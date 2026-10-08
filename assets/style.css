@@ -156,3 +156,38 @@ table.cmp { border-collapse: collapse; margin: 14px 0; font-size: .92rem; }
 table.cmp th, table.cmp td { border: 1px solid var(--border); padding: 6px 12px; }
 table.cmp th { background: var(--accent-soft); }
 
+
+/* ---- 春学期のまとめへのリンク・戻るボタン ---- */
+html { scroll-behavior: auto; }
+main h2[id], main h3[id], main section[id], main div[id] { scroll-margin-top: 16px; }
+
+.xref-link {
+  display: inline-block; font-size: .78rem; font-weight: 600; margin-left: .6em;
+  padding: 1px 9px; border-radius: 99px; text-decoration: none; vertical-align: middle;
+  background: color-mix(in srgb, var(--surface) 82%, #8e5bd0 18%); color: #8e5bd0; border: 1px solid color-mix(in srgb, #8e5bd0 35%, transparent);
+}
+.xref-link:hover { text-decoration: none; filter: brightness(1.08); }
+@media (prefers-color-scheme: dark) { .xref-link { color: #c3a0f0; } }
+.box .label .xref-link { font-weight: 600; }
+
+.used-in { font-size: .9rem; color: var(--muted); border-top: 1px dashed var(--border); padding-top: 8px; margin-top: 18px; }
+.used-in a { margin-right: .9em; white-space: nowrap; }
+
+.nav-return {
+  position: fixed; left: 14px; bottom: 14px; z-index: 50; max-width: min(88vw, 420px);
+  display: flex; align-items: center; gap: 10px; padding: 9px 16px 9px 12px;
+  background: var(--accent); color: #fff; border-radius: 99px; text-decoration: none;
+  box-shadow: 0 4px 16px rgba(0,0,0,.28); font-size: .9rem; font-weight: 700; line-height: 1.3;
+}
+@media (prefers-color-scheme: dark) { .nav-return { color: #10131a; } }
+.nav-return:hover { text-decoration: none; filter: brightness(1.07); }
+.nav-return .nr-arrow { font-size: 1.25rem; }
+.nav-return small { display: block; font-weight: 400; font-size: .74rem; opacity: .9; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 300px; }
+
+.site-header .links { display: flex; gap: 16px; font-size: .85rem; align-items: baseline; flex-wrap: wrap; }
+
+.step-list { counter-reset: st; list-style: none; padding-left: 0; }
+.step-list > li { counter-increment: st; margin: 8px 0; padding-left: 2.2em; position: relative; }
+.step-list > li::before { content: counter(st); position: absolute; left: 0; top: .1em; width: 1.6em; height: 1.6em; border-radius: 50%; background: var(--accent-soft); color: var(--accent); font-weight: 700; font-size: .85em; display: flex; align-items: center; justify-content: center; }
+.imp { display: inline-block; padding: 3px 10px; margin: 3px 4px 3px 0; border: 1px solid var(--border); border-radius: 8px; background: var(--surface); font-size: .92rem; }
+.imp.no { color: var(--muted); }

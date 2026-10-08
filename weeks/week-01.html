@@ -5,16 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>第1回 陰関数の定理 | Aセメ微積まとめノート</title>
   <link rel="stylesheet" href="../assets/style.css">
+  <script defer src="../assets/nav.js"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
-    onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],macros:{'\\R':'\\mathbb{R}'}})"></script>
+    onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],macros:{'\\R':'\\mathbb{R}'}});window.__navReady&&window.__navReady()"></script>
 </head>
 <body>
   <header class="site-header">
     <div class="inner">
       <a class="site-title" href="../">Aセメ微積まとめノート</a>
-      <a href="../" style="font-size:.85rem">← 週の一覧</a>
+      <span class="links"><a href="../basics.html">春学期のまとめ</a><a href="../">週の一覧</a></span>
     </div>
   </header>
 
@@ -69,9 +70,9 @@
     <h2 id="s1">1. 準備:春学期の復習(基礎の確認)</h2>
     <p>陰関数の定理の証明や使い方で使う道具を、先に全部並べておきます。</p>
 
-    <h3>1.1 1変数関数の微分</h3>
+    <h3 id="w-deriv">1.1 1変数関数の微分</h3>
     <div class="box basic">
-      <div class="label">基礎:微分係数と導関数</div>
+      <div class="label">基礎:微分係数と導関数 <a class="xref-link" href="../basics.html#deriv" data-xref>→ 詳しい解説</a></div>
       <p>関数 $g(x)$ の $x=a$ での<b>微分係数</b>(その点での傾き)は
       $$g'(a)=\lim_{h\to 0}\frac{g(a+h)-g(a)}{h}$$
       で定義されます。各 $x$ に対して $g'(x)$ を対応させる関数が<b>導関数</b>です。</p>
@@ -94,9 +95,9 @@
       <figcaption>$h$ を小さくすると、2点 $(a,g(a))$ と $(a+h,g(a+h))$ を結ぶ線(割線)の傾き $\dfrac{g(a+h)-g(a)}{h}$ が、接線の傾き $g'(a)$ に近づきます。</figcaption>
     </figure>
 
-    <h3>1.2 中間値の定理</h3>
+    <h3 id="w-ivt">1.2 中間値の定理</h3>
     <div class="box basic">
-      <div class="label">基礎:中間値の定理</div>
+      <div class="label">基礎:中間値の定理 <a class="xref-link" href="../basics.html#ivt" data-xref>→ 詳しい解説</a></div>
       <p>関数 $g$ が閉区間 $[p,q]$ で<b>連続</b>で、$g(p)\lt 0\lt g(q)$ ならば、$g(c)=0$ となる $c$ が $p\lt c\lt q$ の中に<b>少なくとも1つ</b>ある。</p>
       <p>(一般には「$g(p)$ と $g(q)$ の間の値は必ずとる」という形ですが、今回使うのは「間の値が $0$」の場合です。)</p>
     </div>
@@ -114,17 +115,17 @@
       <figcaption>とぎれずにつながったグラフ(連続)が、$x$ 軸の下の点から上の点へ行くなら、途中で必ず $x$ 軸を横切ります。当たり前に見えますが、証明で何度も使う重要な道具です。</figcaption>
     </figure>
 
-    <h3>1.3 微分の符号と単調増加</h3>
+    <h3 id="w-mono">1.3 微分の符号と単調増加</h3>
     <div class="box basic">
-      <div class="label">基礎:導関数が正なら単調増加</div>
+      <div class="label">基礎:導関数が正なら単調増加 <a class="xref-link" href="../basics.html#mvt" data-xref>→ 詳しい解説</a></div>
       <p>区間で $g'(y)\gt 0$ ならば、$g$ はその区間で<b>単調増加</b>(厳密に増加)です。つまり $y_1\lt y_2$ なら $g(y_1)\lt g(y_2)$。</p>
       <p>理由は平均値の定理です。$g(y_2)-g(y_1)=g'(\xi)(y_2-y_1)$ となる $\xi$ が間にあり、右辺は「正×正」なので正になります。</p>
     </div>
     <p>今回は特に、<b>単調増加な関数は同じ値を2回とらない</b>(だから $g(y)=0$ となる $y$ は<b>高々1つ</b>)という使い方が重要です。これが「関数 $\varphi(x)$ が一意に決まる」ことの理由になります。</p>
 
-    <h3>1.4 開区間・近傍・$\varepsilon$ の記号</h3>
+    <h3 id="w-eps">1.4 開区間・近傍・$\varepsilon$ の記号</h3>
     <div class="box basic">
-      <div class="label">基礎:開区間と $\varepsilon$</div>
+      <div class="label">基礎:開区間と $\varepsilon$ <a class="xref-link" href="../basics.html#eps" data-xref>→ 詳しい解説</a></div>
       <p><b>開区間</b> $(a-\varepsilon,\,a+\varepsilon)$ とは、$a-\varepsilon\lt x\lt a+\varepsilon$ をみたす $x$ 全体、つまり<b>$a$ から距離 $\varepsilon$ 未満</b>の範囲です(両端は含みません)。</p>
       <p>「$x=a$ を含むある開区間」とは、「$a$ のごく近く(どれだけ狭くてもよいから、とにかく $a$ の両側に少し広がった範囲)」という意味です。$\varepsilon$ は<b>小さい正の数</b>を表す文字として使います。</p>
     </div>
@@ -140,9 +141,9 @@
       <figcaption>白丸は「その点を含まない」しるしです。$\varepsilon$ をいくらでも小さく取り直せる、というのがこの記号のポイントです。</figcaption>
     </figure>
 
-    <h3>1.5 2変数関数と偏微分</h3>
+    <h3 id="w-partial">1.5 2変数関数と偏微分</h3>
     <div class="box basic">
-      <div class="label">基礎:偏微分</div>
+      <div class="label">基礎:偏微分 <a class="xref-link" href="../basics.html#partial" data-xref>→ 詳しい解説</a></div>
       <p>2つの変数 $x,y$ をもつ関数 $f(x,y)$ について、</p>
       <p>・<b>$x$ についての偏微分</b>:$y$ を<b>定数として固定</b>して、$x$ だけの関数とみて微分する。
       $$f_x(a,b)=\frac{\partial f}{\partial x}(a,b)=\lim_{h\to 0}\frac{f(a+h,\,b)-f(a,\,b)}{h}$$</p>
@@ -171,21 +172,22 @@
       <figcaption>地図の等高線のイメージ。点 $(a,b)$ から真横(x方向)へ進んだときの高さの変化率が $f_x$、真上(y方向)へ進んだときの変化率が $f_y$ です。</figcaption>
     </figure>
 
-    <h3>1.6 連続と $C^1$ 級・$C^2$ 級</h3>
+    <h3 id="w-c1">1.6 連続と $C^1$ 級・$C^2$ 級</h3>
     <div class="box basic">
-      <div class="label">基礎:連続、$C^1$ 級、$C^2$ 級</div>
+      <div class="label">基礎:連続、$C^1$ 級、$C^2$ 級 <a class="xref-link" href="../basics.html#cont2" data-xref>→ 詳しい解説</a><a class="xref-link" href="../basics.html#c1c2" data-xref>→ $C^n$ 級・順序交換</a></div>
       <p>・$f(x,y)$ が点 $(a,b)$ で<b>連続</b>とは、$(x,y)\to(a,b)$ のとき $f(x,y)\to f(a,b)$ となること(値がジャンプしない)。</p>
       <p>・$f$ が <b>$C^1$ 級</b>とは、偏導関数 $f_x,\ f_y$ が<b>存在して、しかも連続</b>であること(板書 p.5 の「つまり $f_x,f_y$ が存在して連続」がこれです)。</p>
       <p>・$f$ が <b>$C^2$ 級</b>とは、2階までの偏導関数 $f_{xx},f_{xy},f_{yx},f_{yy}$ がすべて存在して連続であること。このとき $f_{xy}=f_{yx}$(偏微分の順序を入れ替えてよい)が成り立ちます。</p>
     </div>
     <p>$C^1$ 級という条件がなぜ大事かというと、<b>$f_y$ が連続</b>だからこそ「$f_y(a,b)\gt 0$ なら、$(a,b)$ の近くでずっと $f_y\gt 0$」と言えるからです(連続関数は、ある点で正なら、その近くでも正)。これが証明の出発点になります。</p>
 
-    <h3>1.7 合成関数の微分(連鎖律)</h3>
+    <h3 id="w-chain">1.7 合成関数の微分(連鎖律)</h3>
     <div class="box basic">
-      <div class="label">基礎:連鎖律(2変数)</div>
+      <div class="label">基礎:連鎖律(2変数) <a class="xref-link" href="../basics.html#chain" data-xref>→ 詳しい解説</a></div>
       <p>$f(x,y)$ が $C^1$ 級で、$x=x(t),\ y=y(t)$ が $t$ の微分可能な関数のとき、$f(x(t),y(t))$ を $t$ で微分すると
       $$\frac{d}{dt}f(x(t),y(t))=f_x\,\frac{dx}{dt}+f_y\,\frac{dy}{dt}$$
       (右辺の $f_x,f_y$ は $(x(t),y(t))$ での値)。</p>
+      <p>(正確には、連鎖律に必要なのは「$f$ が<b>全微分可能</b>」という条件です。$C^1$ 級の関数は全微分可能なので、この回では $C^1$ 級を仮定して使います。<a class="xref-link" href="../basics.html#total" data-xref>→ 全微分可能とは</a>)</p>
       <p>1変数の $\dfrac{d}{dt}g(u(t))=g'(u)\,u'(t)$ の「変数が2つ版」で、<b>「$x$ を通る経路の分」+「$y$ を通る経路の分」</b>を足すと覚えます。</p>
     </div>
     <figure class="fig">
@@ -201,9 +203,9 @@
       <figcaption>$f$ から $t$ に至る道は2本(x経由・y経由)。各道で矢印の「係数」をかけ、道ごとに足し合わせたものが $\dfrac{df}{dt}$ です。</figcaption>
     </figure>
 
-    <h3>1.8 2変数の平均値の定理</h3>
+    <h3 id="w-mvt2">1.8 2変数の平均値の定理</h3>
     <div class="box basic">
-      <div class="label">基礎:平均値の定理(2変数)</div>
+      <div class="label">基礎:平均値の定理(2変数) <a class="xref-link" href="../basics.html#mvt2" data-xref>→ 詳しい解説</a></div>
       <p>$f$ が $C^1$ 級のとき、点 $(x,y)$ から $(x+h,\,y+k)$ まで移ると、ある $\theta$($0\lt\theta\lt 1$)が存在して
       $$f(x+h,\,y+k)=f(x,y)+h\,f_x(x+\theta h,\,y+\theta k)+k\,f_y(x+\theta h,\,y+\theta k)$$
       が成り立つ(板書 p.16 の右半分)。</p>
@@ -223,9 +225,9 @@
       <figcaption>2点を結ぶ線分の「途中のどこか」の点での偏微分係数を使って、変化量を書けるというのが平均値の定理です。どの点かは分かりませんが、「線分上にある」ことが分かっていれば十分です。</figcaption>
     </figure>
 
-    <h3>1.9 勾配ベクトル(グラディエント)</h3>
+    <h3 id="w-grad">1.9 勾配ベクトル(グラディエント)</h3>
     <div class="box basic">
-      <div class="label">基礎:勾配ベクトル</div>
+      <div class="label">基礎:勾配ベクトル <a class="xref-link" href="../basics.html#grad" data-xref>→ 詳しい解説</a></div>
       <p>$f(x,y)$ の<b>勾配ベクトル</b>(gradient)を、偏微分を並べたベクトル
       $$\nabla f=(f_x,\ f_y)\qquad(\operatorname{grad} f\text{ とも書く})$$
       で定める(板書 p.4, p.15)。$\nabla$ は「ナブラ」と読みます。</p>
@@ -545,7 +547,7 @@
       <p>板書に p.19 はありませんでした。p.18→p.20 の流れから、おそらく「別の導出」の導入(あるいは連鎖律の復習)が書かれていたものと思われます。内容は上のとおり p.20 の左半分だけで完結しています。</p>
     </div>
 
-    <h3>7.2 2階導関数 $\varphi''$(板書 p.20 右)</h3>
+    <h3>7.2 2階導関数 $\varphi''$(板書 p.20 右) <a class="xref-link" href="../basics.html#c1c2" data-xref>→ $C^2$ 級・順序交換</a></h3>
     <p>$f$ が <b>$C^2$ 級</b>のとき、$\varphi$ の2階導関数も求まります。7.1 で得た恒等式
     $$f_x(x,\varphi(x))+f_y(x,\varphi(x))\,\varphi'(x)=0\qquad(\heartsuit)$$
     の両辺をもう一度 $x$ で微分します。</p>
@@ -637,7 +639,7 @@
 
     <h3>9.1 接線の方程式(板書 p.17 左)</h3>
     <div class="box basic">
-      <div class="label">基礎:接線の方程式</div>
+      <div class="label">基礎:接線の方程式 <a class="xref-link" href="../basics.html#deriv" data-xref>→ 詳しい解説</a></div>
       <p>関数 $y=\varphi(x)$ のグラフの、点 $(a,b)$($b=\varphi(a)$)における接線は
       $$y-b=\varphi'(a)\,(x-a)$$
       です。「点 $(a,b)$ を通る、傾き $\varphi'(a)$ の直線」を表しています。</p>
@@ -651,10 +653,10 @@
     <h3>9.2 $f_x(a,b)\ne0$ の場合も同じ式(板書 p.17 右)</h3>
     <p>$f_x(a,b)\ne 0$ のときは、陰関数 $x=\psi(y)$ を使います。接線は $x-a=\psi'(b)(y-b)$、$\psi'(b)=-\dfrac{f_y(a,b)}{f_x(a,b)}$ なので、整理すると<b>全く同じ式 (T)</b> になります。つまり、(T) は $\nabla f(a,b)\ne(0,0)$ でありさえすれば、どちらの場合でも成り立ちます。</p>
 
-    <h3>9.3 勾配ベクトルと接線の関係(板書 p.18)</h3>
+    <h3 id="w-gradperp">9.3 勾配ベクトルと接線の関係(板書 p.18)</h3>
     <div class="box basic">
-      <div class="label">基礎:内積と直交</div>
-      <p>2つのベクトル $\vec u=(u_1,u_2)$ と $\vec v=(v_1,v_2)$ の<b>内積</b>は $\vec u\cdot\vec v=u_1v_1+u_2v_2$。<b>内積が $0$</b> であることと、2つのベクトルが<b>直交する</b>(直角)ことは同じです。</p>
+      <div class="label">基礎:内積と直交 <a class="xref-link" href="../basics.html#inner" data-xref>→ 詳しい解説</a></div>
+      <p>2つのベクトル $\vec u=(u_1,u_2)$ と $\vec v=(v_1,v_2)$ の<b>内積</b>は $\vec u\cdot\vec v=\langle\vec u,\vec v\rangle=u_1v_1+u_2v_2$。<b>内積が $0$</b> であることと、2つのベクトルが<b>直交する</b>(直角)ことは同じです。</p>
     </div>
     <p>(T) の左辺は、2つのベクトル
     $$\nabla f(a,b)=(f_x(a,b),\,f_y(a,b)),\qquad (x-a,\ y-b)$$
@@ -684,6 +686,13 @@
       <figcaption>曲線上の点 $(a,b)$ で、接線 $\ell$(赤)と勾配ベクトル $\nabla f(a,b)$(上向きの矢印)は直角。接線上の点 $(x,y)$ へ向かうベクトル $(x-a,y-b)$(緑)も、$\nabla f$ と直角です(板書 p.18 の図)。</figcaption>
     </figure>
 
+    <div class="box supp">
+      <div class="label">別の示し方:連鎖律から一行で <a class="xref-link" href="../basics.html#gradperp" data-xref>→ 詳しい解説</a></div>
+      <p>曲線 $f(x,y)=0$ の上を動く点 $(x(t),y(t))$ をとると、$f(x(t),y(t))=0$ がずっと成り立ちます(そのような曲線は、陰関数を使って $(t,\varphi(t))$ ととれます)。両辺を $t$ で微分すると、連鎖律で
+      $$f_x\,x'(t)+f_y\,y'(t)=0,$$
+      つまり $\langle\nabla f,\,(x'(t),y'(t))\rangle=0$。$(x'(t),y'(t))$ は曲線の接線方向のベクトルなので、<b>$\nabla f$ は接線と直交</b>します。陰関数の公式 $\varphi'=-f_x/f_y$ を使わず、連鎖律と内積だけで言えます。</p>
+    </div>
+
     <p>これで、1.9 で予告した「勾配ベクトルは等高線に直交する」が示されました($f(x,y)=0$ は、高さ0の等高線です)。</p>
 
     <details class="photo"><summary>この部分の板書(p.16–18)の写真を見る</summary>
@@ -695,7 +704,7 @@
     <h2 id="s10">10. 3変数への拡張:曲面と接平面 <span class="page-tag">板書 p.21–26</span></h2>
     <p>ここまでは変数が $x,y$ の2つで、方程式 $f(x,y)=0$ は<b>平面上の曲線</b>でした。板書 p.21 からは変数を3つにします。方程式 $f(x,y,z)=0$ は<b>空間の中の曲面</b>です(球面 $x^2+y^2+z^2-1=0$ のようなもの)。話の筋道は2変数と全く同じで、役者が1人増えるだけです。</p>
 
-    <h3>10.1 3変数関数の偏微分・連鎖律(板書 p.21、p.24左)</h3>
+    <h3>10.1 3変数関数の偏微分・連鎖律(板書 p.21、p.24左) <a class="xref-link" href="../basics.html#partial3" data-xref>→ 3変数の偏微分</a><a class="xref-link" href="../basics.html#chain3" data-xref>→ 3変数の連鎖律</a></h3>
     <p>3変数関数 $f(x,y,z)$ の偏微分 $f_x,f_y,f_z$ も、2変数と同じく「<b>他の2つを固定</b>して、残り1つで微分」します(板書 p.21)。たとえば
     $$\frac{\partial f}{\partial x}(a,b,c)=\lim_{h\to0}\frac1h\bigl(f(a+h,b,c)-f(a,b,c)\bigr).$$
     <b>全微分</b>(1次近似できること)や連続性も、2変数と同様に定義します。$C^1$ 級も「$f_x,f_y,f_z$ がすべて存在して連続」で同様です。</p>
@@ -714,10 +723,11 @@
       <figcaption>道が3本。各道の係数をかけて足し合わせます。</figcaption>
     </figure>
 
-    <h3>10.2 3変数の陰関数の定理(板書 p.22–23)</h3>
+    <h3 id="w-open">10.2 3変数の陰関数の定理(板書 p.22–23)</h3>
     <div class="box basic">
-      <div class="label">基礎:開集合</div>
+      <div class="label">基礎:開集合 <a class="xref-link" href="../basics.html#eps" data-xref>→ 詳しい解説</a></div>
       <p>平面での「$(a,b)$ を含む<b>開集合</b>」とは、境界を含まない<b>(丸い)開いた範囲</b>、たとえば $(a,b)$ を中心とする半径 $r$ の円板(縁を含まない)のことです。1変数の「開区間」の2次元版です。</p>
+      <p>正確には、平面の部分集合 $D$ が開集合であるとは、$D$ のどの点 $p$ に対しても、ある $\varepsilon\gt0$ が存在して、$p$ の $\varepsilon$-近傍 $U_\varepsilon(p)$(中心 $p$、半径 $\varepsilon$ の円板)が $D$ に含まれることです。たとえば $\{x^2+y^2\lt1\}$ は開集合ですが、$\{x^2+y^2\le1\}$ は(縁の点があるので)開集合ではありません。</p>
     </div>
     <div class="box thm">
       <div class="label">定理(3変数の陰関数の定理)</div>
@@ -739,9 +749,9 @@
     $f_z\ne0$ のもとで解けば、上の $\varphi_x,\varphi_y$ の公式になります(板書 p.23 右)。</p>
     <p>(これは 7.1 の 2変数の導出と、まったく同じ形です。)</p>
 
-    <h3>10.4 接平面の方程式(板書 p.25–26)</h3>
+    <h3 id="w-tplane">10.4 接平面の方程式(板書 p.25–26)</h3>
     <div class="box basic">
-      <div class="label">基礎:接平面</div>
+      <div class="label">基礎:接平面 <a class="xref-link" href="../basics.html#tangent" data-xref>→ 詳しい解説</a></div>
       <p>曲線の「接線」に当たるのが、曲面の「<b>接平面</b>」です。関数 $z=\varphi(x,y)$ のグラフの、点 $(a,b,c)$($c=\varphi(a,b)$)での接平面は
       $$z-c=\varphi_x(a,b)(x-a)+\varphi_y(a,b)(y-b)$$
       です。接線 $y-b=\varphi'(a)(x-a)$ の2変数版で、<b>$x$ 方向の傾きと $y$ 方向の傾き</b>の両方を使った平らな板が、曲面に点 $(a,b,c)$ でぴったり接します。</p>
@@ -757,6 +767,12 @@
     <div class="box thm">
       <div class="label">結論</div>
       <p>$\nabla f(a,b,c)$ は、曲面 $f=0$ の点 $(a,b,c)$ での<b>接平面と直交する</b>(=接平面の法線ベクトル)(板書 p.26 最後の行)。</p>
+    </div>
+    <div class="box supp">
+      <div class="label">補足:グラフの接平面との関係 <a class="xref-link" href="../basics.html#tangent" data-xref>→ 詳しい解説</a></div>
+      <p>$z=f(x,y)$ のグラフは、$g(x,y,z)=z-f(x,y)=0$ という曲面です。$\nabla g=(-f_x,-f_y,1)$ なので、上の接平面の式は $-f_x(x-a)-f_y(y-b)+(z-c)=0$、すなわち
+      $$z-c=f_x(a,b)(x-a)+f_y(a,b)(y-b)$$
+      となります。これは、グラフ $z=f(x,y)$ の接平面としておなじみの式と<b>一致</b>します。曲面の接平面の公式は、グラフの接平面の公式の一般化になっているのです。</p>
     </div>
     <p>$f_z(a,b,c)=0$ でも、$f_x\ne0$ か $f_y\ne0$ のどちらかなら、変数を入れ替えて(2変数のときの $x=\psi(y)$ と同様)同じ式になります。だから $\nabla f\ne(0,0,0)$ でありさえすれば、接平面の式はこの形で成り立ちます。</p>
 
@@ -857,6 +873,9 @@
   <footer>© Aセメ微積まとめノート</footer>
 </body>
 </html>
+
+
+
 
 
 
