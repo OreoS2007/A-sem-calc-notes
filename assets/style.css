@@ -36,8 +36,10 @@ a { color: var(--accent); text-decoration: none; }
 a:hover { text-decoration: underline; }
 
 .site-header {
+  position: sticky; top: 0; z-index: 40;
   border-bottom: 1px solid var(--border);
   background: var(--surface);
+  box-shadow: 0 1px 6px rgba(0,0,0,.08);
 }
 .site-header .inner {
   max-width: 860px; margin: 0 auto; padding: 14px 20px;
@@ -159,7 +161,7 @@ table.cmp th { background: var(--accent-soft); }
 
 /* ---- 春学期のまとめへのリンク・戻るボタン ---- */
 html { scroll-behavior: auto; }
-main h2[id], main h3[id], main section[id], main div[id] { scroll-margin-top: 16px; }
+main h2[id], main h3[id], main section[id], main div[id] { scroll-margin-top: 68px; }
 
 .xref-link {
   display: inline-block; font-size: .78rem; font-weight: 600; margin-left: .6em;
@@ -191,3 +193,4 @@ main h2[id], main h3[id], main section[id], main div[id] { scroll-margin-top: 16
 .step-list > li::before { content: counter(st); position: absolute; left: 0; top: .1em; width: 1.6em; height: 1.6em; border-radius: 50%; background: var(--accent-soft); color: var(--accent); font-weight: 700; font-size: .85em; display: flex; align-items: center; justify-content: center; }
 .imp { display: inline-block; padding: 3px 10px; margin: 3px 4px 3px 0; border: 1px solid var(--border); border-radius: 8px; background: var(--surface); font-size: .92rem; }
 .imp.no { color: var(--muted); }
+
