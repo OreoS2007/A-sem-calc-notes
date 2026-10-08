@@ -18,6 +18,9 @@ linalg/ (同じ構成)
 templates/week-template.html   週のノートのひな形
 tools/serve.ps1            ローカル確認用の簡易サーバー
 reference/                 (.gitignore 済み・非公開)春学期のノートなどの私的な資料
+  calc/spring/README.md    微積の春学期ノート(手書き)の索引。基礎ページ・基礎の枠を書くときの第一の根拠
+  linalg/spring/README.md  線形代数の春学期ノート(手書き ①〜⑦、板書にページ番号なし)の索引。同上
+  common/README.md         数理科学基礎 共通資料(活字の教科書、微積・線形が混在)の索引。春学期ノートで足りない前提の補足に使う
 weeks/week-01.html, basics.html   旧URLからの転送(消さない)
 ```
 
