@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="ja">
 <head>
   <meta charset="utf-8">
@@ -26,19 +26,456 @@
     <div class="box note-box">
       <div class="label">このページの使い方</div>
       <p>・各回のノートの「基礎」の枠にある<span class="xref-link" style="margin-left:0">→ 詳しい解説</span>のリンクから、対応するトピックに飛べます。</p>
-      <p>・飛んだ先には、画面の左下に<b>「元の位置にもどる」</b>ボタンが出ます。押すと、元のノートの読んでいた場所にそのまま戻れます。</p>
+      <p>・飛んだ先には、画面の左下に<b>「元の位置にもどる」</b>ボタンが出ます。押すと、元のノートの読んでいた場所にそのまま戻れます(ブラウザの「戻る」でも同じ位置に戻ります)。</p>
       <p>・各トピックの最後に「この回で使う場所」があり、本文の対応箇所に飛べます。</p>
       <p>・説明は、<b>定義・主張 → 意味(直感) → 例 → 証明</b>の順です。証明は折りたたんであります。</p>
+      <p>・このページは、各回のノートを作るたびに、その回で必要になるトピックを足していきます。</p>
     </div>
-
-    <p>最初の回のノートを作るときに、その回で必要になる春学期の内容を、トピックごとにこのページへ追加していきます。</p>
 
     <nav class="toc">
       <div class="toc-title">目次</div>
-      <p style="margin:0;color:var(--muted)">(準備中)</p>
+      <ol>
+        <li><b>記号と数</b>
+          <ol type="a">
+            <li><a href="#maps">直積と写像の記号</a></li>
+            <li><a href="#complex">複素数(共役・絶対値・極形式)</a></li>
+          </ol></li>
+        <li><b>ベクトル空間の基本</b>
+          <ol type="a" start="3">
+            <li><a href="#vspace">$K$-ベクトル空間($K=\R$ または $\mathbb{C}$)</a></li>
+            <li><a href="#linmap">線形写像</a></li>
+            <li><a href="#basis">一次独立・基底・次元</a></li>
+          </ol></li>
+        <li><b>内積に向けた道具</b>
+          <ol type="a" start="6">
+            <li><a href="#rnip">平面・空間のベクトルと内積(高校+α)</a></li>
+            <li><a href="#quad">2次式と判別式</a></li>
+            <li><a href="#intpos">連続関数の積分の性質</a></li>
+          </ol></li>
+      </ol>
     </nav>
 
-    <!--TOPICS-->
+    <!-- ===================== a: 直積と写像 ===================== -->
+    <h2 id="maps">a. 直積と写像の記号</h2>
+
+    <div class="box def">
+      <div class="label">定義(直積)</div>
+      <p>集合 $X,\,Y$ に対し、$X$ の元 $x$ と $Y$ の元 $y$ の<b>組</b> $(x,y)$ をすべて集めた集合を<b>直積</b>といい、$X\times Y$ と書く。
+      $$X\times Y=\{(x,y)\mid x\in X,\ y\in Y\}$$
+      組は<b>順序つき</b>で、$(x,y)$ と $(y,x)$ は別物($x\ne y$ のとき)。</p>
+    </div>
+    <div class="box def">
+      <div class="label">定義(写像)</div>
+      <p>集合 $X$ の<b>どの</b>元 $x$ に対しても、集合 $Y$ の元をちょうど<b>1つ</b>対応させる規則 $f$ を、$X$ から $Y$ への<b>写像</b>といい、
+      $$f:X\to Y,\qquad x\mapsto f(x)$$
+      と書く。$f(x)$ を「$x$ の像(あるいは値)」という。</p>
+    </div>
+    <p><b>意味:</b> $f:X\to Y$ は「$X$ の元を入れると $Y$ の元が1つ出てくる機械」です。「関数」とほぼ同じ意味ですが、入れるものも出てくるものも数とは限りません(ベクトルでも、行列でも、関数でもよい)。</p>
+
+    <h3>例</h3>
+    <ul>
+      <li>$\R\times\R=\R^2$ は、平面の点 $(x,y)$ 全体。2変数関数 $f(x,y)=x^2+y$ は、写像 $\R\times\R\to\R$、$(x,y)\mapsto x^2+y$。</li>
+      <li>積分 $f\mapsto\displaystyle\int_0^1 f(x)\,dx$ は、「連続関数」を入れると「実数」が出てくる写像。</li>
+      <li><b>内積</b>は、ベクトル空間 $V$ から2つのベクトルを選んで組 $(v,w)\in V\times V$ にして入れると、実数が1つ出てくる写像
+      $$\langle\ ,\ \rangle:\ V\times V\to\R,\qquad (v,w)\mapsto\langle v,w\rangle$$
+      です。「$\langle\ ,\ \rangle$ の2つの空欄に、ベクトルを2つ入れる」と読みます。</li>
+    </ul>
+
+    <figure class="fig">
+      <svg viewBox="0 0 460 130" width="460" role="img" aria-label="内積は2つのベクトルから実数を作る機械">
+        <text class="tm" x="14" y="24">入れるもの:ベクトル2つの組</text>
+        <text class="tm" x="320" y="24">出てくるもの:実数1つ</text>
+        <text class="t" x="24" y="76">(v, w)</text><text class="tj" x="14" y="100">∈ V × V</text>
+        <line class="arr" x1="92" y1="70" x2="152" y2="70"/><polygon class="arrh" points="160,70 149,65 149,75"/>
+        <rect class="rect" x="160" y="38" width="130" height="64" rx="8"/>
+        <text class="ta" x="190" y="76">〈 , 〉</text>
+        <line class="arr" x1="290" y1="70" x2="342" y2="70"/><polygon class="arrh" points="350,70 339,65 339,75"/>
+        <text class="t" x="358" y="76">〈v, w〉</text><text class="tj" x="358" y="100">∈ ℝ</text>
+      </svg>
+      <figcaption>「内積」は、2つのベクトルを入れると実数を1つ返す機械、つまり $V\times V\to\R$ の写像です。</figcaption>
+    </figure>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-01.html#w-maps" data-xref>1.1 直積と写像の記号</a><a href="weeks/week-01.html#s3" data-xref>3. (抽象)内積</a></p>
+
+    <!-- ===================== b: 複素数 ===================== -->
+    <h2 id="complex">b. 複素数(共役・絶対値・極形式)</h2>
+
+    <div class="box def">
+      <div class="label">定義(複素数・実部・虚部)</div>
+      <p><b>複素数</b>とは、実数 $x,y$ と、$i^2=-1$ をみたす数 $i$(虚数単位)を使って $z=x+iy$ と書かれる数。$x$ を<b>実部</b>($\operatorname{Re}z$)、$y$ を<b>虚部</b>($\operatorname{Im}z$)という。複素数全体の集合を $\mathbb{C}$ と書く。</p>
+      <p>和と積は、文字式と同じように計算し、$i^2$ が出てきたら $-1$ に置き換えます:
+      $$(x_1+iy_1)(x_2+iy_2)=(x_1x_2-y_1y_2)+i(x_1y_2+x_2y_1).$$</p>
+    </div>
+    <div class="box def">
+      <div class="label">定義(共役・絶対値)</div>
+      <p>$z=x+iy$ に対し、虚部の符号を変えた $\bar z=x-iy$ を<b>共役</b>(複素共役)といい、
+      $$|z|=\sqrt{x^2+y^2}$$
+      を<b>絶対値</b>(大きさ)という。</p>
+    </div>
+
+    <h3>複素平面と意味</h3>
+    <p>$z=x+iy$ を平面の点 $(x,y)$ と同一視した平面が<b>複素平面</b>です(横軸を実軸、縦軸を虚軸という)。すると
+    $|z|$ は原点から $z$ までの<b>距離</b>、$\bar z$ は $z$ を実軸について<b>折り返した点</b>です。</p>
+
+    <figure class="fig">
+      <svg viewBox="0 0 460 300" width="460" role="img" aria-label="複素平面と共役">
+        <line class="ax" x1="40" y1="150" x2="430" y2="150"/><line class="ax" x1="150" y1="285" x2="150" y2="14"/>
+        <text class="t" x="412" y="170">Re</text><text class="t" x="158" y="26">Im</text>
+        <line class="dash" x1="270" y1="70" x2="270" y2="230"/>
+        <line class="dash" x1="150" y1="70" x2="270" y2="70"/><line class="dash" x1="150" y1="230" x2="270" y2="230"/>
+        <line class="cv2" x1="150" y1="150" x2="270" y2="70" style="stroke-width:2.6"/>
+        <line class="cv3" x1="150" y1="150" x2="270" y2="230" style="stroke-width:2.6"/>
+        <circle class="dot" cx="270" cy="70" r="5"/><circle class="dotb" cx="270" cy="230" r="5"/>
+        <path class="thin" d="M190 150 A40 40 0 0 0 183.3 127.8"/>
+        <text class="t" x="196" y="143">θ</text>
+        <text class="tt" x="280" y="66">z = x + iy</text>
+        <text class="ta" x="280" y="248">z̄ = x − iy</text>
+        <text class="t" x="262" y="168">x</text><text class="t" x="124" y="74">y</text><text class="t" x="118" y="234">−y</text>
+        <text class="tm" x="190" y="96">|z|=√(x²+y²)</text>
+      </svg>
+      <figcaption>$z$ と $\bar z$ は実軸について対称な位置にあります。$|z|$ は原点からの距離で、$|\bar z|=|z|$ です。角 $\theta$ は $z$ の偏角(実軸の正の向きから反時計回りに測った角)です。</figcaption>
+    </figure>
+
+    <h3>使う性質</h3>
+    <div class="box thm">
+      <div class="label">共役と絶対値の性質</div>
+      <p>$z,w$ を複素数とする。</p>
+      <p>(1) $\bar{\bar z}=z$、$\ \overline{z+w}=\bar z+\bar w$、$\ \overline{zw}=\bar z\,\bar w$。</p>
+      <p>(2) $z\bar z=|z|^2$(この右辺は<b>0以上の実数</b>)。特に $|z|=0\iff z=0$。</p>
+      <p>(3) $|zw|=|z|\,|w|$、$\ |\bar z|=|z|$。</p>
+      <p>(4) $\operatorname{Re}z=\dfrac{z+\bar z}{2}$。$z$ が実数 $\iff \bar z=z$。また $|\operatorname{Re}z|\le|z|$。</p>
+    </div>
+    <p><b>(2) が一番大事です。</b>$z$ に $z$ 自身を掛けると($z=i$ なら $i\cdot i=-1$)負になることもありますが、<b>共役を掛ける</b>と
+    $$z\bar z=(x+iy)(x-iy)=x^2-(iy)^2=x^2+y^2=|z|^2\ \ge 0$$
+    となり、必ず0以上の実数になります。このおかげで、複素数のベクトルにも「長さ」を考えられるようになります(次回以降の内積の話の核心です)。</p>
+    <details><summary>理由(証明)</summary>
+      <div class="box proof"><div class="label">証明</div>
+      <p>$z=a+bi,\ w=c+di$($a,b,c,d$ は実数)とする。</p>
+      <p>(1) $zw=(ac-bd)+(ad+bc)i$ の共役は $(ac-bd)-(ad+bc)i$。一方 $\bar z\bar w=(a-bi)(c-di)=ac-adi-bci+bdi^2=(ac-bd)-(ad+bc)i$。両者は等しい。和についても同様。</p>
+      <p>(2) 上で計算したとおり。</p>
+      <p>(3) (1),(2) より $|zw|^2=zw\,\overline{zw}=z\bar z\,w\bar w=|z|^2|w|^2$。両辺は0以上の実数なので平方根をとると $|zw|=|z||w|$。</p>
+      <p>(4) $z+\bar z=2a$。$|\operatorname{Re}z|=|a|\le\sqrt{a^2+b^2}=|z|$。</p></div>
+    </details>
+
+    <h3>極形式と $e^{i\theta}$</h3>
+    <p>$z\ne0$ の大きさを $r=|z|$、偏角を $\theta$ とすると、
+    $$z=r(\cos\theta+i\sin\theta)$$
+    と書けます(<b>極形式</b>)。ここで $\cos\theta+i\sin\theta$ を $e^{i\theta}$ と書くことが多く、$z=re^{i\theta}$ です。</p>
+    <ul>
+      <li>$|e^{i\theta}|=\sqrt{\cos^2\theta+\sin^2\theta}=1$(大きさ1の複素数)。</li>
+      <li>$\overline{e^{i\theta}}=\cos\theta-i\sin\theta=e^{-i\theta}$。したがって $e^{i\theta}e^{-i\theta}=1$。</li>
+      <li><b>積は「大きさを掛け、偏角を足す」</b>:$re^{i\alpha}\cdot se^{i\beta}=rs\,e^{i(\alpha+\beta)}$。つまり $e^{i\theta}$ を掛けることは、原点のまわりに角 $\theta$ だけ<b>回転</b>することです。</li>
+    </ul>
+    <details><summary>理由(証明:積は偏角を足す)</summary>
+      <div class="box proof"><div class="label">証明</div>
+      <p>$(\cos\alpha+i\sin\alpha)(\cos\beta+i\sin\beta)=(\cos\alpha\cos\beta-\sin\alpha\sin\beta)+i(\sin\alpha\cos\beta+\cos\alpha\sin\beta)$。三角関数の加法定理により、これは $\cos(\alpha+\beta)+i\sin(\alpha+\beta)$ に等しい。</p></div>
+    </details>
+
+    <h3>例</h3>
+    <ul>
+      <li>$z=3+4i$:$|z|=\sqrt{9+16}=5$、$\bar z=3-4i$、$z\bar z=9+16=25=|z|^2$。</li>
+      <li>$(1+i)(1-i)=1-i^2=2$($|1+i|^2=1+1=2$ と一致)。</li>
+      <li>割り算は、分母に共役を掛けて実数にする:$\dfrac{1}{3+4i}=\dfrac{3-4i}{(3+4i)(3-4i)}=\dfrac{3-4i}{25}$。つまり $\dfrac1z=\dfrac{\bar z}{|z|^2}$。</li>
+      <li>$i\cdot i=-1$(負!)だが、$i\cdot\bar i=i\cdot(-i)=1$(正)。</li>
+    </ul>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-01.html#w-complex" data-xref>1.2 複素数の共役と絶対値</a><a href="weeks/week-01.html#s7" data-xref>7. エルミート内積</a></p>
+
+    <!-- ===================== c: K-ベクトル空間 ===================== -->
+    <h2 id="vspace">c. $K$-ベクトル空間($K=\R$ または $\mathbb{C}$)</h2>
+
+    <p>線形代数の主役は<b>ベクトル空間</b>です。春学期は、ベクトルが「座標をもつ矢印」でなくても構わないよう、<b>足し算とスカラー倍のルールだけ</b>を取り出して定義しました。</p>
+    <p>文字 $K$ は、実数全体 $\R$ か複素数全体 $\mathbb{C}$ のどちらか(「$K=\R$ または $\mathbb{C}$」と断って、両方の場合をまとめて扱う)を表します。$K$ の元を<b>スカラー</b>と呼びます。</p>
+
+    <div class="box def">
+      <div class="label">定義($K$-ベクトル空間)</div>
+      <p>集合 $V$ に、<b>和</b> $+:V\times V\to V$、<b>スカラー倍</b> $\cdot:K\times V\to V$、および<b>零元</b> $0\in V$ が定められていて、次の規則 (V4)〜(V11) がすべて成り立つとき、$V$ を<b>$K$-ベクトル空間</b>といい、$V$ の元を<b>ベクトル</b>という。($x,y,z\in V$、$a,b\in K$)</p>
+      <p>(V4) $x+y=y+x$ (交換) ／ (V5) $(x+y)+z=x+(y+z)$ (結合)</p>
+      <p>(V6) $x+0=0+x=x$ (零元) ／ (V7) $x+y=y+x=0$ となる $y$ が存在する(逆元)</p>
+      <p>(V8) $a(x+y)=ax+ay$ ／ (V9) $(a+b)x=ax+bx$ ／ (V10) $(ab)x=a(bx)$ ／ (V11) $1x=x$</p>
+      <p>$K=\R$ のとき<b>実ベクトル空間</b>、$K=\mathbb{C}$ のとき<b>複素ベクトル空間</b>ともいう。</p>
+    </div>
+
+    <p><b>意味:</b> 「ベクトルどうしは足せる。ベクトルにスカラーを掛けられる。その計算が、ふだんの文字式と同じ規則で動く」ということです。ベクトルの中身が何かは問いません。</p>
+
+    <figure class="fig">
+      <svg viewBox="0 0 460 250" width="460" role="img" aria-label="ベクトルの和とスカラー倍">
+        <line class="dash" x1="210" y1="160" x2="270" y2="50"/><line class="dash" x1="120" y1="100" x2="270" y2="50"/>
+        <line class="dash" x1="210" y1="160" x2="354" y2="112" style="stroke:var(--ex)"/><polygon class="arrh" points="360,110 350.2,118.5 347,109.1" style="fill:var(--ex)"/>
+        <line class="arr" x1="60" y1="210" x2="203" y2="162" style="stroke:var(--accent);stroke-width:2.8"/><polygon class="arrh" points="210,160 200.2,168.5 197,159.1" style="fill:var(--accent)"/>
+        <line class="arr" x1="60" y1="210" x2="117" y2="107" style="stroke:var(--thm);stroke-width:2.8"/><polygon class="arrh" points="120,100 118.7,112.9 109.9,108.1"/>
+        <line class="arr" x1="60" y1="210" x2="264" y2="57" style="stroke:var(--ex);stroke-width:2.8"/><polygon class="arrh" points="270,50 263.5,61.3 257.5,53.3" style="fill:var(--ex)"/>
+        <circle class="dot" cx="60" cy="210" r="3.5" style="fill:var(--muted)"/>
+        <text class="t" x="42" y="226">0</text>
+        <text class="ta" x="130" y="196" style="fill:var(--accent)">v</text><text class="tt" x="78" y="146">w</text>
+        <text class="ta" x="204" y="48" style="fill:var(--ex)">v + w</text>
+        <text class="ta" x="362" y="118" style="fill:var(--ex)">2v</text>
+        <text class="tm" x="250" y="196">v + w は平行四辺形の対角線</text>
+        <text class="tm" x="250" y="214">2v は v と同じ向きで2倍の長さ</text>
+      </svg>
+      <figcaption>平面の矢印の場合:$v+w$ は平行四辺形の対角線、$a\cdot v$ は向きはそのままで長さが $|a|$ 倍(負なら逆向き)。ベクトル空間の規則は、この2つの計算が普通に成り立つための最小限の約束です。</figcaption>
+    </figure>
+
+    <h3>例</h3>
+    <ul>
+      <li>$K^n$($n$ 個の数を縦に並べた列ベクトル全体):成分ごとの和とスカラー倍。$\R^n$ は $\R$-ベクトル空間、$\mathbb{C}^n$ は $\mathbb{C}$-ベクトル空間。</li>
+      <li>$M_{m,n}(K)$($m\times n$ 行列全体):成分ごとの和とスカラー倍。</li>
+      <li><b>関数空間</b>:区間 $[0,1]$ 上の<b>連続関数</b>全体。和とスカラー倍を「各点ごと」に決める:$(f+g)(x)=f(x)+g(x)$、$(af)(x)=a\,f(x)$。実数値の連続関数全体を $C_{\R}([0,1])$、複素数値のものを $C([0,1])$ と書く(それぞれ $\R$-ベクトル空間、$\mathbb{C}$-ベクトル空間)。このとき「ベクトル」は<b>関数</b>です。零元は恒等的に $0$ の関数。</li>
+    </ul>
+    <p>ほかにも、多項式全体、収束する数列全体などがベクトル空間になります。</p>
+
+    <h3>すぐ分かること</h3>
+    <div class="box thm">
+      <div class="label">系</div>
+      <p>$V$ を $K$-ベクトル空間とする。(1) 零元はただ1つ、各 $x$ の逆元もただ1つ(これを $-x$ と書く)。(2) $0\cdot x=0$、$(-1)\cdot x=-x$。</p>
+    </div>
+    <details><summary>理由(証明)</summary>
+      <div class="box proof"><div class="label">証明</div>
+      <p>(1) $x+z=0$ かつ $x+y=0$ とすると、$z=z+0=z+(x+y)=(z+x)+y=0+y=y$。零元の一意性も同様。</p>
+      <p>(2) $0x=0x+0=0x+(x+(-x))=(0x+1x)+(-x)=(0+1)x+(-x)=x+(-x)=0$。また $x+(-1)x=(1+(-1))x=0x=0$ なので、$(-1)x$ は $x$ の逆元、つまり $-x$。</p></div>
+    </details>
+    <p>この約束にしたがって、$x+(-y)$ を $x-y$ と書きます。</p>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-01.html#w-vspace" data-xref>1.3 $K$-ベクトル空間</a><a href="weeks/week-01.html#s3" data-xref>3. (抽象)内積</a><a href="weeks/week-01.html#s7" data-xref>7. エルミート内積</a></p>
+
+    <!-- ===================== d: 線形写像 ===================== -->
+    <h2 id="linmap">d. 線形写像</h2>
+
+    <div class="box def">
+      <div class="label">定義(線形写像)</div>
+      <p>$V,W$ を $K$-ベクトル空間とする。写像 $T:V\to W$ が<b>$K$-線形写像</b>であるとは、次の2つが成り立つこと。</p>
+      <p>(L1) $T(x+y)=T(x)+T(y)$ ($x,y\in V$) ／ (L2) $T(ax)=a\,T(x)$ ($x\in V,\ a\in K$)</p>
+    </div>
+    <p><b>意味:</b> 「足してから $T$ に入れても、$T$ に入れてから足しても同じ」「スカラー倍してから入れても、入れてからスカラー倍しても同じ」。つまり、<b>和とスカラー倍を保つ</b>写像です。</p>
+
+    <figure class="fig">
+      <svg viewBox="0 0 460 180" width="460" role="img" aria-label="線形写像は和を保つ">
+        <text class="t" x="30" y="52">(x, y)</text>
+        <line class="arr" x1="100" y1="46" x2="170" y2="46"/><polygon class="arrh" points="178,46 167,41 167,51"/>
+        <text class="tm" x="104" y="36">T を各々に</text>
+        <text class="t" x="190" y="52">(T(x), T(y))</text>
+        <line class="arr" x1="60" y1="64" x2="60" y2="112"/><polygon class="arrh" points="60,120 55,109 65,109"/>
+        <text class="tm" x="68" y="96">足す</text>
+        <line class="arr" x1="236" y1="64" x2="236" y2="112"/><polygon class="arrh" points="236,120 231,109 241,109"/>
+        <text class="tm" x="244" y="96">足す</text>
+        <text class="t" x="30" y="148">x + y</text>
+        <line class="arr" x1="100" y1="142" x2="170" y2="142"/><polygon class="arrh" points="178,142 167,137 167,147"/>
+        <text class="tm" x="124" y="136">T</text>
+        <text class="t" x="190" y="148">T(x+y) = T(x) + T(y)</text>
+      </svg>
+      <figcaption>(L1) の意味:左上から右下まで、「足してから $T$」と「$T$ してから足す」のどちらの道を通っても同じ結果になります。</figcaption>
+    </figure>
+
+    <h3>例</h3>
+    <ul>
+      <li>行列 $A$ による $T(x)=Ax$($K^n\to K^m$)。行列の積の性質 $A(x+y)=Ax+Ay$、$A(ax)=aAx$ がそのまま (L1),(L2)。</li>
+      <li>積分 $f\mapsto\displaystyle\int_0^1f(x)\,dx$($C_{\R}([0,1])\to\R$):$\int(f+g)=\int f+\int g$、$\int af=a\int f$。</li>
+      <li>微分 $f\mapsto f'$:$(f+g)'=f'+g'$、$(af)'=af'$。</li>
+      <li>線形でない例:$T(x)=x^2$($\R\to\R$)。$T(1+1)=4\ne T(1)+T(1)=2$。</li>
+    </ul>
+
+    <div class="box thm">
+      <div class="label">系</div>
+      <p>$T$ が線形なら、$T(0)=0$、$T(-x)=-T(x)$、$T(a_1x_1+\cdots+a_nx_n)=a_1T(x_1)+\cdots+a_nT(x_n)$。</p>
+    </div>
+    <details><summary>理由(証明)</summary>
+      <div class="box proof"><div class="label">証明</div>
+      <p>$T(0)=T(0\cdot 0)=0\cdot T(0)=0$。$T(-x)=T((-1)x)=(-1)T(x)=-T(x)$。最後の式は (L1),(L2) を繰り返し使えば出る。</p></div>
+    </details>
+
+    <h3>「1つの変数について線形」</h3>
+    <p>2変数の写像 $F:V\times V\to K$ について、<b>片方のベクトルを固定したとき</b>、残りの変数の写像が線形になることを、「その変数について線形」といいます。たとえば $w$ を固定して $v\mapsto F(v,w)$ が線形写像のとき、「第1変数について線形」です。内積の「双線形」とは、<b>2つの変数のそれぞれについて</b>線形、という意味です(次回以降の本文で使います)。</p>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-01.html#w-linmap" data-xref>1.4 線形写像</a><a href="weeks/week-01.html#s3" data-xref>3. (抽象)内積</a></p>
+
+    <!-- ===================== e: 基底 ===================== -->
+    <h2 id="basis">e. 一次独立・基底・次元</h2>
+
+    <div class="box def">
+      <div class="label">定義(一次結合・一次独立・基底)</div>
+      <p>$V$ を $K$-ベクトル空間、$v_1,\dots,v_n\in V$ とする。</p>
+      <p>・<b>一次結合</b>:$a_1v_1+\cdots+a_nv_n$($a_i\in K$)の形のベクトル。一次結合全体を $\langle v_1,\dots,v_n\rangle_K$ と書く($v_1,\dots,v_n$ が<b>生成する</b>部分空間)。$V=\langle v_1,\dots,v_n\rangle_K$ のとき、$v_1,\dots,v_n$ は $V$ を<b>生成する</b>という。</p>
+      <p>・<b>一次独立</b>:$a_1v_1+\cdots+a_nv_n=0$ ならば $a_1=\cdots=a_n=0$ となること。</p>
+      <p>・<b>基底</b>:$V$ を生成し、かつ一次独立な $v_1,\dots,v_n$。</p>
+    </div>
+    <p><b>意味:</b> 基底は「$V$ の座標軸」です。基底 $v_1,\dots,v_n$ があると、$V$ のどのベクトル $v$ も
+    $$v=x_1v_1+\cdots+x_nv_n$$
+    の形に<b>ただ一通り</b>に書けます(生成するから「書ける」、一次独立だから「一通り」)。この $(x_1,\dots,x_n)$ が $v$ の<b>座標</b>です。基底を選ぶことは、$V$ を $K^n$ と同一視することにあたります(春学期の言い方では、$T_{v_1,\dots,v_n}:K^n\to V,\ (x_i)\mapsto\sum x_iv_i$ が<b>同型写像</b>になる)。</p>
+
+    <div class="box def">
+      <div class="label">定義・定理(次元)</div>
+      <p>$V$ が $n$ 個のベクトルからなる基底をもつとき、基底の個数は基底の取り方によらず $n$ に決まる。これを $V$ の<b>次元</b>といい、$\dim V=n$ と書く($V$ を $n$ 次元ベクトル空間という)。</p>
+      <p>$\dim V=n$ のとき、$V$ の $n$ 個のベクトル $v_1,\dots,v_n$ については、「一次独立」「$V$ を生成する」「$V$ の基底」はすべて同値。</p>
+    </div>
+
+    <h3>例</h3>
+    <ul>
+      <li>$K^n$ の<b>標準基底</b> $e_1=(1,0,\dots,0)^{\mathrm T},\ \dots,\ e_n=(0,\dots,0,1)^{\mathrm T}$。$\dim K^n=n$。$v=(a_1,\dots,a_n)^{\mathrm T}$ の座標は、そのまま $(a_1,\dots,a_n)$。</li>
+      <li>$\dim M_{m,n}(K)=mn$。</li>
+      <li>$[0,1]$ 上の連続関数全体は<b>無限次元</b>:$1,x,x^2,\dots$ が、どこまでとっても一次独立だから。</li>
+      <li>$\R^2$ の別の基底:$b_1=(1,0)^{\mathrm T},\ b_2=(1,1)^{\mathrm T}$。下の図のとおり、座標のとり方が標準基底とは変わります。</li>
+    </ul>
+
+    <figure class="fig">
+      <svg viewBox="0 0 460 290" width="460" role="img" aria-label="斜めの基底と座標">
+        <line class="thin" x1="20" y1="230" x2="440" y2="230"/><line class="thin" x1="20" y1="160" x2="440" y2="160"/><line class="thin" x1="20" y1="90" x2="440" y2="90"/><line class="thin" x1="20" y1="20" x2="440" y2="20"/>
+        <line class="thin" x1="100" y1="250" x2="330" y2="20"/><line class="thin" x1="170" y1="250" x2="400" y2="20"/><line class="thin" x1="240" y1="250" x2="440" y2="50"/><line class="thin" x1="310" y1="250" x2="440" y2="120"/><line class="thin" x1="30" y1="250" x2="260" y2="20"/>
+        <line class="ax" x1="20" y1="230" x2="440" y2="230" style="stroke-width:1.6"/>
+        <line class="arr" x1="100" y1="230" x2="166" y2="230" style="stroke:var(--accent);stroke-width:3"/><polygon class="arrh" points="172,230 160,225 160,235" style="fill:var(--accent)"/>
+        <line class="arr" x1="100" y1="230" x2="166" y2="164" style="stroke:var(--ex);stroke-width:3"/><polygon class="arrh" points="171,159 158,164 165,171" style="fill:var(--ex)"/>
+        <line class="dash" x1="170" y1="230" x2="310" y2="90" style="stroke:var(--thm);stroke-width:1.6"/>
+        <circle class="dot" cx="310" cy="90" r="5.5"/>
+        <text class="ta" x="116" y="248" style="paint-order:stroke;stroke:var(--surface);stroke-width:4px;stroke-linejoin:round">b₁ = (1, 0)</text>
+        <text class="ta" x="52" y="186" style="fill:var(--ex);paint-order:stroke;stroke:var(--surface);stroke-width:4px;stroke-linejoin:round">b₂ = (1, 1)</text>
+        <text class="tt" x="322" y="86" style="paint-order:stroke;stroke:var(--surface);stroke-width:4px;stroke-linejoin:round">v = (3, 2)</text>
+        <text class="tm" x="322" y="104" style="paint-order:stroke;stroke:var(--surface);stroke-width:4px;stroke-linejoin:round">= 1·b₁ + 2·b₂</text>
+        <text class="tm" x="322" y="122" style="paint-order:stroke;stroke:var(--surface);stroke-width:4px;stroke-linejoin:round">基底 b での座標は (1, 2)</text>
+        <text class="tm" x="26" y="278" style="paint-order:stroke;stroke:var(--surface);stroke-width:4px;stroke-linejoin:round">格子:b₁, b₂ の方向に1目盛りずつ(斜めの座標系)</text>
+      </svg>
+      <figcaption>基底 $b_1,b_2$ に沿った座標の格子。同じ点 $v$ でも、標準基底では $(3,2)$、$b_1,b_2$ では $(1,2)$ と、座標が変わります($b_1+2b_2=(1,0)+(2,2)=(3,2)$)。</figcaption>
+    </figure>
+    <details><summary>理由(証明:基底なら表し方が一通り)</summary>
+      <div class="box proof"><div class="label">証明</div>
+      <p>$\sum x_iv_i=\sum y_iv_i$ とすると $\sum(x_i-y_i)v_i=0$。一次独立から $x_i-y_i=0$、つまり $x_i=y_i$。逆に、表し方が一通りなら、$0=\sum0\cdot v_i$ 以外に $\sum a_iv_i=0$ となる表し方はないので、一次独立。</p></div>
+    </details>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-01.html#w-basis" data-xref>1.5 基底と次元</a><a href="weeks/week-01.html#s8" data-xref>8. グラム行列</a></p>
+
+    <!-- ===================== f: 平面・空間の内積 ===================== -->
+    <h2 id="rnip">f. 平面・空間のベクトルと内積(高校+α)</h2>
+
+    <div class="box def">
+      <div class="label">定義(平面・空間のベクトルの内積と長さ)</div>
+      <p>$v=(v_1,v_2,v_3),\ w=(w_1,w_2,w_3)$(平面なら成分は2つ)に対し、
+      $$(v,w)=v_1w_1+v_2w_2+v_3w_3,\qquad \|v\|=\sqrt{(v,v)}=\sqrt{v_1^2+v_2^2+v_3^2}.$$
+      $(v,w)$ を<b>内積</b>、$\|v\|$ を $v$ の<b>長さ</b>という(高校では $\vec v\cdot\vec w$ や $|\vec v|$ と書く)。$n$ 個の成分でも同じ(成分を $n$ 個に増やすだけ)。</p>
+    </div>
+
+    <div class="box thm">
+      <div class="label">事実(内積と角)</div>
+      <p>$v,w\ne0$ のなす角を $\theta$($0\le\theta\le\pi$)とすると
+      $$(v,w)=\|v\|\,\|w\|\cos\theta.$$
+      特に $(v,w)=0\iff v\perp w$(直交)。</p>
+    </div>
+
+    <p><b>意味:</b> $\|w\|\cos\theta$ は、$w$ を $v$ の向きの直線に落とした影(正射影)の長さ(符号つき)です。内積 $(v,w)$ は「<b>$v$ の長さ × $w$ の影の長さ</b>」。向きがそろっていれば大きな正、直角なら0、反対向きなら負になります。</p>
+
+    <figure class="fig">
+      <svg viewBox="0 0 460 250" width="460" role="img" aria-label="余弦定理と内積">
+        <line class="cv" x1="80" y1="200" x2="380" y2="200"/>
+        <polygon class="arrh" points="388,200 376,195 376,205" style="fill:var(--accent)"/>
+        <line class="cv2" x1="80" y1="200" x2="220" y2="60"/>
+        <polygon class="arrh" points="226,54 212,60 220,68"/>
+        <line class="thin" x1="380" y1="200" x2="220" y2="60" style="stroke:var(--muted);stroke-width:1.4"/>
+        <line class="dash" x1="220" y1="60" x2="220" y2="200"/>
+        <line class="rect" x1="80" y1="214" x2="220" y2="214" style="stroke:var(--ex);stroke-width:3"/>
+        <path class="thin" d="M115 200 A35 35 0 0 0 104.7 175.3"/>
+        <text class="t" x="122" y="190">θ</text>
+        <text class="t" x="60" y="218">O</text>
+        <text class="ta" x="372" y="190" style="fill:var(--accent)">v</text>
+        <text class="tt" x="204" y="48">w</text>
+        <text class="tm" x="100" y="238" style="fill:var(--ex)">‖w‖cosθ(影の長さ)</text>
+        <text class="tm" x="296" y="122">v − w</text>
+      </svg>
+      <figcaption>$O,\ v,\ w$ を頂点とする三角形に、余弦定理 $\|v-w\|^2=\|v\|^2+\|w\|^2-2\|v\|\|w\|\cos\theta$ を使います。</figcaption>
+    </figure>
+
+    <details><summary>理由(証明:余弦定理から)</summary>
+      <div class="box proof"><div class="label">証明</div>
+      <p>三角形の余弦定理より $\|v-w\|^2=\|v\|^2+\|w\|^2-2\|v\|\|w\|\cos\theta$。一方、成分で計算すると
+      $\|v-w\|^2=(v-w,v-w)=(v,v)-2(v,w)+(w,w)=\|v\|^2-2(v,w)+\|w\|^2$。右辺どうしを比べて $(v,w)=\|v\|\|w\|\cos\theta$。</p></div>
+    </details>
+
+    <h3>内積の基本的な性質</h3>
+    <ul>
+      <li><b>線形性</b>:$(v_1+v_2,w)=(v_1,w)+(v_2,w)$、$(av,w)=a(v,w)$($w$ 側も同様)。成分ごとの和と積なので当たり前に成り立つ。</li>
+      <li><b>対称性</b>:$(v,w)=(w,v)$。</li>
+      <li><b>正定値性</b>:$(v,v)=\|v\|^2\ge0$、かつ $(v,v)=0\iff v=0$(成分の2乗の和が0になるのは、全部0のときだけ)。</li>
+    </ul>
+    <p>この3つが、あとで一般のベクトル空間の「内積の定義(公理)」の元ネタになります。さらに、$|\cos\theta|\le1$ から
+    $$|(v,w)|\le\|v\|\,\|w\|$$
+    が従います。これがコーシー・シュワルツの不等式の、平面・空間での姿です。</p>
+
+    <h3>例</h3>
+    <p>$v=(1,1,0),\ w=(0,1,1)$:$(v,w)=0+1+0=1$、$\|v\|=\|w\|=\sqrt2$。$\cos\theta=\dfrac{1}{\sqrt2\sqrt2}=\dfrac12$ なので $\theta=60^\circ$。</p>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-01.html#w-rnip" data-xref>1.6 平面・空間のベクトルと内積</a><a href="weeks/week-01.html#s2" data-xref>2. 数ベクトル空間の標準内積</a></p>
+
+    <!-- ===================== g: 2次式と判別式 ===================== -->
+    <h2 id="quad">g. 2次式と判別式</h2>
+
+    <div class="box thm">
+      <div class="label">事実(2次式がつねに0以上であるための条件)</div>
+      <p>$a\gt0$ とする。2次式 $q(t)=at^2+bt+c$ について、
+      $$q(t)\ge0\ \ (\text{すべての実数 }t)\quad\Longleftrightarrow\quad b^2-4ac\le0.$$
+      さらに、$b^2-4ac=0$ のとき、$q(t_0)=0$ となる $t_0$ がちょうど1つ(重解 $t_0=-\dfrac{b}{2a}$)ある。</p>
+    </div>
+    <p><b>意味:</b> $a\gt0$ なら、$y=q(t)$ のグラフは<b>上に開いた</b>放物線(谷の形)です。「どの $t$ でも0以上」とは、グラフが $t$ 軸の下にもぐらないこと。それは「$t$ 軸と交わらない」か「ちょうど1点で接する」ことで、判別式 $D=b^2-4ac$ でいうと $D\le0$ です。</p>
+
+    <figure class="fig">
+      <svg viewBox="0 0 520 195" width="520" role="img" aria-label="判別式と放物線">
+        <line class="ax" x1="10" y1="120" x2="160" y2="120"/><line class="ax" x1="180" y1="120" x2="330" y2="120"/><line class="ax" x1="350" y1="120" x2="500" y2="120"/>
+        <path class="cv" d="M15 40 Q80 260 145 40"/><path class="cv" d="M185 40 Q250 200 315 40"/><path class="cv" d="M355 40 Q420 140 485 40"/>
+        <circle class="dot" cx="46" cy="120" r="4.5"/><circle class="dot" cx="114" cy="120" r="4.5"/><circle class="dot" cx="250" cy="120" r="4.5"/>
+        <text class="ta" x="22" y="176" style="fill:var(--thm)">D &gt; 0(×)</text><text class="tm" x="22" y="192">一部で負になる</text>
+        <text class="ta" x="192" y="176" style="fill:var(--ex)">D = 0</text><text class="tm" x="192" y="192">1点で接する</text>
+        <text class="ta" x="362" y="176" style="fill:var(--ex)">D &lt; 0</text><text class="tm" x="362" y="192">つねに正</text>
+      </svg>
+      <figcaption>$D=b^2-4ac$ の符号による3つの場合。「どの $t$ でも $q(t)\ge0$」となれるのは、真ん中と右(接する・交わらない)だけです。</figcaption>
+    </figure>
+
+    <details><summary>理由(証明:平方完成)</summary>
+      <div class="box proof"><div class="label">証明</div>
+      <p>平方完成すると
+      $$q(t)=a\Bigl(t+\frac{b}{2a}\Bigr)^2-\frac{b^2-4ac}{4a}.$$
+      $a\gt0$ なので、最小値は $t=-\dfrac{b}{2a}$ のときの $-\dfrac{b^2-4ac}{4a}$。これが0以上であることが、つねに $q\ge0$ であるための条件で、$b^2-4ac\le0$ と同じ。特に $b^2-4ac=0$ なら、最小値は0で、それをとるのは $t=-\dfrac{b}{2a}$ のときだけ。</p></div>
+    </details>
+
+    <h3>例</h3>
+    <ul>
+      <li>$q(t)=t^2+2t+3$:$D=4-12=-8\lt0$。たしかに $q(t)=(t+1)^2+2\gt0$。</li>
+      <li>$q(t)=t^2-2t+1=(t-1)^2$:$D=4-4=0$。$t=1$ で0になり、あとは正。</li>
+    </ul>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-01.html#w-quad" data-xref>1.7 2次式と判別式</a><a href="weeks/week-01.html#s5" data-xref>5. コーシー・シュワルツの不等式</a></p>
+
+    <!-- ===================== h: 連続関数の積分 ===================== -->
+    <h2 id="intpos">h. 連続関数の積分の性質</h2>
+
+    <div class="box thm">
+      <div class="label">事実(積分の基本性質)</div>
+      <p>$f,g$ を $[0,1]$ 上の連続関数とする。</p>
+      <p>(1) <b>線形性</b>:$\displaystyle\int_0^1(af+bg)\,dx=a\int_0^1f\,dx+b\int_0^1g\,dx$($a,b$ は定数)。</p>
+      <p>(2) <b>大小の保存</b>:$f\ge0$ なら $\displaystyle\int_0^1f\,dx\ge0$。</p>
+      <p>(3) <b>(重要)</b>$f$ が<b>連続</b>で $f\ge0$ のとき、$\displaystyle\int_0^1f\,dx=0$ ならば、$f$ は $[0,1]$ で<b>恒等的に0</b>。</p>
+    </div>
+    <p>(1),(2) は積分のごく基本的な性質です。<b>(3) は「連続」という仮定が大事</b>です。積分は「グラフの下の面積」で、面積が0なら高さは0のはず、というのが (3) です。ところが、連続でない関数ではこれが成り立ちません。</p>
+
+    <figure class="fig">
+      <svg viewBox="0 0 520 215" width="520" role="img" aria-label="連続な関数と不連続な関数の面積">
+        <line class="ax" x1="20" y1="170" x2="250" y2="170"/><line class="ax" x1="20" y1="170" x2="20" y2="30"/>
+        <path class="cv" d="M20 170 C70 170 90 60 130 60 C170 60 190 170 240 170"/>
+        <rect x="100" y="115" width="60" height="55" style="fill:var(--thm);opacity:.22;stroke:var(--thm);stroke-width:1.3"/>
+        <line class="dash" x1="130" y1="60" x2="130" y2="170"/>
+        <circle class="dot" cx="130" cy="60" r="4.5"/>
+        <text class="t" x="124" y="188">x₀</text><text class="tm" x="136" y="52">f(x₀) &gt; 0</text>
+        <text class="tm" x="14" y="206">連続:f(x₀)&gt;0 なら、まわりも高い → 面積 &gt; 0</text>
+        <line class="ax" x1="280" y1="170" x2="510" y2="170"/><line class="ax" x1="280" y1="170" x2="280" y2="30"/>
+        <line class="cv" x1="280" y1="170" x2="500" y2="170"/>
+        <circle cx="390" cy="170" r="4.5" fill="var(--surface)" stroke="var(--accent)" stroke-width="2"/>
+        <circle class="dot" cx="390" cy="60" r="4.5"/><line class="dash" x1="390" y1="60" x2="390" y2="166"/>
+        <text class="tm" x="400" y="62">f(x₀) = 1</text>
+        <text class="tm" x="274" y="206">不連続:1点だけ高い → 面積 = 0 なのに f ≠ 0</text>
+      </svg>
+      <figcaption>左:連続なら、1点で正なら、その点のまわりの小さな幅でも(たとえば高さの半分以上で)正だから、面積は0にならない。右:1点だけ値が1の関数は、面積は0(1点には幅がない)なのに、恒等的に0ではない。</figcaption>
+    </figure>
+
+    <details><summary>理由(証明:(3))</summary>
+      <div class="box proof"><div class="label">証明(背理法)</div>
+      <p>$f\ge0$ が連続で、ある点 $x_0$ で $f(x_0)\gt0$ とする。連続性から、$x_0$ のまわりの小さな範囲($|x-x_0|\lt\delta$、かつ $[0,1]$ の内側)で $f(x)\gt\dfrac{f(x_0)}{2}$ とできる。この範囲の幅を $\ell\gt0$ とすると、(2) から
+      $$\int_0^1f\,dx\ \ge\ \int_{\text{その範囲}}f\,dx\ \ge\ \frac{f(x_0)}{2}\cdot\ell\ \gt\ 0$$
+      となり、$\int f=0$ に反する。よって $f$ は恒等的に0。</p></div>
+    </details>
+
+    <h3>複素数値の関数</h3>
+    <p>複素数値の連続関数 $f=u+iv$($u,v$ は実数値)の積分は、$\displaystyle\int f\,dx=\int u\,dx+i\int v\,dx$ と決めます。線形性は複素数のスカラーでも成り立ちます。また $|f|^2=u^2+v^2$ は、連続な実数値の関数なので、(3) が使えます:$\displaystyle\int_0^1|f|^2dx=0\Rightarrow|f|^2\equiv0\Rightarrow f\equiv0$。</p>
+
+    <h3>よく使う積分</h3>
+    <p>$\displaystyle\int_0^1x^k\,dx=\frac{1}{k+1}$($k=0,1,2,\dots$)。すなわち $\int_0^11\,dx=1,\ \int_0^1x\,dx=\tfrac12,\ \int_0^1x^2dx=\tfrac13,\ \int_0^1x^3dx=\tfrac14$。</p>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-01.html#w-intpos" data-xref>1.8 連続関数の積分</a><a href="weeks/week-01.html#s3" data-xref>3. (抽象)内積</a><a href="weeks/week-01.html#s9" data-xref>9. 具体例で練習</a></p>
 
   </main>
 

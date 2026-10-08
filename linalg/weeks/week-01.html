@@ -1,0 +1,673 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>第1回 内積空間(内積・ノルム・エルミート内積・グラム行列) | Aセメまとめノート</title>
+  <link rel="stylesheet" href="../../assets/style.css">
+  <script defer src="../../assets/nav.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],macros:{'\\R':'\\mathbb{R}'}});window.__navReady&&window.__navReady()"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="inner">
+      <a class="site-title" href="../../index.html">Aセメまとめノート</a>
+      <span class="links"><a href="../index.html">線形代数</a><a href="../basics.html">春学期のまとめ</a><a href="../../calc/index.html">微積</a></span>
+    </div>
+  </header>
+
+  <main class="note">
+    <h1>第1回:内積空間</h1>
+    <div class="meta">線形代数学②(東京大学 教養学部 秋学期)／板書 p.1〜p.16(板書にページ番号がないため、PDF の順に数えています)</div>
+
+    <nav class="toc">
+      <div class="toc-title">目次</div>
+      <ol start="0">
+        <li><a href="#s0">この回の全体像(授業計画)</a>(p.1–2)</li>
+        <li><a href="#s1">準備:春学期の復習(基礎の確認)</a>
+          <div class="sub">直積と写像／複素数の共役・絶対値／$K$-ベクトル空間／線形写像／基底と次元／平面・空間の内積／2次式と判別式／連続関数の積分</div></li>
+        <li><a href="#s2">数ベクトル空間の標準内積</a>(§1.1、p.3–4)</li>
+        <li><a href="#s3">(抽象)内積の定義</a>(§1.2、p.5–7)</li>
+        <li><a href="#s4">ノルム(長さ)</a>(定義1.2.2、p.8)</li>
+        <li><a href="#s5">コーシー・シュワルツの不等式</a>(定理1.2.3、p.8–9)</li>
+        <li><a href="#s6">三角不等式</a>(系1.2.4、p.10)</li>
+        <li><a href="#s7">エルミート内積(複素ベクトル空間の内積)</a>(§1.3、p.10–15)</li>
+        <li><a href="#s8">グラム行列</a>(§1.4、p.16)</li>
+        <li><a href="#s9">具体例で練習</a></li>
+        <li><a href="#s10">まとめ(この回で覚えること)</a></li>
+        <li><a href="#s11">この回のノートについてのメモ(板書の乱れの扱い)</a></li>
+      </ol>
+    </nav>
+
+    <!-- ===================== 0 ===================== -->
+    <h2 id="s0">0. この回の全体像(授業計画) <span class="page-tag">板書 p.1–2</span></h2>
+    <p>板書の最初のページは表紙(「線形代数学②-1」)で、2ページ目に秋学期の授業計画が書かれていました。</p>
+    <div class="box note-box">
+      <div class="label">授業計画(板書より)</div>
+      <p>・内積空間(エルミート内積を含む)<br>・行列式<br>・固有値・固有ベクトル<br>・対称行列の対角化と2次形式</p>
+      <p><b>予備知識:</b>春学期の線形代数</p>
+    </div>
+    <p>春学期の線形代数は、ベクトル空間の「<b>足し算とスカラー倍</b>」だけで組み立てた世界でした(基底、次元、線形写像と行列)。そこには「<b>長さ</b>」や「<b>角度</b>」はありませんでした。秋学期は、これを足していく、というのが授業計画の見取り図です(以下の対応づけは、板書の項目をもとにした私の解説です)。</p>
+    <ul>
+      <li><b>内積空間</b>:ベクトルに「長さ」と「角度」を持ち込む道具(内積)を、一般のベクトル空間で定義する。<b>今回はここ</b>。</li>
+      <li>行列式:正方行列に「数」を1つ対応させる(次回以降)。</li>
+      <li>固有値・固有ベクトル:行列が「向きを変えずに伸び縮みさせるベクトル」を探す(次回以降)。</li>
+      <li>対称行列の対角化と2次形式:内積と固有値の話がここで合流する(次回以降)。</li>
+    </ul>
+
+    <div class="box thm">
+      <div class="label">この回のゴール</div>
+      <p>$\R^n$ の内積 $(v,w)=v_1w_1+\cdots+v_nw_n$ が持つ性質を取り出して、一般のベクトル空間 $V$ の<b>内積</b>を、<b>双線形性・対称性・正定値性</b>の3つの性質で定義する。そこから、
+      <br>・長さ $\|v\|=\sqrt{\langle v,v\rangle}$ が定まり、
+      <br>・<b>コーシー・シュワルツの不等式</b> $|\langle v,w\rangle|\le\|v\|\|w\|$ と<b>三角不等式</b>が成り立ち、
+      <br>・複素ベクトル空間では、共役を使った<b>エルミート内積</b>に直す必要があり、
+      <br>・基底を決めると、内積は<b>グラム行列</b> $(\langle v_i,v_j\rangle)$ という行列で表される。</p>
+    </div>
+    <p>以下では、まず必要な基礎(春学期の内容と高校の内容)を丁寧に復習してから、板書の順に進みます。基礎はすでに知っているところは飛ばしてかまいません。紫色の枠は「基礎の復習」、黄色の枠は「板書にないが、流れを理解するために私が補った部分」です。</p>
+
+    <!-- ===================== 1 ===================== -->
+    <h2 id="s1">1. 準備:春学期の復習(基礎の確認)</h2>
+    <p>この回で使う道具を、先に全部並べておきます。各枠の「詳しい解説」から、春学期のまとめのページに飛べます。</p>
+
+    <h3 id="w-maps">1.1 直積と写像の記号</h3>
+    <div class="box basic">
+      <div class="label">基礎:直積と写像 <a class="xref-link" href="../basics.html#maps" data-xref>→ 詳しい解説</a></div>
+      <p>集合 $X,Y$ の<b>直積</b> $X\times Y$ は、$x\in X$ と $y\in Y$ の<b>組</b> $(x,y)$ 全体の集合(組は順序つき)。<b>写像</b> $f:X\to Y$ は、$X$ のどの元 $x$ にも $Y$ の元をちょうど1つ対応させる規則で、$x\mapsto f(x)$ と書く。</p>
+      <p>内積は、$V$ のベクトル2つの組 $(v,w)\in V\times V$ を入れると実数(複素ベクトル空間では複素数)$\langle v,w\rangle$ が1つ出てくる写像 $\langle\ ,\ \rangle:V\times V\to\R$ です。</p>
+    </div>
+
+    <h3 id="w-complex">1.2 複素数の共役と絶対値</h3>
+    <div class="box basic">
+      <div class="label">基礎:共役・絶対値・極形式 <a class="xref-link" href="../basics.html#complex" data-xref>→ 詳しい解説</a></div>
+      <p>複素数 $z=x+iy$($x,y$ は実数、$i^2=-1$)に対し、<b>共役</b> $\bar z=x-iy$、<b>絶対値</b> $|z|=\sqrt{x^2+y^2}$。複素平面では、$|z|$ は原点からの距離、$\bar z$ は実軸について折り返した点。</p>
+      <p>・<b>$z\bar z=x^2+y^2=|z|^2\ge0$</b>(共役を掛けると、必ず0以上の実数になる。$z\cdot z$ は $i\cdot i=-1$ のように負になりうる)。</p>
+      <p>・$\overline{zw}=\bar z\,\bar w$、$|zw|=|z||w|$、$\operatorname{Re}z=\dfrac{z+\bar z}{2}$、$|\operatorname{Re}z|\le|z|$。</p>
+      <p>・極形式 $z=r(\cos\theta+i\sin\theta)=re^{i\theta}$($r=|z|$)。$|e^{i\theta}|=1$、$\overline{e^{i\theta}}=e^{-i\theta}$。$e^{i\theta}$ を掛けることは、角 $\theta$ の回転。</p>
+    </div>
+
+    <h3 id="w-vspace">1.3 $K$-ベクトル空間</h3>
+    <div class="box basic">
+      <div class="label">基礎:ベクトル空間 <a class="xref-link" href="../basics.html#vspace" data-xref>→ 詳しい解説</a></div>
+      <p>$K$ は $\R$ か $\mathbb{C}$(どちらでもよい、という断り書き)。集合 $V$ に<b>和</b> $x+y$ と<b>スカラー倍</b> $ax$($a\in K$)、<b>零元</b> $0$ が定まっていて、交換 $x+y=y+x$、結合 $(x+y)+z=x+(y+z)$、$x+0=x$、逆元の存在、分配 $a(x+y)=ax+ay$・$(a+b)x=ax+bx$、$(ab)x=a(bx)$、$1x=x$ がすべて成り立つとき、$V$ を<b>$K$-ベクトル空間</b>という。</p>
+      <p>例:$K^n$(列ベクトル)、$M_{m,n}(K)$(行列)、<b>関数空間</b>(連続関数全体。和・スカラー倍は各点ごと $(f+g)(x)=f(x)+g(x)$、$(af)(x)=af(x)$)。実数値の連続関数全体を $C_{\R}([0,1])$、複素数値のものを $C([0,1])$ と書く。ベクトルは矢印とは限らず、<b>関数</b>でもよい。</p>
+    </div>
+
+    <h3 id="w-linmap">1.4 線形写像</h3>
+    <div class="box basic">
+      <div class="label">基礎:線形写像 <a class="xref-link" href="../basics.html#linmap" data-xref>→ 詳しい解説</a></div>
+      <p>$V,W$ を $K$-ベクトル空間とする。写像 $T:V\to W$ が<b>線形</b>とは、(L1) $T(x+y)=T(x)+T(y)$、(L2) $T(ax)=aT(x)$ をみたすこと(和とスカラー倍を保つ)。例:$x\mapsto Ax$($A$ は行列)、積分 $f\mapsto\int_0^1f\,dx$、微分 $f\mapsto f'$。</p>
+      <p>2つの変数をもつ写像 $F(v,w)$ で、<b>片方を固定したとき、もう片方について線形</b>という言い方をします。内積の「双線形」は、2つの変数それぞれについて線形、という意味です。</p>
+    </div>
+
+    <h3 id="w-basis">1.5 一次独立・基底・次元</h3>
+    <div class="box basic">
+      <div class="label">基礎:基底と次元 <a class="xref-link" href="../basics.html#basis" data-xref>→ 詳しい解説</a></div>
+      <p>$v_1,\dots,v_n\in V$ が<b>一次独立</b>とは、$a_1v_1+\cdots+a_nv_n=0$ ならば $a_1=\cdots=a_n=0$ となること。$V$ を<b>生成する</b>とは、$V$ のすべてのベクトルが $a_1v_1+\cdots+a_nv_n$ の形に書けること。<b>基底</b>は「生成し、かつ一次独立」なもので、このとき $V$ のベクトルは基底の一次結合としてただ一通りに書ける(係数が<b>座標</b>)。</p>
+      <p>基底の個数が<b>次元</b> $\dim V=n$。$n$ 次元空間なら、$n$ 個のベクトルについて「一次独立」「生成する」「基底」は同値。例:$K^n$ の標準基底 $e_1,\dots,e_n$。</p>
+    </div>
+
+    <h3 id="w-rnip">1.6 平面・空間のベクトルと内積</h3>
+    <div class="box basic">
+      <div class="label">基礎:内積・長さ・角(高校+α) <a class="xref-link" href="../basics.html#rnip" data-xref>→ 詳しい解説</a></div>
+      <p>$v=(v_1,v_2,v_3),\ w=(w_1,w_2,w_3)$ の<b>内積</b> $(v,w)=v_1w_1+v_2w_2+v_3w_3$、<b>長さ</b> $\|v\|=\sqrt{(v,v)}$。$v,w\ne0$ のなす角を $\theta$ とすると
+      $$(v,w)=\|v\|\|w\|\cos\theta.$$
+      (余弦定理 $\|v-w\|^2=\|v\|^2+\|w\|^2-2\|v\|\|w\|\cos\theta$ と、成分での計算 $\|v-w\|^2=\|v\|^2-2(v,w)+\|w\|^2$ を比べると出る。)直交 $\iff(v,w)=0$。$|\cos\theta|\le1$ から $|(v,w)|\le\|v\|\|w\|$。</p>
+    </div>
+
+    <h3 id="w-quad">1.7 2次式と判別式</h3>
+    <div class="box basic">
+      <div class="label">基礎:2次式がつねに0以上 <a class="xref-link" href="../basics.html#quad" data-xref>→ 詳しい解説</a></div>
+      <p>$a\gt0$ のとき、2次式 $q(t)=at^2+bt+c$ について
+      $$\text{すべての実数 }t\text{ で }q(t)\ge0\iff b^2-4ac\le0.$$
+      理由は平方完成 $q(t)=a\bigl(t+\frac{b}{2a}\bigr)^2-\frac{b^2-4ac}{4a}$:最小値が $-\dfrac{b^2-4ac}{4a}$ なので、これが0以上なら $b^2-4ac\le0$。特に $b^2-4ac=0$ のときは、最小値が0で、$q(t_0)=0$ となる $t_0=-\dfrac{b}{2a}$ がちょうど1つある。</p>
+    </div>
+
+    <h3 id="w-intpos">1.8 連続関数の積分</h3>
+    <div class="box basic">
+      <div class="label">基礎:積分の性質と「連続」の効き目 <a class="xref-link" href="../basics.html#intpos" data-xref>→ 詳しい解説</a></div>
+      <p>積分は線形:$\int(af+bg)=a\int f+b\int g$。$f\ge0$ なら $\int_0^1f\,dx\ge0$。そして<b>$f$ が連続で $f\ge0$ なら、$\int_0^1f\,dx=0$ のとき $f$ は恒等的に0</b>(ある点で $f(x_0)\gt0$ なら、連続性からそのまわりの幅のある範囲で $f\gt\frac{f(x_0)}{2}$ なので、面積が正になってしまう)。</p>
+      <p>「連続」の仮定が必要です。1点だけ値が1で他は0という関数は、面積は0なのに恒等的に0ではありません。$\int_0^1x^k\,dx=\frac{1}{k+1}$ もよく使います。</p>
+    </div>
+
+    <!-- ===================== 2 ===================== -->
+    <h2 id="s2">2. 数ベクトル空間の標準内積 <span class="page-tag">板書 p.3–4(§1.1)</span></h2>
+
+    <h3>2.1 $\R^3$ から $\R^n$ へ</h3>
+    <p>板書 p.3 の §1(内積空間)の最初の項目 1.1 は、おなじみの内積です。$v,w\in\R^3$ を
+    $v=\begin{pmatrix}v_1\\v_2\\v_3\end{pmatrix},\ w=\begin{pmatrix}w_1\\w_2\\w_3\end{pmatrix}$ とするとき、
+    $$(v,w)=v_1w_1+v_2w_2+v_3w_3$$
+    と書きます。これを一般化して、$v,w\in\R^n$ に対し次のように定めます。</p>
+    <div class="box def">
+      <div class="label">定義(標準内積)</div>
+      <p>$v=(v_1,\dots,v_n)^{\mathrm T},\ w=(w_1,\dots,w_n)^{\mathrm T}\in\R^n$ に対し、
+      $$(v,w)=v_1w_1+\cdots+v_nw_n=\sum_{i=1}^nv_iw_i$$
+      を、$\R^n$ における<b>標準内積</b>という。</p>
+    </div>
+    <p>「同じ番号の成分どうしを掛けて、全部足す」だけです。例:$v=(1,2,3),\ w=(4,-5,6)$ なら $(v,w)=4-10+18=12$。</p>
+    <p>(この節の板書では内積を丸かっこ $(v,w)$ で書いています。次の §1.2 から、一般の内積は山かっこ $\langle v,w\rangle$ で書かれます。同じ「内積」を表します。)</p>
+
+    <h3>2.2 ノルム(長さ)と距離</h3>
+    <div class="box def">
+      <div class="label">定義(ノルム・距離)</div>
+      <p>$v\in\R^n$ に対し、
+      $$\|v\|=\sqrt{(v,v)}=\sqrt{v_1^2+\cdots+v_n^2}$$
+      を $v$ の<b>ノルム</b>(長さ)といい、$v,w\in\R^n$ の<b>距離</b>を
+      $$d(v,w)=\|v-w\|$$
+      で定める。</p>
+    </div>
+    <p>$\R^2$ なら、$\|v\|=\sqrt{v_1^2+v_2^2}$ は<b>三平方の定理</b>で測った、原点から点 $v$ までの距離です。距離 $d(v,w)$ は、2点 $v,w$ を結ぶ線分の長さ($v-w$ という矢印の長さ)です。</p>
+
+    <figure class="fig">
+      <svg viewBox="0 0 460 260" width="460" role="img" aria-label="ベクトル・角・距離">
+        <line class="cv" x1="60" y1="230" x2="234" y2="172"/>
+        <polygon class="arrh" points="240,170 228.6,173.8 230.2,178.5" style="fill:var(--accent)"/><polygon class="arrh" points="240,170 230.2,178.5 227,169.1" style="fill:var(--accent)"/>
+        <line class="cv2" x1="60" y1="230" x2="119" y2="53"/>
+        <polygon class="arrh" points="120,50 120.9,63 111.5,59.8"/>
+        <line class="cv3" x1="120" y1="50" x2="240" y2="170" style="stroke-dasharray:6 4;stroke-width:2.2"/>
+        <path class="thin" d="M107.4 214.2 A50 50 0 0 0 75.8 182.6"/>
+        <text class="t" x="84" y="208">θ</text>
+        <text class="t" x="44" y="238">O</text>
+        <text class="ta" x="246" y="174">v</text><text class="tm" x="246" y="190">(3, 1)</text>
+        <text class="tt" x="108" y="42">w</text><text class="tm" x="126" y="42">(1, 3)</text>
+        <text class="tm" x="150" y="206">‖v‖</text><text class="tm" x="58" y="130">‖w‖</text>
+        <text class="tm" x="196" y="116" style="fill:var(--ex)">d(v,w) = ‖v − w‖</text>
+        <text class="tm" x="280" y="30">(v, w) = 3·1 + 1·3 = 6</text>
+        <text class="tm" x="280" y="50">‖v‖ = ‖w‖ = √10</text>
+        <text class="tm" x="280" y="70">cosθ = 6/10 = 3/5</text>
+      </svg>
+      <figcaption>$\R^2$ のベクトル $v=(3,1),\ w=(1,3)$。長さ $\|v\|,\|w\|$、2点間の距離 $d(v,w)=\|v-w\|=\|(2,-2)\|=2\sqrt2$、なす角 $\theta$。</figcaption>
+    </figure>
+
+    <h3>2.3 内積はノルムから復元できる</h3>
+    <p>板書 p.4 には「ノルムから内積は復元できる」と書かれ、次の式が示されています。</p>
+    <div class="box thm">
+      <div class="label">偏極公式(板書 p.4)</div>
+      <p>$$(v,w)=\frac12\bigl(\|v+w\|^2-\|v\|^2-\|w\|^2\bigr).$$</p>
+    </div>
+    <div class="box proof"><div class="label">証明(板書にない確認)</div>
+      <p>$\|v+w\|^2=(v+w,\,v+w)=(v,v)+(v,w)+(w,v)+(w,w)=\|v\|^2+2(v,w)+\|w\|^2$($(v,w)=(w,v)$ を使った)。これを移項して $2$ で割る。</p></div>
+    <p><b>意味:</b> 「長さ」さえ分かれば「内積」も分かる、ということです。長さと内積は、同じ情報の2通りの表し方です。たとえば $v=(1,2,3),\ w=(4,-5,6)$ では、$v+w=(5,-3,9)$ で $\|v+w\|^2=25+9+81=115$、$\|v\|^2=14$、$\|w\|^2=77$ だから $\frac12(115-14-77)=12$。2.1 で計算した $(v,w)=12$ と一致します。</p>
+
+    <h3>2.4 なす角</h3>
+    <p>板書 p.4 の最後は、$\R^2,\R^3$ のベクトル $v,w$ のなす角を $\theta$ とすると
+    $$\cos\theta=\frac{(v,w)}{\|v\|\,\|w\|}$$
+    が成り立つ、という確認です(1.6 で復習した余弦定理から出る式)。</p>
+    <div class="box supp">
+      <div class="label">板書にない補足:この式が「一般化の動機」</div>
+      <p>$\R^2,\R^3$ では角は目で見えます。しかし $\R^{10}$ や関数空間のような、目で見えない空間でも、この式を<b>角の定義</b>として使えたら便利です。そのためには、右辺が必ず $-1$ から $1$ の間に入る必要があります($\cos\theta$ の値だから)。つまり
+      $$|(v,w)|\le\|v\|\|w\|$$
+      が一般の空間でも成り立たないといけません。それを保証するのが、この回の山場の<b>コーシー・シュワルツの不等式</b>(§5)です。</p>
+    </div>
+
+
+    <!-- ===================== 3 ===================== -->
+    <h2 id="s3">3. (抽象)内積の定義 <span class="page-tag">板書 p.5–7(§1.2)</span></h2>
+
+    <h3>3.1 内積の公理</h3>
+    <p>$\R^n$ の標準内積には、次のような性質があります(1.6 で見た線形性・対称性・正定値性)。<b>この性質だけを取り出して、一般のベクトル空間で「内積」を定義する</b>、というのが §1.2 の方針です。春学期に、$\R^n$ の性質(足し算・スカラー倍の規則)だけを取り出してベクトル空間を定義したのと同じ発想です。</p>
+    <div class="box def">
+      <div class="label">定義 1.2.1(内積)</div>
+      <p>$V$ を $\R$-ベクトル空間とする。写像
+      $$\langle\ ,\ \rangle:V\times V\to\R,\qquad (v,w)\mapsto\langle v,w\rangle$$
+      について、次の性質を考える。</p>
+      <p><b>双線形性</b></p>
+      <p>(BL1) $\langle v_1+v_2,\,w\rangle=\langle v_1,w\rangle+\langle v_2,w\rangle$ ($v_1,v_2,w\in V$)</p>
+      <p>(BL2) $\langle \alpha v,\,w\rangle=\alpha\langle v,w\rangle$ ($v,w\in V,\ \alpha\in\R$)</p>
+      <p>(BL3) $\langle v,\,w_1+w_2\rangle=\langle v,w_1\rangle+\langle v,w_2\rangle$ ($v,w_1,w_2\in V$)</p>
+      <p>(BL4) $\langle v,\,\alpha w\rangle=\alpha\langle v,w\rangle$ ($v,w\in V,\ \alpha\in\R$)</p>
+      <p><b>対称性</b></p>
+      <p>(S) $\langle v,w\rangle=\langle w,v\rangle$ ($v,w\in V$)</p>
+      <p><b>正定値性</b></p>
+      <p>(P1) $\langle v,v\rangle\ge0$ ($v\in V$)</p>
+      <p>(P2) $\langle v,v\rangle\ne0$ ($v\ne0,\ v\in V$)</p>
+    </div>
+    <p>板書 p.6 の下半分では、これらを次のように名づけています。</p>
+    <div class="box def">
+      <div class="label">用語(板書 p.6)</div>
+      <p>① $\langle\ ,\ \rangle$ が (BL1)〜(BL4) をみたすとき、<b>双線形形式</b>(bilinear form)という。</p>
+      <p>② 双線形形式 $\langle\ ,\ \rangle$ が (S) をみたすとき、<b>対称双線形形式</b>(symmetric)という。</p>
+      <p>③ 対称双線形形式が (P1)(P2) をみたすとき、<b>内積</b>(inner product)あるいは<b>正定値対称双線形形式</b>という。</p>
+    </div>
+    <p>内積の定義が決まれば、内積をもつベクトル空間を<b>内積空間</b>と呼びます(授業計画の「内積空間」)。</p>
+
+    <h3>3.2 各条件の意味</h3>
+    <ul>
+      <li><b>(BL1),(BL2)</b>:$w$ を固定したとき、$v\mapsto\langle v,w\rangle$ が<b>線形写像</b>($V\to\R$)になる、という意味です。(BL3),(BL4) は、$v$ を固定して $w\mapsto\langle v,w\rangle$ が線形写像になる、という意味。2つの変数のそれぞれについて線形なので「<b>双</b>線形」です。標準内積では、成分ごとの和と積なので当たり前に成り立ちます。</li>
+      <li><b>(S)</b>:$v$ と $w$ を入れ替えても同じ。向き(順序)によらない。</li>
+      <li><b>(P1),(P2)</b>:$\langle v,v\rangle$ は「$v$ の長さの2乗」にあたるので、<b>0以上で、0になるのは $v=0$ のときだけ</b>であってほしい。(P1) と (P2) を合わせると、「$v\ne0$ なら $\langle v,v\rangle\gt0$」です。</li>
+    </ul>
+
+    <div class="box supp">
+      <div class="label">板書にない補足:公理の整理</div>
+      <p>(S) があれば、(BL3),(BL4) は (BL1),(BL2) から自動的に出ます。たとえば
+      $$\langle v,w_1+w_2\rangle\overset{(S)}{=}\langle w_1+w_2,v\rangle\overset{(BL1)}{=}\langle w_1,v\rangle+\langle w_2,v\rangle\overset{(S)}{=}\langle v,w_1\rangle+\langle v,w_2\rangle.$$
+      ですから、<b>内積の公理は実質 (BL1),(BL2),(S),(P1),(P2) の5つ</b>です。また、(BL2) で $\alpha=0$ とすると $\langle0,0\rangle=0\cdot\langle0,0\rangle=0$ なので、(P2) は「0以外では正」と同じです。</p>
+    </div>
+    <div class="box supp">
+      <div class="label">板書にない補足:公理が1つ欠けるとどうなるか</div>
+      <p>$\R^2$ の中の2つの例で、各公理の役割を確認します。</p>
+      <p>・$\langle v,w\rangle=v_1w_1-v_2w_2$:(BL),(S) は成り立つが、$\langle(0,1),(0,1)\rangle=-1\lt0$ なので (P1) が成り立たない。「長さの2乗が負」になってしまう。</p>
+      <p>・$\langle v,w\rangle=v_1w_1$:(BL),(S),(P1) は成り立つが、$\langle(0,1),(0,1)\rangle=0$ なのに $(0,1)\ne0$ なので (P2) が成り立たない。「長さ0の0でないベクトル」ができてしまう。</p></div>
+
+    <h3>3.3 例</h3>
+    <div class="box ex">
+      <div class="label">例 1.1(板書 p.7)</div>
+      <p>$\R^n$ の標準内積は内積である。</p>
+    </div>
+    <div class="box proof"><div class="label">証明(板書では省略されているので補足)</div>
+      <p>(BL1):$(v_1+v_2,w)=\sum(v_{1,i}+v_{2,i})w_i=\sum v_{1,i}w_i+\sum v_{2,i}w_i=(v_1,w)+(v_2,w)$。(BL2) も同様($\sum(\alpha v_i)w_i=\alpha\sum v_iw_i$)。(S):$\sum v_iw_i=\sum w_iv_i$。(P1):$(v,v)=\sum v_i^2\ge0$。(P2):$v\ne0$ なら、ある $v_i\ne0$ で、$\sum v_j^2\ge v_i^2\gt0$。</p></div>
+
+    <div class="box ex">
+      <div class="label">例 1.2(板書 p.7)関数空間</div>
+      <p>$C_{\R}([0,1])=\{f:[0,1]\to\R\mid f\text{ は連続}\}$ に対し、$\langle\ ,\ \rangle:C_{\R}([0,1])\times C_{\R}([0,1])\to\R$ を
+      $$\langle f(x),g(x)\rangle=\int_0^1f(x)\,g(x)\,dx$$
+      で定めると、$\langle\ ,\ \rangle$ は $C_{\R}([0,1])$ の内積である。(板書の書き込み:<b>「(P2) → 連続性が必要」</b>)</p>
+    </div>
+    <p>ここでは「ベクトル」は<b>関数</b>です。関数 $f,g$ を入れると、実数 $\int_0^1fg\,dx$ が1つ出てきます。</p>
+    <div class="box supp">
+      <div class="label">板書にない補足:なぜ内積と考えてよいか</div>
+      <p><b>直感:</b>$\R^n$ の内積は「成分ごとに掛けて足す」$\sum v_iw_i$ でした。関数は「各点 $x$ ごとに値をもつ、無限個の成分のベクトル」と見られます。成分ごとに掛けて足す $\sum f(x_i)g(x_i)\Delta x$ を、細かくした極限が積分 $\int fg\,dx$ です。</p>
+      <p><b>確認:</b>(BL1)〜(BL4):積分の線形性(1.8)。(S):$fg=gf$。(P1):$f^2\ge0$ なので $\int f^2\ge0$。(P2):$f\ne0$ とは、ある点 $x_0$ で $f(x_0)\ne0$ ということ。すると $f^2$ は<b>連続</b>で、$f^2(x_0)\gt0$ なので、1.8 の事実から $\int_0^1f^2dx\gt0$。</p>
+      <p>この最後の「面積が正になる」ところで<b>連続性</b>が効きます(板書の書き込みの意味)。連続でない関数を許すと、1点だけ値が1の関数 $f$ で $\langle f,f\rangle=0$ なのに $f\ne0$ となり、(P2) が崩れます。</p></div>
+
+    <figure class="fig">
+      <svg viewBox="0 0 460 260" width="460" role="img" aria-label="関数の内積は積の面積">
+        <line class="ax" x1="40" y1="220" x2="430" y2="220"/><line class="ax" x1="60" y1="235" x2="60" y2="30"/>
+        <path d="M60 220 C173.3 220 286.7 220 400 50 L400 220 Z" style="fill:var(--thm);opacity:.22;stroke:none"/>
+        <line class="cv" x1="60" y1="220" x2="400" y2="50"/>
+        <path class="cv3" d="M60 220 Q230 220 400 50"/>
+        <path class="cv2" d="M60 220 C173.3 220 286.7 220 400 50" style="stroke-width:3.2"/>
+        <line class="dash" x1="400" y1="50" x2="400" y2="220"/>
+        <text class="t" x="56" y="238">0</text><text class="t" x="396" y="238">1</text><text class="t" x="414" y="214">x</text>
+        <line class="cv" x1="76" y1="20" x2="104" y2="20"/><text class="tm" x="110" y="24">f(x) = x</text>
+        <line class="cv3" x1="196" y1="20" x2="224" y2="20"/><text class="tm" x="230" y="24">g(x) = x²</text>
+        <line class="cv2" x1="320" y1="20" x2="348" y2="20" style="stroke-width:3.2"/><text class="tm" x="354" y="24">f·g = x³</text>
+        <text class="tt" x="76" y="66">オレンジの面積 = ∫ f g dx = 1/4</text>
+      </svg>
+      <figcaption>$f(x)=x,\ g(x)=x^2$ の内積 $\langle f,g\rangle=\int_0^1x\cdot x^2\,dx=\int_0^1x^3\,dx=\tfrac14$。「積 $f\cdot g$ のグラフの下の面積」が、2つの関数の内積です。</figcaption>
+    </figure>
+
+    <!-- ===================== 4 ===================== -->
+    <h2 id="s4">4. ノルム(長さ) <span class="page-tag">板書 p.8(定義1.2.2)</span></h2>
+    <div class="box def">
+      <div class="label">定義 1.2.2(ノルム)</div>
+      <p>$\langle\ ,\ \rangle$ が $V$ の内積であるとき、$\|\ \|:V\to\R$ を
+      $$\|v\|=\sqrt{\langle v,v\rangle}$$
+      で定める。</p>
+    </div>
+    <p>(P1) より $\langle v,v\rangle\ge0$ なので、平方根がとれて、$\|v\|\ge0$ の実数です。ここで (P1) が効いています。板書には、次の2つが続けて書かれています。</p>
+    <ul>
+      <li>$\|\alpha v\|=|\alpha|\,\|v\|$($\alpha\in\R$)。</li>
+      <li>この $\|\ \|$ から内積は復元できる:$\langle v,w\rangle=\dfrac12\bigl(\|v+w\|^2-\|v\|^2-\|w\|^2\bigr)$。「<b>双線形性と対称性より従う</b>」。</li>
+    </ul>
+    <div class="box proof"><div class="label">証明(板書では結果のみなので補足)</div>
+      <p>$\|\alpha v\|^2=\langle\alpha v,\alpha v\rangle=\alpha^2\langle v,v\rangle$((BL2),(BL4) を使った)なので、平方根をとって $\|\alpha v\|=|\alpha|\|v\|$。</p>
+      <p>偏極公式:(BL1)〜(BL4) で展開して $\|v+w\|^2=\langle v+w,v+w\rangle=\langle v,v\rangle+\langle v,w\rangle+\langle w,v\rangle+\langle w,w\rangle$。(S) より $\langle w,v\rangle=\langle v,w\rangle$ なので、$=\|v\|^2+2\langle v,w\rangle+\|w\|^2$。移項して $2$ で割る(§2.3 の計算を、一般の内積でやり直しただけ)。</p></div>
+    <div class="box supp">
+      <div class="label">板書にない補足:$\|v\|=0\iff v=0$</div>
+      <p>$v=0$ なら $\langle0,0\rangle=0$($\alpha=0$ の (BL2))で $\|0\|=0$。逆に $v\ne0$ なら (P1),(P2) より $\langle v,v\rangle\gt0$ だから $\|v\|\gt0$。「長さが0なのは零ベクトルだけ」という、長さらしい性質がここで保証されます。</p></div>
+
+    <!-- ===================== 5 ===================== -->
+    <h2 id="s5">5. コーシー・シュワルツの不等式 <span class="page-tag">板書 p.8–9(定理1.2.3)</span></h2>
+    <div class="box thm">
+      <div class="label">定理 1.2.3(コーシー・シュワルツの不等式)</div>
+      <p>$\langle\ ,\ \rangle$ が $V$ の内積であるとき、
+      $$|\langle v,w\rangle|\le\|v\|\,\|w\|\qquad(v,w\in V)$$
+      が成り立つ。等号が成り立つのは、$v$ と $w$ が proportional(比例する=一方が他方のスカラー倍)のときに限る。</p>
+    </div>
+    <p>(板書 p.8 の定理の式には絶対値の記号がなく「$\langle v,w\rangle\le\|v\|\|w\|$」と書かれていますが、p.9 の証明の最後に $|\langle v,w\rangle|\le\|v\|\|w\|$ が示されているので、絶対値つきで書きました。)</p>
+    <p><b>意味:</b> $\R^n$ では、$\langle v,w\rangle=\|v\|\|w\|\cos\theta$ で $|\cos\theta|\le1$ だから当たり前でした。それが、<b>どんな内積空間でも成り立つ</b>と主張しています。特に、関数空間 $C_{\R}([0,1])$ でも
+    $$\Bigl|\int_0^1f\,g\,dx\Bigr|\le\sqrt{\int_0^1f^2dx}\,\sqrt{\int_0^1g^2dx}$$
+    が成り立つ、ということです(積分の不等式として、そのまま使える)。</p>
+
+    <h3>証明(板書 p.9)</h3>
+    <p>アイデアは、<b>$t$ の2次式を作って、判別式を使う</b>ことです。</p>
+    <div class="box proof"><div class="label">証明</div>
+      <p><b>(0) 準備:</b>$w=0$ のときは、両辺とも $0$($\langle v,0\rangle=0$)で成り立つ。以下 $w\ne0$ とする(板書には書かれていませんが、$w\ne0$ を使うのは (3) の「2次式」にするためです)。</p>
+      <p><b>(1)</b> $v,w\in V$ を固定する。任意の実数 $t$ について、(P1) より
+      $$0\le\langle v+tw,\ v+tw\rangle.$$
+      <b>(2)</b> 右辺を (BL1)〜(BL4),(S) で展開する:
+      $$\langle v+tw,v+tw\rangle=\langle v,v\rangle+t\langle v,w\rangle+t\langle w,v\rangle+t^2\langle w,w\rangle=\|w\|^2t^2+2\langle v,w\rangle\,t+\|v\|^2.$$
+      <b>(3)</b> これは $t$ の2次式で、$t^2$ の係数 $\|w\|^2$ は、$w\ne0$ だから(P2より)正。すべての実数 $t$ でこの値が0以上なので、判別式は0以下(1.7):
+      $$\bigl(2\langle v,w\rangle\bigr)^2-4\|w\|^2\|v\|^2\le0\quad\Longrightarrow\quad\langle v,w\rangle^2\le\|v\|^2\|w\|^2.$$
+      両辺の平方根をとって $|\langle v,w\rangle|\le\|v\|\|w\|$。</p>
+      <p><b>(4) 等号の条件:</b>等号が成り立つなら判別式は $0$ なので、2次式が $0$ になる $t=t_0$ が存在する(1.7)。つまり $\|v+t_0w\|^2=0$。(P2) から $v+t_0w=0$、すなわち $v=-t_0w$。よって $v$ と $w$ は比例する。</p></div>
+    <p>(板書 p.9 の記述は、(2) の式の $t^2$ の項が $\|w\|^2t$ と書かれていたり、(4) の「(P2) より」が「(PL2) より」と書かれていたりしますが、これらは書き間違いと判断して直しています。詳しくは最後のメモを見てください。)</p>
+
+    <figure class="fig">
+      <svg viewBox="0 0 460 260" width="460" role="img" aria-label="コーシー・シュワルツの証明の2次式">
+        <line class="ax" x1="30" y1="190" x2="436" y2="190"/><line class="ax" x1="230" y1="205" x2="230" y2="18"/>
+        <text class="t" x="438" y="196">t</text>
+        <path class="cv" d="M60 20 Q230 200 400 20"/>
+        <path class="cv3" d="M60 100 Q230 280 400 100"/>
+        <line class="dash" x1="230" y1="110" x2="230" y2="190"/>
+        <circle class="dot" cx="230" cy="110" r="4.5"/><circle class="dotb" cx="230" cy="190" r="4.5"/>
+        <text class="t" x="236" y="208">t₀</text>
+        <text class="tm" x="240" y="140">最小値 ‖v‖² − ⟨v,w⟩²/‖w‖²</text>
+        <text class="tm" x="240" y="156">この値が 0 以上、というのが証明の中身</text>
+        <line class="cv" x1="30" y1="232" x2="58" y2="232"/><text class="tm" x="64" y="236">一般の場合(判別式 &lt; 0):つねに正</text>
+        <line class="cv3" x1="260" y1="232" x2="288" y2="232"/><text class="tm" x="294" y="236">等号(判別式 = 0):1点で 0</text>
+      </svg>
+      <figcaption>$q(t)=\|v+tw\|^2=\|w\|^2t^2+2\langle v,w\rangle t+\|v\|^2$ のグラフ。長さの2乗なので $t$ 軸より下にはもぐれません。もぐれない条件が判別式 $\le0$ で、ちょうど接するとき($v+t_0w=0$)が等号です。</figcaption>
+    </figure>
+
+    <div class="box supp">
+      <div class="label">板書にない補足:等号の逆</div>
+      <p>逆に $v=cw$($c\in\R$)ならば、$|\langle cw,w\rangle|=|c|\|w\|^2=\|cw\|\|w\|$ なので、等号が成り立ちます。ですから「等号 $\iff$ 比例する」です。($w=0$ のときも $w=0\cdot v$ と見て「比例する」に含めます。)</p></div>
+
+    <!-- ===================== 6 ===================== -->
+    <h2 id="s6">6. 三角不等式 <span class="page-tag">板書 p.10(系1.2.4)</span></h2>
+    <div class="box thm">
+      <div class="label">系 1.2.4(三角不等式)</div>
+      <p>$\langle\ ,\ \rangle$ を $V$ の内積、$\|\ \|$ をそれより定まるノルムとすると、
+      $$\|v+w\|\le\|v\|+\|w\|\qquad(v,w\in V)$$
+      が成り立つ。</p>
+    </div>
+    <p>三角形の2辺の長さの和は、残りの1辺の長さ以上、という不等式です。「<b>回り道は遠回り</b>」。</p>
+    <figure class="fig">
+      <svg viewBox="0 0 460 200" width="460" role="img" aria-label="三角不等式">
+        <line class="cv" x1="50" y1="150" x2="190" y2="60"/><polygon class="arrh" points="190,60 179.9,66.5 182.6,70.7" style="fill:var(--accent)"/><polygon class="arrh" points="190,60 182.6,70.7 177.2,62.3" style="fill:var(--accent)"/>
+        <line class="cv2" x1="190" y1="60" x2="370" y2="150"/><polygon class="arrh" points="370,150 359.3,144.6 357.1,149.1"/><polygon class="arrh" points="370,150 361.5,140.1 357.1,149.1"/>
+        <line class="cv3" x1="50" y1="150" x2="370" y2="150" style="stroke-width:3.2"/>
+        <circle class="dot" cx="50" cy="150" r="4"/><circle class="dot" cx="190" cy="60" r="4"/><circle class="dot" cx="370" cy="150" r="4"/>
+        <text class="ta" x="124" y="132">v(長さ ‖v‖)</text><text class="tt" x="292" y="92">w(長さ ‖w‖)</text>
+        <text class="ta" x="188" y="176" style="fill:var(--ex)">‖v + w‖</text>
+              </svg>
+      <figcaption>$v$ を進んでから $w$ を進む(折れ線)と、まっすぐ $v+w$ を進むより長くなります。折れ線の長さが $\|v\|+\|w\|$、まっすぐな線の長さが $\|v+w\|$ です。</figcaption>
+    </figure>
+    <div class="box proof"><div class="label">証明(板書では結果のみなので補足)</div>
+      <p>§4 の偏極公式の計算より $\|v+w\|^2=\|v\|^2+2\langle v,w\rangle+\|w\|^2$。ここで $\langle v,w\rangle\le|\langle v,w\rangle|\le\|v\|\|w\|$(定理1.2.3)なので、
+      $$\|v+w\|^2\le\|v\|^2+2\|v\|\|w\|+\|w\|^2=(\|v\|+\|w\|)^2.$$
+      両辺は0以上なので、平方根をとって $\|v+w\|\le\|v\|+\|w\|$。</p></div>
+    <p>板書には、「等号成立は $v$ と $w$ が proportional なときに限る」とあります。ただし三角不等式の等号は、$\langle v,w\rangle=\|v\|\|w\|$ のとき、つまり<b>同じ向き</b>(一方が他方の0以上の実数倍)のときです。たとえば $w=-v$ は比例していますが、$\|v+w\|=0\lt2\|v\|$ で等号は成り立ちません(最後のメモ参照)。</p>
+
+    <!-- ===================== 7 ===================== -->
+    <h2 id="s7">7. エルミート内積(複素ベクトル空間の内積) <span class="page-tag">板書 p.10–15(§1.3)</span></h2>
+
+    <h3>7.1 問題:複素ベクトル空間ではどうするか</h3>
+    <p>板書 p.10 の最後は、問いかけで終わっています。</p>
+    <div class="box ex">
+      <div class="label">問い(板書 p.10)</div>
+      <p>$V$ が複素ベクトル空間の場合の内積を、どうしたらよいか。<b>正定値性をどうとり込むのか</b>が鍵。</p>
+    </div>
+    <p>実ベクトル空間の内積の公理を、そのまま複素ベクトル空間に持ち込むと、なぜ困るのでしょうか。</p>
+    <div class="box supp">
+      <div class="label">板書にない補足:そのまま持ち込むとうまくいかない</div>
+      <p>$\mathbb{C}^1=\mathbb{C}$ で、$\langle z,w\rangle=zw$ とおいてみます(これは (BL1)〜(BL4)(S) をみたします)。ところが
+      $$\langle i,i\rangle=i\cdot i=-1\lt0$$
+      となり、(P1) が成り立ちません。これは偶然ではありません。<b>複素ベクトル空間で (BL2) と (BL4) が成り立つなら、必ず</b>
+      $$\langle iv,iv\rangle=i\cdot i\,\langle v,v\rangle=-\langle v,v\rangle$$
+      となり、$\langle v,v\rangle$ と $\langle iv,iv\rangle$ の符号が逆になってしまいます。両方が0以上になれるのは $\langle v,v\rangle=0$ のときだけで、これでは (P2) と両立しません。</p>
+    </div>
+    <p>解決策は、<b>第2変数では共役をとる</b>ことです($\bar z\cdot z=|z|^2\ge0$ となる、1.2 の性質を使うため)。すると $\langle iv,iv\rangle=i\cdot\bar i\,\langle v,v\rangle=i(-i)\langle v,v\rangle=\langle v,v\rangle$ となり、符号が保たれます。</p>
+    <figure class="fig">
+      <svg viewBox="0 0 460 230" width="460" role="img" aria-label="z·z は負になるが z·zの共役は正">
+        <circle class="thin" cx="230" cy="118" r="70"/>
+        <line class="ax" x1="60" y1="118" x2="420" y2="118"/><line class="ax" x1="230" y1="215" x2="230" y2="14"/>
+        <text class="t" x="400" y="136">Re</text><text class="t" x="238" y="26">Im</text>
+        <line class="cv2" x1="230" y1="118" x2="230" y2="54"/><polygon class="arrh" points="230,48 225,60 235,60"/>
+        <circle class="dot" cx="230" cy="48" r="5"/>
+        <text class="tt" x="240" y="52">z = i</text>
+        <line class="cv" x1="230" y1="118" x2="164" y2="118" style="stroke:var(--thm)"/><circle class="dot" cx="160" cy="118" r="5" style="fill:var(--thm)"/>
+        <text class="tm" x="70" y="104" style="fill:var(--thm)">z·z = −1</text><text class="tm" x="70" y="138" style="fill:var(--thm)">負になってしまう</text>
+        <line class="cv3" x1="230" y1="118" x2="296" y2="118"/><circle class="dot" cx="300" cy="118" r="5" style="fill:var(--ex)"/>
+        <text class="tm" x="306" y="104" style="fill:var(--ex)">z·z̄ = i·(−i) = 1</text><text class="tm" x="306" y="138" style="fill:var(--ex)">正の実数</text>
+        <circle class="dotb" cx="230" cy="188" r="4.5"/><text class="tm" x="240" y="192">z̄ = −i</text>
+      </svg>
+      <figcaption>$z=i$ を2回掛けると(90°+90°=180°の回転で)負の実数 $-1$ になりますが、$z$ に共役 $\bar z=-i$ を掛けると(+90°と−90°が打ち消し合って)正の実数 $1=|z|^2$ になります。</figcaption>
+    </figure>
+
+    <h3>7.2 エルミート内積の定義(板書 p.11–12)</h3>
+    <div class="box def">
+      <div class="label">定義 1.3.1(エルミート内積)</div>
+      <p>$V$ を $\mathbb{C}$-ベクトル空間とし、$\langle\ ,\ \rangle:V\times V\to\mathbb{C}$ について、次の性質を考える。</p>
+      <p><b>エルミート双線形性</b></p>
+      <p>(HBL1) $\langle v_1+v_2,\,w\rangle=\langle v_1,w\rangle+\langle v_2,w\rangle$</p>
+      <p>(HBL2) $\langle \alpha v,\,w\rangle=\alpha\langle v,w\rangle$ ($\alpha\in\mathbb{C}$)</p>
+      <p>(HBL3) $\langle v,\,w_1+w_2\rangle=\langle v,w_1\rangle+\langle v,w_2\rangle$</p>
+      <p>(HBL4) $\langle v,\,\alpha w\rangle=\overline{\alpha}\,\langle v,w\rangle$ ($\alpha\in\mathbb{C}$)</p>
+      <p><b>エルミート対称性</b></p>
+      <p>(HS) $\langle v,w\rangle=\overline{\langle w,v\rangle}$</p>
+      <p><b>正定値性</b></p>
+      <p>(HP1) $\langle v,v\rangle\ge0$(つねに非負の実数)</p>
+      <p>(HP2) $\langle v,v\rangle=0$ となる必要十分条件は $v=0$</p>
+      <p>(HBL1)〜(HBL4)(HS)(HP1)(HP2) をみたすものを、<b>エルミート内積</b>という。</p>
+    </div>
+    <p>実の場合との違いは<b>共役が現れる2か所</b>だけです。</p>
+    <ul>
+      <li>(HBL4):第2変数からスカラー $\alpha$ を出すときは、<b>$\bar\alpha$ になって出る</b>。(第1変数からは、そのまま $\alpha$ で出る。)</li>
+      <li>(HS):入れ替えると<b>共役</b>がつく。</li>
+    </ul>
+    <p>$\alpha$ が実数なら $\bar\alpha=\alpha$ なので、実の場合の (BL4)(S) に一致します。つまり $K=\R$ とすれば、エルミート内積は、前に見た内積そのものです。</p>
+    <p>(板書 p.11 の (HBL1) の行は、右辺が「$\langle v_1,w\rangle$」で途切れていて、左辺も $v_1+w_2$ と書かれています。上の (HBL1) は、(BL1) と同じ形に直した式です。)</p>
+
+    <div class="box supp">
+      <div class="label">板書にない補足:公理の読み方</div>
+      <p><b>(HP1) の「実数」について:</b>(HS) で $w=v$ とおくと $\langle v,v\rangle=\overline{\langle v,v\rangle}$。自分の共役と等しい複素数は実数(1.2)なので、$\langle v,v\rangle$ はもともと実数です。だから「$\ge0$」と書けるのです。</p>
+      <p><b>(HBL3),(HBL4) は (HBL1),(HBL2),(HS) から出ます。</b>たとえば
+      $$\langle v,\alpha w\rangle\overset{(HS)}{=}\overline{\langle\alpha w,v\rangle}\overset{(HBL2)}{=}\overline{\alpha\langle w,v\rangle}=\bar\alpha\,\overline{\langle w,v\rangle}\overset{(HS)}{=}\bar\alpha\langle v,w\rangle.$$
+      <b>名前:</b>第1変数について線形、第2変数について共役線形(<b>半双線形</b>、sesquilinear)。</p>
+      <p><b>流儀に注意:</b>本によっては、第1変数が共役線形、第2変数が線形の約束(物理でよく使う)もあります。板書は第1変数が線形です。</p>
+    </div>
+
+    <h3>7.3 例(板書 p.12–13)</h3>
+    <div class="box ex">
+      <div class="label">例 1.1:エルミート標準内積(板書 p.12)</div>
+      <p>$\mathbb{C}^n$ 上の $(\ ,\ ):\mathbb{C}^n\times\mathbb{C}^n\to\mathbb{C}$ を
+      $$(v,w)=v_1\overline{w_1}+\cdots+v_n\overline{w_n}$$
+      で定める。</p>
+    </div>
+    <p>実の標準内積 $\sum v_iw_i$ との違いは、$w_i$ に<b>共役</b>がついていることだけです。</p>
+    <div class="box proof"><div class="label">確認(板書にない補足)</div>
+      <p>(HP1):$(v,v)=\sum v_i\overline{v_i}=\sum|v_i|^2\ge0$。(HP2):$\sum|v_i|^2=0$ となるのは、すべての $v_i=0$ のときだけ。(HS):$\overline{(w,v)}=\overline{\sum w_i\overline{v_i}}=\sum\overline{w_i}v_i=\sum v_i\overline{w_i}=(v,w)$。</p></div>
+    <div class="box ex">
+      <div class="label">例 1.2:複素数値の連続関数(板書 p.13)</div>
+      <p>$C([0,1])=\{f:[0,1]\to\mathbb{C}\mid f\text{ は連続}\}$ に対し、
+      $$\langle f(x),g(x)\rangle=\int_0^1f(x)\,\overline{g(x)}\,dx$$
+      (ここでも $g$ の方に共役がつく)。</p>
+    </div>
+    <p>$\langle f,f\rangle=\int_0^1f\bar f\,dx=\int_0^1|f(x)|^2dx\ge0$ です。(HP2) では、$|f|^2$ が連続な実数値関数なので、1.8 の事実から「$\int|f|^2=0$ なら $f\equiv0$」が従います。やはり連続性が必要です。</p>
+
+    <h3>7.4 ノルム(定義1.3.2、板書 p.13)</h3>
+    <div class="box def">
+      <div class="label">定義 1.3.2(エルミート内積から定まるノルム)</div>
+      <p>$\langle\ ,\ \rangle$ をエルミート内積とするとき、$\|v\|=\sqrt{\langle v,v\rangle}$ と定める。このとき
+      $$\|\alpha v\|=|\alpha|\,\|v\|\qquad(\alpha\in\mathbb{C}).$$</p>
+    </div>
+    <div class="box proof"><div class="label">証明(板書 p.13)</div>
+      <p>(HBL2) と (HBL4) より $\langle\alpha v,\alpha v\rangle=\alpha\,\overline{\alpha}\,\langle v,v\rangle=|\alpha|^2\langle v,v\rangle$。よって $\|\alpha v\|=\sqrt{\alpha\bar\alpha\langle v,v\rangle}=|\alpha|\|v\|$。</p></div>
+    <p>実の場合は $\alpha^2$ で済みましたが、複素数では $\alpha\bar\alpha=|\alpha|^2$ になる、というのがここの要点です。</p>
+
+    <h3>7.5 コーシー・シュワルツの不等式(定理1.3.3、板書 p.14–15)</h3>
+    <div class="box thm">
+      <div class="label">定理 1.3.3(コーシー・シュワルツの不等式)</div>
+      <p>$\langle\ ,\ \rangle$ が $V$ のエルミート内積のとき、
+      $$|\langle v,w\rangle|\le\|v\|\,\|w\|\qquad(v,w\in V).$$
+      等号が成り立つのは、$v$ と $w$ が proportional(比例する)なときに限る。</p>
+    </div>
+    <p>ここで $\langle v,w\rangle$ は複素数なので、$|\cdot|$ は複素数の絶対値です。証明は「定理1.2.3 の証明と同じ議論を適用して」から始まります。2段階に分けると分かりやすくなります。</p>
+    <div class="box proof"><div class="label">証明(板書 p.14–15、補足を加えて詳しく)</div>
+      <p><b>第1段階:実部だけの不等式 (*)</b></p>
+      <p>実数 $t$ について
+      $$0\le\|v+tw\|^2=\langle v,v\rangle+\langle v,tw\rangle+\langle tw,v\rangle+\langle tw,tw\rangle=\|v\|^2+t\langle v,w\rangle+t\overline{\langle v,w\rangle}+t^2\|w\|^2.$$
+      ($t$ は実数なので $\bar t=t$、また (HS) より $\langle w,v\rangle=\overline{\langle v,w\rangle}$。)$z+\bar z=2\operatorname{Re}z$ から
+      $$\|v+tw\|^2=\|w\|^2t^2+2\operatorname{Re}\langle v,w\rangle\,t+\|v\|^2\ \ge0.$$
+      これは実数係数の $t$ の2次式なので、定理1.2.3 の証明と同じく判別式を使って(必要なら $w=0$ は別に確認して)
+      $$\bigl|\operatorname{Re}\langle v,w\rangle\bigr|\le\|v\|\|w\|\qquad\cdots(*)$$
+      を得る。(板書:「このように (*) がえられる」)</p>
+      <p><b>第2段階:複素数の「向き」をそろえる</b></p>
+      <p>$\langle v,w\rangle$ は複素数なので、極形式で書くと、ある実数 $\theta$ があって
+      $$e^{i\theta}\,|\langle v,w\rangle|=\langle v,w\rangle$$
+      となる($\theta$ は $\langle v,w\rangle$ の偏角。$\langle v,w\rangle=0$ なら任意の $\theta$)。(*) の $v$ を $e^{-i\theta}v$ で置き換えると、(HBL2) から
+      $$\langle e^{-i\theta}v,\ w\rangle=e^{-i\theta}\langle v,w\rangle=|\langle v,w\rangle|$$
+      (実数!)。実数の実部は自分自身だから、
+      $$|\langle v,w\rangle|=\bigl|\operatorname{Re}\langle e^{-i\theta}v,w\rangle\bigr|\le\|e^{-i\theta}v\|\,\|w\|=|e^{-i\theta}|\,\|v\|\|w\|=\|v\|\|w\|.$$
+      最後の等号は、7.4 の $\|\alpha v\|=|\alpha|\|v\|$ と $|e^{-i\theta}|=1$ による。(板書「後半は省略」。)</p></div>
+
+    <figure class="fig">
+      <svg viewBox="0 0 460 250" width="460" role="img" aria-label="複素数の向きをそろえる">
+        <line class="ax" x1="40" y1="170" x2="430" y2="170"/><line class="ax" x1="90" y1="235" x2="90" y2="20"/>
+        <text class="t" x="408" y="190">Re</text><text class="t" x="98" y="32">Im</text>
+        <line class="dash" x1="270" y1="70" x2="270" y2="170"/>
+        <line class="cv2" x1="90" y1="170" x2="270" y2="70" style="stroke-width:3"/><circle class="dot" cx="270" cy="70" r="5"/>
+        <path class="thin" d="M140 170 A50 50 0 0 0 133.7 145.7"/><text class="t" x="146" y="160">θ</text>
+        <path d="M270 70 A205.9 205.9 0 0 1 295.9 170" style="fill:none;stroke:var(--accent);stroke-width:2;stroke-dasharray:6 4"/>
+        <circle class="dotb" cx="295.9" cy="170" r="5.5"/>
+        <text class="tt" x="206" y="58">c = ⟨v, w⟩</text>
+        <text class="tm" x="206" y="206">Re c(実部)</text>
+        <line class="rect" x1="90" y1="214" x2="270" y2="214" style="stroke:var(--thm);stroke-width:3"/>
+        <text class="ta" x="304" y="196" style="fill:var(--accent)">e^(−iθ)c = |c|</text>
+        <text class="tm" x="304" y="150">回してそろえると、</text><text class="tm" x="304" y="166">実部 = 絶対値になる</text>
+      </svg>
+      <figcaption>複素数 $c=\langle v,w\rangle$ は、実部 $\operatorname{Re}c$ だけでは $|c|$ より小さく見えます(オレンジの線)。そこで $e^{-i\theta}$ を掛けて実軸の上に回してやると($e^{-i\theta}$ は大きさ1なので長さは変わらない)、実部がちょうど $|c|$ になります。回す操作は $v\mapsto e^{-i\theta}v$ で実現でき、ノルムは変わりません。</figcaption>
+    </figure>
+
+    <div class="box supp">
+      <div class="label">板書にない補足:等号の条件(後半)</div>
+      <p>$w\ne0$ とし、$|\langle v,w\rangle|=\|v\|\|w\|$ と仮定します。上の $\theta$ について $v'=e^{-i\theta}v$ とおくと、$\operatorname{Re}\langle v',w\rangle=|\langle v,w\rangle|=\|v'\|\|w\|$ なので、実数 $t$ の2次式 $\|w\|^2t^2+2\operatorname{Re}\langle v',w\rangle t+\|v'\|^2$ の判別式は $0$ です。したがって $\|v'+t_0w\|^2=0$ となる実数 $t_0$ があり、$v'=-t_0w$、すなわち $v=-t_0e^{i\theta}w$。$v$ と $w$ は(複素数倍で)比例します。逆に比例していれば等号が成り立つのは、実の場合と同様です。</p></div>
+
+    <h3>7.6 三角不等式(系1.3.4、板書 p.15)</h3>
+    <div class="box thm">
+      <div class="label">系 1.3.4</div>
+      <p>エルミート内積から定まる $\|\ \|$ は、三角不等式 $\|v+w\|\le\|v\|+\|w\|$ をみたす。</p>
+    </div>
+    <div class="box proof"><div class="label">証明(板書では結果のみなので補足)</div>
+      <p>第1段階と同じ計算($t=1$)で $\|v+w\|^2=\|v\|^2+2\operatorname{Re}\langle v,w\rangle+\|w\|^2$。$\operatorname{Re}\langle v,w\rangle\le|\langle v,w\rangle|\le\|v\|\|w\|$(定理1.3.3)だから
+      $$\|v+w\|^2\le\|v\|^2+2\|v\|\|w\|+\|w\|^2=(\|v\|+\|w\|)^2.$$
+      平方根をとって終わり。</p></div>
+
+    <!-- ===================== 8 ===================== -->
+    <h2 id="s8">8. グラム行列 <span class="page-tag">板書 p.16(§1.4)</span></h2>
+    <p>板書の最後のページは、グラム行列の定義です。ここまでの内積(実の内積とエルミート内積)を、<b>行列</b>で表す準備にあたります。</p>
+    <div class="box def">
+      <div class="label">定義 1.4.1(グラム行列)</div>
+      <p>$K=\R,\ \mathbb{C}$。$V$ を $n$ 次元 $K$-ベクトル空間、$v_1,\dots,v_n\in V$ をその基底とする。$\langle\ ,\ \rangle:V\times V\to K$ に対して、$\langle\ ,\ \rangle$ の($v_1,\dots,v_n$ に関する)<b>グラム行列</b>を
+      $$\bigl(\langle v_i,v_j\rangle\bigr)_{1\le i\le n,\ 1\le j\le n}\in M_n(K)$$
+      で定める。すなわち $(i,j)$ 成分が $\langle v_i,v_j\rangle$ の $n\times n$ 行列。</p>
+      <p>$V=K^n$ のときに基底を指定しなければ、標準基底 $e_1,\dots,e_n$ に関するグラム行列とする。</p>
+    </div>
+    <p>基底の全部の組 $(v_i,v_j)$ で内積を計算して、表にしたものです。$K=\R$ なら内積(§3)、$K=\mathbb{C}$ ならエルミート内積(§7)を考えます。($\langle\ ,\ \rangle$ は、この段階では内積であることまでは要求されていません。)</p>
+
+    <h3>8.1 例</h3>
+    <div class="box ex">
+      <div class="label">例 1:標準内積と標準基底</div>
+      <p>$\R^n$ の標準内積で標準基底 $e_1,\dots,e_n$ をとると、$\langle e_i,e_j\rangle$ は $i=j$ なら $1$、$i\ne j$ なら $0$。グラム行列は<b>単位行列</b> $I_n$。</p>
+    </div>
+    <div class="box ex">
+      <div class="label">例 2:斜めの基底</div>
+      <p>$\R^2$ の標準内積で、基底 $v_1=(1,0)^{\mathrm T},\ v_2=(1,1)^{\mathrm T}$ をとる(基礎の枠 1.5 の基底と同じ)。
+      $\langle v_1,v_1\rangle=1,\ \langle v_1,v_2\rangle=1,\ \langle v_2,v_1\rangle=1,\ \langle v_2,v_2\rangle=2$ だから、
+      $$G=\begin{pmatrix}1&1\\1&2\end{pmatrix}.$$
+      対角線の成分は「長さの2乗」($\|v_1\|^2=1,\ \|v_2\|^2=2$)、それ以外の成分は「基底どうしの内積」(直交していないので0でない)。</p>
+    </div>
+    <figure class="fig">
+      <svg viewBox="0 0 460 230" width="460" role="img" aria-label="グラム行列の成分の意味">
+        <line class="cv" x1="70" y1="190" x2="180" y2="190"/><polygon class="arrh" points="188,190 176,185 176,195" style="fill:var(--accent)"/>
+        <line class="cv3" x1="70" y1="190" x2="180" y2="80" style="stroke-width:2.6"/><polygon class="arrh" points="186,74 174,80 182,88" style="fill:var(--ex)"/>
+        <path class="thin" d="M105 190 A35 35 0 0 0 94.7 165.3"/><text class="t" x="110" y="180">45°</text>
+        <text class="ta" x="86" y="214">v₁ = (1, 0),長さ 1</text>
+        <text class="ta" x="22" y="140" style="fill:var(--ex)">v₂ = (1, 1)</text><text class="tm" x="22" y="156">長さ √2</text>
+        <text class="tj" x="250" y="62">グラム行列 G の成分</text>
+        <text class="tm" x="250" y="90">⟨v₁, v₁⟩ = 1  ← v₁ の長さの2乗</text>
+        <text class="tm" x="250" y="112">⟨v₁, v₂⟩ = 1  ← √2·(1/√2)(角が 45°)</text>
+        <text class="tm" x="250" y="134">⟨v₂, v₁⟩ = 1</text>
+        <text class="tm" x="250" y="156">⟨v₂, v₂⟩ = 2  ← v₂ の長さの2乗</text>
+      </svg>
+      <figcaption>基底ベクトルの長さと、基底どうしのなす角が、グラム行列のすべての成分に出てきます。</figcaption>
+    </figure>
+    <div class="box ex">
+      <div class="label">例 3:関数空間の基底 $1,\,x$</div>
+      <p>$C_{\R}([0,1])$ の内積 $\langle f,g\rangle=\int_0^1fg\,dx$ で、2つの関数 $v_1=1,\ v_2=x$(これらで張られる2次元の部分空間の基底)を考える。1.8 の積分の値を使って
+      $\langle1,1\rangle=\int_0^11\,dx=1,\ \langle1,x\rangle=\int_0^1x\,dx=\tfrac12,\ \langle x,x\rangle=\int_0^1x^2dx=\tfrac13$ だから
+      $$G=\begin{pmatrix}1&\tfrac12\\[2pt]\tfrac12&\tfrac13\end{pmatrix}.$$</p>
+    </div>
+    <div class="box ex">
+      <div class="label">例 4:エルミート内積($\mathbb{C}^2$)</div>
+      <p>$\mathbb{C}^2$ のエルミート標準内積 $(v,w)=v_1\overline{w_1}+v_2\overline{w_2}$ で、基底 $v_1=(1,0)^{\mathrm T},\ v_2=(i,1)^{\mathrm T}$ をとる。
+      $\langle v_1,v_1\rangle=1,\ \langle v_1,v_2\rangle=1\cdot\bar i+0=-i,\ \langle v_2,v_1\rangle=i\cdot\bar1+1\cdot0=i,\ \langle v_2,v_2\rangle=i\bar i+1=2$ だから
+      $$G=\begin{pmatrix}1&-i\\ i&2\end{pmatrix}.$$
+      非対角成分が $-i$ と $i$ で、<b>互いに共役</b>になっています(次の補足)。</p>
+    </div>
+
+    <div class="box supp">
+      <div class="label">板書にない補足:グラム行列の使いみち(板書の定義の後に続く内容の見通し)</div>
+      <p><b>性質:</b>(S) があれば $\langle v_i,v_j\rangle=\langle v_j,v_i\rangle$ なので、$G$ は<b>対称行列</b>。(HS) があれば $\langle v_i,v_j\rangle=\overline{\langle v_j,v_i\rangle}$ なので、$G$ の $(j,i)$ 成分は $(i,j)$ 成分の共役になる(例4)。</p>
+      <p><b>使いみち:</b>$v=\sum_ix_iv_i,\ w=\sum_jy_jv_j$ と座標で書くと、(BL1)〜(BL4) で展開して
+      $$\langle v,w\rangle=\sum_{i,j}x_i\,y_j\,\langle v_i,v_j\rangle\quad(K=\R),\qquad\langle v,w\rangle=\sum_{i,j}x_i\,\overline{y_j}\,\langle v_i,v_j\rangle\quad(K=\mathbb{C}).$$
+      つまり、<b>内積は、グラム行列 $G$ だけで決まります</b>。$K=\R$ なら $\langle v,w\rangle=x^{\mathrm T}Gy$($x,y$ は座標の列ベクトル)です。「内積」という抽象的な規則が、基底を選ぶと「$n\times n$ の行列」という具体的な数の表になる、というのがグラム行列の意味です。授業計画にある「対称行列」「2次形式」は、この行列の話につながっていくと思われます(板書はここまでなので、これは私の見通しです)。</p></div>
+
+    <!-- ===================== 9 ===================== -->
+    <h2 id="s9">9. 具体例で練習(板書にない補足) <span class="page-tag">補足</span></h2>
+    <p>この節は、板書にはない、理解を助けるための練習問題と解答です(私が作りました)。</p>
+
+    <div class="box ex">
+      <div class="label">問題 A:$\R^3$ の内積・長さ・角</div>
+      <p>$v=(1,2,2),\ w=(2,-1,2)$ について、$(v,w)$、$\|v\|$、$\|w\|$、$\cos\theta$ を求め、コーシー・シュワルツの不等式を確認せよ。</p>
+    </div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>$(v,w)=2-2+4=4$。$\|v\|=\sqrt{1+4+4}=3$、$\|w\|=\sqrt{4+1+4}=3$。$\cos\theta=\dfrac{4}{3\cdot3}=\dfrac49$($\theta\approx63.6^\circ$)。$|(v,w)|=4\le\|v\|\|w\|=9$ で成り立つ。</p></div>
+
+    <div class="box ex">
+      <div class="label">問題 B:内積かどうかの判定</div>
+      <p>$\R^2$ 上の、次の $\langle v,w\rangle$ は内積か。(1) $2v_1w_1+3v_2w_2$ (2) $v_1w_2+v_2w_1$</p>
+    </div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>(1) (BL),(S) は明らか。$\langle v,v\rangle=2v_1^2+3v_2^2\ge0$ で、$0$ になるのは $v_1=v_2=0$ のときだけなので (P1),(P2) も成り立つ。<b>内積である</b>(成分ごとに重みをつけた内積)。</p>
+      <p>(2) (BL),(S) は成り立つが、$v=(1,-1)$ とすると $\langle v,v\rangle=1\cdot(-1)+(-1)\cdot1=-2\lt0$。(P1) が成り立たないので<b>内積ではない</b>(対称双線形形式ではある)。</p></div>
+
+    <div class="box ex">
+      <div class="label">問題 C:関数空間でのコーシー・シュワルツ</div>
+      <p>$C_{\R}([0,1])$ の内積で、$f=x,\ g=x^2$ について $\langle f,g\rangle$、$\|f\|$、$\|g\|$ を求め、不等式を確認せよ。また、$f,g$ のなす角の余弦を求めよ。</p>
+    </div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>$\langle f,g\rangle=\int_0^1x^3dx=\tfrac14$。$\|f\|^2=\int_0^1x^2dx=\tfrac13$、$\|g\|^2=\int_0^1x^4dx=\tfrac15$ だから $\|f\|\|g\|=\dfrac{1}{\sqrt{15}}\approx0.2582$。確かに $\tfrac14=0.25\le0.2582$。$\cos\theta=\dfrac{1/4}{1/\sqrt{15}}=\dfrac{\sqrt{15}}{4}\approx0.968$($\theta\approx14.5^\circ$)。関数 $x$ と $x^2$ は、「向きがよく似たベクトル」です。</p></div>
+
+    <div class="box ex">
+      <div class="label">問題 D:エルミート内積の計算</div>
+      <p>$\mathbb{C}^2$ のエルミート標準内積で、$v=(1+i,\,2),\ w=(1,\,i)$ について $\langle v,w\rangle$、$\langle w,v\rangle$、$\|v\|$、$\|w\|$ を求め、不等式を確認せよ。</p>
+    </div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>$\langle v,w\rangle=(1+i)\bar1+2\bar i=(1+i)+2(-i)=1-i$。$\langle w,v\rangle=1\cdot\overline{(1+i)}+i\cdot\bar2=(1-i)+2i=1+i$。確かに $\langle w,v\rangle=\overline{\langle v,w\rangle}$(エルミート対称性)。$\|v\|^2=|1+i|^2+|2|^2=2+4=6$、$\|w\|^2=1+1=2$。$|\langle v,w\rangle|=|1-i|=\sqrt2\le\|v\|\|w\|=\sqrt{12}$。</p></div>
+
+    <!-- ===================== 10 ===================== -->
+    <h2 id="s10">10. まとめ(この回で覚えること)</h2>
+    <ul>
+      <li><b>内積の定義(実ベクトル空間)</b>:$\langle\ ,\ \rangle:V\times V\to\R$ で、双線形性(2つの変数それぞれについて線形)、対称性 $\langle v,w\rangle=\langle w,v\rangle$、正定値性($\langle v,v\rangle\ge0$、$v\ne0$ なら $\ne0$)をみたすもの。</li>
+      <li>例:$\R^n$ の標準内積 $\sum v_iw_i$、連続関数の空間の $\int_0^1fg\,dx$(正定値性に<b>連続性</b>が必要)。</li>
+      <li><b>ノルム</b> $\|v\|=\sqrt{\langle v,v\rangle}$、$\|\alpha v\|=|\alpha|\|v\|$。内積はノルムから $\langle v,w\rangle=\frac12(\|v+w\|^2-\|v\|^2-\|w\|^2)$ で復元できる。</li>
+      <li><b>コーシー・シュワルツ</b> $|\langle v,w\rangle|\le\|v\|\|w\|$(等号は比例するとき)。証明は $\|v+tw\|^2\ge0$ を $t$ の2次式と見て、<b>判別式 $\le0$</b>。</li>
+      <li><b>三角不等式</b> $\|v+w\|\le\|v\|+\|w\|$(等号は同じ向きのとき)。</li>
+      <li><b>エルミート内積</b>(複素ベクトル空間):第1変数について線形、第2変数について<b>共役線形</b>、対称性は $\langle v,w\rangle=\overline{\langle w,v\rangle}$。標準内積は $\sum v_i\overline{w_i}$。共役を掛けると $z\bar z=|z|^2\ge0$ になるので、正定値性が成り立つ。</li>
+      <li>エルミート版のコーシー・シュワルツは、実部の不等式 $|\operatorname{Re}\langle v,w\rangle|\le\|v\|\|w\|$ から出発し、$e^{-i\theta}v$ で複素数の向きをそろえて導く。</li>
+      <li><b>グラム行列</b> $\bigl(\langle v_i,v_j\rangle\bigr)_{i,j}$:基底 $v_1,\dots,v_n$ に関する内積の成分表。内積はグラム行列で決まる。</li>
+    </ul>
+
+    <!-- ===================== 11 ===================== -->
+    <h2 id="s11">11. この回のノートについてのメモ(板書の乱れの扱い)</h2>
+    <p>板書の読み方と、書き間違いと判断した箇所の扱いを記録しておきます。補足として足した部分(黄色の枠)や基礎ページの内容は、Claude が書き足したもので、板書にはありません。</p>
+    <ol>
+      <li><b>ページ番号について。</b>この回の板書にはページ番号がありませんでした。そこで、PDF の順に数えて表紙を p.1、授業計画を p.2、…、最後を p.16 とし、本文のページ表示はこの数え方です。p.2 の予備知識の欄は「S…の線形代数」と書かれていて、最後の文字までは読み取れませんでしたが、春学期の線形代数のことと判断しました。</li>
+      <li><b>記号の切り替え(p.3–4 と p.5 以降)。</b>p.3–4 では内積を $(v,w)$ と書き、p.5 以降では $\langle v,w\rangle$ と書いています。同じ「内積」を表すものとして、そのまま区別して載せました。</li>
+      <li><b>コーシー・シュワルツの証明の式(p.9)。</b>展開した式の第1項が $\|w\|^2t$ と書かれていましたが、正しくは $\|w\|^2t^2$ です(「$t$ の2次式」と書かれていること、判別式の結果 $4\langle v,w\rangle^2\le4\|v\|^2\|w\|^2$ とも合います)。また、等号の議論で「(PL2) より」とあるのは、(P2) の書き間違いと判断しました。さらに、板書は $w\ne0$ を断っていませんが、2次式にするには $\|w\|^2\gt0$ が要るので、$w=0$ を別に確認する一文を足しました。</li>
+      <li><b>定理1.2.3 の式(p.8)。</b>定理の式が $\langle v,w\rangle\le\|v\|\|w\|$ と絶対値なしで書かれていますが、p.9 の最後で $|\langle v,w\rangle|\le\|v\|\|w\|$ を示しているので、絶対値つきで載せました。</li>
+      <li><b>等号の条件(p.8–10)。</b>コーシー・シュワルツでは「proportional のとき」が正しい。系1.2.4(三角不等式)の等号も板書では「proportional なとき」とありますが、三角不等式の等号は「同じ向き(一方が他方の0以上の実数倍)」のときです($w=-v$ は反例)。板書の言い方は不正確だと判断し、本文で直しました。</li>
+      <li><b>(HBL1) の行(p.11)。</b>左辺が $\langle v_1+w_2,w\rangle$ と書かれ、右辺も $\langle v_1,w\rangle$ で終わっていました。(BL1) と同じ形 $\langle v_1+v_2,w\rangle=\langle v_1,w\rangle+\langle v_2,w\rangle$ の書き落としと判断しました。</li>
+      <li><b>(HP1) の補足(p.12)。</b>「(つねに非負実数)」と読みました(手書きがつぶれていて断定できません)。(HS) から $\langle v,v\rangle$ が実数になるので、意味はこのとおりです。</li>
+      <li><b>例1.2 の関数空間(p.7, p.13)。</b>p.13 では定義域が $[0,1)$ のように見える書き方がありましたが、p.7 と同じ閉区間 $[0,1]$ と判断しました。また、p.7 の「(P2) → 連続性が必要」の書き込みは、正定値性(P2)の確認で連続性を使う、という意味と判断しました。</li>
+      <li><b>板書で証明が省略されていた部分。</b>例1.1(標準内積が内積であること)、$\|\alpha v\|=|\alpha|\|v\|$ の実の場合、偏極公式、系1.2.4・系1.3.4(三角不等式)、定理1.3.3 の等号条件は、板書に証明がありません。本文では、板書に準じた形で証明を補い、黄色の枠(補足)か証明の枠に「板書では省略」と明記しました。</li>
+      <li><b>板書の終わり。</b>板書は、p.16 のグラム行列の定義で終わっています。グラム行列の性質、内積との関係(§8 の最後の補足)は私が足したもので、続きは次回以降の板書で扱われると思われます。</li>
+    </ol>
+
+    <nav class="pager">
+      <span class="disabled">← 前の週</span>
+      <a href="../index.html">一覧へ</a>
+      <span class="disabled">次の週 →</span>
+    </nav>
+  </main>
+
+  <footer>© Aセメまとめノート</footer>
+</body>
+</html>
