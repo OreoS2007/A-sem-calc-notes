@@ -1,0 +1,884 @@
+﻿<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>第1回 陰関数の定理 | Aセメまとめノート</title>
+  <link rel="stylesheet" href="../../assets/style.css">
+  <script defer src="../../assets/nav.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],macros:{'\\R':'\\mathbb{R}'}});window.__navReady&&window.__navReady()"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="inner">
+      <a class="site-title" href="../../index.html">Aセメまとめノート</a>
+      <span class="links"><a href="../../calc/index.html">微積</a><a href="../../calc/basics.html">春学期のまとめ</a><a href="../../linalg/index.html">線形代数</a></span>
+    </div>
+  </header>
+
+  <main class="note">
+    <h1>第1回:陰関数の定理</h1>
+    <div class="meta">微分積分学②(東京大学 教養学部 秋学期)／板書 p.1〜p.26／板書の写真はページごとに折りたたんで載せてあります</div>
+
+    <nav class="toc">
+      <div class="toc-title">目次</div>
+      <ol start="0">
+        <li><a href="#s0">この回の全体像(授業計画)</a></li>
+        <li><a href="#s1">準備:春学期の復習(基礎の確認)</a>
+          <div class="sub">1変数の微分／中間値の定理／微分の符号と単調性／開区間とε／偏微分／連続とC¹級／連鎖律／2変数の平均値の定理／勾配ベクトル</div></li>
+        <li><a href="#s2">陰関数とは何か</a>(p.2–3)</li>
+        <li><a href="#s3">例:円 $x^2+y^2-1=0$</a>(p.4)</li>
+        <li><a href="#s4">陰関数の定理(主張)</a>(p.5–6)</li>
+        <li><a href="#s5">証明①:陰関数 $\varphi$ が存在すること</a>(p.7–11)</li>
+        <li><a href="#s6">証明②:$\varphi$ が微分可能で導関数の公式が成り立つこと</a>(p.12–13)</li>
+        <li><a href="#s7">別の導き方:連鎖律で公式を出す／2階導関数</a>(p.19–20)</li>
+        <li><a href="#s8">注意:$x$ の関数としてだめなら $y$ の関数として</a>(p.14–15)</li>
+        <li><a href="#s9">応用:曲線の接線の方程式</a>(p.16–18)</li>
+        <li><a href="#s10">3変数への拡張:曲面と接平面</a>(p.21–26)</li>
+        <li><a href="#s11">具体例で練習</a></li>
+        <li><a href="#s12">まとめ(この回で覚えること)</a></li>
+        <li><a href="#s13">この回のノートについてのメモ(板書の乱れの扱い)</a></li>
+      </ol>
+    </nav>
+
+    <!-- ===================== 0 ===================== -->
+    <h2 id="s0">0. この回の全体像(授業計画) <span class="page-tag">板書 p.1</span></h2>
+    <p>板書の最初のページには、秋学期の授業計画が書かれていました。</p>
+    <div class="box note-box">
+      <div class="label">授業計画(板書より)</div>
+      <p><b>偏微分とその応用</b></p>
+      <p>◎ 陰関数の定理<br>◎ ラグランジュの未定乗数法(条件付き極大・極小問題)</p>
+      <p>各項目ごとにレポート課題(3回)</p>
+    </div>
+    <p>つまり秋学期の最初のテーマは、<b>偏微分を使って「方程式から関数を作る」話</b>(陰関数の定理)と、それを使って<b>「条件つきの最大・最小」を調べる話</b>(ラグランジュの未定乗数法)です。今回はこのうちの<b>陰関数の定理</b>です。次回以降のラグランジュの未定乗数法でも、今回出てくる<b>勾配ベクトル</b>と<b>接線・接平面</b>の考え方がそのまま使われます。
+
+    <p><b>この回を一言で言うと:</b></p>
+    <div class="box thm">
+      <div class="label">この回のゴール</div>
+      <p>方程式 $f(x,y)=0$ は $x$ と $y$ の関係式です。これを「$y=\varphi(x)$ の形」に<b>きれいに解けなくても</b>、ある条件($f_y(a,b)\ne 0$)さえ成り立てば、点 $(a,b)$ のまわりでは<b>$y$ は $x$ の関数として決まる</b>ことが保証されます。しかもその関数の傾きは、解かなくても
+      $$\varphi'(x)=-\frac{f_x(x,y)}{f_y(x,y)}$$
+      と計算できます。</p>
+    </div>
+    <p>以下では、まず必要な基礎(春学期の内容)を丁寧に復習してから、板書の順に進みます。基礎はすでに知っているところは飛ばしてかまいません。紫色の枠は「基礎の復習」、黄色の枠は「板書にないが、流れを理解するために私が補った部分」です。</p>
+
+    <details class="photo"><summary>この部分の板書(p.1–2)の写真を見る</summary><img src="../images/week-01/board-p01-02.webp" alt="板書 p.1-2" loading="lazy"></details>
+
+    <!-- ===================== 1 ===================== -->
+    <h2 id="s1">1. 準備:春学期の復習(基礎の確認)</h2>
+    <p>陰関数の定理の証明や使い方で使う道具を、先に全部並べておきます。</p>
+
+    <h3 id="w-deriv">1.1 1変数関数の微分</h3>
+    <div class="box basic">
+      <div class="label">基礎:微分係数と導関数 <a class="xref-link" href="../basics.html#deriv" data-xref>→ 詳しい解説</a></div>
+      <p>関数 $g(x)$ の $x=a$ での<b>微分係数</b>(その点での傾き)は
+      $$g'(a)=\lim_{h\to 0}\frac{g(a+h)-g(a)}{h}$$
+      で定義されます。各 $x$ に対して $g'(x)$ を対応させる関数が<b>導関数</b>です。</p>
+      <p>意味は「$x$ を $a$ から $h$ だけ動かしたとき、$g$ の値がどれだけ変わるか(変化量)を、動かした量 $h$ で割ったもの」です。$h$ をどんどん小さくした極限なので、グラフの<b>接線の傾き</b>になります。</p>
+    </div>
+
+    <figure class="fig">
+      <svg viewBox="0 0 460 250" width="460" role="img" aria-label="接線と割線">
+        <line class="ax" x1="40" y1="215" x2="440" y2="215"/><line class="ax" x1="40" y1="215" x2="40" y2="20"/>
+        <path class="cv" d="M60 190 C150 60 260 40 400 120"/>
+        <line class="cv2" x1="90" y1="117" x2="330" y2="21" style="stroke-width:1.8"/>
+        <line class="dash" x1="178" y1="86" x2="246" y2="86"/><line class="dash" x1="246" y1="86" x2="246" y2="73"/>
+        <line class="dash" x1="178" y1="86" x2="178" y2="215"/><line class="dash" x1="246" y1="73" x2="246" y2="215"/>
+        <circle class="dot" cx="178" cy="86" r="4.5"/><circle class="dotb" cx="246" cy="73" r="4.5"/>
+        <text class="t" x="173" y="233">a</text><text class="t" x="232" y="233">a+h</text>
+        <text class="tj" x="210" y="103">h</text><text class="tm" x="252" y="95">g(a+h)−g(a)</text>
+        <text class="tt" x="300" y="40">接線(傾き g′(a))</text>
+        <text class="ta" x="330" y="150">y = g(x)</text>
+      </svg>
+      <figcaption>$h$ を小さくすると、2点 $(a,g(a))$ と $(a+h,g(a+h))$ を結ぶ線(割線)の傾き $\dfrac{g(a+h)-g(a)}{h}$ が、接線の傾き $g'(a)$ に近づきます。</figcaption>
+    </figure>
+
+    <h3 id="w-ivt">1.2 中間値の定理</h3>
+    <div class="box basic">
+      <div class="label">基礎:中間値の定理 <a class="xref-link" href="../basics.html#ivt" data-xref>→ 詳しい解説</a></div>
+      <p>関数 $g$ が閉区間 $[p,q]$ で<b>連続</b>で、$g(p)\lt 0\lt g(q)$ ならば、$g(c)=0$ となる $c$ が $p\lt c\lt q$ の中に<b>少なくとも1つ</b>ある。</p>
+      <p>(一般には「$g(p)$ と $g(q)$ の間の値は必ずとる」という形ですが、今回使うのは「間の値が $0$」の場合です。)</p>
+    </div>
+    <figure class="fig">
+      <svg viewBox="0 0 460 250" width="460" role="img" aria-label="中間値の定理">
+        <line class="ax" x1="40" y1="140" x2="440" y2="140"/><line class="ax" x1="40" y1="20" x2="40" y2="240"/>
+        <path class="cv" d="M70 205 C180 215 250 60 410 45"/>
+        <line class="dash" x1="102" y1="140" x2="102" y2="203"/><line class="dash" x1="365" y1="140" x2="365" y2="53"/>
+        <circle class="dotb" cx="102" cy="203" r="4.5"/><circle class="dotb" cx="365" cy="53" r="4.5"/>
+        <circle class="dot" cx="215" cy="140" r="5.5"/>
+        <text class="t" x="98" y="130">p</text><text class="t" x="212" y="130">c</text><text class="t" x="361" y="160">q</text>
+        <text class="tm" x="108" y="215">g(p) &lt; 0</text><text class="tm" x="300" y="45">g(q) &gt; 0</text>
+        <text class="tt" x="222" y="162">g(c)=0</text>
+      </svg>
+      <figcaption>とぎれずにつながったグラフ(連続)が、$x$ 軸の下の点から上の点へ行くなら、途中で必ず $x$ 軸を横切ります。当たり前に見えますが、証明で何度も使う重要な道具です。</figcaption>
+    </figure>
+
+    <h3 id="w-mono">1.3 微分の符号と単調増加</h3>
+    <div class="box basic">
+      <div class="label">基礎:導関数が正なら単調増加 <a class="xref-link" href="../basics.html#mvt" data-xref>→ 詳しい解説</a></div>
+      <p>区間で $g'(y)\gt 0$ ならば、$g$ はその区間で<b>単調増加</b>(厳密に増加)です。つまり $y_1\lt y_2$ なら $g(y_1)\lt g(y_2)$。</p>
+      <p>理由は平均値の定理です。$g(y_2)-g(y_1)=g'(\xi)(y_2-y_1)$ となる $\xi$ が間にあり、右辺は「正×正」なので正になります。</p>
+    </div>
+    <p>今回は特に、<b>単調増加な関数は同じ値を2回とらない</b>(だから $g(y)=0$ となる $y$ は<b>高々1つ</b>)という使い方が重要です。これが「関数 $\varphi(x)$ が一意に決まる」ことの理由になります。</p>
+
+    <h3 id="w-eps">1.4 開区間・近傍・$\varepsilon$ の記号</h3>
+    <div class="box basic">
+      <div class="label">基礎:開区間と $\varepsilon$ <a class="xref-link" href="../basics.html#eps" data-xref>→ 詳しい解説</a></div>
+      <p><b>開区間</b> $(a-\varepsilon,\,a+\varepsilon)$ とは、$a-\varepsilon\lt x\lt a+\varepsilon$ をみたす $x$ 全体、つまり<b>$a$ から距離 $\varepsilon$ 未満</b>の範囲です(両端は含みません)。</p>
+      <p>「$x=a$ を含むある開区間」とは、「$a$ のごく近く(どれだけ狭くてもよいから、とにかく $a$ の両側に少し広がった範囲)」という意味です。$\varepsilon$ は<b>小さい正の数</b>を表す文字として使います。</p>
+    </div>
+    <figure class="fig">
+      <svg viewBox="0 0 460 90" width="460" role="img" aria-label="開区間">
+        <line class="ax" x1="30" y1="50" x2="430" y2="50"/>
+        <line class="rect" x1="120" y1="50" x2="340" y2="50" style="stroke-width:5"/>
+        <circle cx="120" cy="50" r="5" fill="var(--surface)" stroke="var(--ex)" stroke-width="2"/><circle cx="340" cy="50" r="5" fill="var(--surface)" stroke="var(--ex)" stroke-width="2"/>
+        <circle class="dot" cx="230" cy="50" r="4.5"/>
+        <text class="t" x="224" y="78">a</text><text class="t" x="95" y="78">a−ε</text><text class="t" x="322" y="78">a+ε</text>
+        <text class="tj" x="168" y="32">開区間 (a−ε, a+ε)</text>
+      </svg>
+      <figcaption>白丸は「その点を含まない」しるしです。$\varepsilon$ をいくらでも小さく取り直せる、というのがこの記号のポイントです。</figcaption>
+    </figure>
+
+    <h3 id="w-partial">1.5 2変数関数と偏微分</h3>
+    <div class="box basic">
+      <div class="label">基礎:偏微分 <a class="xref-link" href="../basics.html#partial" data-xref>→ 詳しい解説</a></div>
+      <p>2つの変数 $x,y$ をもつ関数 $f(x,y)$ について、</p>
+      <p>・<b>$x$ についての偏微分</b>:$y$ を<b>定数として固定</b>して、$x$ だけの関数とみて微分する。
+      $$f_x(a,b)=\frac{\partial f}{\partial x}(a,b)=\lim_{h\to 0}\frac{f(a+h,\,b)-f(a,\,b)}{h}$$</p>
+      <p>・<b>$y$ についての偏微分</b>:$x$ を固定して、$y$ だけの関数とみて微分する。
+      $$f_y(a,b)=\frac{\partial f}{\partial y}(a,b)=\lim_{k\to 0}\frac{f(a,\,b+k)-f(a,\,b)}{k}$$</p>
+      <p>意味は「$x$ 方向<b>だけ</b>に動いたときの $f$ の変化率」「$y$ 方向<b>だけ</b>に動いたときの $f$ の変化率」です。</p>
+    </div>
+    <p><b>計算例:</b> $f(x,y)=x^2y+3y^2$ のとき、$f_x$ では $y$ を定数扱いして $f_x=2xy$。$f_y$ では $x$ を定数扱いして $f_y=x^2+6y$。たとえば $(a,b)=(1,2)$ なら $f_x(1,2)=4,\ f_y(1,2)=13$。</p>
+    <p>2変数関数 $f(x,y)$ は「地図上の各地点 $(x,y)$ に高さ $f$ が決まっている」ものと見ると分かりやすいです。等しい高さの点を結んだ線が<b>等高線</b>です。そしてこの回の主役 $f(x,y)=0$ は、「<b>高さがちょうど $0$ の等高線</b>」にほかなりません。</p>
+    <figure class="fig">
+      <svg viewBox="0 0 460 270" width="460" role="img" aria-label="等高線と偏微分">
+        <line class="ax" x1="30" y1="245" x2="440" y2="245"/><line class="ax" x1="30" y1="245" x2="30" y2="15"/>
+        <text class="t" x="430" y="262">x</text><text class="t" x="14" y="26">y</text>
+        <ellipse class="thin" cx="230" cy="135" rx="40" ry="25"/>
+        <ellipse class="thin" cx="230" cy="135" rx="70" ry="45"/>
+        <ellipse class="thin" cx="230" cy="135" rx="100" ry="65"/>
+        <ellipse class="thin" cx="230" cy="135" rx="130" ry="85"/>
+        <circle class="dot" cx="284" cy="106" r="5"/>
+        <line class="arr" x1="284" y1="106" x2="352" y2="106"/><polygon class="arrh" points="360,106 349,101 349,111"/>
+        <line class="arr" x1="284" y1="106" x2="284" y2="38"/><polygon class="arrh" points="284,30 279,41 289,41"/>
+        <text class="tt" x="320" y="96">x方向だけ → f_x</text>
+        <text class="tt" x="292" y="30">y方向だけ → f_y</text>
+        <text class="t" x="262" y="124">(a,b)</text>
+        <text class="tm" x="40" y="40">細い楕円 = 等高線(同じ高さの点を結んだ線)</text>
+      </svg>
+      <figcaption>地図の等高線のイメージ。点 $(a,b)$ から真横(x方向)へ進んだときの高さの変化率が $f_x$、真上(y方向)へ進んだときの変化率が $f_y$ です。</figcaption>
+    </figure>
+
+    <h3 id="w-c1">1.6 連続と $C^1$ 級・$C^2$ 級</h3>
+    <div class="box basic">
+      <div class="label">基礎:連続、$C^1$ 級、$C^2$ 級 <a class="xref-link" href="../basics.html#cont2" data-xref>→ 詳しい解説</a><a class="xref-link" href="../basics.html#c1c2" data-xref>→ $C^n$ 級・順序交換</a></div>
+      <p>・$f(x,y)$ が点 $(a,b)$ で<b>連続</b>とは、$(x,y)\to(a,b)$ のとき $f(x,y)\to f(a,b)$ となること(値がジャンプしない)。</p>
+      <p>・$f$ が <b>$C^1$ 級</b>とは、偏導関数 $f_x,\ f_y$ が<b>存在して、しかも連続</b>であること(板書 p.5 の「つまり $f_x,f_y$ が存在して連続」がこれです)。</p>
+      <p>・$f$ が <b>$C^2$ 級</b>とは、2階までの偏導関数 $f_{xx},f_{xy},f_{yx},f_{yy}$ がすべて存在して連続であること。このとき $f_{xy}=f_{yx}$(偏微分の順序を入れ替えてよい)が成り立ちます。</p>
+    </div>
+    <p>$C^1$ 級という条件がなぜ大事かというと、<b>$f_y$ が連続</b>だからこそ「$f_y(a,b)\gt 0$ なら、$(a,b)$ の近くでずっと $f_y\gt 0$」と言えるからです(連続関数は、ある点で正なら、その近くでも正)。これが証明の出発点になります。</p>
+
+    <h3 id="w-chain">1.7 合成関数の微分(連鎖律)</h3>
+    <div class="box basic">
+      <div class="label">基礎:連鎖律(2変数) <a class="xref-link" href="../basics.html#chain" data-xref>→ 詳しい解説</a></div>
+      <p>$f(x,y)$ が $C^1$ 級で、$x=x(t),\ y=y(t)$ が $t$ の微分可能な関数のとき、$f(x(t),y(t))$ を $t$ で微分すると
+      $$\frac{d}{dt}f(x(t),y(t))=f_x\,\frac{dx}{dt}+f_y\,\frac{dy}{dt}$$
+      (右辺の $f_x,f_y$ は $(x(t),y(t))$ での値)。</p>
+      <p>(正確には、連鎖律に必要なのは「$f$ が<b>全微分可能</b>」という条件です。$C^1$ 級の関数は全微分可能なので、この回では $C^1$ 級を仮定して使います。<a class="xref-link" href="../basics.html#total" data-xref>→ 全微分可能とは</a>)</p>
+      <p>1変数の $\dfrac{d}{dt}g(u(t))=g'(u)\,u'(t)$ の「変数が2つ版」で、<b>「$x$ を通る経路の分」+「$y$ を通る経路の分」</b>を足すと覚えます。</p>
+    </div>
+    <figure class="fig">
+      <svg viewBox="0 0 440 190" width="440" role="img" aria-label="連鎖律の木">
+        <text class="t" x="205" y="28" style="font-size:20px">f</text>
+        <line class="thin" x1="203" y1="34" x2="115" y2="92"/><line class="thin" x1="212" y1="34" x2="300" y2="92"/>
+        <text class="t" x="100" y="108" style="font-size:20px">x</text><text class="t" x="296" y="108" style="font-size:20px">y</text>
+        <line class="thin" x1="108" y1="116" x2="196" y2="168"/><line class="thin" x1="304" y1="116" x2="216" y2="168"/>
+        <text class="t" x="204" y="184" style="font-size:20px">t</text>
+        <text class="ta" x="100" y="64">f_x</text><text class="ta" x="300" y="64">f_y</text>
+        <text class="ta" x="104" y="150">dx/dt</text><text class="ta" x="280" y="150">dy/dt</text>
+      </svg>
+      <figcaption>$f$ から $t$ に至る道は2本(x経由・y経由)。各道で矢印の「係数」をかけ、道ごとに足し合わせたものが $\dfrac{df}{dt}$ です。</figcaption>
+    </figure>
+
+    <h3 id="w-mvt2">1.8 2変数の平均値の定理</h3>
+    <div class="box basic">
+      <div class="label">基礎:平均値の定理(2変数) <a class="xref-link" href="../basics.html#mvt2" data-xref>→ 詳しい解説</a></div>
+      <p>$f$ が $C^1$ 級のとき、点 $(x,y)$ から $(x+h,\,y+k)$ まで移ると、ある $\theta$($0\lt\theta\lt 1$)が存在して
+      $$f(x+h,\,y+k)=f(x,y)+h\,f_x(x+\theta h,\,y+\theta k)+k\,f_y(x+\theta h,\,y+\theta k)$$
+      が成り立つ(板書 p.16 の右半分)。</p>
+      <p><b>なぜ?</b> 2点を結ぶ線分上を $t$($0\le t\le 1$)で動かして、1変数関数 $G(t)=f(x+th,\,y+tk)$ を考えます。1変数の平均値の定理より $G(1)-G(0)=G'(\theta)$($0\lt\theta\lt 1$)。連鎖律(1.7)で $G'(t)=h f_x(\cdots)+k f_y(\cdots)$ なので、上の式になります。</p>
+    </div>
+    <figure class="fig">
+      <svg viewBox="0 0 440 210" width="440" role="img" aria-label="2変数の平均値の定理">
+        <line class="ax" x1="30" y1="185" x2="420" y2="185"/><line class="ax" x1="30" y1="185" x2="30" y2="15"/>
+        <line class="cv" x1="110" y1="150" x2="340" y2="50"/>
+        <circle class="dot" cx="110" cy="150" r="5"/><circle class="dot" cx="340" cy="50" r="5"/>
+        <circle class="dotb" cx="215" cy="104" r="5"/>
+        <text class="t" x="70" y="170">(x, y)</text><text class="t" x="320" y="38">(x+h, y+k)</text>
+        <text class="tt" x="150" y="96">(x+θh, y+θk)</text><text class="tm" x="228" y="124">この間のどこか(0&lt;θ&lt;1)</text>
+        <line class="dash" x1="110" y1="150" x2="340" y2="150"/><line class="dash" x1="340" y1="150" x2="340" y2="50"/>
+        <text class="tm" x="215" y="167">h</text><text class="tm" x="348" y="105">k</text>
+      </svg>
+      <figcaption>2点を結ぶ線分の「途中のどこか」の点での偏微分係数を使って、変化量を書けるというのが平均値の定理です。どの点かは分かりませんが、「線分上にある」ことが分かっていれば十分です。</figcaption>
+    </figure>
+
+    <h3 id="w-grad">1.9 勾配ベクトル(グラディエント)</h3>
+    <div class="box basic">
+      <div class="label">基礎:勾配ベクトル <a class="xref-link" href="../basics.html#grad" data-xref>→ 詳しい解説</a></div>
+      <p>$f(x,y)$ の<b>勾配ベクトル</b>(gradient)を、偏微分を並べたベクトル
+      $$\nabla f=(f_x,\ f_y)\qquad(\operatorname{grad} f\text{ とも書く})$$
+      で定める(板書 p.4, p.15)。$\nabla$ は「ナブラ」と読みます。</p>
+      <p><b>意味:</b> 「その点で、$f$ の値が<b>いちばん急に増える向き</b>」を向き、その急さを大きさにもつベクトルです。そして重要な事実として、<b>等高線に直交する</b>向きを向きます。これは後の p.17–18 と p.25–26 で証明されます。</p>
+    </div>
+    <figure class="fig">
+      <svg viewBox="0 0 440 250" width="440" role="img" aria-label="勾配と等高線">
+        <circle class="thin" cx="220" cy="125" r="35"/><circle class="thin" cx="220" cy="125" r="70"/><circle class="thin" cx="220" cy="125" r="105"/>
+        <text class="tm" x="14" y="20">例:f(x,y)=x²+y²(原点から離れるほど高い)</text>
+        <g class="arr">
+          <line x1="245" y1="100" x2="278" y2="67"/><line x1="170" y1="75" x2="141" y2="46"/>
+        </g>
+        <polygon class="arrh" points="283,62 271,66 279,74"/><polygon class="arrh" points="136,41 148,45 140,53"/>
+        <line class="arr" x1="220" y1="195" x2="220" y2="238"/><polygon class="arrh" points="220,246 215,234 225,234"/>
+        <text class="tt" x="285" y="70">∇f</text><text class="tm" x="170" y="228">等高線の外向き = 最も急に増える向き</text>
+      </svg>
+      <figcaption>$f=x^2+y^2$ では $\nabla f=(2x,2y)$。等高線(円)の接線と直角に、外へ向かう矢印になっています。「等高線に直交する」という性質は、このあと何度も使います。</figcaption>
+    </figure>
+
+    <!-- ===================== 2 ===================== -->
+    <h2 id="s2">2. 陰関数とは何か <span class="page-tag">板書 p.2–3</span></h2>
+
+    <h3>2.1 「陽」に書ける関数と「陰」にしか書けない関係</h3>
+    <p>これまで扱ってきた関数は、$y=f(x)$ のように「$y=$ ○○」の形で書かれたものでした。これを<b>陽関数</b>(explicit function)と呼びます。$x$ を入れれば $y$ がそのまま出てきます。</p>
+    <p>一方、板書 p.2 のように、$x$ と $y$ の関係が
+    $$f(x,y)=0$$
+    という<b>方程式の形</b>で与えられることもあります。たとえば円 $x^2+y^2-1=0$ や、$x^3+y^3-3xy=0$ のような式です。</p>
+    <p>この方程式のグラフは、$xy$ 平面上の<b>曲線</b>(板書のたまご型の曲線)になります。しかし曲線全体では、同じ $x$ に対して $y$ が2つ以上あるのが普通で、<b>関数のグラフにはなっていません</b>(下図の青い曲線全体は、縦線で切ると2点で交わる)。</p>
+
+    <figure class="fig">
+      <svg viewBox="0 0 580 300" width="580" role="img" aria-label="陰関数のイメージ">
+        <defs><clipPath id="clipD"><rect x="198" y="25" width="90" height="64"/></clipPath></defs>
+        <line class="ax" x1="50" y1="275" x2="480" y2="275"/><line class="ax" x1="50" y1="275" x2="50" y2="15"/>
+        <text class="t" x="468" y="292">x</text><text class="t" x="34" y="26">y</text>
+        <path class="cv" d="M120 150 C120 60 230 40 300 70 C360 95 420 90 440 140 C460 200 380 240 300 230 C220 220 120 240 120 150 Z"/>
+        <path class="cv2" style="stroke-width:5" clip-path="url(#clipD)" d="M120 150 C120 60 230 40 300 70 C360 95 420 90 440 140 C460 200 380 240 300 230 C220 220 120 240 120 150 Z"/>
+        <rect class="rect" x="198" y="25" width="90" height="64"/>
+        <circle class="dot" cx="242" cy="57" r="5"/>
+        <text class="t" x="250" y="52">(a, b)</text>
+        <line class="dash" x1="242" y1="57" x2="242" y2="275"/><line class="dash" x1="50" y1="57" x2="242" y2="57"/>
+        <text class="t" x="238" y="292">a</text><text class="t" x="34" y="62">b</text>
+        <line class="dash" x1="355" y1="87" x2="355" y2="228"/><circle class="dotb" cx="355" cy="87" r="4"/><circle class="dotb" cx="355" cy="228" r="4"/>
+        <text class="tm" x="462" y="150">同じ x に</text><text class="tm" x="462" y="167">y が2つ</text><text class="tm" x="462" y="184">→関数ではない</text>
+        <text class="ta" x="140" y="205">f(x, y) = 0</text>
+        <text class="tt" x="300" y="22">赤い部分だけなら</text><text class="tt" x="300" y="40">y は x の関数</text>
+      </svg>
+      <figcaption>曲線全体($f(x,y)=0$)は関数ではないが、点 $(a,b)$ のごく近く(緑の枠の中)だけを見れば、1つの $x$ に1つの $y$ が対応していて、<b>$y=\varphi(x)$ という関数のグラフ</b>になっています(板書 p.2 の図)。</figcaption>
+    </figure>
+
+    <h3>2.2 陰関数の定義</h3>
+    <p>そこで、「曲線のある一点の近くだけ」に注目します。板書 p.2 の右半分には次のように書かれています。</p>
+    <div class="box def">
+      <div class="label">定義(陰関数)</div>
+      <p>$f(a,b)=0$ とする。$x=a$ を含むある開区間で定義された関数 $\varphi(x)$ で、
+      $$\varphi(a)=b,\qquad f(x,\varphi(x))=0$$
+      をみたすものがあるとき、この関数 $y=\varphi(x)$ を、$f(x,y)=0$ で定義された<b>陰関数</b>(implicit function)という。</p>
+    </div>
+    <p>言葉でほぐすと:</p>
+    <ul>
+      <li>$\varphi(a)=b$:曲線は点 $(a,b)$ を通る。陰関数のグラフもその点を通る。</li>
+      <li>$f(x,\varphi(x))=0$:$x$ に対して $y=\varphi(x)$ を代入したとき、方程式 $f(x,y)=0$ が<b>常に</b>成り立つ。つまり $(x,\varphi(x))$ はずっと曲線の上にある。</li>
+      <li>「$x=a$ を含むある開区間で」:曲線全体ではなく、<b>$a$ の近くだけ</b>で成り立てばよい(局所的)。</li>
+    </ul>
+    <p>板書 p.3 には「implicit ↔ explicit」(陰 ↔ 陽)と書かれています。「陽に($y=\cdots$ と)書けない代わりに、方程式の陰に隠れている関数」という意味です。</p>
+
+    <div class="box note-box">
+      <div class="label">陰関数は「解かなくても存在する」</div>
+      <p>$x^2+y^2-1=0$ なら $y=\sqrt{1-x^2}$ と解けますが、$x^3+y^3-3xy=0$ のように <b>$y$ について解く公式が書けない</b>式でも、陰関数は(条件さえ合えば)存在します。陰関数の定理は、<b>「具体的に解けなくても、存在することと、微分の仕方」を保証してくれる</b>定理です。</p>
+    </div>
+
+    <h3>2.3 この回の問い</h3>
+    <p>板書 p.3 の右半分には、この回の中心になる問いが書かれています。</p>
+    <div class="box ex">
+      <div class="label">問い</div>
+      <p>$f(x,y)=0$ について、点 $(a,b)$ において<b>どのような条件をみたすとき</b>、陰関数 $y=\varphi(x)$ が $x=a$ のまわりで<b>存在するか</b>?</p>
+    </div>
+    <p>この答えが、次の節以降で出てくる<b>陰関数の定理</b>(条件:$f$ が $C^1$ 級で $f_y(a,b)\neq 0$)です。</p>
+
+    <details class="photo"><summary>この部分の板書(p.2–3)の写真を見る</summary>
+      <img src="../images/week-01/board-p01-02.webp" alt="板書 p.2" loading="lazy">
+      <img src="../images/week-01/board-p03-04.webp" alt="板書 p.3-4" loading="lazy">
+    </details>
+
+    <!-- ===================== 3 ===================== -->
+    <h2 id="s3">3. 例:円 $x^2+y^2-1=0$ <span class="page-tag">板書 p.4</span></h2>
+    <p>定理の前に、もっとも単純な例で「陰関数がある場所・ない場所」を確かめます。板書 p.4 の左半分です。</p>
+    <div class="box ex">
+      <div class="label">例</div>
+      <p>$f(x,y)=x^2+y^2-1$。方程式 $f(x,y)=0$ は<b>原点中心・半径1の円</b>です。</p>
+    </div>
+
+    <figure class="fig">
+      <svg viewBox="0 0 560 300" width="560" role="img" aria-label="円の陰関数">
+        <defs><clipPath id="clipUp"><rect x="0" y="0" width="560" height="145"/></clipPath></defs>
+        <line class="ax" x1="40" y1="145" x2="290" y2="145"/><line class="ax" x1="150" y1="255" x2="150" y2="20"/>
+        <text class="t" x="276" y="164">x</text><text class="t" x="158" y="22">y</text>
+        <circle class="cv" cx="150" cy="145" r="100"/>
+        <circle class="cv2" style="stroke-width:5" clip-path="url(#clipUp)" cx="150" cy="145" r="100"/>
+        <circle class="dot" cx="150" cy="45" r="5"/><text class="t" x="162" y="40">(0, 1)</text>
+        <circle class="dot" cx="250" cy="145" r="5"/><text class="t" x="258" y="136">(1, 0)</text>
+        <text class="tt" x="40" y="276">赤い上半分は y = √(1−x²) という関数(陰関数)</text>
+        <text class="tj" x="345" y="30">(1, 0) 付近を拡大</text>
+        <line class="ax" x1="340" y1="145" x2="540" y2="145"/>
+        <path class="cv" d="M402 45 C432 70 440 115 440 145 C440 175 432 220 402 245"/>
+        <line class="dash" x1="412" y1="38" x2="412" y2="252"/><line class="dash" x1="470" y1="38" x2="470" y2="252"/>
+        <circle class="dotb" cx="412" cy="54" r="4"/><circle class="dotb" cx="412" cy="236" r="4"/>
+        <circle class="dot" cx="440" cy="145" r="4.5"/>
+        <text class="tm" x="372" y="270">左の縦線(x &lt; 1):2点で交わる</text><text class="tm" x="372" y="288">右の縦線(x &gt; 1):交わらない</text>
+      </svg>
+      <figcaption>左:円。赤い上半分は $y=\sqrt{1-x^2}$ という関数のグラフ。右:$(1,0)$ のまわりを拡大したイメージ。$x$ 軸方向から見ると、曲線は $(1,0)$ で垂直に立っていて、$x\lt1$ では2つ、$x\gt1$ では0個の $y$ が対応するため、関数になりません。</figcaption>
+    </figure>
+
+    <h3>3.1 $(0,1)$ のまわり:陰関数がある</h3>
+    <p>$-1\lt x\lt 1$ において
+    $$\varphi(x)=\sqrt{1-x^2}$$
+    とおくと、$\varphi(0)=1$ で、$f(x,\varphi(x))=x^2+(1-x^2)-1=0$ が成り立ちます。したがって $\varphi$ は、$f(x,y)=0$ で定義された $(0,1)$ のまわりの陰関数です(板書の「は陰関数」)。</p>
+
+    <h3>3.2 $(1,0)$ のまわり:陰関数は存在しない</h3>
+    <p>点 $(1,0)$ のまわりでは、$y=\varphi(x)$ の形では<b>書けません</b>。$x$ が $1$ より少し小さいとき、$y=\sqrt{1-x^2}$ と $y=-\sqrt{1-x^2}$ の2つの値があり($(1,0)$ の近くのどちらも曲線上の点)、$1$ より大きい $x$ では点がありません。「$x$ に $y$ がちょうど1つ対応する」という関数の条件が崩れます。</p>
+
+    <h3>3.3 見分ける鍵:$f_y$ の値</h3>
+    <p>$f_x=2x,\ f_y=2y$ なので、</p>
+    <table class="cmp">
+      <tr><th>点</th><th>$f_y$ の値</th><th>陰関数 $y=\varphi(x)$</th></tr>
+      <tr><td>$(0,1)$</td><td>$f_y(0,1)=2\ne 0$</td><td>存在する</td></tr>
+      <tr><td>$(1,0)$</td><td>$f_y(1,0)=0$</td><td>存在しない</td></tr>
+    </table>
+    <p>板書の「$f_y(0,1)\neq 0$、$f_y(1,0)=0$」はこの対比です。<b>$f_y\ne 0$ かどうかが、「$y=\varphi(x)$ の形で書ける」かどうかを分けている</b>らしい——これが次の定理の中身です。</p>
+    <p>なお板書の右端の「勾配ベクトル $\nabla f=(f_x,f_y)$」は、この後の説明のための予告で、定義は 1.9 のとおりです。</p>
+
+    <details class="photo"><summary>この部分の板書(p.4)の写真を見る</summary><img src="../images/week-01/board-p03-04.webp" alt="板書 p.3-4" loading="lazy"></details>
+
+    <!-- ===================== 4 ===================== -->
+    <h2 id="s4">4. 陰関数の定理(主張) <span class="page-tag">板書 p.5–6</span></h2>
+
+    <div class="box thm">
+      <div class="label">定理(陰関数の定理)</div>
+      <p>$f(x,y)$ は <b>$C^1$ 級</b>とする(つまり $f_x,f_y$ が存在して連続)。$f(a,b)=0$ とし、さらに
+      $$\boxed{\;f_y(a,b)\neq 0\;}$$
+      とする。このとき、$x=a$ を含むある開区間で定義された関数 $y=\varphi(x)$ で
+      $$\varphi(a)=b,\qquad f(x,\varphi(x))=0$$
+      をみたすものが存在する。さらに、$\varphi(x)$ は<b>微分可能</b>で、
+      $$\varphi'(x)=-\frac{f_x(x,y)}{f_y(x,y)}\qquad(y=\varphi(x))$$
+      と表される。</p>
+    </div>
+    <p>板書の p.5(仮定)・p.6(結論)をつなげて書いたものです。この定理は、次の3つのことを同時に言っています。</p>
+    <ol>
+      <li><b>存在</b>:点 $(a,b)$ のまわりで、$y$ が $x$ の関数 $\varphi(x)$ として決まる。</li>
+      <li><b>一意性</b>(p.11):そのような $\varphi$ は(狭い範囲では)ちょうど1つに決まる。</li>
+      <li><b>微分可能性と公式</b>:導関数は $-f_x/f_y$。$\varphi$ を具体的に求めなくても傾きが分かる。</li>
+    </ol>
+
+    <div class="box supp">
+      <div class="label">補足:なぜ条件が $f_y(a,b)\neq0$ なのか(直感)</div>
+      <p>点 $(a,b)$ のごく近くでは、曲線は<b>接線</b>とほとんど同じです。$f(x,y)=0$ を1次近似すると、
+      $$f_x(a,b)(x-a)+f_y(a,b)(y-b)\approx 0.$$
+      これを $y$ について解こうとすると
+      $$y-b\approx -\frac{f_x(a,b)}{f_y(a,b)}(x-a)$$
+      となり、<b>$f_y(a,b)\ne 0$ のときだけ</b>(0で割らずに)解けます。もし $f_y(a,b)=0$ なら、$y$ は上の式で決まらず、$x$ は $a$ のまま(縦線)になってしまう——これが円の $(1,0)$ で起きていたことです。</p>
+    </div>
+
+    <details class="photo"><summary>この部分の板書(p.5–6)の写真を見る</summary><img src="../images/week-01/board-p05-06.webp" alt="板書 p.5-6" loading="lazy"></details>
+
+    <!-- ===================== 5 ===================== -->
+    <h2 id="s5">5. 証明①:陰関数 $\varphi$ が存在すること <span class="page-tag">板書 p.7–11</span></h2>
+    <p>板書 p.8 以降の証明を、段階に分けて読みます。方針は次のとおりです。</p>
+    <div class="box note-box">
+      <div class="label">証明の方針</div>
+      <p>各 $x$ に対して「$f(x,y)=0$ を満たす $y$」を<b>中間値の定理</b>で見つけ、それが<b>ただ1つ</b>であることを<b>単調性</b>で示す。そうして $x\mapsto y$ という対応(=関数 $\varphi$)を作る。</p>
+    </div>
+
+    <h3>Step 0:$f_y(a,b)>0$ としてよい</h3>
+    <p>$f_y(a,b)\ne 0$ なので、正か負のどちらかです。もし負なら、$f$ を $-f$ に取り替えます。方程式 $-f(x,y)=0$ は $f(x,y)=0$ と同じ曲線で、$-f$ の $y$ 偏微分は正になります。したがって一般性を失わずに <b>$f_y(a,b)\gt 0$</b> と仮定してよい。(板書では、この仮定を前提に p.8 が始まっています。)</p>
+
+    <h3>Step 1:$(a,b)$ の近くで $f_y\gt0$(板書 p.7 に相当)</h3>
+    <div class="box supp">
+      <div class="label">板書にない補足(p.7 に相当する部分)</div>
+      <p>板書の p.7 は欠けていますが、p.8 の「$f_y(a,y)\gt 0$($b-\varepsilon\lt y\lt b+\varepsilon$)」を使うために、おそらく次のことが書かれていたはずです。</p>
+      <p>$f$ は $C^1$ 級なので $f_y$ は<b>連続</b>です。連続関数は、ある点で正ならその近くでも正だから、ある $\varepsilon\gt 0$ が存在して
+      $$|x-a|\lt\varepsilon,\ |y-b|\lt\varepsilon\ \Longrightarrow\ f_y(x,y)\gt 0$$
+      が成り立つ。この正方形(板書の図の長方形の枠)を $Q=(a-\varepsilon,a+\varepsilon)\times(b-\varepsilon,b+\varepsilon)$ とおく。</p>
+    </div>
+
+    <h3>Step 2:$x=a$ のとき $y\mapsto f(a,y)$ は単調増加(板書 p.8)</h3>
+    <p>$x=a$ に固定すると、$f(a,y)$ は $y$ だけの1変数関数です。$Q$ の中では $f_y(a,y)\gt0$ なので、1.3 により<b>単調増加</b>です。そして $f(a,b)=0$ なので、$b$ のちょうど左では負、右では正です。つまり
+    $$b-\varepsilon\lt y_1\lt b\lt y_2\lt b+\varepsilon\ \text{ をとれば }\ f(a,y_1)\lt 0,\quad f(a,y_2)\gt 0.$$</p>
+
+    <figure class="fig">
+      <svg viewBox="0 0 480 260" width="480" role="img" aria-label="f(a,y)のグラフ">
+        <line class="ax" x1="60" y1="150" x2="450" y2="150"/><line class="ax" x1="60" y1="250" x2="60" y2="20"/>
+        <text class="t" x="438" y="140">y</text><text class="t" x="68" y="30">z = f(a, y)</text>
+        <path class="cv" d="M110 220 C170 205 215 175 250 150 S340 85 400 55"/>
+        <line class="dash" x1="175" y1="150" x2="175" y2="196"/><line class="dash" x1="316" y1="150" x2="316" y2="104"/>
+        <circle class="dotb" cx="175" cy="196" r="4.5"/><circle class="dotb" cx="316" cy="104" r="4.5"/><circle class="dot" cx="250" cy="150" r="5"/>
+        <line class="dash" x1="110" y1="150" x2="110" y2="220"/><line class="dash" x1="400" y1="150" x2="400" y2="55"/>
+        <text class="t" x="96" y="168">b−ε</text><text class="t" x="170" y="140">y₁</text><text class="t" x="256" y="168">b</text><text class="t" x="312" y="140">y₂</text><text class="t" x="388" y="168">b+ε</text>
+        <text class="tm" x="95" y="236">f(a,y₁)&lt;0</text><text class="tm" x="330" y="84">f(a,y₂)&gt;0</text>
+        <text class="tt" x="215" y="50">f_y &gt; 0 だから右上がり</text>
+      </svg>
+      <figcaption>$x=a$ のときの断面。右上がり(単調増加)で、$y=b$ でちょうど $0$ を横切ります。$y_1$ では負、$y_2$ では正です(板書 p.8)。</figcaption>
+    </figure>
+
+    <h3>Step 3:$x$ を少し動かしても符号は変わらない(板書 p.9)</h3>
+    <p>$f$ は連続なので、$f(a,y_1)\lt 0$ という事実は、$x$ を $a$ から少しだけ動かしても保たれます。同じく $f(a,y_2)\gt 0$ も保たれます。したがって、$0\lt\varepsilon'\lt\varepsilon$ をうまくとって
+    $$a-\varepsilon'\lt x\lt a+\varepsilon'\ \Longrightarrow\ f(x,y_1)\lt 0,\quad f(x,y_2)\gt 0$$
+    が成り立つようにできます。</p>
+
+    <figure class="fig">
+      <svg viewBox="0 0 540 335" width="540" role="img" aria-label="証明の図">
+        <line class="ax" x1="40" y1="305" x2="525" y2="305"/><line class="ax" x1="70" y1="318" x2="70" y2="15"/>
+        <rect x="210" y="45" width="120" height="220" fill="var(--ex)" opacity=".08"/>
+        <rect class="rect" x="150" y="45" width="240" height="220"/>
+        <line class="rect" x1="210" y1="45" x2="210" y2="265" style="stroke-dasharray:4 3;stroke-width:1.4"/><line class="rect" x1="330" y1="45" x2="330" y2="265" style="stroke-dasharray:4 3;stroke-width:1.4"/>
+        <path class="fillp" d="M150 45 L390 45 L390 122 C340 138 305 147 270 155 S200 172 150 185 Z"/>
+        <path class="fillm" d="M150 265 L390 265 L390 122 C340 138 305 147 270 155 S200 172 150 185 Z"/>
+        <path class="cv" d="M150 185 C200 172 235 163 270 155 S340 138 390 122"/>
+        <line class="dash" x1="70" y1="95" x2="390" y2="95"/><line class="dash" x1="70" y1="215" x2="390" y2="215"/><line class="dash" x1="70" y1="155" x2="270" y2="155"/>
+        <line class="cv3" x1="307" y1="95" x2="307" y2="215" style="stroke-width:3.2"/>
+        <circle cx="307" cy="95" r="4.5" fill="var(--surface)" stroke="var(--accent)" stroke-width="2"/><circle cx="307" cy="215" r="4.5" fill="var(--surface)" stroke="var(--thm)" stroke-width="2"/>
+        <circle class="dot" cx="307" cy="146" r="5"/><circle class="dotb" cx="270" cy="155" r="4"/>
+        <text class="tt" x="312" y="172">φ(a′)</text><line class="thin" x1="309" y1="150" x2="318" y2="164"/>
+        <text class="ta" x="340" y="72">f &gt; 0</text><text class="tt" x="340" y="252">f &lt; 0</text>
+        <text class="ta" x="395" y="118">f(x,y)=0</text>
+        <text class="t" x="20" y="50">b+ε</text><text class="t" x="38" y="100">y₂</text><text class="t" x="44" y="160">b</text><text class="t" x="38" y="220">y₁</text><text class="t" x="20" y="270">b−ε</text>
+        <text class="t" x="132" y="322">a−ε</text><text class="t" x="262" y="322">a</text><text class="t" x="302" y="322">a′</text><text class="t" x="374" y="322">a+ε</text>
+        <text class="t" x="188" y="36">a−ε′</text><text class="t" x="318" y="36">a+ε′</text>
+      </svg>
+      <figcaption>緑の外枠は $Q$(その中では $f_y\gt0$)。内側の帯は $a-\varepsilon'\lt x\lt a+\varepsilon'$。帯の中のどの縦線でも、上端 $y_2$ では $f\gt 0$(青い側)、下端 $y_1$ では $f\lt 0$(赤い側)。したがって曲線 $f=0$ が必ず縦線をまたいで通ります(板書 p.9 の図)。</figcaption>
+    </figure>
+
+    <h3>Step 4:縦線ごとに $f(x,y)=0$ となる $y$ が見つかる(板書 p.10)</h3>
+    <p>帯の中の勝手な $a'$($a-\varepsilon'\lt a'\lt a+\varepsilon'$)を1つとります。縦線 $x=a'$ の上で $y$ だけを動かす関数 $y\mapsto f(a',y)$ は連続で、
+    $$f(a',y_1)\lt 0,\qquad f(a',y_2)\gt 0$$
+    です。したがって<b>中間値の定理</b>(1.2)より、
+    $$f(a',y)=0,\qquad y_1\lt y\lt y_2$$
+    をみたす $y$ が<b>存在します</b>。</p>
+
+    <h3>Step 5:その $y$ はただ1つ——だから関数 $\varphi$ が決まる(板書 p.10–11)</h3>
+    <p>縦線 $x=a'$ も $Q$ の中にあるので $f_y\gt 0$ で、$y\mapsto f(a',y)$ は<b>単調増加</b>です(1.3)。単調増加な関数は同じ値を2回とらないので、$f(a',y)=0$ となる $y$ は<b>ちょうど1つ</b>です。この $y$ を
+    $$y=\varphi(a')$$
+    とおきます。これを帯の中のすべての $x$ に対して行うと、$x\mapsto\varphi(x)$ という<b>関数</b>が定まり、
+    $$f(x,\varphi(x))=0\qquad(a-\varepsilon'\lt x\lt a+\varepsilon')$$
+    が成り立ちます(板書 p.10 の枠内)。特に $x=a$ では $f(a,b)=0$ で、一意性から $\varphi(a)=b$ です。</p>
+
+    <div class="box proof">
+      <div class="label">p.11 の書き間違いについて</div>
+      <p>板書 p.11 の左半分に「$\varphi(a)=\varphi(b)$」とありますが、これは内容から $\varphi(a)=b$ の<b>書き間違い</b>と判断しました(上で述べたとおり、$\varphi(a)=b$ が陰関数の条件です)。</p>
+    </div>
+
+    <p>以上で、$x=a$ を含む開区間 $(a-\varepsilon',a+\varepsilon')$ で定義された陰関数 $y=\varphi(x)$ が<b>存在し、しかも一意に決まる</b>ことが示されました。板書 p.11 の最後の言葉
+    「これが $f(x,y)=0$ で定義される $x=a$ のまわりの陰関数 $y=\varphi(x)$」は、まさにこのことを言っています。</p>
+
+    <details class="photo"><summary>この部分の板書(p.8–11)の写真を見る</summary>
+      <img src="../images/week-01/board-p08-09.webp" alt="板書 p.8-9" loading="lazy">
+      <img src="../images/week-01/board-p10-11.webp" alt="板書 p.10-11" loading="lazy">
+    </details>
+
+    <!-- ===================== 6 ===================== -->
+    <h2 id="s6">6. 証明②:$\varphi$ は微分可能で、$\varphi'=-f_x/f_y$ <span class="page-tag">板書 p.12–13・p.16右半分</span></h2>
+    <p>ここまでで $\varphi$ という関数は作れました。次に、<b>$\varphi$ が微分可能であること</b>と<b>導関数の公式</b>を示します。</p>
+
+    <h3>6.1 $\varphi$ は連続(板書 p.12 に相当・補足)</h3>
+    <div class="box supp">
+      <div class="label">板書にない補足(p.12 に相当する部分)</div>
+      <p>次の p.13 では「$h\to 0$ のとき $k\to 0$」を使います。それは $\varphi$ が<b>連続</b>だから成り立ちます。理由は p.9–11 の構成そのものです:</p>
+      <p>$y_1,y_2$ を $b$ にいくらでも近くとれます($\varepsilon$ を小さくしてよい)。そのたびに、$a$ に十分近い $x$ すべてで $y_1\lt\varphi(x)\lt y_2$ となる(Step 3–5)。つまり「$x$ が $a$ に近づけば、$\varphi(x)$ は $b=\varphi(a)$ にいくらでも近づく」ので、$\varphi$ は $a$ で連続です。同じ議論は $\varphi$ の定義域のどの点でもできる(その点でも $f_y\gt 0$ だから)ので、$\varphi$ はどこでも連続です。</p>
+    </div>
+
+    <h3>6.2 差分の言い換え(板書 p.13・左上)</h3>
+    <p>定義域の1点 $x$ をとり、$y=\varphi(x)$ とします。$x$ を $h$ だけ動かしたとき、$\varphi$ の値が $k$ だけ変わるとします:
+    $$\varphi(x+h)=\varphi(x)+k=y+k.$$
+    すると $\varphi'(x)$ の定義の分数は、
+    $$\lim_{h\to0}\frac{\varphi(x+h)-\varphi(x)}{h}=\lim_{h\to0}\frac{k}{h}\qquad(\ast)$$
+    と書けます。ここで $\varphi$ の連続性より、$h\to0$ のとき $k\to 0$ です。</p>
+    <p>さらに、2点 $(x,y)$ と $(x+h,\,y+k)$ は<b>どちらも曲線上</b>にあります。つまり
+    $$f(x,y)=0,\qquad f(x+h,\,y+k)=0.$$</p>
+
+    <h3>6.3 平均値の定理で $k/h$ を表す(板書 p.16右・p.13)</h3>
+    <p>2変数の平均値の定理(1.8)より、ある $\theta$($0\lt\theta\lt 1$)があって
+    $$f(x+h,\,y+k)=f(x,y)+h\,f_x(x+\theta h,\,y+\theta k)+k\,f_y(x+\theta h,\,y+\theta k).$$
+    左辺も、右辺の $f(x,y)$ も $0$ なので、
+    $$0=h\,f_x(x+\theta h,\,y+\theta k)+k\,f_y(x+\theta h,\,y+\theta k).$$
+    これを $h\,f_y(\cdots)$ で割って整理すると($f_y\gt0$ なので割れる)、
+    $$\frac{k}{h}=-\frac{f_x(x+\theta h,\,y+\theta k)}{f_y(x+\theta h,\,y+\theta k)}.$$</p>
+
+    <h3>6.4 $h\to 0$ とする(板書 p.13・右)</h3>
+    <p>$h\to 0$ のとき $k\to 0$ なので、点 $(x+\theta h,\,y+\theta k)$ は $(x,y)$ に近づきます($\theta$ は何であっても $0\lt\theta\lt1$ なので、動く量 $\theta h,\theta k$ はそれぞれ $h,k$ より小さい)。$f_x,f_y$ は連続で、$f_y(x,y)\ne0$ なので、
+    $$(\ast)=\lim_{h\to0}\frac{k}{h}=-\frac{f_x(x,y)}{f_y(x,y)}.$$
+    極限が存在するので $\varphi$ は微分可能で、
+    $$\boxed{\ \varphi'(x)=-\frac{f_x(x,y)}{f_y(x,y)}\quad(y=\varphi(x))\ }$$
+    が示されました。これが板書 p.13 の最後の式、そして p.6 の主張の後半です。</p>
+
+    <div class="box note-box">
+      <div class="label">この証明の気持ち</div>
+      <p>曲線上で少し動いたときの $x$ の変化 $h$ と $y$ の変化 $k$ は、「全体の変化が $0$($f$ が一定)」という制約で結ばれています。$f$ の変化量 $\approx f_x h+f_y k=0$ から、$k/h=-f_x/f_y$ と出る——これが公式の意味です。平均値の定理は、この「$\approx$」をきちんと「$=$」に直すための道具です。</p>
+    </div>
+
+    <details class="photo"><summary>この部分の板書(p.13・p.16の右半分)の写真を見る</summary><img src="../images/week-01/board-p13-16.webp" alt="板書 p.13 と p.16" loading="lazy"></details>
+
+    <!-- ===================== 7 ===================== -->
+    <h2 id="s7">7. 別の導き方:連鎖律で公式を出す／2階導関数 <span class="page-tag">板書 p.19–20</span></h2>
+    <p>$\varphi$ が微分可能だと分かった後なら、公式 $\varphi'=-f_x/f_y$ はもっと簡単に導けます。これは<b>実際に計算するときの覚え方</b>としても便利です。</p>
+
+    <h3>7.1 連鎖律で導く(板書 p.20 左・p.19 相当)</h3>
+    <p>恒等式 $f(x,\varphi(x))=0$ の<b>両辺を $x$ で微分</b>します。右辺は定数 $0$ なので $0$。左辺は連鎖律(1.7)で、$x(t)=t$ と見て $y=\varphi(x)$ として:
+    $$\frac{d}{dx}f(x,\varphi(x))=f_x(x,y)\cdot 1+f_y(x,y)\,\varphi'(x).$$
+    したがって
+    $$f_x(x,y)+f_y(x,y)\,\varphi'(x)=0.$$
+    $f_y\ne0$ として $\varphi'$ について解くと、
+    $$\varphi'(x)=-\frac{f_x(x,y)}{f_y(x,y)}.$$</p>
+    <div class="box warn">
+      <div class="label">注意:順序</div>
+      <p>この導出は「$\varphi$ が微分可能」を<b>すでに使っています</b>(連鎖律の前提)。だから、微分可能性そのものは p.13 の証明(第6節)で示す必要があり、この計算は<b>公式を覚える・使うための簡単な方法</b>として理解するのがよいです。</p>
+    </div>
+    <div class="box supp">
+      <div class="label">板書にない補足(p.19 について)</div>
+      <p>板書に p.19 はありませんでした。p.18→p.20 の流れから、おそらく「別の導出」の導入(あるいは連鎖律の復習)が書かれていたものと思われます。内容は上のとおり p.20 の左半分だけで完結しています。</p>
+    </div>
+
+    <h3>7.2 2階導関数 $\varphi''$(板書 p.20 右) <a class="xref-link" href="../basics.html#c1c2" data-xref>→ $C^2$ 級・順序交換</a></h3>
+    <p>$f$ が <b>$C^2$ 級</b>のとき、$\varphi$ の2階導関数も求まります。7.1 で得た恒等式
+    $$f_x(x,\varphi(x))+f_y(x,\varphi(x))\,\varphi'(x)=0\qquad(\heartsuit)$$
+    の両辺をもう一度 $x$ で微分します。</p>
+    <ul>
+      <li>第1項 $f_x(x,\varphi(x))$ の微分 = $f_{xx}+f_{xy}\,\varphi'$(連鎖律)</li>
+      <li>第2項 $f_y\cdot\varphi'$ は<b>積</b>の微分:$\bigl(f_y\bigr)'\cdot\varphi'+f_y\cdot\varphi''$。ここで $(f_y)'=f_{yx}+f_{yy}\,\varphi'$</li>
+    </ul>
+    <p>まとめると、
+    $$f_{xx}+f_{xy}\varphi'+(f_{yx}+f_{yy}\varphi')\varphi'+f_y\varphi''=0.$$
+    $C^2$ 級なので $f_{xy}=f_{yx}$ として、
+    $$f_{xx}+2f_{xy}\varphi'+f_{yy}(\varphi')^2+f_y\varphi''=0.$$
+    $\varphi''$ について解いて、$\varphi'=-f_x/f_y$ を代入します:
+    $$\varphi''=-\frac{f_{xx}+2f_{xy}\varphi'+f_{yy}(\varphi')^2}{f_y}
+    =-\frac{f_{xx}-2f_{xy}\dfrac{f_x}{f_y}+f_{yy}\dfrac{f_x^2}{f_y^2}}{f_y}.$$
+    分子分母に $f_y^2$ をかけて整理すると、
+    $$\boxed{\ \varphi''(x)=-\frac{f_{xx}f_y^{\,2}-2f_{xy}f_xf_y+f_{yy}f_x^{\,2}}{f_y^{\,3}}\ }$$
+    これが板書 p.20 の最後の式です。</p>
+    <p>実際の問題では、この長い公式を暗記するより、$(\heartsuit)$ をもう一度微分する、という手順を覚えるほうが安全です。</p>
+
+    <details class="photo"><summary>この部分の板書(p.20)の写真を見る</summary><img src="../images/week-01/board-p20-21.webp" alt="板書 p.20-21" loading="lazy"></details>
+
+    <!-- ===================== 8 ===================== -->
+    <h2 id="s8">8. 注意:$x$ の関数としてだめなら $y$ の関数として <span class="page-tag">板書 p.14–15</span></h2>
+    <p>定理の条件は $f_y(a,b)\ne0$ でした。もし $f_y(a,b)=0$ でも、<b>$f_x(a,b)\ne 0$ なら、$x$ と $y$ の役割を入れ替えて</b>同じことが言えます。</p>
+    <div class="box thm">
+      <div class="label">注意(板書 p.14)</div>
+      <p>$f(a,b)=0$、$f_x(a,b)\ne0$ とする。このとき、$y=b$ を含むある開区間で定義された関数 $x=\psi(y)$($\psi$ は「プサイ」)で
+      $$a=\psi(b),\qquad f(\psi(y),y)=0$$
+      をみたすものが存在する。(導関数は $\psi'(y)=-\dfrac{f_y}{f_x}$。)</p>
+    </div>
+    <p>理由:定理の証明で $x$ と $y$ をそっくり入れ替えるだけです。今度は「曲線を<b>横から見て</b>、$y$ に対して $x$ がただ1つ決まる」という関数になります。円の例なら、$(1,0)$ のまわりでは $x=\sqrt{1-y^2}$ がその陰関数です(右半円)。</p>
+
+    <figure class="fig">
+      <svg viewBox="0 0 580 300" width="580" role="img" aria-label="xの関数とyの関数">
+        <defs>
+          <clipPath id="clipTop"><rect x="198" y="25" width="90" height="64"/></clipPath>
+          <clipPath id="clipRight"><rect x="410" y="105" width="70" height="95"/></clipPath>
+        </defs>
+        <line class="ax" x1="50" y1="275" x2="470" y2="275"/><line class="ax" x1="50" y1="275" x2="50" y2="15"/>
+        <text class="t" x="458" y="292">x</text><text class="t" x="34" y="26">y</text>
+        <path class="cv" d="M120 150 C120 60 230 40 300 70 C360 95 420 90 440 140 C460 200 380 240 300 230 C220 220 120 240 120 150 Z"/>
+        <path class="cv2" style="stroke-width:5" clip-path="url(#clipTop)" d="M120 150 C120 60 230 40 300 70 C360 95 420 90 440 140 C460 200 380 240 300 230 C220 220 120 240 120 150 Z"/>
+        <path class="cv3" style="stroke-width:5" clip-path="url(#clipRight)" d="M120 150 C120 60 230 40 300 70 C360 95 420 90 440 140 C460 200 380 240 300 230 C220 220 120 240 120 150 Z"/>
+        <circle class="dot" cx="242" cy="57" r="5"/><circle class="dot" cx="442" cy="166" r="5"/>
+        <line class="arr" x1="242" y1="57" x2="242" y2="20"/><polygon class="arrh" points="242,12 237,24 247,24"/>
+        <line class="arr" x1="442" y1="166" x2="490" y2="166"/><polygon class="arrh" points="498,166 486,161 486,171"/>
+        <text class="tt" x="252" y="20">∇f(上向き)</text>
+        <text class="tt" x="506" y="170">∇f</text>
+        <text class="ta" x="140" y="140">f(x,y)=0</text>
+        <text class="tt" x="210" y="112" style="fill:var(--thm)">上の点:f_y≠0</text><text class="tm" x="210" y="128">→ y=φ(x)(赤)</text>
+        <text class="tj" x="280" y="186" style="fill:var(--ex)">右の点:f_x≠0 →</text><text class="tj" x="280" y="203" style="fill:var(--ex)">x=ψ(y)(緑)</text>
+      </svg>
+      <figcaption>たまご型の曲線。上の点では接線がほぼ水平で、$y$ を $x$ の関数 $\varphi(x)$ として表せる(赤)。右の点では接線がほぼ垂直で、$y$ では表せないが、$x$ を $y$ の関数 $\psi(y)$ として表せる(緑)(板書 p.14 の図)。矢印は勾配ベクトル $\nabla f$ の向きで、曲線と直交しています(第9節)。</figcaption>
+    </figure>
+
+    <h3>8.1 つまり $\nabla f\ne(0,0)$ ならよい(板書 p.15)</h3>
+    <div class="box thm">
+      <div class="label">まとめ(板書 p.15)</div>
+      <p>$\nabla f(a,b)\ne(0,0)$ ならば、$x$ または $y$ の関数として<b>局所的に陰関数が定まる</b>。</p>
+    </div>
+    <p>$\nabla f=(f_x,f_y)\ne(0,0)$ とは、$f_x$ と $f_y$ が<b>両方とも $0$ ではない</b>ということではなく、「<b>少なくとも一方は $0$ でない</b>」ということです。$f_y\neq0$ なら定理をそのまま、$f_x\neq0$ なら上の注意を使えばよいので、どちらの場合も陰関数が存在します。</p>
+
+    <div class="box warn">
+      <div class="label">逆は成り立たない/本当に危ない点</div>
+      <p>・<b>$\nabla f=(0,0)$ の点</b>(特異点)では、陰関数が存在するとは限りません。たとえば $f=x^2-y^2$ の原点では、曲線は $y=x$ と $y=-x$ が交差していて、$x$ を決めても $y$ が2つ、$y$ を決めても $x$ が2つになります。</p>
+      <p>・ただし $f_y(a,b)=0$ でも陰関数が存在する場合があります。$f=x-y^3$ の原点では $f_y=-3y^2=0$ ですが、曲線は $y=\sqrt[3]{x}$ で、$y$ は $x$ の関数として存在します(ただし原点で微分不可能)。つまり<b>$f_y\ne0$ は十分条件であって、必要条件ではありません</b>。</p>
+    </div>
+    <figure class="fig">
+      <svg viewBox="0 0 520 220" width="520" role="img" aria-label="特異点">
+        <line class="ax" x1="20" y1="110" x2="240" y2="110"/><line class="ax" x1="130" y1="10" x2="130" y2="205"/>
+        <line class="cv2" x1="50" y1="30" x2="210" y2="190"/><line class="cv2" x1="50" y1="190" x2="210" y2="30"/>
+        <circle class="dot" cx="130" cy="110" r="5"/>
+        <text class="tt" x="30" y="215">x²−y²=0(∇f=(0,0))</text>
+        <text class="tm" x="145" y="104">原点で交差</text>
+        <line class="ax" x1="280" y1="110" x2="500" y2="110"/><line class="ax" x1="390" y1="10" x2="390" y2="205"/>
+        <path class="cv" d="M294 190 C350 185 390 160 390 110 C390 60 430 35 486 30"/>
+        <circle class="dot" cx="390" cy="110" r="5"/>
+        <text class="ta" x="292" y="215">x−y³=0(y=∛x)</text>
+        <text class="tm" x="402" y="132">原点で接線は縦</text>
+      </svg>
+      <figcaption>左:$\nabla f=(0,0)$ の点では曲線が自分自身と交わり、関数としては表せない。右:$f_y=0$ でも曲線は $y=\sqrt[3]{x}$ として表せるが、原点で接線が垂直(傾きが無限大)なので、$\varphi'(0)=-f_x/f_y$ の公式は使えない。</figcaption>
+    </figure>
+
+    <details class="photo"><summary>この部分の板書(p.14–15)の写真を見る</summary><img src="../images/week-01/board-p14-15.webp" alt="板書 p.14-15" loading="lazy"></details>
+
+    <!-- ===================== 9 ===================== -->
+    <h2 id="s9">9. 応用:曲線 $f(x,y)=0$ の接線の方程式 <span class="page-tag">板書 p.16–18</span></h2>
+    <p>板書 p.16 の左半分に「応用 曲線 $f(x,y)=0$ の(接線)」と書き始められています。陰関数の定理の応用として、<b>曲線の接線</b>を求めます。</p>
+
+    <h3>9.1 接線の方程式(板書 p.17 左)</h3>
+    <div class="box basic">
+      <div class="label">基礎:接線の方程式 <a class="xref-link" href="../basics.html#deriv" data-xref>→ 詳しい解説</a></div>
+      <p>関数 $y=\varphi(x)$ のグラフの、点 $(a,b)$($b=\varphi(a)$)における接線は
+      $$y-b=\varphi'(a)\,(x-a)$$
+      です。「点 $(a,b)$ を通る、傾き $\varphi'(a)$ の直線」を表しています。</p>
+    </div>
+    <p>$f_y(a,b)\ne0$ のとき、陰関数 $y=\varphi(x)$ があって $\varphi'(a)=-\dfrac{f_x(a,b)}{f_y(a,b)}$ なので、
+    $$y-b=-\frac{f_x(a,b)}{f_y(a,b)}(x-a).$$
+    両辺に $f_y(a,b)$ をかけて移項すると、
+    $$\boxed{\ f_x(a,b)(x-a)+f_y(a,b)(y-b)=0\ }\qquad(\mathrm{T})$$
+    これが $(a,b)$ における接線の方程式です(板書 p.17 の枠。板書では ⊛ と呼ばれている式)。</p>
+
+    <h3>9.2 $f_x(a,b)\ne0$ の場合も同じ式(板書 p.17 右)</h3>
+    <p>$f_x(a,b)\ne 0$ のときは、陰関数 $x=\psi(y)$ を使います。接線は $x-a=\psi'(b)(y-b)$、$\psi'(b)=-\dfrac{f_y(a,b)}{f_x(a,b)}$ なので、整理すると<b>全く同じ式 (T)</b> になります。つまり、(T) は $\nabla f(a,b)\ne(0,0)$ でありさえすれば、どちらの場合でも成り立ちます。</p>
+
+    <h3 id="w-gradperp">9.3 勾配ベクトルと接線の関係(板書 p.18)</h3>
+    <div class="box basic">
+      <div class="label">基礎:内積と直交 <a class="xref-link" href="../basics.html#inner" data-xref>→ 詳しい解説</a></div>
+      <p>2つのベクトル $\vec u=(u_1,u_2)$ と $\vec v=(v_1,v_2)$ の<b>内積</b>は $\vec u\cdot\vec v=\langle\vec u,\vec v\rangle=u_1v_1+u_2v_2$。<b>内積が $0$</b> であることと、2つのベクトルが<b>直交する</b>(直角)ことは同じです。</p>
+    </div>
+    <p>(T) の左辺は、2つのベクトル
+    $$\nabla f(a,b)=(f_x(a,b),\,f_y(a,b)),\qquad (x-a,\ y-b)$$
+    の<b>内積</b>そのものです。ここで $(x,y)$ は接線 $\ell$ 上の任意の点だから、$(x-a,y-b)$ は<b>接線の方向のベクトル</b>(点 $(a,b)$ から $(x,y)$ へ向かうベクトル)です。(T)=0 は、これが $\nabla f(a,b)$ と直交すると言っています(板書 p.18)。</p>
+    <div class="box thm">
+      <div class="label">結論</div>
+      <p>勾配ベクトル $\nabla f(a,b)$ は、曲線 $f(x,y)=0$ の点 $(a,b)$ での<b>接線と直交する</b>(=<b>法線ベクトル</b>)。</p>
+    </div>
+
+    <figure class="fig">
+      <svg viewBox="0 0 500 250" width="500" role="img" aria-label="勾配ベクトルと接線">
+        <g transform="rotate(-12 250 140)">
+          <path class="cv" d="M100 196.25 Q250 83.75 400 196.25"/>
+          <line class="thin" x1="60" y1="140" x2="440" y2="140" style="stroke:var(--thm);stroke-width:1.6"/>
+          <line class="arr" x1="250" y1="140" x2="250" y2="70"/><polygon class="arrh" points="250,62 245,74 255,74"/>
+          <line class="arr" x1="250" y1="140" x2="370" y2="140" style="stroke:var(--ex)"/><polygon points="380,140 368,135 368,145" fill="var(--ex)"/>
+          <path d="M250 128 L262 128 L262 140" fill="none" stroke="var(--muted)" stroke-width="1.4"/>
+          <circle class="dot" cx="250" cy="140" r="5"/>
+        </g>
+        <text class="t" x="228" y="168">(a, b)</text><text class="t" x="392" y="108">(x, y)</text>
+        <text class="tt" x="130" y="52">∇f(a,b)=(f_x(a,b), f_y(a,b))</text>
+        <text class="tt" x="40" y="195" style="fill:var(--thm)">接線 ℓ</text>
+        <text class="tj" x="300" y="148" style="fill:var(--ex)">(x−a, y−b)</text>
+        <text class="ta" x="330" y="215">曲線 f(x,y)=0</text>
+        <text class="tm" x="140" y="236">直角:∇f と (x−a, y−b) の内積 = 0</text>
+      </svg>
+      <figcaption>曲線上の点 $(a,b)$ で、接線 $\ell$(赤)と勾配ベクトル $\nabla f(a,b)$(上向きの矢印)は直角。接線上の点 $(x,y)$ へ向かうベクトル $(x-a,y-b)$(緑)も、$\nabla f$ と直角です(板書 p.18 の図)。</figcaption>
+    </figure>
+
+    <div class="box supp">
+      <div class="label">別の示し方:連鎖律から一行で <a class="xref-link" href="../basics.html#gradperp" data-xref>→ 詳しい解説</a></div>
+      <p>曲線 $f(x,y)=0$ の上を動く点 $(x(t),y(t))$ をとると、$f(x(t),y(t))=0$ がずっと成り立ちます(そのような曲線は、陰関数を使って $(t,\varphi(t))$ ととれます)。両辺を $t$ で微分すると、連鎖律で
+      $$f_x\,x'(t)+f_y\,y'(t)=0,$$
+      つまり $\langle\nabla f,\,(x'(t),y'(t))\rangle=0$。$(x'(t),y'(t))$ は曲線の接線方向のベクトルなので、<b>$\nabla f$ は接線と直交</b>します。陰関数の公式 $\varphi'=-f_x/f_y$ を使わず、連鎖律と内積だけで言えます。</p>
+    </div>
+
+    <p>これで、1.9 で予告した「勾配ベクトルは等高線に直交する」が示されました($f(x,y)=0$ は、高さ0の等高線です)。</p>
+
+    <details class="photo"><summary>この部分の板書(p.16–18)の写真を見る</summary>
+      <img src="../images/week-01/board-p13-16.webp" alt="板書 p.13, p.16" loading="lazy">
+      <img src="../images/week-01/board-p17-18.webp" alt="板書 p.17-18" loading="lazy">
+    </details>
+
+    <!-- ===================== 10 ===================== -->
+    <h2 id="s10">10. 3変数への拡張:曲面と接平面 <span class="page-tag">板書 p.21–26</span></h2>
+    <p>ここまでは変数が $x,y$ の2つで、方程式 $f(x,y)=0$ は<b>平面上の曲線</b>でした。板書 p.21 からは変数を3つにします。方程式 $f(x,y,z)=0$ は<b>空間の中の曲面</b>です(球面 $x^2+y^2+z^2-1=0$ のようなもの)。話の筋道は2変数と全く同じで、役者が1人増えるだけです。</p>
+
+    <h3>10.1 3変数関数の偏微分・連鎖律(板書 p.21、p.24左) <a class="xref-link" href="../basics.html#partial3" data-xref>→ 3変数の偏微分</a><a class="xref-link" href="../basics.html#chain3" data-xref>→ 3変数の連鎖律</a></h3>
+    <p>3変数関数 $f(x,y,z)$ の偏微分 $f_x,f_y,f_z$ も、2変数と同じく「<b>他の2つを固定</b>して、残り1つで微分」します(板書 p.21)。たとえば
+    $$\frac{\partial f}{\partial x}(a,b,c)=\lim_{h\to0}\frac1h\bigl(f(a+h,b,c)-f(a,b,c)\bigr).$$
+    <b>全微分</b>(1次近似できること)や連続性も、2変数と同様に定義します。$C^1$ 級も「$f_x,f_y,f_z$ がすべて存在して連続」で同様です。</p>
+    <p>3変数の<b>連鎖律</b>(板書 p.24 左)も、道が3本になるだけです:
+    $$\frac{d}{dt}f(x(t),y(t),z(t))=\frac{\partial f}{\partial x}\frac{dx}{dt}+\frac{\partial f}{\partial y}\frac{dy}{dt}+\frac{\partial f}{\partial z}\frac{dz}{dt}.$$</p>
+    <figure class="fig">
+      <svg viewBox="0 0 440 200" width="440" role="img" aria-label="3変数の連鎖律">
+        <text class="t" x="212" y="28" style="font-size:20px">f</text>
+        <line class="thin" x1="205" y1="34" x2="95" y2="88"/><line class="thin" x1="218" y1="36" x2="218" y2="88"/><line class="thin" x1="230" y1="34" x2="340" y2="88"/>
+        <text class="t" x="85" y="106" style="font-size:20px">x</text><text class="t" x="213" y="106" style="font-size:20px">y</text><text class="t" x="338" y="106" style="font-size:20px">z</text>
+        <line class="thin" x1="95" y1="114" x2="205" y2="166"/><line class="thin" x1="218" y1="114" x2="218" y2="158"/><line class="thin" x1="340" y1="114" x2="232" y2="166"/>
+        <text class="t" x="212" y="182" style="font-size:20px">t</text>
+        <text class="ta" x="100" y="60">f_x</text><text class="ta" x="224" y="64">f_y</text><text class="ta" x="310" y="60">f_z</text>
+        <text class="ta" x="100" y="148">dx/dt</text><text class="ta" x="224" y="140">dy/dt</text><text class="ta" x="300" y="148">dz/dt</text>
+      </svg>
+      <figcaption>道が3本。各道の係数をかけて足し合わせます。</figcaption>
+    </figure>
+
+    <h3 id="w-open">10.2 3変数の陰関数の定理(板書 p.22–23)</h3>
+    <div class="box basic">
+      <div class="label">基礎:開集合 <a class="xref-link" href="../basics.html#eps" data-xref>→ 詳しい解説</a></div>
+      <p>平面での「$(a,b)$ を含む<b>開集合</b>」とは、境界を含まない<b>(丸い)開いた範囲</b>、たとえば $(a,b)$ を中心とする半径 $r$ の円板(縁を含まない)のことです。1変数の「開区間」の2次元版です。</p>
+      <p>正確には、平面の部分集合 $D$ が開集合であるとは、$D$ のどの点 $p$ に対しても、ある $\varepsilon\gt0$ が存在して、$p$ の $\varepsilon$-近傍 $U_\varepsilon(p)$(中心 $p$、半径 $\varepsilon$ の円板)が $D$ に含まれることです。たとえば $\{x^2+y^2\lt1\}$ は開集合ですが、$\{x^2+y^2\le1\}$ は(縁の点があるので)開集合ではありません。</p>
+    </div>
+    <div class="box thm">
+      <div class="label">定理(3変数の陰関数の定理)</div>
+      <p>$f(x,y,z)=0$ を $\R^3$ の曲面と考える。$f$ は $C^1$ 級とし、$f(a,b,c)=0$、かつ
+      $$f_z(a,b,c)\ne0$$
+      と仮定する。このとき、$(a,b)$ を含むある開集合で定義された陰関数 $z=\varphi(x,y)$、つまり
+      $$c=\varphi(a,b),\qquad f(x,y,\varphi(x,y))=0$$
+      をみたすものが存在する。さらに $\varphi$ は $x,y$ について偏微分可能で
+      $$\varphi_x(x,y)=-\frac{f_x(x,y,z)}{f_z(x,y,z)},\qquad \varphi_y(x,y)=-\frac{f_y(x,y,z)}{f_z(x,y,z)}\qquad(z=\varphi(x,y)).$$</p>
+    </div>
+    <p>図のイメージ:曲面 $f=0$ 上の点 $(a,b,c)$ のまわりで、「$xy$ 平面の $(a,b)$ 近くの円板」の上に、曲面が<b>1枚の板</b>としてのっている——その高さを与える関数が $z=\varphi(x,y)$ です(板書 p.23 左の図)。2変数のときの「$x$ の区間の上に曲線がのる」の1次元アップ版です。</p>
+    <p>証明は2変数と同じ流れ(中間値の定理と単調性)で、ここでは板書にも詳しく出てきません。<b>導関数の公式</b>は次のように導けます。</p>
+
+    <h3>10.3 偏導関数の公式を連鎖律で導く(板書 p.24 右)</h3>
+    <p>恒等式 $f(x,y,\varphi(x,y))=0$ の両辺を<b>$x$ で偏微分</b>します($y$ は固定)。連鎖律で、
+    $$\frac{\partial f}{\partial x}+\frac{\partial f}{\partial z}\frac{\partial\varphi}{\partial x}=0.$$
+    ($x$ を動かしても $y$ は動かないので、$f_y$ の項は $\dfrac{dy}{dx}=0$ で消える。)同じく<b>$y$ で偏微分</b>すると
+    $$\frac{\partial f}{\partial y}+\frac{\partial f}{\partial z}\frac{\partial\varphi}{\partial y}=0.$$
+    $f_z\ne0$ のもとで解けば、上の $\varphi_x,\varphi_y$ の公式になります(板書 p.23 右)。</p>
+    <p>(これは 7.1 の 2変数の導出と、まったく同じ形です。)</p>
+
+    <h3 id="w-tplane">10.4 接平面の方程式(板書 p.25–26)</h3>
+    <div class="box basic">
+      <div class="label">基礎:接平面 <a class="xref-link" href="../basics.html#tangent" data-xref>→ 詳しい解説</a></div>
+      <p>曲線の「接線」に当たるのが、曲面の「<b>接平面</b>」です。関数 $z=\varphi(x,y)$ のグラフの、点 $(a,b,c)$($c=\varphi(a,b)$)での接平面は
+      $$z-c=\varphi_x(a,b)(x-a)+\varphi_y(a,b)(y-b)$$
+      です。接線 $y-b=\varphi'(a)(x-a)$ の2変数版で、<b>$x$ 方向の傾きと $y$ 方向の傾き</b>の両方を使った平らな板が、曲面に点 $(a,b,c)$ でぴったり接します。</p>
+    </div>
+    <p>曲面 $f(x,y,z)=0$ の $(a,b,c)$ での接平面を求めます。$\nabla f(a,b,c)=(f_x,f_y,f_z)\ne(0,0,0)$ とします(板書 p.25 左)。まず $f_z(a,b,c)\ne0$ の場合、陰関数 $z=\varphi(x,y)$ があるので、接平面は
+    $$z-c=\varphi_x(a,b)(x-a)+\varphi_y(a,b)(y-b).$$
+    ここに $\varphi_x=-\dfrac{f_x}{f_z},\ \varphi_y=-\dfrac{f_y}{f_z}$ を代入して(板書 p.25 右):
+    $$z-c=-\frac{f_x(a,b,c)}{f_z(a,b,c)}(x-a)-\frac{f_y(a,b,c)}{f_z(a,b,c)}(y-b)\qquad(\text{板書 p.26 上}).$$
+    両辺に $f_z(a,b,c)$ をかけて移項すると、
+    $$\boxed{\ f_x(a,b,c)(x-a)+f_y(a,b,c)(y-b)+f_z(a,b,c)(z-c)=0\ }$$
+    これが<b>曲面 $f=0$ の $(a,b,c)$ における接平面の方程式</b>です(板書 p.26 の枠)。</p>
+    <p>この式の左辺は、2つのベクトル $\nabla f(a,b,c)=(f_x,f_y,f_z)$ と $(x-a,\,y-b,\,z-c)$ の<b>内積</b>です。後者は「接平面上の点 $(x,y,z)$ へ向かうベクトル」ですから、内積が $0$ とは<b>直交する</b>こと。</p>
+    <div class="box thm">
+      <div class="label">結論</div>
+      <p>$\nabla f(a,b,c)$ は、曲面 $f=0$ の点 $(a,b,c)$ での<b>接平面と直交する</b>(=接平面の法線ベクトル)(板書 p.26 最後の行)。</p>
+    </div>
+    <div class="box supp">
+      <div class="label">補足:グラフの接平面との関係 <a class="xref-link" href="../basics.html#tangent" data-xref>→ 詳しい解説</a></div>
+      <p>$z=f(x,y)$ のグラフは、$g(x,y,z)=z-f(x,y)=0$ という曲面です。$\nabla g=(-f_x,-f_y,1)$ なので、上の接平面の式は $-f_x(x-a)-f_y(y-b)+(z-c)=0$、すなわち
+      $$z-c=f_x(a,b)(x-a)+f_y(a,b)(y-b)$$
+      となります。これは、グラフ $z=f(x,y)$ の接平面としておなじみの式と<b>一致</b>します。曲面の接平面の公式は、グラフの接平面の公式の一般化になっているのです。</p>
+    </div>
+    <p>$f_z(a,b,c)=0$ でも、$f_x\ne0$ か $f_y\ne0$ のどちらかなら、変数を入れ替えて(2変数のときの $x=\psi(y)$ と同様)同じ式になります。だから $\nabla f\ne(0,0,0)$ でありさえすれば、接平面の式はこの形で成り立ちます。</p>
+
+    <figure class="fig">
+      <svg viewBox="0 0 520 320" width="520" role="img" aria-label="曲面と接平面">
+        <line class="ax" x1="110" y1="285" x2="110" y2="25"/><line class="ax" x1="110" y1="285" x2="40" y2="315"/><line class="ax" x1="110" y1="285" x2="500" y2="300"/>
+        <text class="t" x="98" y="22">z</text><text class="t" x="24" y="312">x</text><text class="t" x="490" y="316">y</text>
+        <ellipse class="thin" cx="260" cy="272" rx="70" ry="18"/>
+        <line class="dash" x1="190" y1="272" x2="190" y2="130"/><line class="dash" x1="330" y1="272" x2="330" y2="130"/><line class="dash" x1="260" y1="272" x2="260" y2="130"/>
+        <circle class="dotb" cx="260" cy="272" r="3.5"/><text class="t" x="266" y="290">(a, b)</text>
+        <ellipse cx="260" cy="130" rx="70" ry="18" fill="var(--accent)" opacity=".18" stroke="var(--accent)" stroke-width="2.4"/>
+        <polygon points="130,150 300,95 400,115 230,170" fill="var(--thm)" opacity=".13" stroke="var(--thm)" stroke-width="1.8"/>
+        <line class="arr" x1="260" y1="130" x2="262" y2="48"/><polygon class="arrh" points="262,40 257,52 267,52"/>
+        <circle class="dot" cx="260" cy="130" r="5"/>
+        <text class="t" x="270" y="124">(a, b, c)</text>
+        <text class="tt" x="272" y="46">∇f(a,b,c)(接平面と直交)</text>
+        <text class="tt" x="405" y="118">接平面</text>
+        <text class="ta" x="338" y="154">曲面 f=0</text>
+        <text class="tm" x="140" y="200">xy平面上の (a,b) のまわりの円板</text>
+      </svg>
+      <figcaption>$xy$ 平面上の円板(下の楕円)の真上に、曲面 $z=\varphi(x,y)$ が1枚の板としてのっています(青)。点 $(a,b,c)$ で曲面に接するのが接平面(赤)、それと直角に立つのが勾配ベクトル $\nabla f(a,b,c)$(矢印)です(板書 p.23, p.26 の図)。</figcaption>
+    </figure>
+
+    <details class="photo"><summary>この部分の板書(p.21–26)の写真を見る</summary>
+      <img src="../images/week-01/board-p20-21.webp" alt="板書 p.20-21" loading="lazy">
+      <img src="../images/week-01/board-p22-23.webp" alt="板書 p.22-23" loading="lazy">
+      <img src="../images/week-01/board-p21-24.webp" alt="板書 p.21, p.24" loading="lazy">
+      <img src="../images/week-01/board-p25-26.webp" alt="板書 p.25-26" loading="lazy">
+    </details>
+
+    <!-- ===================== 11 ===================== -->
+    <h2 id="s11">11. 具体例で練習(板書にない補足) </h2>
+    <p>公式の使い方を、簡単な例で確かめておきます。</p>
+
+    <h3>例1:円の傾き・接線・2階微分</h3>
+    <p>$f(x,y)=x^2+y^2-1$。$f_x=2x,\ f_y=2y$。</p>
+    <ul>
+      <li>傾き:$\varphi'(x)=-\dfrac{f_x}{f_y}=-\dfrac{2x}{2y}=-\dfrac{x}{y}$。</li>
+      <li>確認:$y=\varphi(x)=\sqrt{1-x^2}$ を直接微分すると $\varphi'=\dfrac{-x}{\sqrt{1-x^2}}=-\dfrac{x}{y}$。公式と一致します。</li>
+      <li>接線:点 $\left(\tfrac1{\sqrt2},\tfrac1{\sqrt2}\right)$ では $f_x=f_y=\sqrt2$ なので、(T) より $\sqrt2\left(x-\tfrac1{\sqrt2}\right)+\sqrt2\left(y-\tfrac1{\sqrt2}\right)=0$、すなわち $x+y=\sqrt2$。</li>
+      <li>2階:$f_{xx}=2,\ f_{xy}=0,\ f_{yy}=2$ を p.20 の公式に入れると
+      $$\varphi''=-\frac{2\cdot(2y)^2-0+2\cdot(2x)^2}{(2y)^3}=-\frac{8(x^2+y^2)}{8y^3}=-\frac1{y^3}.$$
+      直接微分した結果 $\varphi''=-(1-x^2)^{-3/2}=-\dfrac1{y^3}$ と一致します。</li>
+    </ul>
+
+    <h3>例2:デカルトの葉線 $x^3+y^3-3xy=0$</h3>
+    <p>この式は $y$ について解く公式がきれいには書けませんが、陰関数の定理が使えます。点 $\left(\tfrac32,\tfrac32\right)$ が曲線上にあるか確認すると、$\tfrac{27}{8}+\tfrac{27}{8}-3\cdot\tfrac94=\tfrac{27}{4}-\tfrac{27}{4}=0$ で OK。</p>
+    <p>$f_x=3x^2-3y,\ f_y=3y^2-3x$ より、点 $\left(\tfrac32,\tfrac32\right)$ で $f_x=\tfrac94,\ f_y=\tfrac94\ne0$。よって陰関数 $y=\varphi(x)$ が存在して
+    $$\varphi'\left(\tfrac32\right)=-\frac{9/4}{9/4}=-1.$$
+    接線は (T) より $\tfrac94(x-\tfrac32)+\tfrac94(y-\tfrac32)=0$、すなわち $x+y=3$。</p>
+    <p>2階微分($f_{xx}=6x=9,\ f_{xy}=-3,\ f_{yy}=6y=9$):$f_{xx}+2f_{xy}\varphi'+f_{yy}(\varphi')^2+f_y\varphi''=0$ に代入すると
+    $$9+2(-3)(-1)+9\cdot1+\tfrac94\,\varphi''=0\ \Longrightarrow\ \varphi''\left(\tfrac32\right)=-\tfrac{32}{3}.$$
+    (負なので、この点のまわりでグラフは上に凸です。)</p>
+
+    <h3>例3:球面の接平面($3$ 変数)</h3>
+    <p>$f(x,y,z)=x^2+y^2+z^2-1$。点 $\left(\tfrac1{\sqrt3},\tfrac1{\sqrt3},\tfrac1{\sqrt3}\right)$ では $\nabla f=(2x,2y,2z)=\tfrac{2}{\sqrt3}(1,1,1)$。接平面は
+    $$\tfrac2{\sqrt3}\left(x-\tfrac1{\sqrt3}\right)+\tfrac2{\sqrt3}\left(y-\tfrac1{\sqrt3}\right)+\tfrac2{\sqrt3}\left(z-\tfrac1{\sqrt3}\right)=0\ \Longleftrightarrow\ x+y+z=\sqrt3.$$
+    また $\varphi_x=-\dfrac{f_x}{f_z}=-\dfrac{x}{z}$、この点では $-1$。上半球 $z=\sqrt{1-x^2-y^2}$ を直接 $x$ で偏微分した $-\dfrac{x}{\sqrt{1-x^2-y^2}}=-\dfrac xz$ と一致します。</p>
+
+    <!-- ===================== 12 ===================== -->
+    <h2 id="s12">12. まとめ(この回で覚えること)</h2>
+    <ol>
+      <li><b>陰関数</b>:方程式 $f(x,y)=0$ から、点 $(a,b)$ のまわりで局所的に決まる関数 $y=\varphi(x)$($\varphi(a)=b,\ f(x,\varphi(x))=0$)。</li>
+      <li><b>陰関数の定理</b>:$f$ が $C^1$ 級、$f(a,b)=0$、$f_y(a,b)\ne0$ ⟹ $(a,b)$ のまわりで陰関数 $y=\varphi(x)$ が(一意的に)存在し、微分可能で
+        $\varphi'(x)=-\dfrac{f_x}{f_y}$。</li>
+      <li>$f_x(a,b)\ne0$ なら、$x=\psi(y)$ として同様。$\nabla f\ne(0,0)$ ならどちらかで陰関数が定まる。</li>
+      <li><b>証明の流れ</b>:$f_y\gt0$ の近くで、縦線ごとに「$f$ の符号が上下で逆」(連続性)→中間値の定理で零点がある→単調増加でただ1つ→ $\varphi$ が定まる。導関数は平均値の定理(または連鎖律)。</li>
+      <li>$\varphi'=-f_x/f_y$ は、$f(x,\varphi(x))=0$ を連鎖律で微分した $f_x+f_y\varphi'=0$ から出る。もう一度微分すれば $\varphi''$。</li>
+      <li><b>接線</b>:$f_x(a,b)(x-a)+f_y(a,b)(y-b)=0$。<b>$\nabla f$ は曲線(等高線)に直交する</b>。</li>
+      <li><b>3変数</b>:$f_z\ne0$ のとき $z=\varphi(x,y)$、$\varphi_x=-f_x/f_z$、$\varphi_y=-f_y/f_z$。接平面は $f_x(x-a)+f_y(y-b)+f_z(z-c)=0$、$\nabla f$ は接平面に直交。</li>
+    </ol>
+    <div class="box note-box">
+      <div class="label">次回以降へ</div>
+      <p>授業計画の次の項目は<b>ラグランジュの未定乗数法</b>(条件付き極値)です。そこでは「$g(x,y)=0$ という条件のもとで $f$ の最大・最小を探す」ことになり、$g(x,y)=0$ は<b>曲線</b>、そして $\nabla f$ と $\nabla g$ が<b>平行になる点</b>が候補になります。今回の「$\nabla g$ が曲線に直交する」「陰関数で曲線を関数として扱う」という知識がそのまま使われます。</p>
+    </div>
+
+    <!-- ===================== 13 ===================== -->
+    <h2 id="s13">13. この回のノートについてのメモ(板書の乱れの扱い)</h2>
+    <p>板書には、ページ番号の乱れや欠けがありました。次のように判断してまとめています。もし違うところがあれば教えてください。</p>
+    <ul>
+      <li><b>p.7、p.12、p.19 が板書にない</b>:内容が自然につながるように、第5節 Step 1(p.7)、第6節 6.1(p.12)、第7節(p.19)に<b>黄色い枠で補足</b>を入れました。</li>
+      <li><b>p.16 の右半分(2変数の平均値の定理)</b>:ページ番号は 16 ですが、内容は p.13 の計算で使うもの(「$f(x+h,y+k)=0$ より」の前の準備)なので、第6節 6.3 に入れました。p.16 の左半分(「応用 曲線 $f(x,y)=0$ の…」)は、接線の話(第9節、p.17–18)の書き出しとして扱いました。</li>
+      <li><b>p.21</b>が写真に2回写っていました(同じ内容)。1回だけ載せています。</li>
+      <li><b>p.11</b>の「$\varphi(a)=\varphi(b)$」は「$\varphi(a)=b$」と読みました。</li>
+      <li>板書の図は、見やすいように<b>描き直して</b>載せています。原本の写真は、各節の下の折りたたみで見られます。</li>
+      <li>講義では説明されていない補足(補足と書いた黄色の枠、第11節の例)は、私(Claude)が書き足したものです。授業で使った記号や順序とは違う可能性があるので、テスト前には板書と照らし合わせてください。</li>
+    </ul>
+
+    <nav class="pager">
+      <span class="disabled">← 前の週</span>
+      <a href="../index.html">一覧へ</a>
+      <span class="disabled">次の週 →</span>
+    </nav>
+    <!--END-->
+
+  </main>
+
+  <footer>© Aセメまとめノート</footer>
+</body>
+</html>
+
+
+
+
+
+
+
+
+

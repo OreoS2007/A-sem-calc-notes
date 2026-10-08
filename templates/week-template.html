@@ -1,0 +1,85 @@
+﻿<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <!-- ひな形: <教科>/weeks/week-NN.html にコピーして使う。{{...}} とコメントの指示を埋めて、不要な指示コメントは消す。
+       パスは「<教科>/weeks/」の深さを前提にしている(../../assets/)。 -->
+  <title>第{{N}}回 {{タイトル}} | Aセメまとめノート</title>
+  <link rel="stylesheet" href="../../assets/style.css">
+  <script defer src="../../assets/nav.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],macros:{'\\R':'\\mathbb{R}'}});window.__navReady&&window.__navReady()"></script>
+</head>
+<body>
+  <!-- 教科が calc の場合。linalg の場合は、リンクの並びを「線形代数 / 春学期のまとめ / 微積」にする -->
+  <header class="site-header">
+    <div class="inner">
+      <a class="site-title" href="../../index.html">Aセメまとめノート</a>
+      <span class="links"><a href="../index.html">{{教科名}}</a><a href="../basics.html">春学期のまとめ</a><a href="../../{{もう一方の教科}}/index.html">{{もう一方の教科名}}</a></span>
+    </div>
+  </header>
+
+  <main class="note">
+    <h1>第{{N}}回:{{タイトル}}</h1>
+    <div class="meta">{{授業名}}(東京大学 教養学部 秋学期)／板書 p.1〜p.{{最後}}</div>
+
+    <nav class="toc">
+      <div class="toc-title">目次</div>
+      <ol start="0">
+        <li><a href="#s0">この回の全体像</a></li>
+        <li><a href="#s1">準備:春学期の復習(基礎の確認)</a><div class="sub">{{トピックを列挙}}</div></li>
+        <!-- 板書の順に節を並べる。最後は「具体例」「まとめ」「板書の乱れの扱い」 -->
+      </ol>
+    </nav>
+
+    <h2 id="s0">0. この回の全体像 <span class="page-tag">板書 p.1</span></h2>
+    <!-- 授業計画・この回のゴールを1つの枠(box thm)で。次回以降とのつながりも一言 -->
+
+    <h2 id="s1">1. 準備:春学期の復習(基礎の確認)</h2>
+    <h3 id="w-{{topic}}">1.1 {{トピック名}}</h3>
+    <div class="box basic">
+      <div class="label">基礎:{{名前}} <a class="xref-link" href="../basics.html#{{anchor}}" data-xref>→ 詳しい解説</a></div>
+      <p>{{本文の基礎の枠。ここは簡略化しない。1つの枠だけで理解できる詳しさにする}}</p>
+    </div>
+    <!-- 詳しい説明・証明・図は <教科>/basics.html の対応トピック(id="{{anchor}}")に書く。
+         そこの末尾の「この回で使う場所」から、この h3 の id (w-...) にリンクを張る -->
+
+    <h2 id="s2">2. {{板書の節}} <span class="page-tag">板書 p.{{a}}–{{b}}</span></h2>
+    <div class="box def"><div class="label">定義({{名前}})</div><p>{{...}}</p></div>
+    <div class="box thm"><div class="label">定理({{名前}})</div><p>{{...}}</p></div>
+    <div class="box proof"><div class="label">証明</div><p>{{...}}</p></div>
+    <div class="box ex"><div class="label">例</div><p>{{...}}</p></div>
+    <div class="box supp"><div class="label">板書にない補足(p.{{n}} に相当する部分)</div><p>{{板書が欠けていて補った箇所は、必ずこの黄色の枠で示す}}</p></div>
+    <div class="box warn"><div class="label">注意</div><p>{{...}}</p></div>
+
+    <figure class="fig">
+      <svg viewBox="0 0 460 250" width="460" role="img" aria-label="{{図の説明}}">
+        <!-- クラス: ax(軸) cv/cv2/cv3(曲線) thin dash dot dotb arr arrh t(斜体の記号) tj tm ta tt rect fillp fillm -->
+      </svg>
+      <figcaption>{{図の説明。数式は $...$ で書ける}}</figcaption>
+    </figure>
+
+    <!-- 板書の写真は、人が写っていない場合だけ載せる(CLAUDE.md を参照)。載せるなら:
+    <details class="photo"><summary>この部分の板書(p.{{a}}–{{b}})の写真を見る</summary><img src="../images/week-{{NN}}/board-p{{aa}}-{{bb}}.webp" alt="板書 p.{{a}}-{{b}}" loading="lazy"></details>
+    -->
+
+    <h2 id="s{{k}}">具体例で練習(板書にない補足)</h2>
+    <h2 id="s{{k+1}}">まとめ(この回で覚えること)</h2>
+    <h2 id="s{{k+2}}">この回のノートについてのメモ(板書の乱れの扱い)</h2>
+    <p>{{ページ番号の乱れ・欠け・書き間違いを、どう判断したか。補足は Claude が書き足したものだと明記する}}</p>
+
+    <nav class="pager">
+      <a href="week-{{前}}.html">← 前の週</a>
+      <a href="../index.html">一覧へ</a>
+      <span class="disabled">次の週 →</span>
+    </nav>
+  </main>
+
+  <footer>© Aセメまとめノート</footer>
+</body>
+</html>
+
