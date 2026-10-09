@@ -55,6 +55,14 @@
             <li><a href="#param">曲線・曲面のパラメータ表示</a></li>
             <li><a href="#extrema">極大・極小と2階微分</a></li>
           </ol></li>
+        <li><b>静電場のための道具</b>
+          <ol type="a" start="10">
+            <li><a href="#delta">デルタ関数</a></li>
+            <li><a href="#symm">対称性を使う</a></li>
+            <li><a href="#taylor">テイラー展開(小さい量での近似)</a></li>
+            <li><a href="#geom">円・球・円柱の面積と体積</a></li>
+            <li><a href="#work">仕事とポテンシャルエネルギー</a></li>
+          </ol></li>
       </ol>
     </nav>
 
@@ -360,6 +368,126 @@
     </div>
     <p>最大値をとる点は、領域の内部のこともあれば、境界のこともあります。たとえば $f(x)=x$ の $[0,1]$ での最大値は、境界($x=1$)でとります。「境界か内部か」という問いが、調和関数の最大値原理の中心です。</p>
     <p class="used-in">この回で使う場所:<a href="weeks/week-02.html#w-extrema" data-xref>第2回 1.8 極大・極小と2階微分</a><a href="weeks/week-02.html#s5-2" data-xref>第2回 5.2 最大値原理</a></p>
+
+
+
+    <!-- ===================== j: デルタ関数 ===================== -->
+    <h2 id="delta">j. デルタ関数</h2>
+    <p>「1点だけに集中した量」を、関数の形で書き表す道具です。たとえば、<b>点電荷</b>(1点に電荷が集まっている)の電荷密度は、普通の関数では書けません(その点で無限大で、他では0で、全体で有限の電荷)。デルタ関数は、これを表すために導入されます。</p>
+
+    <h3>定義と意味</h3>
+    <div class="box def">
+      <div class="label">定義(デルタ関数)</div>
+      <p>$\delta(x)$ は次の2つを満たす(広い意味の)関数。
+      $$\delta(x)=0\ (x\ne0),\qquad\int_{-\varepsilon}^{\varepsilon}g(x)\,\delta(x)\,dx=g(0)\ \ (\text{任意の滑らかな }g,\ \varepsilon\gt0).$$</p>
+    </div>
+    <p>特に $g=1$ とすると $\displaystyle\int_{-\varepsilon}^{\varepsilon}\delta(x)\,dx=1$、つまり<b>山の面積は1</b>です。普通の関数では、「1点以外で0」ならば積分も0になってしまうので、$\delta$ は<b>普通の関数ではありません</b>(超関数と呼ばれる。ここでは「積分の中で上の性質を満たすもの」と考えれば十分です)。</p>
+    <figure class="fig">
+      <svg viewBox="0 0 560 226" width="560" role="img" aria-label="デルタ関数のイメージ"><line x1="20" y1="190" x2="400" y2="190" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><line x1="210" y1="196" x2="210" y2="20" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><text class="t" x="404" y="195">x</text><text class="t" x="218" y="24">y</text><path d="M140 190 V164 H280 V190" style="fill:none;stroke:var(--accent);stroke-width:2.2"/><text class="tm" x="286" y="176" style="fill:var(--accent)">a = 1</text><path d="M175 190 V138 H245 V190" style="fill:none;stroke:var(--ex);stroke-width:2.2"/><text class="tm" x="251" y="150" style="fill:var(--ex)">a = 2</text><path d="M192.5 190 V86 H227.5 V190" style="fill:none;stroke:var(--thm);stroke-width:2.2"/><text class="tm" x="233.5" y="98" style="fill:var(--thm)">a = 4</text><line x1="210" y1="70" x2="210" y2="29.4" style="stroke:var(--muted);stroke-width:1.6;fill:none;stroke-dasharray:4 3"/><polygon points="210,22 213.6,30 206.4,30" style="fill:var(--muted)"/><text class="tj" x="202" y="20" style="text-anchor:end">∞</text><text class="tm" x="90" y="210">幅 1/a、高さ a:面積はいつも 1</text><text class="ta" x="270" y="54">a → ∞ の極限が δ(x)</text><text class="tm" x="270" y="74">(幅 → 0、高さ → ∞、面積 = 1)</text></svg>
+      <figcaption>幅 $1/a$、高さ $a$ の長方形(面積はいつも1)の $a\to\infty$ の極限が $\delta(x)$。</figcaption>
+    </figure>
+
+    <h3>使い方:「$x=0$ での値を取り出す」</h3>
+    <ul>
+      <li>$\displaystyle\int g(x)\,\delta(x-x_0)\,dx=g(x_0)$(積分範囲が $x_0$ を含むとき)。含まないときは 0。</li>
+      <li>3次元:$\delta(\bm{r})=\delta(x)\delta(y)\delta(z)$、$\displaystyle\int g(\bm{r})\,\delta(\bm{r}-\bm{r}_0)\,d\bm{r}=g(\bm{r}_0)$。</li>
+    </ul>
+    <div class="box ex">
+      <div class="label">例</div>
+      <p>・$\displaystyle\int_{-1}^{1}\cos x\,\delta(x)\,dx=\cos0=1$。<br>
+      ・$\displaystyle\int_0^5x^2\delta(x-2)\,dx=2^2=4$。<br>
+      ・$\displaystyle\int_3^5x^2\delta(x-2)\,dx=0$($x=2$ が範囲にない)。<br>
+      ・点電荷 $q$ を原点に置いたときの電荷密度は $\rho(\bm{r})=q\,\delta(\bm{r})$。全電荷は $\int\rho\,d\bm{r}=q$。</p>
+    </div>
+    <p><b>注意:</b>$\delta(x)$ の単位は「$1/x$ の単位」(積分すると無次元の1になるため)。3次元の $\delta(\bm{r})$ は「1/体積」で、確かに「電荷密度 = 電荷 × 1/体積」になります。</p>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-03.html#w-delta" data-xref>第3回 1.1 デルタ関数</a><a href="weeks/week-03.html#s2-3" data-xref>第3回 2.3 原点では、デルタ関数になる</a></p>
+
+    <!-- ===================== k: 対称性 ===================== -->
+    <h2 id="symm">k. 対称性を使う</h2>
+    <p>物理では、「状況が<b>ある操作(回転・平行移動・鏡映)で変わらない</b>なら、結果も変わらない」という考え方(対称性)を、計算を簡単にするために使います。</p>
+
+    <div class="box thm">
+      <div class="label">原理(対称性)</div>
+      <p>電荷分布がある操作で不変ならば、その電荷分布が作る電場も、同じ操作で不変(同じ操作で自分自身に移る)。</p>
+    </div>
+
+    <h3>回転対称性:球対称と軸対称</h3>
+    <ul>
+      <li><b>球対称</b>(原点まわりの回転で不変:点電荷、一様な球殻・球):電場の向きは<b>動径方向</b>(外向き、または内向き)、大きさは原点からの距離 $r$ だけ。<br>
+      理由:もし動径方向以外の成分があったとすると、原点まわりに回転させたとき、向きが変わって矛盾する。大きさが方向によって変わっても、回転させれば矛盾する。</li>
+      <li><b>軸対称</b>($z$ 軸まわりの回転と $z$ 方向の並進で不変:無限に長い一様な線電荷):電場の向きは<b>軸に垂直</b>(軸から遠ざかる向き)、大きさは軸からの距離 $a$ だけ。</li>
+      <li><b>平面対称</b>(平面に沿った並進で不変:無限に広い一様な面電荷):電場の向きは<b>面に垂直</b>、大きさは面からの距離だけ。</li>
+    </ul>
+    <figure class="fig">
+      <svg viewBox="0 0 560 240" width="560" role="img" aria-label="対称性の使い方"><circle cx="130" cy="128" r="78" style="fill:none;stroke:var(--muted);stroke-width:1.2;stroke-dasharray:5 4"/><line x1="208" y1="128" x2="230.6" y2="128" style="stroke:var(--thm);stroke-width:2.2;fill:none"/><polygon points="238,128 230,131.8 230,124.2" style="fill:var(--thm)"/><line x1="185.2" y1="72.8" x2="201.1" y2="56.9" style="stroke:var(--thm);stroke-width:2.2;fill:none"/><polygon points="206.4,51.6 203.4,60 198,54.6" style="fill:var(--thm)"/><line x1="130" y1="50" x2="130" y2="27.4" style="stroke:var(--thm);stroke-width:2.2;fill:none"/><polygon points="130,20 133.8,28 126.2,28" style="fill:var(--thm)"/><line x1="74.8" y1="72.8" x2="58.9" y2="56.9" style="stroke:var(--thm);stroke-width:2.2;fill:none"/><polygon points="53.6,51.6 62,54.6 56.6,60" style="fill:var(--thm)"/><line x1="52" y1="128" x2="29.4" y2="128" style="stroke:var(--thm);stroke-width:2.2;fill:none"/><polygon points="22,128 30,124.2 30,131.8" style="fill:var(--thm)"/><line x1="74.8" y1="183.2" x2="58.9" y2="199.1" style="stroke:var(--thm);stroke-width:2.2;fill:none"/><polygon points="53.6,204.4 56.6,196 62,201.4" style="fill:var(--thm)"/><line x1="130" y1="206" x2="130" y2="228.6" style="stroke:var(--thm);stroke-width:2.2;fill:none"/><polygon points="130,236 126.2,228 133.8,228" style="fill:var(--thm)"/><line x1="185.2" y1="183.2" x2="201.1" y2="199.1" style="stroke:var(--thm);stroke-width:2.2;fill:none"/><polygon points="206.4,204.4 198,201.4 203.4,196" style="fill:var(--thm)"/><circle cx="130" cy="128" r="11" style="fill:var(--thm)"/><text class="tj" x="130" y="133" style="text-anchor:middle;fill:#fff;font-weight:700;font-size:16px">+</text><text class="tj" x="300" y="60">回転しても状況が変わらない(点電荷)</text><text class="ta" x="300" y="82">⇒ E の向きは動径方向</text><text class="ta" x="300" y="102">⇒ 大きさは原点からの距離だけで決まる</text><text class="tm" x="300" y="140">軸まわりの回転(円柱)なら、</text><text class="tm" x="300" y="158">大きさは軸からの距離だけで決まる</text><text class="tm" x="300" y="186">平面の反転・鏡映も同様に使える</text></svg>
+      <figcaption>点電荷の電場。原点まわりに回転しても状況が変わらないので、向きは動径方向、大きさは原点からの距離だけで決まる。</figcaption>
+    </figure>
+
+    <h3>鏡映対称性</h3>
+    <p>$z$ 軸の上下を入れ替える(鏡映)操作で不変な分布では、電場の $z$ 成分は上下で符号が反転します(上下対称なので、「上向き」は「下向き」に映る)。たとえば無限に長い線電荷は、$z\to-z$ の反転で不変なので、電場に $z$ 成分があると矛盾します(上向きの成分が、反転すると下向きになるのに、反転しても電場は同じはず)。これが、「電場は軸に垂直」と言える理由です。</p>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-03.html#w-symm" data-xref>第3回 1.2 対称性を使う</a><a href="weeks/week-03.html#s3-2" data-xref>第3回 3.2 積分型ガウスの法則(例3.1、3.2)</a></p>
+
+    <!-- ===================== l: テイラー展開 ===================== -->
+    <h2 id="taylor">l. テイラー展開(小さい量での近似)</h2>
+
+    <div class="box thm">
+      <div class="label">テイラー展開</div>
+      <p>$f$ が何回でも微分できるとき、$x$ が小さいところでは
+      $$f(x)=f(0)+f'(0)\,x+\frac{f''(0)}{2!}x^2+\frac{f'''(0)}{3!}x^3+\cdots$$
+      と、$x$ の多項式で近似できる。後ろの項ほど、$x$ が小さいときに急速に小さくなる。</p>
+    </div>
+    <p>意味:「$x=0$ のまわりで、関数を、同じ値・同じ傾き・同じ曲がり方をもつ多項式で置き換える」。最初の2項 $f(0)+f'(0)x$ が<b>1次近似</b>(接線)、3項まで入れたものが<b>2次近似</b>。</p>
+    <figure class="fig">
+      <svg viewBox="0 0 520 232" width="520" role="img" aria-label="1/√(1+x) の1次近似"><line x1="30" y1="190" x2="420" y2="190" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><line x1="70" y1="200" x2="70" y2="24" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><polyline points="77.5,94.2 80.5,97.1 83.5,99.8 86.5,102.4 89.5,104.8 92.5,107.2 95.5,109.4 98.5,111.5 101.5,113.6 104.5,115.6 107.5,117.4 110.5,119.2 113.5,121 116.5,122.7 119.5,124.3 122.5,125.8 125.5,127.3 128.5,128.8 131.5,130.2 134.5,131.6 137.5,132.9 140.5,134.2 143.5,135.4 146.5,136.6 149.5,137.8 152.5,138.9 155.5,140 158.5,141.1 161.5,142.1 164.5,143.1 167.5,144.1 170.5,145.1 173.5,146 176.5,146.9 179.5,147.8 182.5,148.7 185.5,149.5 188.5,150.3 191.5,151.2 194.5,151.9 197.5,152.7 200.5,153.5 203.5,154.2 206.5,154.9 209.5,155.7 212.5,156.3 215.5,157 218.5,157.7 221.5,158.3 224.5,159 227.5,159.6 230.5,160.2 233.5,160.8 236.5,161.4 239.5,162 242.5,162.6 245.5,163.1 248.5,163.7 251.5,164.2 254.5,164.8 257.5,165.3 260.5,165.8 263.5,166.3 266.5,166.8 269.5,167.3 272.5,167.8 275.5,168.2 278.5,168.7 281.5,169.2 284.5,169.6 287.5,170.1 290.5,170.5 293.5,170.9" style="fill:none;stroke:var(--accent);stroke-width:3"/><polyline points="77.5,109 80.5,110.2 83.5,111.4 86.5,112.6 89.5,113.8 92.5,115 95.5,116.2 98.5,117.4 101.5,118.6 104.5,119.8 107.5,121 110.5,122.2 113.5,123.4 116.5,124.6 119.5,125.8 122.5,127 125.5,128.2 128.5,129.4 131.5,130.6 134.5,131.8 137.5,133 140.5,134.2 143.5,135.4 146.5,136.6 149.5,137.8 152.5,139 155.5,140.2 158.5,141.4 161.5,142.6 164.5,143.8 167.5,145 170.5,146.2 173.5,147.4 176.5,148.6 179.5,149.8 182.5,151 185.5,152.2 188.5,153.4 191.5,154.6 194.5,155.8 197.5,157 200.5,158.2 203.5,159.4 206.5,160.6 209.5,161.8 212.5,163 215.5,164.2 218.5,165.4 221.5,166.6 224.5,167.8 227.5,169 230.5,170.2 233.5,171.4 236.5,172.6 239.5,173.8 242.5,175 245.5,176.2 248.5,177.4 251.5,178.6 254.5,179.8 257.5,181 260.5,182.2 263.5,183.4 266.5,184.6 269.5,185.8 272.5,187 275.5,188.2 278.5,189.4 281.5,190.6 284.5,191.8 287.5,193 290.5,194.2 293.5,195.4" style="fill:none;stroke:var(--thm);stroke-width:2.2;stroke-dasharray:6 4"/><line x1="145" y1="190" x2="145" y2="136" style="stroke:var(--muted);stroke-width:1.1;stroke-dasharray:5 4;fill:none"/><circle cx="145" cy="136" r="5" style="fill:var(--text)"/><text class="tm" x="151" y="208">x = 0</text><text class="tm" x="215" y="40">x が小さいところでは</text><text class="tm" x="215" y="58">直線でほぼ一致</text><text class="ta" x="227.5" y="145.6">1/√(1+x)</text><text class="tt" x="227.5" y="193">1 − x/2</text></svg>
+      <figcaption>$f(x)=\dfrac1{\sqrt{1+x}}$(青)と1次近似 $1-\dfrac x2$(橙の破線)。$x=0$ のごく近くでは、ほぼ重なっている。</figcaption>
+    </figure>
+
+    <h3>よく使う展開:$(1+x)^{-1/2}$</h3>
+    <p>$f(x)=(1+x)^{-1/2}$ なら、$f'(x)=-\frac12(1+x)^{-3/2}$、$f''(x)=\frac34(1+x)^{-5/2}$。$x=0$ で $f(0)=1$、$f'(0)=-\frac12$、$f''(0)=\frac34$ なので
+    $$\frac{1}{\sqrt{1+x}}=1-\frac12x+\frac{3/4}{2}x^2-\cdots=1-\frac12x+\frac38x^2-\cdots.$$</p>
+    <div class="box ex">
+      <div class="label">例(精度を数字で見る)</div>
+      <p>$x=0.1$ のとき、$\dfrac{1}{\sqrt{1.1}}=0.953463\ldots$。1次近似 $1-0.05=0.95$(誤差 0.0035)、2次近似 $0.95+\frac38\cdot0.01=0.95375$(誤差 0.0003)。項を増やすほど正確になります。</p>
+    </div>
+    <h3>$O(\ )$ 記号</h3>
+    <p>$O(x^3)$ は「$x^3$ 程度以下の大きさの量(係数は定数)」という記号です。たとえば $\dfrac1{r}\Bigl(1+\dfrac{r'}{r}\cos\theta\Bigr)+O\Bigl(\dfrac{1}{r^3}\Bigr)$ と書けば、「$1/r^3$ 程度以下の、無視できる項が残っている」と読みます。遠方($r$ が大きい)ほど、高次の項は急速に効かなくなります。</p>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-03.html#w-taylor" data-xref>第3回 1.3 テイラー展開</a><a href="weeks/week-03.html#s6" data-xref>第3回 6. 補論:多重極展開</a></p>
+
+    <!-- ===================== m: 面積と体積 ===================== -->
+    <h2 id="geom">m. 円・球・円柱の面積と体積</h2>
+    <figure class="fig">
+      <svg viewBox="0 0 520 200" width="520" role="img" aria-label="円・球・円柱の面積と体積"><circle cx="70" cy="90" r="46" style="fill:var(--accent);opacity:.13;stroke:var(--accent);stroke-width:2"/><line x1="70" y1="90" x2="116" y2="90" style="stroke:var(--ex);stroke-width:2"/><text class="t" x="92" y="82" style="text-anchor:middle;fill:var(--ex)">r</text><text class="tt" x="70" y="160" style="text-anchor:middle">円周 2πr</text><text class="tm" x="70" y="180" style="text-anchor:middle">円板の面積 πr²</text><circle cx="236" cy="90" r="46" style="fill:var(--accent);opacity:.13;stroke:var(--accent);stroke-width:2"/><path d="M190 90 A46 14 0 0 0 282 90" style="fill:none;stroke:var(--accent);stroke-width:1.4"/><path d="M190 90 A46 14 0 0 1 282 90" style="fill:none;stroke:var(--accent);stroke-width:1.4;stroke-dasharray:4 4"/><text class="tt" x="236" y="160" style="text-anchor:middle">球面の面積 4πr²</text><text class="tm" x="236" y="180" style="text-anchor:middle">球の体積 4πr³/3</text><path d="M370 54 V118 A38 11 0 0 0 446 118 V54" style="fill:var(--accent);fill-opacity:.13;stroke:var(--accent);stroke-width:2"/><path d="M370 54 A38 11 0 1 0 446 54 A38 11 0 1 0 370 54" style="fill:var(--accent);fill-opacity:.2;stroke:var(--accent);stroke-width:2"/><text class="t" x="454" y="92">h</text><line x1="408" y1="54" x2="446" y2="54" style="stroke:var(--ex);stroke-width:2"/><text class="t" x="428" y="48" style="text-anchor:middle;fill:var(--ex)">r</text><text class="tt" x="408" y="160" style="text-anchor:middle">側面の面積 2πrh</text><text class="tm" x="408" y="180" style="text-anchor:middle">円板(上下)πr² ずつ</text></svg>
+      <figcaption>円・球・円柱の面積と体積の公式。</figcaption>
+    </figure>
+    <ul>
+      <li><b>円</b>:円周 $2\pi r$、円板の面積 $\pi r^2$。</li>
+      <li><b>球</b>:表面積 $4\pi r^2$、体積 $\dfrac43\pi r^3$。(体積は、球殻の体積 $4\pi r^2\,dr$ を $0$ から $r$ まで足したもの:$\int_0^r4\pi r'^2dr'=\frac43\pi r^3$。)</li>
+      <li><b>円柱</b>(半径 $a$、高さ $b$):側面積 $2\pi ab$(円周 × 高さ)、上下の円板は $\pi a^2$ ずつ、体積 $\pi a^2b$。</li>
+    </ul>
+    <details><summary>理由(球の表面積)</summary>
+      <div class="box proof"><div class="label">考え方</div>
+      <p>球面のパラメータ表示(基礎 h)で、面素 $dS=r^2\sin\theta\,d\theta\,d\varphi$。全体は
+      $$\int_0^{2\pi}d\varphi\int_0^{\pi}r^2\sin\theta\,d\theta=2\pi\cdot r^2\cdot[-\cos\theta]_0^\pi=2\pi r^2\cdot2=4\pi r^2.$$</p></div>
+    </details>
+    <p><b>使い方</b>:電場が球面上で一定の大きさ $E$ で面に垂直なら、球面での面積分は単に $E\cdot4\pi r^2$。円筒の側面で一定なら $E\cdot2\pi ab$。これが、積分型ガウスの法則を使うときの計算の中身です。</p>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-03.html#w-geom" data-xref>第3回 1.4 面積と体積</a><a href="weeks/week-03.html#s2-2" data-xref>第3回 2.2 点電荷の電場の発散</a><a href="weeks/week-03.html#s3-2" data-xref>第3回 3.2 積分型ガウスの法則</a></p>
+
+    <!-- ===================== n: 仕事とポテンシャル ===================== -->
+    <h2 id="work">n. 仕事とポテンシャルエネルギー</h2>
+
+    <h3>仕事</h3>
+    <p>物体に力 $\bm{F}$ が働いていて、物体が小さく $d\bm{x}$ だけ動くとき、<b>力がする仕事</b>は $\bm{F}\cdot d\bm{x}$(力の、動く向きの成分 × 動く長さ)。経路 $C$ に沿って動くときは、これを足し合わせた線積分
+    $$W_C=\int_C\bm{F}\cdot d\bm{x}$$
+    です(第2回の線積分そのもの)。物体を動かしたいときに<b>外から加える力</b>は、(ゆっくり動かすなら)$\bm{F}$ と釣り合う $-\bm{F}$ なので、外からする仕事は $-\int_C\bm{F}\cdot d\bm{x}$ です。</p>
+    <div class="box ex">
+      <div class="label">例</div>
+      <p>・重力($\bm{F}=(0,0,-mg)$)の下で質量 $m$ の物体を高さ $h$ だけ持ち上げる外からの仕事:$-\int(0,0,-mg)\cdot(0,0,dz)=mgh$。経路が曲がっていても、結果は同じ $mgh$(高さの差だけで決まる)。<br>
+      ・電荷 $q$ を一様な電場 $\bm{E}=(E,0,0)$ の中で、$x$ 軸方向に $L$ だけ動かす外からの仕事:$-\int qE\,dx=-qEL$(電場の向きに動かすと、負)。</p>
+    </div>
+
+    <h3>保存力とポテンシャルエネルギー</h3>
+    <p>仕事が、始点と終点だけで決まって<b>経路によらない</b>力を<b>保存力</b>といいます。このとき、外からする仕事を「位置のエネルギーの差」で表せます:$W=U(\text{終点})-U(\text{始点})$。この $U$ を<b>ポテンシャルエネルギー</b>といい、力は $\bm{F}=-\nabla U$。電荷 $q$ に対する $U=q\phi$($\phi$ は電位)です。</p>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-03.html#w-work" data-xref>第3回 1.5 仕事とポテンシャルエネルギー</a><a href="weeks/week-03.html#s4" data-xref>第3回 4. スカラーポテンシャル(電位)</a><a href="weeks/week-03.html#s5" data-xref>第3回 5. 系と電場のエネルギー</a></p>
 
 
   </main>
