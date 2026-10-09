@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>第1回 はじめに(場という考え方) | Aセメまとめノート</title>
+  <link rel="stylesheet" href="../../assets/style.css">
+  <script defer src="../../assets/nav.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],macros:{'\\R':'\\mathbb{R}','\\bm':'\\boldsymbol{#1}','\\rot':'\\operatorname{rot}','\\grad':'\\operatorname{grad}','\\dvg':'\\operatorname{div}','\\pd':'\\frac{\\partial #1}{\\partial #2}'}});window.__navReady&&window.__navReady()"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="inner">
+      <a class="site-title" href="../../index.html">Aセメまとめノート</a>
+      <span class="links"><a href="../index.html">電磁気学</a><a href="../basics.html">基礎のまとめ</a><a href="../../calc/index.html">微積</a><a href="../../linalg/index.html">線形代数</a></span>
+    </div>
+  </header>
+
+  <main class="note">
+    <h1>第1回:はじめに(場という考え方)</h1>
+    <div class="meta">電磁気学(東京大学 教養学部 秋学期)／講義ノート §1(p.1〜p.3)／この回は式の計算がほとんどない「読み物」の回です</div>
+
+    <nav class="toc">
+      <div class="toc-title">目次</div>
+      <ol start="0">
+        <li><a href="#s0">この回の全体像(講義全体の流れ)</a>(§1.1)</li>
+        <li><a href="#s1">準備:高校の復習(基礎の確認)</a>
+          <div class="sub">電荷・電場・クーロンの法則／多変数関数とベクトル</div></li>
+        <li><a href="#s2">場という考え方</a>(§1.2)</li>
+        <li><a href="#s3">電磁気学の基本構造</a>(§1.3)</li>
+        <li><a href="#s4">補論:電磁気学の難しさと注意点</a>(§1.4)</li>
+        <li><a href="#s5">具体例で練習</a></li>
+        <li><a href="#s6">まとめ(この回で覚えること)</a></li>
+        <li><a href="#s7">この回のノートについてのメモ</a></li>
+      </ol>
+    </nav>
+
+    <!-- ===================== 0 ===================== -->
+    <h2 id="s0">0. この回の全体像(講義全体の流れ) <span class="page-tag">講義ノート p.1(§1.1)</span></h2>
+    <p>最初の回は、「電磁気学という科目を、どんな順序で、どんな見方で学ぶのか」の見取り図です。講義ノートの §1.1 には、次の流れが書かれています。</p>
+    <ol>
+      <li>まず、電磁気学を書き表すために必須の数学の道具である<b>ベクトル解析</b>を、詳しく学ぶ。</li>
+      <li>そのうえで、電磁気学の<b>諸法則</b>を学ぶ。高校までに習った法則(クーロンの法則、ファラデーの法則など)が、どのように<b>精緻化・一般化</b>されるかを見ながら、<b>マクスウェル方程式</b>の関係式を一つずつ導入していく。</li>
+      <li>マクスウェル方程式から<b>電磁波</b>を導く。これが講義の<b>ハイライト</b>。</li>
+      <li>余裕があれば、マクスウェル方程式の自然な帰結である<b>特殊相対論</b>との関係や、それを踏まえた電磁気学の記述も議論する。</li>
+    </ol>
+
+    <figure class="fig">
+      <svg viewBox="0 0 640 120" width="640" role="img" aria-label="講義全体の流れ"><rect x="10" y="40" width="112" height="58" rx="8" style="fill:var(--surface);stroke:var(--accent);stroke-width:1.8"/><text class="tj" x="66" y="65" style="text-anchor:middle;font-weight:700">ベクトル解析</text><text class="tm" x="66" y="85" style="text-anchor:middle">(数学の道具)</text><text class="tm" x="66" y="28" style="text-anchor:middle">STEP 1</text><line x1="123" y1="69" x2="129.6" y2="69" style="stroke:var(--muted);stroke-width:2;fill:none"/><polygon points="136,69 129,73 129,65" style="fill:var(--muted)"/><rect x="137" y="40" width="112" height="58" rx="8" style="fill:var(--surface);stroke:var(--accent);stroke-width:1.8"/><text class="tj" x="193" y="65" style="text-anchor:middle;font-weight:700">電磁気学の</text><text class="tm" x="193" y="85" style="text-anchor:middle">諸法則を導入</text><text class="tm" x="193" y="28" style="text-anchor:middle">STEP 2</text><line x1="250" y1="69" x2="256.6" y2="69" style="stroke:var(--muted);stroke-width:2;fill:none"/><polygon points="263,69 256,73 256,65" style="fill:var(--muted)"/><rect x="264" y="40" width="112" height="58" rx="8" style="fill:var(--surface);stroke:var(--accent);stroke-width:1.8"/><text class="tj" x="320" y="65" style="text-anchor:middle;font-weight:700">マクスウェル</text><text class="tm" x="320" y="85" style="text-anchor:middle">方程式</text><text class="tm" x="320" y="28" style="text-anchor:middle">STEP 3</text><line x1="377" y1="69" x2="383.6" y2="69" style="stroke:var(--muted);stroke-width:2;fill:none"/><polygon points="390,69 383,73 383,65" style="fill:var(--muted)"/><rect x="391" y="40" width="112" height="58" rx="8" style="fill:var(--surface);stroke:var(--thm);stroke-width:2.8"/><text class="tj" x="447" y="65" style="text-anchor:middle;font-weight:700">電磁波の導出</text><text class="tm" x="447" y="85" style="text-anchor:middle">(ハイライト)</text><text class="tm" x="447" y="28" style="text-anchor:middle">STEP 4</text><line x1="504" y1="69" x2="510.6" y2="69" style="stroke:var(--muted);stroke-width:2;fill:none"/><polygon points="517,69 510,73 510,65" style="fill:var(--muted)"/><rect x="518" y="40" width="112" height="58" rx="8" style="fill:var(--surface);stroke:var(--accent);stroke-width:1.8;stroke-dasharray:6 4"/><text class="tj" x="574" y="65" style="text-anchor:middle;font-weight:700">特殊相対論など</text><text class="tm" x="574" y="85" style="text-anchor:middle">(余裕があれば)</text><text class="tm" x="574" y="28" style="text-anchor:middle">STEP 5</text></svg>
+      <figcaption>講義全体の見取り図。第2回(次の回)が STEP 1 の「ベクトル解析」にあたります。</figcaption>
+    </figure>
+
+    <div class="box thm">
+      <div class="label">この回のゴール</div>
+      <p>式の計算に入る前に、次の3つをつかむ。</p>
+      <p>① <b>場</b>(field)とは何か:空間の各点に、数やベクトルが割り当てられているもの。<br>
+      ② 電磁気学の<b>基本構造</b>:電荷・電流が電磁場を作り、電磁場が電荷・電流に力を及ぼす。「遠くから直接力が働く」のではなく、「間にある場を波が伝わる」という見方をする。<br>
+      ③ 電磁気学が<b>つまずきやすい</b>理由と注意点:一般的な法則と、特別な状況でしか成り立たない法則が混ざっていること、名前に引きずられないこと、など。</p>
+    </div>
+    <p>以下では、先に基礎(高校の内容と、多変数関数の見方)を丁寧に復習してから、講義ノートの順に進みます。紫色の枠は「基礎の復習」、黄色の枠は「講義ノートにないが、理解を助けるために私が補った部分」です。</p>
+
+    <!-- ===================== 1 ===================== -->
+    <h2 id="s1">1. 準備:高校の復習(基礎の確認)</h2>
+    <p>この回の話は、「電荷が電場を作る」「場は空間の関数」という2つの考え方に支えられています。それぞれ確認しておきます。</p>
+
+    <h3 id="w-coulomb">1.1 電荷・電場・クーロンの法則</h3>
+    <div class="box basic">
+      <div class="label">基礎:電荷と電場とクーロンの法則 <a class="xref-link" href="../basics.html#coulomb" data-xref>→ 詳しい解説</a></div>
+      <p><b>電荷</b> $q$(単位 C:クーロン)をもつ粒子は、まわりの空間に<b>電場</b> $\bm{E}$ を作ります。電場は、「その場所に電荷 $q'$ を置いたとき、その電荷が受ける力 $\bm{F}$ を $q'$ で割ったもの」、つまり $\bm{F}=q'\bm{E}$ で決まるベクトルです(単位 N/C = V/m)。</p>
+      <p>原点に点電荷 $q$ を置いたとき、位置 $\bm{r}$ に作られる電場は
+      $$\bm{E}=\frac{q}{4\pi\varepsilon_0}\frac{\bm{r}}{|\bm{r}|^3}\qquad(\text{クーロンの法則})$$
+      です。$\bm{r}/|\bm{r}|$ は、原点から外に向かう<b>長さ1の向き</b>(動径方向の単位ベクトル)なので、<b>電場の大きさは距離の2乗に反比例</b>($q\gt0$ なら外向き、$q\lt0$ なら内向き)。$\varepsilon_0$ は定数(真空の誘電率と呼ばれる)で、$\dfrac{1}{4\pi\varepsilon_0}\approx 8.99\times10^{9}\ \mathrm{N\cdot m^2/C^2}$。</p>
+      <p>電場は<b>重ね合わせ</b>られる:電荷 $q_i$ が位置 $\bm{r}_i$ にあれば、位置 $\bm{r}$ の電場は各電荷が作る電場のベクトルの和 $\bm{E}(\bm{r})=\sum_i\dfrac{q_i}{4\pi\varepsilon_0}\dfrac{\bm{r}-\bm{r}_i}{|\bm{r}-\bm{r}_i|^3}$ です。</p>
+    </div>
+
+    <h3 id="w-mvfunc">1.2 多変数関数とベクトル</h3>
+    <div class="box basic">
+      <div class="label">基礎:多変数関数と数ベクトル <a class="xref-link" href="../basics.html#mvfunc" data-xref>→ 詳しい解説</a></div>
+      <p>$n$ 次元空間の点 $\bm{x}=(x_1,\dots,x_n)\in\R^n$ を入力すると、数(実数)が1つ出てくる規則 $f(\bm{x})$ を<b>多変数関数</b>といいます。たとえば3次元で $f(x,y,z)=x^2+y^2+z^2$(原点からの距離の2乗)。</p>
+      <p>数が1つではなく、<b>ベクトル</b>が出てくる規則 $\bm{A}(\bm{x})=(A_1(\bm{x}),\dots,A_n(\bm{x}))$ もあります。これは「$n$ 個の多変数関数 $A_1,\dots,A_n$ を、ベクトルとして束ねたもの」にほかなりません($A_i$ を $\bm{A}$ の<b>第 $i$ 成分</b>という)。3次元では、$x,y,z$ 方向を成分1,2,3に対応させます。</p>
+    </div>
+
+    <!-- ===================== 2 ===================== -->
+    <h2 id="s2">2. 場という考え方 <span class="page-tag">講義ノート p.1(§1.2)</span></h2>
+    <p>講義ノートは、ベクトル解析の議論のために「場(field)」という概念を導入します。一見難しい概念に見えるかもしれませんが、<b>場とは、単に「空間上の各点ごとに、数やベクトルが割り当てられているもの」のこと</b>です。</p>
+
+    <div class="box def">
+      <div class="label">定義(スカラー場・ベクトル場)</div>
+      <p>空間の各点に<b>数(スカラー)</b>が割り当てられている場を<b>スカラー場</b>(scalar field)、<b>ベクトル</b>が割り当てられている場を<b>ベクトル場</b>(vector field)という。</p>
+    </div>
+    <ul>
+      <li><b>スカラー場</b>:点 $\bm{x}\in\R^n$ を入力すると数($\R$ または $\mathbb{C}$)が出力されるもの。これは実質的には<b>多変数関数</b> $f(\bm{x})$ と変わらない。</li>
+      <li><b>ベクトル場</b>:ベクトルの各成分は数なので、結局「多変数関数をベクトルとして束ねたもの」と見ることができる。たとえば3次元空間で、各点 $\bm{x}$ にベクトル $\bm{A}(\bm{x})$ を割り当てるのは、$A_x(\bm{x}),\,A_y(\bm{x}),\,A_z(\bm{x})$ という3つの3変数関数をベクトル表示していると思えばよい。</li>
+    </ul>
+
+    <figure class="fig">
+      <svg viewBox="0 0 580 240" width="580" role="img" aria-label="スカラー場とベクトル場"><text class="ta" x="26" y="26">スカラー場 φ(x)</text><text class="tm" x="26" y="44">各点に「数」(色の濃さ)</text><circle cx="30" cy="72" r="9.5" style="fill:var(--accent);opacity:0.11"/><circle cx="56" cy="72" r="9.5" style="fill:var(--accent);opacity:0.13"/><circle cx="82" cy="72" r="9.5" style="fill:var(--accent);opacity:0.20"/><circle cx="108" cy="72" r="9.5" style="fill:var(--accent);opacity:0.29"/><circle cx="134" cy="72" r="9.5" style="fill:var(--accent);opacity:0.36"/><circle cx="160" cy="72" r="9.5" style="fill:var(--accent);opacity:0.33"/><circle cx="186" cy="72" r="9.5" style="fill:var(--accent);opacity:0.24"/><circle cx="212" cy="72" r="9.5" style="fill:var(--accent);opacity:0.15"/><circle cx="238" cy="72" r="9.5" style="fill:var(--accent);opacity:0.11"/><circle cx="30" cy="98" r="9.5" style="fill:var(--accent);opacity:0.11"/><circle cx="56" cy="98" r="9.5" style="fill:var(--accent);opacity:0.17"/><circle cx="82" cy="98" r="9.5" style="fill:var(--accent);opacity:0.31"/><circle cx="108" cy="98" r="9.5" style="fill:var(--accent);opacity:0.53"/><circle cx="134" cy="98" r="9.5" style="fill:var(--accent);opacity:0.67"/><circle cx="160" cy="98" r="9.5" style="fill:var(--accent);opacity:0.61"/><circle cx="186" cy="98" r="9.5" style="fill:var(--accent);opacity:0.41"/><circle cx="212" cy="98" r="9.5" style="fill:var(--accent);opacity:0.22"/><circle cx="238" cy="98" r="9.5" style="fill:var(--accent);opacity:0.13"/><circle cx="30" cy="124" r="9.5" style="fill:var(--accent);opacity:0.12"/><circle cx="56" cy="124" r="9.5" style="fill:var(--accent);opacity:0.20"/><circle cx="82" cy="124" r="9.5" style="fill:var(--accent);opacity:0.41"/><circle cx="108" cy="124" r="9.5" style="fill:var(--accent);opacity:0.72"/><circle cx="134" cy="124" r="9.5" style="fill:var(--accent);opacity:0.94"/><circle cx="160" cy="124" r="9.5" style="fill:var(--accent);opacity:0.85"/><circle cx="186" cy="124" r="9.5" style="fill:var(--accent);opacity:0.55"/><circle cx="212" cy="124" r="9.5" style="fill:var(--accent);opacity:0.28"/><circle cx="238" cy="124" r="9.5" style="fill:var(--accent);opacity:0.15"/><circle cx="30" cy="150" r="9.5" style="fill:var(--accent);opacity:0.12"/><circle cx="56" cy="150" r="9.5" style="fill:var(--accent);opacity:0.20"/><circle cx="82" cy="150" r="9.5" style="fill:var(--accent);opacity:0.40"/><circle cx="108" cy="150" r="9.5" style="fill:var(--accent);opacity:0.70"/><circle cx="134" cy="150" r="9.5" style="fill:var(--accent);opacity:0.91"/><circle cx="160" cy="150" r="9.5" style="fill:var(--accent);opacity:0.83"/><circle cx="186" cy="150" r="9.5" style="fill:var(--accent);opacity:0.53"/><circle cx="212" cy="150" r="9.5" style="fill:var(--accent);opacity:0.27"/><circle cx="238" cy="150" r="9.5" style="fill:var(--accent);opacity:0.14"/><circle cx="30" cy="176" r="9.5" style="fill:var(--accent);opacity:0.11"/><circle cx="56" cy="176" r="9.5" style="fill:var(--accent);opacity:0.16"/><circle cx="82" cy="176" r="9.5" style="fill:var(--accent);opacity:0.29"/><circle cx="108" cy="176" r="9.5" style="fill:var(--accent);opacity:0.49"/><circle cx="134" cy="176" r="9.5" style="fill:var(--accent);opacity:0.62"/><circle cx="160" cy="176" r="9.5" style="fill:var(--accent);opacity:0.57"/><circle cx="186" cy="176" r="9.5" style="fill:var(--accent);opacity:0.38"/><circle cx="212" cy="176" r="9.5" style="fill:var(--accent);opacity:0.21"/><circle cx="238" cy="176" r="9.5" style="fill:var(--accent);opacity:0.13"/><circle cx="30" cy="202" r="9.5" style="fill:var(--accent);opacity:0.11"/><circle cx="56" cy="202" r="9.5" style="fill:var(--accent);opacity:0.13"/><circle cx="82" cy="202" r="9.5" style="fill:var(--accent);opacity:0.18"/><circle cx="108" cy="202" r="9.5" style="fill:var(--accent);opacity:0.27"/><circle cx="134" cy="202" r="9.5" style="fill:var(--accent);opacity:0.32"/><circle cx="160" cy="202" r="9.5" style="fill:var(--accent);opacity:0.30"/><circle cx="186" cy="202" r="9.5" style="fill:var(--accent);opacity:0.22"/><circle cx="212" cy="202" r="9.5" style="fill:var(--accent);opacity:0.15"/><circle cx="238" cy="202" r="9.5" style="fill:var(--accent);opacity:0.11"/><text class="ta" x="330" y="26">ベクトル場 A(x)</text><text class="tm" x="330" y="44">各点に「矢印」(向きと大きさ)</text><line x1="338.7" y1="66.1" x2="326.2" y2="74.6" style="stroke:var(--thm);stroke-width:1.9;fill:none"/><polygon points="321.3,77.9 324.9,71.6 328.5,76.9" style="fill:var(--thm)"/><line x1="365.3" y1="67.2" x2="351.9" y2="74.1" style="stroke:var(--thm);stroke-width:1.9;fill:none"/><polygon points="346.7,76.8 351,71 353.9,76.7" style="fill:var(--thm)"/><line x1="391.4" y1="69.1" x2="378.2" y2="73.1" style="stroke:var(--thm);stroke-width:1.9;fill:none"/><polygon points="372.6,74.9 377.9,69.9 379.8,76" style="fill:var(--thm)"/><line x1="416.7" y1="71.7" x2="405.2" y2="72.1" style="stroke:var(--thm);stroke-width:1.9;fill:none"/><polygon points="399.3,72.3 405.7,68.9 405.9,75.3" style="fill:var(--thm)"/><line x1="441.7" y1="74.7" x2="431.9" y2="71.3" style="stroke:var(--thm);stroke-width:1.9;fill:none"/><polygon points="426.3,69.3 433.5,68.4 431.4,74.5" style="fill:var(--thm)"/><line x1="466.1" y1="77.6" x2="458.3" y2="70.4" style="stroke:var(--thm);stroke-width:1.9;fill:none"/><polygon points="453.9,66.4 460.9,68.5 456.5,73.2" style="fill:var(--thm)"/><line x1="490.3" y1="80" x2="484.5" y2="69.2" style="stroke:var(--thm);stroke-width:1.9;fill:none"/><polygon points="481.7,64 487.6,68.2 482,71.3" style="fill:var(--thm)"/><line x1="514.8" y1="82" x2="510.8" y2="67.7" style="stroke:var(--thm);stroke-width:1.9;fill:none"/><polygon points="509.2,62 514.1,67.4 507.9,69.1" style="fill:var(--thm)"/><line x1="539.2" y1="82.4" x2="537.5" y2="67.4" style="stroke:var(--thm);stroke-width:1.9;fill:none"/><polygon points="536.8,61.6 540.7,67.7 534.4,68.4" style="fill:var(--thm)"/><line x1="337.4" y1="90.6" x2="326.8" y2="101.3" style="stroke:var(--thm);stroke-width:1.9;fill:none"/><polygon points="322.6,105.4 324.9,98.6 329.4,103.1" style="fill:var(--thm)"/><line x1="363.9" y1="91.4" x2="352.6" y2="100.8" style="stroke:var(--thm);stroke-width:1.9;fill:none"/><polygon points="348.1,104.6 351,98 355.2,102.9" style="fill:var(--thm)"/><line x1="389.3" y1="93.5" x2="379.7" y2="99.4" style="stroke:var(--thm);stroke-width:1.9;fill:none"/><polygon points="374.7,102.5 378.5,96.4 381.9,101.8" style="fill:var(--thm)"/><line x1="414.9" y1="96" x2="406.8" y2="98.3" style="stroke:var(--thm);stroke-width:1.9;fill:none"/><polygon points="401.1,100 406.5,95.1 408.3,101.3" style="fill:var(--thm)"/><line x1="440.1" y1="99.6" x2="433.7" y2="97.9" style="stroke:var(--thm);stroke-width:1.9;fill:none"/><polygon points="427.9,96.4 435,95 433.4,101.2" style="fill:var(--thm)"/><line x1="464" y1="103.1" x2="459.6" y2="97.5" style="stroke:var(--thm);stroke-width:1.9;fill:none"/><polygon points="456,92.9 462.5,96.1 457.5,100" style="fill:var(--thm)"/><line x1="487.8" y1="105.5" x2="485.6" y2="96.3" style="stroke:var(--thm);stroke-width:1.9;fill:none"/><polygon points="484.2,90.5 488.8,96.1 482.6,97.6" style="fill:var(--thm)"/><line x1="512.2" y1="107.3" x2="511.9" y2="94.6" style="stroke:var(--thm);stroke-width:1.9;fill:none"/><polygon points="511.8,88.7 515.1,95.2 508.7,95.3" style="fill:var(--thm)"/><line x1="537" y1="108.5" x2="538.4" y2="93.4" style="stroke:var(--thm);stroke-width:1.9;fill:none"/><polygon points="539,87.5 541.6,94.3 535.2,93.7" style="fill:var(--thm)"/><line x1="335.6" y1="115.1" x2="327.6" y2="127.9" style="stroke:var(--thm);stroke-width:1.9;fill:none"/><polygon points="324.4,132.9 325.2,125.7 330.6,129.1" style="fill:var(--thm)"/><line x1="361.5" y1="115.9" x2="353.8" y2="127.2" style="stroke:var(--thm);stroke-width:1.9;fill:none"/><polygon points="350.5,132.1 351.5,125 356.8,128.5" style="fill:var(--thm)"/><line x1="386.8" y1="117.7" x2="380.8" y2="125.6" style="stroke:var(--thm);stroke-width:1.9;fill:none"/><polygon points="377.2,130.3 378.6,123.2 383.7,127.1" style="fill:var(--thm)"/><line x1="412.3" y1="119.7" x2="407.9" y2="124.1" style="stroke:var(--thm);stroke-width:1.9;fill:none"/><polygon points="403.7,128.3 406,121.5 410.6,126" style="fill:var(--thm)"/><line x1="438.4" y1="123.3" x2="435.4" y2="123.8" style="stroke:var(--thm);stroke-width:1.9;fill:none"/><polygon points="429.6,124.7 435.5,120.5 436.5,126.8" style="fill:var(--thm)"/><line x1="460.4" y1="129" x2="460.1" y2="124.9" style="stroke:var(--thm);stroke-width:1.9;fill:none"/><polygon points="459.6,119 463.3,125.2 456.9,125.7" style="fill:var(--thm)"/><line x1="484.5" y1="130.6" x2="486.2" y2="123.1" style="stroke:var(--thm);stroke-width:1.9;fill:none"/><polygon points="487.5,117.4 489.2,124.4 482.9,123" style="fill:var(--thm)"/><line x1="509.4" y1="132.2" x2="512.8" y2="121.4" style="stroke:var(--thm);stroke-width:1.9;fill:none"/><polygon points="514.6,115.8 515.7,122.9 509.6,121" style="fill:var(--thm)"/><line x1="534.4" y1="133.9" x2="539.6" y2="119.7" style="stroke:var(--thm);stroke-width:1.9;fill:none"/><polygon points="541.6,114.1 542.4,121.3 536.4,119.1" style="fill:var(--thm)"/><line x1="333.4" y1="140.1" x2="328.5" y2="154.4" style="stroke:var(--thm);stroke-width:1.9;fill:none"/><polygon points="326.6,159.9 325.7,152.7 331.7,154.8" style="fill:var(--thm)"/><line x1="358.8" y1="140.6" x2="354.9" y2="153.8" style="stroke:var(--thm);stroke-width:1.9;fill:none"/><polygon points="353.2,159.4 352,152.3 358.1,154.1" style="fill:var(--thm)"/><line x1="383.7" y1="142.2" x2="381.5" y2="152" style="stroke:var(--thm);stroke-width:1.9;fill:none"/><polygon points="380.3,157.8 378.6,150.8 384.8,152.2" style="fill:var(--thm)"/><line x1="408.3" y1="143.8" x2="408" y2="150.3" style="stroke:var(--thm);stroke-width:1.9;fill:none"/><polygon points="407.7,156.2 404.8,149.5 411.2,149.9" style="fill:var(--thm)"/><line x1="431.3" y1="146.1" x2="433.3" y2="149.1" style="stroke:var(--thm);stroke-width:1.9;fill:none"/><polygon points="436.7,153.9 430.4,150.4 435.6,146.7" style="fill:var(--thm)"/><line x1="455.2" y1="152.1" x2="459.4" y2="150.3" style="stroke:var(--thm);stroke-width:1.9;fill:none"/><polygon points="464.8,147.9 460.1,153.5 457.5,147.6" style="fill:var(--thm)"/><line x1="481.1" y1="154.8" x2="486.7" y2="149.3" style="stroke:var(--thm);stroke-width:1.9;fill:none"/><polygon points="490.9,145.2 488.5,152 484,147.5" style="fill:var(--thm)"/><line x1="506.6" y1="156.8" x2="513.8" y2="147.8" style="stroke:var(--thm);stroke-width:1.9;fill:none"/><polygon points="517.4,143.2 515.9,150.3 510.9,146.3" style="fill:var(--thm)"/><line x1="531.9" y1="158.6" x2="540.7" y2="146.3" style="stroke:var(--thm);stroke-width:1.9;fill:none"/><polygon points="544.1,141.4 542.9,148.6 537.7,144.9" style="fill:var(--thm)"/><line x1="331.2" y1="165.6" x2="329.5" y2="180.6" style="stroke:var(--thm);stroke-width:1.9;fill:none"/><polygon points="328.8,186.4 326.4,179.6 332.7,180.3" style="fill:var(--thm)"/><line x1="356.2" y1="165.6" x2="355.9" y2="180.5" style="stroke:var(--thm);stroke-width:1.9;fill:none"/><polygon points="355.8,186.4 352.7,179.9 359.1,180" style="fill:var(--thm)"/><line x1="380.8" y1="167.3" x2="382.4" y2="178.9" style="stroke:var(--thm);stroke-width:1.9;fill:none"/><polygon points="383.2,184.7 379.1,178.7 385.5,177.8" style="fill:var(--thm)"/><line x1="405" y1="169.3" x2="408.6" y2="177.3" style="stroke:var(--thm);stroke-width:1.9;fill:none"/><polygon points="411,182.7 405.4,178.1 411.3,175.5" style="fill:var(--thm)"/><line x1="428.8" y1="172" x2="434.5" y2="176.4" style="stroke:var(--thm);stroke-width:1.9;fill:none"/><polygon points="439.2,180 432.1,178.6 436,173.5" style="fill:var(--thm)"/><line x1="453.3" y1="175.7" x2="460.9" y2="176" style="stroke:var(--thm);stroke-width:1.9;fill:none"/><polygon points="466.7,176.3 460.1,179.2 460.4,172.8" style="fill:var(--thm)"/><line x1="478.6" y1="178.8" x2="487.8" y2="175.3" style="stroke:var(--thm);stroke-width:1.9;fill:none"/><polygon points="493.4,173.2 488.4,178.5 486.2,172.5" style="fill:var(--thm)"/><line x1="504.1" y1="181.1" x2="514.9" y2="174.1" style="stroke:var(--thm);stroke-width:1.9;fill:none"/><polygon points="519.9,170.9 516.2,177.1 512.7,171.7" style="fill:var(--thm)"/><line x1="530" y1="182.8" x2="541.5" y2="173" style="stroke:var(--thm);stroke-width:1.9;fill:none"/><polygon points="546,169.2 543.1,175.9 539,171" style="fill:var(--thm)"/><line x1="329.2" y1="191.5" x2="330.3" y2="206.6" style="stroke:var(--thm);stroke-width:1.9;fill:none"/><polygon points="330.8,212.5 327.1,206.2 333.5,205.7" style="fill:var(--thm)"/><line x1="353.9" y1="191.7" x2="356.9" y2="206.5" style="stroke:var(--thm);stroke-width:1.9;fill:none"/><polygon points="358.1,212.3 353.7,206.6 359.9,205.3" style="fill:var(--thm)"/><line x1="378.3" y1="192.7" x2="383.5" y2="205.8" style="stroke:var(--thm);stroke-width:1.9;fill:none"/><polygon points="385.7,211.3 380.3,206.5 386.3,204.1" style="fill:var(--thm)"/><line x1="402.7" y1="194.8" x2="409.8" y2="204.5" style="stroke:var(--thm);stroke-width:1.9;fill:none"/><polygon points="413.3,209.2 406.9,205.9 412,202.1" style="fill:var(--thm)"/><line x1="427" y1="197.4" x2="436.1" y2="203.4" style="stroke:var(--thm);stroke-width:1.9;fill:none"/><polygon points="441,206.6 433.8,205.7 437.4,200.4" style="fill:var(--thm)"/><line x1="451.6" y1="200.3" x2="462.6" y2="202.5" style="stroke:var(--thm);stroke-width:1.9;fill:none"/><polygon points="468.4,203.7 461.4,205.5 462.6,199.3" style="fill:var(--thm)"/><line x1="476.7" y1="203.1" x2="489.4" y2="201.6" style="stroke:var(--thm);stroke-width:1.9;fill:none"/><polygon points="495.3,200.9 489.2,204.8 488.4,198.5" style="fill:var(--thm)"/><line x1="502.1" y1="205.5" x2="516.3" y2="200.5" style="stroke:var(--thm);stroke-width:1.9;fill:none"/><polygon points="521.9,198.5 516.8,203.7 514.7,197.6" style="fill:var(--thm)"/><line x1="528.8" y1="207" x2="542" y2="199.8" style="stroke:var(--thm);stroke-width:1.9;fill:none"/><polygon points="547.2,197 543,202.9 540,197.3" style="fill:var(--thm)"/></svg>
+      <figcaption>左:スカラー場(各点に数がある。ここでは、数の大きさを色の濃さで表しました)。右:ベクトル場(各点に矢印がある)。「場」は、地図の各地点に書き込まれた数や矢印のようなものです。</figcaption>
+    </figure>
+
+    <h3>2.1 場は物理のいたるところに現れる</h3>
+    <table class="cmp">
+      <tr><th>場</th><th>スカラー場の例</th><th>ベクトル場の例</th></tr>
+      <tr><td>身近な例</td><td>各地点の気温、気圧</td><td>各地点の風(向きと強さ)</td></tr>
+      <tr><td>力学</td><td>—</td><td>万有引力など:「各場所 $\bm{r}$ に対し、その場所に働く力 $\bm{F}(\bm{r})$ が指定されている」状況。この $\bm{F}(\bm{r})$ はベクトル場そのもの</td></tr>
+      <tr><td>流体力学</td><td>密度場、エネルギー場</td><td>速度場</td></tr>
+      <tr><td>電磁気学(この講義)</td><td>電荷密度 $\rho(\bm{x})$</td><td>電場 $\bm{E}(\bm{x})$、磁場 $\bm{B}(\bm{x})$</td></tr>
+    </table>
+    <p>量子力学では「場の量子論(quantum field theory)」が、素粒子物理でも物性物理でも重要な記述の枠組みになります。つまり、<b>この講義で学ぶ電磁気学は「電磁場に対する理論」</b>であり、場という考え方は物理の他の分野にも通じる、基本的な見方です。</p>
+    <div class="box note-box">
+      <div class="label">用語の注意:field は2つの意味をもつ</div>
+      <p>英語の「field」は、数学の「体」(加減乗除が適切な形でできる代数系。$\R$ や $\mathbb{C}$ のこと)の意味でも使われます。講義ノートの脚注にあるとおり、両者は特に関係ありません。</p>
+    </div>
+    <div class="box supp">
+      <div class="label">講義ノートにない補足:時間にも依存する場</div>
+      <p>変化する状況では、場は時刻 $t$ にも依存します。たとえば電場は $\bm{E}(\bm{x},t)$:「時刻 $t$ に、位置 $\bm{x}$ にいる人が感じる電場」です。この講義ではまず、時間によらない場(静電場など)から始めます。</p>
+    </div>
+
+    <!-- ===================== 3 ===================== -->
+    <h2 id="s3">3. 電磁気学の基本構造 <span class="page-tag">講義ノート p.1–2(§1.3)</span></h2>
+
+    <h3>3.1 電荷・電流と電磁場は、お互いを決め合う</h3>
+    <p>電磁気学の基礎法則である<b>マクスウェル方程式</b>は、「<b>電磁場</b>(electromagnetic field)」と「<b>電荷</b>(electric particle)・<b>電流</b>(electric current)」の関係を与えるものです。</p>
+    <ul>
+      <li>電荷および電流(電荷の運動)が、電磁場の変化を生み出す。</li>
+      <li>一方、その電磁場によって、電荷や電流は力を受け、運動を変える。</li>
+    </ul>
+    <figure class="fig">
+      <svg viewBox="0 0 480 148" width="480" role="img" aria-label="電荷・電流と電磁場の関係"><rect x="20" y="50" width="160" height="70" rx="10" style="fill:var(--surface);stroke:var(--thm);stroke-width:2"/><text class="tj" x="100" y="80" style="text-anchor:middle;font-weight:700">電荷・電流</text><text class="tm" x="100" y="102" style="text-anchor:middle">(目に見える存在)</text><rect x="300" y="50" width="160" height="70" rx="10" style="fill:var(--surface);stroke:var(--accent);stroke-width:2"/><text class="tj" x="380" y="80" style="text-anchor:middle;font-weight:700">電磁場</text><text class="tm" x="380" y="102" style="text-anchor:middle">(電場・磁場:見えにくい)</text><line x1="182" y1="70" x2="289.6" y2="70" style="stroke:var(--thm);stroke-width:2.4;fill:none"/><polygon points="298,70 289,74.4 289,65.6" style="fill:var(--thm)"/><text class="tt" x="240" y="60" style="text-anchor:middle">場を生み出す</text><line x1="298" y1="100" x2="190.4" y2="100" style="stroke:var(--accent);stroke-width:2.4;fill:none"/><polygon points="182,100 191,95.6 191,104.4" style="fill:var(--accent)"/><text class="ta" x="240" y="128" style="text-anchor:middle">力を与え、運動を変える</text><text class="tm" x="240" y="24" style="text-anchor:middle">マクスウェル方程式 = この関係式の集まり</text></svg>
+      <figcaption>電荷・電流と電磁場は、互いに影響を与え合っています。この関係を一つ一つ式にしたものがマクスウェル方程式で、この講義の主役です。</figcaption>
+    </figure>
+
+    <h3>3.2 電場と磁場は「二つのもの」ではない</h3>
+    <p>「電磁場」は「電場(electric field)」と「磁場(magnetic field)」からなりますが、講義ノートは次のように注意しています。</p>
+    <div class="box warn">
+      <div class="label">注意(今は頭に置いておくだけでよい)</div>
+      <p>「二つの場があるというより、<b>同じものの二通りの表れが電場と磁場である</b>」という方がより正確です。この点は、特に変動電磁場を学ぶ際にきちんと説明されます。現時点ではこの意味はよく分からなくてよいので、「電場と磁場(という二つのもの)が互いに影響を及ぼしあう」という見方は<b>あまり正確ではない</b>、ということだけ覚えておく。</p>
+    </div>
+
+    <h3>3.3 「遠隔作用」と「近接作用」</h3>
+    <p>高校では、「離れた場所にある二つの電荷同士は、互いにクーロン力で相互作用しあう」と習った人も多いでしょう。しかし、これだと、ある場所 X の電荷を動かすと、その影響が<b>即座に</b>離れた場所 Y の別の電荷に現れることになります。これは<b>遠隔作用</b>と呼ばれる見方ですが、<b>情報は光の速さを超えては伝わらない</b>という原則に反しています。</p>
+    <p>物理的に正しい見方(<b>近接作用</b>)は次のとおりです。</p>
+    <ol>
+      <li>電荷は電場という場を作っている。</li>
+      <li>場所 X の電荷の変化は、まず X のすぐまわりの電場の変化を引き起こす。</li>
+      <li>電場の変化は<b>波として空間を伝わっていき</b>、その波が離れた場所 Y に到達すると、Y にいる電荷が変化を感じる。</li>
+    </ol>
+    <figure class="fig">
+      <svg viewBox="0 0 580 330" width="580" role="img" aria-label="遠隔作用と近接作用"><text class="ta" x="10" y="22">遠隔作用(離れた電荷が直接に力を及ぼし合う)</text><circle cx="60" cy="90" r="14" style="fill:var(--thm)"/><text class="tj" x="60" y="95" style="text-anchor:middle;fill:#fff;font-weight:700">+</text><text class="t" x="60" y="124" style="text-anchor:middle">X</text><circle cx="400" cy="90" r="14" style="fill:var(--accent)"/><text class="tj" x="400" y="95" style="text-anchor:middle;fill:#fff;font-weight:700">+</text><text class="t" x="400" y="124" style="text-anchor:middle">Y</text><line x1="76" y1="90" x2="373.6" y2="90" style="stroke:var(--thm);stroke-width:2.2;fill:none;stroke-dasharray:7 5"/><polygon points="382,90 373,94.4 373,85.6" style="fill:var(--thm)"/><text class="tm" x="230" y="78" style="text-anchor:middle">X を動かすと、Y に「即座に」影響が出る?</text><text class="tt" x="230" y="112" style="text-anchor:middle">情報が光速を超えて伝わる … 原則に反する</text><line x1="10" y1="148" x2="570" y2="148" style="stroke:var(--muted);stroke-width:1.1;stroke-dasharray:5 4;fill:none"/><text class="ta" x="10" y="172">近接作用(場を介する:物理的に正しい見方)</text><circle cx="60" cy="252" r="14" style="fill:var(--thm)"/><text class="tj" x="60" y="257" style="text-anchor:middle;fill:#fff;font-weight:700">+</text><text class="t" x="60" y="288" style="text-anchor:middle">X</text><circle cx="400" cy="252" r="14" style="fill:var(--accent)"/><text class="tj" x="400" y="257" style="text-anchor:middle;fill:#fff;font-weight:700">+</text><text class="t" x="400" y="288" style="text-anchor:middle">Y</text><path d="M104.4 240.1 A46 46 0 0 1 104.4 263.9" style="fill:none;stroke:var(--thm);stroke-width:2;opacity:1.00"/><path d="M148.9 228.2 A92 92 0 0 1 148.9 275.8" style="fill:none;stroke:var(--thm);stroke-width:2;opacity:0.88"/><path d="M193.3 216.3 A138 138 0 0 1 193.3 287.7" style="fill:none;stroke:var(--thm);stroke-width:2;opacity:0.76"/><path d="M237.7 204.4 A184 184 0 0 1 237.7 299.6" style="fill:none;stroke:var(--thm);stroke-width:2;opacity:0.64"/><path d="M282.2 192.5 A230 230 0 0 1 282.2 311.5" style="fill:none;stroke:var(--thm);stroke-width:2;opacity:0.52"/><path d="M326.6 180.6 A276 276 0 0 1 326.6 323.4" style="fill:none;stroke:var(--thm);stroke-width:2;opacity:0.40"/><path d="M374.9 167.6 A326 326 0 0 1 374.9 336.4" style="fill:none;stroke:var(--ex);stroke-width:2.4"/><line x1="80" y1="196" x2="173.6" y2="196" style="stroke:var(--muted);stroke-width:1.6;fill:none"/><polygon points="180,196 173,199.6 173,192.4" style="fill:var(--muted)"/><text class="tm" x="80" y="188" style="paint-order:stroke;stroke:var(--surface);stroke-width:4px;stroke-linejoin:round">電場の変化が「波」として空間を伝わる</text><text class="tm" x="426" y="256">← 波が届くと</text><text class="tm" x="426" y="274">   Y が変化を感じる</text><text class="tm" x="60" y="308" style="text-anchor:middle">時刻 0</text><text class="tm" x="400" y="308" style="text-anchor:middle">時刻 d/c(c は光速)</text></svg>
+      <figcaption>上:遠隔作用(X を動かした瞬間に Y が反応する)は、光速を超えて情報が伝わってしまう。下:近接作用では、X の変化が電場の波として少しずつ空間を伝わり、時間 $d/c$(距離 $d$ ÷ 光速 $c$)かかって Y に届く。</figcaption>
+    </figure>
+    <p>このように電磁気学では、<b>電磁場が主役</b>になり、電磁場がさまざまな役割を果たします。</p>
+
+    <div class="box note-box">
+      <div class="label">それでも遠隔作用の見方も使う理由</div>
+      <p>目に見える存在である電荷や電流と比べて、電磁場は「いかにも分かりにくい存在」で、直観も働きにくい。また、実用上は、ある場所の変化が即座に別の場所に伝わる遠隔作用の描像であっても、<b>少なくない場合に、正しい、あるいは近似的にほとんど正しい結果を与える</b>。そのため、この講義では、遠隔作用の見方も<b>便利な道具として、注意しながら併用</b>していきます。</p>
+    </div>
+
+    <!-- ===================== 4 ===================== -->
+    <h2 id="s4">4. 補論:電磁気学の難しさと注意点 <span class="page-tag">講義ノート p.2–3(§1.4)</span></h2>
+    <div class="box note-box">
+      <div class="label">この節の読み方(講義ノートの断り書き)</div>
+      <p>この節の内容は、電磁気学を学び始めた現時点でよく分からなくても構いません。もう少し先の内容を学んでいる際に、難しいと思ったら戻って読み直してください。</p>
+    </div>
+    <p>電磁気学は、力学と比べて難しいと感じる人が多い科目です。ベクトル解析という計算(数学)の難しさもありますが、<b>概念的な部分</b>で電磁気学の方が力学よりも混乱しやすい要素が多い、というのが講義ノートの指摘です。以下、混乱の要因を5つ挙げます。</p>
+
+    <h3>4.1 「特定の状況でだけ成り立つ式」と「いつでも成り立つ式」が混ざっている</h3>
+    <p>分かりにくさの一つ目は、「応用上使いやすく、概念的にも分かりやすいが、<b>特定の状況でのみ成り立つ</b>定式化」と「<b>普遍的</b>だが、応用上は不便だし直観的にも理解しづらい定式化」が存在することです。例として、電荷と電場の関係を表す2つの式が挙げられています。</p>
+    <p>・<b>クーロンの法則</b>:電荷 $q$ が作る電場の大きさは
+    $$E=\frac{1}{4\pi\varepsilon_0}\frac{q}{r^2}\tag{1.1}$$
+    ・<b>ガウスの法則</b>(これから学ぶ関係式)
+    $$\nabla\cdot\bm{E}=\frac{1}{\varepsilon_0}\rho\tag{1.2}$$
+    ($\nabla\cdot\bm{E}$ の意味は第2回で学びます。今は意味が分からなくてよい。$\rho$ は電荷の密度です。)</p>
+    <p>この2つは、次のような関係にあります。</p>
+
+    <figure class="fig">
+      <svg viewBox="0 0 480 236" width="480" role="img" aria-label="クーロンの法則とガウスの法則の関係"><rect x="14" y="18" width="452" height="204" rx="14" style="fill:var(--surface);stroke:var(--accent);stroke-width:2.4"/><text class="ta" x="30" y="44">ガウスの法則  ∇·E = ρ/ε₀</text><text class="tm" x="30" y="63">いつでも成り立つ(一般的)</text><rect x="40" y="84" width="232" height="116" rx="12" style="fill:var(--surface);stroke:var(--thm);stroke-width:2.4;stroke-dasharray:7 4"/><text class="tt" x="56" y="110">クーロンの法則</text><text class="tm" x="56" y="130">E = q/(4πε₀) · r/|r|³</text><text class="tm" x="56" y="152">静電場(電荷が時間変化しない)</text><text class="tm" x="56" y="170">のときだけ正しい</text><text class="tm" x="292" y="108">電荷が動いたり</text><text class="tm" x="292" y="126">電場が時間変化したり</text><text class="tm" x="292" y="144">する場合にも通用する</text><text class="ta" x="292" y="168">→ こちらが一般的な法則</text></svg>
+      <figcaption>ガウスの法則は一般的な法則で、クーロンの法則は、その<b>特別な場合</b>(静電場)です。</figcaption>
+    </figure>
+    <table class="cmp">
+      <tr><th></th><th>クーロンの法則(1.1)</th><th>ガウスの法則(1.2)</th></tr>
+      <tr><td>成り立つ範囲</td><td><b>静電場</b>(電荷などが時間変化しない場合)のみ。時間変化する環境では正しくない</td><td><b>常に正しい</b>。より一般的な法則</td></tr>
+      <tr><td>直観的な理解</td><td>理解しやすい</td><td>理解しにくい</td></tr>
+      <tr><td>電場の計算</td><td>電荷分布にきれいな対称性がある場合を除き、一般の電荷分布に対して電場を計算するときは、<b>こちらの方が計算しやすい</b></td><td>(対称性がきれいな場合には便利)</td></tr>
+    </table>
+    <p>クーロンの法則の方が理解しやすく、また(静電場しか考えないのなら)応用上も便利です。そのため、教科書や講義では、まずクーロンの法則から導入することが多い。しかし、<b>クーロンの法則が厳密に成り立つのは静電場のみ</b>であるという条件を忘れ、変動電磁場に対してクーロンの法則を適用すると、<b>誤った結論</b>を導いてしまいます。</p>
+    <p><b>エネルギー</b>についても同様です。電荷を持つ系のエネルギーは、「電荷同士のポテンシャルが作るエネルギー」で定義することも、「電場が有するエネルギー」で定義することもできます。前者は静電場に限った特徴づけで、後者はより一般的です。しかし、直観的な理解も(静電場での)計算も、前者の方が容易であることが多い。</p>
+    <div class="box thm">
+      <div class="label">要するに</div>
+      <p>電磁気学の基本的な量は電磁場によって与えられるのに対し、電磁場は直観的には理解しづらく、また計算も楽でない場合が多い。(場を介するのではなく)電荷や電流が<b>直接に相互作用していると考える</b>方が、不正確ではあるが直観的に理解しやすく、また多くの場合(準定常系など)にそのように考えても正しい結果が得られるので便利です。しかし、<b>この記述は一定の条件付きで正しいものであることを忘れると、誤った結論に導かれてしまう</b>。</p>
+    </div>
+
+    <h3>4.2 名前に引きずられない</h3>
+    <p>二つ目は、歴史的経緯に基づいて付けられた呼称や定義が、実際の物理的性質と結びついていない場合が少なくないことです。名前に引きずられると、物理の理解を誤ってしまうことになりかねません。</p>
+    <table class="cmp">
+      <tr><th>名前</th><th>実際は</th></tr>
+      <tr><td>真空の誘電率 $\varepsilon_0$</td><td>真空は<b>誘電体でもなければ分極もしない</b>ので、「真空の誘電率」という呼び方は全く不自然。これは、真空が「エーテル」という物質で満たされていると理解されていた頃に作られたもの(現在はエーテルは否定されている)。「電気定数(electric constant)」とも呼ばれる。</td></tr>
+      <tr><td>マクスウェルの「変位電流」</td><td>電流と<b>対等の関係のものではない</b>。マクスウェルは、変位電流は電流と並ぶような存在だと考えていたようだが、現在では、電流は電磁場を生み出す源であるのに対し、変位電流はそのようなものではないと理解されている。</td></tr>
+      <tr><td>「起電力」</td><td><b>力でもなければ電力でもない</b>。単位電荷あたりのエネルギーの次元をもつ量(電圧と同じ種類の量)。</td></tr>
+    </table>
+
+    <h3>4.3 特異性(無限大・デルタ関数)が生じやすい</h3>
+    <p>三つ目は、<b>特異性</b>が頻繁に生じて、それが悪さをすることです。たとえば、<b>点電荷はデルタ関数</b>であり(1点に有限の電荷が集まっている ⇒ 電荷の密度はその点で無限大)、<b>導体</b>は無限に電気が流れやすく、<b>表面にのみ電荷が集まる</b>(これも特異性)。</p>
+    <p>力学にも特異性はありました(質点や剛体の拘束など)が、計算をするうえではほとんど困難を生じさせませんでした。これに対し電磁気学では、自然と思われる考え方に基づく計算を進めていくと、特異性が出てきてしまう場合が少なくありません。特異性の存在は、さまざまな場所で<b>計算ミスや直観的な議論の誤り</b>を生じさせます。</p>
+
+    <h3>4.4 物質中の電磁気学はさらに難しい</h3>
+    <p>四つ目は、真空中の電磁気学でもこのように混乱の種が多いのに、それに輪をかけて難しいのが<b>物質中の電磁気学</b>であることです。物質中の電磁気学は、ミクロに電荷や磁性をもつ物体がマクロに集まった、<b>誘電体や磁性体</b>を対象とします。</p>
+    <ul>
+      <li>ミクロな構成要素が集まり、局所的に熱力学を満たしているとみなせるような状況を、メソスケールで粗視化して記述する。</li>
+      <li>そのため、きちんと取り扱うには<b>熱力学・統計力学</b>(またそれらに基礎づけられた物性理論)の知見が不可欠。</li>
+      <li>さらに、ミクロな要素は<b>量子力学</b>的な存在であり、特に磁性などではその量子性が本質的でさえある。</li>
+    </ul>
+    <p>つまり、物質中の電磁気学を本当にきちんと理解するには、熱力学・統計力学・量子力学を総動員する必要があるのですが、1年生の時点では統計力学も量子力学もまだ習っていません。そのため、電磁気学の講義や教科書では、<b>細かなところは曖昧にしながら話を進めることが多い</b>。これは当然、細かいところを気にしながら学んでいくと、疑問点が大量に出てきてしまう、ということでもあります。</p>
+
+    <h3>4.5 この講義の姿勢</h3>
+    <p>講義ノートは、こうした躓きやすい点についてはなるべく明確な注意をしながら議論を進めたい、としています。それでも分からないと感じたり、あるいは教科書で自習していてよく分からないと思ったら、「こうした点に躓きやすい部分がある」ということを思い出してほしい、という言葉で §1 は終わっています。</p>
+
+    <!-- ===================== 5 ===================== -->
+    <h2 id="s5">5. 具体例で練習(講義ノートにない補足) <span class="page-tag">補足</span></h2>
+    <p>この回の話を、手を動かして確かめます。ここは講義ノートにはなく、私が作った練習問題と解答です。</p>
+
+    <div class="box ex">
+      <div class="label">問題 A:スカラー場かベクトル場か</div>
+      <p>次の量は、スカラー場とベクトル場のどちらか。(1) 教室の各点の気温 (2) 川の各点の水の流速 (3) 地球のまわりの各点で、質量 $m$ の物体が受ける重力 (4) 池の各点の水深。</p>
+    </div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>(1) スカラー場(数が1つ)。(2) ベクトル場(速さだけでなく向きがある)。(3) ベクトル場(力は向きをもつ)。(4) スカラー場。</p>
+      <p>判定のしかたは、「各点で、何個の数が決まるか」です。1個ならスカラー場、(3次元なら)3個の成分が決まるならベクトル場。</p></div>
+
+    <div class="box ex">
+      <div class="label">問題 B:クーロンの法則と距離</div>
+      <p>$q=1\ \mathrm{nC}=10^{-9}\ \mathrm{C}$ の点電荷から、距離 $1\ \mathrm{m}$、$2\ \mathrm{m}$ の点での電場の大きさを求めよ。$\dfrac{1}{4\pi\varepsilon_0}\approx 9.0\times10^{9}\ \mathrm{N\cdot m^2/C^2}$ とする。</p>
+    </div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>$E=\dfrac{1}{4\pi\varepsilon_0}\dfrac{q}{r^2}$ に代入して、$r=1\ \mathrm{m}$ のとき $E=9.0\times10^{9}\times\dfrac{10^{-9}}{1^2}=9.0\ \mathrm{N/C}$。$r=2\ \mathrm{m}$ のとき $E=9.0\times10^{9}\times\dfrac{10^{-9}}{2^2}=2.25\ \mathrm{N/C}$。</p>
+      <p>距離が2倍になると、電場の大きさは $1/2^2=1/4$ になります(距離の2乗に反比例)。</p></div>
+
+    <div class="box ex">
+      <div class="label">問題 C:電場の重ね合わせ</div>
+      <p>同じ正の電荷 $q$ を $(-a,0)$ と $(a,0)$ に置く(2次元の断面で考える)。$y$ 軸上の点 $(0,y)$($y\gt0$)での電場を求めよ。</p>
+    </div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>各電荷からこの点までの距離は $\sqrt{a^2+y^2}$ で、各電荷が作る電場の大きさは $\dfrac{1}{4\pi\varepsilon_0}\dfrac{q}{a^2+y^2}$。向きは、電荷から遠ざかる向きです。</p>
+      <p>$x$ 成分は左右の電荷が作る分が<b>打ち消し合って</b>0になります(対称性)。$y$ 成分は、それぞれ「大きさ × $\dfrac{y}{\sqrt{a^2+y^2}}$」(電荷から点への向きの $y$ 成分の比)で、2つ分を足して
+      $$E_y=2\cdot\frac{1}{4\pi\varepsilon_0}\frac{q}{a^2+y^2}\cdot\frac{y}{\sqrt{a^2+y^2}}=\frac{q}{2\pi\varepsilon_0}\frac{y}{(a^2+y^2)^{3/2}}.$$
+      $y\gg a$(遠く)では $E_y\approx\dfrac{2q}{4\pi\varepsilon_0\,y^2}$ となり、「電荷 $2q$ の点電荷が原点にある」ときの電場に近づきます。</p></div>
+
+    <div class="box ex">
+      <div class="label">問題 D(先取り):ガウスの法則の意味を、点電荷で確かめる</div>
+      <p>原点の点電荷 $q$ を中心とする、半径 $l$ の球面を考える。球面の上で、電場の大きさ $E$ に球面の面積 $4\pi l^2$ を掛けた量を求めよ。(これは、第3章でガウスの法則 $\nabla\cdot\bm{E}=\rho/\varepsilon_0$ を導くときに使う計算です。)</p>
+    </div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>球面上では電場は動径方向を向き、大きさは $E=\dfrac{q}{4\pi\varepsilon_0l^2}$。したがって
+      $$E\times4\pi l^2=\frac{q}{4\pi\varepsilon_0l^2}\times4\pi l^2=\frac{q}{\varepsilon_0}.$$
+      この値は<b>半径 $l$ によらず</b>、中にある電荷 $q$ だけで決まります(下の図)。電場は距離の2乗に反比例して弱まるが、球面の面積は距離の2乗に比例して増えるので、ちょうど打ち消し合う、ということです。</p>
+      <figure class="fig">
+        <svg viewBox="0 0 520 264" width="520" role="img" aria-label="点電荷のまわりの電場と球面"><circle cx="150" cy="132" r="40" style="fill:none;stroke:var(--muted);stroke-width:1.1;stroke-dasharray:5 4"/><text class="t" x="181.8" y="100.2">l₁</text><circle cx="150" cy="132" r="75" style="fill:none;stroke:var(--muted);stroke-width:1.1;stroke-dasharray:5 4"/><text class="t" x="207" y="75">l₂</text><circle cx="150" cy="132" r="110" style="fill:none;stroke:var(--muted);stroke-width:1.1;stroke-dasharray:5 4"/><text class="t" x="232.2" y="49.8">l₃</text><line x1="164" y1="132" x2="264.6" y2="132" style="stroke:var(--thm);stroke-width:1.7;fill:none"/><polygon points="272,132 264,135.6 264,128.4" style="fill:var(--thm)"/><line x1="162.1" y1="125" x2="249.2" y2="74.7" style="stroke:var(--thm);stroke-width:1.7;fill:none"/><polygon points="255.7,71 250.5,78.1 246.9,71.9" style="fill:var(--thm)"/><line x1="157" y1="119.9" x2="207.3" y2="32.8" style="stroke:var(--thm);stroke-width:1.7;fill:none"/><polygon points="211,26.3 210.1,35.1 203.9,31.5" style="fill:var(--thm)"/><line x1="150" y1="118" x2="150" y2="17.4" style="stroke:var(--thm);stroke-width:1.7;fill:none"/><polygon points="150,10 153.6,18 146.4,18" style="fill:var(--thm)"/><line x1="143" y1="119.9" x2="92.7" y2="32.8" style="stroke:var(--thm);stroke-width:1.7;fill:none"/><polygon points="89,26.3 96.1,31.5 89.9,35.1" style="fill:var(--thm)"/><line x1="137.9" y1="125" x2="50.8" y2="74.7" style="stroke:var(--thm);stroke-width:1.7;fill:none"/><polygon points="44.3,71 53.1,71.9 49.5,78.1" style="fill:var(--thm)"/><line x1="136" y1="132" x2="35.4" y2="132" style="stroke:var(--thm);stroke-width:1.7;fill:none"/><polygon points="28,132 36,128.4 36,135.6" style="fill:var(--thm)"/><line x1="137.9" y1="139" x2="50.8" y2="189.3" style="stroke:var(--thm);stroke-width:1.7;fill:none"/><polygon points="44.3,193 49.5,185.9 53.1,192.1" style="fill:var(--thm)"/><line x1="143" y1="144.1" x2="92.7" y2="231.2" style="stroke:var(--thm);stroke-width:1.7;fill:none"/><polygon points="89,237.7 89.9,228.9 96.1,232.5" style="fill:var(--thm)"/><line x1="150" y1="146" x2="150" y2="246.6" style="stroke:var(--thm);stroke-width:1.7;fill:none"/><polygon points="150,254 146.4,246 153.6,246" style="fill:var(--thm)"/><line x1="157" y1="144.1" x2="207.3" y2="231.2" style="stroke:var(--thm);stroke-width:1.7;fill:none"/><polygon points="211,237.7 203.9,232.5 210.1,228.9" style="fill:var(--thm)"/><line x1="162.1" y1="139" x2="249.2" y2="189.3" style="stroke:var(--thm);stroke-width:1.7;fill:none"/><polygon points="255.7,193 246.9,192.1 250.5,185.9" style="fill:var(--thm)"/><circle cx="150" cy="132" r="11" style="fill:var(--thm)"/><text class="tj" x="150" y="137" style="text-anchor:middle;fill:#fff;font-weight:700">+</text><text class="tj" x="300" y="66">半径 l の球面で考えると</text><text class="tt" x="300" y="94">E の大きさ  ∝ 1/l²</text><text class="tt" x="300" y="118">球面の面積    ∝ l²</text><text class="tj" x="300" y="148">→ (E)×(面積) は l によらず一定</text><text class="ta" x="300" y="176">= q/ε₀ (電荷の量だけで決まる)</text></svg>
+        <figcaption>点電荷から出る電気力線。半径が大きい球面ほど、1本1本の線は散らばって(電場は弱くなって)いるが、球面を貫く線の本数は変わらない。</figcaption>
+      </figure>
+    </div>
+
+    <!-- ===================== 6 ===================== -->
+    <h2 id="s6">6. まとめ(この回で覚えること)</h2>
+    <ul>
+      <li><b>講義の流れ</b>:ベクトル解析 → 電磁気学の諸法則(マクスウェル方程式を一つずつ導入) → 電磁波(ハイライト) → 余裕があれば特殊相対論。</li>
+      <li><b>場</b>とは、空間の各点に数やベクトルが割り当てられたもの。数なら<b>スカラー場</b>(実質は多変数関数)、ベクトルなら<b>ベクトル場</b>(多変数関数を束ねたもの)。電磁気学は<b>電磁場の理論</b>。</li>
+      <li>電荷・電流が電磁場を作り、電磁場が電荷・電流に力を与える。電場と磁場は「二つの場」というより<b>同じものの二通りの表れ</b>。</li>
+      <li>離れた電荷が直接力を及ぼし合う<b>遠隔作用</b>は、光速を超える情報伝達になってしまう。正しい見方は、電場の変化が波として伝わる<b>近接作用</b>。ただし遠隔作用は、条件付きで便利な近似として併用する。</li>
+      <li><b>つまずきやすい点</b>:(1) クーロンの法則は静電場のみ、ガウスの法則は常に成り立つ。(2) 名前に引きずられない(真空の誘電率、変位電流、起電力)。(3) 特異性(点電荷はデルタ関数、導体の表面電荷)。(4) 物質中の電磁気学は熱力学・統計力学・量子力学の知識が必要。</li>
+    </ul>
+
+    <!-- ===================== 7 ===================== -->
+    <h2 id="s7">7. この回のノートについてのメモ</h2>
+    <p>板書の写真ではなく、<b>文章で書かれた講義ノート(PDF)</b>をもとにまとめました。ページ番号は、講義ノートの各ページ下に印刷されている番号を使っています。補足として足した部分(黄色の枠)、基礎ページの内容、問題と解答は、Claude が書き足したもので、講義ノートにはありません。</p>
+    <ol>
+      <li><b>「電磁力学」と「電磁気学」</b>:講義ノートのタイトルは「電磁気学:講義ノート」なので、このサイトでも科目名は「電磁気学」としました。</li>
+      <li><b>クーロンの法則の式の書き方</b>:講義ノートには、大きさだけの式 (1.1) と、ベクトルで書いた式 (3.1)(p.16、次の章)があります。この回の基礎の枠では、後者の形も使って説明しました。</li>
+      <li><b>§1.4 の内容</b>:この節は、講義ノート自身が「現時点で分からなくてよい」と断っています。ここでは、5つの混乱要因を整理して並べ直し、表にまとめました。意味が分からない式(ガウスの法則など)は、第2回以降で扱われます。</li>
+      <li>この回には、講義ノートの誤りと思われる箇所はありませんでした。</li>
+    </ol>
+
+    <nav class="pager">
+      <span class="disabled">← 前の週</span>
+      <a href="../index.html">一覧へ</a>
+      <a href="week-02.html">次の週 →</a>
+    </nav>
+
+  </main>
+
+  <footer>© Aセメまとめノート</footer>
+</body>
+</html>

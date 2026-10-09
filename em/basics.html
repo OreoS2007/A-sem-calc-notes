@@ -1,0 +1,369 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>基礎のまとめ(電磁気学) | Aセメまとめノート</title>
+  <link rel="stylesheet" href="../assets/style.css">
+  <script defer src="../assets/nav.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],macros:{'\\R':'\\mathbb{R}','\\bm':'\\boldsymbol{#1}','\\rot':'\\operatorname{rot}','\\grad':'\\operatorname{grad}','\\dvg':'\\operatorname{div}','\\pd':'\\frac{\\partial #1}{\\partial #2}'}});window.__navReady&&window.__navReady()"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="inner">
+      <a class="site-title" href="../index.html">Aセメまとめノート</a>
+      <span class="links"><a href="index.html">電磁気学</a><a href="basics.html">基礎のまとめ</a><a href="../calc/index.html">微積</a><a href="../linalg/index.html">線形代数</a></span>
+    </div>
+  </header>
+
+  <main class="note">
+    <h1>基礎のまとめ(電磁気学)</h1>
+    <div class="meta">電磁気学のノートで使う、高校〜微積の内容を、トピックごとに一から説明したページです。本文の紫色の「基礎」の枠だけで分からなかったときに、ここへ来てください。</div>
+
+    <div class="box note-box">
+      <div class="label">このページの使い方</div>
+      <p>・各回のノートの「基礎」の枠にある<span class="xref-link" style="margin-left:0">→ 詳しい解説</span>のリンクから、対応するトピックに飛べます。</p>
+      <p>・飛んだ先には、画面の左下に<b>「元の位置にもどる」</b>ボタンが出ます。押すと、元のノートの読んでいた場所にそのまま戻れます(ブラウザの「戻る」でも同じ位置に戻ります)。</p>
+      <p>・各トピックの最後に「この回で使う場所」があり、本文の対応箇所に飛べます。</p>
+      <p>・説明は、<b>定義・主張 → 意味(直感) → 例 → 証明</b>の順です。証明は折りたたんであります。</p>
+      <p>・偏微分・勾配・連鎖律などの詳しい説明は、<a href="../calc/basics.html#partial" data-xref>微積の「春学期のまとめ」</a>にもあります。内積・基底などは<a href="../linalg/basics.html#rnip" data-xref>線形代数の「春学期のまとめ」</a>も見てください。</p>
+      <p>・このページは、各回のノートを作るたびに、その回で必要になるトピックを足していきます。</p>
+    </div>
+
+    <nav class="toc">
+      <div class="toc-title">目次</div>
+      <ol>
+        <li><b>電磁気の入口</b>
+          <ol type="a">
+            <li><a href="#coulomb">電荷・電場・クーロンの法則(高校)</a></li>
+          </ol></li>
+        <li><b>ベクトルと座標</b>
+          <ol type="a" start="2">
+            <li><a href="#mvfunc">多変数関数と数ベクトル(場の見方)</a></li>
+            <li><a href="#vec3">3次元ベクトルの内積と外積</a></li>
+            <li><a href="#sigma">総和記号 $\Sigma$ と、クロネッカーのデルタ</a></li>
+          </ol></li>
+        <li><b>微分と積分</b>
+          <ol type="a" start="5">
+            <li><a href="#partial">偏微分・勾配・連鎖律</a></li>
+            <li><a href="#ftc">微分積分学の基本定理</a></li>
+            <li><a href="#multint">重積分と累次積分(体積積分)</a></li>
+            <li><a href="#param">曲線・曲面のパラメータ表示</a></li>
+            <li><a href="#extrema">極大・極小と2階微分</a></li>
+          </ol></li>
+      </ol>
+    </nav>
+
+    <!-- ===================== a: 電荷・電場・クーロンの法則 ===================== -->
+    <h2 id="coulomb">a. 電荷・電場・クーロンの法則(高校)</h2>
+
+    <h3>電荷とクーロン力</h3>
+    <p><b>電荷</b>(electric charge)は、物体がもつ「電気の量」で、記号 $q$、単位はC(クーロン)。正と負があります。<b>同じ符号の電荷は反発し合い、異なる符号の電荷は引き合います</b>。2つの点電荷 $q_1,q_2$ が距離 $r$ だけ離れているとき、その間に働く力の大きさは
+    $$F=\frac{1}{4\pi\varepsilon_0}\frac{q_1q_2}{r^2}$$
+    (<b>クーロンの法則</b>)です。$\varepsilon_0$ は定数で、$\dfrac{1}{4\pi\varepsilon_0}\approx 8.99\times10^{9}\ \mathrm{N\cdot m^2/C^2}$。力の大きさは<b>距離の2乗に反比例</b>します。</p>
+
+    <h3>電場</h3>
+    <div class="box def">
+      <div class="label">定義(電場)</div>
+      <p>空間の点に電荷 $q'$(試験電荷)を置いたとき、それが受ける力を $\bm{F}$ として、
+      $$\bm{E}:=\frac{\bm{F}}{q'}$$
+      を、その点の<b>電場</b>(electric field)という。つまり $\bm{F}=q'\bm{E}$。単位は N/C(= V/m)。</p>
+    </div>
+    <p>電場は、空間の各点にベクトルを対応させる<b>ベクトル場</b>です。「電荷が、まわりの空間に作る性質」を、試験電荷を使わずに表したものです。</p>
+
+    <h3>点電荷の作る電場</h3>
+    <p>原点に点電荷 $q$ を置いたとき、位置 $\bm{r}$ に作られる電場は
+    $$\bm{E}(\bm{r})=\frac{q}{4\pi\varepsilon_0}\frac{\bm{r}}{|\bm{r}|^3}=\frac{q}{4\pi\varepsilon_0r^2}\,\bm{e}_r,\qquad\bm{e}_r=\frac{\bm{r}}{|\bm{r}|}$$
+    です。$\bm{e}_r=\bm{r}/|\bm{r}|$ は、原点から外へ向かう<b>長さ1のベクトル</b>(動径方向の単位ベクトル)。$q\gt0$ なら電場は外向き、$q\lt0$ なら内向き。</p>
+    <figure class="fig">
+      <svg viewBox="0 0 560 250" width="560" role="img" aria-label="点電荷のまわりの電場"><line x1="176" y1="118" x2="198.1" y2="118" style="stroke:var(--thm);stroke-width:1.8;fill:none"/><polygon points="204,118 197.5,121.2 197.5,114.8" style="fill:var(--thm)"/><line x1="169.1" y1="96.8" x2="187" y2="83.8" style="stroke:var(--thm);stroke-width:1.8;fill:none"/><polygon points="191.8,80.4 188.4,86.8 184.6,81.6" style="fill:var(--thm)"/><line x1="151.1" y1="83.8" x2="158" y2="62.7" style="stroke:var(--thm);stroke-width:1.8;fill:none"/><polygon points="159.8,57.1 160.8,64.3 154.7,62.3" style="fill:var(--thm)"/><line x1="128.9" y1="83.8" x2="122" y2="62.7" style="stroke:var(--thm);stroke-width:1.8;fill:none"/><polygon points="120.2,57.1 125.3,62.3 119.2,64.3" style="fill:var(--thm)"/><line x1="110.9" y1="96.8" x2="93" y2="83.8" style="stroke:var(--thm);stroke-width:1.8;fill:none"/><polygon points="88.2,80.4 95.4,81.6 91.6,86.8" style="fill:var(--thm)"/><line x1="104" y1="118" x2="81.9" y2="118" style="stroke:var(--thm);stroke-width:1.8;fill:none"/><polygon points="76,118 82.5,114.8 82.5,121.2" style="fill:var(--thm)"/><line x1="110.9" y1="139.2" x2="93" y2="152.2" style="stroke:var(--thm);stroke-width:1.8;fill:none"/><polygon points="88.2,155.6 91.6,149.2 95.4,154.4" style="fill:var(--thm)"/><line x1="128.9" y1="152.2" x2="122" y2="173.3" style="stroke:var(--thm);stroke-width:1.8;fill:none"/><polygon points="120.2,178.9 119.2,171.7 125.3,173.7" style="fill:var(--thm)"/><line x1="151.1" y1="152.2" x2="158" y2="173.3" style="stroke:var(--thm);stroke-width:1.8;fill:none"/><polygon points="159.8,178.9 154.7,173.7 160.8,171.7" style="fill:var(--thm)"/><line x1="169.1" y1="139.2" x2="187" y2="152.2" style="stroke:var(--thm);stroke-width:1.8;fill:none"/><polygon points="191.8,155.6 184.6,154.4 188.4,149.2" style="fill:var(--thm)"/><line x1="195.2" y1="100.1" x2="199.8" y2="98.6" style="stroke:var(--thm);stroke-width:1.8;fill:none"/><polygon points="205.4,96.7 200.2,101.8 198.2,95.7" style="fill:var(--thm)"/><line x1="174.1" y1="71.1" x2="177" y2="67.1" style="stroke:var(--thm);stroke-width:1.8;fill:none"/><polygon points="180.4,62.4 179.2,69.5 174,65.7" style="fill:var(--thm)"/><line x1="140" y1="60" x2="140" y2="55.1" style="stroke:var(--thm);stroke-width:1.8;fill:none"/><polygon points="140,49.2 143.2,55.7 136.8,55.7" style="fill:var(--thm)"/><line x1="105.9" y1="71.1" x2="103" y2="67.1" style="stroke:var(--thm);stroke-width:1.8;fill:none"/><polygon points="99.6,62.4 106,65.7 100.8,69.5" style="fill:var(--thm)"/><line x1="84.8" y1="100.1" x2="80.2" y2="98.6" style="stroke:var(--thm);stroke-width:1.8;fill:none"/><polygon points="74.6,96.7 81.8,95.7 79.8,101.8" style="fill:var(--thm)"/><line x1="84.8" y1="135.9" x2="80.2" y2="137.4" style="stroke:var(--thm);stroke-width:1.8;fill:none"/><polygon points="74.6,139.3 79.8,134.2 81.8,140.3" style="fill:var(--thm)"/><line x1="105.9" y1="164.9" x2="103" y2="168.9" style="stroke:var(--thm);stroke-width:1.8;fill:none"/><polygon points="99.6,173.6 100.8,166.5 106,170.3" style="fill:var(--thm)"/><line x1="140" y1="176" x2="140" y2="180.9" style="stroke:var(--thm);stroke-width:1.8;fill:none"/><polygon points="140,186.8 136.8,180.3 143.2,180.3" style="fill:var(--thm)"/><line x1="174.1" y1="164.9" x2="177" y2="168.9" style="stroke:var(--thm);stroke-width:1.8;fill:none"/><polygon points="180.4,173.6 174,170.3 179.2,166.5" style="fill:var(--thm)"/><line x1="195.2" y1="135.9" x2="199.8" y2="137.4" style="stroke:var(--thm);stroke-width:1.8;fill:none"/><polygon points="205.4,139.3 198.2,140.3 200.2,134.2" style="fill:var(--thm)"/><line x1="222" y1="118" x2="224" y2="118" style="stroke:var(--thm);stroke-width:1.8;fill:none"/><polygon points="229,118 223.4,120.8 223.4,115.2" style="fill:var(--thm)"/><line x1="206.3" y1="69.8" x2="208" y2="68.6" style="stroke:var(--thm);stroke-width:1.8;fill:none"/><polygon points="212,65.7 209.1,71.2 205.9,66.7" style="fill:var(--thm)"/><line x1="165.3" y1="40" x2="166" y2="38.1" style="stroke:var(--thm);stroke-width:1.8;fill:none"/><polygon points="167.5,33.4 168.4,39.5 163.2,37.8" style="fill:var(--thm)"/><line x1="114.7" y1="40" x2="114" y2="38.1" style="stroke:var(--thm);stroke-width:1.8;fill:none"/><polygon points="112.5,33.4 116.8,37.8 111.6,39.5" style="fill:var(--thm)"/><line x1="73.7" y1="69.8" x2="72" y2="68.6" style="stroke:var(--thm);stroke-width:1.8;fill:none"/><polygon points="68,65.7 74.1,66.7 70.9,71.2" style="fill:var(--thm)"/><line x1="58" y1="118" x2="56" y2="118" style="stroke:var(--thm);stroke-width:1.8;fill:none"/><polygon points="51,118 56.6,115.2 56.6,120.8" style="fill:var(--thm)"/><line x1="73.7" y1="166.2" x2="72" y2="167.4" style="stroke:var(--thm);stroke-width:1.8;fill:none"/><polygon points="68,170.3 70.9,164.8 74.1,169.3" style="fill:var(--thm)"/><line x1="114.7" y1="196" x2="114" y2="197.9" style="stroke:var(--thm);stroke-width:1.8;fill:none"/><polygon points="112.5,202.6 111.6,196.5 116.8,198.2" style="fill:var(--thm)"/><line x1="165.3" y1="196" x2="166" y2="197.9" style="stroke:var(--thm);stroke-width:1.8;fill:none"/><polygon points="167.5,202.6 163.2,198.2 168.4,196.5" style="fill:var(--thm)"/><line x1="206.3" y1="166.2" x2="208" y2="167.4" style="stroke:var(--thm);stroke-width:1.8;fill:none"/><polygon points="212,170.3 205.9,169.3 209.1,164.8" style="fill:var(--thm)"/><circle cx="140" cy="118" r="12" style="fill:var(--thm)"/><text class="tj" x="140" y="124" style="text-anchor:middle;fill:#fff;font-weight:700;font-size:18px">+</text><line x1="484" y1="118" x2="461.9" y2="118" style="stroke:var(--accent);stroke-width:1.8;fill:none"/><polygon points="456,118 462.5,114.8 462.5,121.2" style="fill:var(--accent)"/><line x1="471.8" y1="80.4" x2="453.9" y2="93.4" style="stroke:var(--accent);stroke-width:1.8;fill:none"/><polygon points="449.1,96.8 452.5,90.4 456.3,95.6" style="fill:var(--accent)"/><line x1="439.8" y1="57.1" x2="432.9" y2="78.2" style="stroke:var(--accent);stroke-width:1.8;fill:none"/><polygon points="431.1,83.8 430.1,76.6 436.2,78.6" style="fill:var(--accent)"/><line x1="400.2" y1="57.1" x2="407.1" y2="78.2" style="stroke:var(--accent);stroke-width:1.8;fill:none"/><polygon points="408.9,83.8 403.8,78.6 409.9,76.6" style="fill:var(--accent)"/><line x1="368.2" y1="80.4" x2="386.1" y2="93.4" style="stroke:var(--accent);stroke-width:1.8;fill:none"/><polygon points="390.9,96.8 383.7,95.6 387.5,90.4" style="fill:var(--accent)"/><line x1="356" y1="118" x2="378.1" y2="118" style="stroke:var(--accent);stroke-width:1.8;fill:none"/><polygon points="384,118 377.5,121.2 377.5,114.8" style="fill:var(--accent)"/><line x1="368.2" y1="155.6" x2="386.1" y2="142.6" style="stroke:var(--accent);stroke-width:1.8;fill:none"/><polygon points="390.9,139.2 387.5,145.6 383.7,140.4" style="fill:var(--accent)"/><line x1="400.2" y1="178.9" x2="407.1" y2="157.8" style="stroke:var(--accent);stroke-width:1.8;fill:none"/><polygon points="408.9,152.2 409.9,159.4 403.8,157.4" style="fill:var(--accent)"/><line x1="439.8" y1="178.9" x2="432.9" y2="157.8" style="stroke:var(--accent);stroke-width:1.8;fill:none"/><polygon points="431.1,152.2 436.2,157.4 430.1,159.4" style="fill:var(--accent)"/><line x1="471.8" y1="155.6" x2="453.9" y2="142.6" style="stroke:var(--accent);stroke-width:1.8;fill:none"/><polygon points="449.1,139.2 456.3,140.4 452.5,145.6" style="fill:var(--accent)"/><line x1="485.4" y1="96.7" x2="480.8" y2="98.3" style="stroke:var(--accent);stroke-width:1.8;fill:none"/><polygon points="475.2,100.1 480.4,95 482.3,101.1" style="fill:var(--accent)"/><line x1="460.4" y1="62.4" x2="457.6" y2="66.3" style="stroke:var(--accent);stroke-width:1.8;fill:none"/><polygon points="454.1,71.1 455.3,63.9 460.5,67.7" style="fill:var(--accent)"/><line x1="420" y1="49.2" x2="420" y2="54.1" style="stroke:var(--accent);stroke-width:1.8;fill:none"/><polygon points="420,60 416.8,53.5 423.2,53.5" style="fill:var(--accent)"/><line x1="379.6" y1="62.4" x2="382.4" y2="66.3" style="stroke:var(--accent);stroke-width:1.8;fill:none"/><polygon points="385.9,71.1 379.5,67.7 384.7,63.9" style="fill:var(--accent)"/><line x1="354.6" y1="96.7" x2="359.2" y2="98.3" style="stroke:var(--accent);stroke-width:1.8;fill:none"/><polygon points="364.8,100.1 357.7,101.1 359.6,95" style="fill:var(--accent)"/><line x1="354.6" y1="139.3" x2="359.2" y2="137.7" style="stroke:var(--accent);stroke-width:1.8;fill:none"/><polygon points="364.8,135.9 359.6,141 357.7,134.9" style="fill:var(--accent)"/><line x1="379.6" y1="173.6" x2="382.4" y2="169.7" style="stroke:var(--accent);stroke-width:1.8;fill:none"/><polygon points="385.9,164.9 384.7,172.1 379.5,168.3" style="fill:var(--accent)"/><line x1="420" y1="186.8" x2="420" y2="181.9" style="stroke:var(--accent);stroke-width:1.8;fill:none"/><polygon points="420,176 423.2,182.5 416.8,182.5" style="fill:var(--accent)"/><line x1="460.4" y1="173.6" x2="457.6" y2="169.7" style="stroke:var(--accent);stroke-width:1.8;fill:none"/><polygon points="454.1,164.9 460.5,168.3 455.3,172.1" style="fill:var(--accent)"/><line x1="485.4" y1="139.3" x2="480.8" y2="137.7" style="stroke:var(--accent);stroke-width:1.8;fill:none"/><polygon points="475.2,135.9 482.3,134.9 480.4,141" style="fill:var(--accent)"/><line x1="509" y1="118" x2="507" y2="118" style="stroke:var(--accent);stroke-width:1.8;fill:none"/><polygon points="502,118 507.6,115.2 507.6,120.8" style="fill:var(--accent)"/><line x1="492" y1="65.7" x2="490.4" y2="66.9" style="stroke:var(--accent);stroke-width:1.8;fill:none"/><polygon points="486.3,69.8 489.2,64.3 492.5,68.7" style="fill:var(--accent)"/><line x1="447.5" y1="33.4" x2="446.9" y2="35.3" style="stroke:var(--accent);stroke-width:1.8;fill:none"/><polygon points="445.3,40 444.4,33.8 449.7,35.5" style="fill:var(--accent)"/><line x1="392.5" y1="33.4" x2="393.1" y2="35.3" style="stroke:var(--accent);stroke-width:1.8;fill:none"/><polygon points="394.7,40 390.3,35.5 395.6,33.8" style="fill:var(--accent)"/><line x1="348" y1="65.7" x2="349.6" y2="66.9" style="stroke:var(--accent);stroke-width:1.8;fill:none"/><polygon points="353.7,69.8 347.5,68.7 350.8,64.3" style="fill:var(--accent)"/><line x1="331" y1="118" x2="333" y2="118" style="stroke:var(--accent);stroke-width:1.8;fill:none"/><polygon points="338,118 332.4,120.8 332.4,115.2" style="fill:var(--accent)"/><line x1="348" y1="170.3" x2="349.6" y2="169.1" style="stroke:var(--accent);stroke-width:1.8;fill:none"/><polygon points="353.7,166.2 350.8,171.7 347.5,167.3" style="fill:var(--accent)"/><line x1="392.5" y1="202.6" x2="393.1" y2="200.7" style="stroke:var(--accent);stroke-width:1.8;fill:none"/><polygon points="394.7,196 395.6,202.2 390.3,200.5" style="fill:var(--accent)"/><line x1="447.5" y1="202.6" x2="446.9" y2="200.7" style="stroke:var(--accent);stroke-width:1.8;fill:none"/><polygon points="445.3,196 449.7,200.5 444.4,202.2" style="fill:var(--accent)"/><line x1="492" y1="170.3" x2="490.4" y2="169.1" style="stroke:var(--accent);stroke-width:1.8;fill:none"/><polygon points="486.3,166.2 492.5,167.3 489.2,171.7" style="fill:var(--accent)"/><circle cx="420" cy="118" r="12" style="fill:var(--accent)"/><text class="tj" x="420" y="124" style="text-anchor:middle;fill:#fff;font-weight:700;font-size:18px">−</text><text class="tj" x="140" y="232" style="text-anchor:middle">正の電荷:電場は外向き</text><text class="tj" x="420" y="232" style="text-anchor:middle">負の電荷:電場は内向き</text></svg>
+      <figcaption>点電荷のまわりの電場。矢印の長さは距離の2乗に反比例して短くなる(目安)。</figcaption>
+    </figure>
+    <div class="box ex">
+      <div class="label">例</div>
+      <p>$q=1\ \mathrm{nC}=10^{-9}\ \mathrm{C}$ を原点に置く。点 $(3,4,0)\ \mathrm{m}$ では、$r=5\ \mathrm{m}$、$\bm{r}/|\bm{r}|=(3,4,0)/5$ なので、$|\bm{E}|=9.0\times10^9\times\dfrac{10^{-9}}{25}=0.36\ \mathrm{N/C}$、向きは原点から遠ざかる向き。</p>
+    </div>
+
+    <h3>重ね合わせ</h3>
+    <p>電場は<b>重ね合わせ</b>られます。電荷 $q_i$ が位置 $\bm{r}_i$ にあるとき、位置 $\bm{r}$ での電場は、各電荷が作る電場の<b>ベクトルの和</b>:
+    $$\bm{E}(\bm{r})=\sum_i\frac{q_i}{4\pi\varepsilon_0}\frac{\bm{r}-\bm{r}_i}{|\bm{r}-\bm{r}_i|^3}.$$
+    電荷が密度 $\rho(\bm{r})$ で連続的に分布しているときは、和を積分に置き換えます。</p>
+    <figure class="fig">
+      <svg viewBox="0 0 520 262" width="520" role="img" aria-label="電場の重ね合わせ"><line x1="100" y1="44" x2="250" y2="130" style="stroke:var(--muted);stroke-width:1.1;stroke-dasharray:5 4;fill:none"/><line x1="100" y1="216" x2="250" y2="130" style="stroke:var(--muted);stroke-width:1.1;stroke-dasharray:5 4;fill:none"/><line x1="317.7" y1="168.8" x2="385.3" y2="130" style="stroke:var(--muted);stroke-width:1.1;stroke-dasharray:5 4;fill:none"/><line x1="317.7" y1="91.2" x2="385.3" y2="130" style="stroke:var(--muted);stroke-width:1.1;stroke-dasharray:5 4;fill:none"/><line x1="250" y1="130" x2="310.4" y2="164.6" style="stroke:var(--accent);stroke-width:2.4;fill:none"/><polygon points="317.7,168.8 307.7,168.1 312,160.5" style="fill:var(--accent)"/><line x1="250" y1="130" x2="310.4" y2="95.4" style="stroke:var(--ex);stroke-width:2.4;fill:none"/><polygon points="317.7,91.2 312,99.5 307.7,91.9" style="fill:var(--ex)"/><line x1="250" y1="130" x2="374.9" y2="130" style="stroke:var(--thm);stroke-width:3.4;fill:none"/><polygon points="385.3,130 374.3,135.4 374.3,124.6" style="fill:var(--thm)"/><circle cx="100" cy="44" r="12" style="fill:var(--thm)"/><text class="tj" x="100" y="49" style="text-anchor:middle;fill:#fff;font-weight:700">+</text><text class="tm" x="120" y="36">q(位置 r₁)</text><circle cx="100" cy="216" r="12" style="fill:var(--thm)"/><text class="tj" x="100" y="221" style="text-anchor:middle;fill:#fff;font-weight:700">+</text><text class="tm" x="120" y="238">q(位置 r₂)</text><circle cx="250" cy="130" r="4.5" style="fill:var(--text)"/><text class="t" x="242" y="134" style="text-anchor:end;font-size:17px">P</text><text class="tm" x="323.7" y="160.8" style="fill:var(--accent);paint-order:stroke;stroke:var(--surface);stroke-width:4px;stroke-linejoin:round">E₁(r₁ の電荷が作る)</text><text class="tm" x="323.7" y="109.2" style="fill:var(--ex);paint-order:stroke;stroke:var(--surface);stroke-width:4px;stroke-linejoin:round">E₂(r₂ の電荷が作る)</text><text class="tt" x="393.3" y="135">E = E₁ + E₂</text></svg>
+      <figcaption>2つの同じ正電荷が点 P に作る電場は、それぞれが作る電場(青と緑)のベクトル和(橙)。</figcaption>
+    </figure>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-01.html#w-coulomb" data-xref>第1回 1.1 電荷・電場・クーロンの法則</a><a href="weeks/week-01.html#s5" data-xref>第1回 5. 具体例で練習</a><a href="weeks/week-02.html#s8" data-xref>第2回 8. 具体例で練習(問題 F)</a></p>
+
+    <!-- ===================== b: 多変数関数と数ベクトル ===================== -->
+    <h2 id="mvfunc">b. 多変数関数と数ベクトル(場の見方)</h2>
+
+    <h3>座標と成分</h3>
+    <p>3次元空間の1点は、3つの数の組 $(x,y,z)$ で表されます。$n$ 次元なら $n$ 個の数 $(x_1,x_2,\dots,x_n)$ で、これを $\bm{x}$ と書き、点 $\bm{x}\in\R^n$ といいます。3次元では $(x,y,z)=(x_1,x_2,x_3)$ のように、$x,y,z$ 方向が成分1,2,3に対応します。$\bm{x}$ を原点から点へ向かう矢印と見たものを<b>位置ベクトル</b>といい、$x_i$ を<b>第 $i$ 成分</b>といいます。</p>
+    <ul>
+      <li><b>基本単位ベクトル</b> $\bm{e}_i$:第 $i$ 成分だけが1で、他が0のベクトル。3次元では $\bm{e}_1=(1,0,0)$、$\bm{e}_2=(0,1,0)$、$\bm{e}_3=(0,0,1)$。どのベクトルも $\bm{x}=x_1\bm{e}_1+x_2\bm{e}_2+x_3\bm{e}_3$ と書ける。</li>
+      <li><b>長さ</b>(ノルム):$|\bm{x}|=\sqrt{x_1^2+x_2^2+\cdots+x_n^2}$(三平方の定理)。原点からの距離なので、$r=|\bm{x}|$ と書くことが多い。</li>
+    </ul>
+
+    <h3>多変数関数とスカラー場</h3>
+    <p>点 $\bm{x}$ を入力すると<b>数</b>が1つ出力される規則 $f(\bm{x})$ を<b>多変数関数</b>といいます。例:$f(x,y,z)=x^2+y^2+z^2=r^2$(原点からの距離の2乗)、各点の気温。これを物理では<b>スカラー場</b>(scalar field)とも呼びます(空間の各点に、数が1つ割り当てられている)。</p>
+
+    <h3>ベクトル値の関数とベクトル場</h3>
+    <p>点 $\bm{x}$ を入力すると<b>ベクトル</b>が出力される規則も考えられます:
+    $$\bm{A}(\bm{x})=\bigl(A_1(\bm{x}),\ A_2(\bm{x}),\ A_3(\bm{x})\bigr).$$
+    これは「3つの多変数関数 $A_1,A_2,A_3$ を、ベクトルとして束ねたもの」と見ることができます($A_i$ は<b>成分関数</b>)。物理では<b>ベクトル場</b>(vector field)とも呼びます(空間の各点に、矢印が1つ割り当てられている)。</p>
+    <div class="box ex">
+      <div class="label">例</div>
+      <p>・$\bm{A}(\bm{x})=\bm{x}=(x,y,z)$:各点で、原点から外向きの矢印。矢印の長さは、原点から遠いほど大きい(放射状の場)。<br>
+      ・$\bm{A}(\bm{x})=(-y,\ x,\ 0)$:$z$ 軸のまわりを反時計回りに回る矢印(渦の場)。<br>
+      ・電場 $\bm{E}(\bm{x})=\dfrac{q}{4\pi\varepsilon_0}\dfrac{\bm{x}}{|\bm{x}|^3}$:点電荷のまわりの外向きの場。</p>
+    </div>
+    <figure class="fig">
+      <svg viewBox="0 0 580 240" width="580" role="img" aria-label="スカラー場とベクトル場"><text class="ta" x="26" y="26">スカラー場 φ(x)</text><text class="tm" x="26" y="44">各点に「数」(色の濃さ)</text><circle cx="30" cy="72" r="9.5" style="fill:var(--accent);opacity:0.11"/><circle cx="56" cy="72" r="9.5" style="fill:var(--accent);opacity:0.13"/><circle cx="82" cy="72" r="9.5" style="fill:var(--accent);opacity:0.20"/><circle cx="108" cy="72" r="9.5" style="fill:var(--accent);opacity:0.29"/><circle cx="134" cy="72" r="9.5" style="fill:var(--accent);opacity:0.36"/><circle cx="160" cy="72" r="9.5" style="fill:var(--accent);opacity:0.33"/><circle cx="186" cy="72" r="9.5" style="fill:var(--accent);opacity:0.24"/><circle cx="212" cy="72" r="9.5" style="fill:var(--accent);opacity:0.15"/><circle cx="238" cy="72" r="9.5" style="fill:var(--accent);opacity:0.11"/><circle cx="30" cy="98" r="9.5" style="fill:var(--accent);opacity:0.11"/><circle cx="56" cy="98" r="9.5" style="fill:var(--accent);opacity:0.17"/><circle cx="82" cy="98" r="9.5" style="fill:var(--accent);opacity:0.31"/><circle cx="108" cy="98" r="9.5" style="fill:var(--accent);opacity:0.53"/><circle cx="134" cy="98" r="9.5" style="fill:var(--accent);opacity:0.67"/><circle cx="160" cy="98" r="9.5" style="fill:var(--accent);opacity:0.61"/><circle cx="186" cy="98" r="9.5" style="fill:var(--accent);opacity:0.41"/><circle cx="212" cy="98" r="9.5" style="fill:var(--accent);opacity:0.22"/><circle cx="238" cy="98" r="9.5" style="fill:var(--accent);opacity:0.13"/><circle cx="30" cy="124" r="9.5" style="fill:var(--accent);opacity:0.12"/><circle cx="56" cy="124" r="9.5" style="fill:var(--accent);opacity:0.20"/><circle cx="82" cy="124" r="9.5" style="fill:var(--accent);opacity:0.41"/><circle cx="108" cy="124" r="9.5" style="fill:var(--accent);opacity:0.72"/><circle cx="134" cy="124" r="9.5" style="fill:var(--accent);opacity:0.94"/><circle cx="160" cy="124" r="9.5" style="fill:var(--accent);opacity:0.85"/><circle cx="186" cy="124" r="9.5" style="fill:var(--accent);opacity:0.55"/><circle cx="212" cy="124" r="9.5" style="fill:var(--accent);opacity:0.28"/><circle cx="238" cy="124" r="9.5" style="fill:var(--accent);opacity:0.15"/><circle cx="30" cy="150" r="9.5" style="fill:var(--accent);opacity:0.12"/><circle cx="56" cy="150" r="9.5" style="fill:var(--accent);opacity:0.20"/><circle cx="82" cy="150" r="9.5" style="fill:var(--accent);opacity:0.40"/><circle cx="108" cy="150" r="9.5" style="fill:var(--accent);opacity:0.70"/><circle cx="134" cy="150" r="9.5" style="fill:var(--accent);opacity:0.91"/><circle cx="160" cy="150" r="9.5" style="fill:var(--accent);opacity:0.83"/><circle cx="186" cy="150" r="9.5" style="fill:var(--accent);opacity:0.53"/><circle cx="212" cy="150" r="9.5" style="fill:var(--accent);opacity:0.27"/><circle cx="238" cy="150" r="9.5" style="fill:var(--accent);opacity:0.14"/><circle cx="30" cy="176" r="9.5" style="fill:var(--accent);opacity:0.11"/><circle cx="56" cy="176" r="9.5" style="fill:var(--accent);opacity:0.16"/><circle cx="82" cy="176" r="9.5" style="fill:var(--accent);opacity:0.29"/><circle cx="108" cy="176" r="9.5" style="fill:var(--accent);opacity:0.49"/><circle cx="134" cy="176" r="9.5" style="fill:var(--accent);opacity:0.62"/><circle cx="160" cy="176" r="9.5" style="fill:var(--accent);opacity:0.57"/><circle cx="186" cy="176" r="9.5" style="fill:var(--accent);opacity:0.38"/><circle cx="212" cy="176" r="9.5" style="fill:var(--accent);opacity:0.21"/><circle cx="238" cy="176" r="9.5" style="fill:var(--accent);opacity:0.13"/><circle cx="30" cy="202" r="9.5" style="fill:var(--accent);opacity:0.11"/><circle cx="56" cy="202" r="9.5" style="fill:var(--accent);opacity:0.13"/><circle cx="82" cy="202" r="9.5" style="fill:var(--accent);opacity:0.18"/><circle cx="108" cy="202" r="9.5" style="fill:var(--accent);opacity:0.27"/><circle cx="134" cy="202" r="9.5" style="fill:var(--accent);opacity:0.32"/><circle cx="160" cy="202" r="9.5" style="fill:var(--accent);opacity:0.30"/><circle cx="186" cy="202" r="9.5" style="fill:var(--accent);opacity:0.22"/><circle cx="212" cy="202" r="9.5" style="fill:var(--accent);opacity:0.15"/><circle cx="238" cy="202" r="9.5" style="fill:var(--accent);opacity:0.11"/><text class="ta" x="330" y="26">ベクトル場 A(x)</text><text class="tm" x="330" y="44">各点に「矢印」(向きと大きさ)</text><line x1="338.7" y1="66.1" x2="326.2" y2="74.6" style="stroke:var(--thm);stroke-width:1.9;fill:none"/><polygon points="321.3,77.9 324.9,71.6 328.5,76.9" style="fill:var(--thm)"/><line x1="365.3" y1="67.2" x2="351.9" y2="74.1" style="stroke:var(--thm);stroke-width:1.9;fill:none"/><polygon points="346.7,76.8 351,71 353.9,76.7" style="fill:var(--thm)"/><line x1="391.4" y1="69.1" x2="378.2" y2="73.1" style="stroke:var(--thm);stroke-width:1.9;fill:none"/><polygon points="372.6,74.9 377.9,69.9 379.8,76" style="fill:var(--thm)"/><line x1="416.7" y1="71.7" x2="405.2" y2="72.1" style="stroke:var(--thm);stroke-width:1.9;fill:none"/><polygon points="399.3,72.3 405.7,68.9 405.9,75.3" style="fill:var(--thm)"/><line x1="441.7" y1="74.7" x2="431.9" y2="71.3" style="stroke:var(--thm);stroke-width:1.9;fill:none"/><polygon points="426.3,69.3 433.5,68.4 431.4,74.5" style="fill:var(--thm)"/><line x1="466.1" y1="77.6" x2="458.3" y2="70.4" style="stroke:var(--thm);stroke-width:1.9;fill:none"/><polygon points="453.9,66.4 460.9,68.5 456.5,73.2" style="fill:var(--thm)"/><line x1="490.3" y1="80" x2="484.5" y2="69.2" style="stroke:var(--thm);stroke-width:1.9;fill:none"/><polygon points="481.7,64 487.6,68.2 482,71.3" style="fill:var(--thm)"/><line x1="514.8" y1="82" x2="510.8" y2="67.7" style="stroke:var(--thm);stroke-width:1.9;fill:none"/><polygon points="509.2,62 514.1,67.4 507.9,69.1" style="fill:var(--thm)"/><line x1="539.2" y1="82.4" x2="537.5" y2="67.4" style="stroke:var(--thm);stroke-width:1.9;fill:none"/><polygon points="536.8,61.6 540.7,67.7 534.4,68.4" style="fill:var(--thm)"/><line x1="337.4" y1="90.6" x2="326.8" y2="101.3" style="stroke:var(--thm);stroke-width:1.9;fill:none"/><polygon points="322.6,105.4 324.9,98.6 329.4,103.1" style="fill:var(--thm)"/><line x1="363.9" y1="91.4" x2="352.6" y2="100.8" style="stroke:var(--thm);stroke-width:1.9;fill:none"/><polygon points="348.1,104.6 351,98 355.2,102.9" style="fill:var(--thm)"/><line x1="389.3" y1="93.5" x2="379.7" y2="99.4" style="stroke:var(--thm);stroke-width:1.9;fill:none"/><polygon points="374.7,102.5 378.5,96.4 381.9,101.8" style="fill:var(--thm)"/><line x1="414.9" y1="96" x2="406.8" y2="98.3" style="stroke:var(--thm);stroke-width:1.9;fill:none"/><polygon points="401.1,100 406.5,95.1 408.3,101.3" style="fill:var(--thm)"/><line x1="440.1" y1="99.6" x2="433.7" y2="97.9" style="stroke:var(--thm);stroke-width:1.9;fill:none"/><polygon points="427.9,96.4 435,95 433.4,101.2" style="fill:var(--thm)"/><line x1="464" y1="103.1" x2="459.6" y2="97.5" style="stroke:var(--thm);stroke-width:1.9;fill:none"/><polygon points="456,92.9 462.5,96.1 457.5,100" style="fill:var(--thm)"/><line x1="487.8" y1="105.5" x2="485.6" y2="96.3" style="stroke:var(--thm);stroke-width:1.9;fill:none"/><polygon points="484.2,90.5 488.8,96.1 482.6,97.6" style="fill:var(--thm)"/><line x1="512.2" y1="107.3" x2="511.9" y2="94.6" style="stroke:var(--thm);stroke-width:1.9;fill:none"/><polygon points="511.8,88.7 515.1,95.2 508.7,95.3" style="fill:var(--thm)"/><line x1="537" y1="108.5" x2="538.4" y2="93.4" style="stroke:var(--thm);stroke-width:1.9;fill:none"/><polygon points="539,87.5 541.6,94.3 535.2,93.7" style="fill:var(--thm)"/><line x1="335.6" y1="115.1" x2="327.6" y2="127.9" style="stroke:var(--thm);stroke-width:1.9;fill:none"/><polygon points="324.4,132.9 325.2,125.7 330.6,129.1" style="fill:var(--thm)"/><line x1="361.5" y1="115.9" x2="353.8" y2="127.2" style="stroke:var(--thm);stroke-width:1.9;fill:none"/><polygon points="350.5,132.1 351.5,125 356.8,128.5" style="fill:var(--thm)"/><line x1="386.8" y1="117.7" x2="380.8" y2="125.6" style="stroke:var(--thm);stroke-width:1.9;fill:none"/><polygon points="377.2,130.3 378.6,123.2 383.7,127.1" style="fill:var(--thm)"/><line x1="412.3" y1="119.7" x2="407.9" y2="124.1" style="stroke:var(--thm);stroke-width:1.9;fill:none"/><polygon points="403.7,128.3 406,121.5 410.6,126" style="fill:var(--thm)"/><line x1="438.4" y1="123.3" x2="435.4" y2="123.8" style="stroke:var(--thm);stroke-width:1.9;fill:none"/><polygon points="429.6,124.7 435.5,120.5 436.5,126.8" style="fill:var(--thm)"/><line x1="460.4" y1="129" x2="460.1" y2="124.9" style="stroke:var(--thm);stroke-width:1.9;fill:none"/><polygon points="459.6,119 463.3,125.2 456.9,125.7" style="fill:var(--thm)"/><line x1="484.5" y1="130.6" x2="486.2" y2="123.1" style="stroke:var(--thm);stroke-width:1.9;fill:none"/><polygon points="487.5,117.4 489.2,124.4 482.9,123" style="fill:var(--thm)"/><line x1="509.4" y1="132.2" x2="512.8" y2="121.4" style="stroke:var(--thm);stroke-width:1.9;fill:none"/><polygon points="514.6,115.8 515.7,122.9 509.6,121" style="fill:var(--thm)"/><line x1="534.4" y1="133.9" x2="539.6" y2="119.7" style="stroke:var(--thm);stroke-width:1.9;fill:none"/><polygon points="541.6,114.1 542.4,121.3 536.4,119.1" style="fill:var(--thm)"/><line x1="333.4" y1="140.1" x2="328.5" y2="154.4" style="stroke:var(--thm);stroke-width:1.9;fill:none"/><polygon points="326.6,159.9 325.7,152.7 331.7,154.8" style="fill:var(--thm)"/><line x1="358.8" y1="140.6" x2="354.9" y2="153.8" style="stroke:var(--thm);stroke-width:1.9;fill:none"/><polygon points="353.2,159.4 352,152.3 358.1,154.1" style="fill:var(--thm)"/><line x1="383.7" y1="142.2" x2="381.5" y2="152" style="stroke:var(--thm);stroke-width:1.9;fill:none"/><polygon points="380.3,157.8 378.6,150.8 384.8,152.2" style="fill:var(--thm)"/><line x1="408.3" y1="143.8" x2="408" y2="150.3" style="stroke:var(--thm);stroke-width:1.9;fill:none"/><polygon points="407.7,156.2 404.8,149.5 411.2,149.9" style="fill:var(--thm)"/><line x1="431.3" y1="146.1" x2="433.3" y2="149.1" style="stroke:var(--thm);stroke-width:1.9;fill:none"/><polygon points="436.7,153.9 430.4,150.4 435.6,146.7" style="fill:var(--thm)"/><line x1="455.2" y1="152.1" x2="459.4" y2="150.3" style="stroke:var(--thm);stroke-width:1.9;fill:none"/><polygon points="464.8,147.9 460.1,153.5 457.5,147.6" style="fill:var(--thm)"/><line x1="481.1" y1="154.8" x2="486.7" y2="149.3" style="stroke:var(--thm);stroke-width:1.9;fill:none"/><polygon points="490.9,145.2 488.5,152 484,147.5" style="fill:var(--thm)"/><line x1="506.6" y1="156.8" x2="513.8" y2="147.8" style="stroke:var(--thm);stroke-width:1.9;fill:none"/><polygon points="517.4,143.2 515.9,150.3 510.9,146.3" style="fill:var(--thm)"/><line x1="531.9" y1="158.6" x2="540.7" y2="146.3" style="stroke:var(--thm);stroke-width:1.9;fill:none"/><polygon points="544.1,141.4 542.9,148.6 537.7,144.9" style="fill:var(--thm)"/><line x1="331.2" y1="165.6" x2="329.5" y2="180.6" style="stroke:var(--thm);stroke-width:1.9;fill:none"/><polygon points="328.8,186.4 326.4,179.6 332.7,180.3" style="fill:var(--thm)"/><line x1="356.2" y1="165.6" x2="355.9" y2="180.5" style="stroke:var(--thm);stroke-width:1.9;fill:none"/><polygon points="355.8,186.4 352.7,179.9 359.1,180" style="fill:var(--thm)"/><line x1="380.8" y1="167.3" x2="382.4" y2="178.9" style="stroke:var(--thm);stroke-width:1.9;fill:none"/><polygon points="383.2,184.7 379.1,178.7 385.5,177.8" style="fill:var(--thm)"/><line x1="405" y1="169.3" x2="408.6" y2="177.3" style="stroke:var(--thm);stroke-width:1.9;fill:none"/><polygon points="411,182.7 405.4,178.1 411.3,175.5" style="fill:var(--thm)"/><line x1="428.8" y1="172" x2="434.5" y2="176.4" style="stroke:var(--thm);stroke-width:1.9;fill:none"/><polygon points="439.2,180 432.1,178.6 436,173.5" style="fill:var(--thm)"/><line x1="453.3" y1="175.7" x2="460.9" y2="176" style="stroke:var(--thm);stroke-width:1.9;fill:none"/><polygon points="466.7,176.3 460.1,179.2 460.4,172.8" style="fill:var(--thm)"/><line x1="478.6" y1="178.8" x2="487.8" y2="175.3" style="stroke:var(--thm);stroke-width:1.9;fill:none"/><polygon points="493.4,173.2 488.4,178.5 486.2,172.5" style="fill:var(--thm)"/><line x1="504.1" y1="181.1" x2="514.9" y2="174.1" style="stroke:var(--thm);stroke-width:1.9;fill:none"/><polygon points="519.9,170.9 516.2,177.1 512.7,171.7" style="fill:var(--thm)"/><line x1="530" y1="182.8" x2="541.5" y2="173" style="stroke:var(--thm);stroke-width:1.9;fill:none"/><polygon points="546,169.2 543.1,175.9 539,171" style="fill:var(--thm)"/><line x1="329.2" y1="191.5" x2="330.3" y2="206.6" style="stroke:var(--thm);stroke-width:1.9;fill:none"/><polygon points="330.8,212.5 327.1,206.2 333.5,205.7" style="fill:var(--thm)"/><line x1="353.9" y1="191.7" x2="356.9" y2="206.5" style="stroke:var(--thm);stroke-width:1.9;fill:none"/><polygon points="358.1,212.3 353.7,206.6 359.9,205.3" style="fill:var(--thm)"/><line x1="378.3" y1="192.7" x2="383.5" y2="205.8" style="stroke:var(--thm);stroke-width:1.9;fill:none"/><polygon points="385.7,211.3 380.3,206.5 386.3,204.1" style="fill:var(--thm)"/><line x1="402.7" y1="194.8" x2="409.8" y2="204.5" style="stroke:var(--thm);stroke-width:1.9;fill:none"/><polygon points="413.3,209.2 406.9,205.9 412,202.1" style="fill:var(--thm)"/><line x1="427" y1="197.4" x2="436.1" y2="203.4" style="stroke:var(--thm);stroke-width:1.9;fill:none"/><polygon points="441,206.6 433.8,205.7 437.4,200.4" style="fill:var(--thm)"/><line x1="451.6" y1="200.3" x2="462.6" y2="202.5" style="stroke:var(--thm);stroke-width:1.9;fill:none"/><polygon points="468.4,203.7 461.4,205.5 462.6,199.3" style="fill:var(--thm)"/><line x1="476.7" y1="203.1" x2="489.4" y2="201.6" style="stroke:var(--thm);stroke-width:1.9;fill:none"/><polygon points="495.3,200.9 489.2,204.8 488.4,198.5" style="fill:var(--thm)"/><line x1="502.1" y1="205.5" x2="516.3" y2="200.5" style="stroke:var(--thm);stroke-width:1.9;fill:none"/><polygon points="521.9,198.5 516.8,203.7 514.7,197.6" style="fill:var(--thm)"/><line x1="528.8" y1="207" x2="542" y2="199.8" style="stroke:var(--thm);stroke-width:1.9;fill:none"/><polygon points="547.2,197 543,202.9 540,197.3" style="fill:var(--thm)"/></svg>
+      <figcaption>左:スカラー場(各点に数)。右:ベクトル場(各点に矢印)。</figcaption>
+    </figure>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-01.html#w-mvfunc" data-xref>第1回 1.2 多変数関数とベクトル</a><a href="weeks/week-01.html#s2" data-xref>第1回 2. 場という考え方</a><a href="weeks/week-02.html#w-mvfunc" data-xref>第2回 1.1 ベクトルと座標、場の記号</a></p>
+
+    <!-- ===================== c: 内積と外積 ===================== -->
+    <h2 id="vec3">c. 3次元ベクトルの内積と外積</h2>
+
+    <h3>内積</h3>
+    <div class="box def">
+      <div class="label">定義(内積)</div>
+      <p>$\bm{A}=(A_1,A_2,A_3)$、$\bm{B}=(B_1,B_2,B_3)$ に対し、
+      $$\bm{A}\cdot\bm{B}=A_1B_1+A_2B_2+A_3B_3=|\bm{A}||\bm{B}|\cos\theta$$
+      ($\theta$ は2つのベクトルのなす角)。結果は<b>数(スカラー)</b>。</p>
+    </div>
+    <ul>
+      <li>$\bm{A}\cdot\bm{A}=|\bm{A}|^2$(自分自身との内積は、長さの2乗)。</li>
+      <li>$\bm{A}\cdot\bm{B}=0$ は、2つのベクトルが<b>垂直</b>(直交)であること。</li>
+      <li><b>法線成分</b>:$\bm{n}$ を長さ1のベクトルとすると、$\bm{A}\cdot\bm{n}=|\bm{A}|\cos\theta$ は、「$\bm{A}$ を $\bm{n}$ の向きの直線に落とした影の、符号つきの長さ」。$\bm{n}$ が面に垂直なら、「$\bm{A}$ のうち面を貫く成分」です。</li>
+    </ul>
+    <figure class="fig">
+      <svg viewBox="0 0 520 224" width="520" role="img" aria-label="内積による法線成分の取り出し"><line x1="30" y1="180" x2="300" y2="180" style="stroke:var(--muted);stroke-width:5;stroke-linecap:round;opacity:.5"/><text class="tm" x="40" y="202">面(の一部)</text><line x1="150" y1="180" x2="150" y2="70" style="stroke:var(--muted);stroke-width:1.1;stroke-dasharray:5 4;fill:none"/><line x1="150" y1="180" x2="150" y2="90.4" style="stroke:var(--ex);stroke-width:2.8;fill:none"/><polygon points="150,82 154.4,91 145.6,91" style="fill:var(--ex)"/><text class="tm" x="140" y="80" style="text-anchor:end">n(面に垂直な単位ベクトル)</text><line x1="150" y1="180" x2="218.7" y2="92.1" style="stroke:var(--accent);stroke-width:2.8;fill:none"/><polygon points="223.9,85.4 221.8,95.2 214.9,89.8" style="fill:var(--accent)"/><text class="t" x="231.9" y="89.4" style="font-size:18px;fill:var(--accent)">A</text><line x1="223.9" y1="85.4" x2="150" y2="85.4" style="stroke:var(--muted);stroke-width:1.1;stroke-dasharray:5 4;fill:none"/><line x1="144" y1="180" x2="144" y2="85.4" style="stroke:var(--thm);stroke-width:5;stroke-linecap:round;opacity:.85"/><text class="tt" x="136" y="136.7" style="text-anchor:end">A·n</text><path d="M150 138 A42 42 0 0 1 175.9 146.9" style="fill:none;stroke:var(--muted);stroke-width:1.4"/><text class="t" x="164" y="134">θ</text><text class="tj" x="330" y="70">A·n = |A| cosθ</text><text class="tm" x="330" y="96">「A のうち、面に垂直な方向の</text><text class="tm" x="330" y="114">  成分(符号つきの長さ)」</text></svg>
+      <figcaption>$\bm{A}\cdot\bm{n}$ は、ベクトル $\bm{A}$ の「面に垂直な方向の成分」。</figcaption>
+    </figure>
+    <p>(内積・直交・なす角のさらに詳しい説明は、<a href="../linalg/basics.html#rnip" data-xref>線形代数の基礎ページ</a>や、<a href="../calc/basics.html#inner" data-xref>微積の基礎ページ</a>にもあります。)</p>
+
+    <h3>外積(ベクトル積)</h3>
+    <div class="box def">
+      <div class="label">定義(外積)</div>
+      <p>3次元ベクトルに対し、
+      $$\bm{A}\times\bm{B}=\begin{pmatrix}A_2B_3-A_3B_2\\A_3B_1-A_1B_3\\A_1B_2-A_2B_1\end{pmatrix}.$$
+      結果は<b>ベクトル</b>。</p>
+    </div>
+    <ul>
+      <li><b>向き</b>:$\bm{A}$ にも $\bm{B}$ にも垂直。右手の指を $\bm{A}$ から $\bm{B}$ の向きに曲げたとき、親指が向く方向(右手系)。</li>
+      <li><b>大きさ</b>:$|\bm{A}\times\bm{B}|=|\bm{A}||\bm{B}|\sin\theta$ は、$\bm{A},\bm{B}$ が作る<b>平行四辺形の面積</b>。</li>
+      <li>$\bm{B}\times\bm{A}=-\bm{A}\times\bm{B}$(順序を入れ替えると符号が反転)。$\bm{A}\times\bm{A}=\bm{0}$。$\bm{A}\parallel\bm{B}$ なら $\bm{A}\times\bm{B}=\bm{0}$。分配法則 $\bm{A}\times(\bm{B}+\bm{C})=\bm{A}\times\bm{B}+\bm{A}\times\bm{C}$。</li>
+      <li>外積は<b>3次元特有</b>の演算です(回転 $\nabla\times$ が3次元だけで定義される理由)。</li>
+    </ul>
+    <figure class="fig">
+      <svg viewBox="0 0 480 284" width="480" role="img" aria-label="外積の向きと大きさ"><polygon points="140,205 290,179 354,105 204,131" style="fill:var(--accent);opacity:.13;stroke:none"/><polyline points="140,205 290,179 354,105 204,131 140,205" style="fill:none;stroke:var(--muted);stroke-width:1.1;stroke-dasharray:5 4"/><line x1="140" y1="205" x2="281.7" y2="180.4" style="stroke:var(--accent);stroke-width:2.8;fill:none"/><polygon points="290,179 281.9,184.9 280.4,176.2" style="fill:var(--accent)"/><line x1="140" y1="205" x2="198.5" y2="137.4" style="stroke:var(--ex);stroke-width:2.8;fill:none"/><polygon points="204,131 201.4,140.7 194.8,134.9" style="fill:var(--ex)"/><line x1="140" y1="205" x2="140" y2="97.4" style="stroke:var(--thm);stroke-width:3.2;fill:none"/><polygon points="140,87 145,98 135,98" style="fill:var(--thm)"/><text class="t" x="298" y="183" style="font-size:18px;fill:var(--accent)">a</text><text class="t" x="208" y="123" style="font-size:18px;fill:var(--ex)">b</text><text class="tt" x="148" y="93">a × b</text><path d="M185.3 197.1 A46 46 0 0 0 170.1 170.2" style="fill:none;stroke:var(--muted);stroke-width:1.4"/><text class="t" x="192" y="185">θ</text><text class="tm" x="308" y="45">面積 = |a × b|</text><text class="tm" x="308" y="61">(a, b が作る平行四辺形)</text><text class="tm" x="14" y="250">向き:右手の指を a から b へ曲げたとき、親指が向く方向(a にも b にも垂直)</text><text class="tm" x="14" y="270">大きさ:|a × b| = |a||b| sinθ</text></svg>
+      <figcaption>外積 $\bm{a}\times\bm{b}$ の向きと大きさ。</figcaption>
+    </figure>
+    <div class="box ex">
+      <div class="label">例</div>
+      <p>・$\bm{e}_1\times\bm{e}_2=\bm{e}_3$、$\bm{e}_2\times\bm{e}_3=\bm{e}_1$、$\bm{e}_3\times\bm{e}_1=\bm{e}_2$(添字が $1\to2\to3\to1$ と巡回する並びが $+$)。<br>
+      ・$(1,2,3)\times(4,5,6)=(2\cdot6-3\cdot5,\ 3\cdot4-1\cdot6,\ 1\cdot5-2\cdot4)=(-3,\ 6,\ -3)$。確かめ:$(-3,6,-3)\cdot(1,2,3)=-3+12-9=0$、$(-3,6,-3)\cdot(4,5,6)=-12+30-18=0$(両方に垂直)。平行四辺形の面積は $\sqrt{9+36+9}=\sqrt{54}$。</p>
+    </div>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-02.html#w-vec3" data-xref>第2回 1.2 内積と外積</a><a href="weeks/week-02.html#s2-2" data-xref>第2回 2.2 外積とレヴィ=チヴィタ記号</a><a href="weeks/week-02.html#s4-3" data-xref>第2回 4.3 斜めの線や面を軸に平行にする</a></p>
+
+    <!-- ===================== d: 総和記号 ===================== -->
+    <h2 id="sigma">d. 総和記号 $\Sigma$ と、クロネッカーのデルタ</h2>
+
+    <h3>総和記号</h3>
+    <p>$\displaystyle\sum_{i=1}^{n}a_i=a_1+a_2+\cdots+a_n$。たとえば $\displaystyle\sum_{i=1}^{3}i^2=1+4+9=14$。内積は $\displaystyle\bm{A}\cdot\bm{B}=\sum_{i=1}^{3}A_iB_i$ と書けます。</p>
+    <ul>
+      <li>和をとる文字($i$ など)は、どんな文字を使っても同じ:$\sum_iA_iB_i=\sum_jA_jB_j$。これを<b>ダミー添字</b>という。</li>
+      <li>添字が2つのときは、すべての組について足す:$\displaystyle\sum_{i,j}a_{ij}=\sum_i\sum_ja_{ij}$(3次元なら 9 項)。</li>
+      <li>ベクトル $\bm{A}$ の「第 $i$ 成分」を $A_i$ または $[\bm{A}]_i$ と書きます。ベクトルの式を、「成分の式」に落として計算するのが基本です。</li>
+    </ul>
+
+    <h3>クロネッカーのデルタ</h3>
+    <div class="box def">
+      <div class="label">定義(クロネッカーのデルタ)</div>
+      <p>$$\delta_{ij}=\begin{cases}1&(i=j)\\0&(i\ne j)\end{cases}$$
+      3次元で並べると、単位行列 $\begin{pmatrix}1&0&0\\0&1&0\\0&0&1\end{pmatrix}$ の $(i,j)$ 成分です。</p>
+    </div>
+    <div class="box thm">
+      <div class="label">性質:デルタは添字を付け替える</div>
+      <p>$$\sum_j\delta_{ij}a_j=a_i,\qquad\sum_i\delta_{ii}=3\ (\text{3次元}),\qquad\sum_{i,j}\delta_{ij}\delta_{ij}=3.$$</p>
+    </div>
+    <p>$\sum_j\delta_{ij}a_j$ は、$j$ について足すとき $j=i$ の項($\delta_{ii}a_i=a_i$)しか残らないので、結果は $a_i$ です。「$\delta_{ij}$ を掛けて $j$ で足す」と、「$j$ を $i$ に置き換える」ことになります。</p>
+
+    <h3>偏微分の略記</h3>
+    <p>偏微分を $\partial_i=\dfrac{\partial}{\partial x_i}$ と略記します。$\partial_iA_j=\dfrac{\partial A_j}{\partial x_i}$、$\partial_i^2=\dfrac{\partial^2}{\partial x_i^2}$。この記号を使うと、発散は $\sum_i\partial_iA_i$、ラプラシアンは $\Delta=\sum_i\partial_i^2$ と短く書けます。</p>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-02.html#w-sigma" data-xref>第2回 1.3 総和記号とデルタ</a><a href="weeks/week-02.html#s2-2" data-xref>第2回 2.2 外積とレヴィ=チヴィタ記号</a><a href="weeks/week-02.html#s2-5" data-xref>第2回 2.5 εεの公式とベクトル三重積</a></p>
+
+    <!-- ===================== e: 偏微分・勾配・連鎖律 ===================== -->
+    <h2 id="partial">e. 偏微分・勾配・連鎖律</h2>
+    <p>(ここでは要点だけを整理します。例や図をもっと見たいときは、<a href="../calc/basics.html#partial" data-xref>微積の基礎ページの「偏微分」</a>と<a href="../calc/basics.html#chain" data-xref>「連鎖律」</a>を見てください。)</p>
+
+    <h3>偏微分</h3>
+    <div class="box def">
+      <div class="label">定義(偏微分)</div>
+      <p>多変数関数 $f(x_1,\dots,x_n)$ の $x_i$ についての<b>偏微分</b>:
+      $$\partial_if=\frac{\partial f}{\partial x_i}=\lim_{h\to0}\frac{f(\dots,x_i+h,\dots)-f(\dots,x_i,\dots)}{h}.$$
+      つまり、<b>$x_i$ 以外の文字をすべて定数とみなして、$x_i$ で微分したもの</b>。</p>
+    </div>
+    <div class="box ex">
+      <div class="label">例</div>
+      <p>$f=xy^2z^3$:$\partial_xf=y^2z^3$($y,z$ を定数と見る)、$\partial_yf=2xyz^3$、$\partial_zf=3xy^2z^2$。<br>
+      $f=x^2+y^2+z^2$ なら $\partial_xf=2x$ など。</p>
+    </div>
+    <p>意味:$\partial_if$ は、点から $x_i$ の方向<b>だけ</b>に動いたときの、$f$ の変化率(その方向の断面の傾き)です。</p>
+
+    <h3>勾配</h3>
+    <p>スカラー場 $f$ の偏微分を縦に並べたベクトルを<b>勾配</b>といい、$\nabla f=(\partial_1f,\dots,\partial_nf)$ と書きます。意味は「$f$ が最も急に増加する向き」を指し、大きさがその急さ。上の例なら $\nabla(xy^2z^3)=(y^2z^3,\ 2xyz^3,\ 3xy^2z^2)$。</p>
+
+    <h3>積の微分と、2階微分の順序</h3>
+    <ul>
+      <li><b>積の微分</b>:$\partial_i(fg)=(\partial_if)\,g+f\,(\partial_ig)$。</li>
+      <li><b>順序交換</b>:2階までの偏導関数が連続($C^2$ 級)なら、$\partial_i\partial_jf=\partial_j\partial_if$。例:$f=x^2y^3$ で、$\partial_x\partial_yf=\partial_x(3x^2y^2)=6xy^2$、$\partial_y\partial_xf=\partial_y(2xy^3)=6xy^2$。</li>
+    </ul>
+
+    <h3>連鎖律</h3>
+    <div class="box thm">
+      <div class="label">連鎖律(合成関数の微分)</div>
+      <p>$f(\bm{x})$ が(微分可能な意味で)なめらかで、$\bm{x}=\bm{x}(t)$ が $t$ の微分可能な関数のとき、
+      $$\frac{d}{dt}f(\bm{x}(t))=\sum_i\frac{\partial f}{\partial x_i}\frac{dx_i}{dt}=\nabla f\cdot\frac{d\bm{x}}{dt}.$$</p>
+    </div>
+    <p>例:$f=x^2+y^2$、$x=\cos t$、$y=\sin t$:$\dfrac{df}{dt}=2x(-\sin t)+2y\cos t=-2\cos t\sin t+2\sin t\cos t=0$($f=1$ が一定なので当然)。</p>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-02.html#w-partial" data-xref>第2回 1.4 偏微分、勾配、連鎖律</a><a href="weeks/week-02.html#s2-1" data-xref>第2回 2.1 ナブラと発散・勾配・回転</a><a href="weeks/week-02.html#s2-4" data-xref>第2回 2.4 例2.1と問[2-1]</a></p>
+
+    <!-- ===================== f: 微分積分学の基本定理 ===================== -->
+    <h2 id="ftc">f. 微分積分学の基本定理</h2>
+
+    <div class="box thm">
+      <div class="label">定理(微分積分学の基本定理)</div>
+      <p>$f$ が $[a,b]$ で連続微分可能なとき、
+      $$\int_a^bf'(x)\,dx=f(b)-f(a).$$</p>
+    </div>
+    <p><b>意味</b>:区間を細かく刻み、各小区間での $f$ の増分 $f'(x)\Delta x$ を全部足すと、全体の増分($=$ 両端の値の差 $f(b)-f(a)$)になります。途中の値は打ち消し合って消え、<b>両端の値だけ</b>が残る(望遠鏡の和)。</p>
+    <figure class="fig">
+      <svg viewBox="0 0 560 246" width="560" role="img" aria-label="微積分学の基本定理"><line x1="40" y1="214" x2="440" y2="214" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><line x1="40" y1="214" x2="40" y2="18" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><text class="t" x="444" y="220">x</text><text class="t" x="30" y="22">y</text><polyline points="70,180 75,176.9 80,173.9 85,170.8 90,167.8 95,164.8 100,161.9 105,158.9 110,156 115,153.2 120,150.4 125,147.6 130,145 135,142.4 140,139.8 145,137.3 150,134.9 155,132.6 160,130.4 165,128.2 170,126.2 175,124.2 180,122.3 185,120.5 190,118.8 195,117.2 200,115.7 205,114.2 210,112.9 215,111.6 220,110.5 225,109.4 230,108.3 235,107.4 240,106.5 245,105.7 250,105 255,104.4 260,103.7 265,103.2 270,102.7 275,102.2 280,101.8 285,101.4 290,101 295,100.6 300,100.3 305,99.9 310,99.6 315,99.2 320,98.9 325,98.5 330,98.1 335,97.7 340,97.2 345,96.7 350,96.2 355,95.6 360,94.9 365,94.2 370,93.4" style="fill:none;stroke:var(--accent);stroke-width:2.6"/><text class="t" x="66" y="232" style="text-anchor:middle">a</text><text class="t" x="366" y="232" style="text-anchor:middle">b</text><line x1="70" y1="214" x2="70" y2="180" style="stroke:var(--muted);stroke-width:1.1;stroke-dasharray:5 4;fill:none"/><line x1="370" y1="214" x2="370" y2="93.4" style="stroke:var(--muted);stroke-width:1.1;stroke-dasharray:5 4;fill:none"/><line x1="70" y1="180" x2="452" y2="180" style="stroke:var(--muted);stroke-width:1.1;stroke-dasharray:5 4;fill:none"/><line x1="370" y1="93.4" x2="452" y2="93.4" style="stroke:var(--muted);stroke-width:1.1;stroke-dasharray:5 4;fill:none"/><circle cx="70" cy="180" r="4.5" style="fill:var(--accent)"/><circle cx="370" cy="93.4" r="4.5" style="fill:var(--accent)"/><line x1="452" y1="180" x2="452" y2="157.5" style="stroke:var(--thm);stroke-width:7"/><line x1="452" y1="157.5" x2="452" y2="137.3" style="stroke:var(--ex);stroke-width:7"/><line x1="452" y1="137.3" x2="452" y2="121.4" style="stroke:var(--thm);stroke-width:7"/><line x1="452" y1="121.4" x2="452" y2="110.5" style="stroke:var(--ex);stroke-width:7"/><line x1="452" y1="110.5" x2="452" y2="104" style="stroke:var(--thm);stroke-width:7"/><line x1="452" y1="104" x2="452" y2="100.6" style="stroke:var(--ex);stroke-width:7"/><line x1="452" y1="100.6" x2="452" y2="97.9" style="stroke:var(--thm);stroke-width:7"/><line x1="452" y1="97.9" x2="452" y2="93.4" style="stroke:var(--ex);stroke-width:7"/><text class="tt" x="462" y="140.7">f(b) − f(a)</text><text class="tm" x="100" y="40">細かく刻んだ増分 f′(x)Δx を</text><text class="tm" x="100" y="58">全部足すと、両端の値の差になる</text></svg>
+      <figcaption>$f$ の小さな増分(右の色分けされた棒)をすべてつなぐと、$f(b)-f(a)$ の長さになる。</figcaption>
+    </figure>
+    <details><summary>理由(証明の考え方)</summary>
+      <div class="box proof"><div class="label">考え方</div>
+      <p>区間を $a=x_0\lt x_1\lt\cdots\lt x_N=b$ と分けると、$f(b)-f(a)=\sum_{k}\bigl(f(x_k)-f(x_{k-1})\bigr)$(途中の項が打ち消し合う)。各項は、平均値の定理から $f'(\xi_k)(x_k-x_{k-1})$ の形で、これは積分(リーマン和)の項そのもの。細かくする極限で、和が $\int_a^bf'(x)\,dx$ になります。</p></div>
+    </details>
+
+    <h3>積分の基本的な性質と、置換積分</h3>
+    <ul>
+      <li><b>線形性</b>:$\int(af+bg)\,dx=a\int f\,dx+b\int g\,dx$。<b>区間の分割</b>:$\int_a^c=\int_a^b+\int_b^c$。<b>向き</b>:$\int_b^a=-\int_a^b$。</li>
+      <li><b>置換積分</b>:$x=x(s)$ と変数を変えると $\displaystyle\int g(x)\,dx=\int g(x(s))\,\frac{dx}{ds}\,ds$(形式的に $dx=\frac{dx}{ds}ds$ と置き換える)。線積分の定義は、これと同じ形です。</li>
+    </ul>
+    <div class="box ex">
+      <div class="label">例</div>
+      <p>$\displaystyle\int_0^\pi\sin x\,dx=[-\cos x]_0^\pi=2$。<br>
+      $\displaystyle\int_0^{\pi/2}\sin\theta\cos\theta\,d\theta=\Bigl[\frac{\sin^2\theta}{2}\Bigr]_0^{\pi/2}=\frac12$。<br>
+      $\displaystyle\int_0^{\pi/2}\cos^2\theta\sin\theta\,d\theta$:$u=\cos\theta$ とおくと $du=-\sin\theta\,d\theta$、$\theta:0\to\frac\pi2$ のとき $u:1\to0$ なので、$=\int_1^0(-u^2)\,du=\int_0^1u^2\,du=\dfrac13$。</p>
+    </div>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-02.html#w-ftc" data-xref>第2回 1.5 微分積分学の基本定理</a><a href="weeks/week-02.html#s4-2" data-xref>第2回 4.2 微積分学の基本定理との関係</a></p>
+
+    <!-- ===================== g: 重積分 ===================== -->
+    <h2 id="multint">g. 重積分と累次積分(体積積分)</h2>
+
+    <h3>重積分とは</h3>
+    <p>1変数の積分 $\int f\,dx$ は、「$f$ の値 × 幅 $\Delta x$」の和でした。2変数では、領域を小さい長方形(面積 $\Delta x\Delta y$)に分け、「$f$ の値 × 面積」を足します。これが<b>重積分</b> $\displaystyle\iint f\,dx\,dy$ です($f\ge0$ なら、グラフの下の<b>体積</b>)。3変数なら、小さな直方体(体積 $\Delta x\Delta y\Delta z$)に分けた<b>体積積分</b> $\displaystyle\int_Vf\,d\bm{x}$ です。</p>
+
+    <h3>累次積分:1変数の積分を順番に行う</h3>
+    <p>計算は、1変数の積分を<b>内側から順番に</b>行う<b>累次積分</b>で行います。
+    $$\iint_{[a,b]\times[c,d]}f\,dx\,dy=\int_c^d\Bigl(\int_a^bf(x,y)\,dx\Bigr)dy.$$
+    内側では $y$ を定数とみなして $x$ について積分し(帯の面積)、外側でその結果を $y$ について足します。</p>
+    <figure class="fig">
+      <svg viewBox="0 0 560 226" width="560" role="img" aria-label="累次積分:帯に切って足し合わせる"><line x1="60" y1="200" x2="380" y2="200" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><line x1="60" y1="200" x2="60" y2="24" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><text class="t" x="384" y="206">x</text><text class="t" x="50" y="24">y</text><rect x="100" y="50" width="230" height="21.7" rx="0" style="fill:var(--accent);opacity:0.2;stroke:none"/><rect x="100" y="71.7" width="230" height="21.7" rx="0" style="fill:var(--accent);opacity:0.1;stroke:none"/><rect x="100" y="93.3" width="230" height="21.7" rx="0" style="fill:var(--accent);opacity:0.2;stroke:none"/><rect x="100" y="115" width="230" height="21.7" rx="0" style="fill:var(--accent);opacity:0.1;stroke:none"/><rect x="100" y="136.7" width="230" height="21.7" rx="0" style="fill:var(--accent);opacity:0.2;stroke:none"/><rect x="100" y="158.3" width="230" height="21.7" rx="0" style="fill:var(--accent);opacity:0.1;stroke:none"/><rect x="100" y="50" width="230" height="130" rx="0" style="fill:none;stroke:var(--accent);stroke-width:2"/><rect x="100" y="93.3" width="230" height="21.7" rx="0" style="fill:var(--thm);opacity:.38;stroke:var(--thm);stroke-width:1.5"/><line x1="106" y1="104.2" x2="315.6" y2="104.2" style="stroke:var(--thm);stroke-width:2.2;fill:none"/><polygon points="324,104.2 315,108.6 315,99.8" style="fill:var(--thm)"/><text class="t" x="96" y="216" style="text-anchor:middle">a</text><text class="t" x="330" y="216" style="text-anchor:middle">b</text><text class="t" x="48" y="184" style="text-anchor:end">c</text><text class="t" x="48" y="54" style="text-anchor:end">d</text><text class="tm" x="340" y="96.2">この帯(幅 Δy)</text><text class="tm" x="340" y="114.2">の上で x 方向に積分</text><text class="tm" x="340" y="176">帯を y 方向に並べて足す</text></svg>
+      <figcaption>領域を $x$ 方向の帯に切り、各帯の上でまず $x$ 方向に端から端まで積分し(橙の矢印)、その結果を $y$ 方向に足し合わせる。</figcaption>
+    </figure>
+    <div class="box ex">
+      <div class="label">例</div>
+      <p>$\displaystyle\iint_{[0,1]^2}(x+y)\,dx\,dy=\int_0^1\Bigl(\int_0^1(x+y)\,dx\Bigr)dy=\int_0^1\Bigl(\frac12+y\Bigr)dy=\frac12+\frac12=1$。</p>
+    </div>
+    <p>領域が長方形でないときは、内側の積分の範囲が外側の変数に依存します(例:$x^2\le y\le1$ なら、$y$ を定数として $x$ の範囲は $-\sqrt y\le x\le\sqrt y$、または、$x$ を先に固定して $y$ の範囲を $x^2\le y\le1$ としてもよい)。</p>
+
+    <h3>球と球面</h3>
+    <ul>
+      <li>半径 $R$ の球の<b>体積</b> $\dfrac43\pi R^3$、球面の<b>面積</b> $4\pi R^2$。</li>
+      <li><b>球殻に分ける</b>:原点からの距離 $r$ だけに依存する関数 $g(r)$ の積分は、半径 $r$、厚さ $dr$ の薄い球殻(体積 $\approx4\pi r^2\,dr$)に分けて $\displaystyle\int_{|\bm{x}|\le R}g\,d\bm{x}=\int_0^Rg(r)\,4\pi r^2\,dr$。たとえば $\displaystyle\int_{|\bm{x}|\le1}d\bm{x}=\int_0^14\pi r^2dr=\frac{4\pi}{3}$、$\displaystyle\int_{|\bm{x}|\le1}r^2\,d\bm{x}=\int_0^14\pi r^4dr=\frac{4\pi}{5}$。</li>
+      <li><b>球面上の積分</b>:球面座標(次の「パラメータ表示」)で、半径 $R$ の球面の面素は $dS=R^2\sin\theta\,d\theta\,d\varphi$。たとえば $\displaystyle\int_{|\bm{x}|=1}z^2\,dS=\int_0^{2\pi}\!d\varphi\int_0^\pi\cos^2\theta\sin\theta\,d\theta=2\pi\cdot\frac23=\frac{4\pi}{3}$(対称性から $x^2,y^2$ でも同じ値で、3つの和が $\int1\,dS=4\pi$ になることとも合う)。</li>
+    </ul>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-02.html#w-multint" data-xref>第2回 1.6 重積分と累次積分</a><a href="weeks/week-02.html#s4-4" data-xref>第2回 4.4 ガウスの定理(直方体)</a><a href="weeks/week-02.html#s4-6" data-xref>第2回 4.6 問[2-5][2-6]</a></p>
+
+    <!-- ===================== h: パラメータ表示 ===================== -->
+    <h2 id="param">h. 曲線・曲面のパラメータ表示</h2>
+
+    <h3>曲線のパラメータ表示と接線ベクトル</h3>
+    <p>曲線を、1つのパラメータ(媒介変数)$s$ で位置を表す形 $\bm{x}(s)=(x_1(s),\dots,x_n(s))$($0\le s\le a$)で表します。$s$ を動かすと点が曲線をたどるので、「質点の運動の軌道」と同じです。微分
+    $$\frac{d\bm{x}}{ds}=\Bigl(\frac{dx_1}{ds},\dots,\frac{dx_n}{ds}\Bigr)$$
+    は、曲線の<b>接線ベクトル</b>(質点の速度ベクトル)です。</p>
+    <figure class="fig">
+      <svg viewBox="0 0 540 256" width="540" role="img" aria-label="円のパラメータ表示と接線ベクトル"><line x1="30" y1="132" x2="262" y2="132" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><line x1="140" y1="246" x2="140" y2="20" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><text class="t" x="266" y="150">x</text><text class="t" x="148" y="22">y</text><circle cx="140" cy="132" r="92" style="fill:none;stroke:var(--accent);stroke-width:2"/><path d="M232 132 A92 92 0 0 0 140 40" style="fill:none;stroke:var(--ex);stroke-width:4"/><line x1="140" y1="132" x2="199.1" y2="61.5" style="stroke:var(--muted);stroke-width:1.1;stroke-dasharray:5 4;fill:none"/><circle cx="199.1" cy="61.5" r="4.8" style="fill:var(--thm)"/><path d="M170 132 A30 30 0 0 0 159.3 109" style="fill:none;stroke:var(--muted);stroke-width:1.4"/><text class="t" x="176" y="124">θ</text><line x1="199.1" y1="61.5" x2="170.3" y2="37.4" style="stroke:var(--thm);stroke-width:2.8;fill:none"/><polygon points="163.9,32 173.6,34.4 168,41.1" style="fill:var(--thm)"/><text class="tm" x="238" y="148">(1,0)</text><text class="tm" x="148" y="32">(0,1)</text><text class="tj" x="300" y="70">x(θ) = (cosθ, sinθ)</text><text class="tm" x="300" y="94">0 ≦ θ ≦ π/2 が緑の部分</text><text class="tm" x="300" y="118">(1,0) から (0,1) までの 1/4 円</text><text class="tt" x="300" y="156">dx/dθ = (−sinθ, cosθ)</text><text class="tm" x="300" y="176">= 曲線に沿った向きの</text><text class="tm" x="300" y="194">  接線ベクトル(橙の矢印)</text></svg>
+      <figcaption>単位円 $\bm{x}(\theta)=(\cos\theta,\sin\theta)$ の $0\le\theta\le\frac\pi2$ の部分(緑)。点での接線ベクトル $d\bm{x}/d\theta=(-\sin\theta,\cos\theta)$(橙)。</figcaption>
+    </figure>
+    <figure class="fig">
+      <svg viewBox="0 0 520 290" width="520" role="img" aria-label="螺旋のパラメータ表示"><line x1="200" y1="236" x2="136.3" y2="281.3" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><polygon points="130.3,285.6 134.8,278.2 138.7,283.7" style="fill:var(--muted)"/><text class="t" x="136.3" y="289.6">x</text><line x1="200" y1="236" x2="362.6" y2="236" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><polygon points="370,236 362,239.4 362,232.6" style="fill:var(--muted)"/><text class="t" x="376" y="240">y</text><line x1="200" y1="236" x2="200" y2="100.8" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><polygon points="200,93.4 203.4,101.4 196.6,101.4" style="fill:var(--muted)"/><text class="t" x="206" y="101.4">z</text><polyline points="155,268 160.3,266.9 165.7,265.8 171.2,264.5 176.8,263.2 182.4,261.7 188.1,260.2 193.8,258.6 199.6,257 205.3,255.2 211,253.4 216.7,251.5 222.4,249.5 228,247.4 233.5,245.3 238.9,243.1 244.2,240.9 249.4,238.6 254.5,236.2 259.4,233.8 264.1,231.3 268.7,228.8 273.1,226.3 277.2,223.7 281.2,221.1 284.9,218.4 288.5,215.8 291.7,213.1 294.7,210.4 297.5,207.7 300,205 302.2,202.3 304.2,199.6 305.8,196.9 307.2,194.2 308.2,191.6 309,188.9 309.5,186.3 309.7,183.7 309.5,181.2 309.1,178.7 308.4,176.2 307.4,173.8 306,171.4 304.4,169.1 302.5,166.9 300.4,164.7 297.9,162.6 295.2,160.5 292.2,158.5 289,156.6 285.5,154.8 281.8,153 277.8,151.4 273.7,149.8 269.3,148.3 264.8,146.8 260.1,145.5 255.2,144.2 250.2,143.1 245,142 239.7,141 234.3,140.1 228.8,139.3 223.2,138.6 217.6,137.9 211.9,137.4 206.2,136.9 200.4,136.5 194.7,136.2 189,136 183.3,135.8 177.6,135.7 172,135.7 166.5,135.8 161.1,135.9 155.8,136.1 150.6,136.3 145.5,136.6 140.6,136.9 135.9,137.3 131.3,137.8 126.9,138.3 122.8,138.8 118.8,139.3 115.1,139.9 111.5,140.5 108.3,141.1 105.3,141.7 102.5,142.4 100,143 97.8,143.6 95.8,144.3 94.2,144.9 92.8,145.5 91.8,146.1 91,146.7 90.5,147.2 90.3,147.7 90.5,148.2 90.9,148.7 91.6,149.1 92.6,149.4 94,149.7 95.6,149.9 97.5,150.1 99.6,150.2 102.1,150.3 104.8,150.3 107.8,150.2 111,150 114.5,149.8 118.2,149.5 122.2,149.1 126.3,148.6 130.7,148.1 135.2,147.4 139.9,146.7 144.8,145.9 149.8,145 155,144" style="fill:none;stroke:var(--muted);stroke-width:1.5;stroke-dasharray:4 4"/><polyline points="155,268 160.3,266.9 165.7,265.8 171.2,264.5 176.8,263.2 182.4,261.7 188.1,260.2 193.8,258.6 199.6,257 205.3,255.2 211,253.4 216.7,251.5 222.4,249.5 228,247.4 233.5,245.3 238.9,243.1 244.2,240.9 249.4,238.6 254.5,236.2 259.4,233.8 264.1,231.3 268.7,228.8 273.1,226.3 277.2,223.7 281.2,221.1 284.9,218.4 288.5,215.8 291.7,213.1 294.7,210.4 297.5,207.7 300,205 302.2,202.3 304.2,199.6 305.8,196.9 307.2,194.2 308.2,191.6 309,188.9 309.5,186.3 309.7,183.7 309.5,181.2 309.1,178.7 308.4,176.2 307.4,173.8 306,171.4 304.4,169.1 302.5,166.9 300.4,164.7 297.9,162.6 295.2,160.5 292.2,158.5 289,156.6 285.5,154.8 281.8,153 277.8,151.4 273.7,149.8 269.3,148.3 264.8,146.8 260.1,145.5 255.2,144.2 250.2,143.1 245,142" style="fill:none;stroke:var(--thm);stroke-width:3.2"/><circle cx="155" cy="268" r="4.6" style="fill:var(--accent)"/><circle cx="245" cy="142" r="4.6" style="fill:var(--accent)"/><text class="tm" x="165" y="282">s = 0:(1, 0, 0)</text><text class="tm" x="255" y="136">s = π:(−1, 0, 1/2)</text><text class="tj" x="300" y="60">x(s) = (cos s, sin s, s/2π)</text><text class="tm" x="300" y="82">実線:0 ≦ s ≦ π(半周)</text><text class="tm" x="300" y="100">点線:その先(もう半周)</text></svg>
+      <figcaption>螺旋 $\bm{x}(s)=(\cos s,\sin s,s/2\pi)$。$0\le s\le\pi$(橙の実線)は半周分で、$z$ は 0 から $\frac12$ まで上がる。</figcaption>
+    </figure>
+
+    <h3>曲面のパラメータ表示(球面)</h3>
+    <p>曲面は、2つのパラメータで表します。原点中心・半径 $r$ の球面は、$z$ 軸からの角 $\theta$($0\le\theta\le\pi$)と、$x$ 軸から測った回転角 $\varphi$($0\le\varphi\lt2\pi$)を使って
+    $$x=r\sin\theta\cos\varphi,\qquad y=r\sin\theta\sin\varphi,\qquad z=r\cos\theta$$
+    と表されます。</p>
+    <figure class="fig">
+      <svg viewBox="0 0 610 330" width="610" role="img" aria-label="球面のパラメータ表示(θ, φ)"><circle cx="170" cy="176" r="112" style="fill:var(--accent);opacity:.07;stroke:var(--accent);stroke-width:1.8"/><polyline points="119.6,211.8 129.6,211.7 139.8,211.3 150.3,210.6 160.9,209.7 171.7,208.5 182.4,207 193,205.4 203.4,203.5 213.6,201.3 223.4,199 232.8,196.6 241.8,193.9 250.2,191.1 258,188.3 265.1,185.3 271.5,182.2 277.2,179.1 282,176 286,172.9 289.1,169.8 291.2,166.7 292.5,163.7 292.8,160.9 292.2,158.1 290.7,155.4 288.2,153 284.8,150.7 280.6,148.5 275.5,146.6 269.6,145 263,143.5 255.7,142.3 247.7,141.4 239.1,140.7 230,140.3 220.4,140.2 210.4,140.3 200.2,140.7 189.7,141.4 179.1,142.3 168.3,143.5 157.6,145 147,146.6 136.6,148.5 126.4,150.7 116.6,153 107.2,155.4 98.2,158.1 89.8,160.9 82,163.7 74.9,166.7 68.5,169.8 62.8,172.9 58,176 54,179.1 50.9,182.2 48.8,185.3 47.5,188.3 47.2,191.1 47.8,193.9 49.3,196.6 51.8,199 55.2,201.3 59.4,203.5 64.5,205.4 70.4,207 77,208.5 84.3,209.7 92.3,210.6 100.9,211.3 110,211.7 119.6,211.8" style="fill:none;stroke:var(--muted);stroke-width:1.2;stroke-dasharray:4 4"/><line x1="170" y1="176" x2="106.5" y2="221.2" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><polygon points="100.4,225.5 105,218.1 108.9,223.6" style="fill:var(--muted)"/><text class="t" x="86.4" y="239.5">x</text><line x1="170" y1="176" x2="317.2" y2="176" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><polygon points="324.6,176 316.6,179.4 316.6,172.6" style="fill:var(--muted)"/><text class="t" x="330.6" y="180">y</text><line x1="170" y1="176" x2="170" y2="31.1" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><polygon points="170,23.7 173.4,31.7 166.6,31.7" style="fill:var(--muted)"/><text class="t" x="176" y="31.7">z</text><line x1="170" y1="176" x2="195.6" y2="125" style="stroke:var(--thm);stroke-width:2.6"/><line x1="195.6" y1="197" x2="195.6" y2="125" style="stroke:var(--muted);stroke-width:1.1;stroke-dasharray:5 4;fill:none"/><line x1="170" y1="176" x2="195.6" y2="197" style="stroke:var(--muted);stroke-width:1.1;stroke-dasharray:5 4;fill:none"/><polyline points="170,114.4 170.5,114.9 171.1,115.4 171.6,116 172.1,116.6 172.7,117.2 173.2,118 173.7,118.7 174.2,119.5 174.8,120.4 175.3,121.3 175.8,122.3 176.3,123.3 176.8,124.3 177.3,125.4 177.8,126.6 178.2,127.7 178.7,128.9 179.2,130.2 179.6,131.5 180.1,132.8 180.5,134.2 181,135.6 181.4,137 181.8,138.5 182.2,140 182.6,141.6 183,143.1 183.4,144.7 183.7,146.3 184.1,148" style="fill:none;stroke:var(--ex);stroke-width:2.4"/><polyline points="144.8,193.9 146.1,193.9 147.4,193.9 148.8,193.9 150.1,193.8 151.5,193.8 152.8,193.7 154.2,193.7 155.6,193.6 157,193.5 158.4,193.4 159.8,193.3 161.2,193.2 162.6,193.1 164,193 165.5,192.8 166.9,192.7 168.3,192.5 169.8,192.4 171.2,192.2 172.6,192 174,191.8 175.5,191.6 176.9,191.4 178.3,191.2 179.7,191 181.1,190.7 182.5,190.5 183.9,190.2 185.3,190 186.7,189.7" style="fill:none;stroke:var(--accent);stroke-width:2.4"/><circle cx="195.6" cy="125" r="5" style="fill:var(--thm)"/><text class="tm" x="203.6" y="119">(x, y, z)</text><text class="t" x="179.4" y="139.8" style="fill:var(--ex);font-size:17px">θ</text><text class="t" x="169.9" y="204.5" style="fill:var(--accent);font-size:17px">φ</text><text class="t" x="228" y="188.5">r</text><text class="tj" x="370" y="70">x = r sinθ cosφ</text><text class="tj" x="370" y="92">y = r sinθ sinφ</text><text class="tj" x="370" y="114">z = r cosθ</text><text class="tm" x="370" y="144" style="fill:var(--ex)">θ:z軸からの角(0〜π)</text><text class="tm" x="370" y="162" style="fill:var(--accent)">φ:x軸からの回転角(0〜2π)</text><text class="tm" x="370" y="180">r:原点からの距離(半径)</text></svg>
+      <figcaption>球面の点 $(x,y,z)$ と、角 $\theta$(緑)、$\varphi$(青)。</figcaption>
+    </figure>
+    <p><b>外向き単位法線ベクトル</b>は、球面の点では $\bm{n}=\bm{x}/r$(原点から点へ向かう向きの単位ベクトル)です。</p>
+
+    <h3>平面と法線ベクトル</h3>
+    <p>点 $\bm{x}_0$ を通り、法線ベクトル $\bm{n}=(a,b,c)\ne\bm{0}$ をもつ平面の方程式は
+    $$\bm{n}\cdot(\bm{x}-\bm{x}_0)=0\quad\Longleftrightarrow\quad a(x-x_0)+b(y-y_0)+c(z-z_0)=0.$$
+    平面上の2つの(平行でない)ベクトル $\bm{u},\bm{v}$ があれば、$\bm{n}=\bm{u}\times\bm{v}$ が法線ベクトルです。</p>
+
+    <h3>面素ベクトル</h3>
+    <p>曲面 $\bm{x}(u,v)$ の微小な部分は、2つの接線ベクトル $\partial_u\bm{x}\,du$、$\partial_v\bm{x}\,dv$ が作る平行四辺形に近い。その<b>面積ベクトル</b>(向きは法線、長さは面積)は外積で
+    $$d\bm{S}=\partial_u\bm{x}\times\partial_v\bm{x}\,du\,dv.$$</p>
+    <details><summary>理由(球面で確かめる)</summary>
+      <div class="box proof"><div class="label">計算</div>
+      <p>半径 $r$ の球面で $\partial_\theta\bm{x}=r(\cos\theta\cos\varphi,\ \cos\theta\sin\varphi,\ -\sin\theta)$、$\partial_\varphi\bm{x}=r(-\sin\theta\sin\varphi,\ \sin\theta\cos\varphi,\ 0)$。外積を計算すると
+      $$\partial_\theta\bm{x}\times\partial_\varphi\bm{x}=r^2\sin\theta\,(\sin\theta\cos\varphi,\ \sin\theta\sin\varphi,\ \cos\theta)=r^2\sin\theta\,\bm{n}.$$
+      つまり、向きは外向き法線 $\bm{n}$、面積は $dS=r^2\sin\theta\,d\theta\,d\varphi$ です。</p></div>
+    </details>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-02.html#w-param" data-xref>第2回 1.7 パラメータ表示</a><a href="weeks/week-02.html#s3-1" data-xref>第2回 3.1 線積分</a><a href="weeks/week-02.html#s3-2" data-xref>第2回 3.2 面積分</a></p>
+
+    <!-- ===================== i: 極大・極小 ===================== -->
+    <h2 id="extrema">i. 極大・極小と2階微分</h2>
+
+    <h3>1変数の場合</h3>
+    <p>$f$ が $x_0$ で<b>極大</b>(まわりより高い山の頂上)なら、そこでの接線は水平($f'(x_0)=0$)で、グラフは上に凸($f''(x_0)\le0$)。<b>極小</b>(谷の底)なら $f'(x_0)=0$、下に凸($f''(x_0)\ge0$)。2階微分 $f''$ は、「傾き $f'$ の変化の度合い」、つまり曲がり方です。</p>
+    <figure class="fig">
+      <svg viewBox="0 0 520 206" width="520" role="img" aria-label="極大・極小と2階微分"><line x1="20" y1="170" x2="250" y2="170" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><line x1="270" y1="170" x2="500" y2="170" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><polyline points="30,150 35,141.2 40,132.9 45,125 50,117.6 55,110.6 60,104.1 65,98 70,92.4 75,87.2 80,82.5 85,78.2 90,74.4 95,71 100,68.1 105,65.6 110,63.6 115,62 120,60.9 125,60.2 130,60 135,60.2 140,60.9 145,62 150,63.6 155,65.6 160,68.1 165,71 170,74.4 175,78.2 180,82.5 185,87.2 190,92.4 195,98 200,104.1 205,110.6 210,117.6 215,125 220,132.9 225,141.2 230,150" style="fill:none;stroke:var(--accent);stroke-width:2.6"/><polyline points="280,70 285,78.8 290,87.1 295,95 300,102.4 305,109.4 310,115.9 315,122 320,127.6 325,132.8 330,137.5 335,141.8 340,145.6 345,149 350,151.9 355,154.4 360,156.4 365,158 370,159.1 375,159.8 380,160 385,159.8 390,159.1 395,158 400,156.4 405,154.4 410,151.9 415,149 420,145.6 425,141.8 430,137.5 435,132.8 440,127.6 445,122 450,115.9 455,109.4 460,102.4 465,95 470,87.1 475,78.8 480,70" style="fill:none;stroke:var(--accent);stroke-width:2.6"/><line x1="70" y1="60" x2="190" y2="60" style="stroke:var(--thm);stroke-width:1.6;stroke-dasharray:5 4"/><line x1="320" y1="160" x2="440" y2="160" style="stroke:var(--thm);stroke-width:1.6;stroke-dasharray:5 4"/><circle cx="130" cy="60" r="5" style="fill:var(--thm)"/><circle cx="380" cy="160" r="5" style="fill:var(--thm)"/><text class="tj" x="130" y="36" style="text-anchor:middle">極大(山の頂上)</text><text class="tj" x="380" y="36" style="text-anchor:middle">極小(谷の底)</text><text class="tm" x="130" y="192" style="text-anchor:middle">f′ = 0、f″ ≦ 0(上に凸)</text><text class="tm" x="380" y="192" style="text-anchor:middle">f′ = 0、f″ ≧ 0(下に凸)</text><text class="tm" x="194" y="54">接線は水平</text><text class="tm" x="444" y="154">接線は水平</text></svg>
+      <figcaption>極大では上に凸($f''\le0$)、極小では下に凸($f''\ge0$)。</figcaption>
+    </figure>
+
+    <h3>多変数の場合</h3>
+    <p>多変数関数が最大の点で最大値をとるなら、<b>どの方向の断面を見ても、その点が頂上</b>になっています。特に、座標軸の方向の断面を見れば、$\partial_i^2f\le0$($i=1,\dots,n$)です。したがって、それらを足したラプラシアン $\Delta f=\sum_i\partial_i^2f\le0$。逆に最小の点では $\Delta f\ge0$。</p>
+    <div class="box ex">
+      <div class="label">例</div>
+      <p>$f=-x^2-y^2$ は原点で最大(値 0)で、$\Delta f=-2-2=-4\lt0$。$f=x^2+y^2$ は原点で最小で、$\Delta f=4\gt0$。</p>
+    </div>
+
+    <h3>最大値の定理</h3>
+    <div class="box thm">
+      <div class="label">定理(最大値・最小値の存在)</div>
+      <p>有界な閉じた領域(境界を含み、無限に広がらない領域)で連続な関数は、その領域で<b>最大値と最小値をとる</b>。</p>
+    </div>
+    <p>最大値をとる点は、領域の内部のこともあれば、境界のこともあります。たとえば $f(x)=x$ の $[0,1]$ での最大値は、境界($x=1$)でとります。「境界か内部か」という問いが、調和関数の最大値原理の中心です。</p>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-02.html#w-extrema" data-xref>第2回 1.8 極大・極小と2階微分</a><a href="weeks/week-02.html#s5-2" data-xref>第2回 5.2 最大値原理</a></p>
+
+
+  </main>
+
+  <footer>© Aセメまとめノート</footer>
+</body>
+</html>
