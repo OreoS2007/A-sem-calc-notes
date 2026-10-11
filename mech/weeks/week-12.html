@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>第12回 回転座標系とコリオリ力 | Aセメまとめノート</title>
+  <link rel="stylesheet" href="../../assets/style.css">
+  <script defer src="../../assets/nav.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],macros:{'\\R':'\\mathbb{R}','\\bm':'\\boldsymbol{#1}','\\dd':'\\mathrm{d}'}});window.__navReady&&window.__navReady()"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="inner">
+      <a class="site-title" href="../../index.html">Aセメまとめノート</a>
+      <span class="links"><a href="../index.html">力学A</a><a href="../basics.html">基礎のまとめ</a><a href="../../calc/index.html">微積</a><a href="../../linalg/index.html">線形代数</a><a href="../../em/index.html">電磁気学</a></span>
+    </div>
+  </header>
+
+  <main class="note">
+    <h1>第12回:回転座標系とコリオリ力</h1>
+    <div class="meta">力学A(東京大学 教養学部 秋学期)／板書 p.18〜p.20(PDF の順に数えています)／ノートの見出し「慣性系に対し回転している座標系」</div>
+
+    <nav class="toc">
+      <div class="toc-title">目次</div>
+      <ol start="0">
+        <li><a href="#s0">この回の全体像</a></li>
+        <li><a href="#s1">準備:基礎の確認</a>
+          <div class="sub">ベクトルの外積／角速度ベクトル／べき級数展開と係数比較</div></li>
+        <li><a href="#s2">回転するベクトルの変化:$\dot{\bm a}=\bm\omega\times\bm a$</a>(p.18)</li>
+        <li><a href="#s3">地球上の座標系(南・東・上)</a>(p.18)</li>
+        <li><a href="#s4">見かけの力:コリオリ力と遠心力</a>(p.18)</li>
+        <li><a href="#s5">$\bm\omega$ の成分と、成分ごとの運動方程式</a>(p.18–19)</li>
+        <li><a href="#s6">自由落下:逐次近似法</a>(p.19–20)</li>
+        <li><a href="#s7">具体例で練習</a></li>
+        <li><a href="#s8">まとめ(この回で覚えること)</a></li>
+        <li><a href="#s9">この回のノートについてのメモ</a></li>
+      </ol>
+    </nav>
+
+    <!-- ===================== 0 ===================== -->
+    <h2 id="s0">0. この回の全体像 <span class="page-tag">板書 p.18–20</span></h2>
+    <p>ニュートンの運動方程式 $m\ddot{\bm r}=\bm F$ が、そのままの形で成り立つ座標系を<b>慣性系</b>といいます。ところが、私たちは自転する地球の上に立っていて、地面に固定された座標系は<b>慣性系に対して回転している</b>座標系です。この回転する座標系の中で運動を記述すると、運動方程式に<b>見かけの力</b>が現れます。</p>
+    <ol>
+      <li>回転する座標系の中で、時間とともに変わる量を、慣性系から見た変化に直す規則:$\dot{\bm a}=\bm\omega\times\bm a$。</li>
+      <li>これを2回使うと、$m\bm a=\bm F-2m\bm\omega\times\bm v-m\bm\omega\times(\bm\omega\times\bm r)$:<b>コリオリ力</b>と<b>遠心力</b>。</li>
+      <li>地球の自転では、遠心力は小さくて無視できる($\omega^2R=0.034\ \mathrm{m/s^2}$ は $g$ の約 0.3%)。コリオリ力だけを考える。</li>
+      <li>高さ $h$ からの自由落下で、コリオリ力の効果(<b>東向きのずれ</b>)を、<b>逐次近似法</b>(角速度 $\omega$ のべきで展開して、次数ごとに解く)で求める。</li>
+    </ol>
+    <figure class="fig">
+      <svg viewBox="0 0 560 250" width="560" role="img" aria-label="回転するベクトルの変化"><line x1="150" y1="230" x2="150" y2="48.4" style="stroke:var(--thm);stroke-width:3;fill:none"/><polygon points="150,40 154.4,49 145.6,49" style="fill:var(--thm)"/><text class="tt" x="140" y="52" style="text-anchor:end;fill:var(--thm)">ω(角速度ベクトル)</text><path d="M70 130 A80 24 0 1 0 230 130 A80 24 0 1 0 70 130" style="fill:none;stroke:var(--muted);stroke-width:1.6;stroke-dasharray:5 4"/><line x1="150" y1="230" x2="207" y2="152.8" style="stroke:var(--accent);stroke-width:3;fill:none"/><polygon points="212,146 210.2,155.9 203.1,150.6" style="fill:var(--accent)"/><text class="tt" x="208" y="180" style="fill:var(--accent)">a(位置ベクトル)</text><line x1="150" y1="130" x2="212" y2="146" style="stroke:var(--muted);stroke-width:1;fill:none"/><line x1="212" y1="146" x2="238.2" y2="135.2" style="stroke:var(--ex);stroke-width:3;fill:none"/><polygon points="246,132 239.4,139.5 236,131.4" style="fill:var(--ex)"/><text class="tt" x="252" y="132" style="fill:var(--ex)">da = ω × a dt</text><circle cx="212" cy="146" r="5" style="fill:var(--text)"/><text class="tt" x="158" y="195">θ</text><text class="tj" x="350" y="70" style="font-size:15px">|da| = |a| sinθ · ω dt</text><text class="tm" x="350" y="98">(円の半径 |a| sinθ)×(回る角 ω dt)</text><text class="tm" x="350" y="130">向き:軸と a の両方に垂直(右ねじ)</text><text class="tt" x="350" y="160" style="fill:var(--ex)">⇒ da/dt = ω × a</text></svg>
+      <figcaption>回転軸まわりに角速度 $\omega$ で回る点。$dt$ の間の位置ベクトルの変化 $d\bm a$ は、軸と $\bm a$ の両方に垂直で、大きさは $|\bm a|\sin\theta\cdot\omega\,dt$。</figcaption>
+    </figure>
+
+    <!-- ===================== 1 ===================== -->
+    <h2 id="s1">1. 準備:基礎の確認</h2>
+
+    <h3 id="w-cross">1.1 ベクトルの外積</h3>
+    <div class="box basic">
+      <div class="label">基礎:外積 $\bm a\times\bm b$ <a class="xref-link" href="../basics.html#cross" data-xref>→ 詳しい解説</a><a class="xref-link" href="../../em/basics.html#vec3" data-xref>→ 電磁気学の基礎(3次元ベクトル)</a></div>
+      <p>$\bm a\times\bm b$ は、$\bm a$ と $\bm b$ の両方に垂直で、向きは右ねじ($\bm a$ から $\bm b$ へ回すとき、ねじの進む向き)、大きさは $|\bm a||\bm b|\sin\theta$($\theta$ は2つのベクトルのなす角)。成分では
+      $$\bm a\times\bm b=(a_2b_3-a_3b_2,\ a_3b_1-a_1b_3,\ a_1b_2-a_2b_1).$$
+      $\bm a\times\bm b=-\bm b\times\bm a$、平行なら $0$。</p>
+    </div>
+
+    <h3 id="w-angvec">1.2 角速度ベクトル</h3>
+    <div class="box basic">
+      <div class="label">基礎:角速度ベクトル $\bm\omega$ <a class="xref-link" href="../basics.html#angvel" data-xref>→ 詳しい解説</a></div>
+      <p>回転を、1本のベクトルで表す:向きは回転軸(回転の向きに右ねじを回したとき、ねじが進む向き)、大きさ $|\bm\omega|=\omega$ は角速度(単位 rad/s)。地球の自転なら、北極の方を向き、$\omega=\dfrac{2\pi}{86164\ \mathrm s}=7.29\times10^{-5}\ \mathrm{s^{-1}}$(恒星日で測った値)。</p>
+    </div>
+
+    <h3 id="w-series">1.3 べき級数展開と係数比較</h3>
+    <div class="box basic">
+      <div class="label">基礎:パラメータで展開して、次数ごとに比べる <a class="xref-link" href="../basics.html#taylor1" data-xref>→ 詳しい解説</a></div>
+      <p>小さなパラメータ $\omega$ を含む量を $x=x_0+\omega x_1+\omega^2x_2+\cdots$ と展開する。「$\omega$ の恒等式」$A_0+\omega A_1+\cdots=B_0+\omega B_1+\cdots$ が(小さい範囲の)すべての $\omega$ で成り立つなら、各次数の係数が等しい:$A_0=B_0$、$A_1=B_1$、…。これで、解けない1つの方程式を、解ける方程式の列に分解できる。</p>
+    </div>
+
+    <!-- ===================== 2 ===================== -->
+    <h2 id="s2">2. 回転するベクトルの変化:$\dot{\bm a}=\bm\omega\times\bm a$ <span class="page-tag">板書 p.18</span></h2>
+    <p>板書:「$\bm a$ は位置ベクトル。$dt$ の間の $\bm a$ の変化を $d\bm a$ とすると、$|d\bm a|=|\bm a|\sin\theta\cdot\omega\,dt$、$d\bm a=\bm\omega\times\bm a\,dt$ ⇒ $\dot{\bm a}=\bm\omega\times\bm a$。」</p>
+    <ol class="step-list">
+      <li>角速度ベクトル $\bm\omega$(大きさ $\omega$、向きは回転軸)の周りを、位置ベクトル $\bm a$ が回っている。$\bm a$ と軸のなす角を $\theta$ とする。</li>
+      <li>$\bm a$ の先端は、軸から $|\bm a|\sin\theta$ の距離を、半径とする円を描く。</li>
+      <li>$dt$ の間に回る角は $\omega\,dt$ だから、先端の動く距離(弧の長さ)は $|d\bm a|=|\bm a|\sin\theta\cdot\omega\,dt$。</li>
+      <li>$d\bm a$ の向きは、円の接線の向き。軸と $\bm a$ の両方に垂直で、右ねじの向き。これは $\bm\omega\times\bm a$ の向きで、大きさ $\omega|\bm a|\sin\theta$ にもなる。</li>
+      <li>よって $d\bm a=\bm\omega\times\bm a\,dt$、すなわち $\dot{\bm a}=\bm\omega\times\bm a$。</li>
+    </ol>
+    <div class="box thm">
+      <div class="label">回転するベクトルの時間微分</div>
+      <p>角速度ベクトル $\bm\omega$ で、一様に回転している(慣性系から見て)ベクトル $\bm a$ について、$\dot{\bm a}=\bm\omega\times\bm a$。</p>
+    </div>
+
+    <!-- ===================== 3 ===================== -->
+    <h2 id="s3">3. 地球上の座標系(南・東・上) <span class="page-tag">板書 p.18</span></h2>
+    <p>板書:「地球上に原点をとり、その座標系での質点の座標を $(x(t),y(t),z(t))$(南、東、上)$=x\bm e_\theta+y\bm e_\varphi+z\bm e_r=\bm r_{\text{地上}}(t)$。地球中心に原点をとり、質点の位置ベクトルを $\bm r(t)=x\bm e_\theta+y\bm e_\varphi+(z+R)\bm e_r$(これも回転)。$\dot{\bm e}_i=\bm\omega\times\bm e_i$($i=\theta,\varphi,r$)。」</p>
+    <figure class="fig">
+      <svg viewBox="0 0 660 262" width="660" role="img" aria-label="北緯 α の座標軸"><circle cx="170" cy="140" r="100" style="fill:var(--accent);fill-opacity:.08;stroke:var(--muted);stroke-width:2"/><line x1="170" y1="258" x2="170" y2="20.4" style="stroke:var(--thm);stroke-width:2.6;fill:none"/><polygon points="170,12 174.4,21 165.6,21" style="fill:var(--thm)"/><text class="tm" x="178" y="26" style="fill:var(--thm)">ω(自転軸:北向き)</text><line x1="58" y1="140" x2="282" y2="140" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><text class="tm" x="58" y="156">赤道</text><line x1="170" y1="140" x2="250.9" y2="81.2" style="stroke:var(--muted);stroke-width:1.1;stroke-dasharray:5 4;fill:none"/><circle cx="250.9" cy="81.2" r="5" style="fill:var(--text)"/><path d="M206 140 A36 36 0 0 0 199.1 118.8" style="fill:none;stroke:var(--muted);stroke-width:1.4"/><text class="tt" x="214" y="132">α</text><line x1="250.9" y1="81.2" x2="287.8" y2="54.4" style="stroke:var(--accent);stroke-width:2.8;fill:none"/><polygon points="294.6,49.5 289.9,58.3 284.7,51.2" style="fill:var(--accent)"/><text class="tt" x="301.8" y="45.1" style="fill:var(--accent)">e_r(上)</text><line x1="250.9" y1="81.2" x2="277.7" y2="118.1" style="stroke:var(--ex);stroke-width:2.8;fill:none"/><polygon points="282.6,124.9 273.8,120.2 280.9,115" style="fill:var(--ex)"/><text class="tt" x="279" y="144.1" style="fill:var(--ex)">e_θ(南)</text><text class="tm" x="232.9" y="67.2" style="text-anchor:end">e_φ(東)は紙面の奥向き</text><text class="tj" x="380" y="60" style="font-size:15px">ω = ω(−cosα e_θ + sinα e_r)</text><text class="tt" x="380" y="90">= (−ω cosα, 0, ω sinα)  (南,東,上)</text><text class="tm" x="380" y="130">赤道(α = 0):ω は北向き(水平)</text><text class="tm" x="380" y="154">北極(α = 90°):ω は真上</text></svg>
+      <figcaption>北緯 $\alpha$ の地点の座標軸:$\bm e_r$(上)、$\bm e_\theta$(南)、$\bm e_\varphi$(東、紙面の奥向き)。自転の角速度ベクトル $\bm\omega$ は北向き。</figcaption>
+    </figure>
+    <ul>
+      <li>$\bm e_r$:地球の中心から外向き(<b>上</b>)。$\bm e_\theta$:<b>南</b>向き。$\bm e_\varphi$:<b>東</b>向き。$(\bm e_\theta,\bm e_\varphi,\bm e_r)$ の順で右手系。</li>
+      <li>この3本の単位ベクトルは、地球とともに<b>回転している</b>(地面に固定されているので)。だから、$\dot{\bm e}_i=\bm\omega\times\bm e_i$。</li>
+      <li>地球上の観測者が見る座標 $(x,y,z)$ は、この回転する基底で測ったもの。観測者の速度・加速度は、$(x,y,z)$ をそのまま微分したもの:$\bm v=\dot x\bm e_\theta+\dot y\bm e_\varphi+\dot z\bm e_r$、$\bm a=\ddot x\bm e_\theta+\ddot y\bm e_\varphi+\ddot z\bm e_r$。</li>
+    </ul>
+    <p>板書:このとき($\bm R$ の長さは $R$ で一定、$\bm\omega$ も一定)、積の微分で
+    $$\dot{\bm r}=\dot x\bm e_\theta+\dot y\bm e_\varphi+\dot z\bm e_r+x(\bm\omega\times\bm e_\theta)+y(\bm\omega\times\bm e_\varphi)+(z+R)(\bm\omega\times\bm e_r).$$
+    もう1回微分すると、
+    $$\ddot{\bm r}=\ddot x\bm e_\theta+\ddot y\bm e_\varphi+\ddot z\bm e_r+2\bigl(\dot x(\bm\omega\times\bm e_\theta)+\dot y(\bm\omega\times\bm e_\varphi)+\dot z(\bm\omega\times\bm e_r)\bigr)+x\,\bm\omega\times(\bm\omega\times\bm e_\theta)+y\,\bm\omega\times(\bm\omega\times\bm e_\varphi)+(z+R)\,\bm\omega\times(\bm\omega\times\bm e_r).$$
+    (真ん中の「2」は、$\dot x\bm e_\theta$ を微分して出る $\dot x(\bm\omega\times\bm e_\theta)$ と、$x(\bm\omega\times\bm e_\theta)$ を微分して出る $\dot x(\bm\omega\times\bm e_\theta)$ が同じ形で、2つ足されたもの。)</p>
+
+    <!-- ===================== 4 ===================== -->
+    <h2 id="s4">4. 見かけの力:コリオリ力と遠心力 <span class="page-tag">板書 p.18</span></h2>
+    <p>板書:地球上の観測者から見た速度 $\bm v$、加速度 $\bm a$ を使って、前節の結果をまとめると、
+    $$\ddot{\bm r}(t)=\bm a+2\bm\omega\times\bm v+\bm\omega\times\bigl(\bm\omega\times\bm r(t)\bigr).$$
+    (右辺の2項目と3項目は、板書で、それぞれ波かっこで強調されている。)</p>
+    <p>$m\ddot{\bm r}=\bm F$(慣性系の運動方程式)より、
+    $$\boxed{\,m\bm a=\bm F-2m\,\bm\omega\times\bm v-m\,\bm\omega\times(\bm\omega\times\bm r)\,}$$</p>
+    <div class="box def">
+      <div class="label">見かけの力</div>
+      <p>回転座標系の観測者から見ると、実際の力 $\bm F$ のほかに、2つの<b>見かけの力</b>がはたらいているように見える。</p>
+      <ul>
+        <li><b>コリオリ力</b> $-2m\,\bm\omega\times\bm v$:速度 $\bm v$ に垂直で、速さに比例。静止している物体にははたらかない。</li>
+        <li><b>遠心力</b> $-m\,\bm\omega\times(\bm\omega\times\bm r)$:回転軸から遠ざかる向きで、軸からの距離に比例($m\omega^2\times$ 軸からの距離)。</li>
+      </ul>
+    </div>
+    <div class="box supp">
+      <div class="label">板書にない補足:遠心力が「軸から遠ざかる」ことの確認</div>
+      <p>軸を $z$ 軸、$\bm\omega=(0,0,\omega)$、$\bm r=(x,y,z)$ とすると、$\bm\omega\times\bm r=\omega(-y,x,0)$、$\bm\omega\times(\bm\omega\times\bm r)=\omega^2(-x,-y,0)$。よって $-m\bm\omega\times(\bm\omega\times\bm r)=m\omega^2(x,y,0)$:軸から外向きで、大きさは $m\omega^2\times(\text{軸からの距離})$。</p>
+    </div>
+
+    <!-- ===================== 5 ===================== -->
+    <h2 id="s5">5. $\bm\omega$ の成分と、成分ごとの運動方程式 <span class="page-tag">板書 p.18–19</span></h2>
+    <p>板書:「$\bm\omega$ の地上成分:$\bm\omega=\omega(-\cos\alpha\,\bm e_\theta+\sin\alpha\,\bm e_r)=(-\omega\cos\alpha,\ 0,\ \omega\sin\alpha)$」。</p>
+    <p><b>理由。</b>北緯 $\alpha$ の地点で、$\bm\omega$ は北極を向きます。「上」の成分は $\omega\sin\alpha$(赤道で 0、北極で最大)。「南」の成分は、北向きだから負で $-\omega\cos\alpha$(赤道で $-\omega$、北極で 0)。東西の成分は 0(北は東西に垂直)。</p>
+    <p>板書:$\bm r=(x,y,z)$、$\bm v=(\dot x,\dot y,\dot z)$、$\bm a=(\ddot x,\ddot y,\ddot z)$、
+    $$\bm\omega\times\bm v=\bigl(-\dot y\,\omega\sin\alpha,\ \ \dot x\,\omega\sin\alpha+\dot z\,\omega\cos\alpha,\ \ -\dot y\,\omega\cos\alpha\bigr).$$
+    これは、外積の定義どおりで、$\bm\omega=\omega(-\cos\alpha,0,\sin\alpha)$、$\bm v=(\dot x,\dot y,\dot z)$ から:
+    $x$ 成分 $=0\cdot\dot z-\sin\alpha\,\dot y$ ✓、$y$ 成分 $=\sin\alpha\,\dot x-(-\cos\alpha)\dot z$ ✓、$z$ 成分 $=-\cos\alpha\,\dot y-0\cdot\dot x$ ✓。</p>
+    <p>遠心力は無視します。板書(p.19の最初):「地上は $\omega=7.3\times10^{-5}\ [/\mathrm s]$、$\omega^2R=0.034\ [\mathrm{m/s^2}]$($g=9.8\ [\mathrm{m/s^2}]$)⇒ 無視できる」。確かめ:$\omega^2R=(7.29\times10^{-5})^2\times6.371\times10^6=0.0339$。$g$ の約 0.35%。</p>
+    <p>コリオリ力だけを考えた運動方程式 $m\bm a=\bm F-2m\bm\omega\times\bm v$ を、$\bm F=(F_x,F_y,F_z)$ として成分で書くと(板書):
+    $$\begin{cases}m\ddot x=F_x+2m\dot y\,\omega\sin\alpha\\ m\ddot y=F_y-2m\omega(\dot x\sin\alpha+\dot z\cos\alpha)\\ m\ddot z=F_z+2m\dot y\,\omega\cos\alpha\end{cases}$$</p>
+    <div class="box supp">
+      <div class="label">板書にない補足:コリオリ力の向きを日常の言葉で</div>
+      <p>北半球($\alpha\gt0$)で、水平に動く物体($\dot z=0$)について:$x$(南)方向に速さ $\dot x$ で動く(南へ進む)と、$y$ 方向の力 $-2m\omega\sin\alpha\,\dot x\lt0$ で、<b>西</b>向きに曲げられる(進行方向に向かって右)。北へ進む($\dot x\lt0$)と、東向きの力(これも進行方向に向かって右)。東へ進む($\dot y\gt0$)と、$x$ 方向の力 $+2m\omega\sin\alpha\,\dot y\gt0$ で南向き(進行方向に向かって右)。つまり、北半球では、水平に動く物体は、進行方向に向かって<b>右</b>に曲げられます(台風の渦が反時計回りになる理由)。南半球($\alpha\lt0$)では左。</p>
+    </div>
+
+    <!-- ===================== 6 ===================== -->
+    <h2 id="s6">6. 自由落下:逐次近似法 <span class="page-tag">板書 p.19–20</span></h2>
+    <p>板書:「高さ $h$ からの自由落下を考える(<b>逐次近似法(重要)</b>)。$\bm F=(0,0,-mg)$ ⇒
+    $$\begin{cases}\ddot x=2\omega\dot y\sin\alpha\\ \ddot y=-2\omega(\dot x\sin\alpha+\dot z\cos\alpha)\\ \ddot z=-g+2\omega\dot y\cos\alpha\end{cases}\cdots(\ast)$$
+    これは<b>解けない</b>(係数が $\omega$ を含み、3つの未知関数が絡み合っている)。」</p>
+    <p>そこで、$\omega$ が小さいことを使って、解を $\omega$ のべきで展開します(板書の式①):
+    $$x(t,\omega)=x_0+\omega x_1+\omega^2x_2+\cdots,\quad y=y_0+\omega y_1+\cdots,\quad z=z_0+\omega z_1+\cdots\ \cdots①$$
+    ($x_0,x_1,\dots$ は $t$ の関数。$\omega\to0$ のとき、$x\to x_0$:回転がないときの解。)</p>
+    <p>$(\ast)$ に代入すると:
+    $$\begin{cases}\ddot x_0+\omega\ddot x_1+\cdots=2\omega\sin\alpha(\dot y_0+\omega\dot y_1+\cdots)\\ \ddot y_0+\omega\ddot y_1+\cdots=-2\omega\bigl(\sin\alpha(\dot x_0+\cdots)+\cos\alpha(\dot z_0+\cdots)\bigr)\\ \ddot z_0+\omega\ddot z_1+\cdots=-g+2\omega\cos\alpha(\dot y_0+\cdots)\end{cases}$$
+    両辺の $\omega$ のべきの係数を比べます(板書:「角速度が地上のスケールに比べ小さいから(?)」)。</p>
+
+    <h3 id="s6-0">6.1 $\omega^0$ 次:回転がない場合</h3>
+    <p>$\omega^0$ の係数:$\ddot x_0=0$、$\ddot y_0=0$、$\ddot z_0=-g$。初期条件(時刻 0 で $(x,y,z)=(0,0,h)$、静止、①の各次数で:$0=x_0+\omega x_1+\cdots$ などを比べて、全部 0 だから、$x_0(0)=\dot x_0(0)=0$、$y_0(0)=\dot y_0(0)=0$、$z_0(0)=h$、$\dot z_0(0)=0$)を使うと
+    $$x_0=0,\quad y_0=0,\quad z_0=h-\tfrac12gt^2.$$
+    ふつうの自由落下です。</p>
+
+    <h3 id="s6-1">6.2 $\omega^1$ 次:コリオリ力による最初の補正</h3>
+    <p>$\omega^1$ の係数(板書):
+    $$\begin{cases}\ddot x_1=2\dot y_0\sin\alpha\\ \ddot y_1=-2(\dot x_0\sin\alpha+\dot z_0\cos\alpha)\\ \ddot z_1=2\dot y_0\cos\alpha\end{cases}$$
+    $\omega^0$ 次の解($\dot x_0=\dot y_0=0$、$\dot z_0=-gt$)を右辺に代入すると、右辺が、既に分かっている量だけになって、積分できます:
+    $$\ddot x_1=0,\qquad\ddot y_1=-2(-gt)\cos\alpha=2gt\cos\alpha,\qquad\ddot z_1=0.$$
+    初期条件(速度も位置も 0)で、順に積分して:
+    $$\dot x_1=0,\ \ \dot y_1=gt^2\cos\alpha,\ \ \dot z_1=0\ \Longrightarrow\ x_1=0,\ \ y_1=\tfrac13gt^3\cos\alpha,\ \ z_1=0.$$</p>
+    <p>よって、$\omega$ の1次まで(板書):
+    $$x=0,\qquad y=\tfrac13g\omega t^3\cos\alpha,\qquad z=h-\tfrac12gt^2.$$
+    ($y$ は $\omega y_1$ だから、板書の「$y=\frac13gt^3\cos\alpha$」は $\omega$ が抜けています。次の式では $\omega$ が入っているので、書き落としと読みました。メモ参照。)</p>
+    <figure class="fig">
+      <svg viewBox="0 0 560 262" width="560" role="img" aria-label="自由落下の東向きのずれ"><line x1="80" y1="220" x2="500" y2="220" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><text class="t" x="504" y="225">東</text><line x1="120" y1="226" x2="120" y2="26" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><text class="t" x="126" y="22">上</text><polyline points="120,40 120,40.1 120,40.3 120.1,40.6 120.2,41.2 120.3,41.8 120.6,42.6 120.9,43.5 121.4,44.6 121.9,45.8 122.6,47.2 123.5,48.7 124.6,50.4 125.8,52.2 127.2,54.1 128.9,56.2 130.8,58.4 133,60.8 135.4,63.3 138.1,66 141.1,68.8 144.4,71.8 148.1,74.8 152.1,78.1 156.5,81.5 161.3,85 166.4,88.7 172,92.5 178,96.4 184.4,100.6 191.3,104.8 198.6,109.2 206.5,113.7 214.9,118.4 223.8,123.2 233.2,128.2 243.2,133.3 253.7,138.6 264.9,144 276.6,149.5 289,155.2 302,161 315.6,167 329.9,173.1 344.9,179.4 360.6,185.8 377,192.4 394.1,199 412,205.9 430.6,212.9 450,220" style="fill:none;stroke:var(--thm);stroke-width:3"/><line x1="120" y1="40" x2="120" y2="220" style="stroke:var(--muted);stroke-width:1.1;stroke-dasharray:5 4;fill:none"/><circle cx="120" cy="40" r="5" style="fill:var(--text)"/><text class="tm" x="130" y="44">h(落とす点)</text><circle cx="450" cy="220" r="5" style="fill:var(--thm)"/><text class="tm" x="450" y="240" style="text-anchor:middle">落下点</text><circle cx="120" cy="220" r="4" style="fill:var(--muted)"/><text class="tm" x="120" y="240" style="text-anchor:middle">真下</text><text class="tj" x="270" y="100" style="font-size:15px;fill:var(--thm)">y = (1/3) g ω t³ cosα</text><text class="tm" x="270" y="124">(図では、ずれを大きく誇張)</text></svg>
+      <figcaption>自由落下の軌跡(横から)。真下にまっすぐ落ちるのではなく、時間の3乗で、わずかに東へずれる。ずれは、落下の高さに比べて、非常に小さい(図では誇張)。</figcaption>
+    </figure>
+
+    <h3 id="s6-2">6.3 落下点のずれ</h3>
+    <p>地面に着く時刻は $z=0$ より $t=\sqrt{\dfrac{2h}g}$(板書)。このとき
+    $$y=\frac13g\omega\Bigl(\frac{2h}g\Bigr)^{3/2}\cos\alpha=\frac13\omega g\sqrt{\frac{(2h)^3}{g^3}}\cos\alpha=\frac{\omega\cos\alpha}{3}\sqrt{\frac{8h^3}{g}}.$$
+    だけ<b>東</b>にずれる。(板書の式は、$\frac13g\omega\sqrt{\frac{2h}{g}^{\,3}}\cos\alpha$。)</p>
+    <p><b>数値例</b>(板書):駒場($\alpha=35.6586^\circ$、$\cos\alpha=0.812495$)、$\omega=7.29\times10^{-5}\ \mathrm{s^{-1}}$。$h=50\ \mathrm m$ なら、$t=\sqrt{100/9.8}=3.19\ \mathrm s$、$y=\dfrac13(7.29\times10^{-5})(9.8)(3.19)^3(0.8125)\approx6.3\ \mathrm{mm}$。$h=100\ \mathrm m$ なら $t=4.52\ \mathrm s$、$y\approx17.8\ \mathrm{mm}$。</p>
+    <div class="box supp">
+      <div class="label">板書にない補足:なぜ「東」?—— 角運動量の考え方</div>
+      <p>地面は、東向きに、速さ $\omega(R+z)\cos\alpha$ で動いている(自転の速さ)。高いところほど、東向きの速さが少し大きい(半径が大きいので)。物体は、高いところで、その高さの東向きの速さをもったまま落ち始める(慣性)ので、落ちていくにつれて、地面(その速さは、低いところでは、少し小さい)を<b>追い越して</b>、東にずれる。コリオリ力の式 $\ddot y=-2\omega\dot z\cos\alpha$ で、落下中は $\dot z\lt0$ だから、$\ddot y\gt0$(東向き)と、一致します。</p>
+    </div>
+
+    <!-- ===================== 7 ===================== -->
+    <h2 id="s7">7. 具体例で練習(板書にない補足) <span class="page-tag">補足</span></h2>
+    <div class="box ex">
+      <div class="label">問題 A:東京タワーの高さからのずれ</div>
+      <p>$h=333\ \mathrm m$ から物体を落とす。東京の緯度($35.7^\circ$)で、東にずれる距離を求めよ。</p>
+    </div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>$t=\sqrt{2h/g}=\sqrt{666/9.8}=8.24\ \mathrm s$。$y=\tfrac13\omega g\,t^3\cos\alpha=\tfrac13(7.29\times10^{-5})(9.8)(559.6)(0.8118)\approx0.108\ \mathrm m$。約 11 cm 東にずれる。</p></div>
+
+    <div class="box ex">
+      <div class="label">問題 B:赤道・北極でのずれ</div>
+      <p>同じ高さ $h$ からの落下で、東へのずれは、赤道($\alpha=0$)、北極($\alpha=90^\circ$)ではどうなるか。</p>
+    </div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>ずれは $\propto\cos\alpha$。赤道で最大($\cos0=1$)、北極で 0($\cos90^\circ=0$)。北極では、$\bm\omega$ が鉛直(上向き)で、落下する向きと平行だから、コリオリ力 $-2m\bm\omega\times\bm v=0$。</p></div>
+
+    <div class="box ex">
+      <div class="label">問題 C:コリオリ力の大きさの目安</div>
+      <p>北緯 $35.7^\circ$ で、時速 $100\ \mathrm{km}$($27.8\ \mathrm{m/s}$)で南へ進む電車の、質量 $1\ \mathrm{kg}$ あたりの、横向きのコリオリ力を求めよ。</p>
+    </div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>$2\omega\sin\alpha\cdot v=2(7.29\times10^{-5})(0.583)(27.8)\approx2.4\times10^{-3}\ \mathrm N$(重さの約 $2.4\times10^{-4}$ 倍)。日常では、ほとんど気づかない大きさ。大気や海洋のように、広くて長い時間続く運動で、はじめて効く。</p></div>
+
+    <!-- ===================== 8 ===================== -->
+    <h2 id="s8">8. まとめ(この回で覚えること)</h2>
+    <ul>
+      <li>回転するベクトルの変化:$\dot{\bm a}=\bm\omega\times\bm a$(大きさ $|\bm a|\sin\theta\cdot\omega$、向きは接線)。</li>
+      <li>回転座標系の運動方程式:$m\bm a=\bm F-2m\bm\omega\times\bm v-m\bm\omega\times(\bm\omega\times\bm r)$(コリオリ力 + 遠心力)。</li>
+      <li>北緯 $\alpha$ で $\bm\omega=\omega(-\cos\alpha,0,\sin\alpha)$(南・東・上)。地球では $\omega^2R=0.034\ \mathrm{m/s^2}$ で遠心力は無視。</li>
+      <li>成分:$\ddot x=\dfrac{F_x}m+2\omega\dot y\sin\alpha$、$\ddot y=\dfrac{F_y}m-2\omega(\dot x\sin\alpha+\dot z\cos\alpha)$、$\ddot z=\dfrac{F_z}m+2\omega\dot y\cos\alpha$。</li>
+      <li><b>逐次近似法</b>:$x=x_0+\omega x_1+\cdots$ とおき、$\omega$ の次数ごとに係数を比べて、低い次数から順に解く。</li>
+      <li>自由落下は、東へ $\tfrac13g\omega t^3\cos\alpha$ ずれる。$t=\sqrt{2h/g}$ で、$h=50\ \mathrm m$ で 6.3 mm、$h=100\ \mathrm m$ で 17.8 mm(駒場)。</li>
+    </ul>
+
+    <!-- ===================== 9 ===================== -->
+    <h2 id="s9">9. この回のノートについてのメモ</h2>
+    <p>板書は手書きの iPad ノートで、ページ番号がありません。PDF の順に数えました(p.18〜p.20)。板書の画像はこのサイトには載せていません。黄色の枠、基礎ページの内容、練習問題と解答は、Claude が書き足したもので、板書にはありません。</p>
+    <ol>
+      <li><b>$y$ の式の $\omega$(p.20)</b>:板書の「$\omega$ 一次までの近似で $y=\frac13gt^3\cos\alpha$」は、$y=\omega y_1$ ですから、$\frac13g\omega t^3\cos\alpha$ が正しい式です。直後の落下点の式 $y=\frac13g\omega\sqrt{\cdots}\cos\alpha$ には $\omega$ が入っているので、書き落としと判断しました。</li>
+      <li><b>$\omega^1$ 次の方程式(p.20)</b>:板書の「$\ddot y_1=-2\omega(\dot x_0\sin\alpha+\dot z_0\cos\alpha)$」には、$\omega$ が残っています($\omega^1$ の係数を取り出した後の式なので、$\omega$ は不要)。直後の式 $\ddot y_1=-2(-gt)\cos\alpha$ では、$\omega$ が消えているので、そちらに合わせました。</li>
+      <li><b>板書の最初のコメント(p.19)</b>:「(角速度が地上のスケールに比べ小さいから(?))」は、先生ではなく、ノートをとった人の疑問の書き込みと読みました。係数比較が許される理由は、解が $\omega$ のべきで展開でき、任意の小さな $\omega$ で成り立つ恒等式だからです(準備 1.3)。</li>
+      <li><b>$\omega$ の値(p.19, p.20)</b>:p.19 は $7.3\times10^{-5}$、p.20 の駒場の例は $7.29\times10^{-5}$ と書かれています。同じ値の、有効数字の違いです。数値は p.20 の値で計算しました。</li>
+      <li><b>$\bm r$ の微分の途中(p.18)</b>:$\ddot{\bm r}$ の式の先頭は、板書で「$\ddot x\bm e_\theta+\ddot y\bm e_\varphi+\ddot z\bm e_r$」となっています(ドットは2つ)。右下の「2」は、$2(\dot x(\bm\omega\times\bm e_\theta)+\cdots)$ と読みました。</li>
+    </ol>
+
+    <nav class="pager">
+      <a href="week-11.html">← 前の週</a>
+      <a href="../index.html">一覧へ</a>
+      <a href="week-13.html">次の週 →</a>
+    </nav>
+
+  </main>
+
+  <footer>© Aセメまとめノート</footer>
+</body>
+</html>

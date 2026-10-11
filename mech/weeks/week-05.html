@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>第5回 保存力とポテンシャル | Aセメまとめノート</title>
+  <link rel="stylesheet" href="../../assets/style.css">
+  <script defer src="../../assets/nav.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],macros:{'\\R':'\\mathbb{R}','\\bm':'\\boldsymbol{#1}','\\dd':'\\mathrm{d}'}});window.__navReady&&window.__navReady()"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="inner">
+      <a class="site-title" href="../../index.html">Aセメまとめノート</a>
+      <span class="links"><a href="../index.html">力学A</a><a href="../basics.html">基礎のまとめ</a><a href="../../calc/index.html">微積</a><a href="../../linalg/index.html">線形代数</a><a href="../../em/index.html">電磁気学</a></span>
+    </div>
+  </header>
+
+  <main class="note">
+    <h1>第5回:保存力とポテンシャル</h1>
+    <div class="meta">力学A(東京大学 教養学部 秋学期)／板書 p.7 の後半〜p.9 の前半(PDF の順に数えています)／ノートの節番号は「4.2 保存力とポテンシャル」</div>
+
+    <nav class="toc">
+      <div class="toc-title">目次</div>
+      <ol start="0">
+        <li><a href="#s0">この回の全体像</a></li>
+        <li><a href="#s1">準備:基礎の確認</a>
+          <div class="sub">偏微分／線積分の向きと分割／極限と $O(\ )$／位置エネルギー(高校)</div></li>
+        <li><a href="#s2">保存力とは</a>(p.7)</li>
+        <li><a href="#s3">ポテンシャルの定義</a>(p.8)</li>
+        <li><a href="#s4">ポテンシャルから力を求める:$\nabla U=-\bm F$</a>(p.8–9)</li>
+        <li><a href="#s5">$\nabla$(gradient)の意味</a>(p.9)</li>
+        <li><a href="#s6">力学的エネルギー保存</a>(補足)</li>
+        <li><a href="#s7">具体例で練習</a></li>
+        <li><a href="#s8">まとめ(この回で覚えること)</a></li>
+        <li><a href="#s9">この回のノートについてのメモ</a></li>
+      </ol>
+    </nav>
+
+    <!-- ===================== 0 ===================== -->
+    <h2 id="s0">0. この回の全体像 <span class="page-tag">板書 p.7–9</span></h2>
+    <p>前回(第4回)で、力 $\bm F$ のした仕事を、線積分 $\int_C\bm F\cdot d\bm r$ として表しました。一般に、この仕事の値は<b>道筋に依存</b>します(第4回の問題 C)。ところが、重力やばねの力のように、<b>始点と終点だけで決まり、道筋によらない</b>力があります。これが<b>保存力</b>です。保存力には、「位置だけで決まる量 $U(\bm r)$」(<b>ポテンシャル</b>、位置エネルギー)があり、力は $U$ の<b>勾配</b>($\nabla$、gradient)から $\bm F=-\nabla U$ と求まります。</p>
+    <div class="box thm">
+      <div class="label">この回のゴール</div>
+      <p>① 保存力の定義:仕事が道筋によらない $\iff$ 任意の閉曲線に沿った線積分が 0。<br>
+      ② 保存力 $\bm F$ に対して、基準点 $\bm r_0$ からの線積分で<b>ポテンシャル</b> $U(\bm r)=-\int_{\bm r_0}^{\bm r}\bm F\cdot d\bm r$ が定義できること。<br>
+      ③ $U$ の変化から、$\dfrac{\partial U}{\partial x}=-F_x$、すなわち $\nabla U=-\bm F$(gradient)を導く。<br>
+      ④ $\nabla U$ の幾何学的な意味:等ポテンシャル線に垂直で、$U$ が最も急に増える向き。</p>
+    </div>
+    <figure class="fig">
+      <svg viewBox="0 0 540 240" width="540" role="img" aria-label="保存力:仕事が経路によらない"><polyline points="60,180 64.5,175.7 69,171.5 73.5,167.2 78,163 82.5,158.8 87,154.6 91.5,150.4 96,146.3 100.5,142.2 105,138.1 109.5,134.1 114,130.2 118.5,126.3 123,122.5 127.5,118.7 132,115 136.5,111.3 141,107.8 145.5,104.3 150,100.9 154.5,97.6 159,94.4 163.5,91.3 168,88.3 172.5,85.4 177,82.5 181.5,79.8 186,77.2 190.5,74.7 195,72.3 199.5,70.1 204,67.9 208.5,65.9 213,64 217.5,62.2 222,60.5 226.5,58.9 231,57.5 235.5,56.2 240,55 244.5,53.9 249,53 253.5,52.2 258,51.5 262.5,50.9 267,50.5 271.5,50.1 276,49.9 280.5,49.8 285,49.8 289.5,50 294,50.2 298.5,50.6 303,51 307.5,51.6 312,52.3 316.5,53 321,53.9 325.5,54.9 330,55.9 334.5,57.1 339,58.3 343.5,59.6 348,61 352.5,62.4 357,64 361.5,65.5 366,67.2 370.5,68.9 375,70.6 379.5,72.4 384,74.3 388.5,76.2 393,78.1 397.5,80 402,82 406.5,84 411,86 415.5,88 420,90" style="fill:none;stroke:var(--thm);stroke-width:3"/><polyline points="60,180 64.5,181.6 69,183.2 73.5,184.8 78,186.3 82.5,187.8 87,189.2 91.5,190.6 96,192 100.5,193.3 105,194.5 109.5,195.7 114,196.8 118.5,197.9 123,198.9 127.5,199.8 132,200.7 136.5,201.4 141,202.1 145.5,202.8 150,203.3 154.5,203.7 159,204.1 163.5,204.4 168,204.5 172.5,204.6 177,204.6 181.5,204.5 186,204.3 190.5,204 195,203.6 199.5,203.2 204,202.6 208.5,201.9 213,201.1 217.5,200.3 222,199.3 226.5,198.2 231,197.1 235.5,195.8 240,194.5 244.5,193.1 249,191.5 253.5,189.9 258,188.2 262.5,186.4 267,184.6 271.5,182.6 276,180.6 280.5,178.5 285,176.3 289.5,174 294,171.7 298.5,169.3 303,166.8 307.5,164.3 312,161.7 316.5,159.1 321,156.4 325.5,153.7 330,150.9 334.5,148 339,145.1 343.5,142.2 348,139.3 352.5,136.3 357,133.3 361.5,130.2 366,127.2 370.5,124.1 375,121 379.5,117.9 384,114.8 388.5,111.7 393,108.6 397.5,105.4 402,102.3 406.5,99.2 411,96.1 415.5,93.1 420,90" style="fill:none;stroke:var(--ex);stroke-width:3"/><line x1="240" y1="55" x2="245.2" y2="53.8" style="stroke:var(--thm);stroke-width:3;fill:none"/><polygon points="254.4,51.7 245.7,58.4 243.6,49.5" style="fill:var(--thm)"/><line x1="240" y1="194.5" x2="245.5" y2="192.7" style="stroke:var(--ex);stroke-width:3;fill:none"/><polygon points="254.4,189.8 246.3,197.3 243.5,188.5" style="fill:var(--ex)"/><circle cx="60" cy="180" r="5" style="fill:var(--text)"/><circle cx="420" cy="90" r="5" style="fill:var(--text)"/><circle cx="240" cy="55" r="4" style="fill:var(--thm)"/><circle cx="240" cy="194.5" r="4" style="fill:var(--ex)"/><text class="t" x="54" y="202" style="font-size:18px;text-anchor:end">A</text><text class="t" x="428" y="96" style="font-size:18px">B</text><text class="t" x="240" y="43" style="text-anchor:middle;fill:var(--thm)">P</text><text class="t" x="240" y="216.5" style="text-anchor:middle;fill:var(--ex)">Q</text><text class="ta" x="60" y="24">保存力:∫(A→P→B) F·dr = ∫(A→Q→B) F·dr</text><text class="tt" x="60" y="44">⇔ 閉曲線(A→P→B→Q→A)に沿った ∮ F·dr = 0</text></svg>
+      <figcaption>保存力:$A$ から $B$ に行くとき、経路 $A\to P\to B$ と $A\to Q\to B$ で仕事が等しい。つまり、1 周($A\to P\to B\to Q\to A$)の仕事は 0。</figcaption>
+    </figure>
+    <p>以下では、先に必要な基礎を丁寧に復習してから、板書の順に進みます。紫色の枠は「基礎の復習」、黄色の枠は「板書にないが、理解を助けるために私が補った部分」です。</p>
+
+    <!-- ===================== 1 ===================== -->
+    <h2 id="s1">1. 準備:基礎の確認</h2>
+
+    <h3 id="w-partial">1.1 偏微分</h3>
+    <div class="box basic">
+      <div class="label">基礎:偏微分と勾配 <a class="xref-link" href="../basics.html#partial" data-xref>→ 詳しい解説</a><a class="xref-link" href="../../calc/basics.html#partial" data-xref>→ 微積の基礎(偏微分)</a></div>
+      <p>多変数関数 $U(x,y,z)$ の<b>偏微分</b> $\dfrac{\partial U}{\partial x}$ は、「$y,z$ を定数とみなして、$x$ だけで微分したもの」:
+      $$\frac{\partial U}{\partial x}=\lim_{\Delta x\to0}\frac{U(x+\Delta x,y,z)-U(x,y,z)}{\Delta x}.$$
+      3つの偏微分を並べたベクトル $\nabla U=\Bigl(\dfrac{\partial U}{\partial x},\dfrac{\partial U}{\partial y},\dfrac{\partial U}{\partial z}\Bigr)$ が<b>勾配</b>(gradient、$\operatorname{grad}U$)。$\nabla=\bigl(\frac\partial{\partial x},\frac\partial{\partial y},\frac\partial{\partial z}\bigr)$ は「ナブラ」。</p>
+    </div>
+
+    <h3 id="w-linesplit">1.2 線積分:向きの反転と、道筋のつなぎ方</h3>
+    <div class="box basic">
+      <div class="label">基礎:線積分の性質 <a class="xref-link" href="../basics.html#linepar" data-xref>→ 詳しい解説</a></div>
+      <p>線積分 $\int_C\bm F\cdot d\bm r$ は、リーマン和 $\sum\bm F(\bm r_n)\cdot\Delta\bm r_n$ の極限。道筋 $C$ を<b>逆向き</b>にたどると、$\Delta\bm r_n$ の符号が反転するので、線積分の符号が反転します:$\int_{-C}\bm F\cdot d\bm r=-\int_C\bm F\cdot d\bm r$。道筋を途中でつなぐ($A\to P$ のあと $P\to B$)と、線積分は<b>和</b>になります。</p>
+    </div>
+
+    <h3 id="w-ub">1.3 位置エネルギー(高校)</h3>
+    <div class="box basic">
+      <div class="label">基礎:位置エネルギー <a class="xref-link" href="../basics.html#newton" data-xref>→ 詳しい解説</a></div>
+      <p>高校では、重力の位置エネルギー $mgh$、ばねの弾性エネルギー $\tfrac12kx^2$ を習い、「力学的エネルギー(運動エネルギー + 位置エネルギー)が保存する」と習いました。この回は、これを<b>一般の力</b>に対して、きちんと定義し、「どんな力に位置エネルギーが定義できるか」を調べます。</p>
+    </div>
+
+    <!-- ===================== 2 ===================== -->
+    <h2 id="s2">2. 保存力とは <span class="page-tag">板書 p.7</span></h2>
+    <p>板書「4.2 保存力とポテンシャル」:「$A$ から $B$ まで質点が移動したとする。$\bm F$ のした仕事は<b>一般には</b>経路に依る。依らないとき、$\bm F$ は<b>保存力</b>という」。</p>
+    <div class="box def">
+      <div class="label">保存力</div>
+      <p>点 $A$ から点 $B$ へ質点が移動するとき、力 $\bm F$ のした仕事 $\displaystyle\int_{C_{A\to B}}\bm F\cdot d\bm r$ が、<b>経路 $C_{A\to B}$ によらず</b>、始点 $A$ と終点 $B$ だけで決まるとき、$\bm F$ は<b>保存力</b>という。</p>
+    </div>
+    <p>板書は、この定義と同値な条件を、次のように導いています。</p>
+    <ol class="step-list">
+      <li><b>向きの反転</b>:$\displaystyle\int_{C_{A\to B}}\bm F\cdot d\bm r=-\int_{C_{B\to A}}\bm F\cdot d\bm r$(逆向きにたどると符号が反転)。</li>
+      <li><b>保存力なら</b>、2つの経路 $A\to P\to B$ と $A\to Q\to B$ について、$\displaystyle\int_{C_{A\to P\to B}}\bm F\cdot d\bm r=\int_{C_{A\to Q\to B}}\bm F\cdot d\bm r$ が<b>いつも成立</b>。</li>
+      <li>これは、$A\to P\to B$ の仕事から $A\to Q\to B$ の仕事を引くと 0、つまり<b>閉じた道筋</b>($A\to P\to B\to Q\to A$、$B\to Q\to A$ は $A\to Q\to B$ の逆)を 1 周する線積分が 0 ということ。
+      $$\bm F\ \text{が保存力}\iff\oint_{C_{\text{閉}}}\bm F\cdot d\bm r=0\ \text{が任意の閉曲線で成立}.$$</li>
+    </ol>
+    <p>板書 p.8 の冒頭に、まとめがあります:「保存力 $\int_{A\to B}\bm F\cdot d\bm r$ が経路に依らない $\iff\bm F$ は保存力 $\iff\oint\bm F\cdot d\bm r=0$($\forall$ 閉ループ)」。</p>
+    <div class="box supp">
+      <div class="label">板書にない補足:保存力の例と、そうでない例</div>
+      <p><b>保存力</b>:一様な重力 $\bm F=(0,0,-mg)$(仕事は高さの差だけで決まる)、ばねの力 $F=-kx$、万有引力・クーロン力(中心力、次回)。<br>
+      <b>保存力でない</b>:動摩擦力(同じ長さでも、遠回りするほど、多くの負の仕事)。第4回の問題 C の力 $\bm F=(-y,x)$(円弧に沿った仕事 $\pi/2$ と、弦に沿った仕事 1 が違う)。後者は、「渦を巻く力」で、原点まわりを 1 周すると、いつも正の仕事をします。</p>
+    </div>
+    <figure class="fig">
+      <svg viewBox="0 0 600 284" width="600" role="img" aria-label="保存力と、保存力でない力"><text class="ta" x="140" y="22" style="text-anchor:middle">F = (y, x):rot F = 0(保存力)</text><line x1="40.9" y1="40.9" x2="58.3" y2="58.3" style="stroke:var(--thm);stroke-width:2;fill:none"/><polygon points="63.1,63.1 55.3,60.4 60.4,55.3" style="fill:var(--thm)"/><line x1="83.7" y1="45.9" x2="102.1" y2="55" style="stroke:var(--thm);stroke-width:2;fill:none"/><polygon points="108.3,58.1 99.9,58 103.2,51.6" style="fill:var(--thm)"/><line x1="127.1" y1="52" x2="146" y2="52" style="stroke:var(--thm);stroke-width:2;fill:none"/><polygon points="152.9,52 145.4,55.6 145.4,48.4" style="fill:var(--thm)"/><line x1="171.7" y1="58.1" x2="190.1" y2="49" style="stroke:var(--thm);stroke-width:2;fill:none"/><polygon points="196.3,45.9 191.2,52.4 187.9,46" style="fill:var(--thm)"/><line x1="216.9" y1="63.1" x2="234.3" y2="45.7" style="stroke:var(--thm);stroke-width:2;fill:none"/><polygon points="239.1,40.9 236.4,48.7 231.3,43.6" style="fill:var(--thm)"/><line x1="45.9" y1="83.7" x2="55" y2="102.1" style="stroke:var(--thm);stroke-width:2;fill:none"/><polygon points="58.1,108.3 51.6,103.2 58,99.9" style="fill:var(--thm)"/><line x1="88.3" y1="88.3" x2="98.8" y2="98.8" style="stroke:var(--thm);stroke-width:2;fill:none"/><polygon points="103.7,103.7 95.8,100.9 100.9,95.8" style="fill:var(--thm)"/><line x1="130.6" y1="96" x2="142.5" y2="96" style="stroke:var(--thm);stroke-width:2;fill:none"/><polygon points="149.4,96 141.9,99.6 141.9,92.4" style="fill:var(--thm)"/><line x1="176.3" y1="103.7" x2="186.8" y2="93.2" style="stroke:var(--thm);stroke-width:2;fill:none"/><polygon points="191.7,88.3 188.9,96.2 183.8,91.1" style="fill:var(--thm)"/><line x1="221.9" y1="108.3" x2="231" y2="89.9" style="stroke:var(--thm);stroke-width:2;fill:none"/><polygon points="234.1,83.7 234,92.1 227.6,88.8" style="fill:var(--thm)"/><line x1="52" y1="127.1" x2="52" y2="146" style="stroke:var(--thm);stroke-width:2;fill:none"/><polygon points="52,152.9 48.4,145.4 55.6,145.4" style="fill:var(--thm)"/><line x1="96" y1="130.6" x2="96" y2="142.5" style="stroke:var(--thm);stroke-width:2;fill:none"/><polygon points="96,149.4 92.4,141.9 99.6,141.9" style="fill:var(--thm)"/><line x1="184" y1="149.4" x2="184" y2="137.5" style="stroke:var(--thm);stroke-width:2;fill:none"/><polygon points="184,130.6 187.6,138.1 180.4,138.1" style="fill:var(--thm)"/><line x1="228" y1="152.9" x2="228" y2="134" style="stroke:var(--thm);stroke-width:2;fill:none"/><polygon points="228,127.1 231.6,134.6 224.4,134.6" style="fill:var(--thm)"/><line x1="58.1" y1="171.7" x2="49" y2="190.1" style="stroke:var(--thm);stroke-width:2;fill:none"/><polygon points="45.9,196.3 46,187.9 52.4,191.2" style="fill:var(--thm)"/><line x1="103.7" y1="176.3" x2="93.2" y2="186.8" style="stroke:var(--thm);stroke-width:2;fill:none"/><polygon points="88.3,191.7 91.1,183.8 96.2,188.9" style="fill:var(--thm)"/><line x1="149.4" y1="184" x2="137.5" y2="184" style="stroke:var(--thm);stroke-width:2;fill:none"/><polygon points="130.6,184 138.1,180.4 138.1,187.6" style="fill:var(--thm)"/><line x1="191.7" y1="191.7" x2="181.2" y2="181.2" style="stroke:var(--thm);stroke-width:2;fill:none"/><polygon points="176.3,176.3 184.2,179.1 179.1,184.2" style="fill:var(--thm)"/><line x1="234.1" y1="196.3" x2="225" y2="177.9" style="stroke:var(--thm);stroke-width:2;fill:none"/><polygon points="221.9,171.7 228.4,176.8 222,180.1" style="fill:var(--thm)"/><line x1="63.1" y1="216.9" x2="45.7" y2="234.3" style="stroke:var(--thm);stroke-width:2;fill:none"/><polygon points="40.9,239.1 43.6,231.3 48.7,236.4" style="fill:var(--thm)"/><line x1="108.3" y1="221.9" x2="89.9" y2="231" style="stroke:var(--thm);stroke-width:2;fill:none"/><polygon points="83.7,234.1 88.8,227.6 92.1,234" style="fill:var(--thm)"/><line x1="152.9" y1="228" x2="134" y2="228" style="stroke:var(--thm);stroke-width:2;fill:none"/><polygon points="127.1,228 134.6,224.4 134.6,231.6" style="fill:var(--thm)"/><line x1="196.3" y1="234.1" x2="177.9" y2="225" style="stroke:var(--thm);stroke-width:2;fill:none"/><polygon points="171.7,221.9 180.1,222 176.8,228.4" style="fill:var(--thm)"/><line x1="239.1" y1="239.1" x2="221.7" y2="221.7" style="stroke:var(--thm);stroke-width:2;fill:none"/><polygon points="216.9,216.9 224.7,219.6 219.6,224.7" style="fill:var(--thm)"/><text class="tm" x="140" y="266" style="text-anchor:middle">U = −xy(等ポテンシャル線は双曲線)</text><text class="ta" x="450" y="22" style="text-anchor:middle">F = (−y, x):rot F = 2(保存力でない)</text><line x1="373.1" y1="40.9" x2="355.7" y2="58.3" style="stroke:var(--thm);stroke-width:2;fill:none"/><polygon points="350.9,63.1 353.6,55.3 358.7,60.4" style="fill:var(--thm)"/><line x1="418.3" y1="45.9" x2="399.9" y2="55" style="stroke:var(--thm);stroke-width:2;fill:none"/><polygon points="393.7,58.1 398.8,51.6 402.1,58" style="fill:var(--thm)"/><line x1="462.9" y1="52" x2="444" y2="52" style="stroke:var(--thm);stroke-width:2;fill:none"/><polygon points="437.1,52 444.6,48.4 444.6,55.6" style="fill:var(--thm)"/><line x1="506.3" y1="58.1" x2="487.9" y2="49" style="stroke:var(--thm);stroke-width:2;fill:none"/><polygon points="481.7,45.9 490.1,46 486.8,52.4" style="fill:var(--thm)"/><line x1="549.1" y1="63.1" x2="531.7" y2="45.7" style="stroke:var(--thm);stroke-width:2;fill:none"/><polygon points="526.9,40.9 534.7,43.6 529.6,48.7" style="fill:var(--thm)"/><line x1="368.1" y1="83.7" x2="359" y2="102.1" style="stroke:var(--thm);stroke-width:2;fill:none"/><polygon points="355.9,108.3 356,99.9 362.4,103.2" style="fill:var(--thm)"/><line x1="413.7" y1="88.3" x2="403.2" y2="98.8" style="stroke:var(--thm);stroke-width:2;fill:none"/><polygon points="398.3,103.7 401.1,95.8 406.2,100.9" style="fill:var(--thm)"/><line x1="459.4" y1="96" x2="447.5" y2="96" style="stroke:var(--thm);stroke-width:2;fill:none"/><polygon points="440.6,96 448.1,92.4 448.1,99.6" style="fill:var(--thm)"/><line x1="501.7" y1="103.7" x2="491.2" y2="93.2" style="stroke:var(--thm);stroke-width:2;fill:none"/><polygon points="486.3,88.3 494.2,91.1 489.1,96.2" style="fill:var(--thm)"/><line x1="544.1" y1="108.3" x2="535" y2="89.9" style="stroke:var(--thm);stroke-width:2;fill:none"/><polygon points="531.9,83.7 538.4,88.8 532,92.1" style="fill:var(--thm)"/><line x1="362" y1="127.1" x2="362" y2="146" style="stroke:var(--thm);stroke-width:2;fill:none"/><polygon points="362,152.9 358.4,145.4 365.6,145.4" style="fill:var(--thm)"/><line x1="406" y1="130.6" x2="406" y2="142.5" style="stroke:var(--thm);stroke-width:2;fill:none"/><polygon points="406,149.4 402.4,141.9 409.6,141.9" style="fill:var(--thm)"/><line x1="494" y1="149.4" x2="494" y2="137.5" style="stroke:var(--thm);stroke-width:2;fill:none"/><polygon points="494,130.6 497.6,138.1 490.4,138.1" style="fill:var(--thm)"/><line x1="538" y1="152.9" x2="538" y2="134" style="stroke:var(--thm);stroke-width:2;fill:none"/><polygon points="538,127.1 541.6,134.6 534.4,134.6" style="fill:var(--thm)"/><line x1="355.9" y1="171.7" x2="365" y2="190.1" style="stroke:var(--thm);stroke-width:2;fill:none"/><polygon points="368.1,196.3 361.6,191.2 368,187.9" style="fill:var(--thm)"/><line x1="398.3" y1="176.3" x2="408.8" y2="186.8" style="stroke:var(--thm);stroke-width:2;fill:none"/><polygon points="413.7,191.7 405.8,188.9 410.9,183.8" style="fill:var(--thm)"/><line x1="440.6" y1="184" x2="452.5" y2="184" style="stroke:var(--thm);stroke-width:2;fill:none"/><polygon points="459.4,184 451.9,187.6 451.9,180.4" style="fill:var(--thm)"/><line x1="486.3" y1="191.7" x2="496.8" y2="181.2" style="stroke:var(--thm);stroke-width:2;fill:none"/><polygon points="501.7,176.3 498.9,184.2 493.8,179.1" style="fill:var(--thm)"/><line x1="531.9" y1="196.3" x2="541" y2="177.9" style="stroke:var(--thm);stroke-width:2;fill:none"/><polygon points="544.1,171.7 544,180.1 537.6,176.8" style="fill:var(--thm)"/><line x1="350.9" y1="216.9" x2="368.3" y2="234.3" style="stroke:var(--thm);stroke-width:2;fill:none"/><polygon points="373.1,239.1 365.3,236.4 370.4,231.3" style="fill:var(--thm)"/><line x1="393.7" y1="221.9" x2="412.1" y2="231" style="stroke:var(--thm);stroke-width:2;fill:none"/><polygon points="418.3,234.1 409.9,234 413.2,227.6" style="fill:var(--thm)"/><line x1="437.1" y1="228" x2="456" y2="228" style="stroke:var(--thm);stroke-width:2;fill:none"/><polygon points="462.9,228 455.4,231.6 455.4,224.4" style="fill:var(--thm)"/><line x1="481.7" y1="234.1" x2="500.1" y2="225" style="stroke:var(--thm);stroke-width:2;fill:none"/><polygon points="506.3,221.9 501.2,228.4 497.9,222" style="fill:var(--thm)"/><line x1="526.9" y1="239.1" x2="544.3" y2="221.7" style="stroke:var(--thm);stroke-width:2;fill:none"/><polygon points="549.1,216.9 546.4,224.7 541.3,219.6" style="fill:var(--thm)"/><circle cx="450" cy="140" r="66" style="fill:none;stroke:var(--ex);stroke-width:2.8"/><line x1="450.2" y1="74" x2="448" y2="74" style="stroke:var(--ex);stroke-width:3;fill:none"/><polygon points="442,74 448.6,71 448.6,77" style="fill:var(--ex)"/><text class="tm" x="450" y="266" style="text-anchor:middle">1 周すると、力はずっと正の仕事をする</text></svg>
+      <figcaption>左:$\bm F=(y,x)$ は、保存力(ポテンシャル $U=-xy$)。右:$\bm F=(-y,x)$ は渦を巻く力。円に沿って 1 周すると、力はずっと運動の向きに働くので、仕事は 0 でなく $2\pi$ になる(保存力でない)。</figcaption>
+    </figure>
+
+    <!-- ===================== 3 ===================== -->
+    <h2 id="s3">3. ポテンシャルの定義 <span class="page-tag">板書 p.8</span></h2>
+    <p>板書:「$\bm F=\bm F(\bm r)$ が保存力とする。<b>基点</b> $P_0(\bm r_0)$ を決めると、任意の点 $P(\bm r)$ へ至る経路に沿った線積分 $\displaystyle\int_{P_0}^{P}\bm F\cdot d\bm r$ は、その経路のとり方に依らず $\bm r$ に依る。つまり
+    $$\int_{P_0}^{P}\bm F(\bm r)\cdot d\bm r=-U(\bm r)$$
+    なる $U(\bm r)$ を定義できる。(<b>ポテンシャル</b>)」</p>
+    <div class="box def">
+      <div class="label">ポテンシャル(位置エネルギー)</div>
+      <p>保存力 $\bm F$ と基準点 $\bm r_0$ に対し、
+      $$U(\bm r)=-\int_{\bm r_0}^{\bm r}\bm F\cdot d\bm r\qquad(\text{経路によらない}).$$
+      $U(\bm r)$ は、「$\bm r_0$ を基準にして、$\bm r$ にある質点がもつ位置エネルギー」(力に逆らって $\bm r_0$ から $\bm r$ まで運ぶのに、外からしなければならない仕事)。</p>
+    </div>
+    <p>基準点の選び方で、$U$ は<b>定数の違い</b>だけ変わります(基準を変えると、$U$ 全体が一定量だけずれる)。力は $U$ の変化(差)だけに依るので、この定数は物理的な結果に影響しません。</p>
+
+    <h3 id="s3-1">3.1 運動エネルギーとの関係</h3>
+    <p>板書の続き:第4回の「仕事 = 運動エネルギーの変化」と、$\bm r_1\to\bm r_2$ の線積分を、基準点 $\bm r_0$ を経由して分けて書きます:
+    $$\int_{\bm r_1}^{\bm r_2}\bm F\cdot d\bm r=\tfrac12m(\dot{\bm r}_2)^2-\tfrac12m(\dot{\bm r}_1)^2$$
+    $$=\int_{\bm r_1}^{\bm r_0}\bm F\cdot d\bm r+\int_{\bm r_0}^{\bm r_2}\bm F\cdot d\bm r=U(\bm r_1)-U(\bm r_2).$$
+    ($\int_{\bm r_1}^{\bm r_0}=-\int_{\bm r_0}^{\bm r_1}=+U(\bm r_1)$、$\int_{\bm r_0}^{\bm r_2}=-U(\bm r_2)$。)</p>
+    <p>つまり、$\tfrac12m\dot{\bm r}_2^2+U(\bm r_2)=\tfrac12m\dot{\bm r}_1^2+U(\bm r_1)$。<b>運動エネルギーとポテンシャルの和 $\tfrac12m\dot{\bm r}^2+U(\bm r)$ は、運動の間、一定</b>(力学的エネルギー保存則)。</p>
+
+    <h3 id="s3-2">3.2 リーマン和でポテンシャルを書く</h3>
+    <p>板書の続き:
+    $$U(\bm r)=-\int_{\bm r_0}^{\bm r}\bm F\cdot d\bm r=-\lim_{N\to\infty}\sum_{n=0}^{N-1}\bm F(\bm r_n)\cdot\Delta\bm r_n.$$
+    ここで、道筋は $\bm r_0\to\bm r_1\to\cdots\to\bm r_N=\bm r$ と、$N$ 個の小さな区間に分けています(板書の図)。</p>
+
+    <!-- ===================== 4 ===================== -->
+    <h2 id="s4">4. ポテンシャルから力を求める:$\nabla U=-\bm F$ <span class="page-tag">板書 p.8–9</span></h2>
+    <p>$U(\bm r+\Delta\bm r)$ を考えるため、道筋を1歩延ばして、$\bm r_{N+1}=\bm r_N+\Delta\bm r$ とします。
+    $$U(\bm r+\Delta\bm r)=-\lim_{N\to\infty}\sum_{n=0}^{N}\bm F(\bm r_n)\cdot\Delta\bm r_n.$$
+    $U(\bm r)$ との差は、最後の1項だけ(「$N$ 個集めても」、のこりは同じ)なので
+    $$U(\bm r+\Delta\bm r)-U(\bm r)=-\bm F(\bm r)\cdot\Delta\bm r+O\bigl((\Delta\bm r)^2\bigr).$$
+    (板書では、誤差を「$O(1/N^2)$」と書いています。区間の大きさを $1/N$ のオーダーとする、という意味です。)</p>
+    <div class="box proof"><div class="label">成分で書く</div>
+      <p>$\bm r=(x,y,z)$、$\Delta\bm r=(\Delta x,\Delta y,\Delta z)$ とすると、$\bm r+\Delta\bm r=(x+\Delta x,\,y+\Delta y,\,z+\Delta z)$。
+      $$\Delta U=-(F_x\Delta x+F_y\Delta y+F_z\Delta z)+O\bigl((\Delta x,\Delta y,\Delta z)^2\bigr).$$
+      ここで $\Delta y=\Delta z=0$ とおいて $\Delta x\to0$ とすると
+      $$\lim_{\Delta x\to0}\frac{U(x+\Delta x,y,z)-U(x,y,z)}{\Delta x}=-F_x,\quad\text{つまり}\quad\frac{\partial U}{\partial x}=-F_x.$$
+      同様に $\dfrac{\partial U}{\partial y}=-F_y$、$\dfrac{\partial U}{\partial z}=-F_z$。</p></div>
+    <p>板書 p.9 の最初の行:「まとめると、$\Bigl(\dfrac\partial{\partial x},\dfrac\partial{\partial y},\dfrac\partial{\partial z}\Bigr)U=-(F_x,F_y,F_z)$。これを、
+    $$\boxed{\nabla U=-\bm F}\quad\text{と書き、}U\text{ の ``gradient'' という。}\quad\operatorname{grad}U=-\bm F.$$
+    また、微分演算子 $\nabla=\Bigl(\dfrac\partial{\partial x},\dfrac\partial{\partial y},\dfrac\partial{\partial z}\Bigr)$ は ``nabla'' という。」</p>
+    <div class="box supp">
+      <div class="label">板書にない補足:ポテンシャルが分かれば、力は微分で出る</div>
+      <p>この関係の使い方:ポテンシャルが与えられたら、<b>微分するだけで力が求まります</b>。<br>
+      ・重力 $U=mgz$:$\bm F=-\nabla U=(0,0,-mg)$。<br>
+      ・ばね $U=\tfrac12kx^2$:$F=-\dfrac{dU}{dx}=-kx$。<br>
+      ・3次元の等方的なばね $U=\tfrac12k(x^2+y^2+z^2)$:$\bm F=-k(x,y,z)=-k\bm r$。</p>
+      <figure class="fig">
+        <svg viewBox="0 0 580 214" width="580" role="img" aria-label="重力とばねのポテンシャル"><line x1="40" y1="170" x2="240" y2="170" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><line x1="40" y1="178" x2="40" y2="50" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><text class="t" x="244" y="175">z</text><text class="t" x="42" y="42">U</text><text class="ta" x="140" y="24" style="text-anchor:middle">重力:U = mgz</text><polyline points="40,170 41.7,169.1 43.3,168.2 45,167.3 46.7,166.4 48.3,165.5 50,164.5 51.7,163.6 53.3,162.7 55,161.8 56.7,160.9 58.3,160 60,159.1 61.7,158.2 63.3,157.3 65,156.4 66.7,155.5 68.3,154.5 70,153.6 71.7,152.7 73.3,151.8 75,150.9 76.7,150 78.3,149.1 80,148.2 81.7,147.3 83.3,146.4 85,145.5 86.7,144.5 88.3,143.6 90,142.7 91.7,141.8 93.3,140.9 95,140 96.7,139.1 98.3,138.2 100,137.3 101.7,136.4 103.3,135.5 105,134.5 106.7,133.6 108.3,132.7 110,131.8 111.7,130.9 113.3,130 115,129.1 116.7,128.2 118.3,127.3 120,126.4 121.7,125.5 123.3,124.5 125,123.6 126.7,122.7 128.3,121.8 130,120.9 131.7,120 133.3,119.1 135,118.2 136.7,117.3 138.3,116.4 140,115.5 141.7,114.5 143.3,113.6 145,112.7 146.7,111.8 148.3,110.9 150,110 151.7,109.1 153.3,108.2 155,107.3 156.7,106.4 158.3,105.5 160,104.5 161.7,103.6 163.3,102.7 165,101.8 166.7,100.9 168.3,100 170,99.1 171.7,98.2 173.3,97.3 175,96.4 176.7,95.5 178.3,94.5 180,93.6 181.7,92.7 183.3,91.8 185,90.9 186.7,90 188.3,89.1 190,88.2 191.7,87.3 193.3,86.4 195,85.5 196.7,84.5 198.3,83.6 200,82.7 201.7,81.8 203.3,80.9 205,80 206.7,79.1 208.3,78.2 210,77.3 211.7,76.4 213.3,75.5 215,74.5 216.7,73.6 218.3,72.7 220,71.8 221.7,70.9 223.3,70 225,69.1 226.7,68.2 228.3,67.3 230,66.4 231.7,65.5 233.3,64.5 235,63.6 236.7,62.7 238.3,61.8 240,60.9" style="fill:none;stroke:var(--accent);stroke-width:3"/><circle cx="180" cy="93.6" r="6" style="fill:var(--thm)"/><line x1="180" y1="93.6" x2="142.4" y2="93.6" style="stroke:var(--ex);stroke-width:3;fill:none"/><polygon points="134,93.6 143,89.2 143,98" style="fill:var(--ex)"/><text class="tt" x="156" y="83.6" style="text-anchor:middle;fill:var(--ex)">F = −mg(下向き)</text><line x1="330" y1="170" x2="530" y2="170" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><line x1="330" y1="178" x2="330" y2="50" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><text class="t" x="534" y="175">x</text><text class="t" x="332" y="42">U</text><text class="ta" x="430" y="24" style="text-anchor:middle">ばね:U = ½kx²</text><polyline points="330,62 331.7,65.6 333.3,69.1 335,72.5 336.7,75.9 338.3,79.3 340,82.5 341.7,85.7 343.3,88.9 345,92 346.7,95 348.3,98 350,100.9 351.7,103.7 353.3,106.5 355,109.3 356.7,111.9 358.3,114.5 360,117.1 361.7,119.6 363.3,122 365,124.4 366.7,126.7 368.3,128.9 370,131.1 371.7,133.3 373.3,135.3 375,137.3 376.7,139.3 378.3,141.2 380,143 381.7,144.8 383.3,146.5 385,148.1 386.7,149.7 388.3,151.3 390,152.7 391.7,154.1 393.3,155.5 395,156.8 396.7,158 398.3,159.2 400,160.3 401.7,161.3 403.3,162.3 405,163.3 406.7,164.1 408.3,164.9 410,165.7 411.7,166.4 413.3,167 415,167.6 416.7,168.1 418.3,168.5 420,168.9 421.7,169.3 423.3,169.5 425,169.7 426.7,169.9 428.3,170 430,170 431.7,170 433.3,169.9 435,169.7 436.7,169.5 438.3,169.3 440,168.9 441.7,168.5 443.3,168.1 445,167.6 446.7,167 448.3,166.4 450,165.7 451.7,164.9 453.3,164.1 455,163.3 456.7,162.3 458.3,161.3 460,160.3 461.7,159.2 463.3,158 465,156.8 466.7,155.5 468.3,154.1 470,152.7 471.7,151.3 473.3,149.7 475,148.1 476.7,146.5 478.3,144.8 480,143 481.7,141.2 483.3,139.3 485,137.3 486.7,135.3 488.3,133.3 490,131.1 491.7,128.9 493.3,126.7 495,124.4 496.7,122 498.3,119.6 500,117.1 501.7,114.5 503.3,111.9 505,109.2 506.7,106.5 508.3,103.7 510,100.9 511.7,98 513.3,95 515,92 516.7,88.9 518.3,85.7 520,82.5 521.7,79.3 523.3,75.9 525,72.5 526.7,69.1 528.3,65.6 530,62" style="fill:none;stroke:var(--accent);stroke-width:3"/><circle cx="496.7" cy="122" r="6" style="fill:var(--thm)"/><line x1="496.7" y1="122" x2="459.1" y2="122" style="stroke:var(--ex);stroke-width:3;fill:none"/><polygon points="450.7,122 459.7,117.6 459.7,126.4" style="fill:var(--ex)"/><text class="tt" x="472.7" y="112" style="text-anchor:middle;fill:var(--ex)">F = −dU/dx</text></svg>
+        <figcaption>重力($U=mgz$)とばね($U=\tfrac12kx^2$)のポテンシャル。力は $-\frac{dU}{dx}$、つまり<b>ポテンシャルの坂を下る向き</b>で、坂が急なほど大きい。</figcaption>
+      </figure>
+    </div>
+
+    <!-- ===================== 5 ===================== -->
+    <h2 id="s5">5. $\nabla$(gradient)の意味 <span class="page-tag">板書 p.9</span></h2>
+    <p>板書の見出し:「$\nabla$ (gradient) の意味」、「2次元の例」:
+    $$U(x,y)=x+2y,\qquad\nabla U=(1,2).$$
+    板書の図には、直線 $x+2y=0$(実線)と、それに平行な赤い破線の直線群が描かれています。<b>等 $U$ 線</b>(等ポテンシャル線:$U$ が同じ値をとる点を結んだ線)です。そして板書の注記:「保存力の逆で、<b>法線ベクトル</b>だから、これは最も急なポテンシャルの昇り方」。</p>
+    <figure class="fig">
+      <svg viewBox="0 0 560 262" width="560" role="img" aria-label="勾配と等ポテンシャル線"><line x1="40" y1="140" x2="340" y2="140" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><line x1="190" y1="250" x2="190" y2="20" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><text class="t" x="344" y="158">x</text><text class="t" x="198" y="24">y</text><line x1="42.8" y1="158.4" x2="337.2" y2="305.6" style="stroke:var(--thm);stroke-width:1.6;stroke-dasharray:6 4;opacity:.9"/><text class="tm" x="335.2" y="299.6" style="text-anchor:end;fill:var(--thm);paint-order:stroke;stroke:var(--surface);stroke-width:4px;stroke-linejoin:round">U = -4</text><line x1="42.8" y1="112.4" x2="337.2" y2="259.6" style="stroke:var(--thm);stroke-width:1.6;stroke-dasharray:6 4;opacity:.9"/><text class="tm" x="335.2" y="253.6" style="text-anchor:end;fill:var(--thm);paint-order:stroke;stroke:var(--surface);stroke-width:4px;stroke-linejoin:round">U = -2</text><line x1="42.8" y1="66.4" x2="337.2" y2="213.6" style="stroke:var(--thm);stroke-width:2.8;stroke-dasharray:6 4;opacity:.9"/><text class="tm" x="335.2" y="207.6" style="text-anchor:end;fill:var(--thm);paint-order:stroke;stroke:var(--surface);stroke-width:4px;stroke-linejoin:round">U = 0</text><line x1="42.8" y1="20.4" x2="337.2" y2="167.6" style="stroke:var(--thm);stroke-width:1.6;stroke-dasharray:6 4;opacity:.9"/><text class="tm" x="335.2" y="161.6" style="text-anchor:end;fill:var(--thm);paint-order:stroke;stroke:var(--surface);stroke-width:4px;stroke-linejoin:round">U = 2</text><line x1="42.8" y1="-25.6" x2="337.2" y2="121.6" style="stroke:var(--thm);stroke-width:1.6;stroke-dasharray:6 4;opacity:.9"/><text class="tm" x="335.2" y="115.6" style="text-anchor:end;fill:var(--thm);paint-order:stroke;stroke:var(--surface);stroke-width:4px;stroke-linejoin:round">U = 4</text><line x1="190" y1="140" x2="225.3" y2="69.3" style="stroke:var(--accent);stroke-width:3.2;fill:none"/><polygon points="230,60 229.6,72.1 220.6,67.6" style="fill:var(--accent)"/><text class="tt" x="238" y="56" style="fill:var(--accent)">∇U = (1, 2)</text><line x1="190" y1="140" x2="162.7" y2="194.7" style="stroke:var(--ex);stroke-width:3;fill:none"/><polygon points="158,204 158.4,191.9 167.4,196.4" style="fill:var(--ex)"/><text class="tt" x="152" y="220" style="text-anchor:end;fill:var(--ex)">F = −∇U</text><circle cx="190" cy="140" r="4" style="fill:var(--text)"/><text class="ta" x="20" y="22">U(x, y) = x + 2y の等ポテンシャル線(赤い破線)</text><text class="tm" x="350" y="70">∇U は等ポテンシャル線に垂直で、</text><text class="tm" x="350" y="88">U が最も急に増える向き</text><text class="tm" x="350" y="118">力 F はその逆向き</text><text class="tm" x="350" y="136">(坂を下る向き)</text></svg>
+      <figcaption>$U=x+2y$ の等ポテンシャル線(赤い破線、$x+2y=c$)と、勾配 $\nabla U=(1,2)$(青)、力 $\bm F=-\nabla U$(緑)。(板書 p.9 の図を描き直しました。)</figcaption>
+    </figure>
+    <ul>
+      <li><b>勾配は等ポテンシャル線に垂直</b>:等 $U$ 線 $x+2y=c$ の方向ベクトルは $(2,-1)$(傾き $-\frac12$)。$\nabla U=(1,2)$ との内積は $2-2=0$。直交しています。(板書:「法線ベクトル」)</li>
+      <li><b>勾配は $U$ が最も急に増える向き</b>:単位ベクトル $\bm e$ の向きに進んだときの $U$ の増える速さ(方向微分)は $\nabla U\cdot\bm e=|\nabla U|\cos\theta$。$\theta=0$(勾配と同じ向き)で最大。その大きさが $|\nabla U|=\sqrt5$。</li>
+      <li><b>力は勾配の逆向き</b>:$\bm F=-\nabla U$ は、$U$ が最も急に減る向き(坂を下る向き)を指します。物体は、ポテンシャルの坂を<b>転がり落ちる</b>向きに力を受けます。</li>
+    </ul>
+    <div class="box supp">
+      <div class="label">板書にない補足:なぜ「法線」なのか</div>
+      <p>等 $U$ 線に沿って微小に動いても、$U$ は変わらない(動いた変位 $\Delta\bm r$ に対して $\Delta U=\nabla U\cdot\Delta\bm r=0$)。つまり $\nabla U\perp\Delta\bm r$。したがって、$\nabla U$ は等 $U$ 線(面)の<b>法線方向</b>を向いています。(同じ議論が、電磁気学 第2回の「勾配は等高線に直交する」です。)</p>
+    </div>
+
+    <!-- ===================== 6 ===================== -->
+    <h2 id="s6">6. 力学的エネルギー保存 <span class="page-tag">補足</span></h2>
+    <p>3.1 節で、保存力のもとでは $\tfrac12m\dot{\bm r}^2+U(\bm r)$ が一定になることを見ました。これを一般的にまとめておきます。</p>
+    <div class="box thm">
+      <div class="label">力学的エネルギー保存則</div>
+      <p>質点にはたらく力が保存力 $\bm F=-\nabla U$ だけのとき、
+      $$E=\tfrac12m|\dot{\bm r}|^2+U(\bm r)=\text{一定}.$$</p>
+    </div>
+    <div class="box supp">
+      <div class="label">板書にない補足:時間微分で直接確かめる</div>
+      <p>$\dfrac{dE}{dt}=m\ddot{\bm r}\cdot\dot{\bm r}+\nabla U\cdot\dot{\bm r}$(連鎖律:$\dfrac{dU(\bm r(t))}{dt}=\nabla U\cdot\dot{\bm r}$)。運動方程式 $m\ddot{\bm r}=\bm F=-\nabla U$ を代入して $\dfrac{dE}{dt}=-\nabla U\cdot\dot{\bm r}+\nabla U\cdot\dot{\bm r}=0$。$E$ は時間によらず一定。</p>
+    </div>
+
+    <!-- ===================== 7 ===================== -->
+    <h2 id="s7">7. 具体例で練習(板書にない補足) <span class="page-tag">補足</span></h2>
+    <p>この節は、板書にはない、理解を助けるための練習問題と解答です。</p>
+
+    <div class="box ex">
+      <div class="label">問題 A:勾配の計算</div>
+      <p>次のポテンシャルから、力 $\bm F=-\nabla U$ を求めよ。(1) $U=x^2+y^2$ (2) $U=xyz$ (3) $U=-\dfrac{k}{r}$($r=\sqrt{x^2+y^2+z^2}$)</p>
+    </div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>(1) $\nabla U=(2x,2y,0)$、$\bm F=-(2x,2y,0)$。(2) $\nabla U=(yz,xz,xy)$、$\bm F=-(yz,xz,xy)$。(3) $\dfrac{\partial r}{\partial x}=\dfrac xr$ なので $\dfrac{\partial}{\partial x}\Bigl(-\dfrac kr\Bigr)=\dfrac{k}{r^2}\cdot\dfrac xr=\dfrac{kx}{r^3}$。$\nabla U=\dfrac{k\,\bm r}{r^3}$、$\bm F=-\dfrac{k\bm r}{r^3}$:大きさ $\dfrac k{r^2}$、中心に向かう引力(万有引力のポテンシャル $U=-GMm/r$ の形)。</p></div>
+
+    <div class="box ex">
+      <div class="label">問題 B:ポテンシャルを求める</div>
+      <p>力 $\bm F=(2xy,\ x^2,\ 0)$ は保存力である。ポテンシャル $U$(基準 $U(0,0,0)=0$)を、基点 $(0,0,0)$ からの線積分で求めよ。</p>
+    </div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>基点 $(0,0,0)$ から点 $(x,y,0)$ まで、まず $x$ 方向に $(x,0,0)$、次に $y$ 方向に $(x,y,0)$ へ進む(経路によらないので、都合のよい道を選べる)。第1段($y=0$、$x':0\to x$):$\bm F=(0,x'^2,0)$、$d\bm r=(dx',0,0)$、$\bm F\cdot d\bm r=0$。第2段($x'=x$ 一定、$y':0\to y$):$\bm F=(2xy',x^2,0)$、$d\bm r=(0,dy',0)$、$\bm F\cdot d\bm r=x^2dy'$、積分は $x^2y$。よって $U=-x^2y$。確かめ:$-\nabla U=(2xy,x^2,0)=\bm F$。</p></div>
+
+    <div class="box ex">
+      <div class="label">問題 C:エネルギー保存で速さを求める</div>
+      <p>ばね定数 $k$ のばねにつながれた質量 $m$ の質点を、自然長の位置($x=0$)から $x=A$ まで引き、静かに放す。通過する $x=0$ での速さを求めよ。</p>
+    </div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>$E=\tfrac12m\dot x^2+\tfrac12kx^2$ が一定。放した直後 $\dot x=0$、$x=A$:$E=\tfrac12kA^2$。$x=0$ で $\tfrac12mv^2=\tfrac12kA^2$、$v=A\sqrt{k/m}$。(運動方程式を解かずに求まりました。単振動の最大の速さ $A\omega$、$\omega=\sqrt{k/m}$ と一致。)</p></div>
+
+    <div class="box ex">
+      <div class="label">問題 D:保存力でないことの確認</div>
+      <p>力 $\bm F=(y,\ -x)$ は保存力か。原点中心、半径 1 の円を、反時計回りに 1 周する線積分を計算して判定せよ。</p>
+    </div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>$\bm r=(\cos\theta,\sin\theta)$、$\bm F=(\sin\theta,-\cos\theta)$、$\dfrac{d\bm r}{d\theta}=(-\sin\theta,\cos\theta)$。内積 $-\sin^2\theta-\cos^2\theta=-1$。1周($0\to2\pi$)で $-2\pi\ne0$。閉曲線に沿った線積分が 0 でないので、<b>保存力ではない</b>。</p></div>
+
+    <!-- ===================== 8 ===================== -->
+    <h2 id="s8">8. まとめ(この回で覚えること)</h2>
+    <ul>
+      <li><b>保存力</b>:仕事が経路によらない力 $\iff$ 任意の閉曲線で $\oint\bm F\cdot d\bm r=0$。逆向きにたどると線積分は符号が変わるので、2つの経路の差が閉曲線になる。</li>
+      <li><b>ポテンシャル</b>:$U(\bm r)=-\int_{\bm r_0}^{\bm r}\bm F\cdot d\bm r$(経路によらず、基準点で定数だけ決まる)。仕事は $\int_{\bm r_1}^{\bm r_2}\bm F\cdot d\bm r=U(\bm r_1)-U(\bm r_2)$。</li>
+      <li><b>力はポテンシャルの勾配から</b>:$\bm F=-\nabla U$、すなわち $F_x=-\dfrac{\partial U}{\partial x}$ など。($\nabla$ = ナブラ。)</li>
+      <li><b>勾配の意味</b>:$\nabla U$ は等ポテンシャル線に垂直で、$U$ が最も急に増える向き。力は逆向き(坂を下る向き)。</li>
+      <li><b>力学的エネルギー保存則</b>:保存力のもとで、$\tfrac12m\dot{\bm r}^2+U(\bm r)=$ 一定。</li>
+    </ul>
+
+    <!-- ===================== 9 ===================== -->
+    <h2 id="s9">9. この回のノートについてのメモ</h2>
+    <p>板書は手書きの iPad ノートで、ページ番号がありません。PDF の順に数えました(p.7 の後半〜p.9 の前半)。板書の画像はこのサイトには載せていません。補足として足した部分(黄色の枠)、基礎ページの内容、練習問題と解答は、Claude が書き足したもので、板書にはありません。</p>
+    <ol>
+      <li><b>ベクトルと成分の書き方(p.8)</b>:板書の「$\Delta U=-(F_x\Delta x,F_y\Delta y,F_z\Delta z)+O(\ldots)$」は、ベクトルの形で書かれていますが、$\Delta U$ はスカラーなので、3成分の<b>和</b> $-(F_x\Delta x+F_y\Delta y+F_z\Delta z)$ と読みました。</li>
+      <li><b>誤差の書き方(p.8)</b>:「$O(1/N^2)$」は、区間の大きさ $\Delta\bm r$ を $O(1/N)$ とみなしたときの、$O((\Delta\bm r)^2)$ のことと読みました。</li>
+      <li><b>図の読み方(p.9)</b>:2次元の例の図には、$U=x+2y$ の等ポテンシャル線が描かれています。実線は $x+2y=0$ です。「保存力の逆で法線ベクトル」は、「$\nabla U=-\bm F$ だから、$\nabla U$ は(等ポテンシャル線の)法線ベクトル」の意味と読みました。</li>
+      <li><b>板書の見出しと前回の続き(p.7)</b>:「保存力とポテンシャル」の節 4.2 は、p.7 の途中から始まります(前回の最後の、パラメータによらない、という議論に続く)。</li>
+    </ol>
+
+    <nav class="pager">
+      <a href="week-04.html">← 前の週</a>
+      <a href="../index.html">一覧へ</a>
+      <a href="week-06.html">次の週 →</a>
+    </nav>
+
+  </main>
+
+  <footer>© Aセメまとめノート</footer>
+</body>
+</html>

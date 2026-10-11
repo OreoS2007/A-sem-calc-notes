@@ -1,7 +1,7 @@
 # Aセメまとめノート(このリポジトリの運用ルール)
 
 東京大学 教養学部1年・秋学期の授業の板書を、週ごとのまとめノートにして、GitHub Pages で公開するサイト。
-教科は3つ:`calc`(微積:微分積分学②)、`linalg`(線形代数)、`em`(電磁気学)。教科の追加は、フォルダと一覧カードを足すだけ(`index.html` の教科カード、`em/` を手本にする)。
+教科は4つ:`calc`(微積:微分積分学②)、`linalg`(線形代数)、`em`(電磁気学)、`mech`(力学A)。教科の追加は、フォルダと一覧カードを足すだけ(`index.html` の教科カード、`em/` を手本にする)。
 
 ## ユーザーがやること
 
@@ -16,12 +16,14 @@ assets/style.css, nav.js   全ページ共通のスタイルと、スクロー�
 calc/   index.html(回の一覧)  basics.html(春学期のまとめ)  weeks/week-NN.html  images/week-NN/
 linalg/ (同じ構成)
 em/     (同じ構成。春学期がないので basics.html は「基礎のまとめ」。講義ノートは文章なので `講義ノート p.N` と書く)
+mech/   (同じ構成。講義ノートは手書き24ページ(PDF)で、ページ番号がないので PDF の順に `p.N` と数える。13回への分け方はこちらで決めたもの(`reference/mech/README.md` に対応表))
 templates/week-template.html   週のノートのひな形
 tools/serve.ps1            ローカル確認用の簡易サーバー
 reference/                 (.gitignore 済み・非公開)春学期のノートなどの私的な資料
   calc/spring/README.md    微積の春学期ノート(手書き)の索引。基礎ページ・基礎の枠を書くときの第一の根拠
   linalg/spring/README.md  線形代数の春学期ノート(手書き ①〜⑦、板書にページ番号なし)の索引。同上
   em/README.md             電磁気学の講義ノート(活字PDF)と、週↔ページ範囲の対応表、誤記の一覧
+  mech/README.md           力学Aの講義ノート(手書きPDF 24ページ)の索引、週↔ページの対応表、誤記の一覧
   common/README.md         数理科学基礎 共通資料(活字の教科書、微積・線形が混在)の索引。春学期ノートで足りない前提の補足に使う
 weeks/week-01.html, basics.html   旧URLからの転送(消さない)
 ```

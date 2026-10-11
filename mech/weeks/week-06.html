@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>第6回 中心力と保存力の判定法 | Aセメまとめノート</title>
+  <link rel="stylesheet" href="../../assets/style.css">
+  <script defer src="../../assets/nav.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],macros:{'\\R':'\\mathbb{R}','\\bm':'\\boldsymbol{#1}','\\dd':'\\mathrm{d}'}});window.__navReady&&window.__navReady()"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="inner">
+      <a class="site-title" href="../../index.html">Aセメまとめノート</a>
+      <span class="links"><a href="../index.html">力学A</a><a href="../basics.html">基礎のまとめ</a><a href="../../calc/index.html">微積</a><a href="../../linalg/index.html">線形代数</a><a href="../../em/index.html">電磁気学</a></span>
+    </div>
+  </header>
+
+  <main class="note">
+    <h1>第6回:中心力と保存力の判定法</h1>
+    <div class="meta">力学A(東京大学 教養学部 秋学期)／板書 p.9 の後半〜p.10(PDF の順に数えています)／ノートの節番号は「4.3 中心力」と「保存力の判定法」</div>
+
+    <nav class="toc">
+      <div class="toc-title">目次</div>
+      <ol start="0">
+        <li><a href="#s0">この回の全体像</a></li>
+        <li><a href="#s1">準備:基礎の確認</a>
+          <div class="sub">単位ベクトルと動径／合成関数の微分／多変数のテイラー展開／外積と平行四辺形の面積／添字と $\sum$</div></li>
+        <li><a href="#s2">中心力とは</a>(p.9)</li>
+        <li><a href="#s3">中心力は保存力である</a>(p.9)</li>
+        <li><a href="#s4">保存力の判定法:大きなループを小さなループに分ける</a>(p.10)</li>
+        <li><a href="#s5">微小ループの線積分を計算する</a>(p.10)</li>
+        <li><a href="#s6">回転 $\operatorname{rot}\bm F$ と、判定法</a>(p.10)</li>
+        <li><a href="#s7">具体例で練習</a></li>
+        <li><a href="#s8">まとめ(この回で覚えること)</a></li>
+        <li><a href="#s9">この回のノートについてのメモ</a></li>
+      </ol>
+    </nav>
+
+    <!-- ===================== 0 ===================== -->
+    <h2 id="s0">0. この回の全体像 <span class="page-tag">板書 p.9–10</span></h2>
+    <p>前回(第5回)で、保存力の定義と、ポテンシャル $U$、そして $\bm F=-\nabla U$ を学びました。この回の疑問は2つです。</p>
+    <ol>
+      <li><b>どんな力が保存力か。</b> 万有引力やクーロン力のように、<b>中心 $O$ からの距離だけで大きさが決まり、向きが中心に向かう(あるいは離れる)力</b> = <b>中心力</b>は、いつでも保存力である。これを証明する。</li>
+      <li><b>与えられた力が保存力かどうかを、どう調べるか。</b> 「あらゆる閉曲線で線積分が 0」を確かめるのは大変なので、<b>微分だけで判定する方法</b>(回転 $\operatorname{rot}\bm F=\bm 0$ かどうか)を導く。</li>
+    </ol>
+    <div class="box thm">
+      <div class="label">この回のゴール</div>
+      <p>① 中心力 $\bm F(\bm r)=f(|\bm r|)\hat{\bm r}$ が保存力であることを、線積分の計算で示す。<br>
+      ② 閉曲線の線積分を、小さなループの線積分の和に分ける。<br>
+      ③ 微小な平行四辺形のループの線積分を計算して、$(\Delta\bm u\times\Delta\bm v)_z\,(\partial_xF_y-\partial_yF_x)$、すなわち<b>回転</b> $\operatorname{rot}\bm F=\nabla\times\bm F$ が出てくることを理解する。<br>
+      ④ $\operatorname{rot}\bm F=\bm 0$ ならば保存力(の判定法)。</p>
+    </div>
+    <figure class="fig">
+      <svg viewBox="0 0 560 262" width="560" role="img" aria-label="中心力"><circle cx="170" cy="130" r="40" style="fill:none;stroke:var(--muted);stroke-width:1;stroke-dasharray:4 4"/><circle cx="170" cy="130" r="80" style="fill:none;stroke:var(--muted);stroke-width:1;stroke-dasharray:4 4"/><circle cx="170" cy="130" r="120" style="fill:none;stroke:var(--muted);stroke-width:1;stroke-dasharray:4 4"/><line x1="287.8" y1="107.1" x2="310.6" y2="102.7" style="stroke:var(--thm);stroke-width:2.2;fill:none"/><polygon points="317.9,101.3 310.7,106.3 309.4,99.2" style="fill:var(--thm)"/><line x1="236.7" y1="85.8" x2="265.6" y2="66.7" style="stroke:var(--thm);stroke-width:2.2;fill:none"/><polygon points="271.7,62.7 267,70.1 263.1,64.1" style="fill:var(--thm)"/><line x1="237.1" y1="30.5" x2="250.1" y2="11.2" style="stroke:var(--thm);stroke-width:2.2;fill:none"/><polygon points="254.3,5.1 252.8,13.7 246.8,9.7" style="fill:var(--thm)"/><line x1="185.9" y1="51.6" x2="192.8" y2="17.7" style="stroke:var(--thm);stroke-width:2.2;fill:none"/><polygon points="194.3,10.4 196.3,19 189.2,17.6" style="fill:var(--thm)"/><line x1="147.1" y1="12.2" x2="142.7" y2="-10.6" style="stroke:var(--thm);stroke-width:2.2;fill:none"/><polygon points="141.3,-17.9 146.3,-10.7 139.2,-9.4" style="fill:var(--thm)"/><line x1="125.8" y1="63.3" x2="106.7" y2="34.4" style="stroke:var(--thm);stroke-width:2.2;fill:none"/><polygon points="102.7,28.3 110.1,33 104.1,36.9" style="fill:var(--thm)"/><line x1="70.5" y1="62.9" x2="51.2" y2="49.9" style="stroke:var(--thm);stroke-width:2.2;fill:none"/><polygon points="45.1,45.7 53.7,47.2 49.7,53.2" style="fill:var(--thm)"/><line x1="91.6" y1="114.1" x2="57.7" y2="107.2" style="stroke:var(--thm);stroke-width:2.2;fill:none"/><polygon points="50.4,105.7 59,103.7 57.6,110.8" style="fill:var(--thm)"/><line x1="52.2" y1="152.9" x2="29.4" y2="157.3" style="stroke:var(--thm);stroke-width:2.2;fill:none"/><polygon points="22.1,158.7 29.3,153.7 30.6,160.8" style="fill:var(--thm)"/><line x1="103.3" y1="174.2" x2="74.4" y2="193.3" style="stroke:var(--thm);stroke-width:2.2;fill:none"/><polygon points="68.3,197.3 73,189.9 76.9,195.9" style="fill:var(--thm)"/><line x1="102.9" y1="229.5" x2="89.9" y2="248.8" style="stroke:var(--thm);stroke-width:2.2;fill:none"/><polygon points="85.7,254.9 87.2,246.3 93.2,250.3" style="fill:var(--thm)"/><line x1="154.1" y1="208.4" x2="147.2" y2="242.3" style="stroke:var(--thm);stroke-width:2.2;fill:none"/><polygon points="145.7,249.6 143.7,241 150.8,242.4" style="fill:var(--thm)"/><line x1="192.9" y1="247.8" x2="197.3" y2="270.6" style="stroke:var(--thm);stroke-width:2.2;fill:none"/><polygon points="198.7,277.9 193.7,270.7 200.8,269.4" style="fill:var(--thm)"/><line x1="214.2" y1="196.7" x2="233.3" y2="225.6" style="stroke:var(--thm);stroke-width:2.2;fill:none"/><polygon points="237.3,231.7 229.9,227 235.9,223.1" style="fill:var(--thm)"/><line x1="269.5" y1="197.1" x2="288.8" y2="210.1" style="stroke:var(--thm);stroke-width:2.2;fill:none"/><polygon points="294.9,214.3 286.3,212.8 290.3,206.8" style="fill:var(--thm)"/><line x1="248.4" y1="145.9" x2="282.3" y2="152.8" style="stroke:var(--thm);stroke-width:2.2;fill:none"/><polygon points="289.6,154.3 281,156.3 282.4,149.2" style="fill:var(--thm)"/><circle cx="170" cy="130" r="6" style="fill:var(--text)"/><text class="tm" x="178" y="148">中心 O</text><text class="ta" x="340" y="56">中心力 F(r) = f(|r|) r̂</text><text class="tm" x="340" y="80">・向き:中心 O から見た動径方向(r̂)</text><text class="tm" x="340" y="98">・大きさ:O からの距離 |r| だけで決まる</text><text class="tm" x="340" y="128">同じ半径の円(破線)の上では、</text><text class="tm" x="340" y="146">力の大きさはどこでも同じ</text></svg>
+      <figcaption>中心力。力の向きは中心 $O$ から見た動径方向、大きさは中心からの距離 $|\bm r|$ だけで決まる(同じ半径の円の上で、力の大きさは同じ)。</figcaption>
+    </figure>
+    <p>以下では、先に必要な基礎を丁寧に復習してから、板書の順に進みます。紫色の枠は「基礎の復習」、黄色の枠は「板書にないが、理解を助けるために私が補った部分」です。</p>
+
+    <!-- ===================== 1 ===================== -->
+    <h2 id="s1">1. 準備:基礎の確認</h2>
+
+    <h3 id="w-unitvec">1.1 位置ベクトルと動径方向の単位ベクトル</h3>
+    <div class="box basic">
+      <div class="label">基礎:$\hat{\bm r}=\bm r/r$ <a class="xref-link" href="../basics.html#vecdiff" data-xref>→ 詳しい解説</a></div>
+      <p>原点を中心とした位置ベクトル $\bm r=(x,y,z)$、その長さ $r=|\bm r|=\sqrt{x^2+y^2+z^2}$。$\hat{\bm r}=\dfrac{\bm r}{|\bm r|}$ は、$\bm r$ と同じ向きの<b>長さ1のベクトル</b>(動径方向の単位ベクトル)。</p>
+      <p>$\bm r$ の時間変化に伴って $r(t)=|\bm r(t)|$ も変わります。$r^2=\bm r\cdot\bm r$ を時間で微分すると $2r\dot r=2\bm r\cdot\dot{\bm r}$、すなわち
+      $$\bm r\cdot\dot{\bm r}=r\,\dot r\qquad(\dot r=\tfrac{dr}{dt}).$$
+      これは「速度の動径方向の成分 $\hat{\bm r}\cdot\dot{\bm r}$ が $\dot r$($r$ の変化の速さ)に等しい」という意味です。</p>
+    </div>
+
+    <h3 id="w-taylor3">1.2 多変数のテイラー展開(1次近似)</h3>
+    <div class="box basic">
+      <div class="label">基礎:$f(\bm r+\Delta\bm u)\approx f(\bm r)+\Delta\bm u\cdot\nabla f$ <a class="xref-link" href="../basics.html#partial" data-xref>→ 詳しい解説</a><a class="xref-link" href="../../em/basics.html#taylor" data-xref>→ 電磁気学の基礎(テイラー展開)</a></div>
+      <p>1変数では $g(x+\Delta x)=g(x)+g'(x)\Delta x+O(\Delta x^2)$。多変数では、各方向の変化を足して
+      $$f(\bm r+\Delta\bm u)=f(\bm r)+\Delta u_x\frac{\partial f}{\partial x}+\Delta u_y\frac{\partial f}{\partial y}+\Delta u_z\frac{\partial f}{\partial z}+O\bigl(|\Delta\bm u|^2\bigr)=f(\bm r)+(\Delta\bm u\cdot\nabla)f+O(|\Delta\bm u|^2).$$
+      ここで $\Delta\bm u\cdot\nabla=\Delta u_x\partial_x+\Delta u_y\partial_y+\Delta u_z\partial_z$ は「$\Delta\bm u$ の向きに微分する」演算子。ベクトル $\bm F$ には、成分ごとに適用します。</p>
+    </div>
+
+    <h3 id="w-area">1.3 外積と、平行四辺形の面積</h3>
+    <div class="box basic">
+      <div class="label">基礎:$(\Delta\bm u\times\Delta\bm v)_z$ は平行四辺形の(符号つき)面積 <a class="xref-link" href="../basics.html#vecdiff" data-xref>→ 詳しい解説</a><a class="xref-link" href="../../em/basics.html#vec3" data-xref>→ 電磁気学の基礎(外積)</a></div>
+      <p>平面($xy$ 面)内のベクトル $\Delta\bm u=(\Delta u_x,\Delta u_y)$、$\Delta\bm v=(\Delta v_x,\Delta v_y)$ が作る平行四辺形の面積は $\Delta u_x\Delta v_y-\Delta u_y\Delta v_x$(2×2 の行列式)。これは外積 $\Delta\bm u\times\Delta\bm v$ の $z$ 成分に等しい。$\Delta\bm u$ から $\Delta\bm v$ へ反時計回りなら正、時計回りなら負。</p>
+    </div>
+
+    <h3 id="w-index">1.4 添字と $\sum$ の記法</h3>
+    <div class="box basic">
+      <div class="label">基礎:成分の添字と、同じ添字の和 <a class="xref-link" href="../basics.html#vecdiff" data-xref>→ 詳しい解説</a><a class="xref-link" href="../../em/basics.html#sigma" data-xref>→ 電磁気学の基礎(総和記号)</a></div>
+      <p>ベクトルの第 $i$ 成分を $u_i$($i=x,y,z$)、偏微分を $\partial_i=\dfrac{\partial}{\partial x_i}$ と書きます。板書では、<b>同じ添字が2回出てきたら、その添字について足す</b>という省略(アインシュタインの規約)を使っています:$\Delta u_i\,\partial_iF_j\,\Delta v_j=\sum_{i,j}\Delta u_i(\partial_iF_j)\Delta v_j$。和をとる添字の名前は、何に付け替えてもよい($i\leftrightarrow j$ など)。</p>
+    </div>
+
+    <!-- ===================== 2 ===================== -->
+    <h2 id="s2">2. 中心力とは <span class="page-tag">板書 p.9</span></h2>
+    <div class="box def">
+      <div class="label">中心力</div>
+      <p>力 $\bm F=\bm F(\bm r)$ の<b>大きさが $\bm r$ のみの関数</b>(より正確には $r=|\bm r|$ のみの関数)で、その<b>方向が $\bm r$ 方向(動径方向)</b>のとき、$\bm F$ は<b>中心力</b>という。式で書くと
+      $$\bm F(\bm r)=f(|\bm r|)\,\hat{\bm r}\qquad\Bigl(\hat{\bm r}=\frac{\bm r}{|\bm r|}=\frac{\bm r}{r}\Bigr).$$
+      $f>0$ なら中心から遠ざかる向き(斥力)、$f<0$ なら中心に向かう向き(引力)。</p>
+    </div>
+    <p>例:万有引力 $\bm F=-\dfrac{GMm}{r^2}\hat{\bm r}$($f(r)=-\dfrac{GMm}{r^2}$)、クーロン力、原点に固定されたばねの力 $\bm F=-k\bm r$($f(r)=-kr$)。板書の図は、中心から $\bm r$ だけ離れた点で、力 $\bm F(\bm r)$ が $\bm r$ の向きに伸びている様子です。</p>
+
+    <!-- ===================== 3 ===================== -->
+    <h2 id="s3">3. 中心力は保存力である <span class="page-tag">板書 p.9</span></h2>
+    <p>板書の★:「これは保存力」。証明を追います。</p>
+    <div class="box proof"><div class="label">証明(板書のとおり)</div>
+      <p>$\bm F(\bm r)=f(|\bm r|)\hat{\bm r}$。ある経路 $C$ に沿った線積分 $\displaystyle\int_C\bm F(\bm r)\cdot d\bm r$ を、$C$ を $\bm r=\bm r(t)$ とパラメータ表示して計算する:
+      $$\int_C\bm F\cdot d\bm r=\int\bm F(\bm r(t))\cdot\frac{d\bm r(t)}{dt}\,dt=\int f(|\bm r(t)|)\,\frac{\bm r(t)}{|\bm r(t)|}\cdot\frac{d\bm r(t)}{dt}\,dt.$$
+      ここで、板書の括弧の中の計算:$\bm r(t)\cdot\dfrac{d\bm r(t)}{dt}$ は、スカラーで、
+      $$\bm r\cdot\dot{\bm r}=\frac d{dt}\Bigl(\tfrac12|\bm r(t)|^2\Bigr)=|\bm r(t)|\,\frac d{dt}|\bm r(t)|.$$
+      これを代入すると
+      $$\int_C\bm F\cdot d\bm r=\int f(|\bm r(t)|)\frac1{|\bm r(t)|}\,|\bm r(t)|\frac{d|\bm r(t)|}{dt}\,dt=\int f(|\bm r(t)|)\,\frac{d|\bm r(t)|}{dt}\,dt=\int f(r)\,dr.$$
+      最後の式は、$r=|\bm r|$ を積分変数とする、<b>1変数の普通の積分</b>で、始点の $r$ と終点の $r$ だけで決まる。<b>経路に依らない</b>。 $\blacksquare$</p></div>
+    <p>意味:中心力は、動径方向にしか力をおよぼさないので、中心からの距離 $r$ が変わるときだけ仕事をします。円周に沿って(距離 $r$ が一定のまま)動くときは、力と変位が直交するので仕事は0。したがって、仕事は<b>距離の変化だけ</b>で決まり、始点・終点の $r$ だけに依るのです。</p>
+    <div class="box supp">
+      <div class="label">板書にない補足:ポテンシャルと、具体例</div>
+      <p>基準点を $r_0$ にとると、ポテンシャルは $U(r)=-\displaystyle\int_{r_0}^rf(r')\,dr'$(距離だけの関数)。<br>
+      ・万有引力 $f=-\dfrac{GMm}{r^2}$:$U=-\displaystyle\int_\infty^r\Bigl(-\frac{GMm}{r'^2}\Bigr)dr'=-\frac{GMm}{r}$(無限遠を基準 $U(\infty)=0$)。<br>
+      ・ばね $f=-kr$:$U=\tfrac12kr^2$(基準 $U(0)=0$)。<br>
+      力は、$\bm F=-\nabla U=-\dfrac{dU}{dr}\hat{\bm r}=f(r)\hat{\bm r}$ と戻る($\nabla U(r)=\dfrac{dU}{dr}\hat{\bm r}$)。</p>
+    </div>
+
+    <!-- ===================== 4 ===================== -->
+    <h2 id="s4">4. 保存力の判定法:大きなループを小さなループに分ける <span class="page-tag">板書 p.10</span></h2>
+    <p>板書 p.10 の見出し「保存力の判定法」。保存力の条件は、あらゆる閉ループ($\forall$)で
+    $$\oint_{\text{閉ループ}}\bm F\cdot d\bm r=0$$
+    が成り立つことでした。しかし、「<b>あらゆる</b>閉曲線」を調べるのは大変です。そこで、<b>閉曲線を細かい小さなループに分けて</b>考えます。板書の図は、1つの円形のループを、細かい格子状のループに分けていく様子です。
+    $$\oint_{\text{大ループ}}\bm F\cdot d\bm r=\sum_I\oint_{I\text{ 番目の小ループ}}\bm F\cdot d\bm r.$$</p>
+    <figure class="fig">
+      <svg viewBox="0 0 560 252" width="560" role="img" aria-label="大きなループを小さなループに分ける"><rect x="40" y="70" width="30" height="30" rx="0" style="fill:var(--accent);fill-opacity:0.1;stroke:var(--muted);stroke-width:1"/><rect x="40" y="100" width="30" height="30" rx="0" style="fill:var(--accent);fill-opacity:0.2;stroke:var(--muted);stroke-width:1"/><rect x="40" y="130" width="30" height="30" rx="0" style="fill:var(--accent);fill-opacity:0.1;stroke:var(--muted);stroke-width:1"/><rect x="40" y="160" width="30" height="30" rx="0" style="fill:var(--accent);fill-opacity:0.2;stroke:var(--muted);stroke-width:1"/><rect x="70" y="40" width="30" height="30" rx="0" style="fill:var(--accent);fill-opacity:0.1;stroke:var(--muted);stroke-width:1"/><rect x="70" y="70" width="30" height="30" rx="0" style="fill:var(--accent);fill-opacity:0.2;stroke:var(--muted);stroke-width:1"/><rect x="70" y="100" width="30" height="30" rx="0" style="fill:var(--accent);fill-opacity:0.1;stroke:var(--muted);stroke-width:1"/><rect x="70" y="130" width="30" height="30" rx="0" style="fill:var(--accent);fill-opacity:0.2;stroke:var(--muted);stroke-width:1"/><rect x="70" y="160" width="30" height="30" rx="0" style="fill:var(--accent);fill-opacity:0.1;stroke:var(--muted);stroke-width:1"/><rect x="70" y="190" width="30" height="30" rx="0" style="fill:var(--accent);fill-opacity:0.2;stroke:var(--muted);stroke-width:1"/><rect x="100" y="40" width="30" height="30" rx="0" style="fill:var(--accent);fill-opacity:0.2;stroke:var(--muted);stroke-width:1"/><rect x="100" y="70" width="30" height="30" rx="0" style="fill:var(--accent);fill-opacity:0.1;stroke:var(--muted);stroke-width:1"/><rect x="100" y="100" width="30" height="30" rx="0" style="fill:var(--accent);fill-opacity:0.2;stroke:var(--muted);stroke-width:1"/><rect x="100" y="130" width="30" height="30" rx="0" style="fill:var(--accent);fill-opacity:0.1;stroke:var(--muted);stroke-width:1"/><rect x="100" y="160" width="30" height="30" rx="0" style="fill:var(--accent);fill-opacity:0.2;stroke:var(--muted);stroke-width:1"/><rect x="100" y="190" width="30" height="30" rx="0" style="fill:var(--accent);fill-opacity:0.1;stroke:var(--muted);stroke-width:1"/><rect x="130" y="40" width="30" height="30" rx="0" style="fill:var(--accent);fill-opacity:0.1;stroke:var(--muted);stroke-width:1"/><rect x="130" y="70" width="30" height="30" rx="0" style="fill:var(--accent);fill-opacity:0.2;stroke:var(--muted);stroke-width:1"/><rect x="130" y="100" width="30" height="30" rx="0" style="fill:var(--accent);fill-opacity:0.1;stroke:var(--muted);stroke-width:1"/><rect x="130" y="130" width="30" height="30" rx="0" style="fill:var(--accent);fill-opacity:0.2;stroke:var(--muted);stroke-width:1"/><rect x="130" y="160" width="30" height="30" rx="0" style="fill:var(--accent);fill-opacity:0.1;stroke:var(--muted);stroke-width:1"/><rect x="130" y="190" width="30" height="30" rx="0" style="fill:var(--accent);fill-opacity:0.2;stroke:var(--muted);stroke-width:1"/><rect x="160" y="40" width="30" height="30" rx="0" style="fill:var(--accent);fill-opacity:0.2;stroke:var(--muted);stroke-width:1"/><rect x="160" y="70" width="30" height="30" rx="0" style="fill:var(--accent);fill-opacity:0.1;stroke:var(--muted);stroke-width:1"/><rect x="160" y="100" width="30" height="30" rx="0" style="fill:var(--accent);fill-opacity:0.2;stroke:var(--muted);stroke-width:1"/><rect x="160" y="130" width="30" height="30" rx="0" style="fill:var(--accent);fill-opacity:0.1;stroke:var(--muted);stroke-width:1"/><rect x="160" y="160" width="30" height="30" rx="0" style="fill:var(--accent);fill-opacity:0.2;stroke:var(--muted);stroke-width:1"/><rect x="160" y="190" width="30" height="30" rx="0" style="fill:var(--accent);fill-opacity:0.1;stroke:var(--muted);stroke-width:1"/><rect x="190" y="70" width="30" height="30" rx="0" style="fill:var(--accent);fill-opacity:0.2;stroke:var(--muted);stroke-width:1"/><rect x="190" y="100" width="30" height="30" rx="0" style="fill:var(--accent);fill-opacity:0.1;stroke:var(--muted);stroke-width:1"/><rect x="190" y="130" width="30" height="30" rx="0" style="fill:var(--accent);fill-opacity:0.2;stroke:var(--muted);stroke-width:1"/><rect x="190" y="160" width="30" height="30" rx="0" style="fill:var(--accent);fill-opacity:0.1;stroke:var(--muted);stroke-width:1"/><path d="M40 40 H220 V220 H40 Z" style="fill:none;stroke:var(--thm);stroke-width:3.2"/><line x1="110" y1="40" x2="139.6" y2="40" style="stroke:var(--thm);stroke-width:3.2;fill:none"/><polygon points="150,40 139,45 139,35" style="fill:var(--thm)"/><line x1="220" y1="110" x2="220" y2="139.6" style="stroke:var(--thm);stroke-width:3.2;fill:none"/><polygon points="220,150 215,139 225,139" style="fill:var(--thm)"/><line x1="150" y1="220" x2="120.4" y2="220" style="stroke:var(--thm);stroke-width:3.2;fill:none"/><polygon points="110,220 121,215 121,225" style="fill:var(--thm)"/><line x1="40" y1="150" x2="40" y2="120.4" style="stroke:var(--thm);stroke-width:3.2;fill:none"/><polygon points="40,110 45,121 35,121" style="fill:var(--thm)"/><line x1="106" y1="130" x2="116.6" y2="130" style="stroke:var(--accent);stroke-width:2.2;fill:none"/><polygon points="124,130 116,133.6 116,126.4" style="fill:var(--accent)"/><line transform="translate(0,5)" x1="124" y1="130" x2="113.4" y2="130" style="stroke:var(--ex);stroke-width:2.2;fill:none"/><polygon transform="translate(0,5)" points="106,130 114,126.4 114,133.6" style="fill:var(--ex)"/><text class="tj" x="300" y="60">大きなループ(橙)を、</text><text class="tj" x="300" y="82">小さなループに細かく分ける</text><text class="tm" x="300" y="112">隣り合う小ループの境界では、</text><text class="tm" x="300" y="130">線積分が逆向きに 2 回出てきて</text><text class="tm" x="300" y="148">打ち消し合う(青と緑)</text><text class="tt" x="300" y="180">⇒ 大ループの ∮ = 小ループの ∮ の総和</text></svg>
+      <figcaption>大きなループを、小さなループに細かく分ける。隣り合う小ループの境界は、一方では行きに、他方では帰りに通るので、線積分は打ち消し合い、外側の道筋の線積分だけが残る。</figcaption>
+    </figure>
+    <p><b>なぜ成り立つか:</b>隣り合う2つの小ループを、同じ向き(たとえば反時計回り)にたどると、それらが共有する辺は、<b>逆向きに2回</b>通ります。逆向きの線積分は符号が反対なので、足し合わせると打ち消し合います。結局、<b>一番外側の辺だけ</b>が残り、それは大ループの周に等しい。したがって、大ループの線積分は、すべての小ループの線積分の和です。</p>
+    <p>だから、<b>どんな小さなループの線積分も 0</b> であれば、大きなループの線積分も 0。そこで、小さなループの線積分を計算します。</p>
+
+    <!-- ===================== 5 ===================== -->
+    <h2 id="s5">5. 微小ループの線積分を計算する <span class="page-tag">板書 p.10</span></h2>
+    <p>板書:「$I$ 番目の微小ループの線積分($\ldots$のオーダー…とかあるけど、<b>平行四辺形として良い</b>)」。小さなループは、2つのベクトル $\Delta\bm u$、$\Delta\bm v$ が作る<b>平行四辺形</b>の周としてよい、という意味です。</p>
+    <figure class="fig">
+      <svg viewBox="0 0 560 240" width="560" role="img" aria-label="微小な平行四辺形のループ"><polygon points="100,190 250,190 298,80 148,80" style="fill:var(--accent);opacity:.13;stroke:none"/><line x1="100" y1="190" x2="237.6" y2="190" style="stroke:var(--thm);stroke-width:3.2;fill:none"/><polygon points="248,190 237,195 237,185" style="fill:var(--thm)"/><line x1="250" y1="190" x2="293.8" y2="91.5" style="stroke:var(--thm);stroke-width:3.2;fill:none"/><polygon points="298,82 298.1,94.1 289,90" style="fill:var(--thm)"/><line x1="298" y1="80" x2="160.4" y2="80" style="stroke:var(--thm);stroke-width:3.2;fill:none"/><polygon points="150,80 161,75 161,85" style="fill:var(--thm)"/><line x1="148" y1="80" x2="104.2" y2="178.5" style="stroke:var(--thm);stroke-width:3.2;fill:none"/><polygon points="100,188 99.9,175.9 109,180" style="fill:var(--thm)"/><line x1="100" y1="190" x2="121.3" y2="163.7" style="stroke:var(--ex);stroke-width:2;fill:none"/><polygon points="126,158 123.6,166.4 118.3,162.1" style="fill:var(--ex)"/><line x1="250" y1="190" x2="271.3" y2="163.7" style="stroke:var(--ex);stroke-width:2;fill:none"/><polygon points="276,158 273.6,166.4 268.3,162.1" style="fill:var(--ex)"/><line x1="148" y1="80" x2="169.3" y2="53.7" style="stroke:var(--ex);stroke-width:2;fill:none"/><polygon points="174,48 171.6,56.4 166.3,52.1" style="fill:var(--ex)"/><text class="tm" x="96" y="210" style="text-anchor:end;fill:var(--ex)">F(r)</text><text class="tm" x="256" y="210" style="fill:var(--ex)">F(r + Δu)</text><text class="tm" x="142" y="72" style="text-anchor:end;fill:var(--ex)">F(r + Δv)</text><text class="t" x="175" y="210" style="text-anchor:middle;fill:var(--thm);font-size:17px">Δu</text><text class="t" x="308" y="135" style="fill:var(--thm);font-size:17px">Δv</text><text class="tt" x="300" y="60">1 周 = (O→A→B) − (O→C→B)</text><text class="tj" x="300" y="90">= [F(r)·Δu + F(r+Δu)·Δv]</text><text class="tj" x="300" y="112">  − [F(r)·Δv + F(r+Δv)·Δu]</text><text class="tm" x="300" y="148">→ F の変化(微分)だけが残る:</text><text class="tt" x="300" y="168">(Δu × Δv)_z (∂ₓF_y − ∂_yFₓ)</text></svg>
+      <figcaption>微小な平行四辺形のループ(板書 p.10 の図を描き直しました)。四隅 $\bm r$、$\bm r+\Delta\bm u$、$\bm r+\Delta\bm u+\Delta\bm v$、$\bm r+\Delta\bm v$ における力のベクトルが、少しずつ違うことが、線積分が 0 にならない理由。</figcaption>
+    </figure>
+    <p>平行四辺形の周を、$\bm r\to\bm r+\Delta\bm u\to\bm r+\Delta\bm u+\Delta\bm v$ の道筋 から、$\bm r\to\bm r+\Delta\bm v\to\bm r+\Delta\bm v+\Delta\bm u$ の道筋を引いたもの(同じ終点に向かう2つの道筋の差)として書けます(板書の「$=$ ┘ $-$ ┌」の図)。各辺では、その辺の始点での力を使って:
+    $$\oint=\Bigl(\bm F(\bm r)\cdot\Delta\bm u+\bm F(\bm r+\Delta\bm u)\cdot\Delta\bm v\Bigr)-\Bigl(\bm F(\bm r)\cdot\Delta\bm v+\bm F(\bm r+\Delta\bm v)\cdot\Delta\bm u\Bigr).$$</p>
+
+    <h3 id="s5-1">5.1 テイラー展開で、差だけを残す</h3>
+    <p>板書の括弧の中:$F_x(\bm r+\Delta\bm u)=F_x(\bm r)+\Delta\bm u\cdot\nabla F_x(\bm r)+O\bigl((\Delta\bm u)^2\bigr)$(他の成分も同様)より、
+    $$\bm F(\bm r+\Delta\bm u)=\bm F(\bm r)+(\Delta\bm u\cdot\nabla)\bm F+O(\text{高次}).$$
+    同様に $\bm F(\bm r+\Delta\bm v)=\bm F(\bm r)+(\Delta\bm v\cdot\nabla)\bm F+O(\text{高次})$。これを上の式に代入すると:
+    $$\oint=\Bigl(\bm F\cdot\Delta\bm u+\bigl\{\bm F+(\Delta\bm u\cdot\nabla)\bm F\bigr\}\cdot\Delta\bm v\Bigr)-\Bigl(\bm F\cdot\Delta\bm v+\bigl\{\bm F+(\Delta\bm v\cdot\nabla)\bm F\bigr\}\cdot\Delta\bm u\Bigr)+O(\text{高次}).$$
+    $\bm F\cdot\Delta\bm u$、$\bm F\cdot\Delta\bm v$ は<b>打ち消し合って</b>、次の式が残ります(板書の式の変形):
+    $$\oint=\bigl((\Delta\bm u\cdot\nabla)\bm F\bigr)\cdot\Delta\bm v-\bigl((\Delta\bm v\cdot\nabla)\bm F\bigr)\cdot\Delta\bm u+O(\text{高次}).$$</p>
+
+    <h3 id="s5-2">5.2 添字で書き直す</h3>
+    <p>成分で書くと($i,j$ について足す):
+    $$\oint=\Delta u_i\,\partial_iF_j\,\Delta v_j-\Delta v_i\,\partial_iF_j\,\Delta u_j+O(\text{高次}).$$
+    第2項の添字 $i,j$ を付け替える($i\leftrightarrow j$):$\Delta v_j\,\partial_jF_i\,\Delta u_i=\Delta u_i\,\Delta v_j\,\partial_jF_i$。したがって
+    $$\oint=\Delta u_i\,\Delta v_j\,\bigl(\partial_iF_j-\partial_jF_i\bigr)+O(\text{高次}).$$
+    板書では、ここで「$(\Delta u_i\Delta v_j-\Delta u_j\Delta v_i)\cdot\dfrac12(\partial_iF_j-\partial_jF_i)$」と書き直します。これは、$i,j$ の和をとるとき、$(i,j)$ と $(j,i)$ の項が同じ値になる(掛け算の部分も、括弧の中も、$i\leftrightarrow j$ で符号が変わる)ので、前の式と等しい、という変形です。前半が、<b>平行四辺形の面積</b>(板書の赤字)です。</p>
+
+    <h3 id="s5-3">5.3 2次元(の面)で、書き下す</h3>
+    <p>$xy$ 面内の微小ループ($i,j\in\{x,y\}$)では、$(i,j)=(x,y)$ と $(y,x)$ の2項から(係数の $2$ と $\frac12$ が打ち消し合い):
+    $$\oint=\bigl(\Delta u_x\Delta v_y-\Delta u_y\Delta v_x\bigr)\bigl(\partial_xF_y-\partial_yF_x\bigr)+O(\text{高次}).$$
+    前の因子は $(\Delta\bm u\times\Delta\bm v)_z$、後ろの因子は $(\nabla\times\bm F)_z$($=\operatorname{rot}\bm F$ の $z$ 成分)です。板書:「<b>微小うず</b>」。
+    $$\oint_{\text{微小ループ}}\bm F\cdot d\bm r=(\Delta\bm u\times\Delta\bm v)_z\,(\nabla\times\bm F)_z.$$</p>
+
+    <!-- ===================== 6 ===================== -->
+    <h2 id="s6">6. 回転 $\operatorname{rot}\bm F$ と、判定法 <span class="page-tag">板書 p.10</span></h2>
+    <div class="box def">
+      <div class="label">回転(rot)</div>
+      <p>3次元のベクトル場 $\bm F=(F_x,F_y,F_z)$ に対し
+      $$\operatorname{rot}\bm F=\nabla\times\bm F=\Bigl(\frac{\partial F_z}{\partial y}-\frac{\partial F_y}{\partial z},\ \frac{\partial F_x}{\partial z}-\frac{\partial F_z}{\partial x},\ \frac{\partial F_y}{\partial x}-\frac{\partial F_x}{\partial y}\Bigr).$$
+      $xy$ 面のループには $z$ 成分 $\partial_xF_y-\partial_yF_x$ が、$yz$ 面のループには $x$ 成分が、$zx$ 面のループには $y$ 成分が効く。</p>
+    </div>
+    <p>(板書では、2次元($z$ 成分)の場合を計算して、$\operatorname{rot}\bm F$ と書いています。他の面についても同様で、3成分がそろったものが上のベクトルです。)</p>
+    <div class="box thm">
+      <div class="label">保存力の判定法</div>
+      <p>$\operatorname{rot}\bm F=\nabla\times\bm F=\bm0$ が<b>すべての点で</b>成り立つなら、あらゆる微小ループの線積分が 0。したがって、あらゆる閉ループの線積分が 0 で、$\bm F$ は保存力。(逆に、保存力なら $\bm F=-\nabla U$ で、$\operatorname{rot}(\nabla U)=\bm0$。)</p>
+    </div>
+    <div class="box supp">
+      <div class="label">板書にない補足:保存力 ⇒ rot = 0 の確認</div>
+      <p>$\bm F=-\nabla U$ なら、$\partial_xF_y-\partial_yF_x=-\partial_x\partial_yU+\partial_y\partial_xU=0$(偏微分の順序交換)。他の成分も同様。<b>逆</b>(rot = 0 ⇒ 保存力)は、この回の議論(小さなループの和)で、「領域に穴がなければ」成り立ちます。</p>
+    </div>
+    <div class="box warn">
+      <div class="label">注意:穴があるときは、rot = 0 でも保存力でないことがある</div>
+      <p>$\bm F=\dfrac{(-y,x)}{x^2+y^2}$ は、原点以外のすべての点で $\operatorname{rot}\bm F=\bm 0$ です。しかし、原点まわりの円に沿った線積分は $2\pi\ne0$(原点にある「穴」を取り囲むループは、小さなループに分けて、すべて「穴のない領域に」収められない)。「領域に穴がなく、閉ループをつぶして点にできる」という条件が必要です(電磁気学 第2回の、ポテンシャルの存在の注意も同じ)。</p>
+    </div>
+    <div class="box supp">
+      <div class="label">板書にない補足:この回の結果は、ストークスの定理そのもの</div>
+      <p>大きなループ $C$ に囲まれた面 $S$ を、小さな平行四辺形に分けて、足し合わせると、
+      $$\oint_C\bm F\cdot d\bm r=\int_S(\nabla\times\bm F)\cdot d\bm S$$
+      が得られます(各小ループが $(\Delta\bm u\times\Delta\bm v)\cdot(\nabla\times\bm F)$、すなわち「面積ベクトル」と $\operatorname{rot}\bm F$ の内積)。これが<b>ストークスの定理</b>で、電磁気学 第2回で、証明の筋を学んだものです。</p>
+    </div>
+
+    <!-- ===================== 7 ===================== -->
+    <h2 id="s7">7. 具体例で練習(板書にない補足) <span class="page-tag">補足</span></h2>
+    <p>この節は、板書にはない、理解を助けるための練習問題と解答です。</p>
+
+    <div class="box ex">
+      <div class="label">問題 A:中心力の確認</div>
+      <p>ばねの力 $\bm F=-k\bm r$ について、原点から見て点 $(1,0)$ から点 $(0,1)$ まで、(1) 単位円の 1/4 の円弧、(2) 直線(弦)に沿って線積分し、一致を確かめよ。</p>
+    </div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>(1) $\bm r=(\cos\theta,\sin\theta)$、$\bm F=-k(\cos\theta,\sin\theta)$、$\dfrac{d\bm r}{d\theta}=(-\sin\theta,\cos\theta)$。内積 $-k(-\cos\theta\sin\theta+\sin\theta\cos\theta)=0$。$W=0$。 (2) $\bm r=(1-t,t)$、$\bm F=-k(1-t,t)$、$\dfrac{d\bm r}{dt}=(-1,1)$。内積 $k(1-t)-kt=k(1-2t)$、$\displaystyle\int_0^1k(1-2t)\,dt=k(1-1)=0$。どちらも 0。(ポテンシャル $U=\tfrac12kr^2$ で、両端とも $r=1$ なので $U$ が同じ。)</p></div>
+
+    <div class="box ex">
+      <div class="label">問題 B:回転の計算(2次元)</div>
+      <p>次の力の $(\operatorname{rot}\bm F)_z=\partial_xF_y-\partial_yF_x$ を求め、保存力かどうか判定せよ。(1) $\bm F=(y,x)$ (2) $\bm F=(-y,x)$ (3) $\bm F=(x^2y,\ xy^2)$</p>
+    </div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>(1) $\partial_xF_y=1$、$\partial_yF_x=1$。$1-1=0$:保存力($U=-xy$)。 (2) $\partial_xF_y=1$、$\partial_yF_x=-1$。$1-(-1)=2\ne0$:保存力でない(第5回の図の渦)。 (3) $\partial_xF_y=y^2$、$\partial_yF_x=x^2$。$y^2-x^2\ne0$:保存力でない。</p></div>
+
+    <div class="box ex">
+      <div class="label">問題 C:3次元の rot</div>
+      <p>$\bm F=(2xy+z,\ x^2,\ x)$ が保存力であることを示し、ポテンシャル $U$ を求めよ。</p>
+    </div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>$\operatorname{rot}\bm F=\bigl(\partial_yF_z-\partial_zF_y,\ \partial_zF_x-\partial_xF_z,\ \partial_xF_y-\partial_yF_x\bigr)=(0-0,\ 1-1,\ 2x-2x)=\bm0$。保存力。$U$:$F_x=-\partial_xU=2xy+z$ を $x$ で積分して $U=-x^2y-xz+g(y,z)$。$F_y=-\partial_yU=x^2-\partial_yg=x^2$ より $\partial_yg=0$。$F_z=-\partial_zU=x-\partial_zg=x$ より $\partial_zg=0$。$g$ は定数で、$U=-x^2y-xz$(+定数)。</p></div>
+
+    <div class="box ex">
+      <div class="label">問題 D:穴のある領域</div>
+      <p>$\bm F=\dfrac{(-y,x)}{x^2+y^2}$ の $\operatorname{rot}\bm F$ の $z$ 成分が、$(x,y)\ne(0,0)$ で 0 になることを確かめ、単位円に沿った線積分を求めよ。</p>
+    </div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>$F_y=\dfrac{x}{x^2+y^2}$、$\partial_xF_y=\dfrac{(x^2+y^2)-2x^2}{(x^2+y^2)^2}=\dfrac{y^2-x^2}{(x^2+y^2)^2}$。$F_x=\dfrac{-y}{x^2+y^2}$、$\partial_yF_x=\dfrac{-(x^2+y^2)+2y^2}{(x^2+y^2)^2}=\dfrac{y^2-x^2}{(x^2+y^2)^2}$。差は 0。単位円 $\bm r=(\cos\theta,\sin\theta)$ では、$\bm F=(-\sin\theta,\cos\theta)$、$\dfrac{d\bm r}{d\theta}=(-\sin\theta,\cos\theta)$、内積は 1、線積分は $2\pi\ne0$。rot = 0 でも、穴(原点)のまわりでは保存力ではありません。</p></div>
+
+    <!-- ===================== 8 ===================== -->
+    <h2 id="s8">8. まとめ(この回で覚えること)</h2>
+    <ul>
+      <li><b>中心力</b> $\bm F=f(r)\hat{\bm r}$ は<b>保存力</b>:$\int_C\bm F\cdot d\bm r=\int f(r)\,dr$(1変数の積分、経路によらない)。ポテンシャル $U(r)=-\int f(r)\,dr$。鍵は $\bm r\cdot\dot{\bm r}=r\dot r$。</li>
+      <li><b>判定法</b>:閉ループを小さなループに分ける(隣り合う辺は打ち消し合う)。微小な平行四辺形のループの線積分は $(\Delta\bm u\times\Delta\bm v)_z\,(\partial_xF_y-\partial_yF_x)$(「微小うず」)。</li>
+      <li><b>回転</b> $\operatorname{rot}\bm F=\nabla\times\bm F$。$\operatorname{rot}\bm F=\bm0$ ⇒ 保存力(穴のない領域で)。保存力 ⇒ $\operatorname{rot}\bm F=\bm0$($\operatorname{rot}\nabla U=\bm0$)。</li>
+      <li>計算のコツ:2つの経路の差 → テイラー展開で $\bm F(\bm r)$ の項が消えて、微分の項だけ残る。添字の付け替え $i\leftrightarrow j$。</li>
+    </ul>
+
+    <!-- ===================== 9 ===================== -->
+    <h2 id="s9">9. この回のノートについてのメモ</h2>
+    <p>板書は手書きの iPad ノートで、ページ番号がありません。PDF の順に数えました(p.9 の後半〜p.10)。板書の画像はこのサイトには載せていません。補足として足した部分(黄色の枠)、基礎ページの内容、練習問題と解答は、Claude が書き足したもので、板書にはありません。</p>
+    <ol>
+      <li><b>$\hat{\bm r}$ の記号(p.9)</b>:板書の「$\hat r=\frac{\bm r}{|\bm r|}=\frac{\bm r}{r}$」の帽子つきの $r$ は、動径方向の単位ベクトルの意味と読みました。</li>
+      <li><b>$\bm r\cdot\dot{\bm r}$ の式(p.9)</b>:「$\frac{d}{dt}(\frac12|\bm r(t)|^2)$」という書き方で、スカラーと注記されています。$\bm r\cdot\dot{\bm r}=\frac d{dt}(\frac12|\bm r|^2)=|\bm r|\frac d{dt}|\bm r|$ と読みました。</li>
+      <li><b>平行四辺形の周の図(p.10)</b>:板書の図は、2つの折れ線の差($\bm F(\bm r)\cdot\Delta\bm u+\bm F(\bm r+\Delta\bm u)\cdot\Delta\bm v$ から $\bm F(\bm r)\cdot\Delta\bm v+\bm F(\bm r+\Delta\bm v)\cdot\Delta\bm u$ を引く形)で、周の向きは、反時計回りです。</li>
+      <li><b>$\Delta\bm u\cdot\nabla$ の書き方(p.10)</b>:板書では、$(\Delta\bm u\cdot\nabla)\bm F$ の第1成分が $\Delta u\cdot\nabla F_x$、他の2成分は同様、と箇条書きにしてあります。「$F_x(\bm r+\Delta\bm u)=F_x(\bm r)+\Delta\bm u\cdot\nabla F_x(\bm r)+O((\Delta\bm u)^2)$」の右辺の、最後の式の下に赤で $(\partial_xF_x,0,0)$ と書かれた部分は、$\Delta\bm u$ が $x$ 方向のときの特別な場合の例と読みました。</li>
+      <li><b>係数 $\frac12$ と $2$(p.10)</b>:板書の「$2(\Delta u_x\Delta v_y-\Delta u_y\Delta v_x)$」の書き込みは、$(i,j)=(x,y)$ と $(y,x)$ の2項が同じ値で、係数 $\frac12$ と打ち消し合う、という意味と読みました。</li>
+    </ol>
+
+    <nav class="pager">
+      <a href="week-05.html">← 前の週</a>
+      <a href="../index.html">一覧へ</a>
+      <a href="week-07.html">次の週 →</a>
+    </nav>
+
+  </main>
+
+  <footer>© Aセメまとめノート</footer>
+</body>
+</html>

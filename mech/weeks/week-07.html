@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>第7回 極座標と振り子 | Aセメまとめノート</title>
+  <link rel="stylesheet" href="../../assets/style.css">
+  <script defer src="../../assets/nav.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],macros:{'\\R':'\\mathbb{R}','\\bm':'\\boldsymbol{#1}','\\dd':'\\mathrm{d}'}});window.__navReady&&window.__navReady()"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="inner">
+      <a class="site-title" href="../../index.html">Aセメまとめノート</a>
+      <span class="links"><a href="../index.html">力学A</a><a href="../basics.html">基礎のまとめ</a><a href="../../calc/index.html">微積</a><a href="../../linalg/index.html">線形代数</a><a href="../../em/index.html">電磁気学</a></span>
+    </div>
+  </header>
+
+  <main class="note">
+    <h1>第7回:極座標と振り子</h1>
+    <div class="meta">力学A(東京大学 教養学部 秋学期)／板書 p.11〜p.12 の前半(PDF の順に数えています)／ノートの節番号は「5 振り子」「5.1 極座標表示による運動の記述」</div>
+
+    <nav class="toc">
+      <div class="toc-title">目次</div>
+      <ol start="0">
+        <li><a href="#s0">この回の全体像</a></li>
+        <li><a href="#s1">準備:基礎の確認</a>
+          <div class="sub">極座標／回転行列／積の微分と合成関数の微分／三角関数のテイラー展開／単振動の解</div></li>
+        <li><a href="#s2">極座標と、2組の基底ベクトル</a>(p.11)</li>
+        <li><a href="#s3">ベクトルの成分の変換</a>(p.11)</li>
+        <li><a href="#s4">速度と加速度の極座標成分</a>(p.11–12)</li>
+        <li><a href="#s5">角運動量と面積速度</a>(p.12)</li>
+        <li><a href="#s6">振り子の運動方程式</a>(p.12)</li>
+        <li><a href="#s7">振幅が小さいとき:単振動</a>(p.12)</li>
+        <li><a href="#s8">具体例で練習</a></li>
+        <li><a href="#s9">まとめ(この回で覚えること)</a></li>
+        <li><a href="#s10">この回のノートについてのメモ</a></li>
+      </ol>
+    </nav>
+
+    <!-- ===================== 0 ===================== -->
+    <h2 id="s0">0. この回の全体像 <span class="page-tag">板書 p.11–12</span></h2>
+    <p>ここから「5 振り子」の章に入ります。振り子の運動を記述するには、$(x,y)$ ではなく、<b>支点からの距離 $r$ と、角度 $\varphi$</b> を使う<b>極座標</b>が便利です。この回では、</p>
+    <ol>
+      <li>極座標に対応する基底ベクトル $\bm e_r,\bm e_\varphi$ を導入し、</li>
+      <li>速度と加速度を $(\bm e_r,\bm e_\varphi)$ の成分で表す:$v_r=\dot r,\ v_\varphi=r\dot\varphi$、$a_r=\ddot r-r\dot\varphi^2,\ a_\varphi=2\dot r\dot\varphi+r\ddot\varphi$、</li>
+      <li>これを使って<b>振り子の運動方程式</b> $\ddot\varphi=-\dfrac gl\sin\varphi$ を導き、</li>
+      <li>振幅が小さいときの<b>単振動</b>(周期 $2\pi\sqrt{l/g}$)を求めます。</li>
+    </ol>
+    <div class="box thm">
+      <div class="label">この回のゴール</div>
+      <p>① 極座標の基底 $\bm e_r=\cos\varphi\,\bm e_x+\sin\varphi\,\bm e_y$、$\bm e_\varphi=-\sin\varphi\,\bm e_x+\cos\varphi\,\bm e_y$ を理解する。<br>
+      ② 速度 $(\dot r,\ r\dot\varphi)$、加速度 $(\ddot r-r\dot\varphi^2,\ 2\dot r\dot\varphi+r\ddot\varphi)$ を行列の計算で導く。<br>
+      ③ $a_\varphi=\dfrac1r\dfrac{d}{dt}(r^2\dot\varphi)$ から、中心力のとき $mr^2\dot\varphi$(角運動量)が一定になることを理解する。<br>
+      ④ 振り子の運動方程式を立て、小さな振幅で $\sin\varphi\approx\varphi$ とおいて単振動の解を得る。</p>
+    </div>
+    <figure class="fig">
+      <svg viewBox="0 0 580 262" width="580" role="img" aria-label="極座標と基底ベクトル"><line x1="30" y1="210" x2="330" y2="210" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><line x1="100" y1="250" x2="100" y2="20" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><text class="t" x="334" y="228">x</text><text class="t" x="108" y="24">y</text><line x1="100" y1="210" x2="214.9" y2="113.6" style="stroke:var(--muted);stroke-width:1.6;stroke-dasharray:5 4"/><line x1="214.9" y1="113.6" x2="214.9" y2="210" style="stroke:var(--muted);stroke-width:1.1;stroke-dasharray:5 4;fill:none"/><line x1="214.9" y1="113.6" x2="100" y2="113.6" style="stroke:var(--muted);stroke-width:1.1;stroke-dasharray:5 4;fill:none"/><path d="M140 210 A40 40 0 0 0 130.6 184.3" style="fill:none;stroke:var(--muted);stroke-width:1.4"/><text class="t" x="146" y="198">φ</text><text class="t" x="135.5" y="157.8" style="font-size:18px">r</text><circle cx="214.9" cy="113.6" r="5" style="fill:var(--text)"/><line x1="214.9" y1="113.6" x2="248.3" y2="85.6" style="stroke:var(--thm);stroke-width:3.2;fill:none"/><polygon points="256.3,78.9 251.1,89.8 244.6,82.1" style="fill:var(--thm)"/><text class="t" x="265.3" y="76.3" style="fill:var(--thm);font-size:18px">e_r</text><line x1="214.9" y1="113.6" x2="186.9" y2="80.2" style="stroke:var(--ex);stroke-width:3.2;fill:none"/><polygon points="180.2,72.2 191.1,77.4 183.4,83.9" style="fill:var(--ex)"/><text class="t" x="172.9" y="67.2" style="text-anchor:end;fill:var(--ex);font-size:18px">e_φ</text><line x1="100" y1="210" x2="141.6" y2="210" style="stroke:var(--accent);stroke-width:2.4;fill:none"/><polygon points="150,210 141,214.4 141,205.6" style="fill:var(--accent)"/><text class="t" x="154" y="228" style="fill:var(--accent)">e_x</text><line x1="100" y1="210" x2="100" y2="168.4" style="stroke:var(--accent);stroke-width:2.4;fill:none"/><polygon points="100,160 104.4,169 95.6,169" style="fill:var(--accent)"/><text class="t" x="108" y="160" style="fill:var(--accent)">e_y</text><text class="tj" x="350" y="70">x = r cosφ,  y = r sinφ</text><text class="tj" x="350" y="98" style="fill:var(--thm)">e_r = cosφ e_x + sinφ e_y</text><text class="tj" x="350" y="124" style="fill:var(--ex)">e_φ = −sinφ e_x + cosφ e_y</text><text class="tm" x="350" y="156">e_r:中心から遠ざかる向き</text><text class="tm" x="350" y="174">e_φ:φ が増える向き(反時計回り)</text><text class="tt" x="350" y="204">点が動くと、e_r, e_φ の向きも回る</text></svg>
+      <figcaption>極座標 $(r,\varphi)$ と、2組の基底ベクトル:位置によらない $(\bm e_x,\bm e_y)$(青)と、位置によって向きが変わる $(\bm e_r,\bm e_\varphi)$(橙・緑)。</figcaption>
+    </figure>
+    <p>以下では、先に必要な基礎を丁寧に復習してから、板書の順に進みます。紫色の枠は「基礎の復習」、黄色の枠は「板書にないが、理解を助けるために私が補った部分」です。</p>
+
+    <!-- ===================== 1 ===================== -->
+    <h2 id="s1">1. 準備:基礎の確認</h2>
+
+    <h3 id="w-polar">1.1 極座標</h3>
+    <div class="box basic">
+      <div class="label">基礎:平面の極座標 <a class="xref-link" href="../basics.html#polar" data-xref>→ 詳しい解説</a><a class="xref-link" href="../../em/basics.html#param" data-xref>→ 電磁気学の基礎(パラメータ表示)</a></div>
+      <p>平面の点を、原点からの距離 $r$ と、$x$ 軸から反時計回りに測った角 $\varphi$ で表します。$x=r\cos\varphi$、$y=r\sin\varphi$、$r=\sqrt{x^2+y^2}$。円は $r=$ 一定、原点を通る直線は $\varphi=$ 一定。</p>
+    </div>
+
+    <h3 id="w-rotmat">1.2 回転行列</h3>
+    <div class="box basic">
+      <div class="label">基礎:回転行列とその逆行列 <a class="xref-link" href="../basics.html#rotmat" data-xref>→ 詳しい解説</a><a class="xref-link" href="../../linalg/basics.html#linmap" data-xref>→ 線形代数の基礎(行列と線形写像)</a></div>
+      <p>角 $\varphi$ の<b>回転行列</b> $R(\varphi)=\begin{pmatrix}\cos\varphi&-\sin\varphi\\\sin\varphi&\cos\varphi\end{pmatrix}$ は、平面のベクトルを反時計回りに $\varphi$ だけ回します。逆に $-\varphi$ 回す行列 $R(\varphi)^{-1}=R(-\varphi)=\begin{pmatrix}\cos\varphi&\sin\varphi\\-\sin\varphi&\cos\varphi\end{pmatrix}$ は、転置行列 $R(\varphi)^{\mathsf T}$ に等しい。$R(\varphi)^{-1}R(\varphi)=I$。</p>
+      <p>$R(\varphi)$ を $\varphi$ で微分すると $\dfrac{dR}{d\varphi}=\begin{pmatrix}-\sin\varphi&-\cos\varphi\\\cos\varphi&-\sin\varphi\end{pmatrix}=R(\varphi)\begin{pmatrix}0&-1\\1&0\end{pmatrix}$(90°回転 $J=\begin{pmatrix}0&-1\\1&0\end{pmatrix}$ を掛けたもの)。</p>
+    </div>
+
+    <h3 id="w-deriv2">1.3 積の微分・合成関数の微分</h3>
+    <div class="box basic">
+      <div class="label">基礎:積の微分と連鎖律 <a class="xref-link" href="../basics.html#vecdiff" data-xref>→ 詳しい解説</a></div>
+      <p>積の微分 $\dfrac d{dt}(fg)=\dot fg+f\dot g$。合成関数(連鎖律)$\dfrac d{dt}f(\varphi(t))=f'(\varphi)\dot\varphi$。たとえば $\dfrac d{dt}\cos\varphi=-\dot\varphi\sin\varphi$。</p>
+    </div>
+
+    <h3 id="w-sintaylor">1.4 $\sin\varphi$ のテイラー展開</h3>
+    <div class="box basic">
+      <div class="label">基礎:$\sin\varphi=\varphi-\dfrac{\varphi^3}6+O(\varphi^5)$ <a class="xref-link" href="../basics.html#taylor1" data-xref>→ 詳しい解説</a><a class="xref-link" href="../../em/basics.html#taylor" data-xref>→ 電磁気学の基礎(テイラー展開)</a></div>
+      <p>$|\varphi|$ が小さいとき、$\sin\varphi=\varphi-\dfrac{\varphi^3}{6}+\dfrac{\varphi^5}{120}-\cdots$。最初の項だけをとって $\sin\varphi\approx\varphi$(誤差は $O(\varphi^3)$)。たとえば $\varphi=0.1\ \mathrm{rad}$(約 5.7°)で $\sin\varphi=0.099833$、誤差は 0.17% 程度。</p>
+    </div>
+
+    <h3 id="w-sho">1.5 単振動の方程式の解</h3>
+    <div class="box basic">
+      <div class="label">基礎:$\ddot\varphi=-\omega^2\varphi$ の解 <a class="xref-link" href="week-02.html#s6" data-xref>→ 第2回 6.($e^{it}$ と単振動)</a><a class="xref-link" href="../basics.html#ode" data-xref>→ 詳しい解説</a></div>
+      <p>$\ddot\varphi=-\omega^2\varphi$($\omega\gt0$)の一般解は $\varphi=C_1e^{i\omega t}+C_2e^{-i\omega t}=a\cos\omega t+b\sin\omega t=A\cos(\omega t+\alpha)$。<b>周期</b> $T=\dfrac{2\pi}\omega$、<b>振幅</b> $A$、位相 $\alpha$。(第2回で学びました。)</p>
+    </div>
+
+    <!-- ===================== 2 ===================== -->
+    <h2 id="s2">2. 極座標と、2組の基底ベクトル <span class="page-tag">板書 p.11</span></h2>
+    <p>板書「5 振り子」「5.1 極座標表示による運動の記述」の最初は、次の4つの式です。
+    $$x=r\cos\varphi,\quad y=r\sin\varphi,\quad\bm e_r=\cos\varphi\,\bm e_x+\sin\varphi\,\bm e_y,\quad\bm e_\varphi=-\sin\varphi\,\bm e_x+\cos\varphi\,\bm e_y.$$
+    「これらまとめて」、行列で書くと
+    $$(\bm e_r,\ \bm e_\varphi)=(\bm e_x,\ \bm e_y)\begin{pmatrix}\cos\varphi&-\sin\varphi\\\sin\varphi&\cos\varphi\end{pmatrix}.$$</p>
+    <ul>
+      <li>$\bm e_x,\bm e_y$:$x$ 軸方向、$y$ 軸方向の長さ1のベクトル。<b>どの点でも同じ向き</b>。</li>
+      <li>$\bm e_r$:原点から遠ざかる向き(<b>動径方向</b>)の長さ1のベクトル。位置ベクトルは $\bm r=r\bm e_r$。</li>
+      <li>$\bm e_\varphi$:$\bm e_r$ を反時計回りに 90° 回した向き(<b>角度が増える向き</b>、接線方向)の長さ1のベクトル。</li>
+    </ul>
+    <p>$(\bm e_r,\bm e_\varphi)$ は、$(\bm e_x,\bm e_y)$ を角 $\varphi$ だけ反時計回りに回したもの(回転行列 $R(\varphi)$)です。<b>点が動いて $\varphi$ が変わると、$\bm e_r,\bm e_\varphi$ の向きも変わる</b>点が、$\bm e_x,\bm e_y$ との大きな違い。</p>
+    <div class="box supp">
+      <div class="label">板書にない補足:$\bm e_\varphi$ の符号</div>
+      <p>板書の式の4行目は「$\bm e_\varphi=\sin\varphi\,\bm e_x+\cos\varphi\,\bm e_y$」と書かれていますが、$-\sin\varphi$ のマイナスが抜けています。行列の形(右側)の第2列は $(-\sin\varphi,\cos\varphi)$ なので、こちらが正しい($\bm e_r\cdot\bm e_\varphi=-\cos\varphi\sin\varphi+\sin\varphi\cos\varphi=0$ で直交。マイナスがないと直交しない)。</p>
+    </div>
+
+    <!-- ===================== 3 ===================== -->
+    <h2 id="s3">3. ベクトルの成分の変換 <span class="page-tag">板書 p.11</span></h2>
+    <p>同じベクトル $\bm A$ を、2通りの基底で表します:
+    $$\bm A=A_r\bm e_r+A_\varphi\bm e_\varphi=A_x\bm e_x+A_y\bm e_y.$$
+    行列で書くと $(\bm e_r\ \bm e_\varphi)\begin{pmatrix}A_r\\A_\varphi\end{pmatrix}=(\bm e_x\ \bm e_y)\begin{pmatrix}A_x\\A_y\end{pmatrix}$。左辺に前の式 $(\bm e_r\ \bm e_\varphi)=(\bm e_x\ \bm e_y)R(\varphi)$ を代入すると
+    $$(\bm e_x\ \bm e_y)\,R(\varphi)\begin{pmatrix}A_r\\A_\varphi\end{pmatrix}=(\bm e_x\ \bm e_y)\begin{pmatrix}A_x\\A_y\end{pmatrix}\ \Rightarrow\ \begin{pmatrix}A_x\\A_y\end{pmatrix}=R(\varphi)\begin{pmatrix}A_r\\A_\varphi\end{pmatrix}.$$
+    逆に解くと(両辺に $R(\varphi)^{-1}=R(\varphi)^{\mathsf T}$ を左からかける):
+    $$\boxed{\begin{pmatrix}A_r\\A_\varphi\end{pmatrix}=\begin{pmatrix}\cos\varphi&\sin\varphi\\-\sin\varphi&\cos\varphi\end{pmatrix}\begin{pmatrix}A_x\\A_y\end{pmatrix}}$$
+    (板書の右下の式)。$A_r=\bm A\cdot\bm e_r$、$A_\varphi=\bm A\cdot\bm e_\varphi$ と同じ内容です。</p>
+
+    <!-- ===================== 4 ===================== -->
+    <h2 id="s4">4. 速度と加速度の極座標成分 <span class="page-tag">板書 p.11–12</span></h2>
+    <h3 id="s4-1">4.1 速度</h3>
+    <p>速度ベクトル $\bm v=\dot{\bm r}=v_r\bm e_r+v_\varphi\bm e_\varphi=v_x\bm e_x+v_y\bm e_y$ について、前の変換則から $\begin{pmatrix}v_r\\v_\varphi\end{pmatrix}=R(\varphi)^{-1}\begin{pmatrix}v_x\\v_y\end{pmatrix}$。一方、$x=r\cos\varphi$、$y=r\sin\varphi$ を時間で微分する(積の微分と連鎖律):
+    $$\begin{pmatrix}v_x\\v_y\end{pmatrix}=\begin{pmatrix}\dot x\\\dot y\end{pmatrix}=\begin{pmatrix}\dot r\cos\varphi-r\dot\varphi\sin\varphi\\\dot r\sin\varphi+r\dot\varphi\cos\varphi\end{pmatrix}=\boxed{\begin{pmatrix}\cos\varphi&-\sin\varphi\\\sin\varphi&\cos\varphi\end{pmatrix}\begin{pmatrix}\dot r\\r\dot\varphi\end{pmatrix}}$$
+    (板書の灰色の枠)。これは $R(\varphi)\begin{pmatrix}\dot r\\r\dot\varphi\end{pmatrix}$ なので、「逆行列の積」(両辺に $R^{-1}$ をかけて)、
+    $$\boxed{\begin{pmatrix}v_r\\v_\varphi\end{pmatrix}=\begin{pmatrix}\dot r\\r\dot\varphi\end{pmatrix}}.$$
+    意味:速度の動径成分は「$r$ が増える速さ $\dot r$」、接線成分は「角速度 $\dot\varphi$ に半径 $r$ をかけたもの $r\dot\varphi$」。(円運動の速さ $v=r\omega$ です。)</p>
+
+    <h3 id="s4-2">4.2 加速度</h3>
+    <p>加速度ベクトルも考えます。上の $\bm v$ の式 $\begin{pmatrix}v_x\\v_y\end{pmatrix}=R(\varphi)\begin{pmatrix}\dot r\\r\dot\varphi\end{pmatrix}$ を時間で微分する(積の微分:「これを微分」):
+    $$\begin{pmatrix}a_x\\a_y\end{pmatrix}=\dot\varphi\begin{pmatrix}-\sin\varphi&-\cos\varphi\\\cos\varphi&-\sin\varphi\end{pmatrix}\begin{pmatrix}\dot r\\r\dot\varphi\end{pmatrix}+\begin{pmatrix}\cos\varphi&-\sin\varphi\\\sin\varphi&\cos\varphi\end{pmatrix}\begin{pmatrix}\ddot r\\\dot r\dot\varphi+r\ddot\varphi\end{pmatrix}.$$
+    左から $R(\varphi)^{-1}$ をかけて極座標成分にします。1項目の行列は $\dfrac{dR}{d\varphi}=RJ$ なので、$R^{-1}\dfrac{dR}{d\varphi}=J=\begin{pmatrix}0&-1\\1&0\end{pmatrix}$:
+    $$\begin{pmatrix}a_r\\a_\varphi\end{pmatrix}=\begin{pmatrix}0&-1\\1&0\end{pmatrix}\begin{pmatrix}\dot r\dot\varphi\\r\dot\varphi^2\end{pmatrix}+\begin{pmatrix}\ddot r\\\dot r\dot\varphi+r\ddot\varphi\end{pmatrix}=\begin{pmatrix}-r\dot\varphi^2\\\dot r\dot\varphi\end{pmatrix}+\begin{pmatrix}\ddot r\\\dot r\dot\varphi+r\ddot\varphi\end{pmatrix}.$$
+    したがって
+    $$\boxed{\begin{pmatrix}a_r\\a_\varphi\end{pmatrix}=\begin{pmatrix}\ddot r-r\dot\varphi^2\\2\dot r\dot\varphi+r\ddot\varphi\end{pmatrix}}$$
+    (板書の最後の式)。</p>
+    <div class="box note-box">
+      <div class="label">板書の注記(p.12)</div>
+      <p>「★ $a_r\ne\ddot r$ で、$a_\varphi\ne r\ddot\varphi$ である。$-r\dot\varphi^2$ は<b>遠心力の寄与</b>を表す。」($\bm F=m\bm a$ の右辺に移すと、$m\ddot r=F_r+mr\dot\varphi^2$ となり、$mr\dot\varphi^2$ が外向きの見かけの力(遠心力)にあたる。)</p>
+    </div>
+    <figure class="fig">
+      <svg viewBox="0 0 660 262" width="660" role="img" aria-label="等速円運動の加速度"><circle cx="150" cy="140" r="90" style="fill:none;stroke:var(--muted);stroke-width:1.6;stroke-dasharray:5 4"/><circle cx="150" cy="140" r="4" style="fill:var(--text)"/><line x1="150" y1="140" x2="201.6" y2="66.3" style="stroke:var(--muted);stroke-width:1.4"/><circle cx="201.6" cy="66.3" r="6" style="fill:var(--thm)"/><line x1="201.6" y1="66.3" x2="161" y2="37.8" style="stroke:var(--ex);stroke-width:3.2;fill:none"/><polygon points="152.5,31.9 164.4,34.1 158.6,42.3" style="fill:var(--ex)"/><text class="tt" x="146.5" y="23.9" style="text-anchor:end;fill:var(--ex)">速度 v = rφ̇ e_φ</text><line x1="201.6" y1="66.3" x2="175.5" y2="103.6" style="stroke:var(--thm);stroke-width:3.2;fill:none"/><polygon points="169.5,112.1 171.7,100.3 179.9,106" style="fill:var(--thm)"/><text class="tt" x="185.2" y="139.4" style="fill:var(--thm)">加速度 a_r = −rφ̇²(中心向き)</text><text class="tm" x="56" y="254">等速円運動(r = 一定、φ̇ = 一定)</text><text class="tj" x="380" y="70" style="font-size:14px">(a_r, a_φ) = (r̈ − rφ̇², 2ṙφ̇ + rφ̈)</text><text class="tm" x="380" y="100">r = 一定、φ̇ = 一定のとき</text><text class="tt" x="380" y="120">a_r = −rφ̇² (≠ 0), a_φ = 0</text><text class="tm" x="380" y="152">速さは変わらなくても、向きが変わる</text><text class="tm" x="380" y="170">ので、中心向きの加速度がある</text></svg>
+      <figcaption>等速円運動($r$ 一定、$\dot\varphi$ 一定)では、速度 $\bm v=r\dot\varphi\,\bm e_\varphi$ は一定の大きさでも向きが変わるので、加速度は 0 でなく、中心向きの $a_r=-r\dot\varphi^2$(向心加速度)。</figcaption>
+    </figure>
+    <div class="box supp">
+      <div class="label">板書にない補足:等速円運動で、高校の公式と一致する</div>
+      <p>$r=R$、$\dot\varphi=\omega$(一定)のとき、$\dot r=\ddot r=\ddot\varphi=0$ なので $a_r=-R\omega^2$、$a_\varphi=0$。向心加速度の大きさ $R\omega^2=\dfrac{v^2}R$($v=R\omega$)。高校の公式と同じです。</p>
+    </div>
+
+    <!-- ===================== 5 ===================== -->
+    <h2 id="s5">5. 角運動量と面積速度 <span class="page-tag">板書 p.12</span></h2>
+    <p>板書の続き:
+    $$a_\varphi=2\dot r\dot\varphi+r\ddot\varphi=\frac1r\frac{d}{dt}\bigl(r^2\dot\varphi\bigr).$$
+    $\dfrac{d}{dt}(r^2\dot\varphi)=2r\dot r\dot\varphi+r^2\ddot\varphi$ なので、$r$ で割ると確かに $a_\varphi$。そして「$mr^2\dot\varphi$ は<b>角運動量</b>。$a_\varphi$ が 0 つまり<b>中心力のとき、$mr^2\dot\varphi$ が一定</b>」と板書にあります。</p>
+    <ul>
+      <li>中心力(第6回)は動径方向だけなので $F_\varphi=0$、したがって $ma_\varphi=0$。$\dfrac d{dt}(r^2\dot\varphi)=0$ より $r^2\dot\varphi=$ 一定(<b>角運動量保存</b>)。</li>
+      <li>$\dfrac12r^2\dot\varphi$ は、「中心から質点に引いた線分が、単位時間に掃く面積」(<b>面積速度</b>)。角運動量保存 = 面積速度一定(ケプラーの第2法則、第9回)。</li>
+    </ul>
+    <div class="box supp">
+      <div class="label">板書にない補足:板書の式の係数 $\frac12$</div>
+      <p>板書では $a_\varphi=\dfrac1r\dfrac d{dt}\bigl(\tfrac12r^2\dot\varphi\bigr)$ と $\tfrac12$ を付けて書いているように見えますが、$\dfrac1r\dfrac d{dt}\bigl(\tfrac12r^2\dot\varphi\bigr)=\dot r\dot\varphi+\tfrac12r\ddot\varphi$ は $a_\varphi$ と一致しません。$\tfrac12$ は不要で、$a_\varphi=\dfrac1r\dfrac d{dt}(r^2\dot\varphi)$ が正しい(最後のメモ参照)。結論の「$mr^2\dot\varphi$ が角運動量で、$a_\varphi=0$ のとき一定」は、そのまま成り立ちます。</p>
+    </div>
+
+    <!-- ===================== 6 ===================== -->
+    <h2 id="s6">6. 振り子の運動方程式 <span class="page-tag">板書 p.12</span></h2>
+    <p>板書「振り子の運動方程式」:支点を原点にして、質量 $m$ の質点(おもり)が、長さ $l$ の糸でつるされています。極座標 $(r,\varphi)$ で、角 $\varphi$ は<b>鉛直下向きを基準</b>にして測ります(この節だけ、極座標の「$x$ 軸」にあたる基準の向きを下向きにとる。前の節の式は、そのまま成り立つ)。運動方程式 $F_r=ma_r$、$F_\varphi=ma_\varphi$。</p>
+    <figure class="fig">
+      <svg viewBox="0 0 520 262" width="520" role="img" aria-label="振り子にはたらく力"><line x1="80" y1="30" x2="280" y2="30" style="stroke:var(--text);stroke-width:3"/><line x1="180" y1="30" x2="180" y2="220" style="stroke:var(--muted);stroke-width:1.1;stroke-dasharray:5 4;fill:none"/><text class="tm" x="174" y="236" style="text-anchor:middle">鉛直</text><line x1="180" y1="30" x2="270.1" y2="174.2" style="stroke:var(--text);stroke-width:2.2"/><circle cx="270.1" cy="174.2" r="15" style="fill:var(--muted);fill-opacity:.4;stroke:var(--muted);stroke-width:2.4"/><path d="M180 90 A60 60 0 0 0 211.8 80.9" style="fill:none;stroke:var(--muted);stroke-width:1.4"/><text class="t" x="192" y="110">φ</text><text class="t" x="207" y="94.1" style="font-size:17px">l</text><line x1="270.1" y1="174.2" x2="270.1" y2="237.8" style="stroke:var(--thm);stroke-width:3;fill:none"/><polygon points="270.1,248.2 265.1,237.2 275.1,237.2" style="fill:var(--thm)"/><text class="tt" x="278.1" y="252.2" style="fill:var(--thm)">mg</text><line x1="270.1" y1="174.2" x2="238.5" y2="123.6" style="stroke:var(--accent);stroke-width:3;fill:none"/><polygon points="233,114.8 243.1,121.5 234.6,126.8" style="fill:var(--accent)"/><text class="tt" x="239.8" y="107.7" style="text-anchor:start;fill:var(--accent)">T(張力)</text><line x1="270.1" y1="174.2" x2="299.4" y2="221.1" style="stroke:var(--ex);stroke-width:2;fill:none;stroke-dasharray:5 4"/><polygon points="303.3,227.4 296,222.5 302.2,218.7" style="fill:var(--ex)"/><line x1="270.1" y1="174.2" x2="243.1" y2="191" style="stroke:var(--ex);stroke-width:2;fill:none;stroke-dasharray:5 4"/><polygon points="236.8,194.9 241.7,187.7 245.5,193.8" style="fill:var(--ex)"/><text class="tm" x="311.3" y="241.4" style="fill:var(--ex)">mg cosφ(糸の向き)</text><text class="tm" x="232.8" y="212.9" style="text-anchor:end;fill:var(--ex)">mg sinφ(接線・戻す向き)</text><text class="tm" x="300" y="100">e_r:糸に沿って外向き</text><text class="tm" x="300" y="118">e_φ:φ が増える向き(接線)</text><text class="tj" x="300" y="150">e_r 方向:mg cosφ − T</text><text class="tj" x="300" y="172">e_φ 方向:−mg sinφ</text></svg>
+      <figcaption>振り子にはたらく力:重力 $mg$(下向き)と、糸の張力 $T$(糸に沿って支点に向かう)。重力を、糸の向き($\bm e_r$ の逆)と接線方向($\bm e_\varphi$ の逆)に分けて考えます。</figcaption>
+    </figure>
+    <p>力の成分は、動径方向:重力の成分 $+mg\cos\varphi$($\bm e_r$ 方向の外向きを正)、張力 $-T$。接線方向:重力の成分 $-mg\sin\varphi$。したがって
+    $$\begin{cases}mg\cos\varphi-T=m\bigl(\ddot r-r\dot\varphi^2\bigr)\\-mg\sin\varphi=m\bigl(2\dot r\dot\varphi+r\ddot\varphi\bigr)\end{cases}$$
+    振り子では糸の長さが一定:$r=l$(一定)なので $\dot r=\ddot r=0$:
+    $$\begin{cases}mg\cos\varphi-T=-ml\dot\varphi^2&\cdots①\quad(\text{未知:}\varphi,T)\\-mg\sin\varphi=ml\ddot\varphi&\cdots②\quad(\text{未知:}\varphi)\end{cases}$$
+    ②から、$\varphi$ だけの方程式(<b>振り子の運動方程式</b>):
+    $$\boxed{\ddot\varphi=-\frac gl\sin\varphi}\qquad\cdots②'$$
+    ①は、②'で $\varphi(t)$ が求まったあと、<b>張力 $T$</b> を決める式です:$T=mg\cos\varphi+ml\dot\varphi^2$。</p>
+    <div class="box note-box">
+      <div class="label">なぜ ② だけで運動が決まるのか</div>
+      <p>未知数は $\varphi(t)$ と $T(t)$ の2つで、式も2本。②は $\varphi$ だけを含むので、まず②を解いて $\varphi(t)$ を求め、次にそれを①に入れて $T(t)$ を求める。張力は、「糸の長さが一定」という拘束条件(束縛条件)を満たすように決まる力で、運動方程式を解いた結果として決まります。</p>
+    </div>
+
+    <!-- ===================== 7 ===================== -->
+    <h2 id="s7">7. 振幅が小さいとき:単振動 <span class="page-tag">板書 p.12</span></h2>
+    <p>板書「(1) 振幅が小さいとき」:
+    $$\sin\varphi=\varphi-\frac{\varphi^3}{6}+O(\varphi^5)\approx\varphi\ \text{で置き換えると、}\quad\ddot\varphi=-\frac gl\varphi.$$
+    $\omega=\sqrt{g/l}$ とおく。$\varphi=e^{rt}$ と仮定すると $r^2=-\omega^2$ より $r=\pm i\omega$。
+    $$\varphi=C_1e^{i\omega t}+C_2e^{-i\omega t}=a\cos\omega t+b\sin\omega t=A\cos(\omega t+\alpha).$$
+    (板書の最後の式では振幅を $a$ としています。)</p>
+    <p>周期 $T_0=\dfrac{2\pi}\omega=2\pi\sqrt{\dfrac lg}$。<b>周期は振幅によらず、糸の長さ $l$ と重力加速度 $g$ だけで決まる</b>(振り子の等時性)。質量 $m$ にもよりません。</p>
+    <div class="box supp">
+      <div class="label">板書にない補足:なぜ「振幅が小さい」と $\sin\varphi\approx\varphi$ か</div>
+      <p>振幅 $\varphi_A$ が小さければ、運動中ずっと $|\varphi|\le\varphi_A$ なので、$\sin\varphi$ と $\varphi$ の差(最大で $\varphi_A^3/6$ 程度)は、$\varphi$ そのものに比べて小さい。たとえば $\varphi_A=10°=0.1745$ rad:$\sin\varphi_A=0.17365$、差は 0.5%。このとき、周期のずれも 0.19% です(第8回の表)。<b>この近似の精度を、次回、周期の補正として調べます</b>。</p>
+    </div>
+
+    <!-- ===================== 8 ===================== -->
+    <h2 id="s8">8. 具体例で練習(板書にない補足) <span class="page-tag">補足</span></h2>
+    <p>この節は、板書にはない、理解を助けるための練習問題と解答です。</p>
+
+    <div class="box ex">
+      <div class="label">問題 A:極座標の基底の確認</div>
+      <p>$\varphi=\pi/6$ のとき、$\bm e_r$、$\bm e_\varphi$ を $\bm e_x,\bm e_y$ で表せ。また、ベクトル $\bm A=2\bm e_x+\bm e_y$ の極座標成分 $(A_r,A_\varphi)$ を求めよ。</p>
+    </div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>$\cos\frac\pi6=\frac{\sqrt3}2$、$\sin\frac\pi6=\frac12$。$\bm e_r=\frac{\sqrt3}2\bm e_x+\frac12\bm e_y$、$\bm e_\varphi=-\frac12\bm e_x+\frac{\sqrt3}2\bm e_y$。$A_r=\bm A\cdot\bm e_r=\sqrt3+\frac12=2.23$、$A_\varphi=\bm A\cdot\bm e_\varphi=-1+\frac{\sqrt3}2=-0.13$。(確かめ:$A_r^2+A_\varphi^2=4.97+0.018\approx5=|\bm A|^2$。)</p></div>
+
+    <div class="box ex">
+      <div class="label">問題 B:加速度の極座標成分</div>
+      <p>$r=r_0e^{\lambda t}$、$\varphi=\omega t$($\lambda,\omega$ は定数)で動く質点(らせん運動)の、速度と加速度の極座標成分を求めよ。</p>
+    </div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>$\dot r=\lambda r$、$\ddot r=\lambda^2r$、$\dot\varphi=\omega$、$\ddot\varphi=0$。$v_r=\lambda r$、$v_\varphi=\omega r$。$a_r=\ddot r-r\dot\varphi^2=(\lambda^2-\omega^2)r$、$a_\varphi=2\dot r\dot\varphi+r\ddot\varphi=2\lambda\omega r$。</p></div>
+
+    <div class="box ex">
+      <div class="label">問題 C:振り子の周期</div>
+      <p>糸の長さ $l=1.0\ \mathrm m$ の振り子の周期を、微小振動で求めよ。$g=9.8\ \mathrm{m/s^2}$。また、$l=25\ \mathrm{cm}$ ならどうか。</p>
+    </div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>$T_0=2\pi\sqrt{l/g}=2\pi\sqrt{1.0/9.8}=2.007\ \mathrm s$(約2秒)。$l=0.25\ \mathrm m$ なら $T_0=2\pi\sqrt{0.25/9.8}=1.00\ \mathrm s$。(糸の長さを $\frac14$ にすると、周期は $\frac12$。)</p></div>
+
+    <div class="box ex">
+      <div class="label">問題 D:張力</div>
+      <p>質量 $m$ のおもりが、最下点($\varphi=0$)を速さ $v$ で通過するときの、糸の張力を求めよ。</p>
+    </div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>① より $T=mg\cos\varphi+ml\dot\varphi^2$。最下点 $\varphi=0$ で $v=l\dot\varphi$ なので $T=mg+\dfrac{mv^2}l$。重さ $mg$ に、円運動を保つための向心力 $\dfrac{mv^2}l$ を加えたもの。静止($v=0$)していれば $T=mg$ です。</p></div>
+
+    <div class="box ex">
+      <div class="label">問題 E:単振動の解の決定</div>
+      <p>$\ddot\varphi=-\omega^2\varphi$、初期条件 $\varphi(0)=\varphi_0$、$\dot\varphi(0)=0$ を解け。</p>
+    </div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>$\varphi=a\cos\omega t+b\sin\omega t$、$\dot\varphi=-a\omega\sin\omega t+b\omega\cos\omega t$。$\varphi(0)=a=\varphi_0$、$\dot\varphi(0)=b\omega=0$ より $b=0$。$\varphi(t)=\varphi_0\cos\omega t$(振幅 $\varphi_0$)。</p></div>
+
+    <!-- ===================== 9 ===================== -->
+    <h2 id="s9">9. まとめ(この回で覚えること)</h2>
+    <ul>
+      <li><b>極座標の基底</b>:$\bm e_r=(\cos\varphi,\sin\varphi)$、$\bm e_\varphi=(-\sin\varphi,\cos\varphi)$。$(\bm e_r,\bm e_\varphi)=(\bm e_x,\bm e_y)R(\varphi)$。成分は $(A_r,A_\varphi)^{\mathsf T}=R(\varphi)^{-1}(A_x,A_y)^{\mathsf T}$。位置によって向きが変わる。</li>
+      <li><b>速度</b> $(v_r,v_\varphi)=(\dot r,\ r\dot\varphi)$。<b>加速度</b> $(a_r,a_\varphi)=(\ddot r-r\dot\varphi^2,\ 2\dot r\dot\varphi+r\ddot\varphi)$。$-r\dot\varphi^2$ は遠心力(向心加速度)の寄与。</li>
+      <li>$a_\varphi=\dfrac1r\dfrac d{dt}(r^2\dot\varphi)$。中心力($F_\varphi=0$)なら $mr^2\dot\varphi$(角運動量)が一定(面積速度一定)。</li>
+      <li><b>振り子</b>:$r=l$ 一定で、$\ddot\varphi=-\dfrac gl\sin\varphi$(②')と、張力 $T=mg\cos\varphi+ml\dot\varphi^2$(①)。</li>
+      <li><b>小さな振幅</b>:$\sin\varphi\approx\varphi$ で単振動 $\ddot\varphi=-\dfrac gl\varphi$、$\varphi=A\cos(\omega t+\alpha)$、$\omega=\sqrt{g/l}$、周期 $T_0=2\pi\sqrt{l/g}$(振幅によらない)。</li>
+    </ul>
+
+    <!-- ===================== 10 ===================== -->
+    <h2 id="s10">10. この回のノートについてのメモ</h2>
+    <p>板書は手書きの iPad ノートで、ページ番号がありません。PDF の順に数えました(p.11〜p.12 の前半)。板書には、人の顔のイラストが描かれていますが、このサイトには板書の画像は載せていません。補足として足した部分(黄色の枠)、基礎ページの内容、練習問題と解答は、Claude が書き足したもので、板書にはありません。</p>
+    <ol>
+      <li><b>$\bm e_\varphi$ の符号(p.11)</b>:板書の式「$\bm e_\varphi=\sin\varphi\,\bm e_x+\cos\varphi\,\bm e_y$」は、$-\sin\varphi$ の書き落としと判断しました(右側の行列の形、および $\bm e_r\perp\bm e_\varphi$ から)。</li>
+      <li><b>$a_\varphi$ の式の係数(p.12)</b>:板書の「$a_\varphi=2\dot r\dot\varphi+r\ddot\varphi=\frac1r\frac d{dt}(\frac12r^2\dot\varphi)$」は、$\frac12$ が余計で、正しくは $\frac1r\frac d{dt}(r^2\dot\varphi)$ です(本文の補足の枠)。結論(角運動量 $mr^2\dot\varphi$ が一定)は変わりません。</li>
+      <li><b>$a_\varphi$ と $a_y$ の字(p.11)</b>:加速度の式で、手書きの「$a_\varphi$」と「$a_y$」が似て見える箇所があります。$\begin{pmatrix}a_r\\a_y\end{pmatrix}$ と書かれた行は、極座標成分の $\begin{pmatrix}a_r\\a_\varphi\end{pmatrix}$ のことと読みました。</li>
+      <li><b>振り子の図(p.11–12)</b>:板書の右上の人の顔の絵は、振り子のおもりにあたる(顔を、振り子の先端に見立てた)イラストです。振り子の力の図は、板書にはないので、私が描きました。</li>
+      <li><b>$\varphi$ の符号の向き(p.12)</b>:板書は「$F_\varphi=-mg\sin\varphi$」としているので、$\varphi$ は鉛直下向きから反時計回り(右向きを正)に測っている、と読みました。</li>
+    </ol>
+
+    <nav class="pager">
+      <a href="week-06.html">← 前の週</a>
+      <a href="../index.html">一覧へ</a>
+      <a href="week-08.html">次の週 →</a>
+    </nav>
+
+  </main>
+
+  <footer>© Aセメまとめノート</footer>
+</body>
+</html>

@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>第9回 万有引力とケプラーの法則 | Aセメまとめノート</title>
+  <link rel="stylesheet" href="../../assets/style.css">
+  <script defer src="../../assets/nav.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],macros:{'\\R':'\\mathbb{R}','\\bm':'\\boldsymbol{#1}','\\dd':'\\mathrm{d}'}});window.__navReady&&window.__navReady()"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="inner">
+      <a class="site-title" href="../../index.html">Aセメまとめノート</a>
+      <span class="links"><a href="../index.html">力学A</a><a href="../basics.html">基礎のまとめ</a><a href="../../calc/index.html">微積</a><a href="../../linalg/index.html">線形代数</a><a href="../../em/index.html">電磁気学</a></span>
+    </div>
+  </header>
+
+  <main class="note">
+    <h1>第9回:万有引力とケプラーの法則</h1>
+    <div class="meta">力学A(東京大学 教養学部 秋学期)／板書 p.13 の後半〜p.14(PDF の順に数えています)／ノートの節番号は「6.1 万有引力」「6.2 ケプラーの3法則」(板書に「今回後半が重要」とあります)</div>
+
+    <nav class="toc">
+      <div class="toc-title">目次</div>
+      <ol start="0">
+        <li><a href="#s0">この回の全体像</a></li>
+        <li><a href="#s1">準備:基礎の確認</a>
+          <div class="sub">万有引力／楕円／扇形の面積／エネルギー保存／単振動の方程式 $u''+u=\text{定数}$</div></li>
+        <li><a href="#s2">惑星の運動方程式</a>(p.13)</li>
+        <li><a href="#s3">第2法則:面積速度一定</a>(p.13)</li>
+        <li><a href="#s4">第1法則:軌道は円錐曲線(楕円)</a>(p.14)</li>
+        <li><a href="#s5">楕円の長半径・短半径</a>(p.14)</li>
+        <li><a href="#s6">第3法則:周期と長半径</a>(p.14)</li>
+        <li><a href="#s7">具体例で練習</a></li>
+        <li><a href="#s8">まとめ(この回で覚えること)</a></li>
+        <li><a href="#s9">この回のノートについてのメモ</a></li>
+      </ol>
+    </nav>
+
+    <!-- ===================== 0 ===================== -->
+    <h2 id="s0">0. この回の全体像 <span class="page-tag">板書 p.13–14</span></h2>
+    <p>板書の p.13 の後半には「☆ 万有引力」とあり、「今回後半が重要」と書かれています。この回は、このノートの<b>山場</b>の一つで、<b>ニュートンの万有引力の法則と運動方程式だけから、ケプラーの3法則を導き</b>ます。</p>
+    <div class="box note-box">
+      <div class="label">ケプラーの3法則(板書 6.2)</div>
+      <p>① 惑星の軌道は、太陽を1つの焦点とする<b>楕円</b>である。<br>
+      ② 惑星と太陽を結ぶ線分が単位時間に掃く面積(<b>面積速度</b>)は一定。<br>
+      ③ (周期)$^2\propto$(長半径)$^3$。</p>
+    </div>
+    <p>ケプラー(1571–1630)が、観測データから見つけた法則です。ニュートンは、万有引力 $|\bm F|=G\dfrac{mM}{r^2}$ と運動の法則から、これらが<b>すべて導かれる</b>ことを示しました。このノートでは、導く順序を、第2法則(角運動量保存、一番簡単)→ 第1法則(エネルギー保存と軌道の式)→ 第3法則 としています。</p>
+    <div class="box thm">
+      <div class="label">この回のゴール</div>
+      <p>① 万有引力の運動方程式を、極座標の成分で書く:$m(\ddot r-r\dot\varphi^2)=-\dfrac{GMm}{r^2}$、$m(2\dot r\dot\varphi+r\ddot\varphi)=0$。<br>
+      ② 第2式から $r^2\dot\varphi=h$(一定)= 面積速度一定(第2法則)。<br>
+      ③ エネルギー保存と第2法則から軌道の式 $r=\dfrac{\ell}{1+e\cos(\varphi+\alpha)}$(円錐曲線)を導く($\ell=\dfrac{h^2}{GM}$、$e=\ell A$:離心率)。<br>
+      ④ 楕円の面積と面積速度から、周期 $T=\dfrac{2\pi}{\sqrt{GM}}(\text{長半径})^{3/2}$(第3法則)を導く。</p>
+    </div>
+    <figure class="fig">
+      <svg viewBox="0 0 660 262" width="660" role="img" aria-label="ケプラーの第2法則"><polyline points="282,130 281.8,124.6 281.3,119.1 280.4,113.7 279.2,108.4 277.6,103.1 275.6,97.9 273.4,92.7 270.8,87.7 267.8,82.8 264.6,78 261,73.4 257.2,68.9 253,64.6 248.6,60.4 243.9,56.5 239,52.7 233.8,49.2 228.4,45.9 222.8,42.8 217,39.9 211,37.3 204.9,35 198.6,32.9 192.2,31.1 185.6,29.5 179,28.3 172.3,27.3 165.6,26.6 158.8,26.1 152,26 145.2,26.1 138.4,26.6 131.7,27.3 125,28.3 118.4,29.5 111.8,31.1 105.4,32.9 99.1,35 93,37.3 87,39.9 81.2,42.8 75.6,45.9 70.2,49.2 65,52.7 60.1,56.5 55.4,60.4 51,64.6 46.8,68.9 43,73.4 39.4,78 36.2,82.8 33.2,87.7 30.6,92.7 28.4,97.9 26.4,103.1 24.8,108.4 23.6,113.7 22.7,119.1 22.2,124.6 22,130 22.2,135.4 22.7,140.9 23.6,146.3 24.8,151.6 26.4,156.9 28.4,162.1 30.6,167.3 33.2,172.3 36.2,177.2 39.4,182 43,186.6 46.8,191.1 51,195.4 55.4,199.6 60.1,203.5 65,207.3 70.2,210.8 75.6,214.1 81.2,217.2 87,220.1 93,222.7 99.1,225 105.4,227.1 111.8,228.9 118.4,230.5 125,231.7 131.7,232.7 138.4,233.4 145.2,233.9 152,234 158.8,233.9 165.6,233.4 172.3,232.7 179,231.7 185.6,230.5 192.2,228.9 198.6,227.1 204.9,225 211,222.7 217,220.1 222.8,217.2 228.4,214.1 233.8,210.8 239,207.3 243.9,203.5 248.6,199.6 253,195.4 257.2,191.1 261,186.6 264.6,182 267.8,177.2 270.8,172.3 273.4,167.3 275.6,162.1 277.6,156.9 279.2,151.6 280.4,146.3 281.3,140.9 281.8,135.4 282,130" style="fill:none;stroke:var(--muted);stroke-width:2"/><polygon points="230,130 269.1,175.1 273.3,167.3 276.9,159 279.5,150.1 281.3,140.8 282,131.4 281.6,121.9 280.1,112.5 277.7,103.5 274.4,95 270.4,87 265.8,79.7 260.7,73" style="fill:var(--thm);fill-opacity:.35;stroke:var(--thm);stroke-width:1.4"/><polygon points="230,130 23.2,115.7 22.9,118.1 22.5,120.5 22.3,122.9 22.1,125.2 22,127.6 22,130 22,132.4 22.1,134.8 22.3,137.1 22.5,139.5 22.9,141.9 23.2,144.3" style="fill:var(--accent);fill-opacity:.35;stroke:var(--accent);stroke-width:1.4"/><circle cx="282" cy="130" r="3.4" style="fill:var(--text)"/><circle cx="217.6" cy="40.2" r="3.4" style="fill:var(--text)"/><circle cx="142.3" cy="26.3" r="3.4" style="fill:var(--text)"/><circle cx="87.3" cy="39.8" r="3.4" style="fill:var(--text)"/><circle cx="50.4" cy="65.2" r="3.4" style="fill:var(--text)"/><circle cx="29" cy="96.4" r="3.4" style="fill:var(--text)"/><circle cx="22" cy="130" r="3.4" style="fill:var(--text)"/><circle cx="29" cy="163.6" r="3.4" style="fill:var(--text)"/><circle cx="50.4" cy="194.8" r="3.4" style="fill:var(--text)"/><circle cx="87.3" cy="220.2" r="3.4" style="fill:var(--text)"/><circle cx="142.3" cy="233.7" r="3.4" style="fill:var(--text)"/><circle cx="217.6" cy="219.8" r="3.4" style="fill:var(--text)"/><circle cx="230" cy="130" r="7" style="fill:var(--thm)"/><text class="tm" x="226" y="152" style="text-anchor:middle">太陽(焦点)</text><text class="tm" x="262" y="108" style="text-anchor:middle">近日点</text><text class="tm" x="38" y="108" style="text-anchor:middle">遠日点</text><text class="tm" x="380" y="60">黒い点:等しい時間ごとの位置(周期の 1/12)</text><text class="tj" x="380" y="100">橙と青の扇形は、</text><text class="tj" x="380" y="120">同じ時間に掃く面積</text><text class="tt" x="380" y="150">⇒ 面積が等しい</text><text class="tm" x="380" y="176">近日点では速く、遠日点では遅い</text></svg>
+      <figcaption>第2法則。惑星(黒い点)は、楕円軌道を、近日点では速く、遠日点では遅く動く。等しい時間で掃く面積(橙と青の扇形)は等しい。</figcaption>
+    </figure>
+    <p>以下では、先に必要な基礎を丁寧に復習してから、板書の順に進みます。紫色の枠は「基礎の復習」、黄色の枠は「板書にないが、理解を助けるために私が補った部分」です。</p>
+
+    <!-- ===================== 1 ===================== -->
+    <h2 id="s1">1. 準備:基礎の確認</h2>
+
+    <h3 id="w-grav">1.1 万有引力の法則とポテンシャル</h3>
+    <div class="box basic">
+      <div class="label">基礎:万有引力 <a class="xref-link" href="../basics.html#newton" data-xref>→ 詳しい解説</a></div>
+      <p>質量 $m$ と $M$ の2つの物体が、距離 $r$ だけ離れているとき、互いに引き合う力の大きさは $|\bm F|=G\dfrac{mM}{r^2}$(<b>万有引力の法則</b>、$G=6.67\times10^{-11}\ \mathrm{N\,m^2/kg^2}$:万有引力定数)。向きは2つの物体を結ぶ直線に沿った引力。</p>
+      <p>これは<b>中心力</b>(第6回)で、保存力。ポテンシャルは(無限遠を基準に)$U(r)=-\dfrac{GMm}{r}$。このノートでは、太陽(質量 $M$)が惑星(質量 $m$)に比べて<b>十分重く</b>、太陽は原点に固定されているとみなします。</p>
+    </div>
+
+    <h3 id="w-ellipse">1.2 楕円</h3>
+    <div class="box basic">
+      <div class="label">基礎:楕円の長半径・短半径・焦点・離心率 <a class="xref-link" href="../basics.html#conics" data-xref>→ 詳しい解説</a></div>
+      <p><b>楕円</b>は、2つの定点(<b>焦点</b>)からの距離の和が一定の点の集まり。楕円の中心を原点に、長軸を $x$ 軸にとると $\dfrac{x^2}{a^2}+\dfrac{y^2}{b^2}=1$($a$:<b>長半径</b>、$b$:<b>短半径</b>、$a\ge b$)。焦点は $(\pm c,0)$($c^2=a^2-b^2$)。<b>離心率</b> $e=\dfrac ca$($0\le e\lt1$。$e=0$ は円)。面積は $\pi ab$。</p>
+    </div>
+
+    <h3 id="w-areav">1.3 扇形の面積と面積速度</h3>
+    <div class="box basic">
+      <div class="label">基礎:極座標での面積 <a class="xref-link" href="../basics.html#polar" data-xref>→ 詳しい解説</a></div>
+      <p>原点から距離 $r$ の点が、微小な角 $d\varphi$ だけ動くとき、原点とその2点が作る細い扇形の面積は $\tfrac12r^2d\varphi$(三角形の面積 $\tfrac12\cdot r\cdot r\,d\varphi$)。単位時間あたりの面積 $\dfrac{dS}{dt}=\tfrac12r^2\dot\varphi$ が<b>面積速度</b>です。</p>
+    </div>
+
+    <h3 id="w-ode2">1.4 $u''+u=\text{定数}$ の解</h3>
+    <div class="box basic">
+      <div class="label">基礎:非斉次の単振動型の方程式 <a class="xref-link" href="week-03.html#s5-1" data-xref>→ 第3回 5.1(特解 + 斉次の解)</a><a class="xref-link" href="../basics.html#ode" data-xref>→ 詳しい解説</a></div>
+      <p>$\dfrac{d^2u}{d\varphi^2}+u=c$($c$ は定数)の一般解は、斉次の解 $A\cos(\varphi+\alpha)$(単振動型)と、特解 $u=c$ の和:$u=A\cos(\varphi+\alpha)+c$。(第2・3回の「斉次の一般解 + 特解」。変数は $\varphi$ で、「時間」の役目をします。)</p>
+    </div>
+
+    <!-- ===================== 2 ===================== -->
+    <h2 id="s2">2. 惑星の運動方程式 <span class="page-tag">板書 p.13</span></h2>
+    <p>板書:「まず、惑星の位置座標として $(r,\varphi;z)$ をとる」(図:太陽の位置が原点、惑星の位置を円柱座標で表す)。太陽の万有引力は原点に向かう中心力で、$z$ 方向の力はありません。各方向の運動方程式(第7回の加速度の極座標成分 $a_r=\ddot r-r\dot\varphi^2$、$a_\varphi=2\dot r\dot\varphi+r\ddot\varphi$ を使う):
+    $$\begin{cases}m(\ddot r-r\dot\varphi^2)=-\dfrac{GmM}{r^2}&(r\text{ 方向})\\m(2\dot r\dot\varphi+r\ddot\varphi)=0&(\varphi\text{ 方向})\\m\ddot z=0&\Rightarrow\ z\text{ 方向は考慮しなくてよい}\end{cases}$$
+    $z$ 方向は $m\ddot z=0$ で等速。最初に $z$ 方向の速度が 0 なら、軌道は常に $z=$ 一定の<b>平面内</b>にあります(惑星が太陽を通る平面の中で動く。この平面を軌道面という)。</p>
+
+    <!-- ===================== 3 ===================== -->
+    <h2 id="s3">3. 第2法則:面積速度一定 <span class="page-tag">板書 p.13</span></h2>
+    <p>板書「第2法則」:$\varphi$ 方向の式 $2\dot r\dot\varphi+r\ddot\varphi=0$ を、
+    $$\frac1r\frac{d}{dt}\bigl(r^2\dot\varphi\bigr)=0\ \Rightarrow\ \boxed{r^2\dot\varphi=\text{(一定)}}$$
+    と書き直します(第7回の $a_\varphi=\frac1r\frac d{dt}(r^2\dot\varphi)$)。この一定値を $h$ とおきます:$r^2\dot\varphi=h$。</p>
+    <p>板書の図(細長い三角形の斜線部分、「面積速度」)のとおり、$\tfrac12r^2\dot\varphi=\tfrac12h$ は単位時間に掃く面積。<b>面積速度が一定</b>(ケプラーの第2法則)。</p>
+    <ul>
+      <li>$h=r^2\dot\varphi$ は、単位質量あたりの<b>角運動量</b>($mr^2\dot\varphi=mh$ が角運動量)。第7回のとおり、中心力では角運動量が保存します。</li>
+      <li>意味:太陽に近い($r$ が小さい)ときは、$\dot\varphi=h/r^2$ が大きく、速く回る。遠い($r$ が大きい)ときは、ゆっくり。</li>
+    </ul>
+
+    <!-- ===================== 4 ===================== -->
+    <h2 id="s4">4. 第1法則:軌道は円錐曲線(楕円) <span class="page-tag">板書 p.14</span></h2>
+    <p>板書の見出し:「第1法則(力学的エネルギー保存で考える)」。万有引力のポテンシャル $U(r)=-\dfrac{GmM}r$ より(「$\nabla$ すると力が出る」と板書の横に注記)、力学的エネルギー保存:
+    $$\tfrac12m\bigl(\dot r^2+(r\dot\varphi)^2\bigr)-\frac{GmM}r=E\ (\text{定数})\qquad\cdots(\mathrm A)$$
+    ここで第2法則 $r^2\dot\varphi=h$(定数)$\cdots(\mathrm B)$ を使うと、$r\dot\varphi=\dfrac hr$ なので
+    $$\tfrac12m\Bigl(\dot r^2+\frac{h^2}{r^2}\Bigr)-\frac{GmM}r=E\qquad\cdots(\mathrm C)$$
+    (板書の式 ② と同じ)。</p>
+    <p>目標は、軌道の式 $r=r(\varphi)$ を求めること。板書の指示:「(B) から $\dot\varphi^2=$、(C) から $\dot r^2=$ を出して比をとり、$\dfrac{\dot r}{\dot\varphi}=\dfrac{dr}{d\varphi}=(r\text{ の関数})$ を出し、$r=r(\varphi)$ を出す。」</p>
+    <div class="box proof"><div class="label">計算(板書のとおり)</div>
+      <ol class="step-list">
+        <li>(B) から $\dot\varphi^2=\dfrac{h^2}{r^4}$。(C) から $\dot r^2=\dfrac{2E}m+\dfrac{2GM}r-\dfrac{h^2}{r^2}$。</li>
+        <li>比をとる:$\dfrac{\dot r^2}{\dot\varphi^2}=\dfrac{r^4}{h^2}\Bigl(\dfrac{2E}m+\dfrac{2GM}r-\dfrac{h^2}{r^2}\Bigr)$。$\dfrac{\dot r}{\dot\varphi}=\dfrac{dr/dt}{d\varphi/dt}=\dfrac{dr}{d\varphi}$ なので
+        $$\frac{dr}{d\varphi}=\pm\frac{r^2}h\sqrt{\frac{2E}m+\frac{2GM}r-\frac{h^2}{r^2}}\quad\Longleftrightarrow\quad\frac1{r^2}\frac{dr}{d\varphi}=\pm\frac1h\sqrt{\frac{2E}m+\frac{2GM}r-\frac{h^2}{r^2}}.$$</li>
+        <li>$u=\dfrac1r$ とおく($du=-\dfrac1{r^2}dr$)。左辺は $-\dfrac{du}{d\varphi}$、右辺の根号の中は $\dfrac{2E}m+2GMu-h^2u^2$ なので
+        $$\frac{du}{d\varphi}=\mp\frac1h\sqrt{\frac{2E}m+2GMu-h^2u^2}=\mp\sqrt{\frac{2E}{mh^2}+\frac{2GM}{h^2}u-u^2}.$$
+        $u'=\dfrac{du}{d\varphi}$ と書くと、2乗して
+        $$u'^2=\frac{2E}{mh^2}+\frac{2GM}{h^2}u-u^2.$$</li>
+        <li>$\varphi$ で微分する:$2u'u''=\dfrac{2GM}{h^2}u'-2uu'$。$u'\ne0$ として $2u'$ で割ると
+        $$u''+u=\frac{GM}{h^2}=\frac1\ell\qquad\Bigl(\ell:=\frac{h^2}{GM}\ \text{とおく}\Bigr).$$</li>
+        <li>これは、斉次の解 $\cos\varphi,\sin\varphi$ と特殊解 $\dfrac1\ell$ をもつから、
+        $$u=A\cos(\varphi+\alpha)+\frac1\ell\ \Rightarrow\ \boxed{r=\frac{\ell}{1+\ell A\cos(\varphi+\alpha)}}.$$
+        $e=\ell A$ とおくと $r=\dfrac{\ell}{1+e\cos(\varphi+\alpha)}$。「$\ell A\equiv e$ を<b>離心率</b>とする<b>円錐曲線</b>」と板書にあります。</li>
+        <li>元の式 $u'^2=\cdots$ に代入して、定数 $A$ を決める:$A=\sqrt{\dfrac{2E}{mh^2}+\dfrac1{\ell^2}}$、$\ell=\dfrac{h^2}{GM}$。(板書の最後の式。)</li>
+      </ol></div>
+    <figure class="fig">
+      <svg viewBox="0 0 520 356" width="520" role="img" aria-label="楕円と、長半径・短半径・ℓ"><path d="M100 175 A150 125.2746981636755 0 1 1 400 175 A150 125.2746981636755 0 1 1 100 175" style="fill:var(--accent);fill-opacity:.1;stroke:var(--accent);stroke-width:2.4"/><line x1="80" y1="175" x2="420" y2="175" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><line x1="250" y1="33.7" x2="250" y2="316.3" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><circle cx="167.5" cy="175" r="6" style="fill:var(--thm)"/><text class="tm" x="167.5" y="197" style="text-anchor:middle">焦点(太陽)</text><circle cx="332.5" cy="175" r="4" style="fill:var(--muted)"/><text class="tm" x="332.5" y="195" style="text-anchor:middle">焦点</text><line x1="250" y1="169" x2="400" y2="169" style="stroke:var(--ex);stroke-width:2.6"/><text class="tt" x="325" y="163" style="text-anchor:middle;fill:var(--ex)">長半径 a</text><line x1="258" y1="175" x2="258" y2="49.7" style="stroke:var(--thm);stroke-width:2.6"/><text class="tt" x="264" y="112.4" style="fill:var(--thm)">短半径 b</text><line x1="167.5" y1="175" x2="167.5" y2="70.4" style="stroke:var(--accent);stroke-width:2.6"/><text class="t" x="161.5" y="122.7" style="text-anchor:end;fill:var(--accent);font-size:18px">ℓ</text><text class="tm" x="108" y="167" style="text-anchor:start">近日点まで</text><text class="tm" x="14" y="20">離心率 e:焦点が中心から離れている度合い(c = ae)</text><text class="tt" x="14" y="38">a = ℓ/(1 − e²)、 b = ℓ/√(1 − e²)、 b² = a² (1 − e²)</text><text class="tm" x="14" y="328">楕円の面積 = π a b = πℓ²/(1 − e²)^{3/2}</text><text class="tm" x="14" y="346">太陽から近日点までの距離 = a(1 − e) = ℓ/(1 + e)</text></svg>
+      <figcaption>楕円と、長半径 $a$、短半径 $b$、焦点を通る長軸に垂直な線の半分の長さ $\ell$(半直弦)。軌道の式の $\ell$ は、まさにこの長さです。</figcaption>
+    </figure>
+    <div class="box supp">
+      <div class="label">板書にない補足:$r=\dfrac{\ell}{1+e\cos\varphi}$ が楕円であること、直交座標で確かめる</div>
+      <p>簡単のため $\alpha=0$ とする。$r+er\cos\varphi=\ell$、つまり $r=\ell-ex$($x=r\cos\varphi$)。両辺を2乗して $x^2+y^2=(\ell-ex)^2=\ell^2-2e\ell x+e^2x^2$。整理すると
+      $$(1-e^2)x^2+2e\ell x+y^2=\ell^2.$$
+      $e\lt1$ のとき、$x$ について平方完成して $(1-e^2)\Bigl(x+\dfrac{e\ell}{1-e^2}\Bigr)^2+y^2=\dfrac{\ell^2}{1-e^2}$。これは、中心 $\Bigl(-\dfrac{e\ell}{1-e^2},0\Bigr)$、$x$ 方向の半径 $\dfrac{\ell}{1-e^2}$、$y$ 方向の半径 $\dfrac\ell{\sqrt{1-e^2}}$ の<b>楕円</b>。原点(太陽)は焦点にあたります($c=ae=\dfrac{e\ell}{1-e^2}$)。</p>
+    </div>
+
+    <!-- ===================== 5 ===================== -->
+    <h2 id="s5">5. 楕円の長半径・短半径 <span class="page-tag">板書 p.14</span></h2>
+    <p>板書:$r=\dfrac{\ell}{1+e\cos(\varphi+\alpha)}$ について、
+    $$\text{(長半径)}=\frac{\ell}{1-e^2},\qquad\text{(短半径)}=\frac{\ell}{\sqrt{1-e^2}}.$$
+    上の補足の枠のとおり(楕円の半径)です。たとえば、近日点($\cos=1$)の距離 $\dfrac{\ell}{1+e}$ と、遠日点($\cos=-1$)の距離 $\dfrac\ell{1-e}$ の平均が長半径:$\dfrac12\Bigl(\dfrac\ell{1+e}+\dfrac\ell{1-e}\Bigr)=\dfrac{\ell}{1-e^2}$ ✓。</p>
+
+    <!-- ===================== 6 ===================== -->
+    <h2 id="s6">6. 第3法則:周期と長半径 <span class="page-tag">板書 p.14</span></h2>
+    <p>板書「第3法則(周期 $T$)」:面積速度 $\dfrac{dS}{dt}=\dfrac12r\cdot r\dot\varphi=\dfrac12h$。全面積 $S=\displaystyle\int_0^T\tfrac12h\,dt=\tfrac12hT$。一方、楕円の面積は
+    $$S=\pi\cdot\frac\ell{1-e^2}\cdot\frac\ell{\sqrt{1-e^2}}=\frac{\pi\ell^2}{(1-e^2)^{3/2}}.$$
+    両者から
+    $$T=\frac{2S}h=\frac{2\pi\ell^2}{h\,(1-e^2)^{3/2}}.$$
+    $h=\sqrt{GM\ell}$($\ell=\dfrac{h^2}{GM}$ より)を代入すると:
+    $$T=\frac{2\pi\ell^2}{\sqrt{GM\ell}\,(1-e^2)^{3/2}}=\frac{2\pi\,\ell^{3/2}}{\sqrt{GM}\,(1-e^2)^{3/2}}=\frac{2\pi}{\sqrt{GM}}\Bigl(\frac{\ell}{1-e^2}\Bigr)^{3/2}.$$
+    $\dfrac{\ell}{1-e^2}$ は長半径だから、
+    $$\boxed{T=\frac{2\pi}{\sqrt{GM}}\,(\text{長半径})^{3/2}}\ \Longleftrightarrow\ T^2=\frac{4\pi^2}{GM}\,(\text{長半径})^3.$$
+    (板書の最後の黒い四角は、「証明終わり」の印です。)</p>
+    <figure class="fig">
+      <svg viewBox="0 0 560 262" width="560" role="img" aria-label="ケプラーの第3法則"><line x1="70" y1="210" x2="450" y2="210" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><line x1="70" y1="210" x2="70" y2="40" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><text class="t" x="450" y="230" style="text-anchor:end">長半径³ [AU³]</text><text class="t" x="76" y="32">周期² [年²]</text><line x1="70" y1="210" x2="450" y2="50" style="stroke:var(--thm);stroke-width:2;stroke-dasharray:6 4"/><circle cx="70" cy="210" r="5" style="fill:var(--accent)"/><circle cx="70.2" cy="209.9" r="5" style="fill:var(--accent)"/><circle cx="70.4" cy="209.8" r="5" style="fill:var(--accent)"/><circle cx="71.5" cy="209.4" r="5" style="fill:var(--accent)"/><text class="tm" x="63.5" y="201.4" style="text-anchor:end">火星</text><circle cx="129.5" cy="185" r="5" style="fill:var(--accent)"/><text class="tm" x="121.5" y="177" style="text-anchor:end">木星</text><circle cx="436.2" cy="55.7" r="5" style="fill:var(--accent)"/><text class="tm" x="428.2" y="47.7" style="text-anchor:end">土星</text><text class="tt" x="110" y="70" style="fill:var(--thm)">橙の破線:周期² = 長半径³(単位:年と AU)</text><text class="tm" x="110" y="90">惑星のデータ(青い点)は、直線の上に並ぶ</text><text class="tm" x="70" y="252">内側の惑星(水星・金星・地球)は、この目盛りでは原点付近に重なる。</text></svg>
+      <figcaption>実際の惑星のデータ(周期 [年] と長半径 [AU])。(周期)² = (長半径)³ の直線の上に、水星から土星まで、きれいに並びます。</figcaption>
+    </figure>
+    <div class="box note-box">
+      <div class="label">第3法則のポイント</div>
+      <p>比例定数 $\dfrac{4\pi^2}{GM}$ は、<b>中心の天体の質量 $M$ だけ</b>で決まり、惑星の質量 $m$ や軌道の形(離心率 $e$)にはよりません。だから、太陽のまわりの全惑星で、同じ定数になります。逆に、周期と長半径を測れば、中心の天体の質量 $M$ が求まります。</p>
+    </div>
+
+    <!-- ===================== 7 ===================== -->
+    <h2 id="s7">7. 具体例で練習(板書にない補足) <span class="page-tag">補足</span></h2>
+    <p>この節は、板書にはない、理解を助けるための練習問題と解答です。</p>
+
+    <div class="box ex">
+      <div class="label">問題 A:地球の公転周期</div>
+      <p>太陽の $GM=1.327\times10^{20}\ \mathrm{m^3/s^2}$、地球の軌道の長半径 $a=1.496\times10^{11}\ \mathrm m$(1 AU)から、地球の公転周期を求めよ。</p>
+    </div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>$T=\dfrac{2\pi}{\sqrt{GM}}a^{3/2}=2\pi\sqrt{\dfrac{a^3}{GM}}=2\pi\sqrt{\dfrac{(1.496\times10^{11})^3}{1.327\times10^{20}}}=3.156\times10^7\ \mathrm s$。1年 = $3.156\times10^7\ \mathrm s$ と一致(1.00002年)。</p></div>
+
+    <div class="box ex">
+      <div class="label">問題 B:ハレー彗星の周期</div>
+      <p>ハレー彗星の軌道の長半径は 17.8 AU である。周期は何年か。</p>
+    </div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>第3法則(地球と比較):$T^2/a^3$ が同じ($T$ [年]、$a$ [AU] なら比例定数 1)。$T=17.8^{3/2}=75.1$ 年。(実際は約 76 年。)</p></div>
+
+    <div class="box ex">
+      <div class="label">問題 C:静止衛星の高度</div>
+      <p>地球の $GM_\oplus=3.986\times10^{14}\ \mathrm{m^3/s^2}$。地球の自転周期(恒星日)$86164\ \mathrm s$ と同じ周期の円軌道(静止衛星)の、地心からの距離と、地表からの高度を求めよ。地球の赤道半径 $6378\ \mathrm{km}$。</p>
+    </div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>円軌道は $e=0$、長半径 = 半径 $a$。第3法則 $a^3=\dfrac{GM_\oplus T^2}{4\pi^2}=\dfrac{3.986\times10^{14}\times(86164)^2}{4\pi^2}=7.50\times10^{22}\ \mathrm{m^3}$、$a=4.216\times10^7\ \mathrm m=42164\ \mathrm{km}$。高度は $42164-6378=35786\ \mathrm{km}$(約 36000 km)。</p></div>
+
+    <div class="box ex">
+      <div class="label">問題 D:円軌道の速さ</div>
+      <p>半径 $r$ の円軌道を回る衛星の速さと周期を、運動方程式 $m(\ddot r-r\dot\varphi^2)=-\dfrac{GMm}{r^2}$($r$ 一定、$\dot\varphi=\omega$ 一定)から求め、第3法則と一致することを確かめよ。</p>
+    </div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>$\ddot r=0$:$-mr\omega^2=-\dfrac{GMm}{r^2}$、$\omega^2=\dfrac{GM}{r^3}$、速さ $v=r\omega=\sqrt{\dfrac{GM}{r}}$。周期 $T=\dfrac{2\pi}\omega=2\pi\sqrt{\dfrac{r^3}{GM}}$。第3法則の $a=r$ と一致。たとえば国際宇宙ステーション(高度 420 km、$r=6798\ \mathrm{km}$):$v=\sqrt{3.986\times10^{14}/6.798\times10^6}=7.66\ \mathrm{km/s}$、$T=93$ 分。</p></div>
+
+    <div class="box ex">
+      <div class="label">問題 E:近日点と遠日点の速さの比</div>
+      <p>面積速度が一定であることから、近日点($r_p$)と遠日点($r_a$)での速さ $v_p$、$v_a$ の比を求めよ。地球($e=0.0167$)ではどれくらいか。</p>
+    </div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>近日点・遠日点では、速度が動径に垂直($\dot r=0$)で $v=r\dot\varphi$、$h=rv$。$r_pv_p=r_av_a$、$\dfrac{v_p}{v_a}=\dfrac{r_a}{r_p}=\dfrac{1+e}{1-e}$($r_p=\frac\ell{1+e}$、$r_a=\frac\ell{1-e}$)。地球は $\dfrac{1.0167}{0.9833}=1.034$。近日点(1月初め)の方が、約3.4% 速い。</p></div>
+
+    <!-- ===================== 8 ===================== -->
+    <h2 id="s8">8. まとめ(この回で覚えること)</h2>
+    <ul>
+      <li><b>運動方程式</b>(太陽を原点に固定):$m(\ddot r-r\dot\varphi^2)=-\dfrac{GMm}{r^2}$、$m(2\dot r\dot\varphi+r\ddot\varphi)=0$、$m\ddot z=0$。軌道は平面内。</li>
+      <li><b>第2法則</b>:$\dfrac1r\dfrac d{dt}(r^2\dot\varphi)=0$ ⇒ $r^2\dot\varphi=h$(一定)。面積速度 $\tfrac12h$ が一定。</li>
+      <li><b>第1法則</b>:エネルギー保存 $\tfrac12m(\dot r^2+h^2/r^2)-\dfrac{GMm}r=E$ から、$u=1/r$ の方程式 $u''+u=\dfrac{GM}{h^2}=\dfrac1\ell$。解 $r=\dfrac{\ell}{1+e\cos(\varphi+\alpha)}$($\ell=\dfrac{h^2}{GM}$、$e=\ell A$、$A=\sqrt{\frac{2E}{mh^2}+\frac1{\ell^2}}$)。$0\le e\lt1$ なら楕円:長半径 $\dfrac\ell{1-e^2}$、短半径 $\dfrac\ell{\sqrt{1-e^2}}$。</li>
+      <li><b>第3法則</b>:楕円の面積 $S=\frac{\pi\ell^2}{(1-e^2)^{3/2}}=\tfrac12hT$ から $T=\dfrac{2\pi}{\sqrt{GM}}a^{3/2}$。</li>
+    </ul>
+
+    <!-- ===================== 9 ===================== -->
+    <h2 id="s9">9. この回のノートについてのメモ</h2>
+    <p>板書は手書きの iPad ノートで、ページ番号がありません。PDF の順に数えました(p.13 の後半〜p.14)。板書の画像はこのサイトには載せていません。補足として足した部分(黄色の枠)、基礎ページの内容、実データの図、練習問題と解答は、Claude が書き足したもので、板書にはありません。</p>
+    <ol>
+      <li><b>式の番号(p.14)</b>:板書では、エネルギー保存の式に「①」、$r^2\dot\varphi=h$ に「①」、それを代入した式に「②」と、「①」が2回使われています。本文では (A)、(B)、(C) と付け直しました。</li>
+      <li><b>$\ell$ の定義(p.14)</b>:板書で、$u''+u=\frac{GM}{h^2}=\frac1\ell$ と書いてあり、後で「$\ell=\frac{h^2}{GM}$」と書いてあります。両者は同じ($\frac1\ell=\frac{GM}{h^2}$)です。</li>
+      <li><b>記号 $h$(p.13–14)</b>:板書の面積速度の定数は、手書きで「$\hbar$」(エイチバー)のような字ですが、プランク定数とは無関係なので、$h$ と書きました。</li>
+      <li><b>$G$ と $m$ の順(p.13)</b>:運動方程式の右辺は、板書で「$-\frac{GmM}{r^2}$」と書かれています。万有引力の大きさ $G\frac{mM}{r^2}$ と同じです(板書の 6.1 の $|\bm F|=G\frac{mM}{r^2}$)。</li>
+      <li><b>$u'\ne0$ の仮定(p.14)</b>:板書の「$2u'u''=\cdots$ から $u''+u=\frac{GM}{h^2}$」は、$u'$ で割っているので、$u'=0$ の点では成り立ちません。円軌道($u'\equiv0$)は、元の式 $u'^2=\cdots$ から直接、$u=\frac1\ell$(定数)で、この式も満たします。本文では、これを補いました。</li>
+    </ol>
+
+    <nav class="pager">
+      <a href="week-08.html">← 前の週</a>
+      <a href="../index.html">一覧へ</a>
+      <a href="week-10.html">次の週 →</a>
+    </nav>
+
+  </main>
+
+  <footer>© Aセメまとめノート</footer>
+</body>
+</html>

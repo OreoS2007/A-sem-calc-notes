@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>第1回 いろいろな運動の運動方程式 | Aセメまとめノート</title>
+  <link rel="stylesheet" href="../../assets/style.css">
+  <script defer src="../../assets/nav.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],macros:{'\\R':'\\mathbb{R}','\\bm':'\\boldsymbol{#1}','\\dd':'\\mathrm{d}'}});window.__navReady&&window.__navReady()"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="inner">
+      <a class="site-title" href="../../index.html">Aセメまとめノート</a>
+      <span class="links"><a href="../index.html">力学A</a><a href="../basics.html">基礎のまとめ</a><a href="../../calc/index.html">微積</a><a href="../../linalg/index.html">線形代数</a><a href="../../em/index.html">電磁気学</a></span>
+    </div>
+  </header>
+
+  <main class="note">
+    <h1>第1回:いろいろな運動の運動方程式</h1>
+    <div class="meta">力学A(東京大学 教養学部 秋学期)／板書 p.1(板書にページ番号がないため、PDF の順に数えています)／ノートは「3.2 いろいろな運動の運動方程式」から始まります</div>
+
+    <nav class="toc">
+      <div class="toc-title">目次</div>
+      <ol start="0">
+        <li><a href="#s0">この回の全体像</a></li>
+        <li><a href="#s1">準備:基礎の確認</a>
+          <div class="sub">運動方程式と位置・速度・加速度／浮力／フックの法則／微分方程式の分類</div></li>
+        <li><a href="#s2">流体中で球にはたらく抵抗力</a>(p.1)</li>
+        <li><a href="#s3">運動方程式を立てる</a>(p.1)</li>
+        <li><a href="#s4">立てた方程式の分類</a>(p.1)</li>
+        <li><a href="#s5">具体例で練習</a></li>
+        <li><a href="#s6">まとめ(この回で覚えること)</a></li>
+        <li><a href="#s7">この回のノートについてのメモ</a></li>
+      </ol>
+    </nav>
+
+    <!-- ===================== 0 ===================== -->
+    <h2 id="s0">0. この回の全体像 <span class="page-tag">板書 p.1</span></h2>
+    <p>力学では、「物体にどんな力がはたらくか」を調べて<b>運動方程式</b> $m\ddot{\bm{r}}=\bm{F}$ を立て、それを解いて運動を求めます。このノートの最初のページは、<b>いろいろな運動について運動方程式を立てる</b>練習です。扱うのは次の3つの状況です。</p>
+    <ol>
+      <li><b>流体の中を落ちる球</b>(粘性抵抗だけがはたらく場合/慣性抵抗だけがはたらく場合)。</li>
+      <li><b>真空中のばね振り子</b>(調和振動子)。</li>
+      <li><b>流体の中のばね振り子</b>(粘性抵抗があるとき)。</li>
+    </ol>
+    <div class="box thm">
+      <div class="label">この回のゴール</div>
+      <p>① 流体中を速度 $\bm{v}$ で動く球が受ける<b>抵抗力</b>には、粘性抵抗 $f_v=6\pi a\eta|\bm{v}|$(速さに比例)と、慣性抵抗 $f_I=\tfrac12C_D\pi a^2\rho_0|\bm{v}|^2$(速さの2乗に比例)があることを理解する。<br>
+      ② 力を足し合わせて、4つの運動方程式を立てる。<br>
+      ③ それらが、<b>何階</b>の方程式か、<b>線形か非線形か</b>、<b>斉次か非斉次か</b>を見分けられるようにする。(次回以降、線形斉次・非斉次の方程式の解き方を学びます。)</p>
+    </div>
+    <figure class="fig">
+      <svg viewBox="0 0 520 170" width="520" role="img" aria-label="流体中を動く球"><circle cx="150" cy="90" r="38" style="fill:var(--accent);fill-opacity:.15;stroke:var(--accent);stroke-width:2.2"/><line x1="150" y1="90" x2="150" y2="52" style="stroke:var(--ex);stroke-width:2"/><text class="t" x="158" y="74" style="fill:var(--ex)">a</text><line x1="196" y1="90" x2="259.6" y2="90" style="stroke:var(--thm);stroke-width:3;fill:none"/><polygon points="270,90 259,95 259,85" style="fill:var(--thm)"/><text class="t" x="236" y="78" style="fill:var(--thm);font-size:18px">v</text><line x1="120" y1="130" x2="78.4" y2="130" style="stroke:var(--accent);stroke-width:2.6;fill:none"/><polygon points="70,130 79,125.6 79,134.4" style="fill:var(--accent)"/><text class="tt" x="60" y="150" style="fill:var(--accent)">抵抗力(速度と逆向き)</text><line x1="40" y1="40" x2="90.6" y2="40" style="stroke:var(--muted);stroke-width:1.2;fill:none;opacity:0.5"/><polygon points="96,40 90,43 90,37" style="fill:var(--muted);opacity:0.5"/><line x1="44" y1="54" x2="94.6" y2="54" style="stroke:var(--muted);stroke-width:1.2;fill:none;opacity:0.5"/><polygon points="100,54 94,57 94,51" style="fill:var(--muted);opacity:0.5"/><line x1="48" y1="68" x2="98.6" y2="68" style="stroke:var(--muted);stroke-width:1.2;fill:none;opacity:0.5"/><polygon points="104,68 98,71 98,65" style="fill:var(--muted);opacity:0.5"/><line x1="52" y1="82" x2="102.6" y2="82" style="stroke:var(--muted);stroke-width:1.2;fill:none;opacity:0.5"/><polygon points="108,82 102,85 102,79" style="fill:var(--muted);opacity:0.5"/><text class="tj" x="290" y="56">半径 a の球が</text><text class="tj" x="290" y="78">速度 v で流体中を進む</text><text class="tm" x="290" y="108">流体は球を押し返す。</text><text class="tt" x="290" y="126">その力 = 抵抗力</text></svg>
+      <figcaption>半径 $a$ の球が速度 $\bm{v}$ で流体中を進むと、流体は球の動きを妨げる向きに力(抵抗力)を及ぼします。</figcaption>
+    </figure>
+    <p>以下では、先に基礎(運動方程式、浮力、フックの法則、微分方程式の言葉)を丁寧に復習してから、板書の順に進みます。紫色の枠は「基礎の復習」、黄色の枠は「板書にないが、理解を助けるために私が補った部分」です。</p>
+
+    <!-- ===================== 1 ===================== -->
+    <h2 id="s1">1. 準備:基礎の確認</h2>
+
+    <h3 id="w-newton">1.1 運動方程式と、位置・速度・加速度</h3>
+    <div class="box basic">
+      <div class="label">基礎:ニュートンの運動方程式 <a class="xref-link" href="../basics.html#newton" data-xref>→ 詳しい解説</a></div>
+      <p>質量 $m$ の質点の<b>位置</b> $x(t)$ を時間 $t$ で1回微分したものが<b>速度</b> $\dot x=\dfrac{dx}{dt}$、2回微分したものが<b>加速度</b> $\ddot x=\dfrac{d^2x}{dt^2}$ です(文字の上の点は、時間による微分の記号)。<b>運動方程式</b>は
+      $$m\ddot x=F$$
+      つまり「質量 × 加速度 = 質点にはたらく力の合計」です。力 $F$ が位置 $x$ や速度 $\dot x$ に依存するとき、これは $x(t)$ についての<b>微分方程式</b>になります。3次元では $m\ddot{\bm{r}}=\bm{F}$。力の単位は N(= kg·m/s²)。</p>
+    </div>
+
+    <h3 id="w-buoy">1.2 浮力</h3>
+    <div class="box basic">
+      <div class="label">基礎:浮力(アルキメデスの原理) <a class="xref-link" href="../basics.html#buoy" data-xref>→ 詳しい解説</a></div>
+      <p>密度 $\rho_0$ の流体の中にある、体積 $V$ の物体は、上向きに「<b>押しのけた流体の重さ</b>」$F=\rho_0Vg$ の力(<b>浮力</b>)を受けます。半径 $a$ の球の体積は $V=\tfrac43\pi a^3$ なので $F=\tfrac43\pi a^3\rho_0g$。球の密度を $\rho$ とすると質量は $m=\tfrac43\pi a^3\rho$、重さは $mg=\tfrac43\pi a^3\rho g$。したがって、浮力と重力の合力(上向きを正)は
+      $$-mg+F=-mg\Bigl(1-\frac{\rho_0}{\rho}\Bigr).$$
+      $\rho\gt\rho_0$ なら沈み、$\rho\lt\rho_0$ なら浮きます。</p>
+    </div>
+
+    <h3 id="w-hooke">1.3 フックの法則(ばねの力)</h3>
+    <div class="box basic">
+      <div class="label">基礎:フックの法則 <a class="xref-link" href="../basics.html#hooke" data-xref>→ 詳しい解説</a></div>
+      <p>ばねを自然長から $x$ だけ伸ばす(縮める)と、<b>元に戻そうとする向きに</b>、変位に比例した力 $F=-kx$ がはたらきます($k$ は<b>ばね定数</b>、単位 N/m)。マイナスは「変位と逆向き」を表します。</p>
+    </div>
+
+    <h3 id="w-odeclass">1.4 微分方程式の階数・線形・斉次</h3>
+    <div class="box basic">
+      <div class="label">基礎:微分方程式の分類 <a class="xref-link" href="../basics.html#ode" data-xref>→ 詳しい解説</a></div>
+      <p>未知の関数 $x(t)$ とその導関数の間の関係式を<b>微分方程式</b>といい、現れる最も高い階の導関数が $n$ 階なら<b>$n$ 階</b>の方程式といいます(例:$\ddot x+x=0$ は2階)。</p>
+      <p>$x,\dot x,\ddot x,\dots$ について<b>1次式</b>になっている(各項が、$x$ とその導関数のどれか1つに、定数か $t$ の関数をかけたものだけ)方程式を<b>線形</b>といい、そうでないものを<b>非線形</b>といいます。例:$\ddot x+3\dot x+2x=0$ は線形、$\ddot x+\dot x^2=1$($\dot x^2$ がある)や $\ddot x+\sin x=0$ は非線形。</p>
+      <p>線形で、$x$ や導関数を含まない項(定数や $t$ の関数だけの項)がない方程式を<b>斉次</b>(せいじ、同次)、あるものを<b>非斉次</b>といいます。例:$\ddot x+x=0$ は斉次、$\ddot x+x=-g$ は非斉次。</p>
+    </div>
+
+    <!-- ===================== 2 ===================== -->
+    <h2 id="s2">2. 流体中で球にはたらく抵抗力 <span class="page-tag">板書 p.1</span></h2>
+    <p>板書の最初は、「半径 $a$ の球体の速度ベクトル $\bm{v}$」と書き出して、流体中を動く球にはたらく<b>抵抗力</b>を2種類あげています。</p>
+
+    <h3 id="s2-1">2.1 粘性抵抗</h3>
+    <div class="box def">
+      <div class="label">粘性抵抗(viscosity resistance)</div>
+      <p>$$f_v=6\pi a\eta\,|\bm{v}|$$
+      $\eta$ は流体の<b>粘性係数</b>(「ねばっこさ」、単位 Pa·s)。向きは速度と逆向き。板書には「$f_v\propto\dfrac va\times\pi a^2$ だろう」とあり、この式の見積もりが書かれています。</p>
+    </div>
+    <p>板書の見積もりの意味:球のまわりでは、流体の速度が球の表面(球と同じ速さ $v$)から、遠くの(静止した)流体の速さ0へと変わります。この変化が起こる長さの目安が $a$ なので、速度の変化の割合(ずり)は $\dfrac va$ 程度。ねばりのある流体では、「ずりに比例した力(応力)」$\eta\dfrac va$ が面にはたらき、球の表面積(の目安は $\pi a^2$ 程度)をかけた力が $\sim\eta\dfrac va\cdot a^2=\eta av$ となって、$6\pi a\eta v$ と同じ形になります(数係数 $6\pi$ は、流体力学を丁寧に解くと決まる値で、ストークスの法則といいます)。</p>
+    <div class="box supp">
+      <div class="label">板書にない補足:次元の確認</div>
+      <p>$\eta$ の単位は Pa·s = (N/m²)·s = kg/(m·s)。$a$ は m、$v$ は m/s なので、$6\pi a\eta v$ の単位は m · kg/(m·s) · m/s = kg·m/s² = N。確かに力の単位です。<b>速さに比例</b>する力なので、速度が2倍になれば、抵抗も2倍。</p>
+    </div>
+
+    <h3 id="s2-2">2.2 慣性抵抗</h3>
+    <div class="box def">
+      <div class="label">慣性抵抗(inertial resistance)</div>
+      <p>$$f_I=\frac12C_D\,\pi a^2\rho_0\,|\bm{v}|^2$$
+      $\rho_0$ は流体の密度、$C_D$ は形で決まる無次元の定数(<b>抗力係数</b>)。板書の説明は「単位時間当たりに球が受ける力積が $\pi a^2v\rho_0\cdot(-(0-v))=\pi a^2v^2\rho_0$」。</p>
+    </div>
+    <figure class="fig">
+      <svg viewBox="0 0 640 190" width="640" role="img" aria-label="慣性抵抗の考え方"><path d="M60 70 H330 V150 H60" style="fill:none;stroke:var(--muted);stroke-width:1.4;stroke-dasharray:6 4"/><circle cx="60" cy="110" r="40" style="fill:var(--accent);fill-opacity:.18;stroke:var(--accent);stroke-width:2.4"/><path d="M60 70 A40 40 0 0 1 60 150" style="fill:var(--thm);fill-opacity:.0;stroke:none"/><rect x="100" y="70" width="230" height="80" rx="0" style="fill:var(--thm);fill-opacity:.12;stroke:none"/><line x1="10" y1="110" x2="27.6" y2="110" style="stroke:var(--thm);stroke-width:3;fill:none"/><polygon points="36,110 27,114.4 27,105.6" style="fill:var(--thm)"/><text class="t" x="14" y="98" style="fill:var(--thm);font-size:18px">v</text><circle cx="120" cy="86" r="3.2" style="fill:var(--muted)"/><circle cx="120" cy="110" r="3.2" style="fill:var(--muted)"/><circle cx="120" cy="134" r="3.2" style="fill:var(--muted)"/><circle cx="148" cy="86" r="3.2" style="fill:var(--muted)"/><circle cx="148" cy="110" r="3.2" style="fill:var(--muted)"/><circle cx="148" cy="134" r="3.2" style="fill:var(--muted)"/><circle cx="176" cy="86" r="3.2" style="fill:var(--muted)"/><circle cx="176" cy="110" r="3.2" style="fill:var(--muted)"/><circle cx="176" cy="134" r="3.2" style="fill:var(--muted)"/><circle cx="204" cy="86" r="3.2" style="fill:var(--muted)"/><circle cx="204" cy="110" r="3.2" style="fill:var(--muted)"/><circle cx="204" cy="134" r="3.2" style="fill:var(--muted)"/><circle cx="232" cy="86" r="3.2" style="fill:var(--muted)"/><circle cx="232" cy="110" r="3.2" style="fill:var(--muted)"/><circle cx="232" cy="134" r="3.2" style="fill:var(--muted)"/><circle cx="260" cy="86" r="3.2" style="fill:var(--muted)"/><circle cx="260" cy="110" r="3.2" style="fill:var(--muted)"/><circle cx="260" cy="134" r="3.2" style="fill:var(--muted)"/><circle cx="288" cy="86" r="3.2" style="fill:var(--muted)"/><circle cx="288" cy="110" r="3.2" style="fill:var(--muted)"/><circle cx="288" cy="134" r="3.2" style="fill:var(--muted)"/><circle cx="316" cy="86" r="3.2" style="fill:var(--muted)"/><circle cx="316" cy="110" r="3.2" style="fill:var(--muted)"/><circle cx="316" cy="134" r="3.2" style="fill:var(--muted)"/><line x1="100" y1="62" x2="330" y2="62" style="stroke:var(--ex);stroke-width:1.6"/><text class="tm" x="215" y="54" style="text-anchor:middle;fill:var(--ex)">1 秒間に球が進む長さ v</text><text class="tm" x="60" y="170" style="text-anchor:middle">断面積 πa²</text><text class="tj" x="350" y="70">1 秒間に通る流体の体積 = πa²·v</text><text class="tj" x="350" y="94">質量 = πa²v·ρ₀</text><text class="tm" x="350" y="118">この質量が 0 → v に加速される</text><text class="tt" x="350" y="142">⇒ 球が受ける力 = πa²ρ₀v²</text></svg>
+      <figcaption>慣性抵抗の考え方(板書の円筒の図)。球が進むと、球の前にあった流体(断面積 $\pi a^2$、長さ $v$ の円筒の分)が押しのけられ、0 から $v$ に加速されます。</figcaption>
+    </figure>
+    <p>板書の説明を、ことばで追うと次のとおりです。</p>
+    <ol class="step-list">
+      <li>球は断面積 $\pi a^2$ をもちます。1秒間に球が進む長さは $v$ なので、<b>1秒間に球が通り抜ける流体の体積</b>は $\pi a^2v$、その質量は $\pi a^2v\rho_0$(「粒子の重さ」と板書にあります)。</li>
+      <li>この流体は、最初は止まっていた(速度 0)のが、球に押されて、球と同じ速度 $v$ になる。つまり<b>速度が $0\to v$ に変わる</b>。</li>
+      <li>力 = 運動量の1秒あたりの変化だから、球が流体に与える力は $\pi a^2v\rho_0\cdot(v-0)=\pi a^2\rho_0v^2$。作用・反作用により、同じ大きさの力を、流体が球に(速度と逆向きに)及ぼす。これが慣性抵抗です。</li>
+      <li>実際には、流体の動き方は複雑なので、形で決まる補正を $\tfrac12C_D$ にまとめる(定義として $\tfrac12$ を付けておく)。球では $C_D$ は 0.5 前後。</li>
+    </ol>
+    <p>慣性抵抗は<b>速さの2乗</b>に比例します。粘性抵抗は「流体のねばり」(ゆっくりした運動で重要)、慣性抵抗は「流体の質量(慣性)」(速い運動、空気中などで重要)に由来しています。</p>
+    <div class="box supp">
+      <div class="label">板書にない補足:どちらが効くか(レイノルズ数)</div>
+      <p>2つの抵抗力の比は
+      $$\frac{f_I}{f_v}=\frac{\tfrac12C_D\pi a^2\rho_0v^2}{6\pi a\eta v}=\frac{C_D}{12}\cdot\frac{\rho_0va}{\eta}.$$
+      最後の $\mathrm{Re}=\dfrac{\rho_0va}{\eta}$ を<b>レイノルズ数</b>といいます。$\mathrm{Re}\ll1$(遅い・小さい・ねばっこい)なら粘性抵抗が、$\mathrm{Re}\gg1$(速い・大きい)なら慣性抵抗が支配的です。このノートでは、場面ごとに「どちらか一方だけ」を取り上げています。</p>
+    </div>
+
+    <!-- ===================== 3 ===================== -->
+    <h2 id="s3">3. 運動方程式を立てる <span class="page-tag">板書 p.1</span></h2>
+    <p>板書の見出し「運動方程式」の下に、4つの状況が並んでいます。まず落下の座標を決めます:<b>鉛直上向きに $z$ 軸</b>をとります。</p>
+
+    <h3 id="s3-1">3.1 流体中の落下運動:粘性抵抗のみの場合</h3>
+    <figure class="fig">
+      <svg viewBox="0 0 560 246" width="560" role="img" aria-label="流体中の球にはたらく力"><path d="M60 20 V230 H190 V20" style="fill:none;stroke:var(--text);stroke-width:2.4"/><path d="M60 40 Q80 30 100 40 T140 40 T180 40 L190 40" style="fill:none;stroke:var(--accent);stroke-width:1.6"/><circle cx="125" cy="120" r="20" style="fill:var(--muted);fill-opacity:.35;stroke:var(--muted);stroke-width:2"/><line x1="125" y1="142" x2="125" y2="191.6" style="stroke:var(--thm);stroke-width:3;fill:none"/><polygon points="125,200 120.6,191 129.4,191" style="fill:var(--thm)"/><text class="tt" x="134" y="196" style="fill:var(--thm)">mg(重力)</text><line x1="115" y1="98" x2="115" y2="62.4" style="stroke:var(--ex);stroke-width:3;fill:none"/><polygon points="115,54 119.4,63 110.6,63" style="fill:var(--ex)"/><text class="tt" x="60" y="62" style="fill:var(--ex)">浮力 F</text><line x1="139" y1="98" x2="139" y2="78.4" style="stroke:var(--accent);stroke-width:2.4;fill:none"/><polygon points="139,70 143,79 135,79" style="fill:var(--accent)"/><text class="tt" x="146" y="66" style="fill:var(--accent)">f_v</text><line x1="125" y1="142" x2="125" y2="161.6" style="stroke:var(--muted);stroke-width:1.4;fill:none;opacity:0"/><polygon points="125,168 121.6,161 128.4,161" style="fill:var(--muted);opacity:0"/><line x1="215" y1="230" x2="215" y2="38.4" style="stroke:var(--muted);stroke-width:1.6;fill:none"/><polygon points="215,30 219.4,39 210.6,39" style="fill:var(--muted)"/><text class="tm" x="224" y="40">z(上向き)</text><line x1="100" y1="180" x2="100" y2="197.6" style="stroke:var(--muted);stroke-width:1.8;fill:none"/><polygon points="100,205 96.4,197 103.6,197" style="fill:var(--muted)"/><text class="tm" x="22" y="214" style="text-anchor:start">落下速度 ż &lt; 0</text><text class="ta" x="270" y="70">力の合計(上向きを正)</text><text class="tj" x="270" y="96">重力 −mg</text><text class="tj" x="270" y="118">浮力 +ρ₀(4/3)πa³g</text><text class="tj" x="270" y="140">粘性抵抗 −6πaη ż</text><text class="tm" x="270" y="176">落下中は ż &lt; 0 なので、粘性抵抗は上向き</text><text class="tm" x="270" y="194">(ż の符号によらず「速度と逆向き」)</text></svg>
+      <figcaption>流体中で落下する球にはたらく力。重力 $mg$(下向き)、浮力 $F$(上向き)、粘性抵抗 $f_v$(速度と逆向き)。(板書 p.1 の左側の図を描き直しました。)</figcaption>
+    </figure>
+    <p>球の密度を $\rho$、流体の密度を $\rho_0$、粘性係数を $\eta$ とします。上向きを正として、はたらく力は</p>
+    <ul>
+      <li>重力 $-mg$ 、 浮力 $+\dfrac43\pi a^3\rho_0g$ 、 粘性抵抗 $-6\pi a\eta\,\dot z$ 。</li>
+    </ul>
+    <p>したがって運動方程式は
+    $$m\frac{d^2z}{dt^2}=-mg+\frac43\pi a^3\rho_0g-6\pi a\eta\frac{dz}{dt}.$$
+    ここで $m=\dfrac43\pi a^3\rho$ で両辺を割ると($\dfrac{4}{3}\pi a^3\rho_0g\Big/m=\dfrac{\rho_0}{\rho}g$ になるので)
+    $$\frac{d^2z}{dt^2}=-g\Bigl(1-\frac{\rho_0}{\rho}\Bigr)-\frac{6\pi a\eta}{m}\frac{dz}{dt}\ \Longleftrightarrow\ \boxed{\ddot z+\frac{6\pi a\eta}{m}\dot z=-g\Bigl(1-\frac{\rho_0}{\rho}\Bigr)}$$
+    です。板書の注記:「<b>2階線形非斉次微分方程式</b>」。($\ddot z,\dot z$ について1次式で、右辺に定数 $-g(1-\rho_0/\rho)$ があるので、線形・非斉次。)</p>
+    <div class="box supp">
+      <div class="label">板書にない補足:右辺の意味と、「速度」だけの方程式</div>
+      <p>この式には $z$ そのものは現れず、$\dot z$ と $\ddot z$ だけです。速度 $v=\dot z$ を新しい未知関数にすると、<b>1階</b>の方程式 $\dot v+\dfrac{6\pi a\eta}{m}v=-g\Bigl(1-\dfrac{\rho_0}{\rho}\Bigr)$ になります。加速度が 0 になる(つりあう)速度が<b>終端速度</b>で、
+      $$v_t=-\frac{mg(1-\rho_0/\rho)}{6\pi a\eta}\ (\lt0\ \text{なら下向き}).$$
+      この式から、落下のようすが次回以降で解かれます(第3回の練習問題のビー玉)。</p>
+    </div>
+
+    <h3 id="s3-2">3.2 流体中の落下運動:慣性抵抗のみの場合(沈降と上昇)</h3>
+    <p>板書には「慣性抵抗のみの場合(沈降と上昇)」とあり、丸で囲んだ「沈」(沈降)の場合が書かれています。球が沈むとき($\dot z\lt0$)、慣性抵抗は<b>上向き</b>(板書の枠で囲んだ「+」)なので
+    $$m\frac{d^2z}{dt^2}=-mg\Bigl(1-\frac{\rho_0}{\rho}\Bigr)+\frac12C_D\pi\rho_0a^2\Bigl|\frac{dz}{dt}\Bigr|^2\qquad(\text{マサツに似た}).$$
+    ここで $\mu=\dfrac12C_D\pi\rho_0a^2$ とおいて $m$ で割ると
+    $$\boxed{\ \frac{d^2z}{dt^2}=-g\Bigl(1-\frac{\rho_0}{\rho}\Bigr)+\frac\mu m\Bigl(\frac{dz}{dt}\Bigr)^2\ }$$
+    です。板書は、これを移項して「$\ddot z+\dfrac\mu m(\dot z)^2=-g\Bigl(1-\dfrac{\rho_0}{\rho}\Bigr)$」と書き、注記は「<b>2階非線形</b>」です($\dot z$ の2乗があるので非線形)。</p>
+    <div class="box warn">
+      <div class="label">注意:板書の式の符号</div>
+      <p>板書の1行目は「$m\ddot z=-mg(1-\rho_0/\rho)+\mu\dot z^2$」(沈降で $+\mu\dot z^2$)、2行目の $\ddot z=-g(1-\rho_0/\rho)+\frac\mu m\dot z^2$ も同じ符号です。ところが、最後の行は「$\ddot z+\frac\mu m(\dot z)^2=-g(1-\rho_0/\rho)$」と書かれていて、これを $\ddot z=\cdots$ の形に直すと $-\frac\mu m\dot z^2$ となり、直前の式と $\dot z^2$ の符号が逆になります。<b>正しいのは、直前までの式(沈降で $+\frac{\mu}{m}\dot z^2$)</b>と判断しました。慣性抵抗は沈む球に対して上向きなので、$\ddot z$ に $+\frac\mu m\dot z^2$ が加わるのが正しいからです(符号の誤記。詳しくは最後のメモを見てください)。「$\ddot z$ に非線形な項 $\dot z^2$ がある」という分類(2階非線形)は、符号によらず同じです。</p>
+    </div>
+    <p>上の式で球が<b>上昇</b>するとき($\dot z\gt0$)は、慣性抵抗が下向きになるので、抵抗の項の符号が変わります。まとめて書けば抵抗力は $-\mu|\dot z|\dot z$(速度と逆向きで、大きさ $\mu\dot z^2$)です。</p>
+
+    <h3 id="s3-3">3.3 真空中のばね振り子(調和振動子)</h3>
+    <p>板書:「真空中のばねふりこ(harmonic oscillator =調和振動子)」。
+    $$m\ddot x=-kx\ \Longleftrightarrow\ \boxed{\ddot x+\frac kmx=0}\ \Leftarrow\ \text{二階線形斉次微分方程式}$$
+    ばねの力 $-kx$ だけがはたらく、最もシンプルな振動の方程式です。</p>
+
+    <h3 id="s3-4">3.4 流体中(粘性)のばね振り子</h3>
+    <figure class="fig">
+      <svg viewBox="0 0 640 260" width="640" role="img" aria-label="ばね振り子"><text class="ta" x="10" y="22">(a) 真空中のばね振り子</text><rect x="14" y="44" width="12" height="56" rx="0" style="fill:var(--muted);fill-opacity:.7;stroke:none"/><polyline points="26,72 35.3,62 54,82 72.7,62 91.3,82 110,62 128.7,82 147.3,62 166,82 184.7,62 203.3,82 222,62 240.7,82 250,72" style="fill:none;stroke:var(--muted);stroke-width:2.2"/><circle cx="266" cy="72" r="16" style="fill:var(--surface);stroke:var(--muted);stroke-width:2.4"/><text class="t" x="266" y="77" style="text-anchor:middle">m</text><line x1="26" y1="114" x2="340" y2="114" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><line x1="266" y1="108" x2="266" y2="120" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><text class="t" x="266" y="132" style="text-anchor:middle">x = 0</text><text class="t" x="346" y="118">x</text><line x1="250" y1="72" x2="222.4" y2="72" style="stroke:var(--thm);stroke-width:2.6;fill:none"/><polygon points="214,72 223,68 223,76" style="fill:var(--thm)"/><text class="tt" x="210" y="62" style="text-anchor:end;fill:var(--thm)">−kx</text><text class="ta" x="10" y="138">(b) 流体中(粘性あり)</text><rect x="10" y="152" width="380" height="90" rx="0" style="fill:var(--accent);fill-opacity:.1;stroke:none"/><rect x="14" y="160" width="12" height="56" rx="0" style="fill:var(--muted);fill-opacity:.7;stroke:none"/><polyline points="26,188 35.3,178 54,198 72.7,178 91.3,198 110,178 128.7,198 147.3,178 166,198 184.7,178 203.3,198 222,178 240.7,198 250,188" style="fill:none;stroke:var(--muted);stroke-width:2.2"/><circle cx="266" cy="188" r="16" style="fill:var(--surface);stroke:var(--muted);stroke-width:2.4"/><text class="t" x="266" y="193" style="text-anchor:middle">m</text><line x1="26" y1="230" x2="340" y2="230" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><line x1="266" y1="224" x2="266" y2="236" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><text class="t" x="266" y="248" style="text-anchor:middle">x = 0</text><text class="t" x="346" y="234">x</text><line x1="250" y1="188" x2="222.4" y2="188" style="stroke:var(--thm);stroke-width:2.6;fill:none"/><polygon points="214,188 223,184 223,192" style="fill:var(--thm)"/><text class="tt" x="210" y="178" style="text-anchor:end;fill:var(--thm)">−kx</text><line x1="286" y1="188" x2="313.6" y2="188" style="stroke:var(--accent);stroke-width:2.4;fill:none"/><polygon points="322,188 313,192 313,184" style="fill:var(--accent)"/><text class="tt" x="292" y="178" style="fill:var(--accent)">f_v</text><text class="tj" x="410" y="70" style="font-size:15px">m ẍ = −kx</text><text class="tm" x="410" y="92">→ 単振動(調和振動子)</text><text class="tj" x="410" y="186" style="font-size:15px">m ẍ = −kx − 6πaη ẋ</text><text class="tm" x="410" y="208">→ 減衰振動</text></svg>
+      <figcaption>(a) 真空中のばね振り子。(b) 流体中:ばねの力 $-kx$ に加えて、粘性抵抗 $f_v$ がはたらく(板書 p.1 右下の図を、真空の場合も並べて描き直しました)。</figcaption>
+    </figure>
+    <p>板書:「流体中(粘性)」で、ばねの力と粘性抵抗が同時にはたらきます。
+    $$m\ddot x=-kx-6\pi a\eta\,\dot x\ \Longleftrightarrow\ \boxed{\ddot x+\frac{6\pi a\eta}{m}\dot x+\frac kmx=0}\ \Leftarrow\ \text{線形斉次}$$
+    粘性抵抗は速度 $\dot x$ と逆向きなので、符号は $-6\pi a\eta\dot x$(速度の向きによらない)。「2階」はもちろん板書にある方程式のとおりです。</p>
+
+    <!-- ===================== 4 ===================== -->
+    <h2 id="s4">4. 立てた方程式の分類 <span class="page-tag">板書 p.1</span></h2>
+    <p>板書の各方程式の横に、「2階線形非斉次」「2階非線形」「二階線形斉次」「線形斉次」と書かれていました。ここまでをまとめると、次の表になります(板書の注記に、補足を加えました)。</p>
+    <table class="cmp">
+      <tr><th>状況</th><th>方程式</th><th>階数</th><th>線形?</th><th>斉次?</th></tr>
+      <tr><td>流体中の落下(粘性のみ)</td><td>$\ddot z+\dfrac{6\pi a\eta}{m}\dot z=-g\Bigl(1-\dfrac{\rho_0}{\rho}\Bigr)$</td><td>2階</td><td>線形</td><td><b>非斉次</b>(右辺に定数)</td></tr>
+      <tr><td>流体中の落下(慣性のみ)</td><td>$\ddot z-\dfrac\mu m\dot z^2=-g\Bigl(1-\dfrac{\rho_0}{\rho}\Bigr)$</td><td>2階</td><td><b>非線形</b>($\dot z^2$)</td><td>(線形でないので対象外)</td></tr>
+      <tr><td>真空中のばね振り子</td><td>$\ddot x+\dfrac kmx=0$</td><td>2階</td><td>線形</td><td>斉次</td></tr>
+      <tr><td>流体中のばね振り子</td><td>$\ddot x+\dfrac{6\pi a\eta}{m}\dot x+\dfrac kmx=0$</td><td>2階</td><td>線形</td><td>斉次</td></tr>
+    </table>
+    <p>ポイントは<b>力が速度にどう依存するか</b>です。粘性抵抗 ($\propto\dot x$) は線形、慣性抵抗 ($\propto\dot x^2$) は非線形。ばねの力 ($-kx$) は線形。線形の方程式は<b>重ね合わせ</b>(解どうしの和も解になる)ができ、解き方が確立しています(次回)。非線形の方程式は、一般には解くのが難しくなります。</p>
+    <div class="box supp">
+      <div class="label">板書にない補足:線形性のチェックのしかた</div>
+      <p>方程式を $\mathcal{L}[x]=\text{(右辺)}$ の形で書いたとき、$\mathcal{L}[x_1+x_2]=\mathcal{L}[x_1]+\mathcal{L}[x_2]$、$\mathcal{L}[cx]=c\mathcal{L}[x]$ が成り立てば線形です。たとえば $\mathcal{L}[x]=\ddot x+\dot x^2$ なら $\mathcal{L}[2x]=2\ddot x+4\dot x^2\ne2\mathcal{L}[x]$。非線形です。</p>
+    </div>
+
+    <!-- ===================== 5 ===================== -->
+    <h2 id="s5">5. 具体例で練習(板書にない補足) <span class="page-tag">補足</span></h2>
+    <p>この節は、板書にはない、理解を助けるための練習問題と解答です。</p>
+
+    <div class="box ex">
+      <div class="label">問題 A:終端速度(粘性抵抗のみ)</div>
+      <p>半径 $a=12.5\ \mathrm{mm}$、質量 $m=20.5\ \mathrm{g}$ のビー玉を、はちみつ(粘性係数 $\eta=3.9\ \mathrm{Pa\,s}$、密度 $\rho_0=1.4\ \mathrm{g/cm^3}$)に落とす。重力加速度 $g=9.8\ \mathrm{m/s^2}$ とし、粘性抵抗だけを考えるとき、終端速度を求めよ。</p>
+    </div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>体積 $V=\tfrac43\pi a^3=\tfrac43\pi(1.25\ \mathrm{cm})^3=8.18\ \mathrm{cm^3}$ より、ビー玉の密度 $\rho=m/V=20.5/8.18=2.51\ \mathrm{g/cm^3}$。$1-\rho_0/\rho=1-1.4/2.51=0.441$。粘性抵抗の係数 $k=6\pi a\eta=6\pi\times0.0125\times3.9=0.919\ \mathrm{kg/s}$。加速度 0 の条件から終端速度の大きさは
+      $$v_t=\frac{mg(1-\rho_0/\rho)}{6\pi a\eta}=\frac{0.0205\times9.8\times0.441}{0.919}\approx0.096\ \mathrm{m/s}\ (\text{約 }10\ \mathrm{cm/s}).$$
+      (実際に、この問題は第3回の練習問題として解きます。)</p></div>
+
+    <div class="box ex">
+      <div class="label">問題 B:粘性と慣性のどちらが効くか</div>
+      <p>問題 A の状況で、レイノルズ数 $\mathrm{Re}=\rho_0va/\eta$ を求め、粘性抵抗だけで考えてよいか確かめよ。</p>
+    </div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>$\mathrm{Re}=\dfrac{1400\times0.096\times0.0125}{3.9}\approx0.43$。1 よりやや小さい。2つの抵抗の比は $\dfrac{f_I}{f_v}=\dfrac{C_D}{12}\mathrm{Re}\approx\dfrac{0.5}{12}\times0.43\approx0.02$(2%)なので、慣性抵抗は無視でき、粘性抵抗だけで考えてよい(問題文の設定が妥当)。</p></div>
+
+    <div class="box ex">
+      <div class="label">問題 C:方程式の分類</div>
+      <p>次の方程式は、何階か。線形か。斉次か。(1) $\ddot x+4\dot x+3x=0$ (2) $\ddot x+x^3=0$ (3) $\dot x+2x=\sin t$ (4) $\x^{(3)}+x=0$</p>
+    </div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>(1) 2階、線形、斉次。 (2) 2階、非線形($x^3$)。 (3) 1階、線形、非斉次(右辺 $\sin t$)。 (4) 3階、線形、斉次。</p></div>
+
+    <div class="box ex">
+      <div class="label">問題 D:慣性抵抗の終端速度</div>
+      <p>慣性抵抗のみの沈降の方程式 $\ddot z=-g\Bigl(1-\dfrac{\rho_0}{\rho}\Bigr)+\dfrac\mu m\dot z^2$ で、加速度が 0 になる速さ(終端速度)$V$ を $\mu,m,g,\rho,\rho_0$ で表せ。</p>
+    </div>
+    <div class="box proof"><div class="label">解答</div>
+      <figure class="fig">
+        <svg viewBox="0 0 520 240" width="520" role="img" aria-label="落下速度の時間変化"><line x1="70" y1="190" x2="430" y2="190" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><line x1="70" y1="190" x2="70" y2="50" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><text class="t" x="436" y="195">t</text><text class="t" x="66" y="42" style="text-anchor:middle">−ż / v_t</text><line x1="70" y1="50" x2="430" y2="50" style="stroke:var(--muted);stroke-width:1.1;stroke-dasharray:5 4;fill:none"/><text class="t" x="62" y="54" style="text-anchor:end">1</text><text class="tm" x="428" y="44" style="text-anchor:end">終端速度</text><polyline points="70,190 73,184.3 76,178.8 79,173.5 82,168.5 85,163.7 88,159 91,154.6 94,150.3 97,146.2 100,142.3 103,138.5 106,134.9 109,131.4 112,128.1 115,124.9 118,121.9 121,118.9 124,116.1 127,113.4 130,110.8 133,108.4 136,106 139,103.7 142,101.5 145,99.4 148,97.4 151,95.5 154,93.6 157,91.8 160,90.1 163,88.5 166,86.9 169,85.4 172,84 175,82.6 178,81.2 181,80 184,78.7 187,77.6 190,76.4 193,75.4 196,74.3 199,73.3 202,72.4 205,71.5 208,70.6 211,69.8 214,68.9 217,68.2 220,67.4 223,66.7 226,66 229,65.4 232,64.8 235,64.2 238,63.6 241,63 244,62.5 247,62 250,61.5 253,61 256,60.6 259,60.1 262,59.7 265,59.3 268,58.9 271,58.6 274,58.2 277,57.9 280,57.6 283,57.3 286,57 289,56.7 292,56.4 295,56.2 298,55.9 301,55.7 304,55.4 307,55.2 310,55 313,54.8 316,54.6 319,54.4 322,54.2 325,54.1 328,53.9 331,53.7 334,53.6 337,53.4 340,53.3 343,53.2 346,53 349,52.9 352,52.8 355,52.7 358,52.6 361,52.5 364,52.4 367,52.3 370,52.2 373,52.1 376,52 379,51.9 382,51.8 385,51.8 388,51.7 391,51.6 394,51.6 397,51.5 400,51.4 403,51.4 406,51.3 409,51.3 412,51.2 415,51.2 418,51.1 421,51.1 424,51 427,51 430,50.9" style="fill:none;stroke:var(--accent);stroke-width:3"/><polyline points="70,190 73,184.2 76,178.4 79,172.6 82,166.9 85,161.2 88,155.7 91,150.3 94,145 97,139.8 100,134.8 103,130 106,125.3 109,120.8 112,116.5 115,112.4 118,108.4 121,104.7 124,101.1 127,97.7 130,94.5 133,91.5 136,88.6 139,85.9 142,83.4 145,81 148,78.8 151,76.7 154,74.8 157,72.9 160,71.2 163,69.7 166,68.2 169,66.8 172,65.6 175,64.4 178,63.3 181,62.3 184,61.3 187,60.5 190,59.6 193,58.9 196,58.2 199,57.6 202,57 205,56.4 208,55.9 211,55.5 214,55 217,54.6 220,54.3 223,53.9 226,53.6 229,53.3 232,53.1 235,52.8 238,52.6 241,52.4 244,52.2 247,52 250,51.9 253,51.7 256,51.6 259,51.5 262,51.3 265,51.2 268,51.1 271,51 274,51 277,50.9 280,50.8 283,50.8 286,50.7 289,50.6 292,50.6 295,50.5 298,50.5 301,50.5 304,50.4 307,50.4 310,50.4 313,50.3 316,50.3 319,50.3 322,50.3 325,50.2 328,50.2 331,50.2 334,50.2 337,50.2 340,50.2 343,50.1 346,50.1 349,50.1 352,50.1 355,50.1 358,50.1 361,50.1 364,50.1 367,50.1 370,50.1 373,50.1 376,50.1 379,50.1 382,50 385,50 388,50 391,50 394,50 397,50 400,50 403,50 406,50 409,50 412,50 415,50 418,50 421,50 424,50 427,50 430,50" style="fill:none;stroke:var(--thm);stroke-width:3"/><line x1="142" y1="190" x2="142" y2="196" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><text class="t" x="142" y="210" style="text-anchor:middle">τ</text><text class="tt" x="257.2" y="102.8" style="fill:var(--accent)">粘性抵抗(1 − e^{−t/τ})</text><text class="tt" x="109.6" y="56" style="fill:var(--thm)">慣性抵抗(tanh)</text><text class="tm" x="70" y="230">横軸は適当な時間単位。どちらの場合も、やがて一定の速さ(終端速度)に近づく。</text></svg>
+        <figcaption>落下の速さの時間変化(終端速度で規格化)。粘性抵抗のみ($1-e^{-t/\tau}$)、慣性抵抗のみ($\tanh$)。どちらも終端速度に近づきます。</figcaption>
+      </figure>
+      <p>$\ddot z=0$ とおいて $\dfrac\mu m\dot z^2=g\Bigl(1-\dfrac{\rho_0}{\rho}\Bigr)$。よって $V=|\dot z|=\sqrt{\dfrac{mg(1-\rho_0/\rho)}{\mu}}$。粘性のみの終端速度 $v_t=\dfrac{mg(1-\rho_0/\rho)}{6\pi a\eta}$ が $m$ に<b>比例</b>するのに対し、慣性のみの $V$ は $\sqrt{m}$ に比例します。(速さの時間変化は、粘性のみなら $1-e^{-t/\tau}$、慣性のみなら $\tanh$ の形です。上の図。)</p></div>
+
+    <!-- ===================== 6 ===================== -->
+    <h2 id="s6">6. まとめ(この回で覚えること)</h2>
+    <ul>
+      <li><b>運動方程式</b> $m\ddot{\bm{r}}=\bm{F}$。力を数え上げて足し、左辺の加速度を $\ddot z$ などで書く。</li>
+      <li><b>粘性抵抗</b> $f_v=6\pi a\eta|\bm{v}|$(速さに比例、ストークスの法則)。<b>慣性抵抗</b> $f_I=\tfrac12C_D\pi a^2\rho_0|\bm{v}|^2$(速さの2乗に比例)。どちらも速度と逆向き。粘性は遅く小さい運動、慣性は速く大きい運動で重要。</li>
+      <li><b>流体中の落下</b>(上向きを正):$m\ddot z=-mg+\tfrac43\pi a^3\rho_0g\ -$(抵抗)。重力と浮力で $-mg(1-\rho_0/\rho)$。粘性のみ → 2階線形非斉次、慣性のみ → 2階非線形。</li>
+      <li><b>ばね振り子</b>:真空中 $\ddot x+\frac kmx=0$(2階線形斉次)、粘性のある流体中 $\ddot x+\frac{6\pi a\eta}{m}\dot x+\frac kmx=0$(2階線形斉次)。</li>
+      <li>方程式は、<b>階数</b>・<b>線形/非線形</b>・<b>斉次/非斉次</b>で分類する。線形なら重ね合わせができて、解き方が分かっている(次回)。</li>
+    </ul>
+
+    <!-- ===================== 7 ===================== -->
+    <h2 id="s7">7. この回のノートについてのメモ</h2>
+    <p>板書は手書きの iPad ノート(PDF)で、<b>ページ番号がありません</b>。PDF の順に数えて、このノートの最初のページを p.1 としました。見出しが「3.2 いろいろな運動の運動方程式」から始まっていて、それ以前の内容(3.1 など)は、板書に含まれていません。写真ではなくデジタルの手書きなので、人物は写っていませんが、既定どおり、板書の画像はこのサイトには載せていません(図は描き直しました)。補足として足した部分(黄色の枠)、基礎ページの内容、練習問題と解答は、Claude が書き足したもので、板書にはありません。</p>
+    <ol>
+      <li><b>慣性抵抗の符号(p.1)</b>:沈降の方程式の最後の行 $\ddot z+\frac\mu m(\dot z)^2=-g(1-\frac{\rho_0}{\rho})$ は、その前の行 $\ddot z=-g(1-\frac{\rho_0}{\rho})+\frac\mu m(\dot z)^2$ を移項した結果と符号が合いません。慣性抵抗は沈む球に上向きにはたらくので、前の行が正しく、最後の行は符号の書き間違いと判断しました(分類は変わらず「2階非線形」)。</li>
+      <li><b>図の記号(p.1)</b>:粘性抵抗だけの場合の落下の図の力の記号が、手書きで読み取りにくいものがありました。浮力 $F$、重力 $mg$、(粘性)抵抗 $f_v$ と読み、描き直しました。</li>
+      <li><b>$\eta$ の文字(p.1)</b>:粘性係数の文字は、手書きでは「γ」にも「y」にも見えますが、練習問題に「粘性係数 $\eta$」とあるので $\eta$ と読みました。</li>
+      <li><b>ばね定数と抵抗の係数</b>:板書の p.1 では、ばね定数を $k$、粘性抵抗の係数を $6\pi a\eta$ と書き分けています。後のページ(p.6)では、粘性抵抗の係数 $6\pi a\eta$ を $k$ とおいています。このノートでは、第3回のところでその旨を断ります。</li>
+    </ol>
+
+    <nav class="pager">
+      <span class="disabled">← 前の週</span>
+      <a href="../index.html">一覧へ</a>
+      <a href="week-02.html">次の週 →</a>
+    </nav>
+
+  </main>
+
+  <footer>© Aセメまとめノート</footer>
+</body>
+</html>

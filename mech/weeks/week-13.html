@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>第13回 質点系と剛体 | Aセメまとめノート</title>
+  <link rel="stylesheet" href="../../assets/style.css">
+  <script defer src="../../assets/nav.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],macros:{'\\R':'\\mathbb{R}','\\bm':'\\boldsymbol{#1}','\\dd':'\\mathrm{d}'}});window.__navReady&&window.__navReady()"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="inner">
+      <a class="site-title" href="../../index.html">Aセメまとめノート</a>
+      <span class="links"><a href="../index.html">力学A</a><a href="../basics.html">基礎のまとめ</a><a href="../../calc/index.html">微積</a><a href="../../linalg/index.html">線形代数</a><a href="../../em/index.html">電磁気学</a></span>
+    </div>
+  </header>
+
+  <main class="note">
+    <h1>第13回:質点系と剛体(重心・運動量・角運動量・慣性モーメント)</h1>
+    <div class="meta">力学A(東京大学 教養学部 秋学期)／板書 p.21〜p.24(PDF の順に数えています)／ノートの見出し「剛体」</div>
+
+    <nav class="toc">
+      <div class="toc-title">目次</div>
+      <ol start="0">
+        <li><a href="#s0">この回の全体像</a></li>
+        <li><a href="#s1">準備:基礎の確認</a>
+          <div class="sub">総和記号／作用・反作用の法則／外積／面積分と円環</div></li>
+        <li><a href="#s2">重心の運動</a>(p.21)</li>
+        <li><a href="#s3">質点系の運動量</a>(p.21)</li>
+        <li><a href="#s4">運動エネルギー:重心の運動と相対運動に分ける</a>(p.21–22)</li>
+        <li><a href="#s5">角運動量とモーメント</a>(p.22)</li>
+        <li><a href="#s6">剛体の慣性モーメント(平面内の回転)</a>(p.23)</li>
+        <li><a href="#s7">円板の慣性モーメント</a>(p.23)</li>
+        <li><a href="#s8">カーリング:ストーンの衝突</a>(p.23–24)</li>
+        <li><a href="#s9">具体例で練習</a></li>
+        <li><a href="#s10">まとめ(この回で覚えること)</a></li>
+        <li><a href="#s11">この回のノートについてのメモ</a></li>
+      </ol>
+    </nav>
+
+    <!-- ===================== 0 ===================== -->
+    <h2 id="s0">0. この回の全体像 <span class="page-tag">板書 p.21–24</span></h2>
+    <p>これまでは、1個の質点の運動を調べてきました。この回は、<b>多数の質点の集まり(質点系)</b>、とくに、質点どうしの距離が変わらない<b>剛体</b>の運動を調べます。道具は、これまでと同じ運動方程式ですが、「内力(質点どうしの力)は、作用・反作用の法則で、全部足すと打ち消し合う」ことを使うと、次のように、簡単な法則が出てきます。</p>
+    <ol>
+      <li>重心の運動:$M\ddot{\bm r}_G=\bm F$(外力の和)。全質量が重心に集まって、外力がはたらいたときの運動と同じ。</li>
+      <li>全運動量 $\bm P=M\dot{\bm r}_G$、$\dot{\bm P}=\bm F$。</li>
+      <li>運動エネルギー $=$ (重心の運動エネルギー)+(重心から見た相対運動のエネルギー)。</li>
+      <li>角運動量 $\bm L$ の変化 $=$ 外力のモーメントの和。</li>
+      <li>平面内の剛体の回転:$L_z=I\dot\varphi$($I=\sum m_ir_i^2$ は慣性モーメント)、$I\ddot\varphi=($トルク$)$。円板なら $I=\tfrac12Ma^2$。</li>
+      <li>応用:カーリングのストーンの衝突。</li>
+    </ol>
+    <figure class="fig">
+      <svg viewBox="0 0 600 262" width="600" role="img" aria-label="質点系と重心"><line x1="30" y1="240" x2="61.6" y2="240" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><polygon points="70,240 61,244.4 61,235.6" style="fill:var(--muted)"/><line x1="30" y1="240" x2="30" y2="208.4" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><polygon points="30,200 34.4,209 25.6,209" style="fill:var(--muted)"/><text class="tm" x="26" y="256">原点</text><line x1="30" y1="240" x2="106.2" y2="87.5" style="stroke:var(--accent);stroke-width:1.2;fill:none;opacity:0.5"/><polygon points="110,80 109.9,90 102,86.1" style="fill:var(--accent);opacity:0.5"/><circle cx="110" cy="80" r="7" style="fill:var(--ex)"/><line x1="30" y1="240" x2="142" y2="202.7" style="stroke:var(--accent);stroke-width:1.2;fill:none;opacity:0.5"/><polygon points="150,200 142.9,207 140.1,198.7" style="fill:var(--accent);opacity:0.5"/><circle cx="150" cy="200" r="10" style="fill:var(--accent)"/><line x1="30" y1="240" x2="283" y2="74.6" style="stroke:var(--accent);stroke-width:1.2;fill:none;opacity:0.5"/><polygon points="290,70 284.9,78.6 280.1,71.2" style="fill:var(--accent);opacity:0.5"/><circle cx="290" cy="70" r="6" style="fill:var(--accent)"/><line x1="30" y1="240" x2="311.8" y2="181.7" style="stroke:var(--accent);stroke-width:1.2;fill:none;opacity:0.5"/><polygon points="320,180 312.1,186.1 310.3,177.5" style="fill:var(--accent);opacity:0.5"/><circle cx="320" cy="180" r="9" style="fill:var(--accent)"/><line x1="30" y1="240" x2="222.8" y2="124.3" style="stroke:var(--accent);stroke-width:1.2;fill:none;opacity:0.5"/><polygon points="230,120 224.5,128.4 220,120.9" style="fill:var(--accent);opacity:0.5"/><circle cx="230" cy="120" r="8" style="fill:var(--accent)"/><text class="tm" x="96" y="68">m_i, r_i</text><text class="tm" x="332" y="184">m_j</text><line x1="30" y1="240" x2="210.8" y2="143" style="stroke:var(--thm);stroke-width:2.6;fill:none"/><polygon points="218.3,139 212.4,147.1 208.2,139.4" style="fill:var(--thm)"/><circle cx="218.3" cy="139" r="6" style="fill:var(--thm)"/><text class="tt" x="228.3" y="131" style="fill:var(--thm)">重心 r_G</text><line x1="218.3" y1="139" x2="117.4" y2="84" style="stroke:var(--ex);stroke-width:2;fill:none"/><polygon points="110,80 120,80.4 115.8,88.2" style="fill:var(--ex)"/><text class="tt" x="150.1" y="101.5" style="fill:var(--ex)">r_i'</text><line x1="110" y1="80" x2="92.5" y2="65.4" style="stroke:var(--thm);stroke-width:2.4;fill:none"/><polygon points="86,60 95.7,62.4 90.1,69.1" style="fill:var(--thm)"/><text class="tm" x="80" y="54" style="text-anchor:end;fill:var(--thm)">F_i(外力)</text><line x1="150" y1="200" x2="320" y2="180" style="stroke:var(--muted);stroke-width:1.1;stroke-dasharray:5 4;fill:none"/><text class="tm" x="235" y="208" style="text-anchor:middle">F_ij = −F_ji(内力)</text><text class="tj" x="390" y="70" style="font-size:15px">r_G = (1/M) Σ m_i r_i</text><text class="tt" x="390" y="98">r_i = r_G + r_i'</text><text class="tt" x="390" y="124">Σ m_i r_i' = 0</text><text class="tm" x="390" y="160">内力は全部足すと消える</text><text class="tt" x="390" y="180" style="fill:var(--thm)">⇒ M r̈_G = (外力の和)</text></svg>
+      <figcaption>質点系:各質点の位置 $\bm r_i$、重心 $\bm r_G$、重心から見た位置 $\bm r_i'=\bm r_i-\bm r_G$。外力 $\bm F_i$ と、質点どうしの力 $\bm F_{ij}$(内力)。</figcaption>
+    </figure>
+
+    <!-- ===================== 1 ===================== -->
+    <h2 id="s1">1. 準備:基礎の確認</h2>
+
+    <h3 id="w-sigma13">1.1 総和記号の入れ替え</h3>
+    <div class="box basic">
+      <div class="label">基礎:二重和の添え字の入れ替え <a class="xref-link" href="../../em/basics.html#sigma" data-xref>→ 電磁気学の基礎(総和記号)</a></div>
+      <p>二重和 $\sum_{i}\sum_{j}A_{ij}$ は、$i,j$ の名前を取り換えても同じ値:$\sum_i\sum_jA_{ij}=\sum_j\sum_iA_{ji}$(足す順序が違うだけで、足すものは同じ)。この性質を、次の 2.・5. で使う。</p>
+    </div>
+
+    <h3 id="w-action">1.2 作用・反作用の法則</h3>
+    <div class="box basic">
+      <div class="label">基礎:質点どうしの力 $\bm F_{ij}$ <a class="xref-link" href="../basics.html#newton" data-xref>→ 詳しい解説</a></div>
+      <p>質点 $j$ が質点 $i$ に及ぼす力を $\bm F_{ij}$ と書く。<b>作用・反作用の法則</b>:$\bm F_{ji}=-\bm F_{ij}$(大きさが等しく、向きが逆)。さらに、力は2つの質点を結ぶ直線の向きにはたらく($\bm F_{ij}\parallel\bm r_i-\bm r_j$)。自分自身には力がはたらかない($\bm F_{ii}=\bm 0$)。</p>
+    </div>
+
+    <h3 id="w-cross13">1.3 外積の性質</h3>
+    <div class="box basic">
+      <div class="label">基礎:外積の性質 <a class="xref-link" href="../basics.html#cross" data-xref>→ 詳しい解説</a></div>
+      <p>$\bm a\times\bm b=-\bm b\times\bm a$。$\bm a\parallel\bm b$ なら $\bm a\times\bm b=\bm 0$($\bm a\times\bm a=\bm 0$)。積の微分:$\dfrac d{dt}(\bm a\times\bm b)=\dot{\bm a}\times\bm b+\bm a\times\dot{\bm b}$。</p>
+    </div>
+
+    <h3 id="w-ring">1.4 面積を輪切りにして積分する</h3>
+    <div class="box basic">
+      <div class="label">基礎:円板を、細い円環に分ける <a class="xref-link" href="../basics.html#inertia" data-xref>→ 詳しい解説</a></div>
+      <p>半径 $r$ から $r+dr$ の細い円環の面積は、(円周 $2\pi r$)×(幅 $dr$)$=2\pi r\,dr$。この円環の質量は、面積あたりの質量(面密度)$\sigma$ をかけて $2\pi r\sigma\,dr$。</p>
+    </div>
+
+    <!-- ===================== 2 ===================== -->
+    <h2 id="s2">2. 重心の運動 <span class="page-tag">板書 p.21</span></h2>
+    <p>板書:「$N$ 個の質点 $m_i$($i=1,\dots,N$)、位置ベクトル $\bm r_i$。
+    $$m_i\ddot{\bm r}_i=\bm F_i+\sum_{j=1}^N\bm F_{ij}$$
+    ($\bm F_i$:<b>外力</b>、$\sum\bm F_{ij}$:<b>相互作用(内力)</b>)。」</p>
+    <p>全部の $i$ について足すと(板書の①):
+    $$\sum_im_i\ddot{\bm r}_i=\sum_i\bm F_i+\sum_{i=1}^N\sum_{j=1}^N\bm F_{ij}\qquad\cdots①$$
+    最後の二重和は、$\bm F_{ij}$ と $\bm F_{ji}$ が打ち消し合うので <b>0</b>(作用・反作用)。確かめ:二重和を $S$ とおくと、添え字を入れ替えて $S=\sum_j\sum_i\bm F_{ji}=-\sum_j\sum_i\bm F_{ij}=-S$。よって $S=0$。</p>
+    <p><b>重心</b>の位置を
+    $$\bm r_G=\frac1{\sum m_i}\sum m_i\bm r_i=\frac1M\sum m_i\bm r_i\qquad(M=\sum m_i:\text{総質量})$$
+    と定義する。①の左辺は、$M\cdot\dfrac1M\sum m_i\ddot{\bm r}_i=M\ddot{\bm r}_G$。したがって(板書の枠):
+    $$\boxed{M\ddot{\bm r}_G=\bm F}\qquad\Bigl(\bm F=\sum_i\bm F_i:\text{外力の和}\Bigr).$$
+    <b>よって、重心の運動は、全質点の集まった重心に、全外力が作用したときの運動</b>(板書の下線)。</p>
+    <p>たとえば、投げられたボールが回転しながら飛んでも、その重心は、放物線を描きます。爆発した花火の破片も、(空気抵抗を無視すれば)全体の重心は、はじめの放物線を進み続けます。</p>
+
+    <!-- ===================== 3 ===================== -->
+    <h2 id="s3">3. 質点系の運動量 <span class="page-tag">板書 p.21</span></h2>
+    <p>板書:$\bm r_i=\bm r_G+\bm r_i'$ と書く(重心から見た位置 $\bm r_i'$)。全運動量
+    $$\bm P=\sum\bm p_i=\sum m_i\dot{\bm r}_i=\sum m_i(\dot{\bm r}_G+\dot{\bm r}_i').$$
+    ここで、$M\bm r_G=\sum m_i\bm r_i=\sum m_i(\bm r_G+\bm r_i')=M\bm r_G+\sum m_i\bm r_i'$ より、$\boxed{\sum m_i\bm r_i'=\bm 0}$。(重心から見た位置の、質量で重みをつけた平均は 0。重心の定義そのもの。)両辺を時間で微分して $\sum m_i\dot{\bm r}_i'=\bm 0$。よって
+    $$\bm P=\sum m_i\dot{\bm r}_G=M\dot{\bm r}_G,\qquad\boxed{\dot{\bm P}=\bm F}.$$
+    <b>運動量の時間変化は、外力の和に等しい。</b>外力がなければ、$\bm P$ は保存します(運動量保存則)。</p>
+
+    <!-- ===================== 4 ===================== -->
+    <h2 id="s4">4. 運動エネルギー:重心の運動と相対運動に分ける <span class="page-tag">板書 p.21–22</span></h2>
+    <p>板書:
+    $$T=\sum\tfrac12m_i(\dot{\bm r}_i)^2=\tfrac12\sum m_i(\dot{\bm r}_G+\dot{\bm r}_i')^2=\tfrac12\sum m_i\bigl((\dot{\bm r}_G)^2+\dot{\bm r}_G\cdot\dot{\bm r}_i'+(\dot{\bm r}_i')^2\bigr).$$
+    ($(\bm a+\bm b)^2=\bm a\cdot\bm a+2\bm a\cdot\bm b+\bm b\cdot\bm b$ ですから、真ん中の項は、本当は $2\dot{\bm r}_G\cdot\dot{\bm r}_i'$。メモ参照。)</p>
+    <p>真ん中の項の和は、$\sum m_i\,2\dot{\bm r}_G\cdot\dot{\bm r}_i'=2\dot{\bm r}_G\cdot\sum m_i\dot{\bm r}_i'=0$($\sum m_i\dot{\bm r}_i'=\bm 0$、前節)。よって(板書 p.22):
+    $$T=\tfrac12M(\dot{\bm r}_G)^2+\tfrac12\sum m_i(\dot{\bm r}_i')^2.$$
+    <b>全体の運動エネルギーは、重心の運動エネルギーと、相対運動エネルギーの和に等しい。</b></p>
+    <div class="box supp">
+      <div class="label">板書にない補足:転がる円板の運動エネルギー</div>
+      <p>半径 $a$、質量 $M$ の円板が、滑らずに速さ $v$ で転がっている。重心の運動エネルギー $\tfrac12Mv^2$。重心まわりの回転の運動エネルギー($\dot\varphi=v/a$、$I=\tfrac12Ma^2$ として $\tfrac12I\dot\varphi^2$)は $\tfrac12\cdot\tfrac12Ma^2\cdot\dfrac{v^2}{a^2}=\tfrac14Mv^2$。合計 $\tfrac34Mv^2$。(すべらせて、同じ速さで平行移動するだけのときの $\tfrac12Mv^2$ より、回転の分、大きい。)</p>
+    </div>
+
+    <!-- ===================== 5 ===================== -->
+    <h2 id="s5">5. 角運動量とモーメント <span class="page-tag">板書 p.22</span></h2>
+    <p>板書:角運動量 $\bm L=\sum\bm r_i\times m_i\dot{\bm r}_i$。時間で微分すると、
+    $$\dot{\bm L}=\sum\dot{\bm r}_i\times m_i\dot{\bm r}_i+\sum\bm r_i\times m_i\ddot{\bm r}_i.$$
+    第1項は、同じベクトルどうしの外積だから <b>0</b>(板書の「0」)。第2項に運動方程式を代入して、
+    $$\dot{\bm L}=\sum\bm r_i\times\Bigl(\bm F_i+\sum_j\bm F_{ij}\Bigr)=\sum\bm r_i\times\bm F_i+\sum_i\sum_j\bm r_i\times\bm F_{ij}.$$
+    最後の二重和(板書で下線)が 0 になることを示します。</p>
+    <ol class="step-list">
+      <li>$S=\sum_i\sum_j\bm r_i\times\bm F_{ij}$ とおく。添え字 $i,j$ を入れ替えると $S=\sum_j\sum_i\bm r_j\times\bm F_{ji}$。(板書の最初の2行)</li>
+      <li>作用・反作用 $\bm F_{ji}=-\bm F_{ij}$ より $S=-\sum_i\sum_j\bm r_j\times\bm F_{ij}$。(板書の「$\therefore$」の行)</li>
+      <li>$S$ と、この式を足して $2S$ を作ると、$S+S=\sum_i\sum_j(\bm r_i-\bm r_j)\times\bm F_{ij}$。(板書の「足して」はこの2つの式を足している。板書の「$(\bm r_i+\bm r_j)$」の行は、別の確認、メモ参照。)</li>
+      <li>内力は、2つの質点を結ぶ直線の向きだから、$\bm F_{ij}\parallel\bm r_i-\bm r_j$。<b>平行なベクトルの外積は 0</b>(板書の「並行の外積」)。よって $2S=0$、$S=0$。</li>
+    </ol>
+    <p>したがって(板書):
+    $$\boxed{\dot{\bm L}=\sum\bm r_i\times\bm F_i}\qquad(\text{角運動量の時間変化})=(\text{外力のモーメントの和}).$$
+    また、(重心まわりの角運動量の時間変化)$=$(重心まわりの外力のモーメントの和)。(原点を重心にとっても同じ形の法則が成り立つ、ということ。)</p>
+    <div class="box supp">
+      <div class="label">板書にない補足:「モーメント」とは</div>
+      <p>$\bm r\times\bm F$ を、力 $\bm F$ の、原点まわりの<b>モーメント</b>(トルク、力のモーメント)という。大きさは、$|\bm r||\bm F|\sin\theta=$(力の大きさ)×(腕の長さ)。扉を、蝶番(ちょうつがい)から遠いところで押すほど、よく開くのと同じ。内力のモーメントが、全部足すと打ち消し合うのは、2つの質点にはたらく、大きさが同じで逆向きの力が、<b>同一直線上</b>にあるから(偶力にならない)。</p>
+    </div>
+
+    <!-- ===================== 6 ===================== -->
+    <h2 id="s6">6. 剛体の慣性モーメント(平面内の回転) <span class="page-tag">板書 p.23</span></h2>
+    <p>板書:「2次元の質点系の運動(重心から見ているとする)。$\bm L=\sum(\bm r_i\times m_i\dot{\bm r}_i)$、$\bm r_i=(r_i\cos\varphi_i,\ r_i\sin\varphi_i,\ 0)$ とする。$\dot{\bm r}_i=(\dot r_i\cos\varphi_i-r_i\sin\varphi_i\,\dot\varphi_i,\ \dot r_i\sin\varphi_i+r_i\cos\varphi_i\,\dot\varphi_i,\ 0)$。」</p>
+    <p>外積の $z$ 成分は、$(\bm r_i\times\dot{\bm r}_i)_z=x\dot y-y\dot x$:
+    $$r\cos\varphi(\dot r\sin\varphi+r\dot\varphi\cos\varphi)-r\sin\varphi(\dot r\cos\varphi-r\dot\varphi\sin\varphi)=r^2\dot\varphi(\cos^2\varphi+\sin^2\varphi)=r^2\dot\varphi.$$
+    よって(板書)
+    $$L_z=\sum m_ir_i^2\dot\varphi_i.$$</p>
+    <div class="box def">
+      <div class="label">剛体</div>
+      <p><b>剛体</b>:任意の2点間の距離が変化しない物体。(形が変わらないので、回転するときは、全体が、まとまって回る。)</p>
+    </div>
+    <p>剛体を重心から見ると、各質点の距離 $r_i$ は変わらず、角度 $\varphi_i$ が全体で同じ速さで変わる。<b>$\dot\varphi_i$ は $i$ によらない</b>(板書)。よって
+    $$L_z=\dot\varphi\sum m_ir_i^2=I\dot\varphi,\qquad I=\sum m_ir_i^2\ (\text{時間変化しない}).$$
+    $\dot L_z=I\ddot\varphi$。$I$ を<b>慣性モーメント</b>といいます。前節の $\dot{\bm L}=$(モーメントの和)と合わせて、
+    $$I\ddot\varphi=N_z\qquad(N_z:\text{外力のモーメントの }z\text{ 成分})$$
+    は、並進の $m\ddot x=F$ とそっくりの、回転の運動方程式です($m\leftrightarrow I$、$x\leftrightarrow\varphi$、$F\leftrightarrow N$)。</p>
+
+    <!-- ===================== 7 ===================== -->
+    <h2 id="s7">7. 円板の慣性モーメント <span class="page-tag">板書 p.23</span></h2>
+    <p>板書:「円板の慣性モーメント。面積当りの質量 $\sigma$。
+    $$\int_0^a2\pi r\,dr\,\sigma\cdot r^2=2\pi\sigma\int_0^ar^3dr=\frac\pi2\sigma a^4,\qquad\pi a^2\sigma=M\ \Rightarrow\ \tfrac12Ma^2\cdots I_{\text{円板}}.$$」</p>
+    <ol class="step-list">
+      <li>半径 $r$ の円環(幅 $dr$)の質量は $2\pi r\,dr\,\sigma$。この円環の、中心からの距離は、全部 $r$ だから、慣性モーメントへの寄与は $(2\pi r\,dr\,\sigma)\cdot r^2$。</li>
+      <li>中心から $a$ まで足し合わせる(積分)と $2\pi\sigma\int_0^ar^3dr=2\pi\sigma\cdot\dfrac{a^4}4=\dfrac\pi2\sigma a^4$。</li>
+      <li>全質量 $M=\pi a^2\sigma$ だから、$\sigma=\dfrac M{\pi a^2}$。代入して $I=\dfrac\pi2\cdot\dfrac M{\pi a^2}a^4=\dfrac12Ma^2$。</li>
+    </ol>
+    <figure class="fig">
+      <svg viewBox="0 0 560 262" width="560" role="img" aria-label="円板の慣性モーメントの計算"><circle cx="150" cy="130" r="100" style="fill:var(--accent);fill-opacity:.1;stroke:var(--accent);stroke-width:2.4"/><path d="M76 130 A74 74 0 1 1 224 130 A74 74 0 1 1 76 130 Z M90 130 A60 60 0 1 0 210 130 A60 60 0 1 0 90 130 Z" style="fill:var(--thm);fill-opacity:.55;stroke:var(--thm);stroke-width:1.2;fill-rule:evenodd"/><line x1="150" y1="130" x2="201.6" y2="130" style="stroke:var(--text);stroke-width:1.8;fill:none"/><polygon points="210,130 201,134.4 201,125.6" style="fill:var(--text)"/><text class="tt" x="180" y="122" style="text-anchor:middle">r</text><circle cx="150" cy="130" r="3.4" style="fill:var(--text)"/><line x1="250" y1="100" x2="260" y2="100" style="stroke:var(--muted);stroke-width:1;fill:none"/><text class="tm" x="162" y="252">半径 a、面密度 σ(質量 M = πa²σ)</text><text class="tt" x="320" y="70" style="fill:var(--thm)">円環(幅 dr)の質量 = 2πr dr · σ</text><text class="tt" x="320" y="98">寄与:(2πr dr σ) · r²</text><text class="tj" x="320" y="130" style="font-size:15px">I = 2πσ ∫₀ᵃ r³ dr = (π/2) σ a⁴</text><text class="tj" x="320" y="160" style="font-size:17px;fill:var(--ex)">= (1/2) M a²</text></svg>
+      <figcaption>円板を、半径 $r$、幅 $dr$ の細い円環に分ける。円環の面積は $2\pi r\,dr$。中心からの距離が大きい円環ほど、$r^2$ の重みで効く。</figcaption>
+    </figure>
+    <div class="box supp">
+      <div class="label">板書にない補足:ほかの形の慣性モーメント</div>
+      <p>回転軸が、図形の中心を通り、図形に垂直なとき:細い輪(半径 $a$、質量 $M$)は $Ma^2$(質量が全部、距離 $a$ にある)、円板は $\tfrac12Ma^2$(質量が中心に近いほど小さくなる)、一様な球は $\tfrac25Ma^2$、細い棒(長さ $\ell$、中心まわり)は $\tfrac1{12}M\ell^2$。同じ質量でも、質量が軸から遠いほど回しにくい(慣性モーメントが大きい)。</p>
+    </div>
+
+    <!-- ===================== 8 ===================== -->
+    <h2 id="s8">8. カーリング:ストーンの衝突 <span class="page-tag">板書 p.23–24</span></h2>
+    <p>板書の設定:氷の上の、同じ質量 $m$、半径 $a$ の円板形のストーン2個。ストーン1が、回転しながら、止まっているストーン2に衝突する。座標軸:$x$ は、衝突の瞬間の、2つのストーンの中心を結ぶ向き(1 → 2)、$y$ はそれに垂直。</p>
+    <table class="cmp">
+      <tr><th></th><th>衝突前</th><th>衝突後</th></tr>
+      <tr><td>1 の速度ベクトル</td><td>$(u_0,v_0)$</td><td>$(u_1,v_1)$</td></tr>
+      <tr><td>2 の速度ベクトル</td><td>$(0,0)$</td><td>$(u_2,v_2)$</td></tr>
+      <tr><td>1 の角速度</td><td>$\omega_0$</td><td>$\omega_1$</td></tr>
+      <tr><td>2 の角速度</td><td>$0$</td><td>$\omega_2$</td></tr>
+    </table>
+    <figure class="fig">
+      <svg viewBox="0 0 600 262" width="600" role="img" aria-label="カーリングのストーンの衝突"><circle cx="130" cy="130" r="56" style="fill:var(--accent);fill-opacity:.14;stroke:var(--accent);stroke-width:2.4"/><circle cx="244" cy="130" r="56" style="fill:var(--thm);fill-opacity:.14;stroke:var(--thm);stroke-width:2.4"/><text class="tj" x="130" y="134" style="text-anchor:middle">1</text><text class="tj" x="244" y="134" style="text-anchor:middle">2</text><line x1="110" y1="54" x2="151.6" y2="54" style="stroke:var(--accent);stroke-width:1.2;fill:none;opacity:0"/><polygon points="160,54 151,58.4 151,49.6" style="fill:var(--accent);opacity:0"/><line x1="60" y1="134" x2="91.6" y2="134" style="stroke:var(--accent);stroke-width:2.6;fill:none"/><polygon points="100,134 91,138.4 91,129.6" style="fill:var(--accent)"/><text class="tm" x="60" y="120" style="text-anchor:middle">(u₀, v₀)</text><path d="M102 110 A30 30 0 1 1 116 154" style="fill:none;stroke:var(--accent);stroke-width:1.8"/><text class="tt" x="100" y="82" style="text-anchor:middle;fill:var(--accent)">ω</text><circle cx="187" cy="130" r="4.4" style="fill:var(--text)"/><text class="tm" x="187" y="116" style="text-anchor:middle">接触点</text><line x1="187" y1="132" x2="187" y2="165.6" style="stroke:var(--ex);stroke-width:2.4;fill:none"/><polygon points="187,174 182.6,165 191.4,165" style="fill:var(--ex)"/><text class="tm" x="66" y="232" style="text-anchor:start">2 が 1 に及ぼす摩擦 −F(y 向き、矢印)</text><line x1="20" y1="244" x2="49.6" y2="244" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><polygon points="58,244 49,248.4 49,239.6" style="fill:var(--muted)"/><line x1="20" y1="244" x2="20" y2="214.4" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><polygon points="20,206 24.4,215 15.6,215" style="fill:var(--muted)"/><text class="t" x="62" y="248">x</text><text class="t" x="17" y="202">y</text><text class="tm" x="310" y="52">衝突前:1 は (u₀, v₀)、角速度 ω₀。2 は静止</text><text class="tt" x="310" y="78">運動量保存:u₀ = u₁ + u₂、v₀ = v₁ + v₂</text><text class="tt" x="310" y="100">反発係数:e = (u₂ − u₁)/u₀</text><text class="tt" x="310" y="122">角運動量:I(ω₁ − ω₀) = −Fa、 Iω₂ = −Fa</text><text class="tt" x="310" y="144">滑らない:v₂ − aω₂ = v₁ + aω₁</text><text class="tm" x="310" y="178">R = I/(ma²) = 1/2 のとき</text><text class="tt" x="310" y="202" style="fill:var(--thm)">v₂ = R(v₀ + aω₀) / (2(1 + R))</text><text class="tt" x="310" y="224" style="fill:var(--accent)">v₁ = ((2 + R)v₀ − R aω₀) / (2(1 + R))</text></svg>
+      <figcaption>ストーン1(左、回転 $\omega_0$)が、止まっているストーン2に衝突する。接触点で、法線方向($x$)には押し合い、接線方向($y$)には、摩擦力 $F$ がはたらく。</figcaption>
+    </figure>
+    <p>板書の連立方程式:</p>
+    <ul>
+      <li><b>運動量保存</b>:$x$ 方向 $mu_0=mu_1+mu_2$、$y$ 方向 $mv_0=mv_1+mv_2$。</li>
+      <li><b>反発係数</b> $e=\dfrac{u_2-u_1}{u_0}$。</li>
+      <li><b>角運動量の変化</b>:1 は $I(\omega_1-\omega_0)=-Fa$、2 は $I\omega_2=-Fa$。</li>
+      <li><b>滑らない</b>(接触点で、2つのストーンの表面の速度が同じ):$v_2-a\omega_2=v_1+a\omega_1$。</li>
+    </ul>
+    <p>ここで $F$ は、接触点で、2つのストーンが、$y$ 方向に及ぼし合う摩擦力(の、力積に相当する量)です。ストーン2にはたらく $y$ 方向の力が $+F$、ストーン1にはたらく力が $-F$。接触点は、1 から見て $+a$ の位置、2 から見て $-a$ の位置にあるので、モーメント($z$ 成分)は、どちらも $-Fa$ になります(板書の2式)。</p>
+    <p><b>解く。</b>運動量(の変化)の式 $m(v_1-v_0)=-F$、$mv_2=F$ から $F=mv_2$、$v_1=v_0-v_2$。$R=\dfrac I{ma^2}$ とおくと、角運動量の2式から
+    $$\omega_2=-\frac{Fa}I=-\frac{v_2}{aR},\qquad\omega_1=\omega_0-\frac{Fa}I=\omega_0-\frac{v_2}{aR}.$$
+    滑らない条件 $v_2-a\omega_2=v_1+a\omega_1$ に代入すると、
+    $$v_2+\frac{v_2}R=(v_0-v_2)+a\omega_0-\frac{v_2}R\ \Longrightarrow\ 2v_2\Bigl(1+\frac1R\Bigr)=v_0+a\omega_0.$$
+    よって、板書の結果:
+    $$\boxed{v_2=\frac{R(v_0+\omega a)}{2(1+R)},\qquad v_1=v_0-v_2=\frac{(2+R)v_0-R\omega a}{2(1+R)}}\qquad(\omega=\omega_0).$$
+    板書の最後の「$\omega_1$、$\omega_2$」は空欄でした。続きを、同じ式から求めます:
+    $$\omega_2=-\frac{v_0+a\omega_0}{2a(1+R)},\qquad\omega_1=\frac{(1+2R)a\omega_0-v_0}{2a(1+R)}.$$
+    円板では $R=\dfrac I{ma^2}=\dfrac12$ だから、
+    $$v_1=\frac{5v_0-a\omega_0}6,\quad v_2=\frac{v_0+a\omega_0}6,\quad\omega_1=\frac{2a\omega_0-v_0}{3a},\quad\omega_2=-\frac{v_0+a\omega_0}{3a}.$$
+    $x$ 方向は、$u_1=\dfrac{1-e}2u_0$、$u_2=\dfrac{1+e}2u_0$(運動量保存と反発係数から)。</p>
+    <p>板書の注記「$\omega$ によっては負になりうる」:$v_1$ は、$\omega a\gt(2+R)v_0/R$(円板では $\omega a\gt5v_0$)のとき負になります。つまり、<b>強く回転したストーンは、衝突で、ストーン2に、横向きの速度を与えて、自分は(横向きには)逆向きに跳ね返る</b>ことがあります。ストーン2が、回転の向きと反対に回りだす($\omega_2\lt0$)点は、2つの歯車が噛み合う様子と同じです。</p>
+
+    <!-- ===================== 9 ===================== -->
+    <h2 id="s9">9. 具体例で練習(板書にない補足) <span class="page-tag">補足</span></h2>
+    <div class="box ex">
+      <div class="label">問題 A:重心の位置</div>
+      <p>質量 $1\ \mathrm{kg}$ の質点が $x=0$、質量 $3\ \mathrm{kg}$ の質点が $x=4\ \mathrm m$ にある。重心の位置、それぞれの、重心から見た位置 $r_i'$ を求め、$\sum m_ir_i'=0$ を確かめよ。</p>
+    </div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>$x_G=\dfrac{1\cdot0+3\cdot4}{1+3}=3\ \mathrm m$。$r_1'=-3$、$r_2'=+1$。$\sum m_ir_i'=1\cdot(-3)+3\cdot1=0$ ✓。</p></div>
+
+    <div class="box ex">
+      <div class="label">問題 B:氷上のスケーターの分裂</div>
+      <p>なめらかな氷の上で、静止している質量 $60\ \mathrm{kg}$ と $40\ \mathrm{kg}$ の2人が、互いに押し合って離れた。$60\ \mathrm{kg}$ の人が、$2.0\ \mathrm{m/s}$ で後退した。もう1人の速さは。また、2人の重心の運動は。</p>
+    </div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>外力(重力と垂直抗力)は鉛直で釣り合い、水平方向の外力は 0 だから、水平方向の運動量保存:$60\times2.0=40v$、$v=3.0\ \mathrm{m/s}$(逆向き)。重心は、はじめ静止していたので、$\dot{\bm P}=\bm 0$ より、静止したまま。</p></div>
+
+    <div class="box ex">
+      <div class="label">問題 C:2つの円板の慣性モーメントの比</div>
+      <p>同じ質量 $M$、同じ半径 $a$ の、円板と、細い輪(リング)がある。斜面を、すべらずに転がり落ちるとき、どちらが先に降りるか。</p>
+    </div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>高さ $h$ だけ降りたときのエネルギー保存:$Mgh=\tfrac12Mv^2+\tfrac12I\dot\varphi^2=\tfrac12Mv^2\Bigl(1+\dfrac I{Ma^2}\Bigr)$($\dot\varphi=v/a$)。円板($I/Ma^2=\tfrac12$):$v^2=\tfrac43gh$。輪($I/Ma^2=1$):$v^2=gh$。円板のほうが、速い(回転に回るエネルギーが少ない)ので、先に降りる。</p></div>
+
+    <div class="box ex">
+      <div class="label">問題 D:回転のないストーンの正面衝突</div>
+      <p>カーリングで、$\omega_0=0$、$v_0=0$(まっすぐ当てる)、$e=0.8$ のとき、衝突後の $u_1,u_2$ と、$\omega_1,\omega_2,v_1,v_2$ を求めよ。</p>
+    </div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>$u_1=\dfrac{1-0.8}2u_0=0.1u_0$、$u_2=0.9u_0$。$v_0=0$、$\omega_0=0$ のとき、$v_1=v_2=\omega_1=\omega_2=0$:接線方向の力は生じず、まっすぐ当たるだけ。ストーン1も、わずかに前へ進む(0.1)。</p></div>
+
+    <div class="box ex">
+      <div class="label">問題 E:接触点がずれる場合(衝突で、横に飛ぶ)</div>
+      <p>$R=\tfrac12$、$v_0=1.2\ \mathrm{m/s}$、$a\omega_0=0.6\ \mathrm{m/s}$($a=0.14\ \mathrm m$ なら $\omega_0\approx4.3\ \mathrm{rad/s}$)のとき、$v_1,v_2,a\omega_1,a\omega_2$ を求めよ。</p>
+    </div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>$v_2=\dfrac{v_0+a\omega_0}6=0.30$、$v_1=v_0-v_2=0.90$($\dfrac{5\cdot1.2-0.6}6=0.90$ ✓)。$a\omega_2=-\dfrac{v_0+a\omega_0}3=-0.60$、$a\omega_1=\dfrac{2a\omega_0-v_0}3=0$。滑らない条件の確認:$v_2-a\omega_2=0.30+0.60=0.90$、$v_1+a\omega_1=0.90+0=0.90$ ✓。</p></div>
+
+    <!-- ===================== 10 ===================== -->
+    <h2 id="s10">10. まとめ(この回で覚えること)</h2>
+    <ul>
+      <li><b>内力は打ち消し合う</b>(作用・反作用 $\bm F_{ji}=-\bm F_{ij}$、力は2点を結ぶ向き)。</li>
+      <li><b>重心</b> $\bm r_G=\dfrac1M\sum m_i\bm r_i$:$M\ddot{\bm r}_G=\bm F$(外力の和)。$\bm P=M\dot{\bm r}_G$、$\dot{\bm P}=\bm F$。$\sum m_i\bm r_i'=\bm 0$。</li>
+      <li><b>運動エネルギー</b> $T=\tfrac12M\dot{\bm r}_G^2+\tfrac12\sum m_i\dot{\bm r}_i'^2$。</li>
+      <li><b>角運動量</b>:$\dot{\bm L}=\sum\bm r_i\times\bm F_i$(外力のモーメントの和)。重心まわりでも同じ。</li>
+      <li><b>平面内の剛体</b>:$L_z=I\dot\varphi$、$I=\sum m_ir_i^2$、$I\ddot\varphi=N_z$。円板 $I=\tfrac12Ma^2$。</li>
+      <li><b>カーリング</b>:運動量保存+反発係数+(各ストーンの)角運動量の式+滑らない条件。$R=I/ma^2=\tfrac12$ で $v_2=\dfrac{R(v_0+\omega a)}{2(1+R)}$。</li>
+    </ul>
+
+    <!-- ===================== 11 ===================== -->
+    <h2 id="s11">11. この回のノートについてのメモ</h2>
+    <p>板書は手書きの iPad ノートで、ページ番号がありません。PDF の順に数えました(p.21〜p.24)。これが、ノートの最後のページです。板書の画像はこのサイトには載せていません。黄色の枠、基礎ページの内容、練習問題と解答は、Claude が書き足したもので、板書にはありません。</p>
+    <ol>
+      <li><b>運動エネルギーの展開(p.21)</b>:板書の「$(\dot{\bm r}_G)^2+\dot{\bm r}_G\cdot\dot{\bm r}_i'+(\dot{\bm r}_i')^2$」の真ん中の項は、正しくは $2\dot{\bm r}_G\cdot\dot{\bm r}_i'$ です。どちらにしても、この項の和は 0 になるので、結論は変わりません。</li>
+      <li><b>$\bm P$ の式(p.21)</b>:板書の「$\bm P=\sum m_i\dot{\bm r}_G=M\dot{\bm r}_G$」は、$\sum m_i\dot{\bm r}_i'=\bm 0$ を使った結果です(中間の1行を、補いました)。</li>
+      <li><b>内力のモーメントの打ち消し(p.22)</b>:板書の「$\sum\sum(\bm r_i+\bm r_j)\times\bm F_{ij}=0$」の行は、$\bm F_{ij}$ が $i,j$ について反対称($\bm F_{ji}=-\bm F_{ij}$)であることからくる、和の対称性の確認です。続く「$(\bm r_i-\bm r_j)\times\bm F_{ij}=0$(並行の外積)」の行と足して $2\sum\sum\bm r_i\times\bm F_{ij}=0$ を導く、という流れと読みました。本文は、同じ内容を、少し短い手順に整理しました。この計算には、内力が2点を結ぶ向きにはたらく(中心力)ことが必要です。</li>
+      <li><b>面積密度の記号(p.23)</b>:板書の「$\pi a^2r=M$」の「$r$」は、面積あたりの質量 $\sigma$ の書き間違い(または、筆跡が似ている)と読みました。</li>
+      <li><b>質量の記号(p.23–24)</b>:板書は、剛体では $M$、カーリングでは $m$ と、同じ質量に別の文字を使っています。この回の本文では、カーリングで、同じ質量の、2個のストーンの質量を $m$ としました($I=\tfrac12ma^2$)。</li>
+      <li><b>$\omega_b$(p.24)</b>:板書の「$I(\omega_1-\omega_b)=-Fa$」の「$\omega_b$」は、$\omega_0$ の書き間違いと読みました。</li>
+      <li><b>$\omega_1,\omega_2$ の欄(p.24)</b>:板書は、$\omega_1$、$\omega_2$ の式が、空欄のままで終わっています。本文の式は、同じ連立方程式から、私が計算して補った結果です(数値例で、すべての条件が成り立つことも確かめました)。</li>
+      <li><b>$e$ の定義(p.24)</b>:板書の「$e=\dfrac{u_2-u_1}{u_0}$」は、衝突前の接近速度が $u_0$($x$ 方向、ストーン2は静止)なので、$e$ = (離れる相対速度)÷(近づく相対速度) になっています。</li>
+    </ol>
+
+    <nav class="pager">
+      <a href="week-12.html">← 前の週</a>
+      <a href="../index.html">一覧へ</a>
+      <span class="disabled">次の週 →</span>
+    </nav>
+
+  </main>
+
+  <footer>© Aセメまとめノート</footer>
+</body>
+</html>

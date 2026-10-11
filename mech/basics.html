@@ -1,0 +1,390 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>基礎のまとめ(力学A) | Aセメまとめノート</title>
+  <link rel="stylesheet" href="../assets/style.css">
+  <script defer src="../assets/nav.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],macros:{'\\R':'\\mathbb{R}','\\bm':'\\boldsymbol{#1}','\\dd':'\\mathrm{d}'}});window.__navReady&&window.__navReady()"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="inner">
+      <a class="site-title" href="../index.html">Aセメまとめノート</a>
+      <span class="links"><a href="index.html">力学A</a><a href="basics.html">基礎のまとめ</a><a href="../calc/index.html">微積</a><a href="../linalg/index.html">線形代数</a><a href="../em/index.html">電磁気学</a></span>
+    </div>
+  </header>
+
+  <main class="note">
+    <h1>基礎のまとめ(力学A)</h1>
+    <div class="meta">力学Aのノートで使う、高校〜微積・線形代数の内容を、トピックごとに一から説明したページです。本文の紫色の「基礎」の枠だけで分からなかったときに、ここへ来てください。</div>
+
+    <div class="box note-box">
+      <div class="label">このページの使い方</div>
+      <p>・各回のノートの「基礎」の枠にある<span class="xref-link" style="margin-left:0">→ 詳しい解説</span>のリンクから、対応するトピックに飛べます。</p>
+      <p>・飛んだ先には、画面の左下に<b>「元の位置にもどる」</b>ボタンが出ます。押すと、元のノートの読んでいた場所に戻れます(ブラウザの「戻る」でも同じ位置に戻ります)。</p>
+      <p>・各トピックの最後に「この回で使う場所」があり、本文の対応箇所に飛べます。</p>
+      <p>・偏微分・勾配などの詳しい説明は、<a href="../calc/basics.html#partial" data-xref>微積の「春学期のまとめ」</a>にもあります。ベクトル空間・行列などは<a href="../linalg/basics.html#vspace" data-xref>線形代数の基礎のまとめ</a>、3次元ベクトルの内積・外積は<a href="../em/basics.html#vec3" data-xref>電磁気学の基礎のまとめ</a>にもあります。</p>
+    </div>
+
+    <nav class="toc">
+      <div class="toc-title">目次</div>
+      <ol>
+        <li><b>力学の入口</b>
+          <ol type="a">
+            <li><a href="#newton">運動方程式・仕事・エネルギー・万有引力(高校)</a></li>
+            <li><a href="#buoy">浮力(高校)</a></li>
+            <li><a href="#hooke">フックの法則と単振動(高校)</a></li>
+            <li><a href="#gravfield">重力場と重力線</a></li>
+          </ol></li>
+        <li><b>微分方程式</b>
+          <ol type="a" start="5">
+            <li><a href="#ode">微分方程式の分類と、定数係数の線形微分方程式</a></li>
+            <li><a href="#firstorder">$e^{rt}$ の微分と、1階の微分方程式</a></li>
+            <li><a href="#complexexp">複素数と $e^{i\theta}$、振動の解</a></li>
+            <li><a href="#vspace">ベクトル空間としての解の集まり(重ね合わせ)</a></li>
+          </ol></li>
+        <li><b>ベクトル・行列</b>
+          <ol type="a" start="9">
+            <li><a href="#vecdiff">ベクトルの内積と、ベクトルの微分の規則</a></li>
+            <li><a href="#cross">外積</a></li>
+            <li><a href="#angvel">角速度ベクトル</a></li>
+            <li><a href="#determinant">行列式と2元連立方程式</a></li>
+            <li><a href="#rotmat">回転行列</a></li>
+          </ol></li>
+        <li><b>微分・積分</b>
+          <ol type="a" start="14">
+            <li><a href="#linepar">曲線のパラメータ表示と線積分</a></li>
+            <li><a href="#riemann">リーマン和・置換積分</a></li>
+            <li><a href="#partial">偏微分・全微分・勾配</a></li>
+            <li><a href="#taylor1">テイラー展開と、べき級数の係数比較</a></li>
+          </ol></li>
+        <li><b>座標・図形・式の変形</b>
+          <ol type="a" start="18">
+            <li><a href="#polar">極座標と、面積速度</a></li>
+            <li><a href="#trigid">三角関数の公式</a></li>
+            <li><a href="#quadratic">2次式と判別式</a></li>
+            <li><a href="#conics">円錐曲線(楕円・放物線・双曲線)</a></li>
+            <li><a href="#sphere">円・球の長さ・面積・体積</a></li>
+            <li><a href="#inertia">慣性モーメント</a></li>
+          </ol></li>
+      </ol>
+    </nav>
+
+    <!-- ===================== a ===================== -->
+    <h2 id="newton">a. 運動方程式・仕事・エネルギー・万有引力(高校)</h2>
+
+    <h3>位置・速度・加速度と、運動方程式</h3>
+    <p>物体の位置を時間の関数 $x(t)$ で表します。<b>速度</b>は位置の時間微分 $v=\dot x=\dfrac{dx}{dt}$、<b>加速度</b>は速度の時間微分 $a=\dot v=\ddot x=\dfrac{d^2x}{dt^2}$。3次元では、位置ベクトル $\bm r(t)$ を成分ごとに微分して、$\bm v=\dot{\bm r}$、$\bm a=\ddot{\bm r}$。</p>
+    <div class="box def">
+      <div class="label">ニュートンの運動方程式</div>
+      <p>質量 $m$ の質点にはたらく力の合力を $\bm F$ とすると、$m\ddot{\bm r}=\bm F$。力の単位は N(= kg·m/s²)。</p>
+    </div>
+    <p>力のはたらき方が分かれば(位置・速度・時間の関数として)、この方程式は、$\bm r(t)$ についての<b>微分方程式</b>です。初期位置と初期速度を決めれば、運動が(ふつうは)ただ1つに決まります。</p>
+    <p>地表付近では、重力 $\bm F=(0,0,-mg)$($g=9.8\ \mathrm{m/s^2}$)。したがって $\ddot z=-g$、$z=z_0+v_0t-\tfrac12gt^2$(自由落下・投げ上げ)。質量 $m$ は消えます(質量に関係なく同じ加速度)。</p>
+
+    <h3>仕事と運動エネルギー</h3>
+    <p>力 $\bm F$ が物体を $d\bm r$ だけ動かすとき、力がした<b>仕事</b>は $dW=\bm F\cdot d\bm r$(内積)。道筋に沿って足すと $W=\int\bm F\cdot d\bm r$。運動方程式から、$\dfrac d{dt}\bigl(\tfrac12m\dot{\bm r}^2\bigr)=m\ddot{\bm r}\cdot\dot{\bm r}=\bm F\cdot\dot{\bm r}$。時間で積分すると
+    $$\tfrac12mv_{\rm B}^2-\tfrac12mv_{\rm A}^2=\int_{\rm A}^{\rm B}\bm F\cdot d\bm r\qquad(\text{仕事と運動エネルギーの定理}).$$
+    $\tfrac12mv^2$ が<b>運動エネルギー</b>。</p>
+
+    <h3>位置エネルギーと、力学的エネルギー保存</h3>
+    <p>仕事が、道筋によらず、始点と終点だけで決まる力(<b>保存力</b>)では、$W=U(\mathrm A)-U(\mathrm B)$ と書ける。$U$ が<b>位置エネルギー</b>(ポテンシャル)。このとき $\tfrac12mv^2+U=$ 一定(<b>力学的エネルギー保存</b>)。例:重力 $U=mgz$、ばね $U=\tfrac12kx^2$、万有引力 $U=-\dfrac{GMm}r$。</p>
+    <p>1次元では、$\tfrac12m\dot x^2+U(x)=E$ から $U(x)\le E$ の範囲しか動けない(運動エネルギーは 0 以上)。$U(x)=E$ の点が折り返し点。</p>
+
+    <h3>万有引力</h3>
+    <p>質量 $M,m$ の2つの質点が距離 $r$ だけ離れているとき、互いに引き合う力の大きさは $F=\dfrac{GMm}{r^2}$($G=6.67\times10^{-11}\ \mathrm{N\,m^2/kg^2}$)。向きは2つを結ぶ直線の向き(<b>引力</b>)。距離の2乗に反比例する。ポテンシャルは、無限遠を 0 として、$U=-\dfrac{GMm}r$($\int_r^\infty\dfrac{GMm}{r'^2}dr'=\dfrac{GMm}r$ による)。</p>
+    <p>地表では、$g=\dfrac{GM}{R^2}$(地球の質量 $M$、半径 $R$):$g=\dfrac{6.67\times10^{-11}\times5.97\times10^{24}}{(6.37\times10^6)^2}=9.8\ \mathrm{m/s^2}$。</p>
+
+    <h3>作用・反作用の法則</h3>
+    <p>質点 $j$ が質点 $i$ に及ぼす力 $\bm F_{ij}$ と、$i$ が $j$ に及ぼす力 $\bm F_{ji}$ は、大きさが等しく向きが逆:$\bm F_{ji}=-\bm F_{ij}$。(多くの力では、さらに、2つを結ぶ直線の向きにはたらく。)</p>
+    <div class="box ex">
+      <div class="label">例:脱出速度</div>
+      <p>地表から、無限遠まで飛び去るために必要な最小の速さ:エネルギー保存 $\tfrac12mv^2-\dfrac{GMm}R=0$(無限遠で $U=0$、速さ 0)より $v=\sqrt{\dfrac{2GM}R}=\sqrt{2gR}=11.2\ \mathrm{km/s}$。</p>
+    </div>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-01.html#w-newton" data-xref>第1回 1.1 運動方程式と、位置・速度・加速度</a><a href="weeks/week-04.html#w-work1" data-xref>第4回 1.2 仕事と運動エネルギー(高校)</a><a href="weeks/week-05.html#w-ub" data-xref>第5回 1.3 位置エネルギー(高校)</a><a href="weeks/week-09.html#w-grav" data-xref>第9回 1.1 万有引力の法則とポテンシャル</a><a href="weeks/week-10.html#w-energy1d" data-xref>第10回 1.1 1次元の運動とエネルギー保存</a><a href="weeks/week-13.html#w-action" data-xref>第13回 1.2 作用・反作用の法則</a></p>
+
+    <!-- ===================== b ===================== -->
+    <h2 id="buoy">b. 浮力(高校)</h2>
+    <p>流体(水や空気)の中にある物体は、押しのけた流体の重さに等しい、上向きの力を受けます(<b>アルキメデスの原理</b>)。体積 $V$ の物体が、密度 $\rho_0$ の流体の中にあるとき、浮力は $\rho_0Vg$。</p>
+    <p>密度 $\rho$、体積 $V$ の物体の重さは $\rho Vg$。流体の中で、物体にはたらく合力(下向きを正として)は $(\rho-\rho_0)Vg$。$\rho\gt\rho_0$ なら沈み、$\rho\lt\rho_0$ なら浮く。質量 $m=\rho V$ で書けば、重力と浮力の合力は $mg\Bigl(1-\dfrac{\rho_0}\rho\Bigr)$。</p>
+    <div class="box ex">
+      <div class="label">例</div>
+      <p>鉄の球(密度 $7.9\times10^3\ \mathrm{kg/m^3}$)を水(密度 $1.0\times10^3$)に沈める。見かけの重さは $1-\dfrac{1.0}{7.9}=0.87$ 倍。</p>
+    </div>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-01.html#w-buoy" data-xref>第1回 1.2 浮力</a></p>
+
+    <!-- ===================== c ===================== -->
+    <h2 id="hooke">c. フックの法則と単振動(高校)</h2>
+    <p>ばねを、自然の長さから $x$ だけ伸ばす(縮める)と、ばねは、元に戻そうとする力 $F=-kx$ を出します(<b>フックの法則</b>)。$k$ は<b>ばね定数</b>(単位 N/m)。運動方程式 $m\ddot x=-kx$、すなわち $\ddot x=-\omega^2x$($\omega=\sqrt{k/m}$)。</p>
+    <figure class="fig">
+      <svg viewBox="0 0 640 260" width="640" role="img" aria-label="ばね振り子"><text class="ta" x="10" y="22">(a) 真空中のばね振り子</text><rect x="14" y="44" width="12" height="56" rx="0" style="fill:var(--muted);fill-opacity:.7;stroke:none"/><polyline points="26,72 35.3,62 54,82 72.7,62 91.3,82 110,62 128.7,82 147.3,62 166,82 184.7,62 203.3,82 222,62 240.7,82 250,72" style="fill:none;stroke:var(--muted);stroke-width:2.2"/><circle cx="266" cy="72" r="16" style="fill:var(--surface);stroke:var(--muted);stroke-width:2.4"/><text class="t" x="266" y="77" style="text-anchor:middle">m</text><line x1="26" y1="114" x2="340" y2="114" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><line x1="266" y1="108" x2="266" y2="120" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><text class="t" x="266" y="132" style="text-anchor:middle">x = 0</text><text class="t" x="346" y="118">x</text><line x1="250" y1="72" x2="222.4" y2="72" style="stroke:var(--thm);stroke-width:2.6;fill:none"/><polygon points="214,72 223,68 223,76" style="fill:var(--thm)"/><text class="tt" x="210" y="62" style="text-anchor:end;fill:var(--thm)">−kx</text><text class="ta" x="10" y="138">(b) 流体中(粘性あり)</text><rect x="10" y="152" width="380" height="90" rx="0" style="fill:var(--accent);fill-opacity:.1;stroke:none"/><rect x="14" y="160" width="12" height="56" rx="0" style="fill:var(--muted);fill-opacity:.7;stroke:none"/><polyline points="26,188 35.3,178 54,198 72.7,178 91.3,198 110,178 128.7,198 147.3,178 166,198 184.7,178 203.3,198 222,178 240.7,198 250,188" style="fill:none;stroke:var(--muted);stroke-width:2.2"/><circle cx="266" cy="188" r="16" style="fill:var(--surface);stroke:var(--muted);stroke-width:2.4"/><text class="t" x="266" y="193" style="text-anchor:middle">m</text><line x1="26" y1="230" x2="340" y2="230" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><line x1="266" y1="224" x2="266" y2="236" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><text class="t" x="266" y="248" style="text-anchor:middle">x = 0</text><text class="t" x="346" y="234">x</text><line x1="250" y1="188" x2="222.4" y2="188" style="stroke:var(--thm);stroke-width:2.6;fill:none"/><polygon points="214,188 223,184 223,192" style="fill:var(--thm)"/><text class="tt" x="210" y="178" style="text-anchor:end;fill:var(--thm)">−kx</text><line x1="286" y1="188" x2="313.6" y2="188" style="stroke:var(--accent);stroke-width:2.4;fill:none"/><polygon points="322,188 313,192 313,184" style="fill:var(--accent)"/><text class="tt" x="292" y="178" style="fill:var(--accent)">f_v</text><text class="tj" x="410" y="70" style="font-size:15px">m ẍ = −kx</text><text class="tm" x="410" y="92">→ 単振動(調和振動子)</text><text class="tj" x="410" y="186" style="font-size:15px">m ẍ = −kx − 6πaη ẋ</text><text class="tm" x="410" y="208">→ 減衰振動</text></svg>
+    </figure>
+    <p>この解は、$x=A\cos(\omega t+\alpha)$($A$:振幅、$\alpha$:初期位相)。周期 $T=\dfrac{2\pi}\omega=2\pi\sqrt{\dfrac mk}$、半周期は $\dfrac\pi\omega$。ポテンシャルは $U=\tfrac12kx^2$、エネルギー $E=\tfrac12m\dot x^2+\tfrac12kx^2=\tfrac12kA^2$ が一定。</p>
+    <p><b>つなぎ方。</b>ばね定数 $k_1,k_2$ のばねを<b>並列</b>につなぐと、$k=k_1+k_2$。<b>直列</b>につなぐと、$\dfrac1k=\dfrac1{k_1}+\dfrac1{k_2}$(伸びが足し合わされるので、柔らかくなる)。</p>
+    <div class="box ex">
+      <div class="label">例</div>
+      <p>$m=0.5\ \mathrm{kg}$、$k=200\ \mathrm{N/m}$ なら $\omega=\sqrt{400}=20\ \mathrm{rad/s}$、$T=2\pi/20=0.31\ \mathrm s$。</p>
+    </div>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-01.html#w-hooke" data-xref>第1回 1.3 フックの法則(ばねの力)</a><a href="weeks/week-11.html#w-shm11" data-xref>第11回 1.3 単振動</a></p>
+
+    <!-- ===================== d ===================== -->
+    <h2 id="gravfield">d. 重力場と重力線</h2>
+    <p>万有引力の法則を、「質量 $M$ が、まわりの空間に<b>重力場</b>をつくる」と読み替えます。位置 $\bm r$ での重力場は $\bm g(\bm r)=-\dfrac{GM}{r^2}\bm e_r$(中心向き)。そこに置かれた質量 $m$ の質点は、力 $\bm F=m\bm g$ を受ける。単位は、加速度と同じ $\mathrm{m/s^2}$(= N/kg)。電場と電荷の関係($\bm F=q\bm E$)と、まったく同じ構造です。</p>
+    <p><b>重力線</b>は、重力場を表す線で、質量 $M$ から $4\pi GM$ 本、放射状に出る(場の向きに引く、あるいは、向きを逆にして、質量に入る)と約束する。場の強さ $=$(線の本数)÷(面積)。半径 $r$ の球面は面積 $4\pi r^2$ だから、$\dfrac{4\pi GM}{4\pi r^2}=\dfrac{GM}{r^2}$ となって、万有引力の法則と一致する。これが「距離の2乗に反比例」の理由です(3次元の球面の面積が $r^2$ に比例するから)。</p>
+    <p><b>球対称な質量分布</b>のまわりでは、球面の外側では、全質量が中心に集まったときと同じ場。球殻の内側(空洞)では、場は 0。</p>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-11.html#w-gfield" data-xref>第11回 1.1 重力場</a></p>
+
+    <!-- ===================== e ===================== -->
+    <h2 id="ode">e. 微分方程式の分類と、定数係数の線形微分方程式</h2>
+
+    <h3>用語</h3>
+    <ul>
+      <li><b>微分方程式</b>:未知の関数 $x(t)$ と、その導関数の間の関係式。</li>
+      <li><b>階数</b>:現れる導関数の最高の階数。$\dot x=-x$ は1階、$\ddot x=-\omega^2x$ は2階。</li>
+      <li><b>線形</b>:未知関数とその導関数について1次式($x$、$\dot x$、$\ddot x$ の足し算と定数倍だけ)。$\ddot x=-\omega^2x$ は線形。$\ddot x=-x^2$ や $\ddot x=-\sin x$ は線形ではない。</li>
+      <li><b>斉次</b>(同次):未知関数を含まない項(定数項や、$t$ だけの関数)が 0 の線形方程式。$\ddot x+\omega^2x=0$ は斉次、$\ddot x+\omega^2x=g$ は非斉次。</li>
+    </ul>
+
+    <h3>定数係数の線形斉次方程式の解き方</h3>
+    <p>$\ddot x+b\dot x+cx=0$($b,c$ は定数)。<b>解を $x=e^{rt}$ とおいて</b>代入する($\dot x=re^{rt}$、$\ddot x=r^2e^{rt}$)と、
+    $$(r^2+br+c)e^{rt}=0\ \Longrightarrow\ r^2+br+c=0\quad(\text{特性方程式}).$$
+    $e^{rt}\ne0$ だから、$r$ はこの2次方程式の解。</p>
+    <ul>
+      <li>相異なる2つの解 $r_1,r_2$:一般解 $x=C_1e^{r_1t}+C_2e^{r_2t}$。</li>
+      <li><b>重解</b> $r_1=r_2=r$:一般解 $x=(C_1+C_2t)e^{rt}$。($e^{rt}$ だけでは、解が1つしか出ないので、もう1つの解 $te^{rt}$ が必要。理由:$D=\dfrac d{dt}$ と書くと、方程式は $(D-r)^2x=0$。$x=te^{rt}$ に $(D-r)$ をかけると、積の微分で、$(D-r)(te^{rt})=e^{rt}$、もう一度かけると 0。)</li>
+      <li>複素数の解 $r=-\gamma\pm i\omega$:次の「複素数と $e^{i\theta}$」で、$e^{-\gamma t}(C_1\cos\omega t+C_2\sin\omega t)$ に直す。</li>
+    </ul>
+    <p>一般解の定数 $C_1,C_2$ は、初期条件($x(0)$ と $\dot x(0)$)で決まる。</p>
+
+    <h3>よく使う2つの方程式</h3>
+    <div class="box thm">
+      <div class="label">単振動の方程式</div>
+      <p>$\ddot x=-\omega^2x$ の一般解は $x=A\cos(\omega t+\alpha)=C_1\cos\omega t+C_2\sin\omega t$(特性方程式 $r^2=-\omega^2$、$r=\pm i\omega$)。</p>
+    </div>
+    <div class="box thm">
+      <div class="label">定数のある2階方程式</div>
+      <p>$u''+u=c$($c$ は定数)の解は、$u=c+A\cos(\varphi+\alpha)$。(特解 $u=c$ に、斉次方程式 $u''+u=0$ の一般解を足す。)</p>
+    </div>
+    <p><b>減衰振動の3つの型</b>($m\ddot x=-kx-\gamma'\dot x$、$\ddot x+2\gamma\dot x+\omega_0^2x=0$ として、特性方程式 $r^2+2\gamma r+\omega_0^2=0$):判別式 $\gamma^2-\omega_0^2$ が正のとき<b>過減衰</b>(2つの負の実数の解、振動しない)、0 のとき<b>臨界減衰</b>(重解)、負のとき<b>減衰振動</b>($r=-\gamma\pm i\sqrt{\omega_0^2-\gamma^2}$)。</p>
+    <p>多項式の微分や積の微分は、下の「ベクトルの内積と、ベクトルの微分の規則」を参照:たとえば $(te^{rt})'=e^{rt}+rte^{rt}$。</p>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-01.html#w-odeclass" data-xref>第1回 1.4 微分方程式の階数・線形・斉次</a><a href="weeks/week-03.html#w-prod" data-xref>第3回 1.3 積の微分と多項式の微分</a><a href="weeks/week-07.html#w-sho" data-xref>第7回 1.5 単振動の方程式の解</a><a href="weeks/week-09.html#w-ode2" data-xref>第9回 1.4 $u''+u=\text{定数}$ の解</a></p>
+
+    <!-- ===================== f ===================== -->
+    <h2 id="firstorder">f. $e^{rt}$ の微分と、1階の微分方程式</h2>
+    <p>指数関数 $e^{rt}$ は、微分しても形が変わらず、定数 $r$ がかかるだけ:$\dfrac d{dt}e^{rt}=re^{rt}$。繰り返すと、$\dfrac{d^n}{dt^n}e^{rt}=r^ne^{rt}$。</p>
+    <p><b>1階の微分方程式</b> $\dot x=rx$ の解は $x=Ce^{rt}$($C=x(0)$)。逆に、$x=Ce^{rt}$ を代入すると $\dot x=rCe^{rt}=rx$ で、確かに解になる。$r\lt0$ なら減衰、$r\gt0$ なら発散(増加)。</p>
+    <figure class="fig">
+      <svg viewBox="0 0 520 200" width="520" role="img" aria-label="e^{rt} のグラフ"><line x1="50" y1="170" x2="450" y2="170" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><line x1="50" y1="170" x2="50" y2="50" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><text class="t" x="456" y="175">t</text><text class="t" x="46" y="42" style="text-anchor:middle">x</text><polyline points="50,140 53.3,139.2 56.7,138.5 60,137.7 63.3,136.8 66.7,136 70,135.1 73.3,134.3 76.7,133.4 80,132.4 83.3,131.5 86.7,130.5 90,129.5 93.3,128.5 96.7,127.4 100,126.4 103.3,125.2 106.7,124.1 110,123 113.3,121.8 116.7,120.5 120,119.3 123.3,118 126.7,116.7 130,115.3 133.3,114 136.7,112.5 140,111.1 143.3,109.6 146.7,108.1 150,106.5 153.3,104.9 156.7,103.2 160,101.5 163.3,99.8 166.7,98 170,96.2 173.3,94.3 176.7,92.4 180,90.5 183.3,88.5 186.7,86.4 190,84.3 193.3,82.1 196.7,79.9 200,77.6 203.3,75.3 206.7,72.9 210,70.4 213.3,67.9 216.7,65.3 220,62.6 223.3,59.9 226.7,57.1 230,54.3 233.3,51.3 236.7,48.3 240,45.3 243.3,42.1 246.7,38.9 250,35.5 253.3,32.1 256.7,28.7 260,25.1 263.3,21.4 266.7,17.6 270,13.8 273.3,9.8 276.7,5.8 280,1.6 283.3,-2.6 286.7,-7 290,-11.5 293.3,-16.1 296.7,-20.8 300,-25.6 303.3,-30.6 306.7,-35.7 310,-40.9 313.3,-46.2 316.7,-51.7 320,-57.3 323.3,-63 326.7,-68.9 330,-75 333.3,-81.2 336.7,-87.5 340,-94.1 343.3,-100.8 346.7,-107.6 350,-114.6 353.3,-121.8 356.7,-129.2 360,-136.8 363.3,-144.6 366.7,-152.5 370,-160.7 373.3,-169.1 376.7,-177.7 380,-186.5 383.3,-195.5 386.7,-204.7 390,-214.2 393.3,-223.9 396.7,-233.9 400,-244.1 403.3,-254.6 406.7,-265.4 410,-276.4 413.3,-287.7 416.7,-299.3 420,-311.2 423.3,-323.3 426.7,-335.8 430,-348.6 433.3,-361.8 436.7,-375.2 440,-389 443.3,-403.2 446.7,-417.7 450,-432.6" style="fill:none;stroke:var(--thm);stroke-width:2.6"/><text class="tt" x="330" y="36" style="fill:var(--thm)">r = 1(増大)</text><polyline points="50,140 53.3,140 56.7,140 60,140 63.3,140 66.7,140 70,140 73.3,140 76.7,140 80,140 83.3,140 86.7,140 90,140 93.3,140 96.7,140 100,140 103.3,140 106.7,140 110,140 113.3,140 116.7,140 120,140 123.3,140 126.7,140 130,140 133.3,140 136.7,140 140,140 143.3,140 146.7,140 150,140 153.3,140 156.7,140 160,140 163.3,140 166.7,140 170,140 173.3,140 176.7,140 180,140 183.3,140 186.7,140 190,140 193.3,140 196.7,140 200,140 203.3,140 206.7,140 210,140 213.3,140 216.7,140 220,140 223.3,140 226.7,140 230,140 233.3,140 236.7,140 240,140 243.3,140 246.7,140 250,140 253.3,140 256.7,140 260,140 263.3,140 266.7,140 270,140 273.3,140 276.7,140 280,140 283.3,140 286.7,140 290,140 293.3,140 296.7,140 300,140 303.3,140 306.7,140 310,140 313.3,140 316.7,140 320,140 323.3,140 326.7,140 330,140 333.3,140 336.7,140 340,140 343.3,140 346.7,140 350,140 353.3,140 356.7,140 360,140 363.3,140 366.7,140 370,140 373.3,140 376.7,140 380,140 383.3,140 386.7,140 390,140 393.3,140 396.7,140 400,140 403.3,140 406.7,140 410,140 413.3,140 416.7,140 420,140 423.3,140 426.7,140 430,140 433.3,140 436.7,140 440,140 443.3,140 446.7,140 450,140" style="fill:none;stroke:var(--muted);stroke-width:2.6"/><text class="tt" x="330" y="56" style="fill:var(--muted)">r = 0(一定)</text><polyline points="50,140 53.3,140.7 56.7,141.5 60,142.2 63.3,142.9 66.7,143.5 70,144.2 73.3,144.8 76.7,145.4 80,146 83.3,146.6 86.7,147.2 90,147.8 93.3,148.3 96.7,148.9 100,149.4 103.3,149.9 106.7,150.4 110,150.9 113.3,151.3 116.7,151.8 120,152.3 123.3,152.7 126.7,153.1 130,153.5 133.3,153.9 136.7,154.3 140,154.7 143.3,155.1 146.7,155.5 150,155.8 153.3,156.2 156.7,156.5 160,156.9 163.3,157.2 166.7,157.5 170,157.8 173.3,158.1 176.7,158.4 180,158.7 183.3,159 186.7,159.2 190,159.5 193.3,159.8 196.7,160 200,160.3 203.3,160.5 206.7,160.7 210,161 213.3,161.2 216.7,161.4 220,161.6 223.3,161.8 226.7,162 230,162.2 233.3,162.4 236.7,162.6 240,162.8 243.3,163 246.7,163.1 250,163.3 253.3,163.5 256.7,163.6 260,163.8 263.3,163.9 266.7,164.1 270,164.2 273.3,164.4 276.7,164.5 280,164.7 283.3,164.8 286.7,164.9 290,165 293.3,165.2 296.7,165.3 300,165.4 303.3,165.5 306.7,165.6 310,165.7 313.3,165.8 316.7,165.9 320,166 323.3,166.1 326.7,166.2 330,166.3 333.3,166.4 336.7,166.5 340,166.6 343.3,166.7 346.7,166.8 350,166.8 353.3,166.9 356.7,167 360,167.1 363.3,167.1 366.7,167.2 370,167.3 373.3,167.3 376.7,167.4 380,167.5 383.3,167.5 386.7,167.6 390,167.7 393.3,167.7 396.7,167.8 400,167.8 403.3,167.9 406.7,167.9 410,168 413.3,168 416.7,168.1 420,168.1 423.3,168.2 426.7,168.2 430,168.3 433.3,168.3 436.7,168.3 440,168.4 443.3,168.4 446.7,168.5 450,168.5" style="fill:none;stroke:var(--accent);stroke-width:2.6"/><text class="tt" x="330" y="76" style="fill:var(--accent)">r = −1(減衰)</text><polyline points="50,140 53.3,142.2 56.7,144.2 60,146 63.3,147.8 66.7,149.4 70,150.9 73.3,152.3 76.7,153.5 80,154.7 83.3,155.8 86.7,156.9 90,157.8 93.3,158.7 96.7,159.5 100,160.3 103.3,161 106.7,161.6 110,162.2 113.3,162.8 116.7,163.3 120,163.8 123.3,164.2 126.7,164.7 130,165 133.3,165.4 136.7,165.7 140,166 143.3,166.3 146.7,166.6 150,166.8 153.3,167.1 156.7,167.3 160,167.5 163.3,167.7 166.7,167.8 170,168 173.3,168.1 176.7,168.3 180,168.4 183.3,168.5 186.7,168.6 190,168.7 193.3,168.8 196.7,168.9 200,169 203.3,169 206.7,169.1 210,169.2 213.3,169.2 216.7,169.3 220,169.3 223.3,169.4 226.7,169.4 230,169.5 233.3,169.5 236.7,169.6 240,169.6 243.3,169.6 246.7,169.6 250,169.7 253.3,169.7 256.7,169.7 260,169.7 263.3,169.8 266.7,169.8 270,169.8 273.3,169.8 276.7,169.8 280,169.8 283.3,169.8 286.7,169.9 290,169.9 293.3,169.9 296.7,169.9 300,169.9 303.3,169.9 306.7,169.9 310,169.9 313.3,169.9 316.7,169.9 320,169.9 323.3,169.9 326.7,169.9 330,169.9 333.3,169.9 336.7,170 340,170 343.3,170 346.7,170 350,170 353.3,170 356.7,170 360,170 363.3,170 366.7,170 370,170 373.3,170 376.7,170 380,170 383.3,170 386.7,170 390,170 393.3,170 396.7,170 400,170 403.3,170 406.7,170 410,170 413.3,170 416.7,170 420,170 423.3,170 426.7,170 430,170 433.3,170 436.7,170 440,170 443.3,170 446.7,170 450,170" style="fill:none;stroke:var(--ex);stroke-width:2.6"/><text class="tt" x="330" y="96" style="fill:var(--ex)">r = −3(速く減衰)</text><line x1="50" y1="140" x2="58" y2="140" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><text class="t" x="44" y="144" style="text-anchor:end">1</text></svg>
+    </figure>
+    <div class="box ex">
+      <div class="label">例:速さに比例する抵抗</div>
+      <p>$m\dot v=-bv$、$\dot v=-\dfrac bmv$ の解は $v=v_0e^{-bt/m}$。時定数 $\tau=m/b$ で、速さが $1/e\approx0.37$ 倍になる。</p>
+    </div>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-02.html#w-expderiv" data-xref>第2回 1.1 指数関数 $e^{rt}$ の微分</a></p>
+
+    <!-- ===================== g ===================== -->
+    <h2 id="complexexp">g. 複素数と $e^{i\theta}$、振動の解</h2>
+    <p><b>虚数単位</b> $i$:$i^2=-1$。複素数 $z=a+bi$($a,b$ 実数)。複素平面(横軸:実部、縦軸:虚部)に表すと、$z=r(\cos\theta+i\sin\theta)$(極形式)。</p>
+    <figure class="fig">
+      <svg viewBox="0 0 560 246" width="560" role="img" aria-label="単位円と e^{iθ}"><line x1="40" y1="130" x2="300" y2="130" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><line x1="170" y1="232" x2="170" y2="24" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><text class="t" x="304" y="148">Re</text><text class="t" x="178" y="26">Im</text><circle cx="170" cy="130" r="90" style="fill:none;stroke:var(--accent);stroke-width:2"/><line x1="170" y1="130" x2="227.9" y2="61.1" style="stroke:var(--thm);stroke-width:2.6"/><line x1="227.9" y1="61.1" x2="227.9" y2="130" style="stroke:var(--muted);stroke-width:1.1;stroke-dasharray:5 4;fill:none"/><line x1="227.9" y1="61.1" x2="170" y2="61.1" style="stroke:var(--muted);stroke-width:1.1;stroke-dasharray:5 4;fill:none"/><path d="M200 130 A30 30 0 0 0 189.3 107" style="fill:none;stroke:var(--muted);stroke-width:1.4"/><text class="t" x="206" y="122">θ</text><circle cx="227.9" cy="61.1" r="5" style="fill:var(--thm)"/><text class="t" x="235.9" y="55.1" style="fill:var(--thm);font-size:17px">e^{iθ}</text><text class="t" x="217.9" y="148" style="text-anchor:end">cosθ</text><text class="t" x="162" y="66.1" style="text-anchor:end">sinθ</text><text class="t" x="266" y="146">1</text><text class="t" x="164" y="34" style="text-anchor:end">i</text><text class="tj" x="320" y="70" style="font-size:15px">e^{iθ} = cosθ + i sinθ</text><text class="tm" x="320" y="96">|e^{iθ}| = 1(単位円の上)</text><text class="tm" x="320" y="118">θ が増えると反時計回りに回る</text><text class="tm" x="320" y="150">θ = ωt なら、一定の速さで</text><text class="tt" x="320" y="168">まわる等速円運動</text></svg>
+    </figure>
+    <div class="box thm">
+      <div class="label">オイラーの公式</div>
+      <p>$e^{i\theta}=\cos\theta+i\sin\theta$。</p>
+    </div>
+    <p>理由:$e^x=1+x+\dfrac{x^2}{2!}+\cdots$ に $x=i\theta$ を代入すると、実部が $1-\dfrac{\theta^2}{2!}+\cdots=\cos\theta$、虚部が $\theta-\dfrac{\theta^3}{3!}+\cdots=\sin\theta$(テイラー展開、下の項を参照)。また、微分 $\dfrac d{d\theta}e^{i\theta}=ie^{i\theta}$ は $e^{rt}$ の微分の規則 $r=i$ と同じで、$\dfrac d{d\theta}(\cos\theta+i\sin\theta)=-\sin\theta+i\cos\theta=i(\cos\theta+i\sin\theta)$ とも整合する。</p>
+    <p>逆に、$\cos\theta=\dfrac{e^{i\theta}+e^{-i\theta}}2$、$\sin\theta=\dfrac{e^{i\theta}-e^{-i\theta}}{2i}$。</p>
+    <p><b>振動の解。</b>特性方程式の解 $r=\pm i\omega$ に対し、$C_1e^{i\omega t}+C_2e^{-i\omega t}$ は、実部・虚部を取り出すことで $A\cos\omega t+B\sin\omega t$ の形にできる(係数が実数なら、実数の解)。$r=-\gamma\pm i\omega$ なら、$e^{-\gamma t}(A\cos\omega t+B\sin\omega t)$(<b>減衰振動</b>、振幅が $e^{-\gamma t}$ で縮む)。</p>
+    <p>(複素数の詳しい説明は、<a href="../linalg/basics.html#complex" data-xref>線形代数の基礎のまとめ</a>にもあります。)</p>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-02.html#w-complexexp" data-xref>第2回 1.2 複素数と $e^{i\theta}$</a></p>
+
+    <!-- ===================== h ===================== -->
+    <h2 id="vspace">h. ベクトル空間としての解の集まり(重ね合わせ)</h2>
+    <p>線形斉次の微分方程式の解は、<b>足し算と定数倍で閉じています</b>。$x_1,x_2$ が解なら、$C_1x_1+C_2x_2$ も解。(方程式が、$x$ と導関数の1次式だから、微分も足し算・定数倍と相性がよい。)この性質を<b>重ね合わせの原理</b>という。</p>
+    <p>解全体の集まりは、(関数を「ベクトル」とみなして)<b>ベクトル空間</b>になる。その<b>次元</b>は、方程式の階数に等しい(2階なら、解は2つの独立な解の1次結合で書ける)。独立な解 $x_1,x_2$ をとれば、一般解 $=C_1x_1+C_2x_2$。</p>
+    <p><b>独立性。</b>$e^{r_1t},e^{r_2t}$ が1次独立 $\iff r_1\ne r_2$。確かめ:$C_1e^{r_1t}+C_2e^{r_2t}=0$($t$ の恒等式)の $t=0$ と、微分した式の $t=0$ から $C_1+C_2=0$、$r_1C_1+r_2C_2=0$。この連立方程式が $C_1=C_2=0$ 以外の解をもたない条件は、係数の行列式 $r_2-r_1\ne0$ です(次の「行列式」参照。ヴァンデルモンドの行列式)。</p>
+    <p><b>非斉次の方程式の一般解</b>は、「(1つの特解)+(斉次の一般解)」。</p>
+    <p>(ベクトル空間の一般論は、<a href="../linalg/basics.html#vspace" data-xref>線形代数の基礎のまとめ</a>にあります。)</p>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-02.html#w-vspace" data-xref>第2回 1.3 ベクトル空間(重ね合わせ)</a></p>
+
+
+    <!-- ===================== i ===================== -->
+    <h2 id="vecdiff">i. ベクトルの内積と、ベクトルの微分の規則</h2>
+
+    <h3>内積と長さ</h3>
+    <p>ベクトル $\bm a=(a_1,a_2,a_3)$、$\bm b=(b_1,b_2,b_3)$ の<b>内積</b>は $\bm a\cdot\bm b=a_1b_1+a_2b_2+a_3b_3=|\bm a||\bm b|\cos\theta$($\theta$ は2つのベクトルのなす角)。自分自身との内積は長さの2乗:$\bm a\cdot\bm a=|\bm a|^2$。内積が 0 なら垂直。</p>
+
+    <h3>位置ベクトルと、単位ベクトル</h3>
+    <p>原点から点 $P$ へのベクトル $\bm r$ が<b>位置ベクトル</b>。$|\bm r|=r$ で割った $\bm e_r=\dfrac{\bm r}r$ は、長さ 1 で、原点から遠ざかる向きの<b>単位ベクトル</b>(動径方向)。</p>
+
+    <h3>ベクトルの微分</h3>
+    <p>ベクトル $\bm a(t)$ の微分は、成分ごとの微分。次の規則は、1変数関数の積の微分と同じ形で成り立つ($c(t)$ はスカラー関数):
+    $$\frac d{dt}(c\bm a)=\dot c\bm a+c\dot{\bm a},\quad\frac d{dt}(\bm a\cdot\bm b)=\dot{\bm a}\cdot\bm b+\bm a\cdot\dot{\bm b},\quad\frac d{dt}(\bm a\times\bm b)=\dot{\bm a}\times\bm b+\bm a\times\dot{\bm b}.$$
+    特に $\dfrac d{dt}|\bm v|^2=\dfrac d{dt}(\bm v\cdot\bm v)=2\bm v\cdot\dot{\bm v}$。(運動エネルギーの時間微分 $\dfrac d{dt}\tfrac12m|\bm v|^2=m\bm v\cdot\bm a=\bm F\cdot\bm v$ に使う。)<b>合成関数の微分</b>:$\dfrac d{dt}f(g(t))=f'(g(t))g'(t)$。</p>
+    <p><b>多項式の微分</b>:$\dfrac d{dt}t^n=nt^{n-1}$。たとえば $(a+bt+ct^2)'=b+2ct$。</p>
+
+    <h3>総和記号</h3>
+    <p>$\sum_{i=1}^Na_i=a_1+a_2+\cdots+a_N$。$\bm a\cdot\bm b=\sum_{i=1}^3a_ib_i$ のように、成分を $i=1,2,3$ の添字で表す。二重和 $\sum_i\sum_jA_{ij}$ は、$i,j$ の名前を取り換えても値が同じ。</p>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-04.html#w-dotprod" data-xref>第4回 1.1 内積と、速さの2乗の時間微分</a><a href="weeks/week-06.html#w-unitvec" data-xref>第6回 1.1 位置ベクトルと動径方向の単位ベクトル</a><a href="weeks/week-06.html#w-area" data-xref>第6回 1.3 外積と、平行四辺形の面積</a><a href="weeks/week-06.html#w-index" data-xref>第6回 1.4 添字と $\sum$ の記法</a><a href="weeks/week-07.html#w-deriv2" data-xref>第7回 1.3 積の微分・合成関数の微分</a></p>
+
+    <!-- ===================== j ===================== -->
+    <h2 id="cross">j. 外積</h2>
+    <p>3次元ベクトル $\bm a,\bm b$ の<b>外積</b> $\bm a\times\bm b$ は、$\bm a$ と $\bm b$ の両方に垂直で、向きは右ねじ($\bm a$ から $\bm b$ に回すとき、右ねじの進む向き)、大きさは $|\bm a||\bm b|\sin\theta$($\bm a,\bm b$ のつくる平行四辺形の面積)のベクトル。成分で書くと
+    $$\bm a\times\bm b=(a_2b_3-a_3b_2,\ \ a_3b_1-a_1b_3,\ \ a_1b_2-a_2b_1).$$
+    <b>性質</b>:$\bm a\times\bm b=-\bm b\times\bm a$、$\bm a\times\bm a=\bm0$、平行なベクトルの外積は $\bm0$、$(\bm a+\bm b)\times\bm c=\bm a\times\bm c+\bm b\times\bm c$。</p>
+    <div class="box ex">
+      <div class="label">例</div>
+      <p>$\bm a=(1,0,0)$、$\bm b=(0,1,0)$ なら、$\bm a\times\bm b=(0\cdot0-0\cdot1,\ 0\cdot0-1\cdot0,\ 1\cdot1-0\cdot0)=(0,0,1)$。$x$ 軸から $y$ 軸へ回すと、右ねじは $z$ 軸の正の向きに進む。平行四辺形(正方形)の面積 1。</p>
+    </div>
+    <p><b>2次元の場合</b>:$\bm a=(a_1,a_2)$、$\bm b=(b_1,b_2)$ の外積の $z$ 成分は $a_1b_2-a_2b_1$(平行四辺形の符号付き面積)。位置 $(x,y)$ と速度 $(\dot x,\dot y)$ の $z$ 成分は $x\dot y-y\dot x$(角運動量や面積速度に現れる)。</p>
+    <p><b>力のモーメント</b>:位置 $\bm r$ にはたらく力 $\bm F$ の、原点まわりの<b>モーメント</b>は $\bm r\times\bm F$。大きさは(腕の長さ)×(力の、腕に垂直な成分)。</p>
+    <p>(詳しくは、<a href="../em/basics.html#vec3" data-xref>電磁気学の基礎のまとめ</a>にもあります。)</p>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-12.html#w-cross" data-xref>第12回 1.1 ベクトルの外積</a><a href="weeks/week-13.html#w-cross13" data-xref>第13回 1.3 外積の性質</a></p>
+
+    <!-- ===================== k ===================== -->
+    <h2 id="angvel">k. 角速度ベクトル</h2>
+    <p>回転運動を、1本のベクトル $\bm\omega$ で表します。向きは回転軸(回る向きに右ねじを回したときに、ねじが進む向き)、大きさは角速度 $\omega=\dot\theta$(rad/s)。たとえば、北極から見て反時計回りに回る地球の自転は、北向きの $\bm\omega$($\omega=7.29\times10^{-5}\ \mathrm{rad/s}$)。</p>
+    <p>原点を通る軸のまわりを、角速度ベクトル $\bm\omega$ で回転している剛体上の点 $\bm r$ の速度は $\bm v=\bm\omega\times\bm r$:大きさ $\omega r\sin\theta$($r\sin\theta$ は軸からの距離)、向きは軸と $\bm r$ に垂直で右ねじ。同じ理由で、回転とともに動くベクトル $\bm a$ は $\dot{\bm a}=\bm\omega\times\bm a$。</p>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-12.html#w-angvec" data-xref>第12回 1.2 角速度ベクトル</a></p>
+
+    <!-- ===================== l ===================== -->
+    <h2 id="determinant">l. 行列式と2元連立方程式</h2>
+    <p>2×2 行列 $A=\begin{pmatrix}a&b\\c&d\end{pmatrix}$ の<b>行列式</b>は $\det A=ad-bc$。2つのベクトル $(a,c),(b,d)$ のつくる平行四辺形の(符号付き)面積。</p>
+    <p><b>連立方程式</b> $\begin{pmatrix}a&b\\c&d\end{pmatrix}\begin{pmatrix}x\\y\end{pmatrix}=\begin{pmatrix}p\\q\end{pmatrix}$ は、$\det A\ne0$ のとき、ただ1つの解 $x=\dfrac{pd-bq}{ad-bc}$、$y=\dfrac{aq-pc}{ad-bc}$(クラメルの公式)をもつ。$\det A=0$ なら、解がない、または、無数にある(2つのベクトルが平行)。同次の方程式($p=q=0$)が自明でない解($(x,y)\ne0$)をもつ $\iff\det A=0$。</p>
+    <div class="box ex">
+      <div class="label">例:ヴァンデルモンドの行列式</div>
+      <p>$\begin{pmatrix}1&1\\r_1&r_2\end{pmatrix}$ の行列式は $r_2-r_1$。0 でない $\iff r_1\ne r_2$。3×3($1,1,1;\ r_1,r_2,r_3;\ r_1^2,r_2^2,r_3^2$)では $(r_2-r_1)(r_3-r_1)(r_3-r_2)$(差の積)。相異なる指数関数 $e^{r_it}$ が1次独立であることの確認に使う。</p>
+    </div>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-03.html#w-matsys" data-xref>第3回 1.1 行列と連立方程式</a><a href="weeks/week-03.html#w-det" data-xref>第3回 1.2 行列式と、平行四辺形の面積</a></p>
+
+    <!-- ===================== m ===================== -->
+    <h2 id="rotmat">m. 回転行列</h2>
+    <p>平面上で、原点のまわりに角 $\varphi$ だけ回す操作は、行列
+    $$R(\varphi)=\begin{pmatrix}\cos\varphi&-\sin\varphi\\ \sin\varphi&\cos\varphi\end{pmatrix}$$
+    で表される。理由:$x$ 軸方向の単位ベクトル $(1,0)$ は $(\cos\varphi,\sin\varphi)$ に、$y$ 軸方向の $(0,1)$ は $(-\sin\varphi,\cos\varphi)$ に移るので、これが行列の第1列・第2列。点 $(x,y)=(r\cos\theta,r\sin\theta)$ に $R(\varphi)$ をかけると、加法定理で $(r\cos(\theta+\varphi),r\sin(\theta+\varphi))$ になる。</p>
+    <p>$\det R=\cos^2\varphi+\sin^2\varphi=1$(面積を変えない)。逆の回転は $R(-\varphi)=R(\varphi)^{\mathsf T}$。極座標の基底ベクトル $\bm e_r=(\cos\varphi,\sin\varphi)$、$\bm e_\varphi=(-\sin\varphi,\cos\varphi)$ は、$\bm e_x,\bm e_y$ を $R(\varphi)$ で回したものです。</p>
+    <p>(行列と線形写像の詳しい説明は、<a href="../linalg/basics.html#linmap" data-xref>線形代数の基礎のまとめ</a>にもあります。)</p>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-07.html#w-rotmat" data-xref>第7回 1.2 回転行列</a></p>
+
+    <!-- ===================== n ===================== -->
+    <h2 id="linepar">n. 曲線のパラメータ表示と線積分</h2>
+    <p>平面や空間の曲線 $C$ を、パラメータ $t$($a\le t\le b$)の関数 $\bm r(t)=(x(t),y(t),z(t))$ で表すのが<b>パラメータ表示</b>。たとえば円:$\bm r(t)=(a\cos t,a\sin t)$($0\le t\le2\pi$)。速度ベクトル $\dot{\bm r}(t)$ は曲線の接線の向き。</p>
+    <div class="box def">
+      <div class="label">線積分</div>
+      <p>力 $\bm F(\bm r)$ が、曲線 $C$ に沿って物体を動かすときにする仕事:
+      $$\int_C\bm F\cdot d\bm r=\int_a^b\bm F(\bm r(t))\cdot\dot{\bm r}(t)\,dt.$$
+      (微小な変位 $d\bm r=\dot{\bm r}\,dt$ ごとの仕事 $\bm F\cdot d\bm r$ を足したもの。)</p>
+    </div>
+    <p>性質:(1) 道筋の向きを逆にすると符号が変わる:$\int_{-C}=-\int_C$。(2) 道筋をつなぐと和:$\int_{C_1+C_2}=\int_{C_1}+\int_{C_2}$。(3) パラメータの取り方(速さの違い)には、よらない。</p>
+    <div class="box ex">
+      <div class="label">例</div>
+      <p>$\bm F=(0,-mg)$、道筋 $\bm r(t)=(t,t)$($0\le t\le1$、斜め上へ)。$\bm F\cdot\dot{\bm r}=(0,-mg)\cdot(1,1)=-mg$、積分 $=-mg$(高さ 1 だけ上がる間の、重力の仕事 $-mg\cdot1$)。</p>
+    </div>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-04.html#w-linepar" data-xref>第4回 1.4 曲線のパラメータ表示と線積分</a><a href="weeks/week-05.html#w-linesplit" data-xref>第5回 1.2 線積分:向きの反転と、道筋のつなぎ方</a></p>
+
+    <!-- ===================== o ===================== -->
+    <h2 id="riemann">o. リーマン和・置換積分</h2>
+    <p>関数 $f(x)$ の $a$ から $b$ までの<b>定積分</b>は、区間を $N$ 個に細かく分け($\Delta x=\dfrac{b-a}N$)、各小区間の面積 $f(x_k)\Delta x$ を足し合わせた<b>リーマン和</b>の、$N\to\infty$ の極限:$\int_a^bf(x)dx=\lim_{N\to\infty}\sum_kf(x_k)\Delta x$。これを積分の定義として、線積分や、仕事の「足し合わせ」の考え方を理解できる。</p>
+    <p><b>微分積分学の基本定理</b>:$F'=f$ なら $\int_a^bf(x)dx=F(b)-F(a)$。</p>
+    <p><b>置換積分</b>:$x=g(u)$ とおくと、$dx=g'(u)du$、$\int f(x)dx=\int f(g(u))g'(u)du$(積分範囲も $u$ に直す)。</p>
+    <div class="box ex">
+      <div class="label">例</div>
+      <p>$\int_0^1x\sqrt{1-x^2}\,dx$:$u=1-x^2$、$du=-2x\,dx$。$x:0\to1$ で $u:1\to0$。$\int_1^0\sqrt u\Bigl(-\dfrac{du}2\Bigr)=\dfrac12\int_0^1u^{1/2}du=\dfrac12\cdot\dfrac23=\dfrac13$。</p>
+    </div>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-04.html#w-riemann" data-xref>第4回 1.3 リーマン和と積分</a><a href="weeks/week-08.html#w-subst" data-xref>第8回 1.3 置換積分</a></p>
+
+    <!-- ===================== p ===================== -->
+    <h2 id="partial">p. 偏微分・全微分・勾配</h2>
+    <p>2変数以上の関数 $f(x,y)$ で、他の変数を止めて、1つの変数だけで微分したものが<b>偏微分</b> $\dfrac{\partial f}{\partial x}$、$\dfrac{\partial f}{\partial y}$。たとえば $f=x^2y+y^3$ なら $\dfrac{\partial f}{\partial x}=2xy$、$\dfrac{\partial f}{\partial y}=x^2+3y^2$。</p>
+    <p><b>全微分</b>(1次近似):$(x,y)$ から $(x+dx,y+dy)$ へ動くときの $f$ の変化は
+    $$df=\frac{\partial f}{\partial x}dx+\frac{\partial f}{\partial y}dy=\nabla f\cdot d\bm r,\qquad\nabla f=\Bigl(\frac{\partial f}{\partial x},\frac{\partial f}{\partial y}\Bigr)\ (\text{勾配}).$$
+    勾配 $\nabla f$ は、$f$ が最も急に増える向きを向き、大きさがその増え方。等高線に垂直。</p>
+    <p><b>連鎖律</b>:$f(x(t),y(t))$ の $t$ による微分は $\dfrac{df}{dt}=\dfrac{\partial f}{\partial x}\dot x+\dfrac{\partial f}{\partial y}\dot y=\nabla f\cdot\dot{\bm r}$。ポテンシャル $U$ と力の関係 $\bm F=-\nabla U$ の説明(「$\bm F\cdot d\bm r=-dU$」)に使う。</p>
+    <p>(詳しくは、<a href="../calc/basics.html#partial" data-xref>微積の「春学期のまとめ」</a>にもあります。)</p>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-05.html#w-partial" data-xref>第5回 1.1 偏微分</a><a href="weeks/week-06.html#w-taylor3" data-xref>第6回 1.2 多変数のテイラー展開(1次近似)</a></p>
+
+    <!-- ===================== q ===================== -->
+    <h2 id="taylor1">q. テイラー展開と、べき級数の係数比較</h2>
+    <p>滑らかな関数は、$x=0$ のまわりで、$x$ のべきの和(<b>テイラー展開</b>)で書ける:
+    $$f(x)=f(0)+f'(0)x+\frac{f''(0)}{2!}x^2+\frac{f'''(0)}{3!}x^3+\cdots.$$
+    よく使うもの($|x|$ が小さいとき):
+    $$e^x=1+x+\frac{x^2}2+\cdots,\quad\sin x=x-\frac{x^3}{6}+\cdots,\quad\cos x=1-\frac{x^2}2+\cdots,$$
+    $$(1+x)^\alpha=1+\alpha x+\frac{\alpha(\alpha-1)}2x^2+\cdots,\qquad\frac1{1-x}=1+x+x^2+\cdots,\quad(1-x)^{-1/2}=1+\frac x2+\frac{3x^2}8+\cdots.$$
+    $x$ が小さいときは、最初の数項だけで十分よい近似:$\sin x\approx x$(振り子の微小振動)、$(1+x)^\alpha\approx1+\alpha x$。「$O(x^n)$」は、$x^n$ 程度以下の小さい量。</p>
+    <p><b>パラメータで展開して、次数ごとに比べる</b>(逐次近似法):解を $x=x_0+\omega x_1+\omega^2x_2+\cdots$ と、小さなパラメータ $\omega$ のべきで書く。方程式の両辺をべきで展開して、$\omega^0,\omega^1,\omega^2,\dots$ の係数を、それぞれ等しいとおく(任意の小さな $\omega$ で成り立つ恒等式だから)。解けない1つの方程式を、解ける方程式の列に分解できる。</p>
+    <div class="box ex">
+      <div class="label">例</div>
+      <p>$\ddot x=-g+2\omega\dot y$ のような式で、$x=x_0+\omega x_1+\cdots$、$y=y_0+\omega y_1+\cdots$ とおくと、$\omega^0$:$\ddot x_0=-g$、$\omega^1$:$\ddot x_1=2\dot y_0$、… と、低い次数から順に積分できる。</p>
+    </div>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-07.html#w-sintaylor" data-xref>第7回 1.4 $\sin\varphi$ のテイラー展開</a><a href="weeks/week-08.html#w-series" data-xref>第8回 1.4 $(1-x)^{-1/2}$ の展開と、$\sin^2$ の積分</a><a href="weeks/week-12.html#w-series" data-xref>第12回 1.3 べき級数展開と係数比較</a></p>
+
+    <!-- ===================== r ===================== -->
+    <h2 id="polar">r. 極座標と、面積速度</h2>
+    <p>平面上の点を、原点からの距離 $r$ と、$x$ 軸からの角 $\varphi$ で表す:$x=r\cos\varphi$、$y=r\sin\varphi$。</p>
+    <figure class="fig">
+      <svg viewBox="0 0 580 262" width="580" role="img" aria-label="極座標と基底ベクトル"><line x1="30" y1="210" x2="330" y2="210" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><line x1="100" y1="250" x2="100" y2="20" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><text class="t" x="334" y="228">x</text><text class="t" x="108" y="24">y</text><line x1="100" y1="210" x2="214.9" y2="113.6" style="stroke:var(--muted);stroke-width:1.6;stroke-dasharray:5 4"/><line x1="214.9" y1="113.6" x2="214.9" y2="210" style="stroke:var(--muted);stroke-width:1.1;stroke-dasharray:5 4;fill:none"/><line x1="214.9" y1="113.6" x2="100" y2="113.6" style="stroke:var(--muted);stroke-width:1.1;stroke-dasharray:5 4;fill:none"/><path d="M140 210 A40 40 0 0 0 130.6 184.3" style="fill:none;stroke:var(--muted);stroke-width:1.4"/><text class="t" x="146" y="198">φ</text><text class="t" x="135.5" y="157.8" style="font-size:18px">r</text><circle cx="214.9" cy="113.6" r="5" style="fill:var(--text)"/><line x1="214.9" y1="113.6" x2="248.3" y2="85.6" style="stroke:var(--thm);stroke-width:3.2;fill:none"/><polygon points="256.3,78.9 251.1,89.8 244.6,82.1" style="fill:var(--thm)"/><text class="t" x="265.3" y="76.3" style="fill:var(--thm);font-size:18px">e_r</text><line x1="214.9" y1="113.6" x2="186.9" y2="80.2" style="stroke:var(--ex);stroke-width:3.2;fill:none"/><polygon points="180.2,72.2 191.1,77.4 183.4,83.9" style="fill:var(--ex)"/><text class="t" x="172.9" y="67.2" style="text-anchor:end;fill:var(--ex);font-size:18px">e_φ</text><line x1="100" y1="210" x2="141.6" y2="210" style="stroke:var(--accent);stroke-width:2.4;fill:none"/><polygon points="150,210 141,214.4 141,205.6" style="fill:var(--accent)"/><text class="t" x="154" y="228" style="fill:var(--accent)">e_x</text><line x1="100" y1="210" x2="100" y2="168.4" style="stroke:var(--accent);stroke-width:2.4;fill:none"/><polygon points="100,160 104.4,169 95.6,169" style="fill:var(--accent)"/><text class="t" x="108" y="160" style="fill:var(--accent)">e_y</text><text class="tj" x="350" y="70">x = r cosφ,  y = r sinφ</text><text class="tj" x="350" y="98" style="fill:var(--thm)">e_r = cosφ e_x + sinφ e_y</text><text class="tj" x="350" y="124" style="fill:var(--ex)">e_φ = −sinφ e_x + cosφ e_y</text><text class="tm" x="350" y="156">e_r:中心から遠ざかる向き</text><text class="tm" x="350" y="174">e_φ:φ が増える向き(反時計回り)</text><text class="tt" x="350" y="204">点が動くと、e_r, e_φ の向きも回る</text></svg>
+    </figure>
+    <p>位置の変化に合わせて動く、2本の単位ベクトル:$\bm e_r=(\cos\varphi,\sin\varphi)$(動径方向)、$\bm e_\varphi=(-\sin\varphi,\cos\varphi)$(角が増える向き)。$\varphi$ で微分すると、$\dfrac{d\bm e_r}{d\varphi}=\bm e_\varphi$、$\dfrac{d\bm e_\varphi}{d\varphi}=-\bm e_r$。時間では、$\dot{\bm e}_r=\dot\varphi\bm e_\varphi$、$\dot{\bm e}_\varphi=-\dot\varphi\bm e_r$。</p>
+    <p>位置 $\bm r=r\bm e_r$ を時間で微分して、
+    $$\bm v=\dot r\bm e_r+r\dot\varphi\bm e_\varphi,\qquad\bm a=(\ddot r-r\dot\varphi^2)\bm e_r+(2\dot r\dot\varphi+r\ddot\varphi)\bm e_\varphi.$$
+    (成分 $r\dot\varphi$:円運動の速さ。$-r\dot\varphi^2$:向心加速度。)</p>
+    <p><b>扇形の面積と面積速度</b>:半径 $r$、中心角 $\Delta\varphi$ の扇形の面積は $\tfrac12r^2\Delta\varphi$(円全体の $2\pi$ に対する割合 $\dfrac{\Delta\varphi}{2\pi}$ × $\pi r^2$)。時間 $dt$ の間に、動径が掃く面積は $dA=\tfrac12r^2\dot\varphi\,dt$。単位時間あたりの面積 $\dfrac{dA}{dt}=\tfrac12r^2\dot\varphi$ が<b>面積速度</b>。</p>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-07.html#w-polar" data-xref>第7回 1.1 極座標</a><a href="weeks/week-09.html#w-areav" data-xref>第9回 1.3 扇形の面積と面積速度</a></p>
+
+    <!-- ===================== s ===================== -->
+    <h2 id="trigid">s. 三角関数の公式</h2>
+    <ul>
+      <li>$\sin^2\theta+\cos^2\theta=1$。</li>
+      <li>加法定理:$\sin(\alpha\pm\beta)=\sin\alpha\cos\beta\pm\cos\alpha\sin\beta$、$\cos(\alpha\pm\beta)=\cos\alpha\cos\beta\mp\sin\alpha\sin\beta$。</li>
+      <li>2倍角:$\sin2\theta=2\sin\theta\cos\theta$、$\cos2\theta=\cos^2\theta-\sin^2\theta=1-2\sin^2\theta=2\cos^2\theta-1$。</li>
+      <li><b>半角の公式</b>:$\sin^2\dfrac\theta2=\dfrac{1-\cos\theta}2$、$\cos^2\dfrac\theta2=\dfrac{1+\cos\theta}2$(2倍角の $\cos2\theta$ の式を、$\theta\to\theta/2$ にして整理したもの)。特に $1-\cos\theta=2\sin^2\dfrac\theta2$。</li>
+      <li>$\sin^2\theta$ の積分:$\sin^2\theta=\dfrac{1-\cos2\theta}2$ だから $\int\sin^2\theta\,d\theta=\dfrac\theta2-\dfrac{\sin2\theta}4$。$\int_0^{\pi/2}\sin^2\theta\,d\theta=\dfrac\pi4$。</li>
+    </ul>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-08.html#w-halfangle" data-xref>第8回 1.2 半角の公式</a></p>
+
+    <!-- ===================== t ===================== -->
+    <h2 id="quadratic">t. 2次式と判別式</h2>
+    <p>$ax^2+bx+c$ は、<b>平方完成</b>して $a\Bigl(x+\dfrac b{2a}\Bigr)^2-\dfrac{b^2-4ac}{4a}$ と書ける。$D=b^2-4ac$ が<b>判別式</b>:$ax^2+bx+c=0$ が、実数の解を2つもつ $\iff D\gt0$、重解 $\iff D=0$、実数の解なし $\iff D\lt0$。</p>
+    <p><b>2次不等式</b>:$a\lt0$(上に凸の放物線)のとき、$ax^2+bx+c\ge0$ をみたす $x$ が存在する $\iff D\ge0$。このとき、その範囲は、2つの解のあいだ。頂点 $x=-\dfrac b{2a}$ で最大値。</p>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-10.html#w-quad2" data-xref>第10回 1.3 2次不等式と判別式</a></p>
+
+    <!-- ===================== u ===================== -->
+    <h2 id="conics">u. 円錐曲線(楕円・放物線・双曲線)</h2>
+    <p><b>楕円</b>:2つの定点(焦点)からの距離の和が一定の点の集まり。標準形 $\dfrac{x^2}{a^2}+\dfrac{y^2}{b^2}=1$($a\ge b$)。$a$:長半径、$b$:短半径。焦点は $(\pm c,0)$、$c=\sqrt{a^2-b^2}$。<b>離心率</b> $e=\dfrac ca$($0\le e\lt1$、$e=0$ は円)。面積 $\pi ab$。</p>
+    <figure class="fig">
+      <svg viewBox="0 0 520 356" width="520" role="img" aria-label="楕円と、長半径・短半径・ℓ"><path d="M100 175 A150 125.2746981636755 0 1 1 400 175 A150 125.2746981636755 0 1 1 100 175" style="fill:var(--accent);fill-opacity:.1;stroke:var(--accent);stroke-width:2.4"/><line x1="80" y1="175" x2="420" y2="175" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><line x1="250" y1="33.7" x2="250" y2="316.3" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><circle cx="167.5" cy="175" r="6" style="fill:var(--thm)"/><text class="tm" x="167.5" y="197" style="text-anchor:middle">焦点(太陽)</text><circle cx="332.5" cy="175" r="4" style="fill:var(--muted)"/><text class="tm" x="332.5" y="195" style="text-anchor:middle">焦点</text><line x1="250" y1="169" x2="400" y2="169" style="stroke:var(--ex);stroke-width:2.6"/><text class="tt" x="325" y="163" style="text-anchor:middle;fill:var(--ex)">長半径 a</text><line x1="258" y1="175" x2="258" y2="49.7" style="stroke:var(--thm);stroke-width:2.6"/><text class="tt" x="264" y="112.4" style="fill:var(--thm)">短半径 b</text><line x1="167.5" y1="175" x2="167.5" y2="70.4" style="stroke:var(--accent);stroke-width:2.6"/><text class="t" x="161.5" y="122.7" style="text-anchor:end;fill:var(--accent);font-size:18px">ℓ</text><text class="tm" x="108" y="167" style="text-anchor:start">近日点まで</text><text class="tm" x="14" y="20">離心率 e:焦点が中心から離れている度合い(c = ae)</text><text class="tt" x="14" y="38">a = ℓ/(1 − e²)、 b = ℓ/√(1 − e²)、 b² = a² (1 − e²)</text><text class="tm" x="14" y="328">楕円の面積 = π a b = πℓ²/(1 − e²)^{3/2}</text><text class="tm" x="14" y="346">太陽から近日点までの距離 = a(1 − e) = ℓ/(1 + e)</text></svg>
+    </figure>
+    <p><b>焦点を原点にとった極方程式</b>:$r=\dfrac{\ell}{1+e\cos\varphi}$($\ell$:半直弦(焦点を通り、長軸に垂直な弦の半分の長さ))。$0\le e\lt1$ なら楕円、$e=1$ なら<b>放物線</b>、$e\gt1$ なら<b>双曲線</b>(の、焦点側の枝)。楕円では、近日点 $r=\dfrac\ell{1+e}$、遠日点 $\dfrac\ell{1-e}$、長半径 $a=\dfrac\ell{1-e^2}$、短半径 $b=\dfrac\ell{\sqrt{1-e^2}}$。</p>
+    <p>直交座標に直すと、$r+ex=\ell$($x=r\cos\varphi$)から、$y^2=(e^2-1)x^2-2e\ell x+\ell^2$。</p>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-09.html#w-ellipse" data-xref>第9回 1.2 楕円</a><a href="weeks/week-10.html#w-conics2" data-xref>第10回 1.4 円錐曲線</a></p>
+
+    <!-- ===================== v ===================== -->
+    <h2 id="sphere">v. 円・球の長さ・面積・体積</h2>
+    <p>半径 $r$ の円:円周 $2\pi r$、面積 $\pi r^2$。半径 $r$ の球:表面積 $4\pi r^2$、体積 $\dfrac43\pi r^3$。これらは、微小な厚さ $dr$ の殻の体積 $4\pi r^2dr$ を、$0$ から $r$ まで積分した結果($\int_0^r4\pi r'^2dr'=\dfrac43\pi r^3$)。</p>
+    <p>密度 $\rho$ が一様なら、質量 = 密度 × 体積:半径 $r$ の球の質量は $\rho\cdot\dfrac43\pi r^3$。</p>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-11.html#w-sphere" data-xref>第11回 1.2 球の体積と質量</a></p>
+
+    <!-- ===================== w ===================== -->
+    <h2 id="inertia">w. 慣性モーメント</h2>
+    <p>質点の集まり(剛体)が、軸のまわりに角速度 $\dot\varphi$ で回っているとき、軸からの距離 $r_i$ にある質量 $m_i$ の質点の速さは $r_i\dot\varphi$。全運動エネルギーは $\sum\tfrac12m_i(r_i\dot\varphi)^2=\tfrac12I\dot\varphi^2$、$I=\sum m_ir_i^2$。この $I$ が<b>慣性モーメント</b>(回しにくさ)。角運動量は $L=I\dot\varphi$、運動方程式は $I\ddot\varphi=N$($N$:トルク)。並進運動の $m\leftrightarrow I$、$v\leftrightarrow\dot\varphi$ に対応する。</p>
+    <p>連続的に質量が分布している場合は、和を積分に置き換える:$I=\int r^2\,dm$。円板は、半径 $r$、幅 $dr$ の円環(面積 $2\pi r\,dr$、質量 $2\pi r\,dr\,\sigma$)に分けて $I=\int_0^a2\pi\sigma r^3dr=\dfrac\pi2\sigma a^4=\dfrac12Ma^2$($M=\pi a^2\sigma$)。</p>
+    <table class="cmp">
+      <tr><th>形(軸)</th><th>$I$</th></tr>
+      <tr><td>細い輪(中心を通り、面に垂直)</td><td>$Ma^2$</td></tr>
+      <tr><td>円板(同上)</td><td>$\tfrac12Ma^2$</td></tr>
+      <tr><td>一様な球(中心を通る)</td><td>$\tfrac25Ma^2$</td></tr>
+      <tr><td>細い棒(長さ $\ell$、中心を通り、棒に垂直)</td><td>$\tfrac1{12}M\ell^2$</td></tr>
+    </table>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-13.html#w-ring" data-xref>第13回 1.4 面積を輪切りにして積分する</a></p>
+
+  </main>
+
+  <footer>© Aセメまとめノート</footer>
+</body>
+</html>
