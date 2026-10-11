@@ -66,3 +66,5 @@ weeks/week-01.html, basics.html   旧URLからの転送(消さない)
 
 - Windows。`git` が PATH にないことがある(GitHub Desktop 同梱の git と、GitHub CLI `gh` を使う。場所は記憶を参照)。
 - 実行したサーバーは、確認が終わったら止める。
+- 図・本文を一括で生成するツール(`lib.js`、`build.js` など)は `reference/mech/build/` に保存してある(`reference/mech/README.md` に使い方)。新しい教科(熱力学 `thermo` など)を作るときは、これを手本にコピーして使う。ツールが見えない作業コピーのときは、`mech/` の公開済みHTMLを手本にして、図を直接SVGで書く。
+- 新しい教科の手順:フォルダ(`<教科>/index.html`、`basics.html`、`weeks/`)と `index.html` の教科カードを足し、各教科のヘッダーのリンクも揃える。PDFは `reference/<教科>/lecture/` に置き、ページ画像(`png/pNN.png`)にして読む(`pdf2png.ps1` 相当の PowerShell で Windows の PDF API を使う)。
