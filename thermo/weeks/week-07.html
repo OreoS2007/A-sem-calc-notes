@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>第7回 Clausius の不等式とエントロピー | Aセメまとめノート</title>
+  <link rel="stylesheet" href="../../assets/style.css">
+  <script defer src="../../assets/nav.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],macros:{'\\R':'\\mathbb{R}','\\bm':'\\boldsymbol{#1}','\\dd':'\\mathrm{d}','\\dbar':'\\mathrm{d}^{\\prime}'}});window.__navReady&&window.__navReady()"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="inner">
+      <a class="site-title" href="../../index.html">Aセメまとめノート</a>
+      <span class="links"><a href="../index.html">熱力学</a><a href="../basics.html">基礎のまとめ</a><a href="../../calc/index.html">微積</a><a href="../../linalg/index.html">線形代数</a><a href="../../em/index.html">電磁気学</a><a href="../../mech/index.html">力学A</a></span>
+    </div>
+  </header>
+
+  <main class="note">
+    <h1>第7回:Clausius の不等式とエントロピー</h1>
+    <div class="meta">熱力学(東京大学 教養学部 秋学期)／板書 p.7(下端)〜p.8(画像の順に数えています)／ノートの見出し「Clausius の不等式」「3.9 エントロピー」</div>
+
+    <nav class="toc">
+      <div class="toc-title">目次</div>
+      <ol start="0">
+        <li><a href="#s0">この回の全体像</a></li>
+        <li><a href="#s1">準備:基礎の確認</a>
+          <div class="sub">サイクル積分と、経路によらない量／総和記号／定積熱容量</div></li>
+        <li><a href="#s2">Clausius の不等式(熱源が $n$ 個のとき)</a>(p.7〜8)</li>
+        <li><a href="#s3">熱源が連続無限個のとき:$\oint\frac{\dbar Q}{T}\le0$</a>(p.8)</li>
+        <li><a href="#s4">3.9 エントロピー:可逆サイクルから状態量へ</a>(p.8)</li>
+        <li><a href="#s5">不可逆サイクルとエントロピー増大則</a>(p.8)</li>
+        <li><a href="#s6">エントロピーの測り方</a>(p.8)</li>
+        <li><a href="#s7">具体例で練習</a></li>
+        <li><a href="#s8">まとめ(この回で覚えること)</a></li>
+        <li><a href="#s9">この回のノートについてのメモ</a></li>
+      </ol>
+    </nav>
+
+    <!-- ===================== 0 ===================== -->
+    <h2 id="s0">0. この回の全体像 <span class="page-tag">板書 p.7–8</span></h2>
+    <p>前回、Carnot サイクルでは、(熱)÷(その熱をやりとりする熱源の温度)が、高温側と低温側で等しい($Q_1/T_1=Q_2/T_2$)ことが分かりました。この回では、これを<b>任意のサイクル</b>に一般化して(<b>Clausius の不等式</b>)、そこから、熱力学の主役である状態量、<b>エントロピー</b> $S$ を導きます。</p>
+    <div class="box thm">
+      <div class="label">この回のゴール</div>
+      <p>① <b>Clausius の不等式</b>:任意のサイクルで $\displaystyle\oint\frac{\dbar Q}{T}\le0$($T$ は、熱 $\dbar Q$ をやりとりする熱源の温度)。等号は可逆サイクル。<br>
+      ② 可逆なサイクルでは $\oint\dfrac{\dbar Q}{T}=0$ なので、可逆な過程 A→B にそった積分 $\displaystyle\int_A^B\frac{\dbar Q}{T}$ は、<b>途中の経路によらない</b>。これを使って、状態量<b>エントロピー</b> $S$ を定義する:$S_B-S_A=\displaystyle\int_{A\to B}^{\text{可逆}}\frac{\dbar Q}{T}$。<br>
+      ③ 不可逆なサイクルでは $\oint\dfrac{\dbar Q}{T}\lt0$。これから、<b>断熱過程では、エントロピーは増える</b>(エントロピー増大則)。<br>
+      ④ 測り方:$dS=\dfrac{dU}{T}+\dfrac{P}{T}dV$、定積なら $S_B-S_A=\displaystyle\int\frac{C_V}{T}dT$。</p>
+    </div>
+    <figure class="fig">
+      <svg viewBox="0 0 660 244" width="660" role="img" aria-label="エントロピーの定義"><line x1="56" y1="220" x2="378.6" y2="220" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><polygon points="386,220 378,223.4 378,216.6" style="fill:var(--muted)"/><line x1="56" y1="220" x2="56" y2="37.4" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><polygon points="56,30 59.4,38 52.6,38" style="fill:var(--muted)"/><text class="t" x="386" y="238" style="text-anchor:end">V</text><text class="t" x="48" y="38" style="text-anchor:end">P</text><path d="M96 70 Q136 160 206 170" style="fill:none;stroke:var(--thm);stroke-width:2.8"/><path d="M96 70 Q236 30 326 120" style="fill:none;stroke:var(--ex);stroke-width:2.8"/><path d="M206 170 Q276 200 326 120" style="fill:none;stroke:var(--accent);stroke-width:2.8"/><line x1="140" y1="138" x2="142.6" y2="140.6" style="stroke:var(--thm);stroke-width:3;fill:none"/><polygon points="150,148 138.7,143.8 145.8,136.7" style="fill:var(--thm)"/><line x1="216" y1="54" x2="223.6" y2="54.4" style="stroke:var(--ex);stroke-width:3;fill:none"/><polygon points="234,55 222.7,59.4 223.3,49.4" style="fill:var(--ex)"/><line x1="258" y1="182" x2="265.6" y2="181.6" style="stroke:var(--accent);stroke-width:3;fill:none"/><polygon points="276,181 265.3,186.6 264.7,176.6" style="fill:var(--accent)"/><circle cx="96" cy="70" r="6" style="fill:var(--text)"/><text class="t" x="108" y="60" style="text-anchor:start">O(基準)</text><circle cx="206" cy="170" r="6" style="fill:var(--text)"/><text class="t" x="198" y="188" style="text-anchor:end">A</text><circle cx="326" cy="120" r="6" style="fill:var(--text)"/><text class="t" x="334" y="112" style="text-anchor:start">B</text><text class="tt" x="410" y="60">S_A = S₀ + ∫(O→A) dQ/T</text><text class="tj" x="410" y="86" style="fill:var(--ex);font-weight:600">S_B = S₀ + ∫(O→B) dQ/T</text><text class="tj" x="410" y="124">差をとると:</text><text class="ta" x="410" y="148">S_B − S_A = ∫(A→B) dQ/T</text><text class="tm" x="410" y="182">(可逆な道で、換算熱を足す)</text></svg>
+      <figcaption>エントロピーの定義。基準の状態 O から、可逆な道で、換算熱 $\dbar Q/T$ を足していった値が、その状態のエントロピー(基準の分の定数 $S_0$ を除いて)。</figcaption>
+    </figure>
+
+    <!-- ===================== 1 ===================== -->
+    <h2 id="s1">1. 準備:基礎の確認</h2>
+
+    <h3 id="w-cint">1.1 サイクル積分と、経路によらない量</h3>
+    <div class="box basic">
+      <div class="label">基礎:$\oint$ と、「$\oint=0$ なら、経路によらない」 <a class="xref-link" href="../basics.html#cycleint" data-xref>→ 詳しい解説</a></div>
+      <p><b>$\oint$</b> は、「出発点に戻る閉じた経路(サイクル)に沿った積分」の記号です。たとえば、重力のようなポテンシャルのある力 $F$ では、1周して元の位置に戻る仕事は 0($\oint F\,dx=0$)。これは、「A から B まで、どの経路を通っても、仕事は同じ」ということと同じ意味です:経路 K と K′ で A→B に行って、K′ を逆にたどって戻ると、1周の積分は $\int_K-\int_{K'}=0$。</p>
+      <p>そして、「経路によらない量」は、<b>基準点 O からの積分</b>で、状態の関数(ポテンシャル)として、定義できます:$U(A)=\int_{O\to A}F\,dx$ の符号をつけたもの。この回で、<b>位置エネルギーと同じ発想で、エントロピーを定義</b>します。</p>
+    </div>
+
+    <h3 id="w-sigma">1.2 総和記号 $\Sigma$</h3>
+    <div class="box basic">
+      <div class="label">基礎:$\sum_{k=1}^{n}a_k=a_1+a_2+\cdots+a_n$ <a class="xref-link" href="../basics.html#sigma" data-xref>→ 詳しい解説</a></div>
+      <p>$\displaystyle\sum_{k=1}^{n}a_k$ は、$k=1$ から $n$ までを、すべて足した和。たとえば、$\sum_{k=1}^{3}k^2=1+4+9=14$。足し算の順は、入れかえてよく、$\sum(a_k+b_k)=\sum a_k+\sum b_k$、$\sum c\,a_k=c\sum a_k$($c$ は $k$ によらない定数)。</p>
+    </div>
+
+    <h3 id="w-cv7">1.3 定積熱容量 $C_V$</h3>
+    <div class="box basic">
+      <div class="label">基礎:体積一定で、温度を上げるための熱 <a class="xref-link" href="../basics.html#heatcap" data-xref>→ 詳しい解説</a></div>
+      <p>体積を一定にして温めるとき、微小な温度変化 $dT$ に必要な熱は $\dbar Q=C_V\,dT$(第4回)。$C_V\ge0$(第1回)。温度を $T_0$ から $T$ まで上げるのに必要な熱の合計は、$\int_{T_0}^{T}C_V\,dT$(積分)。</p>
+    </div>
+
+    <!-- ===================== 2 ===================== -->
+    <h2 id="s2">2. Clausius の不等式(熱源が $n$ 個のとき) <span class="page-tag">板書 p.7–8</span></h2>
+    <p>板書(p.7 の最下部):「<b>Clausius の不等式</b>。Carnot サイクル:$\dfrac{Q_2}{Q_1}=\dfrac{T_2}{T_1}$ ⇒ $\dfrac{Q_2}{T_2}=\dfrac{Q_1}{T_1}$ ←換算熱。※ 熱源が2つ以上あるときの換算熱の性質:熱の正の向きをサイクルに入る向きにする。$\dfrac{Q_1}{T_1}+\dfrac{Q_2}{T_2}\le0$。」</p>
+    <p>前回の最後に導入した「<b>換算熱</b>」$\dfrac{Q}{T}$($Q$:熱、$T$:その熱をやりとりする熱源の温度)を使うと、Carnot サイクル(熱源2つ)では、サイクルに入る熱を正として、$\dfrac{Q_1}{T_1}+\dfrac{Q_2}{T_2}=0$。この回の板書(p.8 の冒頭)では、これを、熱源が $n$ 個(温度 $T_1,\dots,T_n$)の、<b>任意のサイクル C</b> に拡張します。</p>
+    <p>板書:「Step 1:$n$ 個の熱源(温度 $T_n$)とやりとりをするサイクル C をまわす。Step 2:$n$ 個の Carnot サイクル $C_n$ をまわす。$Q_i-Q_i'$(…)、$\dfrac{Q_i'}{T_i}+\dfrac{Q_i''}{T_0}=0$。Q. ① 許される C の特性は? ② 可逆サイクルのときの換算熱は?」</p>
+    <figure class="fig">
+      <svg viewBox="0 0 560 370" width="560" role="img" aria-label="Clausius の不等式の証明"><rect x="200" y="31" width="80" height="26" rx="4" style="fill:var(--thm);fill-opacity:.22;stroke:var(--thm);stroke-width:2"/><text class="t" x="240" y="49" style="text-anchor:middle">T₁</text><rect x="200" y="99" width="80" height="26" rx="4" style="fill:var(--thm);fill-opacity:.22;stroke:var(--thm);stroke-width:2"/><text class="t" x="240" y="117" style="text-anchor:middle">T₂</text><rect x="200" y="183" width="80" height="26" rx="4" style="fill:var(--thm);fill-opacity:.22;stroke:var(--thm);stroke-width:2"/><text class="t" x="240" y="201" style="text-anchor:middle">T_k</text><rect x="200" y="257" width="80" height="26" rx="4" style="fill:var(--thm);fill-opacity:.22;stroke:var(--thm);stroke-width:2"/><text class="t" x="240" y="275" style="text-anchor:middle">T_n</text><text class="tj" x="240" y="156" style="text-anchor:middle">⋮</text><text class="tj" x="240" y="236" style="text-anchor:middle">⋮</text><circle cx="70" cy="157" r="34" style="fill:var(--accent);fill-opacity:.18;stroke:var(--accent);stroke-width:2.2"/><text class="t" x="70" y="162" style="text-anchor:middle">C</text><line x1="104" y1="134.4" x2="200" y2="44" style="stroke:var(--muted);stroke-width:1.2"/><line x1="104" y1="148" x2="200" y2="112" style="stroke:var(--muted);stroke-width:1.2"/><line x1="104" y1="164.8" x2="200" y2="196" style="stroke:var(--muted);stroke-width:1.2"/><line x1="104" y1="179.6" x2="200" y2="270" style="stroke:var(--muted);stroke-width:1.2"/><line x1="164" y1="77.5" x2="154.2" y2="84" style="stroke:var(--thm);stroke-width:2.2;fill:none"/><polygon points="148,88.1 152.7,80.7 156.7,86.7" style="fill:var(--thm)"/><text class="t" x="170" y="71.5" style="text-anchor:end">Q₁</text><line x1="164" y1="125.3" x2="155.2" y2="127.7" style="stroke:var(--thm);stroke-width:2.2;fill:none"/><polygon points="148,129.6 154.8,124 156.7,131" style="fill:var(--thm)"/><text class="t" x="170" y="119.3" style="text-anchor:end">Q₂</text><line x1="164" y1="184.4" x2="155.2" y2="182.4" style="stroke:var(--thm);stroke-width:2.2;fill:none"/><polygon points="148,180.8 156.6,179.1 155,186.1" style="fill:var(--thm)"/><text class="t" x="170" y="178.4" style="text-anchor:end">Q_k</text><line x1="164" y1="236.5" x2="154.2" y2="230" style="stroke:var(--thm);stroke-width:2.2;fill:none"/><polygon points="148,225.9 156.7,227.3 152.7,233.3" style="fill:var(--thm)"/><text class="t" x="170" y="230.5" style="text-anchor:end">Q_n</text><circle cx="360" cy="44" r="17" style="fill:var(--ex);fill-opacity:.18;stroke:var(--ex);stroke-width:2.2"/><text class="t" x="360" y="49" style="text-anchor:middle">C₁</text><line x1="282" y1="44" x2="333.6" y2="44" style="stroke:var(--ex);stroke-width:2.4;fill:none"/><polygon points="342,44 333,48 333,40" style="fill:var(--ex)"/><text class="t" x="312" y="38" style="text-anchor:middle">Q′</text><circle cx="360" cy="112" r="17" style="fill:var(--ex);fill-opacity:.18;stroke:var(--ex);stroke-width:2.2"/><text class="t" x="360" y="117" style="text-anchor:middle">C₂</text><line x1="282" y1="112" x2="333.6" y2="112" style="stroke:var(--ex);stroke-width:2.4;fill:none"/><polygon points="342,112 333,116 333,108" style="fill:var(--ex)"/><text class="t" x="312" y="106" style="text-anchor:middle">Q′</text><circle cx="360" cy="196" r="17" style="fill:var(--ex);fill-opacity:.18;stroke:var(--ex);stroke-width:2.2"/><text class="t" x="360" y="201" style="text-anchor:middle">Cₖ</text><line x1="282" y1="196" x2="333.6" y2="196" style="stroke:var(--ex);stroke-width:2.4;fill:none"/><polygon points="342,196 333,200 333,192" style="fill:var(--ex)"/><text class="t" x="312" y="190" style="text-anchor:middle">Q′</text><circle cx="360" cy="270" r="17" style="fill:var(--ex);fill-opacity:.18;stroke:var(--ex);stroke-width:2.2"/><text class="t" x="360" y="275" style="text-anchor:middle">Cₙ</text><line x1="282" y1="270" x2="333.6" y2="270" style="stroke:var(--ex);stroke-width:2.4;fill:none"/><polygon points="342,270 333,274 333,266" style="fill:var(--ex)"/><text class="t" x="312" y="264" style="text-anchor:middle">Q′</text><rect x="470" y="28" width="70" height="262" rx="4" style="fill:var(--accent);fill-opacity:.2;stroke:var(--accent);stroke-width:2"/><text class="t" x="505" y="164" style="text-anchor:middle">T₀</text><line x1="470" y1="44" x2="388.4" y2="44" style="stroke:var(--accent);stroke-width:2.4;fill:none"/><polygon points="380,44 389,40 389,48" style="fill:var(--accent)"/><text class="t" x="425" y="38" style="text-anchor:middle">Q″</text><line x1="470" y1="112" x2="388.4" y2="112" style="stroke:var(--accent);stroke-width:2.4;fill:none"/><polygon points="380,112 389,108 389,116" style="fill:var(--accent)"/><text class="t" x="425" y="106" style="text-anchor:middle">Q″</text><line x1="470" y1="196" x2="388.4" y2="196" style="stroke:var(--accent);stroke-width:2.4;fill:none"/><polygon points="380,196 389,192 389,200" style="fill:var(--accent)"/><text class="t" x="425" y="190" style="text-anchor:middle">Q″</text><line x1="470" y1="270" x2="388.4" y2="270" style="stroke:var(--accent);stroke-width:2.4;fill:none"/><polygon points="380,270 389,266 389,274" style="fill:var(--accent)"/><text class="t" x="425" y="264" style="text-anchor:middle">Q″</text><text class="tj" x="10" y="318">C は熱源 T_k から Q_k をもらう(サイクル C に入る向きを正)。</text><text class="tj" x="10" y="338">C_k は T_k に Q_k をそっくり返す(Q_k′ = −Q_k)ので、T_k は、正味、熱の出入りなし。</text><text class="tt" x="10" y="358">熱源 T₀ だけが、熱を出し入れする。</text></svg>
+      <figcaption>証明の設定。サイクル C は、熱源 $T_1,\dots,T_n$ から、熱 $Q_1,\dots,Q_n$ をもらう。それぞれの熱源 $T_k$ に、Carnot サイクル $C_k$ をつないで、もらった熱を返し、代わりに、共通の熱源 $T_0$ から熱をとる。</figcaption>
+    </figure>
+    <ol class="step-list">
+      <li><b>Step 1</b>:サイクル C は、$n$ 個の熱源 $T_1,\dots,T_n$ とやりとりして1周する。熱源 $T_k$ からサイクルに<b>入る熱</b>を $Q_k$(入る向きを正)とする。</li>
+      <li><b>Step 2</b>:各熱源 $T_k$ と、<b>共通の熱源 $T_0$</b> の間に、Carnot サイクル $C_k$ を置く。$C_k$ は、$T_k$ に、C が使った熱 $Q_k$ を<b>そっくり返す</b>ように動かす。つまり、$C_k$ が $T_k$ から受け取る熱を $Q_k'=-Q_k$ とする。$C_k$ が $T_0$ から受け取る熱を $Q_k''$ とすると、Carnot サイクルの性質(前回、$\dfrac{Q}{T}$ の和が 0)から、
+      $$\frac{Q_k'}{T_k}+\frac{Q_k''}{T_0}=0.$$</li>
+      <li>この組み合わせでは、$T_k$($k=1,\dots,n$)は、C に $Q_k$ を渡し、$C_k$ から $Q_k$ をもらうので、<b>正味、熱の出入りがない</b>。熱を出し入れするのは、$T_0$ だけ(合計 $\sum Q_k''$)。</li>
+    </ol>
+    <p>板書:「※ 換算熱(サイクル C):$\dfrac{Q_1}{T_1}+\dfrac{Q_2}{T_2}+\cdots=\sum_{k=1}^n\dfrac{Q_k}{T_k}=\sum_{k=1}^n\dfrac{-Q_k'}{T_k}=\sum_{k=1}^n\dfrac{Q_k''}{T_0}$ → サイクル C の換算熱は、熱源 $T_0$ の換算熱と同じ。」</p>
+    <p>$Q_k=-Q_k'$ と、Carnot サイクルの関係 $\dfrac{Q_k'}{T_k}=-\dfrac{Q_k''}{T_0}$ を使うと、
+    $$\sum_{k=1}^n\frac{Q_k}{T_k}=\sum_{k=1}^n\frac{-Q_k'}{T_k}=\sum_{k=1}^n\frac{Q_k''}{T_0}=\frac1{T_0}\sum_{k=1}^nQ_k''.$$
+    サイクル C の換算熱の和は、「熱源 $T_0$ の側で見た、熱の和」を $T_0$ で割ったものと、等しい。</p>
+    <p>板書:「※ 全系の仕事:$W_{\rm tot}=W+\sum_{k=1}^nW_k=\sum_{k=1}^nQ_k+\sum_{k=1}^n(Q_k'+Q_k'')=\sum_{k=1}^nQ_k''$。Ⓐ $W_{\rm tot}\gt0$ は、Kelvin の原理に反する。Ⓑ $W_{\rm tot}\le0$ ⟺ $\sum_{k=1}^nQ_k''\le0$ ⇒ $\sum_{k=1}^n\dfrac{Q_k}{T_k}\le0$ ← <b>Clausius の不等式</b>。等号で可逆サイクル、不等号では不可逆サイクル。」</p>
+    <p>全体(C と $C_1,\dots,C_n$ を合わせたもの)の、外にする仕事を考えます。第1法則(各サイクルは1周するので、仕事 = 入った熱の合計)から、
+    $$W_{\rm tot}=W+\sum_kW_k=\sum_kQ_k+\sum_k(Q_k'+Q_k'')=\sum_kQ_k''\qquad(\because\ Q_k'=-Q_k).$$</p>
+    <ul>
+      <li><b>Ⓐ</b> もし $W_{\rm tot}\gt0$ なら、全体は、ただ1つの熱源 $T_0$ から熱 $\sum Q_k''\gt0$ を受け取って、仕事 $W_{\rm tot}$ を出すサイクル(ほかの熱源 $T_k$ は、出入りなし)。<b>Kelvin の原理に反する</b>。</li>
+      <li><b>Ⓑ</b> したがって、$W_{\rm tot}\le0$、つまり $\sum Q_k''\le0$。$T_0\gt0$ なので、上の関係から:</li>
+    </ul>
+    <div class="box thm">
+      <div class="label">Clausius の不等式</div>
+      <p>$$\sum_{k=1}^n\frac{Q_k}{T_k}\le0.$$
+      $Q_k$:熱源 $T_k$ から、サイクルに<b>入る</b>向きを正とした熱。等号は、サイクルが<b>可逆</b>のとき。(不等号が成り立つなら、サイクルは不可逆。)</p>
+    </div>
+    <div class="box supp">
+      <div class="label">板書にない補足:可逆なら等号になる理由</div>
+      <p>サイクル C が<b>可逆</b>なら、C を逆向きに回すことができる。逆向きのサイクルでは、すべての熱の符号が逆になって、換算熱の和は $-\sum\dfrac{Q_k}{T_k}$。これにも、Clausius の不等式を使うと、$-\sum\dfrac{Q_k}{T_k}\le0$。つまり、$\sum\dfrac{Q_k}{T_k}\le0$ と $\ge0$ の両方が成り立つ:<b>可逆なら $\sum\dfrac{Q_k}{T_k}=0$</b>。逆に、$\lt0$ になるサイクルは、可逆ではありえない(不可逆)。</p>
+    </div>
+    <p>板書の問い「Q. ① 許される C の特性は?」への答えが、「$\sum\dfrac{Q_k}{T_k}\le0$ を満たすこと」。「② 可逆サイクルのときの換算熱は?」への答えが、「$=0$」です。</p>
+
+    <!-- ===================== 3 ===================== -->
+    <h2 id="s3">3. 熱源が連続無限個のとき:$\oint\frac{\dbar Q}{T}\le0$ <span class="page-tag">板書 p.8</span></h2>
+    <p>板書:「◎ 連続無限個の熱源の場合:(階段状の図 → なめらかな円の図)⇒ $\displaystyle\oint_{\text{サイクル}}\frac{\dbar Q}{T}\le0$。」</p>
+    <p>サイクルの途中で、温度が連続的に変わる熱源と、熱をやりとりする場合(たとえば、サイクル中に作業物質の温度が連続的に変わり、それぞれの温度の熱源と、少しずつ熱をやりとりする場合)を考えます。熱源の数 $n$ を限りなく増やし、各熱源とやりとりする熱 $Q_k$ を、微小量 $\dbar Q$ に置きかえると、和が積分になって、
+    $$\oint_{\text{サイクル}}\frac{\dbar Q}{T}\le0.$$
+    ここで、$T$ は、その瞬間に、熱 $\dbar Q$ をやりとりしている熱源の温度、$\oint$ は、サイクルを1周する積分です。等号は可逆サイクル。可逆なサイクルでは、作業物質の温度と熱源の温度が(ほとんど)同じなので、$T$ を「作業物質の温度」と読んでよい。</p>
+
+    <!-- ===================== 4 ===================== -->
+    <h2 id="s4">4. 3.9 エントロピー:可逆サイクルから状態量へ <span class="page-tag">板書 p.8</span></h2>
+    <p>板書:「<b>3.9 エントロピー</b>。可逆サイクル C:$\oint\dfrac{\dbar Q}{T}=0=\int_{A\to B}\dfrac{\dbar Q}{T}+\int_{B\to A}\dfrac{\dbar Q}{T}$。可逆サイクル C′:A⇄B⇄A(←可逆サイクルはいくらでもある)$\int_C\dfrac{\dbar Q}{T}=\int_{A\to B}\dfrac{\dbar Q}{T}+\int_{B\to A}\dfrac{\dbar Q}{T}=0$ ⇒ $\int_{A\xrightarrow{K}B}\dfrac{\dbar Q}{T}=\int_{A\xrightarrow{K'}B}\dfrac{\dbar Q}{T}$。可逆 A→B の換算熱の総量は、途中の経路によらない。」</p>
+    <figure class="fig">
+      <svg viewBox="0 0 660 244" width="660" role="img" aria-label="可逆な経路の、換算熱の積分"><line x1="56" y1="220" x2="378.6" y2="220" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><polygon points="386,220 378,223.4 378,216.6" style="fill:var(--muted)"/><line x1="56" y1="220" x2="56" y2="37.4" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><polygon points="56,30 59.4,38 52.6,38" style="fill:var(--muted)"/><text class="t" x="386" y="238" style="text-anchor:end">V</text><text class="t" x="48" y="38" style="text-anchor:end">P</text><path d="M136 160 Q156 70 316 80" style="fill:none;stroke:var(--thm);stroke-width:3"/><path d="M136 160 Q256 170 316 80" style="fill:none;stroke:var(--ex);stroke-width:3"/><line x1="174" y1="94" x2="180.7" y2="90.7" style="stroke:var(--thm);stroke-width:3;fill:none"/><polygon points="190,86 182.4,95.4 177.9,86.4" style="fill:var(--thm)"/><line x1="240" y1="166" x2="249.7" y2="164.5" style="stroke:var(--ex);stroke-width:3;fill:none"/><polygon points="260,163 249.9,169.6 248.4,159.7" style="fill:var(--ex)"/><circle cx="136" cy="160" r="6" style="fill:var(--text)"/><circle cx="316" cy="80" r="6" style="fill:var(--text)"/><text class="t" x="128" y="178" style="text-anchor:end">A</text><text class="t" x="324" y="74">B</text><text class="tt" x="190" y="70">可逆過程 K</text><text class="tj" x="230" y="194" style="fill:var(--ex);font-weight:600">可逆過程 K′</text><text class="tj" x="410" y="70">A→B→A(K で行って、</text><text class="tj" x="410" y="90">K′ を逆に戻る)は可逆サイクル:</text><text class="tt" x="410" y="122">∮ dQ/T = 0</text><text class="tt" x="410" y="148">⇒ ∫(K) dQ/T = ∫(K′) dQ/T</text><text class="tj" x="410" y="182">途中の経路によらず、</text><text class="tj" x="410" y="202">A と B だけで決まる量。</text></svg>
+      <figcaption>A から B への、2つの可逆な経路 K、K′。K で行き、K′ を逆向きに戻る、可逆サイクルを考える。$\oint\frac{\dbar Q}{T}=0$ から、K と K′ に沿った積分は、等しい。</figcaption>
+    </figure>
+    <ol class="step-list">
+      <li>状態 A から B へ行く、2つの<b>可逆な</b>過程(経路)K、K′ を考える。</li>
+      <li>K で A→B と進み、K′ を<b>逆向き</b>にたどって B→A と戻ると、1周する可逆サイクルになる。可逆サイクルでは、$\oint\dfrac{\dbar Q}{T}=0$:
+      $$\int_{A\xrightarrow{K}B}\frac{\dbar Q}{T}+\int_{B\xrightarrow{K'}A}\frac{\dbar Q}{T}=0.$$</li>
+      <li>K′ を逆にたどると、熱の符号が逆になる(可逆過程)ので、$\int_{B\xrightarrow{K'}A}=-\int_{A\xrightarrow{K'}B}$。よって、
+      $$\int_{A\xrightarrow{K}B}\frac{\dbar Q}{T}=\int_{A\xrightarrow{K'}B}\frac{\dbar Q}{T}.$$</li>
+    </ol>
+    <p>つまり、<b>可逆な過程 A→B で、換算熱 $\dfrac{\dbar Q}{T}$ を足した総量は、途中の道筋によらず、A と B だけで決まる</b>。</p>
+    <p>板書:「* 力学仕事が、途中の経路に依らない → 位置エネルギー。* 断熱仕事が、〃 → 内部エネルギー。⇓ 状態量としてエントロピー。」</p>
+    <table class="cmp">
+      <tr><th>経路によらない量</th><th>→ 状態量(基準点からの積分で定義)</th></tr>
+      <tr><td>力学の仕事(保存力)</td><td>位置エネルギー</td></tr>
+      <tr><td>断熱仕事(第1法則、ジュールの実験)</td><td>内部エネルギー $U$</td></tr>
+      <tr><td>可逆過程の換算熱 $\int\dbar Q/T$(第2法則)</td><td><b>エントロピー $S$</b></td></tr>
+    </table>
+    <p>同じ発想の3つ目です。「経路によらない」量があれば、それを、基準の状態 O からの積分として、<b>状態の関数</b>にできる。</p>
+    <p>板書:「状態量として エントロピー。$S_A=S_0+\displaystyle\int_{O\to A}\dfrac{\dbar Q}{T}$、$S_B=S_0+\int_{O\to B}\dfrac{\dbar Q}{T}$。⇒ $S_B-S_A=\int_{O\to B}-\int_{O\to A}=\int_{A\to B}\dfrac{\dbar Q}{T}$。」</p>
+    <div class="box def">
+      <div class="label">エントロピー</div>
+      <p>基準の状態 O のエントロピーを $S_0$ とする。状態 A のエントロピーを、O から A へ至る<b>可逆な</b>過程に沿った換算熱の積分で定める:
+      $$S_A=S_0+\int_{O\to A}^{\text{可逆}}\frac{\dbar Q}{T}.$$
+      したがって、2つの状態 A、B のエントロピーの差は、
+      $$S_B-S_A=\int_{A\to B}^{\text{可逆}}\frac{\dbar Q}{T}.$$
+      単位は J/K。微小な変化は、$dS=\dfrac{\dbar Q_{\rm 可逆}}{T}$。</p>
+    </div>
+    <p>$S$ は、経路によらず、状態だけで決まる量(<b>状態量</b>)。基準を決めると、定数 $S_0$ のぶんだけ不定(差だけが意味をもつ)。<b>示量性</b>(第1回:系を2倍にすれば $S$ も2倍)。「$\dbar Q$」(経路による量)に、$\dfrac1T$ をかけると、「$dS$」(状態量の微分)になる:$\dfrac1T$ は、$\dbar Q$ を状態量の微分に変える<b>積分因子</b>です。</p>
+
+    <!-- ===================== 5 ===================== -->
+    <h2 id="s5">5. 不可逆サイクルとエントロピー増大則 <span class="page-tag">板書 p.8</span></h2>
+    <p>板書:「◎ 不可逆サイクル C″:A⇄B($\int_{C''}\dfrac{\dbar Q}{T}=\int_{A\to B}\dfrac{\dbar Q}{T}+\int_{B\to A}\dfrac{\dbar Q}{T}\lt0$)⇒ $\int_{B\to A}\dfrac{\dbar Q}{T}\lt-\int_{A\to B}\dfrac{\dbar Q}{T}=\int_{B\to A}\dfrac{\dbar Q}{T}=S_A-S_B$。B→A 断熱過程とすると、$\dbar Q=0$ ⇒ $0\lt S_A-S_B$。断熱のとき、エントロピー増大則。」</p>
+    <figure class="fig">
+      <svg viewBox="0 0 660 244" width="660" role="img" aria-label="不可逆サイクルとエントロピー増大"><line x1="56" y1="220" x2="378.6" y2="220" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><polygon points="386,220 378,223.4 378,216.6" style="fill:var(--muted)"/><line x1="56" y1="220" x2="56" y2="37.4" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><polygon points="56,30 59.4,38 52.6,38" style="fill:var(--muted)"/><text class="t" x="386" y="238" style="text-anchor:end">V</text><text class="t" x="48" y="38" style="text-anchor:end">P</text><path d="M146 150 Q166 60 316 90" style="fill:none;stroke:var(--thm);stroke-width:3"/><path d="M316 90 Q206 160 146 150" style="fill:none;stroke:var(--ex);stroke-width:3;stroke-dasharray:7 5"/><line x1="184" y1="84" x2="190.7" y2="80.7" style="stroke:var(--thm);stroke-width:3;fill:none"/><polygon points="200,76 192.4,85.4 187.9,76.4" style="fill:var(--thm)"/><line x1="246" y1="142" x2="239.7" y2="144.3" style="stroke:var(--ex);stroke-width:3;fill:none"/><polygon points="230,148 238.5,139.5 242.1,148.8" style="fill:var(--ex)"/><circle cx="146" cy="150" r="6" style="fill:var(--text)"/><circle cx="316" cy="90" r="6" style="fill:var(--text)"/><text class="t" x="138" y="168" style="text-anchor:end">A</text><text class="t" x="324" y="84">B</text><text class="tt" x="186" y="56">可逆(A→B)</text><text class="tj" x="190" y="164" style="fill:var(--ex);font-weight:600">不可逆(B→A)</text><text class="tj" x="410" y="70">不可逆サイクル C″:</text><text class="tt" x="410" y="94">∮ dQ/T ＜ 0</text><text class="tj" x="410" y="130">⇒ ∫(B→A, 不可逆) dQ/T</text><text class="tt" x="410" y="152">    ＜ S_A − S_B</text><text class="tj" x="410" y="186">もし B→A が断熱なら dQ = 0:</text><text class="ta" x="410" y="208">0 ＜ S_A − S_B(増える)</text></svg>
+      <figcaption>A→B は可逆、B→A は不可逆な過程からなるサイクル C″。全体は不可逆なので、Clausius の不等式から、$\oint\frac{\dbar Q}{T}\lt0$。</figcaption>
+    </figure>
+    <ol class="step-list">
+      <li>サイクル C″ は、A→B を<b>可逆</b>に、B→A を<b>不可逆</b>に行う。全体は不可逆なので、Clausius の不等式から $\oint\dfrac{\dbar Q}{T}\lt0$:
+      $$\int_{A\to B}^{\text{可逆}}\frac{\dbar Q}{T}+\int_{B\to A}^{\text{不可逆}}\frac{\dbar Q}{T}\lt0.$$</li>
+      <li>第1項は、エントロピーの定義から $S_B-S_A$。よって、不可逆な B→A の積分は、$\int_{B\to A}^{\text{不可逆}}\dfrac{\dbar Q}{T}\lt-(S_B-S_A)=S_A-S_B$。</li>
+      <li>特に、B→A の不可逆過程が<b>断熱</b>($\dbar Q=0$、熱の出入りなし)なら、左辺は 0:
+      $$0\lt S_A-S_B.$$
+      つまり、断熱過程で B から A へ変化すると、エントロピーは増える($S_A\gt S_B$)。</li>
+    </ol>
+    <div class="box thm">
+      <div class="label">エントロピー増大則(断熱過程)</div>
+      <p>熱の出入りのない(断熱された)系で、不可逆な変化が起こると、エントロピーは<b>増える</b>($\Delta S\gt0$)。可逆なら変わらない($\Delta S=0$)。したがって、断熱された系の $S$ は、決して減らない:$\Delta S\ge0$。</p>
+    </div>
+    <p>第5回の「できないこと」で、不可逆(自由膨張、摩擦、熱伝導)を、「逆向きは不可能」と表現しました。今は、それが「<b>エントロピーが増える向きにだけ進む</b>」と、1つの数(状態量)で、表現できるようになりました。「状態変化の向き」の基準が、エントロピーです。</p>
+    <div class="box supp">
+      <div class="label">板書にない補足:一般の過程(A→B)の不等式</div>
+      <p>上の議論を、一般化します。A→B の過程が、どんな過程(不可逆でもよい)でも、B から A へ可逆に戻ると、全体が1つのサイクルになるので、$\int_{A\to B}\dfrac{\dbar Q}{T}+(S_A-S_B)\le0$。すなわち、
+      $$\int_{A\to B}\frac{\dbar Q}{T}\le S_B-S_A,\qquad\text{($\dbar Q$ は系が受け取る熱、$T$ は熱源の温度)}.$$
+      等号は、A→B が可逆のとき。これが、次回以降に使う、Clausius の不等式の形です(第8回)。</p>
+    </div>
+
+    <!-- ===================== 6 ===================== -->
+    <h2 id="s6">6. エントロピーの測り方 <span class="page-tag">板書 p.8</span></h2>
+    <p>板書:「◎ エントロピーのはかり方。第1法則 $dU=\dbar Q+\dbar W$($\dbar W=-P\,dV$)、$dS=\dfrac{\dbar Q}{T}=\dfrac{dU}{T}+\dfrac{P}{T}dV$ ← $=T\,dS-P\,dV$。∴ $dS=\dfrac{dU}{T}+\dfrac{P}{T}dV$。」</p>
+    <p>可逆(準静的)な過程では、第1法則 $dU=\dbar Q-P\,dV$ と、$\dbar Q=T\,dS$ から、
+    $$dU=T\,dS-P\,dV\qquad\Longleftrightarrow\qquad dS=\frac{dU}{T}+\frac{P}{T}\,dV.$$
+    この式は、<b>熱力学の基本関係式</b>で、第8回以降の、あらゆる式の出発点です。</p>
+    <p>板書:「* 定積過程で、$T_0\to T$ へ状態変化。$A(T_0,V)\to B(T,V)$。$S_B-S_A=\int_{A\to B}dS=\int_{A\to B}\dfrac{dU}{T}=\int_{A\to B}\dfrac1T\left(\left(\dfrac{\partial U}{\partial T}\right)_VdT+\left(\dfrac{\partial U}{\partial V}\right)_T\underbrace{dV}_{0}\right)$。∴ $S_B-S_A=\int_{T_0}^{T}\dfrac{C_V}{T}dT$。$C_V$ と $T$ は測定できる。$C_V\ge0$ なら、$S(T,V)$ は $T$ の単調増加関数。」</p>
+    <ol class="step-list">
+      <li>体積を一定にして、温度を $T_0$ から $T$ に上げる(A$(T_0,V)$→B$(T,V)$)。この間、$dV=0$ なので、仕事の項($P\,dV$)が消えて、$dS=\dfrac{dU}{T}$。</li>
+      <li>$dU=\left(\dfrac{\partial U}{\partial T}\right)_VdT+\left(\dfrac{\partial U}{\partial V}\right)_T\underbrace{dV}_{=0}=C_V\,dT$。</li>
+      <li>よって、$S_B-S_A=\displaystyle\int_{T_0}^{T}\frac{C_V}{T}\,dT$。</li>
+    </ol>
+    <figure class="fig">
+      <svg viewBox="0 0 660 244" width="660" role="img" aria-label="定積過程でのエントロピー"><line x1="64" y1="220" x2="396.6" y2="220" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><polygon points="404,220 396,223.4 396,216.6" style="fill:var(--muted)"/><line x1="64" y1="220" x2="64" y2="37.4" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><polygon points="64,30 67.4,38 60.6,38" style="fill:var(--muted)"/><text class="t" x="404" y="238" style="text-anchor:end">T</text><text class="t" x="56" y="38" style="text-anchor:end">S</text><polyline points="116,153.6 120.6,150.1 125.1,146.8 129.7,143.7 134.2,140.8 138.8,138 143.3,135.4 147.9,132.9 152.4,130.5 157,128.2 161.5,126.1 166.1,124 170.6,121.9 175.2,120 179.7,118.1 184.3,116.3 188.8,114.6 193.4,112.9 197.9,111.2 202.5,109.7 207,108.1 211.6,106.6 216.1,105.2 220.7,103.8 225.2,102.4 229.8,101 234.3,99.7 238.9,98.5 243.4,97.2 248,96 252.5,94.8 257.1,93.6 261.6,92.5 266.2,91.4 270.7,90.3 275.3,89.2 279.8,88.2 284.4,87.2 288.9,86.2 293.5,85.2 298,84.2 302.5,83.3 307.1,82.3 311.7,81.4 316.2,80.5 320.8,79.6 325.3,78.8 329.8,77.9 334.4,77.1 339,76.2 343.5,75.4 348.1,74.6 352.6,73.8 357.2,73.1 361.7,72.3 366.2,71.5 370.8,70.8 375.4,70.1 379.9,69.3 384.5,68.6 389,67.9" style="fill:none;stroke:var(--accent);stroke-width:3"/><line x1="155" y1="129.2" x2="155" y2="220" style="stroke:var(--muted);stroke-width:1.1;stroke-dasharray:5 4;fill:none"/><line x1="311" y1="81.6" x2="311" y2="220" style="stroke:var(--muted);stroke-width:1.1;stroke-dasharray:5 4;fill:none"/><line x1="64" y1="129.2" x2="155" y2="129.2" style="stroke:var(--muted);stroke-width:1.1;stroke-dasharray:5 4;fill:none"/><line x1="64" y1="81.6" x2="311" y2="81.6" style="stroke:var(--muted);stroke-width:1.1;stroke-dasharray:5 4;fill:none"/><circle cx="155" cy="129.2" r="5" style="fill:var(--text)"/><circle cx="311" cy="81.6" r="5" style="fill:var(--ex)"/><text class="tm" x="155" y="236" style="text-anchor:middle">T₀</text><text class="tm" x="311" y="236" style="text-anchor:middle">T</text><text class="tm" x="58" y="133.2" style="text-anchor:end">S_A</text><text class="tm" x="58" y="85.6" style="text-anchor:end">S_B</text><text class="ta" x="252" y="124.5" style="text-anchor:start">S = C_V log T + (定数)</text><text class="tj" x="420" y="70">体積 V 一定のとき:</text><text class="tt" x="420" y="94">S_B − S_A = ∫ (C_V/T) dT</text><text class="tj" x="420" y="124">C_V ≥ 0 なら、</text><text class="tj" x="420" y="144">S は T とともに増える。</text><text class="tm" x="420" y="178">C_V と T は、測定できる。</text><text class="tm" x="420" y="196">⇒ S の差を、実験で求められる</text></svg>
+      <figcaption>体積一定で温めたときのエントロピー。$C_V$ が一定なら、$S=C_V\log T+$ 定数。$C_V\ge0$ なので、$T$ が上がれば $S$ は増える。</figcaption>
+    </figure>
+    <p>右辺の $C_V$(熱容量)と $T$(温度)は、<b>実験で測れる量</b>です。つまり、エントロピーの差 $S_B-S_A$ を、実際に、測定値から計算できる。これが、エントロピーを「測る」方法です。$C_V\ge0$ なら、被積分関数が正なので、$S(T,V)$ は、$T$ の<b>単調増加関数</b>(温度を上げると、エントロピーは増える)。</p>
+
+    <!-- ===================== 7 ===================== -->
+    <h2 id="s7">7. 具体例で練習(板書にない補足) <span class="page-tag">補足</span></h2>
+    <div class="box ex">
+      <div class="label">問題 A:Clausius の不等式で、許されるサイクルを見分ける</div>
+      <p>あるサイクルが、$600\ \mathrm K$ の熱源から $300\ \mathrm J$、$400\ \mathrm K$ の熱源から $200\ \mathrm J$ をもらい、$300\ \mathrm K$ の熱源に熱 $Q_3$ を捨てる。(i) $Q_3=450\ \mathrm J$(捨てる)のとき、(ii) $Q_3=290\ \mathrm J$ のとき、このサイクルは存在しうるか。</p>
+    </div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>サイクルに入る熱を正にとる。(i) 第1法則から、仕事 $W=300+200-450=50\ \mathrm J$。$\sum\dfrac{Q}{T}=\dfrac{300}{600}+\dfrac{200}{400}-\dfrac{450}{300}=0.5+0.5-1.5=-0.5\ \mathrm{J/K}\le0$。許される(不可逆でもよい)。(ii) $W=210\ \mathrm J$。$\sum\dfrac QT=1-\dfrac{290}{300}=+0.033\gt0$:Clausius の不等式に反する。存在しない(効率が、Carnot の上限を超える)。</p></div>
+
+    <div class="box ex">
+      <div class="label">問題 B:氷の融解のエントロピー変化</div>
+      <p>$0\,{}^\circ\mathrm C$($273.15\ \mathrm K$)の氷 $100\ \mathrm g$ を、同じ温度で、可逆的に融かす。融解熱は $334\ \mathrm J/\mathrm g$。氷のエントロピーの変化 $\Delta S$ を求めよ。</p>
+    </div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>必要な熱 $Q=334\times100=3.34\times10^4\ \mathrm J$。温度一定($T=273.15\ \mathrm K$)なので、$\Delta S=\int\dfrac{\dbar Q}{T}=\dfrac QT=\dfrac{3.34\times10^4}{273.15}=122\ \mathrm{J/K}$。液体の方が、エントロピーが大きい(秩序の少ない状態)。</p></div>
+
+    <div class="box ex">
+      <div class="label">問題 C:水を温めたときのエントロピー変化</div>
+      <p>$100\ \mathrm g$ の水($C=420\ \mathrm{J/K}$、一定とする)を、体積(圧力)を一定に保って、$20\,{}^\circ\mathrm C$ から $80\,{}^\circ\mathrm C$ まで、可逆的に温める。$\Delta S$ を求めよ。</p>
+    </div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>$\Delta S=\int_{T_0}^{T}\dfrac{C}{T}dT=C\log\dfrac{T}{T_0}=420\times\log\dfrac{353.15}{293.15}=420\times0.186=78.2\ \mathrm{J/K}$($T$ は絶対温度で!)。</p></div>
+
+    <div class="box ex">
+      <div class="label">問題 D:自由膨張のエントロピー変化</div>
+      <p>$1\ \mathrm{mol}$ の理想気体($T=300\ \mathrm K$)が、断熱容器の中で、真空へ自由膨張して、体積が2倍になった。エントロピーの変化を求めよ。(ヒント:始状態と終状態は、温度が同じ。同じ2状態を、可逆な等温膨張でつなぐ。)</p>
+    </div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>$S$ は状態量なので、実際の過程(自由膨張、不可逆)ではなく、同じ始状態・終状態を結ぶ<b>可逆な過程</b>で計算する。可逆な等温膨張で、$\Delta U=0$ なので $Q_{\rm 可逆}=nRT\log2$。$\Delta S=\dfrac{Q_{\rm 可逆}}{T}=nR\log2=8.31\times0.693=5.76\ \mathrm{J/K}\gt0$。断熱で、不可逆(第5回)に起こる変化で、$\Delta S\gt0$:エントロピー増大則に合う。(実際の自由膨張では $Q=0$ で、$\int\dbar Q/T=0\lt\Delta S$:不等式 $\int\dfrac{\dbar Q}{T}\le\Delta S$ が、不等号で成り立つ。)</p></div>
+
+    <div class="box ex">
+      <div class="label">問題 E:熱伝導で、全体のエントロピーは増える</div>
+      <p>$T_1=400\ \mathrm K$ の熱源から、$T_2=300\ \mathrm K$ の熱源へ、熱 $Q=1200\ \mathrm J$ が、熱伝導で流れた。2つの熱源を合わせた、エントロピーの変化を求めよ。</p>
+    </div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>高温熱源:$\Delta S_1=-\dfrac{Q}{T_1}=-3.0\ \mathrm{J/K}$。低温熱源:$\Delta S_2=+\dfrac{Q}{T_2}=+4.0\ \mathrm{J/K}$。合計 $\Delta S=+1.0\ \mathrm{J/K}\gt0$。熱伝導は不可逆で、全体のエントロピーが増える。(逆向きに流れると、合計 $-1.0\ \mathrm{J/K}$ で、増大則に反する:Clausius の原理と同じ主張。)</p></div>
+
+    <!-- ===================== 8 ===================== -->
+    <h2 id="s8">8. まとめ(この回で覚えること)</h2>
+    <ul>
+      <li><b>Clausius の不等式</b>:任意のサイクルで $\sum\dfrac{Q_k}{T_k}\le0$、連続なら $\oint\dfrac{\dbar Q}{T}\le0$。等号は可逆。(証明:Carnot サイクルをつなぎ、全体で Kelvin の原理を使う。)</li>
+      <li>可逆サイクルでは $\oint\dfrac{\dbar Q}{T}=0$ ⇒ 可逆な A→B の $\int\dfrac{\dbar Q}{T}$ は経路によらない ⇒ <b>エントロピー</b> $S_B-S_A=\int_{A\to B}^{\text{可逆}}\dfrac{\dbar Q}{T}$(状態量、示量性)。位置エネルギー・内部エネルギーと、同じ発想。</li>
+      <li>不可逆なサイクルでは $\oint\dfrac{\dbar Q}{T}\lt0$。⇒ <b>断熱過程では $\Delta S\ge0$</b>(エントロピー増大則)。一般に $\int\dfrac{\dbar Q}{T}\le S_B-S_A$。</li>
+      <li>基本関係式:$dS=\dfrac{dU}{T}+\dfrac PTdV$(可逆)。定積:$S_B-S_A=\int\dfrac{C_V}{T}dT$。$C_V$ と $T$ から測れる。</li>
+    </ul>
+
+    <!-- ===================== 9 ===================== -->
+    <h2 id="s9">9. この回のノートについてのメモ</h2>
+    <p>板書は手書きの画像です。画像の順に、p.7(下端)から p.8 としました(p.8 の冒頭は、p.7 の末尾の、「Clausius の不等式」の続きです)。板書の画像は、このサイトには載せていません。黄色の枠、基礎ページの内容、練習問題と解答は、Claude が書き足したもので、板書にはありません。</p>
+    <ol>
+      <li><b>節番号(p.7〜p.8)</b>:板書には、「Clausius の不等式」の節番号がなく(3.8 にあたると思われます)、次が「3.9 エントロピー」です。本文は、見出しを、板書のとおり「Clausius の不等式」としました。</li>
+      <li><b>$Q$ の記号(p.8)</b>:Step 2 の「$Q_i-Q_i'$」「$Q_i'/T_i+Q_i''/T_0=0$」は、$Q_k'=-Q_k$(Carnot サイクル $C_k$ が、熱源 $T_k$ に熱をそっくり返す)と読みました。本文では、添字を $i$ でなく $k$ で書いています。</li>
+      <li><b>不等号の向き(p.8)</b>:不可逆サイクル C″ の式で、「$\int_{B\to A}\dfrac{\dbar Q}{T}\lt-\int_{A\to B}\dfrac{\dbar Q}{T}=\int_{B\to A}\dfrac{\dbar Q}{T}$」の2つ目の等号の積分は、<b>可逆な</b> B→A の積分(=$S_A-S_B$)と読みました。最初の積分(不可逆な B→A)と、区別しています。</li>
+      <li><b>「等号で可逆サイクル、不等号では不可逆サイクル」(p.8)</b>:正確には、「可逆なら等号」と「不等号なら不可逆」が、論理的に出る主張です(補足の枠)。「等号なら必ず可逆」は、板書の範囲では示されていません。</li>
+      <li><b>$dS$ の式の途中(p.8)</b>:「$dS=\dfrac{\dbar Q}{T}=T\,dS-P\,dV$」のように見える行は、「$dU=\dbar Q+\dbar W=T\,dS-P\,dV$、∴ $dS=\dfrac{dU}{T}+\dfrac PTdV$」と読みました。</li>
+    </ol>
+
+    <nav class="pager">
+      <a href="week-06.html">← 前の週</a>
+      <a href="../index.html">一覧へ</a>
+      <a href="week-08.html">次の週 →</a>
+    </nav>
+
+  </main>
+
+  <footer>© Aセメまとめノート</footer>
+</body>
+</html>

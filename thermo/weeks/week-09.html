@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>第9回 自由エネルギーと Maxwell の関係式 | Aセメまとめノート</title>
+  <link rel="stylesheet" href="../../assets/style.css">
+  <script defer src="../../assets/nav.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],macros:{'\\R':'\\mathbb{R}','\\bm':'\\boldsymbol{#1}','\\dd':'\\mathrm{d}','\\dbar':'\\mathrm{d}^{\\prime}'}});window.__navReady&&window.__navReady()"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="inner">
+      <a class="site-title" href="../../index.html">Aセメまとめノート</a>
+      <span class="links"><a href="../index.html">熱力学</a><a href="../basics.html">基礎のまとめ</a><a href="../../calc/index.html">微積</a><a href="../../linalg/index.html">線形代数</a><a href="../../em/index.html">電磁気学</a><a href="../../mech/index.html">力学A</a></span>
+    </div>
+  </header>
+
+  <main class="note">
+    <h1>第9回:自由エネルギーと Maxwell の関係式</h1>
+    <div class="meta">熱力学(東京大学 教養学部 秋学期)／板書 p.10(画像の順に数えています)／ノートの見出し「4.2 自由エネルギー」</div>
+
+    <nav class="toc">
+      <div class="toc-title">目次</div>
+      <ol start="0">
+        <li><a href="#s0">この回の全体像</a></li>
+        <li><a href="#s1">準備:基礎の確認</a>
+          <div class="sub">偏微分の順序交換／接線の傾きと切片(ルジャンドル変換のイメージ)</div></li>
+        <li><a href="#s2">Helmholtz の自由エネルギー $F(T,V)$</a>(p.10)</li>
+        <li><a href="#s3">Maxwell の関係式</a>(p.10)</li>
+        <li><a href="#s4">エネルギー方程式</a>(p.10)</li>
+        <li><a href="#s5">Gibbs の自由エネルギー $G(T,P)$</a>(p.10)</li>
+        <li><a href="#s6">エンタルピー $H(S,P)$</a>(p.10)</li>
+        <li><a href="#s7">具体例で練習</a></li>
+        <li><a href="#s8">まとめ(この回で覚えること)</a></li>
+        <li><a href="#s9">この回のノートについてのメモ</a></li>
+      </ol>
+    </nav>
+
+    <!-- ===================== 0 ===================== -->
+    <h2 id="s0">0. この回の全体像 <span class="page-tag">板書 p.10</span></h2>
+    <p>第8回で、$U(S,V)$ が完全な熱力学関数であることを学びました。しかし、実験で、エントロピー $S$ を直接コントロールするのは難しい。そこで、<b>変数を $S$ から温度 $T$ に取り替えた</b>関数を作ります。これが<b>自由エネルギー</b>です。さらに、偏微分の順序交換から、測りにくい量を測りやすい量に変える<b>Maxwell の関係式</b>が出ます。</p>
+    <div class="box thm">
+      <div class="label">この回のゴール</div>
+      <p>① <b>Helmholtz の自由エネルギー</b> $F=U-TS$:$dF=-S\,dT-P\,dV$。$\left(\dfrac{\partial F}{\partial T}\right)_V=-S$、$\left(\dfrac{\partial F}{\partial V}\right)_T=-P$、$C_V=-T\left(\dfrac{\partial^2F}{\partial T^2}\right)_V$。<br>
+      ② <b>Maxwell の関係式</b> $\left(\dfrac{\partial S}{\partial V}\right)_T=\left(\dfrac{\partial P}{\partial T}\right)_V$。<br>
+      ③ <b>エネルギー方程式</b> $\left(\dfrac{\partial U}{\partial V}\right)_T=T\left(\dfrac{\partial P}{\partial T}\right)_V-P$(第4回で使った式の証明)。<br>
+      ④ <b>Gibbs の自由エネルギー</b> $G=F+PV$:$dG=-S\,dT+V\,dP$。<b>エンタルピー</b> $H=G+TS=U+PV$:$dH=T\,dS+V\,dP$。</p>
+    </div>
+    <figure class="fig">
+      <svg viewBox="0 0 640 224" width="640" role="img" aria-label="4つの熱力学関数"><line x1="150" y1="40" x2="350" y2="40" style="stroke:var(--muted);stroke-width:1.4"/><line x1="150" y1="210" x2="350" y2="210" style="stroke:var(--muted);stroke-width:1.4"/><line x1="150" y1="40" x2="150" y2="210" style="stroke:var(--muted);stroke-width:1.4"/><line x1="350" y1="40" x2="350" y2="210" style="stroke:var(--muted);stroke-width:1.4"/><text class="t" x="250" y="46"></text><text class="ta" x="160" y="62">S</text><text class="tt" x="250" y="62" style="text-anchor:middle">U</text><text class="ta" x="340" y="62" style="text-anchor:end">V</text><text class="tt" x="136" y="131" style="text-anchor:end">H</text><text class="tt" x="364" y="131">F</text><text class="ta" x="160" y="204">P</text><text class="tt" x="250" y="204" style="text-anchor:middle">G</text><text class="ta" x="340" y="204" style="text-anchor:end">T</text><text class="t" x="250" y="131"></text><text class="tj" x="380" y="70">U(S,V): dU = T dS − P dV</text><text class="tj" x="380" y="94">H(S,P): dH = T dS + V dP</text><text class="tj" x="380" y="118">F(T,V): dF = −S dT − P dV</text><text class="tj" x="380" y="142">G(T,P): dG = −S dT + V dP</text><text class="tm" x="380" y="176">4つの関数は、変数の組を</text><text class="tm" x="380" y="194">取り替えたもの</text></svg>
+      <figcaption>4つの熱力学関数 $U,H,F,G$ と、それぞれの自然な変数。上の2つの変数($S,V$)、下の2つ($P,T$)の組み合わせで、4通り。</figcaption>
+    </figure>
+
+    <!-- ===================== 1 ===================== -->
+    <h2 id="s1">1. 準備:基礎の確認</h2>
+
+    <h3 id="w-mixed">1.1 偏微分の順序交換</h3>
+    <div class="box basic">
+      <div class="label">基礎:$\dfrac{\partial^2f}{\partial x\partial y}=\dfrac{\partial^2f}{\partial y\partial x}$ <a class="xref-link" href="../basics.html#mixed" data-xref>→ 詳しい解説</a></div>
+      <p>$f(x,y)$ の2階の偏導関数が連続なら、$x$ で微分してから $y$ で微分しても、$y$ で微分してから $x$ で微分しても、同じ結果になります(順序交換)。例:$f=x^2y^3$ なら、$f_x=2xy^3$、$(f_x)_y=6xy^2$。$f_y=3x^2y^2$、$(f_y)_x=6xy^2$。一致。</p>
+    </div>
+
+    <h3 id="w-legendre">1.2 接線の傾きと切片</h3>
+    <div class="box basic">
+      <div class="label">基礎:曲線 $u(s)$ の接線の式 <a class="xref-link" href="../basics.html#legendre" data-xref>→ 詳しい解説</a></div>
+      <p>曲線 $u=u(s)$ の、点 $s=s^*$ での接線は、$u=u(s^*)+u'(s^*)(s-s^*)$。傾きは $u'(s^*)$、$s=0$ での切片(縦軸との交点)は $u(s^*)-u'(s^*)\,s^*$。傾きを「新しい変数」にして、曲線を、(傾き,切片)の関数として表し直すことを、<b>ルジャンドル変換</b>といいます。この回の自由エネルギーは、これです。</p>
+    </div>
+
+    <!-- ===================== 2 ===================== -->
+    <h2 id="s2">2. 4.2 Helmholtz の自由エネルギー $F(T,V)$ <span class="page-tag">板書 p.10</span></h2>
+    <p>板書:「<b>4.2 自由エネルギー</b>。◎ $(T,V)$ を自然な組とする完全な熱力学関数。<b>Helmholtz の自由エネルギー</b>:$F(T,V)=U(S^*,V)-TS^*$。(図:$U(S,V)$ のグラフと、傾き $T$ の接線、切片 $F(T,V)$。)$dF=d(U-TS)=dU-T\,dS-S\,dT=T\,dS-P\,dV-T\,dS-S\,dT$ ∴ $\left(\dfrac{\partial F}{\partial V}\right)_T=-P$、$\left(\dfrac{\partial F}{\partial T}\right)_V=-S$。◎ 熱容量 $C_V=\left(\dfrac{\partial U}{\partial T}\right)_V=T\left(\dfrac{\partial S}{\partial T}\right)_V=-T\left(\dfrac{\partial^2F}{\partial T^2}\right)_V$。」</p>
+    <figure class="fig">
+      <svg viewBox="0 0 660 258" width="660" role="img" aria-label="自由エネルギーのイメージ"><line x1="70" y1="230" x2="402.6" y2="230" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><polygon points="410,230 402,233.4 402,226.6" style="fill:var(--muted)"/><line x1="70" y1="230" x2="70" y2="32.4" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><polygon points="70,25 73.4,33 66.6,33" style="fill:var(--muted)"/><text class="t" x="410" y="248" style="text-anchor:end">S</text><text class="t" x="62" y="33" style="text-anchor:end">U</text><polyline points="70,136.4 74.8,136.4 79.6,136.3 84.4,136.1 89.2,135.9 94,135.6 98.8,135.2 103.6,134.8 108.4,134.3 113.2,133.8 118,133.2 122.8,132.5 127.6,131.7 132.4,130.9 137.2,130 142,129.1 146.8,128.1 151.6,127 156.4,125.9 161.2,124.7 166,123.4 170.8,122.1 175.6,120.7 180.4,119.2 185.2,117.7 190,116.1 194.8,114.5 199.6,112.8 204.4,111 209.2,109.1 214,107.2 218.8,105.2 223.6,103.2 228.4,101.1 233.2,98.9 238,96.7 242.8,94.4 247.6,92 252.4,89.6 257.2,87.1 262,84.5 266.8,81.9 271.6,79.2 276.4,76.4 281.2,73.6 286,70.7 290.8,67.8 295.6,64.8 300.4,61.7 305.2,58.5 310,55.3 314.8,52.1 319.6,48.7 324.4,45.3 329.2,41.8 334,38.3 338.8,34.7 343.6,31 348.4,27.3 353.2,23.5 358,19.7" style="fill:none;stroke:var(--accent);stroke-width:3"/><line x1="61" y1="181.9" x2="358" y2="38.9" style="stroke:var(--thm);stroke-width:2.2;stroke-dasharray:6 4"/><circle cx="241" cy="95.2" r="6" style="fill:var(--text)"/><line x1="241" y1="95.2" x2="241" y2="230" style="stroke:var(--muted);stroke-width:1.1;stroke-dasharray:5 4;fill:none"/><circle cx="70" cy="177.6" r="6" style="fill:var(--ex)"/><line x1="70" y1="136.4" x2="70" y2="136.4" style="stroke:var(--muted);stroke-width:1.1;stroke-dasharray:5 4;fill:none"/><text class="tm" x="241" y="246" style="text-anchor:middle">S*</text><text class="tt" x="62" y="181.6" style="text-anchor:end">F</text><text class="tm" x="62" y="99.2" style="text-anchor:end">U(S*)</text><line x1="259" y1="95.2" x2="259" y2="177.6" style="stroke:var(--muted);stroke-width:1;stroke-dasharray:2 3"/><text class="tt" x="286" y="97.6">傾き T</text><text class="ta" x="88" y="101.9">U(S, V)(V は固定)</text><text class="tj" x="430" y="80">点 S* での接線の</text><text class="tt" x="430" y="100">傾き = (∂U/∂S)ᵥ = T</text><text class="tj" x="430" y="132">S = 0 での切片:</text><text class="tt" x="430" y="154" style="fill:var(--ex)">F = U(S*) − T S*</text><text class="tm" x="430" y="188">(S を T に取り替えた関数)</text></svg>
+      <figcaption>$V$ を固定した $U(S)$ のグラフ。点 $S^*$ での接線の傾きは $T$。この接線の、$S=0$ での切片が $F=U-TS^*$。傾き $T$ を指定すると、切片 $F$ が決まる:$S$ から $T$ に、変数が取り替わった。</figcaption>
+    </figure>
+    <ol class="step-list">
+      <li><b>定義</b>:$F=U-TS$。$U$ から、「$T\times S$」を引く。図の意味は、$U(S)$ の接線(傾き $T=\left(\frac{\partial U}{\partial S}\right)_V$)の切片が $F$。</li>
+      <li><b>微分</b>:$dF=dU-T\,dS-S\,dT$。ここに、基本関係式 $dU=T\,dS-P\,dV$ を代入すると、$T\,dS$ が打ち消しあって、
+      $$dF=-S\,dT-P\,dV.$$</li>
+      <li>これは、$F$ を $(T,V)$ の関数として見たときの全微分で、係数を比べて、
+      $$\left(\frac{\partial F}{\partial T}\right)_V=-S,\qquad\left(\frac{\partial F}{\partial V}\right)_T=-P.$$</li>
+    </ol>
+    <div class="box thm">
+      <div class="label">Helmholtz の自由エネルギー(完全な熱力学関数)</div>
+      <p>$F(T,V)=U-TS$、$dF=-S\,dT-P\,dV$。$F(T,V)$ が分かれば、1階微分から、$S$ と $P$(状態方程式)が出て、2階微分から熱容量が出る。<b>実験でコントロールしやすい $(T,V)$</b> を変数とする、完全な熱力学関数。</p>
+    </div>
+    <p><b>熱容量</b>:$C_V=\left(\dfrac{\partial U}{\partial T}\right)_V$。$U=F+TS$ なので、$C_V$ は、$T\left(\dfrac{\partial S}{\partial T}\right)_V$($V$ 一定の変化で、$dU=T\,dS$ だから)。$S=-\left(\dfrac{\partial F}{\partial T}\right)_V$ をもう一度 $T$ で微分すると、$\left(\dfrac{\partial S}{\partial T}\right)_V=-\left(\dfrac{\partial^2F}{\partial T^2}\right)_V$。よって、
+    $$C_V=T\left(\frac{\partial S}{\partial T}\right)_V=-T\left(\frac{\partial^2F}{\partial T^2}\right)_V.$$</p>
+    <p>「自由エネルギー」という名前の理由は、第10回で分かります(等温過程で外にとり出せる仕事の最大値)。</p>
+
+    <!-- ===================== 3 ===================== -->
+    <h2 id="s3">3. Maxwell の関係式 <span class="page-tag">板書 p.10</span></h2>
+    <p>板書:「◎ <b>Maxwell 関係式</b>。2階偏微分の可換性:$\dfrac{\partial}{\partial V}\left(\dfrac{\partial F}{\partial T}\right)_V\Big|_T=\dfrac{\partial}{\partial T}\left(\dfrac{\partial F}{\partial V}\right)_T\Big|_V$ ⇒ $+\left(\dfrac{\partial S}{\partial V}\right)_T=+\left(\dfrac{\partial P}{\partial T}\right)_V$。(左辺:温度一定で $V$ を変えたときの $S$ の変化。右辺:体積一定で $T$ を変えたときの $P$ の変化。)」</p>
+    <ol class="step-list">
+      <li>$F(T,V)$ の2階偏微分は、順序を交換できる(基礎の枠 1.1):$\dfrac{\partial}{\partial V}\left(\dfrac{\partial F}{\partial T}\right)_V=\dfrac{\partial}{\partial T}\left(\dfrac{\partial F}{\partial V}\right)_T$。</li>
+      <li>$\left(\dfrac{\partial F}{\partial T}\right)_V=-S$、$\left(\dfrac{\partial F}{\partial V}\right)_T=-P$ を代入:$-\left(\dfrac{\partial S}{\partial V}\right)_T=-\left(\dfrac{\partial P}{\partial T}\right)_V$。</li>
+    </ol>
+    <div class="box thm">
+      <div class="label">Maxwell の関係式($F$ から)</div>
+      <p>$$\left(\frac{\partial S}{\partial V}\right)_T=\left(\frac{\partial P}{\partial T}\right)_V.$$</p>
+    </div>
+    <p>左辺の「エントロピーが体積でどう変わるか」は、直接測れませんが、右辺の「体積一定で温度を上げたとき、圧力がどう変わるか」は、状態方程式から(あるいは、測定で)分かる量です。<b>測れない量を、測れる量で置きかえる</b>、これが Maxwell の関係式の使い道です。</p>
+
+    <!-- ===================== 4 ===================== -->
+    <h2 id="s4">4. エネルギー方程式 <span class="page-tag">板書 p.10</span></h2>
+    <p>板書:「◎ <b>エネルギー方程式</b>。$\left(\dfrac{\partial F}{\partial V}\right)_T=\left(\dfrac{\partial}{\partial V}(U-TS)\right)_T=\left(\dfrac{\partial U}{\partial V}\right)_T-T\left(\dfrac{\partial S}{\partial V}\right)_T$($=-P$、$=\left(\dfrac{\partial P}{\partial T}\right)_V$)⇒ $\left(\dfrac{\partial U}{\partial V}\right)_T=T\left(\dfrac{\partial P}{\partial T}\right)_V-P$。」</p>
+    <p>$F=U-TS$ を、$T$ 一定で $V$ で微分します($T$ は定数なので、そのまま外に出る):$\left(\dfrac{\partial F}{\partial V}\right)_T=\left(\dfrac{\partial U}{\partial V}\right)_T-T\left(\dfrac{\partial S}{\partial V}\right)_T$。左辺は $-P$。右辺の $\left(\dfrac{\partial S}{\partial V}\right)_T$ は、Maxwell の関係式で $\left(\dfrac{\partial P}{\partial T}\right)_V$ に置きかえられる。したがって、</p>
+    <div class="box thm">
+      <div class="label">エネルギー方程式</div>
+      <p>$$\left(\frac{\partial U}{\partial V}\right)_T=T\left(\frac{\partial P}{\partial T}\right)_V-P.$$
+      内部エネルギーの体積依存性は、<b>状態方程式だけ</b>から決まる。</p>
+    </div>
+    <p>これは、第4回の黄色の枠(「$P+\left(\frac{\partial U}{\partial V}\right)_T=T\left(\frac{\partial P}{\partial T}\right)_V$」)で先取りした式です。理想気体なら、$P=\dfrac{nRT}{V}$ から $T\left(\dfrac{\partial P}{\partial T}\right)_V=\dfrac{nRT}{V}=P$、よって $\left(\dfrac{\partial U}{\partial V}\right)_T=0$。第4回で、「ジュールの実験」から出した結果が、<b>状態方程式 $PV=nRT$ だけから、導かれました</b>(第2法則を使って)。</p>
+
+    <!-- ===================== 5 ===================== -->
+    <h2 id="s5">5. Gibbs の自由エネルギー $G(T,P)$ <span class="page-tag">板書 p.10</span></h2>
+    <p>板書:「◎ $(T,P)$ での完全な熱力学関数。<b>Gibbs 自由エネルギー</b>。$G(T,P)\leftarrow F(T,V)$。$G(T,P)=F(T,V)+PV$。$dG=d(F+PV)=dF+P\,dV+V\,dP=-S\,dT-P\,dV+P\,dV+V\,dP$。∴ $dG=-S\,dT+V\,dP$ ⇒ $\left(\dfrac{\partial G}{\partial T}\right)_P=-S$、$\left(\dfrac{\partial G}{\partial P}\right)_T=V$ ⇒ Maxwell の関係式:$-\left(\dfrac{\partial S}{\partial P}\right)_T=\left(\dfrac{\partial V}{\partial T}\right)_P$。」</p>
+    <p>実験では、体積 $V$ より、圧力 $P$(大気圧など)を一定にする方が、ずっと簡単です。そこで、$(T,P)$ を自然な変数とする関数を作ります。$F$ から、$V$ を $P$ に取り替えるには、$PV$ を足す(今度は、$F(V)$ の傾き $-P$ から、$P$ を変数にする、ルジャンドル変換)。</p>
+    <div class="box thm">
+      <div class="label">Gibbs の自由エネルギー</div>
+      <p>$$G(T,P)=F+PV=U-TS+PV,\qquad dG=-S\,dT+V\,dP.$$
+      $\left(\dfrac{\partial G}{\partial T}\right)_P=-S$、$\left(\dfrac{\partial G}{\partial P}\right)_T=V$。Maxwell の関係式:$-\left(\dfrac{\partial S}{\partial P}\right)_T=\left(\dfrac{\partial V}{\partial T}\right)_P$。</p>
+    </div>
+    <p>$dG$ の導出:$dG=dF+P\,dV+V\,dP$ に $dF=-S\,dT-P\,dV$ を代入すると、$-P\,dV$ と $+P\,dV$ が打ち消しあって、$dG=-S\,dT+V\,dP$。Maxwell の関係式は、$G(T,P)$ の2階偏微分の順序交換:$\dfrac{\partial}{\partial P}\left(\dfrac{\partial G}{\partial T}\right)_P=\dfrac{\partial}{\partial T}\left(\dfrac{\partial G}{\partial P}\right)_T$ から、$-\left(\dfrac{\partial S}{\partial P}\right)_T=\left(\dfrac{\partial V}{\partial T}\right)_P$。右辺は、第1回の定圧膨張率($\beta=\frac1V\left(\frac{\partial V}{\partial T}\right)_P$)で測れる量です。</p>
+
+    <!-- ===================== 6 ===================== -->
+    <h2 id="s6">6. エンタルピー $H(S,P)$ <span class="page-tag">板書 p.10</span></h2>
+    <p>板書:「◎ エンタルピー $H(S,P)$。$H=G+TS$($G(T,P)$ 完全な熱力学関数)。」</p>
+    <p>$H=G+TS=(U-TS+PV)+TS=U+PV$。$dH=dU+P\,dV+V\,dP=T\,dS+V\,dP$。つまり、$H$ は、$(S,P)$ を自然な変数とする完全な熱力学関数です。$U(S,V)$ から、$V$ を $P$ に取り替えたもの。</p>
+    <div class="box note-box">
+      <div class="label">エンタルピーの意味</div>
+      <p>圧力一定($dP=0$)の変化では、$dH=T\,dS=\dbar Q$。つまり、<b>定圧で系に加えた熱 = $H$ の増加</b>。化学反応や相変化の熱(反応熱、融解熱、蒸発熱)は、定圧(大気圧)で測るので、エンタルピーの差として表される。定圧熱容量は $C_P=\left(\dfrac{\partial H}{\partial T}\right)_P$。</p>
+    </div>
+    <div class="box supp">
+      <div class="label">板書にない補足:4つの関数の Maxwell の関係式</div>
+      <p>$dU=T\,dS-P\,dV$ から $\left(\dfrac{\partial T}{\partial V}\right)_S=-\left(\dfrac{\partial P}{\partial S}\right)_V$。$dH=T\,dS+V\,dP$ から $\left(\dfrac{\partial T}{\partial P}\right)_S=\left(\dfrac{\partial V}{\partial S}\right)_P$。$dF$ から $\left(\dfrac{\partial S}{\partial V}\right)_T=\left(\dfrac{\partial P}{\partial T}\right)_V$。$dG$ から $-\left(\dfrac{\partial S}{\partial P}\right)_T=\left(\dfrac{\partial V}{\partial T}\right)_P$。どれも、「2階偏微分の順序交換」から出ます。</p>
+    </div>
+
+    <!-- ===================== 7 ===================== -->
+    <h2 id="s7">7. 具体例で練習(板書にない補足) <span class="page-tag">補足</span></h2>
+    <div class="box ex">
+      <div class="label">問題 A:理想気体の $F$ から、状態方程式を出す</div>
+      <p>理想気体のエントロピー $S=C_V\log T+nR\log V+s_0$、内部エネルギー $U=C_VT+u_0$ から $F=U-TS$ を作り、$-\left(\dfrac{\partial F}{\partial V}\right)_T$ を計算せよ。</p>
+    </div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>$F=C_VT+u_0-T(C_V\log T+nR\log V+s_0)$。$V$ で微分:$\left(\dfrac{\partial F}{\partial V}\right)_T=-\dfrac{nRT}{V}$。よって $P=\dfrac{nRT}{V}$。確かに、状態方程式が出る。</p></div>
+
+    <div class="box ex">
+      <div class="label">問題 B:Maxwell の関係式の確認(理想気体)</div>
+      <p>理想気体で、$\left(\dfrac{\partial S}{\partial V}\right)_T=\left(\dfrac{\partial P}{\partial T}\right)_V$ を確かめよ。</p>
+    </div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>$S=C_V\log T+nR\log V+s_0$ より $\left(\dfrac{\partial S}{\partial V}\right)_T=\dfrac{nR}{V}$。$P=\dfrac{nRT}{V}$ より $\left(\dfrac{\partial P}{\partial T}\right)_V=\dfrac{nR}{V}$。一致。</p></div>
+
+    <div class="box ex">
+      <div class="label">問題 C:ファンデルワールス気体の $\left(\dfrac{\partial U}{\partial V}\right)_T$</div>
+      <p>$P=\dfrac{nRT}{V-b}-\dfrac{a}{V^2}$ のとき、エネルギー方程式から $\left(\dfrac{\partial U}{\partial V}\right)_T$ を求めよ。</p>
+    </div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>$\left(\dfrac{\partial P}{\partial T}\right)_V=\dfrac{nR}{V-b}$。$T\left(\dfrac{\partial P}{\partial T}\right)_V-P=\dfrac{nRT}{V-b}-\dfrac{nRT}{V-b}+\dfrac{a}{V^2}=\dfrac{a}{V^2}$。体積が増えると、内部エネルギーが $\dfrac{a}{V^2}\,dV$ だけ増える(分子間の引力に逆らって、分子を引き離すから)。理想気体($a=0$)なら 0。</p></div>
+
+    <div class="box ex">
+      <div class="label">問題 D:$C_P-C_V$ を、Maxwell の関係式で出す</div>
+      <p>第4回の $C_P-C_V=\left\{P+\left(\dfrac{\partial U}{\partial V}\right)_T\right\}\left(\dfrac{\partial V}{\partial T}\right)_P$ に、エネルギー方程式を使って、$C_P-C_V=T\left(\dfrac{\partial P}{\partial T}\right)_V\left(\dfrac{\partial V}{\partial T}\right)_P$ を示せ。理想気体で、$nR$ になることを確かめよ。</p>
+    </div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>$P+\left(\dfrac{\partial U}{\partial V}\right)_T=T\left(\dfrac{\partial P}{\partial T}\right)_V$ を代入すれば、直ちに出る。理想気体:$T\cdot\dfrac{nR}{V}\cdot\dfrac{nR}{P}=\dfrac{nR\cdot nRT}{PV}=nR$。</p></div>
+
+    <!-- ===================== 8 ===================== -->
+    <h2 id="s8">8. まとめ(この回で覚えること)</h2>
+    <ul>
+      <li>$F=U-TS$、$dF=-S\,dT-P\,dV$。$S=-F_T$、$P=-F_V$、$C_V=-TF_{TT}$。$(T,V)$ が自然な変数の完全な熱力学関数。</li>
+      <li><b>Maxwell の関係式</b>:$\left(\dfrac{\partial S}{\partial V}\right)_T=\left(\dfrac{\partial P}{\partial T}\right)_V$(2階偏微分の順序交換から)。</li>
+      <li><b>エネルギー方程式</b>:$\left(\dfrac{\partial U}{\partial V}\right)_T=T\left(\dfrac{\partial P}{\partial T}\right)_V-P$。</li>
+      <li>$G=F+PV$、$dG=-S\,dT+V\,dP$、$-\left(\dfrac{\partial S}{\partial P}\right)_T=\left(\dfrac{\partial V}{\partial T}\right)_P$。$H=G+TS=U+PV$、$dH=T\,dS+V\,dP$(定圧で $dH=\dbar Q$)。</li>
+    </ul>
+
+    <!-- ===================== 9 ===================== -->
+    <h2 id="s9">9. この回のノートについてのメモ</h2>
+    <p>板書は手書きの画像です。画像の順に p.10 としました。板書の画像は、このサイトには載せていません。黄色の枠、基礎ページの内容、練習問題と解答は、Claude が書き足したもので、板書にはありません。</p>
+    <ol>
+      <li><b>Maxwell の関係式の符号(p.10)</b>:板書は、$-\left(\frac{\partial S}{\partial V}\right)_T=-\left(\frac{\partial P}{\partial T}\right)_V$ と、符号つきで書き、「$+$」を付け直しています。結論は $\left(\frac{\partial S}{\partial V}\right)_T=\left(\frac{\partial P}{\partial T}\right)_V$ です。</li>
+      <li><b>$F(T,V)=U(S^*,V)-TS^*$(p.10)</b>:$S^*$ は、$T=\left(\frac{\partial U}{\partial S}\right)_V$ を満たす $S$(接線の傾きが $T$ になる点)と読みました。</li>
+      <li><b>エンタルピーの書き込み(p.10)</b>:板書は「$H(S,P)$、$H=G+TS$、$G(T,P)$ 完全な熱力学関数」と短いので、$dH$ と意味づけ(定圧で $dH=\dbar Q$)は、本文で補いました。</li>
+    </ol>
+
+    <nav class="pager">
+      <a href="week-08.html">← 前の週</a>
+      <a href="../index.html">一覧へ</a>
+      <a href="week-10.html">次の週 →</a>
+    </nav>
+
+  </main>
+
+  <footer>© Aセメまとめノート</footer>
+</body>
+</html>

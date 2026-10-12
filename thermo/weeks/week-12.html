@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>第12回 二相平衡とゴムの熱力学 | Aセメまとめノート</title>
+  <link rel="stylesheet" href="../../assets/style.css">
+  <script defer src="../../assets/nav.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],macros:{'\\R':'\\mathbb{R}','\\bm':'\\boldsymbol{#1}','\\dd':'\\mathrm{d}','\\dbar':'\\mathrm{d}^{\\prime}'}});window.__navReady&&window.__navReady()"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="inner">
+      <a class="site-title" href="../../index.html">Aセメまとめノート</a>
+      <span class="links"><a href="../index.html">熱力学</a><a href="../basics.html">基礎のまとめ</a><a href="../../calc/index.html">微積</a><a href="../../linalg/index.html">線形代数</a><a href="../../em/index.html">電磁気学</a><a href="../../mech/index.html">力学A</a></span>
+    </div>
+  </header>
+
+  <main class="note">
+    <h1>第12回:二相平衡とゴムの熱力学</h1>
+    <div class="meta">熱力学(東京大学 教養学部 秋学期)／板書 p.12(画像の順に数えています)／ノートの見出し「5.1 二相平衡」「5.2 ゴムの熱力学」</div>
+
+    <nav class="toc">
+      <div class="toc-title">目次</div>
+      <ol start="0">
+        <li><a href="#s0">この回の全体像</a></li>
+        <li><a href="#s1">準備:基礎の確認</a>
+          <div class="sub">相と相転移／潜熱／ゴムの性質</div></li>
+        <li><a href="#s2">5.1 二相平衡:相と、相図</a>(p.12)</li>
+        <li><a href="#s3">飽和圧力の満たすべき条件:Clausius–Clapeyron の関係式</a>(p.12)</li>
+        <li><a href="#s4">共存領域での自由エネルギー</a>(p.12)</li>
+        <li><a href="#s5">5.2 ゴムの熱力学</a>(p.12)</li>
+        <li><a href="#s6">具体例で練習</a></li>
+        <li><a href="#s7">まとめ(この回で覚えること)</a></li>
+        <li><a href="#s8">この回のノートについてのメモ</a></li>
+      </ol>
+    </nav>
+
+    <!-- ===================== 0 ===================== -->
+    <h2 id="s0">0. この回の全体像 <span class="page-tag">板書 p.12</span></h2>
+    <p>最後の回は、これまでの道具(自由エネルギー、Maxwell の関係式、全微分)の<b>使いこなし</b>です。(1) 水が水蒸気になるような<b>相転移</b>を、自由エネルギーで調べ、圧力と温度の関係(<b>Clausius–Clapeyron の関係式</b>)を導く。(2) 気体とは違う仕事の式をもつ<b>ゴム</b>を、同じ熱力学の枠組みで扱う。</p>
+    <div class="box thm">
+      <div class="label">この回のゴール</div>
+      <p>① 二相が共存するときの圧力 $P_s(T)$(飽和圧力)の満たす条件:$\dfrac{dP_s}{dT}=\dfrac{Q_{\rm 潜熱}}{T(V_1-V_0)}$(<b>Clausius–Clapeyron の関係式</b>)。<br>
+      ② 共存領域では、自由エネルギー $F(T,V)$ は、傾き $-P_s$ の<b>直線</b>(二重接線)。$\left(\dfrac{\partial^2F}{\partial V^2}\right)_T\ge0$(下に凸)。<br>
+      ③ ゴム($\dbar W=X\,dl$、状態方程式 $X=AT\{l/l_0-(l_0/l)^2\}$)の、内部エネルギー・熱容量・熱の出入りを、同じ道具で求める。</p>
+    </div>
+    <figure class="fig">
+      <svg viewBox="0 0 660 258" width="660" role="img" aria-label="相図"><line x1="60" y1="230" x2="392.6" y2="230" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><polygon points="400,230 392,233.4 392,226.6" style="fill:var(--muted)"/><line x1="60" y1="230" x2="60" y2="32.4" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><polygon points="60,25 63.4,33 56.6,33" style="fill:var(--muted)"/><text class="t" x="400" y="248" style="text-anchor:end">T</text><text class="t" x="52" y="33" style="text-anchor:end">P</text><polyline points="80,220 170,170" style="fill:none;stroke:var(--accent);stroke-width:3"/><polyline points="170,170 174,168.9 178,167.8 182,166.4 186,165 190,163.4 194,161.8 198,159.9 202,158 206,155.9 210,153.8 214,151.4 218,149 222,146.4 226,143.8 230,140.9 234,138 238,134.9 242,131.8 246,128.4 250,125 254,121.4 258,117.8 262,113.9 266,110 270,105.9 274,101.8 278,97.4 282,93 286,88.4 290,83.8 294,78.9 298,74 302,68.9 306,63.8 310,58.4 314,53 318,47.4 322,41.8 326,35.9 330,30" style="fill:none;stroke:var(--thm);stroke-width:3"/><polyline points="170,170 206,45" style="fill:none;stroke:var(--ex);stroke-width:3"/><polyline points="170,170 144,45" style="fill:none;stroke:var(--ex);stroke-width:2.4;stroke-dasharray:6 4"/><circle cx="170" cy="170" r="5" style="fill:var(--text)"/><text class="ta" x="96" y="130">固体</text><text class="ta" x="240" y="80">液体</text><text class="ta" x="280" y="206">気体</text><text class="tm" x="164" y="188" style="text-anchor:end">三重点</text><text class="tm" x="140" y="39" style="text-anchor:end">水の融解曲線</text><text class="tm" x="212" y="39">(ふつうの物質)</text><text class="tj" x="430" y="80">各相の Gibbs 自由エネルギー</text><text class="ta" x="430" y="102">G固(T,P), G液(T,P), G気(T,P)</text><text class="tj" x="430" y="132">同じ (T,P) では、</text><text class="tj" x="430" y="152">G が最小の相が現れる。</text><text class="tj" x="430" y="182">境界線では、</text><text class="tt" x="430" y="202">G が等しく、2相が共存。</text></svg>
+      <figcaption>相図($P$–$T$ 平面)。固体・液体・気体の領域と、その境界線。境界線の上では、2つの相が共存する。水の融解曲線は、傾きが負(点線)。</figcaption>
+    </figure>
+
+    <!-- ===================== 1 ===================== -->
+    <h2 id="s1">1. 準備:基礎の確認</h2>
+
+    <h3 id="w-phase">1.1 相と相転移</h3>
+    <div class="box basic">
+      <div class="label">基礎:固体・液体・気体 <a class="xref-link" href="../basics.html#phase" data-xref>→ 詳しい解説</a></div>
+      <p>物質が、系全体で均一な性質をもつ状態を、<b>相</b>といいます(固相・液相・気相)。温度や圧力を変えると、ある点で、相が別の相に変わる(<b>相転移</b>:融解、蒸発、凝固、凝縮)。相転移が起きている間は、温度と圧力が一定のまま、2つの相が共存する。$P$–$T$ 平面で、各相の領域を分ける線が<b>相境界</b>(例:沸騰曲線)。</p>
+    </div>
+
+    <h3 id="w-latent">1.2 潜熱</h3>
+    <div class="box basic">
+      <div class="label">基礎:相転移で、出入りする熱 <a class="xref-link" href="../basics.html#latent" data-xref>→ 詳しい解説</a></div>
+      <p>相転移の間は、熱を加えても、温度が変わらず(一定)、物質が別の相に変わる。この熱を<b>潜熱</b>という(融解熱、蒸発熱)。例:水の蒸発熱は約 $2.26\times10^3\ \mathrm{J/g}$、融解熱は約 $334\ \mathrm{J/g}$。温度が一定なので、エントロピーの変化は $\Delta S=\dfrac{Q}{T}$(第7回)。</p>
+    </div>
+
+    <h3 id="w-rubber">1.3 ゴムの性質</h3>
+    <div class="box basic">
+      <div class="label">基礎:ゴムひもを伸ばすと <a class="xref-link" href="../basics.html#rubber" data-xref>→ 詳しい解説</a></div>
+      <p>ゴムひもを、張力 $X$ で、長さ $l$ に伸ばす。自然の長さ $l_0$ より伸ばすほど、縮もうとする力 $X$ が強い。長さを $dl$ だけ伸ばすときに、外からする仕事は $\dbar W=X\,dl$(第3回)。温度が高いほど、ゴムは縮もうとする力が強くなる(温めると縮む、という、金属と逆の性質)。</p>
+    </div>
+
+    <!-- ===================== 2 ===================== -->
+    <h2 id="s2">2. 5.1 二相平衡:相と、相図 <span class="page-tag">板書 p.12</span></h2>
+    <p>板書:「<b>5.1 二相平衡</b>。◎ 相 → 系全体で均一な性質をもつ状態。($P$–$T$ 図:固体、液相、気体状態 → 気相。完全な熱力学関数 $G_{\text{固}}(T,P)$、$G_{\text{液}}$、$G_{\text{気}}(T,P)$。)($P$–$V$ 図:等温曲線、液相、二相共存、気相、飽和圧力 $P_s(T)$。シリンダーの図3つ。)(圧力一定:$V$–$T$ のグラフ、液相、気相、$T^*$。)」</p>
+    <p>それぞれの相($\alpha$ = 固、液、気)には、その相だけを考えたときの、完全な熱力学関数 $G_\alpha(T,P)$(Gibbs 自由エネルギー)があります。同じ $(T,P)$ のとき、実際に実現するのは、$G_\alpha$ が最小の相(第10回:等温・定圧では $G$ 最小)。だから、2つの相の $G$ が<b>等しい</b>線の上では、2つの相が共存できる。これが相境界です。3つの相の $G$ が等しい点が<b>三重点</b>。</p>
+    <figure class="fig">
+      <svg viewBox="0 0 560 246" width="560" role="img" aria-label="等温線と二相共存"><line x1="56" y1="220" x2="348.6" y2="220" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><polygon points="356,220 348,223.4 348,216.6" style="fill:var(--muted)"/><line x1="56" y1="220" x2="56" y2="37.4" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><polygon points="56,30 59.4,38 52.6,38" style="fill:var(--muted)"/><text class="t" x="356" y="238" style="text-anchor:end">V</text><text class="t" x="48" y="38" style="text-anchor:end">P</text><polyline points="122,44 122.3,49.8 122.6,55.4 122.9,60.7 123.2,65.8 123.5,70.8 123.8,75.5 124.1,80 124.4,84.4 124.7,88.6 125,92.6 125.3,96.5 125.6,100.3 125.9,103.9 126.2,107.3 126.5,110.6 126.8,113.8 127.1,116.9 127.4,119.9 127.7,122.7 128,125.5" style="fill:none;stroke:var(--accent);stroke-width:3"/><line x1="128" y1="125.5" x2="272" y2="125.5" style="stroke:var(--thm);stroke-width:3.6"/><polyline points="272,125.5 276.2,127.3 280.4,129 284.6,130.7 288.8,132.3 293,133.9 297.2,135.4 301.4,136.8 305.6,138.2 309.8,139.6 314,140.9 318.2,142.2 322.4,143.4 326.6,144.6 330.8,145.7 335,146.8 339.2,147.9 343.4,149 347.6,150 351.8,151 356,152" style="fill:none;stroke:var(--accent);stroke-width:3"/><circle cx="128" cy="125.5" r="5" style="fill:var(--text)"/><circle cx="272" cy="125.5" r="5" style="fill:var(--text)"/><circle cx="200" cy="125.5" r="5" style="fill:var(--ex)"/><text class="tm" x="128" y="236" style="text-anchor:middle">V₀</text><text class="tm" x="272" y="236" style="text-anchor:middle">V₁</text><text class="tm" x="200" y="236" style="text-anchor:middle">V_A</text><text class="tt" x="50" y="129.5" style="text-anchor:end">Pₛ(T)</text><text class="ta" x="110" y="40" style="text-anchor:start">液相</text><text class="tt" x="176" y="94">二相共存</text><text class="ta" x="308" y="76">気相</text><text class="tm" x="200" y="115.5" style="text-anchor:middle">飽和圧力</text></svg>
+      <figcaption>等温線($T$ 一定)の $P$–$V$ 図。液相($V\lt V_0$)と気相($V\gt V_1$)の間では、圧力が一定($P_s$:飽和圧力)の水平な線で、液体と気体が共存。体積を増やすと、液体が、少しずつ気体に変わる。</figcaption>
+    </figure>
+    <p>温度 $T$ のまま、液体を膨張させていくと、(i) 液体のまま、圧力が下がる。(ii) 圧力が $P_s(T)$ になると、蒸発が始まり、体積を増やしても、圧力は $P_s$ のまま(2相共存)。(iii) 全部が気体になると、再び、圧力が下がる。板書のシリンダーの3つの図は、(i)液体のみ、(ii)液体と気体の共存、(iii)気体のみ、に対応します。圧力を一定にして温度を上げたときの $V$–$T$ グラフ(板書の右上)では、$T^*$ で、体積が<b>とび</b>ます(液体 → 気体)。</p>
+
+    <!-- ===================== 3 ===================== -->
+    <h2 id="s3">3. 飽和圧力の満たすべき条件 <span class="page-tag">板書 p.12</span></h2>
+    <p>板書:「◎ 飽和圧力の満たすべき条件。Helmholtz 自由エネルギー $F(T,V)$:$dF=d(U-TS)=dU-T\,dS-S\,dT=-S\,dT-P\,dV$。等温過程:状態 ⓪ から ① 状態。$\displaystyle\int_{\text{等温}\ 0\to1}dF=\int_{V_0}^{V_1}(-P\,dV)=-P_s(V_1-V_0)$ ……(※)。$F(T,V_1)-F(T,V_0)=-P_s(V_1-V_0)$。」</p>
+    <ol class="step-list">
+      <li>温度 $T$ で、液体の状態 0(体積 $V_0$)から、気体の状態 1(体積 $V_1$)まで、等温で変化させる。この間、圧力は、いつも $P_s(T)$(共存域は、水平)。</li>
+      <li>$dF=-S\,dT-P\,dV$(第9回)で、等温($dT=0$)なら $dF=-P\,dV$。積分して、
+      $$F(T,V_1)-F(T,V_0)=-P_s(T)\,(V_1-V_0).\qquad(※)$$</li>
+    </ol>
+    <p>板書:「$T\to T+\Delta T$:$F(T+\Delta T,V_1)-F(T+\Delta T,V_0)=-P_s(T+\Delta T)\cdot(V_1-V_0)$ ……(※※)。左辺 $=F(T,V_1)+\left(\dfrac{\partial}{\partial T}F(T,V_1)\right)_V\Delta T+\cdots-F(T,V_0)-\left(\dfrac{\partial}{\partial T}F(T,V_0)\right)_V\Delta T$、右辺 $=-\left(P_s(T)+\dfrac{dP_s}{dT}\Delta T\right)(V_1-V_0)$。第10回から $-P=\left(\dfrac{\partial F}{\partial V}\right)_T$、$-S=\left(\dfrac{\partial F}{\partial T}\right)_V$($-S(T,V_1)$、$-S(T,V_0)$)。」</p>
+    <ol class="step-list">
+      <li>温度を少し変えて $T+\Delta T$ にしても、同じ関係 (※※) が成り立つ:$F(T+\Delta T,V_1)-F(T+\Delta T,V_0)=-P_s(T+\Delta T)(V_1-V_0)$。</li>
+      <li>左辺を、$\Delta T$ の1次まで展開(第2回のテイラー展開):$F(T+\Delta T,V)=F(T,V)+\left(\dfrac{\partial F}{\partial T}\right)_V\Delta T=F(T,V)-S(T,V)\,\Delta T$。右辺の $P_s(T+\Delta T)=P_s(T)+\dfrac{dP_s}{dT}\Delta T$。</li>
+      <li>(※※) − (※):左辺は $\{-S(T,V_1)+S(T,V_0)\}\Delta T$、右辺は $-\dfrac{dP_s}{dT}(V_1-V_0)\Delta T$。$\Delta T$ で割って、
+      $$\frac{dP_s}{dT}=\frac{S(T,V_1)-S(T,V_0)}{V_1-V_0}.$$</li>
+      <li>等温で、液体 → 気体に変わるとき、吸収する熱(<b>潜熱</b>)$Q_{\rm 潜熱}$ は、$T\,dS=\dbar Q$ から、$S(T,V_1)-S(T,V_0)=\dfrac{Q_{\rm 潜熱}}{T}$。</li>
+    </ol>
+    <div class="box thm">
+      <div class="label">Clausius–Clapeyron の関係式</div>
+      <p>$$\frac{dP_s}{dT}=\frac{Q_{\rm 潜熱}}{T\,(V_1-V_0)}.$$
+      相境界(飽和圧力曲線)の傾きは、潜熱と、相転移に伴う体積変化で決まる。</p>
+    </div>
+    <p>板書:「水の蒸発境界 $V_1\gt V_0$、$Q_{\rm 蒸発}\gt0$。水の固液境界 $V_1\lt V_0$、$Q_{\rm 融解}\gt0$。⇒($P$–$T$ 図:固、液、気。※水)」</p>
+    <ul>
+      <li><b>蒸発</b>:液体 → 気体では、$V_1\gt V_0$(気体の方が、体積が大きい)、潜熱も $Q\gt0$(熱を吸収)。よって $\dfrac{dP_s}{dT}\gt0$:沸点は、圧力が高いほど高い。(圧力鍋の原理。)</li>
+      <li><b>水の融解</b>:固体(氷)→ 液体(水)では、$V_1\lt V_0$(氷の方が、体積が大きい。氷が水に浮く理由)、融解熱 $Q\gt0$。よって $\dfrac{dP_s}{dT}\lt0$:圧力を上げると、融点が<b>下がる</b>(水の特異な性質:「※水」)。ふつうの物質では、固体の方が、体積が小さいので、傾きは正。</li>
+    </ul>
+
+    <!-- ===================== 4 ===================== -->
+    <h2 id="s4">4. 共存領域での自由エネルギー <span class="page-tag">板書 p.12</span></h2>
+    <p>板書:「◎ 自由エネルギー。($P$–$V$ 図:$P_s$、点 0、A、1、$V_0\lt V_A\lt V_1$。)$\displaystyle\int_{0\to A}dF=\int_{0\to A}-P\,dV$ ⇒ $F(T,V_A)-F(T,V_0)=-P_s(V_A-V_0)$。($F$–$V$ のグラフ:曲線と、直線、点線。共存、傾き $-P_s$。)$\left(\dfrac{\partial F}{\partial V}\right)_T=-P$、$\left(\dfrac{\partial^2F}{\partial V^2}\right)_T=-\left(\dfrac{\partial P}{\partial V}\right)_T\ge0$ ⇒ 下に凸。」</p>
+    <figure class="fig">
+      <svg viewBox="0 0 480 246" width="480" role="img" aria-label="自由エネルギーの二重接線"><line x1="56" y1="220" x2="388.6" y2="220" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><polygon points="396,220 388,223.4 388,216.6" style="fill:var(--muted)"/><line x1="56" y1="220" x2="56" y2="37.4" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><polygon points="56,30 59.4,38 52.6,38" style="fill:var(--muted)"/><text class="t" x="396" y="238" style="text-anchor:end">V</text><text class="t" x="48" y="38" style="text-anchor:end">F</text><polyline points="94.5,12 98.1,20.5 101.8,28 105.4,34.6 109.1,40.4 112.7,45.4 116.4,49.7 120,53.3 123.7,56.2 127.3,58.6 130.9,60.5 134.6,62 138.2,63 141.9,63.6 145.5,63.9 149.2,63.9 152.8,63.6 156.4,63.1 160.1,62.5 163.7,61.7 167.4,60.7 171,59.8 174.7,58.7 178.3,57.7 182,56.6 185.6,55.6 189.2,54.6 192.9,53.8 196.5,53 200.2,52.3 203.8,51.8 207.5,51.4 211.1,51.2 214.7,51.2 218.4,51.4 222,51.8 225.7,52.3 229.3,53.1 233,54.1 236.6,55.4 240.2,56.8 243.9,58.5 247.5,60.4 251.2,62.5 254.8,64.8 258.5,67.3 262.1,70 265.8,72.9 269.4,76 273,79.2 276.7,82.6 280.3,86.1 284,89.7 287.6,93.4 291.3,97.2 294.9,101 298.6,104.8 302.2,108.7 305.8,112.5 309.5,116.2 313.1,119.8 316.8,123.3 320.4,126.7 324.1,129.9 327.7,132.8 331.3,135.4 335,137.8 338.6,139.7 342.3,141.3 345.9,142.4 349.6,143.1 353.2,143.1 356.8,142.6 360.5,141.5 364.1,139.6 367.8,137 371.4,133.6 375.1,129.3 378.7,124.1 382.4,117.9 386,110.6" style="fill:none;stroke:var(--muted);stroke-width:2;stroke-dasharray:4 4"/><polyline points="94.5,46.7 96.9,47.6 99.4,48.6 101.8,49.5 104.2,50.4 106.6,51.3 109.1,52.3 111.5,53.2 113.9,54.1 116.4,55 118.8,56 121.2,56.9 123.7,57.8 126.1,58.8 128.5,59.7 130.9,60.6 133.4,61.5 135.8,62.5 138.2,63.4 140.7,64.3 143.1,65.3 145.5,66.2 147.9,67.1 150.4,68 152.8,69 155.2,69.9 157.7,70.8 160.1,71.7 162.5,72.7 164.9,73.6 167.4,74.5 169.8,75.5 172.2,76.4 174.7,77.3 177.1,78.2 179.5,79.2 182,80.1 184.4,81 186.8,81.9 189.2,82.9 191.7,83.8 194.1,84.7 196.5,85.7 199,86.6 201.4,87.5 203.8,88.4 206.2,89.4 208.7,90.3 211.1,91.2 213.5,92.1 216,93.1 218.4,94 220.8,94.9 223.2,95.9 225.7,96.8 228.1,97.7 230.5,98.6 233,99.6 235.4,100.5 237.8,101.4 240.2,102.4 242.7,103.3 245.1,104.2 247.5,105.1 250,106.1 252.4,107 254.8,107.9 257.3,108.8 259.7,109.8 262.1,110.7 264.5,111.6 267,112.6 269.4,113.5 271.8,114.4 274.3,115.3 276.7,116.3 279.1,117.2 281.5,118.1 284,119 286.4,120 288.8,120.9 291.3,121.8 293.7,122.8 296.1,123.7 298.6,124.6 301,125.5 303.4,126.5 305.8,127.4 308.3,128.3 310.7,129.2 313.1,130.2 315.6,131.1 318,132 320.4,133 322.8,133.9 325.3,134.8 327.7,135.7 330.1,136.7 332.6,137.6 335,138.5 337.4,139.5 339.8,140.4 342.3,141.3 344.7,142.2 347.1,143.2 349.6,144.1 352,145 354.4,145.9 356.8,146.9 359.3,147.8 361.7,148.7 364.1,149.7 366.6,150.6 369,151.5 371.4,152.4 373.9,153.4 376.3,154.3 378.7,155.2 381.1,156.1 383.6,157.1 386,158" style="fill:none;stroke:var(--accent);stroke-width:3"/><polyline points="133,61.4 143.5,65.4 153.9,69.4 164.4,73.4 174.8,77.4 185.2,81.4 195.7,85.3 206.2,89.3 216.6,93.3 227.1,97.3 237.5,101.3 248,105.3 258.4,109.3 268.9,113.3 279.3,117.3 289.8,121.3 300.2,125.2 310.7,129.2 321.1,133.2 331.6,137.2 342,141.2" style="fill:none;stroke:var(--thm);stroke-width:3.4"/><circle cx="133" cy="61.4" r="5" style="fill:var(--text)"/><circle cx="342" cy="141.2" r="5" style="fill:var(--text)"/><text class="tm" x="133" y="236" style="text-anchor:middle">V₀</text><text class="tm" x="342" y="236" style="text-anchor:middle">V₁</text><text class="tt" x="226.5" y="119.1" style="text-anchor:middle">共存:傾き −Pₛ の直線</text><text class="tm" x="237.5" y="41.7" style="text-anchor:middle">点線:波打つ F(下に凸でない → 不安定)</text></svg>
+      <figcaption>共存領域($V_0\lt V\lt V_1$)での $F(T,V)$ は、傾き $-P_s$ の直線(二重接線)。点線は、状態方程式から単純に作った、波打つ $F$(不安定:下に凸でない)。実際の $F$ は、実線。</figcaption>
+    </figure>
+    <ol class="step-list">
+      <li>共存域の途中の点 A($V_0\lt V_A\lt V_1$)でも、圧力は $P_s$ で一定。$F(T,V_A)-F(T,V_0)=-P_s\,(V_A-V_0)$。つまり、$F$ は $V$ の<b>1次関数</b>で、傾きは $-P_s$。</li>
+      <li>$F(V)$ のグラフは、液相の曲線 → 傾き $-P_s$ の<b>直線</b>(共存)→ 気相の曲線、とつながる。直線の両端で、曲線に<b>接する</b>(傾きが $-P$ から $-P_s$ に、なめらかにつながる)。この直線を<b>二重接線</b>という。</li>
+      <li>安定性(第11回):$\left(\dfrac{\partial P}{\partial V}\right)_T\le0$ なので、$\left(\dfrac{\partial^2F}{\partial V^2}\right)_T=-\left(\dfrac{\partial P}{\partial V}\right)_T\ge0$:$F(V)$ は<b>下に凸</b>。直線の部分は、$F''=0$(凸のぎりぎり)。</li>
+    </ol>
+    <p>ファンデルワールス気体の状態方程式から、単純に作った $F$ は、途中で波打ちます(第11回の、$(\partial P/\partial V)_T\gt0$ の区間で、上に凸になる:図の点線)。それは、不安定で実現しない。<b>下に凸な最小のもの = 二重接線で作った $F$</b>(<b>凸包</b>)が、実際の自由エネルギー。点線の山をまたいで、液相と気相を結ぶ直線が、共存状態の $F$ です。この直線の傾きから、$P_s$ が決まる(<b>Maxwell の等面積則</b>と、同じ内容)。</p>
+
+    <!-- ===================== 5 ===================== -->
+    <h2 id="s5">5. 5.2 ゴムの熱力学 <span class="page-tag">板書 p.12</span></h2>
+    <p>板書:「<b>5.2 ゴムの熱力学</b>。問題のゴムの設定。① 長さ $l$ 一定での熱容量 $C_l$:定数。② 状態方程式 $X(T,l)=AT\left\{\dfrac l{l_0}-\left(\dfrac{l_0}{l}\right)^2\right\}$、定数 $A,l_0\gt0$($l\gt l_0$)。仕事 $\dbar W=X\,dl$。」(図:ゴムひもと、おもり。$X$–$l$ のグラフ(温度 $T_1,T_2$)。$P$–$V$ の図(気体との比較)。)</p>
+    <figure class="fig">
+      <svg viewBox="0 0 660 246" width="660" role="img" aria-label="ゴムの張力"><line x1="56" y1="220" x2="388.6" y2="220" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><polygon points="396,220 388,223.4 388,216.6" style="fill:var(--muted)"/><line x1="56" y1="220" x2="56" y2="37.4" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><polygon points="56,30 59.4,38 52.6,38" style="fill:var(--muted)"/><text class="t" x="396" y="238" style="text-anchor:end">l</text><text class="t" x="48" y="38" style="text-anchor:end">X</text><polyline points="96,200 99.3,194.7 102.7,189.7 106,185 109.3,180.5 112.7,176.2 116,172.2 119.3,168.3 122.7,164.6 126,161 129.3,157.6 132.7,154.3 136,151.1 139.3,147.9 142.7,144.9 146,141.9 149.3,139.1 152.7,136.2 156,133.5 159.3,130.8 162.7,128.1 166,125.5 169.3,123 172.7,120.5 176,118 179.3,115.5 182.7,113.1 186,110.7 189.3,108.4 192.7,106.1 196,103.8 199.3,101.5 202.7,99.2 206,97 209.3,94.8 212.7,92.5 216,90.4 219.3,88.2 222.7,86 226,83.9 229.3,81.8 232.7,79.7 236,77.5 239.3,75.5 242.7,73.4 246,71.3 249.3,69.2 252.7,67.2 256,65.1 259.3,63.1 262.7,61.1 266,59 269.3,57 272.7,55 276,53 279.3,51 282.7,49 286,47 289.3,45.1 292.7,43.1 296,41.1" style="fill:none;stroke:var(--accent);stroke-width:3"/><polyline points="96,200 99.3,196.8 102.7,193.8 106,191 109.3,188.3 112.7,185.7 116,183.3 119.3,181 122.7,178.8 126,176.6 129.3,174.6 132.7,172.6 136,170.6 139.3,168.8 142.7,166.9 146,165.2 149.3,163.4 152.7,161.7 156,160.1 159.3,158.5 162.7,156.9 166,155.3 169.3,153.8 172.7,152.3 176,150.8 179.3,149.3 182.7,147.9 186,146.4 189.3,145 192.7,143.6 196,142.3 199.3,140.9 202.7,139.5 206,138.2 209.3,136.9 212.7,135.5 216,134.2 219.3,132.9 222.7,131.6 226,130.3 229.3,129.1 232.7,127.8 236,126.5 239.3,125.3 242.7,124 246,122.8 249.3,121.5 252.7,120.3 256,119.1 259.3,117.9 262.7,116.6 266,115.4 269.3,114.2 272.7,113 276,111.8 279.3,110.6 282.7,109.4 286,108.2 289.3,107 292.7,105.8 296,104.7" style="fill:none;stroke:var(--thm);stroke-width:3"/><circle cx="96" cy="200" r="5" style="fill:var(--text)"/><text class="tm" x="96" y="236" style="text-anchor:middle">l₀</text><text class="tt" x="231" y="72.7" style="text-anchor:end">T₁(高温)</text><text class="ta" x="286" y="128.2" style="text-anchor:end">T₂(低温)</text><text class="tt" x="410" y="90">X(T, l) = A T { l/l₀ − (l₀/l)² }</text><text class="tj" x="410" y="114">温度が高いほど、</text><text class="tj" x="410" y="134">ゴムは縮もうとする力が強い</text><text class="tm" x="410" y="164">l = l₀ で X = 0</text><text class="tm" x="410" y="184">(自然の長さ)</text></svg>
+      <figcaption>ゴムの状態方程式。温度が高いほど、同じ長さでの張力 $X$ が大きい。$l=l_0$ で $X=0$。</figcaption>
+    </figure>
+    <p>気体の $(P,V)$ に、ゴムの $(X,l)$ が対応します($\dbar W=-P\,dV\ \leftrightarrow\ \dbar W=+X\,dl$:第3回)。同じ道具で、順に調べます。</p>
+    <p><b>[1] 熱力学関係式</b>(板書:$dU=\dbar Q+\dbar W=T\,dS+X\,dl$)</p>
+    <p>可逆な変化で、$\dbar Q=T\,dS$、$\dbar W=X\,dl$ なので、$dU=T\,dS+X\,dl$。(気体の $dU=T\,dS-P\,dV$ で、$-P\to X$、$V\to l$ と置きかえたもの。)</p>
+    <p><b>[2] Helmholtz の自由エネルギー $F(T,l)$</b>(板書:$F=U-TS$ ⇒ $dF=X\,dl-S\,dT$、$X=\left(\dfrac{\partial F}{\partial l}\right)_T$、$-S=\left(\dfrac{\partial F}{\partial T}\right)_l$ ⇒ Maxwell:$\left(\dfrac{\partial X}{\partial T}\right)_l=-\left(\dfrac{\partial S}{\partial l}\right)_T$)</p>
+    <p>$F=U-TS$ から、$dF=dU-T\,dS-S\,dT=X\,dl-S\,dT$。偏微分の順序交換から、<b>Maxwell の関係式</b>
+    $$\left(\frac{\partial X}{\partial T}\right)_l=-\left(\frac{\partial S}{\partial l}\right)_T.$$
+    右辺は、等温でゴムを伸ばしたときの、エントロピーの変化:伸ばすと、分子の鎖が、まっすぐそろって、エントロピーが<b>減る</b>(右辺の値が負 ⇔ $\left(\frac{\partial X}{\partial T}\right)_l\gt0$:温度が高いほど、張力が強い)。</p>
+    <p><b>[3] 熱容量 $C_l$ と内部エネルギー</b>(板書:$C_l=\dfrac{\dbar Q}{dT}\Big|_l=\left(\dfrac{\partial U}{\partial T}\right)_l$($\because\ \dbar Q=dU-\dbar W=dU-X\,dl$))</p>
+    <p>長さ一定($dl=0$)なら、$\dbar Q=dU$:$C_l=\left(\dfrac{\partial U}{\partial T}\right)_l$。</p>
+    <p><b>[4] $U$ は $l$ に依存せず、$T$ のみの関数</b>(板書:$\left(\dfrac{\partial U}{\partial l}\right)_T=T\left(\dfrac{\partial S}{\partial l}\right)_T+X=-T\left(\dfrac{\partial X}{\partial T}\right)_l+X=0$)</p>
+    <p>$dU=T\,dS+X\,dl$ を、$T$ 一定で $l$ で微分して、$\left(\dfrac{\partial U}{\partial l}\right)_T=T\left(\dfrac{\partial S}{\partial l}\right)_T+X$。Maxwell の関係式で、$\left(\dfrac{\partial S}{\partial l}\right)_T=-\left(\dfrac{\partial X}{\partial T}\right)_l$。状態方程式から $X=T\cdot A\{\cdots\}$($T$ に比例)なので、$T\left(\dfrac{\partial X}{\partial T}\right)_l=X$。よって、
+    $$\left(\frac{\partial U}{\partial l}\right)_T=-T\left(\frac{\partial X}{\partial T}\right)_l+X=-X+X=0.$$
+    気体の $\left(\frac{\partial U}{\partial V}\right)_T=0$(理想気体)に、そっくり。この「理想ゴム」の内部エネルギーは、長さによらない(伸ばしても、$U$ は変わらない)。</p>
+    <p><b>[5] 張力一定の熱容量 $C_X$ と $C_l$ の関係</b>(板書:$C_X=\dfrac{\dbar Q}{dT}\Big|_X=\cdots=C_l+\blacksquare$ ⇒ $C_X\gt C_l$)</p>
+    <p>板書は、途中の式が省略され、最後の項(■)が空欄です。計算で補います。$\dbar Q=T\,dS$ で、$S(T,l)$ の全微分 $dS=\left(\dfrac{\partial S}{\partial T}\right)_ldT+\left(\dfrac{\partial S}{\partial l}\right)_Tdl=\dfrac{C_l}{T}dT-\left(\dfrac{\partial X}{\partial T}\right)_ldl$。よって、
+    $$\dbar Q=C_l\,dT-T\left(\frac{\partial X}{\partial T}\right)_ldl.$$
+    $X$ 一定のとき、$dl=\left(\dfrac{\partial l}{\partial T}\right)_XdT$。循環関係(第2回):$\left(\dfrac{\partial l}{\partial T}\right)_X=-\dfrac{(\partial X/\partial T)_l}{(\partial X/\partial l)_T}$。よって、</p>
+    $$C_X=C_l+T\,\frac{\left(\partial X/\partial T\right)_l^{2}}{\left(\partial X/\partial l\right)_T}\ \gt\ C_l.$$
+    <p>最後の項(■)が、板書の空欄に当たります。$\left(\dfrac{\partial X}{\partial l}\right)_T=AT\left(\dfrac1{l_0}+\dfrac{2l_0^2}{l^3}\right)\gt0$(安定性:伸ばすほど、張力が増す)なので、■$\gt0$、$C_X\gt C_l$。気体の $C_P\gt C_V$ に対応する、同じ構造です。</p>
+    <p><b>[6] 等温過程 $l_1\to l_2$ に伸ばすときの熱</b>(板書:問いのみ)</p>
+    <p>等温($T$ 一定)で、可逆に伸ばすとき、吸収する熱は $Q=T\,\Delta S=T\displaystyle\int_{l_1}^{l_2}\left(\frac{\partial S}{\partial l}\right)_Tdl=-T\int_{l_1}^{l_2}\left(\frac{\partial X}{\partial T}\right)_ldl$。$\left(\dfrac{\partial X}{\partial T}\right)_l=A\left\{\dfrac l{l_0}-\left(\dfrac{l_0}l\right)^2\right\}$ を積分して、
+    $$Q=-TA\left[\frac{l^2}{2l_0}+\frac{l_0^2}{l}\right]_{l_1}^{l_2}=-TA\left\{\frac{l_2^2-l_1^2}{2l_0}+l_0^2\left(\frac1{l_2}-\frac1{l_1}\right)\right\}.$$
+    $l_2\gt l_1\ge l_0$ なら、括弧の中は正で、$Q\lt0$:<b>ゴムを等温で伸ばすと、熱を放出する</b>(ゴムを急に伸ばすと、温かくなる)。逆に、縮めると、熱を吸収する。</p>
+
+    <!-- ===================== 6 ===================== -->
+    <h2 id="s6">6. 具体例で練習(板書にない補足) <span class="page-tag">補足</span></h2>
+    <div class="box ex">
+      <div class="label">問題 A:水の沸点と圧力</div>
+      <p>水の蒸発熱を $2.26\times10^3\ \mathrm{J/g}$、$100\,{}^\circ\mathrm C$ での、水と水蒸気の体積を $1.04\ \mathrm{cm^3/g}$、$1.67\times10^3\ \mathrm{cm^3/g}$ とする。$100\,{}^\circ\mathrm C$ での $\dfrac{dP_s}{dT}$ を求めよ。</p>
+    </div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>$V_1-V_0=1.67\times10^3\ \mathrm{cm^3/g}=1.67\times10^{-3}\ \mathrm{m^3/g}$。$\dfrac{dP_s}{dT}=\dfrac{2.26\times10^3}{373.15\times1.67\times10^{-3}}=3.6\times10^3\ \mathrm{Pa/K}$(約 0.036 気圧/K)。圧力を 1 気圧から 0.9 気圧に下げると、沸点は約 $2.8\ \mathrm K$ 下がる(高山の沸点が低い理由)。</p></div>
+
+    <div class="box ex">
+      <div class="label">問題 B:氷の融点と圧力(氷が滑る?)</div>
+      <p>氷の融解熱 $334\ \mathrm{J/g}$、氷の体積 $1.091\ \mathrm{cm^3/g}$、水の体積 $1.000\ \mathrm{cm^3/g}$、$T=273.15\ \mathrm K$。$\dfrac{dP}{dT}$ を求め、圧力を $100$ 気圧($1.01\times10^7\ \mathrm{Pa}$)上げたときの融点の変化を求めよ。</p>
+    </div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>固体 → 液体で $V_1-V_0=1.000-1.091=-0.091\ \mathrm{cm^3/g}=-9.1\times10^{-8}\ \mathrm{m^3/g}$。$\dfrac{dP}{dT}=\dfrac{334}{273.15\times(-9.1\times10^{-8})}=-1.34\times10^7\ \mathrm{Pa/K}$(約 $-132$ 気圧/K)。100気圧上げると、$\Delta T\approx-0.75\ \mathrm K$:融点が約 $0.75\ \mathrm K$ 下がる。(圧力の効果は、実は小さい。)</p></div>
+
+    <div class="box ex">
+      <div class="label">問題 C:理想ゴムの熱の出入り</div>
+      <p>$A=0.1\ \mathrm{J/(K\cdot m)}$、$l_0=1\ \mathrm m$ のゴムを、$T=300\ \mathrm K$ で、等温・可逆に $l=1\ \mathrm m$ から $l=2\ \mathrm m$ に伸ばす。吸収する熱 $Q$ と、外から加える仕事 $W$ を求めよ。($U$ は $l$ によらない。)</p>
+    </div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>$Q=-TA\left\{\dfrac{l_2^2-l_1^2}{2l_0}+l_0^2\left(\dfrac1{l_2}-\dfrac1{l_1}\right)\right\}=-300\times0.1\times\{1.5+(0.5-1)\}=-30\times1.0=-30\ \mathrm J$(熱を $30\ \mathrm J$ 放出)。$\Delta U=0$ なので、$W=-Q=+30\ \mathrm J$(外から $30\ \mathrm J$ の仕事をした)。仕事が、全部、熱になって、出て行った。</p></div>
+
+    <!-- ===================== 7 ===================== -->
+    <h2 id="s7">7. まとめ(この回で覚えること)</h2>
+    <ul>
+      <li><b>相</b>と、各相の $G_\alpha(T,P)$。$G$ が最小の相が実現。境界では、$G$ が等しく、2相が共存。</li>
+      <li>等温で、液体 → 気体:$F(T,V_1)-F(T,V_0)=-P_s(V_1-V_0)$。$T$ を変えて展開 ⇒ <b>Clausius–Clapeyron</b>:$\dfrac{dP_s}{dT}=\dfrac{Q_{\rm 潜熱}}{T(V_1-V_0)}$。蒸発では正、水の融解では負。</li>
+      <li>共存領域の $F(V)$ は、傾き $-P_s$ の直線(二重接線)。$\left(\dfrac{\partial^2F}{\partial V^2}\right)_T\ge0$(下に凸)。</li>
+      <li><b>ゴム</b>:$dU=T\,dS+X\,dl$、$dF=X\,dl-S\,dT$、$\left(\frac{\partial X}{\partial T}\right)_l=-\left(\frac{\partial S}{\partial l}\right)_T$。$U$ は $l$ によらない。$C_X=C_l+T\frac{(\partial X/\partial T)_l^2}{(\partial X/\partial l)_T}\gt C_l$。等温で伸ばすと、熱を放出。</li>
+    </ul>
+
+    <!-- ===================== 8 ===================== -->
+    <h2 id="s8">8. この回のノートについてのメモ</h2>
+    <p>板書は手書きの画像です。画像の順に p.12(最後のページ)としました。板書の画像は、このサイトには載せていません。黄色の枠(この回はなし)、基礎ページの内容、練習問題と解答は、Claude が書き足したもので、板書にはありません。このノートは、ここで終わっています(ゴムの問題 [6] は、問いだけが書かれ、答えは本文で補いました)。</p>
+    <ol>
+      <li><b>$P$–$T$ 図の書き込み(p.12)</b>:図の中の「$G_{\text{気}}(T,P)$」「完全な熱力学関数」は、各相の自由エネルギーのことと読みました。三重点などの細かい書き込みは、読み取りにくいので、一般的な相図(水の融解曲線を点線で)として描き直しました。</li>
+      <li><b>$V_0,V_1$ の読み(p.12)</b>:板書の状態 ⓪、① は、液体 $(T,V_0)$、気体 $(T,V_1)$ と読みました($V_1\gt V_0$)。「水の固液境界 $V_1\lt V_0$」は、⓪ が氷、① が水と読みました。</li>
+      <li><b>ゴムの状態方程式(p.12)</b>:$X=AT\{l/l_0-(l_0/l)^2\}$ と読みました($l=l_0$ で $X=0$ になる形)。「$(l\gt l_0)$」は、この式を使う範囲と読みました。</li>
+      <li><b>$C_X$ の最後の項(p.12)</b>:黒く塗られた枠(■)は、本文の計算で補いました($T\,(\partial X/\partial T)_l^2/(\partial X/\partial l)_T$)。</li>
+      <li><b>問 [6](p.12)</b>:板書は問いのみ(「等温過程 $l_1\to l_2$ にのばすときの熱?」)で、ページはここで終わっています。答えは、[2] の Maxwell の関係式と、状態方程式から計算して補いました。</li>
+    </ol>
+
+    <nav class="pager">
+      <a href="week-11.html">← 前の週</a>
+      <a href="../index.html">一覧へ</a>
+      <span class="disabled">次の週 →</span>
+    </nav>
+
+  </main>
+
+  <footer>© Aセメまとめノート</footer>
+</body>
+</html>

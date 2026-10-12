@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>第8回 エントロピーの計算と熱力学関数 | Aセメまとめノート</title>
+  <link rel="stylesheet" href="../../assets/style.css">
+  <script defer src="../../assets/nav.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],macros:{'\\R':'\\mathbb{R}','\\bm':'\\boldsymbol{#1}','\\dd':'\\mathrm{d}','\\dbar':'\\mathrm{d}^{\\prime}'}});window.__navReady&&window.__navReady()"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="inner">
+      <a class="site-title" href="../../index.html">Aセメまとめノート</a>
+      <span class="links"><a href="../index.html">熱力学</a><a href="../basics.html">基礎のまとめ</a><a href="../../calc/index.html">微積</a><a href="../../linalg/index.html">線形代数</a><a href="../../em/index.html">電磁気学</a><a href="../../mech/index.html">力学A</a></span>
+    </div>
+  </header>
+
+  <main class="note">
+    <h1>第8回:エントロピーの計算と熱力学関数</h1>
+    <div class="meta">熱力学(東京大学 教養学部 秋学期)／板書 p.9〜p.10(上部)(画像の順に数えています)／ノートの見出し「4. 熱力学関数」(4.1)</div>
+
+    <nav class="toc">
+      <div class="toc-title">目次</div>
+      <ol start="0">
+        <li><a href="#s0">この回の全体像</a></li>
+        <li><a href="#s1">準備:基礎の確認</a>
+          <div class="sub">対数／理想気体の断熱変化／偏微分と全微分</div></li>
+        <li><a href="#s2">Clausius の不等式の使い方:熱伝導</a>(p.9)</li>
+        <li><a href="#s3">理想気体のエントロピー</a>(p.9)</li>
+        <li><a href="#s4">断熱過程でのエントロピー変化</a>(p.9)</li>
+        <li><a href="#s5">4. 熱力学関数:状態変数と基本関係式</a>(p.9)</li>
+        <li><a href="#s6">完全な熱力学関数 $U(S,V)$</a>(p.9〜10)</li>
+        <li><a href="#s7">不完全な熱力学関数と、$S(U,V)$</a>(p.10)</li>
+        <li><a href="#s8">具体例で練習</a></li>
+        <li><a href="#s9">まとめ(この回で覚えること)</a></li>
+        <li><a href="#s10">この回のノートについてのメモ</a></li>
+      </ol>
+    </nav>
+
+    <!-- ===================== 0 ===================== -->
+    <h2 id="s0">0. この回の全体像 <span class="page-tag">板書 p.9–10</span></h2>
+    <p>第7回で、エントロピー $S$ を定義しました。この回の前半は、それを<b>実際に計算する</b>練習(熱伝導、理想気体)です。後半は、新しい章「<b>4. 熱力学関数</b>」に入り、熱力学の状態量($T,V,P,U,S$)の関係を整理して、「<b>1つの関数 $U(S,V)$ を知れば、物質の熱力学的な性質が、全部分かる</b>」という、完全な熱力学関数の考え方を学びます。</p>
+    <div class="box thm">
+      <div class="label">この回のゴール</div>
+      <p>① Clausius の不等式 $\displaystyle\int_{A\to B}\frac{\dbar Q}{T}\le S_B-S_A$ を、熱伝導の例で確かめる。<br>
+      ② 理想気体のエントロピー $S=C_V\log T+nR\log V+$ 定数。断熱で到達できる状態は、$S$ が増える側だけ。<br>
+      ③ 熱力学の基本関係式 $dU=T\,dS-P\,dV$。<b>完全な熱力学関数</b> $U(S,V)$:$T=\left(\dfrac{\partial U}{\partial S}\right)_V$、$-P=\left(\dfrac{\partial U}{\partial V}\right)_S$ から、状態方程式も熱容量も出る。<br>
+      ④ $U(T,V)$ は<b>不完全</b>(状態方程式が出ない)。$S(U,V)$ は完全:$\dfrac1T=\left(\dfrac{\partial S}{\partial U}\right)_V$、$\dfrac PT=\left(\dfrac{\partial S}{\partial V}\right)_U$。</p>
+    </div>
+    <figure class="fig">
+      <svg viewBox="0 0 520 268" width="520" role="img" aria-label="理想気体のエントロピーを求める2つの道"><line x1="56" y1="240" x2="408.6" y2="240" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><polygon points="416,240 408,243.4 408,236.6" style="fill:var(--muted)"/><line x1="56" y1="240" x2="56" y2="32.4" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><polygon points="56,25 59.4,33 52.6,33" style="fill:var(--muted)"/><text class="t" x="416" y="258" style="text-anchor:end">V</text><text class="t" x="48" y="33" style="text-anchor:end">P</text><polyline points="120,127.5 123.5,133.3 126.9,138.5 130.4,143.2 133.9,147.5 137.3,151.5 140.8,155.1 144.3,158.4 147.7,161.5 151.2,164.4 154.7,167 158.1,169.5 161.6,171.8 165.1,174 168.5,176 172,177.9 175.5,179.7 178.9,181.4 182.4,183 185.9,184.6 189.3,186 192.8,187.4 196.3,188.7 199.7,189.9 203.2,191.1 206.7,192.2 210.1,193.3 213.6,194.3 217.1,195.3 220.5,196.2 224,197.1 227.5,198 230.9,198.8 234.4,199.6 237.9,200.4 241.3,201.2 244.8,201.9 248.3,202.6 251.7,203.2 255.2,203.9 258.7,204.5 262.1,205.1 265.6,205.6 269.1,206.2 272.5,206.7 276,207.3 279.5,207.8 282.9,208.3 286.4,208.8 289.9,209.2 293.3,209.7 296.8,210.1 300.3,210.5 303.7,210.9 307.2,211.3 310.7,211.7 314.1,212.1 317.6,212.5 321.1,212.8 324.5,213.2 328,213.5" style="fill:none;stroke:var(--muted);stroke-width:1.8;stroke-dasharray:5 4"/><polyline points="120,60 123.5,69.2 126.9,77.6 130.4,85.2 133.9,92.1 137.3,98.4 140.8,104.2 144.3,109.5 147.7,114.4 151.2,119 154.7,123.2 158.1,127.2 161.6,130.9 165.1,134.4 168.5,137.6 172,140.7 175.5,143.6 178.9,146.3 182.4,148.9 185.9,151.3 189.3,153.6 192.8,155.8 196.3,157.9 199.7,159.9 203.2,161.7 206.7,163.5 210.1,165.3 213.6,166.9 217.1,168.5 220.5,170 224,171.4 227.5,172.8 230.9,174.1 234.4,175.4 237.9,176.7 241.3,177.8 244.8,179 248.3,180.1 251.7,181.1 255.2,182.2 258.7,183.2 262.1,184.1 265.6,185 269.1,185.9 272.5,186.8 276,187.6 279.5,188.4 282.9,189.2 286.4,190 289.9,190.7 293.3,191.5 296.8,192.2 300.3,192.8 303.7,193.5 307.2,194.1 310.7,194.8 314.1,195.4 317.6,196 321.1,196.5 324.5,197.1 328,197.6" style="fill:none;stroke:var(--muted);stroke-width:1.8;stroke-dasharray:5 4"/><polyline points="136,150 138.8,155 141.6,159.6 144.4,163.8 147.2,167.7 150,171.2 152.8,174.5 155.6,177.5 158.4,180.4 161.2,183 164,185.4 166.8,187.7 169.6,189.8 172.4,191.8 175.2,193.7 178,195.5 180.8,197.1 183.6,198.7 186.4,200.1 189.2,201.5 192,202.8 194.8,204.1 197.6,205.3 200.4,206.4 203.2,207.4 206,208.4 208.8,209.4 211.6,210.3 214.4,211.2 217.2,212 220,212.8 222.8,213.6 225.6,214.3 228.4,215 231.2,215.6 234,216.3 236.8,216.9 239.6,217.5 242.4,218 245.2,218.6 248,219.1" style="fill:none;stroke:var(--thm);stroke-width:3"/><polyline points="248,219.1 248,180" style="fill:none;stroke:var(--thm);stroke-width:3"/><polyline points="136,150 138.8,153 141.6,155.9 144.4,158.6 147.2,161.1 150,163.4 152.8,165.6 155.6,167.7 158.4,169.7 161.2,171.6 164,173.3 166.8,175 169.6,176.6 172.4,178.1 175.2,179.6 178,181 180.8,182.3 183.6,183.6 186.4,184.8 189.2,185.9 192,187.1 194.8,188.1 197.6,189.2 200.4,190.1 203.2,191.1 206,192 208.8,192.9 211.6,193.7 214.4,194.5 217.2,195.3 220,196.1 222.8,196.8 225.6,197.5 228.4,198.2 231.2,198.9 234,199.6 236.8,200.2 239.6,200.8 242.4,201.4 245.2,201.9 248,202.5" style="fill:none;stroke:var(--ex);stroke-width:3"/><polyline points="248,202.5 248,180" style="fill:none;stroke:var(--ex);stroke-width:3;stroke-dasharray:1 0"/><circle cx="136" cy="150" r="5" style="fill:var(--text)"/><text class="t" x="124" y="142" style="text-anchor:middle">A</text><circle cx="248" cy="180" r="5" style="fill:var(--text)"/><text class="t" x="258" y="172" style="text-anchor:middle">B</text><circle cx="248" cy="219.1" r="5" style="fill:var(--text)"/><text class="t" x="258" y="233.1" style="text-anchor:middle">C</text><circle cx="248" cy="202.5" r="5" style="fill:var(--text)"/><text class="t" x="258" y="218.5" style="text-anchor:middle">D</text><text class="tt" x="112" y="87">方法1:A→C 断熱(S 不変)→B 定積</text><text class="tj" x="112" y="60" style="fill:var(--ex);font-weight:600">方法2:A→D 等温 → B 定積</text><text class="tm" x="296" y="145.5">等温線 T₀</text><text class="tm" x="296" y="170.2">等温線 T</text></svg>
+      <figcaption>理想気体の状態 A から B のエントロピーの差を、2つの可逆な道で計算する。$S$ は状態量なので、どの道でも、同じ答えになる。</figcaption>
+    </figure>
+
+    <!-- ===================== 1 ===================== -->
+    <h2 id="s1">1. 準備:基礎の確認</h2>
+
+    <h3 id="w-log8">1.1 対数と、$\int dx/x$</h3>
+    <div class="box basic">
+      <div class="label">基礎:$\int_a^b\frac{dx}{x}=\log\frac ba$ <a class="xref-link" href="../basics.html#logint" data-xref>→ 詳しい解説</a></div>
+      <p>$\displaystyle\int_{T_0}^{T}\frac{dT}{T}=\log\frac{T}{T_0}$。$\log x\ge1-\dfrac1x$($x\gt0$、等号は $x=1$):たとえば $x=2$ なら $\log2=0.693\ge0.5$。</p>
+    </div>
+
+    <h3 id="w-gas8">1.2 理想気体の断熱変化</h3>
+    <div class="box basic">
+      <div class="label">基礎:$TV^{\gamma-1}=$ 一定、$C_V(\gamma-1)=nR$ <a class="xref-link" href="../basics.html#gasproc" data-xref>→ 詳しい解説</a></div>
+      <p>準静的な断熱変化では $TV^{\gamma-1}=$ 一定(第4回)。$\gamma=C_P/C_V$ とマイヤーの関係 $C_P-C_V=nR$ から、$C_V(\gamma-1)=C_P-C_V=nR$。</p>
+    </div>
+
+    <h3 id="w-partial8">1.3 偏微分と全微分</h3>
+    <div class="box basic">
+      <div class="label">基礎:2変数関数の全微分 <a class="xref-link" href="../basics.html#partial" data-xref>→ 詳しい解説</a></div>
+      <p>$U(S,V)$ の全微分は、$dU=\left(\dfrac{\partial U}{\partial S}\right)_VdS+\left(\dfrac{\partial U}{\partial V}\right)_SdV$(第2回)。変数の組が $(S,V)$ のときは、「$V$ 一定で $S$ で微分」「$S$ 一定で $V$ で微分」。</p>
+    </div>
+
+    <!-- ===================== 2 ===================== -->
+    <h2 id="s2">2. Clausius の不等式の使い方:熱伝導 <span class="page-tag">板書 p.9</span></h2>
+    <p>板書:「Clausius の不等式 $\oint_C\dfrac{\dbar Q}{T}\le0$ ⇒ $\displaystyle\int_{A\xrightarrow{K}B}\frac{\dbar Q}{T}\le S_B-S_A$。」(図:A→B(過程 K)と、B→A(K′)のサイクル。)</p>
+    <p>第7回の補足で導いた形です。A→B が<b>どんな過程</b>(不可逆でもよい)でも、左辺(熱源の温度で割った熱の和)は、右辺($S$ の差。<b>可逆に計算</b>する)以下。</p>
+    <p>板書:「◎ 熱伝導。A:$[T\,|\,T_0]$ → B:$[T]$($T\gt T_0$)。※ A→B での換算熱。◎ 熱容量 $C_V$ は温度に依存しない。◎ 熱による膨張はない。換算熱 $=\displaystyle\int_{A\xrightarrow{K}B}\frac{\dbar Q}{T}=\frac1T\int_{A\to B}\dbar Q=\frac1T\int_{T_0}^{T}C_V\,dT=\frac{C_V}{T}(T-T_0)$。※ エントロピー差:$S_B-S_A=\int_{A\rightsquigarrow B}\dfrac{\dbar Q}{T}=\int_{T_0}^{T}\dfrac{C_V}{T}dT=C_V\log\dfrac{T}{T_0}$ ⇒ $C_V\left(1-\dfrac{T_0}{T}\right)\le C_V\log\dfrac{T}{T_0}$($T=T_0$ で等号成立)。」</p>
+    <figure class="fig">
+      <svg viewBox="0 0 520 212" width="520" role="img" aria-label="熱伝導とエントロピー"><rect x="40" y="50" width="90" height="60" rx="6" style="fill:var(--accent);fill-opacity:.22;stroke:var(--accent);stroke-width:2"/><text class="tj" x="85" y="76" style="text-anchor:middle">物体 A</text><text class="tm" x="85" y="98" style="text-anchor:middle">T₀(熱容量 C_V)</text><rect x="230" y="50" width="110" height="60" rx="6" style="fill:var(--thm);fill-opacity:.25;stroke:var(--thm);stroke-width:2"/><text class="tj" x="285" y="76" style="text-anchor:middle">熱源</text><text class="tm" x="285" y="98" style="text-anchor:middle">T(一定、T＞T₀)</text><line x1="236" y1="80" x2="142.4" y2="80" style="stroke:var(--thm);stroke-width:2.4;fill:none"/><polygon points="134,80 143,76 143,84" style="fill:var(--thm)"/><text class="tm" x="185" y="70" style="text-anchor:middle">熱が流れる</text><text class="tj" x="40" y="150">熱源がやりとりする熱 Q = C_V(T − T₀)、換算熱 Q/T = C_V(T − T₀)/T</text><text class="tj" x="40" y="172">物体のエントロピーの増加 ΔS = C_V log(T/T₀)(可逆な道で計算)</text><text class="tt" x="40" y="196">⇒ Q/T ≤ ΔS を確かめる(等号は T = T₀)</text></svg>
+      <figcaption>温度 $T_0$ の物体 A を、温度 $T$ の熱源に接触させ、熱伝導で温度 $T$ にする。物体の温度は変わるが、熱源の温度は $T$ のまま。</figcaption>
+    </figure>
+    <ol class="step-list">
+      <li><b>実際の過程 K</b>(熱伝導):物体は、温度 $T$ の熱源から熱をもらう。熱を渡す側(熱源)の温度は、いつも $T$。だから、$\dbar Q/T$ の $T$ は、定数 $T$。換算熱 $=\dfrac1T\int\dbar Q=\dfrac{C_V(T-T_0)}{T}$($\int\dbar Q=\int_{T_0}^{T}C_V\,dT=C_V(T-T_0)$)。</li>
+      <li><b>$S$ の差</b>:$S$ は状態量。物体の、温度 $T_0\to T$(体積一定)の変化を、<b>可逆な</b>過程(物体の温度に等しい熱源を、次々つなぐ)で行って計算する:$S_B-S_A=\int_{T_0}^{T}\dfrac{C_V}{T'}dT'=C_V\log\dfrac T{T_0}$(第7回の定積過程)。</li>
+      <li>Clausius の不等式:$\dfrac{C_V(T-T_0)}{T}\le C_V\log\dfrac{T}{T_0}$。$C_V$ で割って、$x=T/T_0$ とおくと、$1-\dfrac1x\le\log x$。1.1 の不等式そのもので、確かに成り立つ(等号は $T=T_0$ のとき、つまり熱伝導が起きないとき)。</li>
+    </ol>
+    <p>温度差のある熱伝導では、不等号が厳密に成り立ちます。差 $S_B-S_A-\dfrac QT\gt0$ が、<b>この過程で新たに生じたエントロピー</b>(不可逆性の大きさ)です。</p>
+
+    <!-- ===================== 3 ===================== -->
+    <h2 id="s3">3. 理想気体のエントロピー <span class="page-tag">板書 p.9</span></h2>
+    <p>板書:「◎ 理想気体の例。状態 A($T_0,V_0$)を基準として、状態 B($T,V$)のエントロピーを求める。$S_B-S_A=?$」</p>
+    <h3 id="s3a">方法1:断熱 → 定積</h3>
+    <p>板書:「方法1:A→C(準静的断熱)→B(準静的定積)。* $S_C=S_A$。* $S_B-S_C=\int_{C\to B}\dfrac{\dbar Q}{T}=\int_{T_C}^{T}\dfrac{C_V}{T}dT=C_V\log\dfrac T{T_C}$。* 断熱過程 A→C:$P_0V_0^{\gamma}=P_CV_C^{\gamma}$ ⇒ $T_0V_0^{\gamma-1}=T_CV_C^{\gamma-1}$ ∴ $T_C=T_0\left(\dfrac{V_0}{V}\right)^{\gamma-1}$。⇒ $S_B-S_A=S_B-S_C=C_V\log\left\{\dfrac{T}{T_0}\left(\dfrac V{V_0}\right)^{\gamma-1}\right\}=C_V\log\dfrac{T}{T_0}+C_V(\gamma-1)\log\dfrac V{V_0}$。$\gamma=\dfrac{C_P}{C_V}$ より $C_V(\gamma-1)=C_P-C_V=R$。∴ $S_B-S_A=C_V\log T+R\log V-(C_V\log T_0+R\log V_0)$(定数)。」</p>
+    <ol class="step-list">
+      <li>A から、<b>断熱</b>(準静的)で、体積を $V_0\to V$ に変えて、状態 C($T_C,V$)へ。断熱($\dbar Q=0$)なので、$\Delta S=0$:$S_C=S_A$。</li>
+      <li>C から、<b>定積</b>で、温度を $T_C\to T$ に変えて、状態 B($T,V$)へ。$S_B-S_C=\int_{T_C}^{T}\dfrac{C_V}{T}dT=C_V\log\dfrac T{T_C}$。</li>
+      <li>$T_C$ は、断熱の関係 $T_0V_0^{\gamma-1}=T_CV^{\gamma-1}$ から、$T_C=T_0(V_0/V)^{\gamma-1}$。</li>
+      <li>代入:$S_B-S_A=C_V\log\left\{\dfrac T{T_0}\left(\dfrac V{V_0}\right)^{\gamma-1}\right\}=C_V\log\dfrac T{T_0}+nR\log\dfrac{V}{V_0}$($C_V(\gamma-1)=nR$)。</li>
+    </ol>
+    <div class="box thm">
+      <div class="label">理想気体のエントロピー</div>
+      <p>$$S(T,V)=C_V\log T+nR\log V+(\text{定数}).$$
+      温度が上がるほど、体積が増えるほど、エントロピーは大きい。</p>
+    </div>
+    <h3 id="s3b">方法2:等温 → 定積</h3>
+    <p>板書:「方法2:A($T_0,V_0$)→D($T_0,V$)→B($T,V$)。$\dbar Q=C_VdT+P\,dV=C_VdT+\dfrac{RT}{V}dV$。$S_D-S_A=\int_{A\to D}\dfrac{\dbar Q}{T}=\int_{V_0}^{V}\dfrac1T\dfrac{RT}VdV=R\log\dfrac V{V_0}$。$S_B-S_D=\int_{D\to B}\dfrac{\dbar Q}{T}=\int_{T_0}^{T}\dfrac{C_V}{T}dT=C_V\log\dfrac T{T_0}$。∴ $S_B-S_A=(S_B-S_D)+(S_D-S_A)=C_V\log\dfrac T{T_0}\ \pm\ R\log\dfrac V{V_0}$。」</p>
+    <p>A→D は<b>等温</b>($T_0$)に体積を $V_0\to V$ にする。$\dbar Q=C_V\,dT+P\,dV$ で $dT=0$ なので $\dbar Q=P\,dV=\dfrac{nRT_0}{V}dV$。$\Delta S=\int\dfrac{\dbar Q}{T_0}=nR\log\dfrac V{V_0}$。D→B は<b>定積</b>:$C_V\log\dfrac T{T_0}$。足して、$S_B-S_A=C_V\log\dfrac T{T_0}+nR\log\dfrac V{V_0}$。方法1と、<b>同じ答え</b>(状態量だから、経路によらない)。</p>
+
+    <!-- ===================== 4 ===================== -->
+    <h2 id="s4">4. 断熱過程でのエントロピー変化 <span class="page-tag">板書 p.9</span></h2>
+    <p>板書:「◎ 断熱過程でのエントロピー変化。($P$–$V$ 図:等温曲線・断熱曲線、斜線の領域)準静的でない断熱過程で、到達できる領域。」</p>
+    <figure class="fig">
+      <svg viewBox="0 0 520 268" width="520" role="img" aria-label="断熱過程で到達できる領域"><line x1="56" y1="240" x2="408.6" y2="240" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><polygon points="416,240 408,243.4 408,236.6" style="fill:var(--muted)"/><line x1="56" y1="240" x2="56" y2="32.4" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><polygon points="56,25 59.4,33 52.6,33" style="fill:var(--muted)"/><text class="t" x="416" y="258" style="text-anchor:end">V</text><text class="t" x="48" y="33" style="text-anchor:end">P</text><polygon points="136,132 140.3,141 144.5,148.8 148.8,155.7 153.1,161.8 157.3,167.2 161.6,172 165.9,176.4 170.1,180.3 174.4,183.8 178.7,187 182.9,190 187.2,192.6 191.5,195.1 195.7,197.4 200,199.5 204.3,201.4 208.5,203.2 212.8,204.8 217.1,206.4 221.3,207.8 225.6,209.1 229.9,210.4 234.1,211.6 238.4,212.7 242.7,213.7 246.9,214.7 251.2,215.6 255.5,216.4 259.7,217.3 264,218 268.3,218.8 272.5,219.5 276.8,220.1 281.1,220.7 285.3,221.3 289.6,221.9 293.9,222.4 298.1,222.9 302.4,223.4 306.7,223.9 310.9,224.3 315.2,224.8 319.5,225.2 323.7,225.6 328,226 332.3,226.3 336.5,226.7 340.8,227 345.1,227.3 349.3,227.6 353.6,227.9 357.9,228.2 362.1,228.5 366.4,228.7 370.7,229 374.9,229.2 379.2,229.5 383.5,229.7 387.7,229.9 392,230.1 392,51 136,51" style="fill:var(--thm);fill-opacity:.15;stroke:none"/><polyline points="136,132 140.3,141 144.5,148.8 148.8,155.7 153.1,161.8 157.3,167.2 161.6,172 165.9,176.4 170.1,180.3 174.4,183.8 178.7,187 182.9,190 187.2,192.6 191.5,195.1 195.7,197.4 200,199.5 204.3,201.4 208.5,203.2 212.8,204.8 217.1,206.4 221.3,207.8 225.6,209.1 229.9,210.4 234.1,211.6 238.4,212.7 242.7,213.7 246.9,214.7 251.2,215.6 255.5,216.4 259.7,217.3 264,218 268.3,218.8 272.5,219.5 276.8,220.1 281.1,220.7 285.3,221.3 289.6,221.9 293.9,222.4 298.1,222.9 302.4,223.4 306.7,223.9 310.9,224.3 315.2,224.8 319.5,225.2 323.7,225.6 328,226 332.3,226.3 336.5,226.7 340.8,227 345.1,227.3 349.3,227.6 353.6,227.9 357.9,228.2 362.1,228.5 366.4,228.7 370.7,229 374.9,229.2 379.2,229.5 383.5,229.7 387.7,229.9 392,230.1" style="fill:none;stroke:var(--thm);stroke-width:3"/><circle cx="136" cy="132" r="6" style="fill:var(--text)"/><text class="tm" x="128" y="148" style="text-anchor:end">始状態</text><text class="tt" x="256" y="177">準静的な断熱曲線(S 一定)</text><text class="tj" x="232" y="100.5" style="text-anchor:middle">準静的でない断熱過程で</text><text class="tj" x="232" y="118.5" style="text-anchor:middle">到達できる領域(S が増える側)</text><text class="tm" x="248" y="229">反対側へは、断熱では行けない</text></svg>
+      <figcaption>始状態から、断熱で到達できる状態。準静的な断熱曲線上($S$ 一定)と、その上側の領域($S$ が大きい側)。曲線の下側へは、断熱では行けない。</figcaption>
+    </figure>
+    <p>始状態を通る、準静的な断熱曲線上では $S$ は一定。ところが、<b>準静的でない</b>断熱過程(急に押す、かき混ぜるなど)では、エントロピー増大則から $S$ が増える。理想気体では、$S=C_V\log T+nR\log V+$ 定数 が増える側は、同じ体積で温度が高い、つまり圧力が高い側(図の上側)。<b>断熱で到達できるのは、断熱曲線とその上側だけ</b>。下側(断熱的に温度を下げる側)へは、行けません。(これは、Kelvin・Clausius の原理の、グラフでの表現です。)</p>
+
+    <!-- ===================== 5 ===================== -->
+    <h2 id="s5">5. 4. 熱力学関数:状態変数と基本関係式 <span class="page-tag">板書 p.9</span></h2>
+    <p>板書:「<b>4. 熱力学関数</b>。* 熱平衡状態。* <b>状態変数</b>:熱平衡状態を特徴付ける変数。ex) $T,V,P,U,S,\dots$ ⇒ 状態変数は独立でない:状態方程式。Q. どの状態変数で、状態を表せるのか? A. どれでもよい。→ 実験の設定でコントロールしやすい → $(T,P)$。↳ ある熱力学関数には、それぞれ「都合がよい」変数のセットがある。」</p>
+    <p>これまでに出てきた状態変数は、$T,V,P,U,S$ など、たくさんあります。でも、これらは独立でなく、状態方程式などで結ばれていて、気体なら、<b>どれか2つ</b>を決めれば、状態が決まる。どの2つを選んでもよいが、実験では、<b>操作しやすい</b>ものがよい(たとえば、温度と圧力 $(T,P)$)。一方、理論的には、「この関数には、この組が都合がよい」という、<b>自然な組</b>があります。</p>
+    <p>板書:「* <b>熱力学の基本関係式</b>:$dU=\dbar Q+\dbar W$ ←第1法則。→(第2法則・可逆過程)$=T\,dS-P\,dV$(気体・液体のとき + 準静的過程)。」</p>
+    <div class="box thm">
+      <div class="label">熱力学の基本関係式</div>
+      <p>$$dU=T\,dS-P\,dV.$$
+      第1法則($dU=\dbar Q+\dbar W$)に、可逆過程で、$\dbar Q=T\,dS$(第2法則)、$\dbar W=-P\,dV$(準静的な仕事)を代入したもの。気体・液体の場合。(他の仕事(磁場、張力など)があれば、その項が足される。)</p>
+    </div>
+    <p>この式は、$U$ を、<b>$S$ と $V$ の関数</b> $U(S,V)$ として見たときの全微分の形をしています。そこで、$U$ の「自然な変数」は $(S,V)$ と、分かります。</p>
+
+    <!-- ===================== 6 ===================== -->
+    <h2 id="s6">6. 完全な熱力学関数 $U(S,V)$ <span class="page-tag">板書 p.9–10</span></h2>
+    <p>板書:「* <b>完全な熱力学関数</b> $U(S,V)$。$dU=\left(\dfrac{\partial U}{\partial S}\right)_VdS+\left(\dfrac{\partial U}{\partial V}\right)_SdV$ ⇒ $T=\left(\dfrac{\partial U}{\partial S}\right)_V=f(S,V)$、$-P=\left(\dfrac{\partial U}{\partial V}\right)_S=g(S,V)$。→ $S$ を消去 → 状態方程式。⇒ 定積熱容量:$C_V=\left(\dfrac{\partial U}{\partial T}\right)_V=\left(\dfrac{\partial U}{\partial S}\right)_V\left(\dfrac{\partial S}{\partial T}\right)_V$($=T$)$=\dfrac{T}{\left(\partial T/\partial S\right)_V}=\dfrac{T}{\left(\dfrac{\partial}{\partial S}\left(\dfrac{\partial U}{\partial S}\right)_V\right)_V}$。」</p>
+    <ol class="step-list">
+      <li>$dU=T\,dS-P\,dV$ と、全微分 $dU=\left(\dfrac{\partial U}{\partial S}\right)_VdS+\left(\dfrac{\partial U}{\partial V}\right)_SdV$ を比べて($dS$、$dV$ の係数を比較)、
+      $$T=\left(\frac{\partial U}{\partial S}\right)_V,\qquad-P=\left(\frac{\partial U}{\partial V}\right)_S.$$
+      左辺の $T$ と $P$ が、$U(S,V)$ の<b>1階の偏微分</b>として、$S$ と $V$ の関数になる:$T=f(S,V)$、$P=-g(S,V)$。</li>
+      <li>この2つの式から、$S$ を消去すれば、$T$、$V$、$P$ の関係式、つまり<b>状態方程式</b>が得られる。</li>
+      <li><b>熱容量</b>:$C_V=\left(\dfrac{\partial U}{\partial T}\right)_V=\left(\dfrac{\partial U}{\partial S}\right)_V\left(\dfrac{\partial S}{\partial T}\right)_V=T\left(\dfrac{\partial S}{\partial T}\right)_V=\dfrac{T}{(\partial T/\partial S)_V}$。分母は、$T=\left(\dfrac{\partial U}{\partial S}\right)_V$ をもう一度 $S$ で微分したもの、つまり $U$ の<b>2階の偏微分</b> $\left(\dfrac{\partial^2U}{\partial S^2}\right)_V$:
+      $$C_V=\frac{T}{\left(\partial^2U/\partial S^2\right)_V}.$$</li>
+    </ol>
+    <div class="box note-box">
+      <div class="label">要点:「完全」の意味</div>
+      <p>$U(S,V)$ が分かれば、<b>1階微分</b>で状態方程式($T$、$P$)が、<b>2階微分</b>で熱容量などの応答関数が、すべて出る。物質の熱力学的な性質が、1つの関数 $U(S,V)$ に、まとめられている。これを「<b>完全な熱力学関数</b>」と呼びます。</p>
+    </div>
+
+    <!-- ===================== 7 ===================== -->
+    <h2 id="s7">7. 不完全な熱力学関数と、$S(U,V)$ <span class="page-tag">板書 p.10</span></h2>
+    <p>板書:「$U(S,V)\to$ 状態方程式(1階微分量)、熱容量(2階微分量:応答関数)。完全な熱力学関数:系の熱力学的性質が、微分によって分かる。」</p>
+    <p>板書:「◎ 不完全な熱力学関数 $U(T,V)$。○ 熱容量 $C_V=\left(\dfrac{\partial U}{\partial T}\right)_V$。○ 状態方程式 $\left(\dfrac{\partial U}{\partial V}\right)_T=T\left(\dfrac{\partial P}{\partial T}\right)_V-P$(エネルギー方程式)(←左辺は、$U(T,V)$ から分かる)。状態方程式を知っていれば分かるが…」</p>
+    <p>同じ $U$ でも、変数の組を $(T,V)$ にとった $U(T,V)$ は、<b>不完全</b>です。$U(T,V)$ から、熱容量 $C_V=\left(\dfrac{\partial U}{\partial T}\right)_V$ や、$\left(\dfrac{\partial U}{\partial V}\right)_T$ は出る。ところが、エネルギー方程式(第9回で導く)$\left(\dfrac{\partial U}{\partial V}\right)_T=T\left(\dfrac{\partial P}{\partial T}\right)_V-P$ は、「$U$ が分かっていて、<b>状態方程式 $P(T,V)$ を知っていれば</b>、右辺が計算できて、チェックできる」関係で、$U(T,V)$ だけから、状態方程式 $P(T,V)$ を決められない(微分方程式の形になるだけで、解の任意性が残る)。つまり、$U(T,V)$ だけでは、熱力学的な性質が、全部は決まらない。</p>
+    <p>板書:「◎ 完全な熱力学関数 $S(U,V)$。$dU=T\,dS-P\,dV$ ⇒ $dS=\dfrac1TdU+\dfrac PTdV$。$dS(U,V)=\left(\dfrac{\partial S}{\partial U}\right)_VdU+\left(\dfrac{\partial S}{\partial V}\right)_UdV$ ⇒ $\dfrac1T=\left(\dfrac{\partial S}{\partial U}\right)_V$、$\dfrac PT=\left(\dfrac{\partial S}{\partial V}\right)_U$。」($V(S,U)$ の書き込みもある。)</p>
+    <p>$dU=T\,dS-P\,dV$ を $dS$ について解くと、$dS=\dfrac1TdU+\dfrac PTdV$。これは、$S$ を $(U,V)$ の関数 $S(U,V)$ として見た全微分で、係数を比べると、$\dfrac1T=\left(\dfrac{\partial S}{\partial U}\right)_V$、$\dfrac PT=\left(\dfrac{\partial S}{\partial V}\right)_U$。$U(S,V)$ と同じように、<b>$S(U,V)$ も完全な熱力学関数</b>です(エントロピー表示)。変数の組と、関数の関係をまとめると:</p>
+    <table class="cmp">
+      <tr><th>関数</th><th>自然な変数</th><th>1階微分</th><th>完全?</th></tr>
+      <tr><td>$U$</td><td>$(S,V)$</td><td>$T=\left(\frac{\partial U}{\partial S}\right)_V$、$-P=\left(\frac{\partial U}{\partial V}\right)_S$</td><td>完全</td></tr>
+      <tr><td>$S$</td><td>$(U,V)$</td><td>$\frac1T=\left(\frac{\partial S}{\partial U}\right)_V$、$\frac PT=\left(\frac{\partial S}{\partial V}\right)_U$</td><td>完全</td></tr>
+      <tr><td>$U$</td><td>$(T,V)$</td><td>(状態方程式が出ない)</td><td>不完全</td></tr>
+    </table>
+    <p>では、実験でコントロールしやすい $(T,V)$ や $(T,P)$ を自然な変数とする、完全な熱力学関数はないのか。それが、次回の<b>自由エネルギー</b>です。</p>
+
+    <!-- ===================== 8 ===================== -->
+    <h2 id="s8">8. 具体例で練習(板書にない補足) <span class="page-tag">補足</span></h2>
+    <div class="box ex">
+      <div class="label">問題 A:理想気体のエントロピー変化</div>
+      <p>$1\ \mathrm{mol}$ の単原子分子の理想気体($C_V=\frac32R$)が、$(T,V)=(300\ \mathrm K,\ 10\ \mathrm L)$ から $(600\ \mathrm K,\ 20\ \mathrm L)$ に変わった。$\Delta S$ を求めよ。</p>
+    </div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>$\Delta S=C_V\log\dfrac{T}{T_0}+nR\log\dfrac{V}{V_0}=\tfrac32R\log2+R\log2=\tfrac52R\log2=2.5\times8.31\times0.693=14.4\ \mathrm{J/K}$。</p></div>
+
+    <div class="box ex">
+      <div class="label">問題 B:準静的な断熱変化で、$S$ が変わらないことの確認</div>
+      <p>理想気体の準静的断熱変化 $TV^{\gamma-1}=$ 一定 で、$S(T,V)=C_V\log T+nR\log V+$ 定数 が一定であることを示せ。</p>
+    </div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>$S=C_V\log T+nR\log V+c=C_V\left[\log T+(\gamma-1)\log V\right]+c=C_V\log\left(TV^{\gamma-1}\right)+c$($nR=C_V(\gamma-1)$)。断熱変化では $TV^{\gamma-1}$ が一定なので、$S$ も一定。</p></div>
+
+    <div class="box ex">
+      <div class="label">問題 C:$U(S,V)$ から、理想気体の状態方程式を出す</div>
+      <p>単原子分子の理想気体では、$U(S,V)=A\,V^{-2/3}\exp\!\left(\dfrac{2S}{3nR}\right)$($A$ は、$n$ だけで決まる正の定数)と書ける。$T$、$P$ を求め、$PV=nRT$ と $U=\frac32nRT$ を確かめよ。</p>
+    </div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>$T=\left(\dfrac{\partial U}{\partial S}\right)_V=\dfrac{2}{3nR}U$。よって $U=\dfrac32nRT$ ✓。$-P=\left(\dfrac{\partial U}{\partial V}\right)_S=-\dfrac{2}{3}\dfrac UV$、$P=\dfrac{2U}{3V}=\dfrac{nRT}{V}$、つまり $PV=nRT$ ✓。$U(S,V)$ 1つから、状態方程式とエネルギーの両方が出た(完全)。熱容量は、$C_V=\dfrac{T}{(\partial T/\partial S)_V}=\dfrac{T}{\frac{2}{3nR}T}\cdot\dfrac{2}{3nR}\cdot$ …より、$(\partial T/\partial S)_V=\dfrac{2}{3nR}T$ から $C_V=T/\left(\dfrac{2T}{3nR}\right)=\dfrac32nR$ ✓。</p></div>
+
+    <!-- ===================== 9 ===================== -->
+    <h2 id="s9">9. まとめ(この回で覚えること)</h2>
+    <ul>
+      <li>$\int_{A\to B}\dfrac{\dbar Q}{T}\le S_B-S_A$。熱伝導の例:$C_V\left(1-\dfrac{T_0}{T}\right)\le C_V\log\dfrac T{T_0}$。</li>
+      <li>理想気体:$S(T,V)=C_V\log T+nR\log V+$ 定数。方法1(断熱+定積)と方法2(等温+定積)で、同じ。断熱で到達できるのは、$S$ が増える側。</li>
+      <li><b>基本関係式</b> $dU=T\,dS-P\,dV$。<b>完全な熱力学関数</b>:$U(S,V)$($T=U_S$、$-P=U_V$、$C_V=T/U_{SS}$)、$S(U,V)$($\frac1T=S_U$、$\frac PT=S_V$)。$U(T,V)$ は不完全。</li>
+    </ul>
+
+    <!-- ===================== 10 ===================== -->
+    <h2 id="s10">10. この回のノートについてのメモ</h2>
+    <p>板書は手書きの画像です。画像の順に p.9(下端に「4. 熱力学関数」の書き出し)、p.10 としました。板書の画像は、このサイトには載せていません。黄色の枠、基礎ページの内容、練習問題と解答は、Claude が書き足したもので、板書にはありません。</p>
+    <ol>
+      <li><b>節番号(p.9)</b>:Clausius の不等式から「断熱過程でのエントロピー変化」までは、見出しの番号がありません(3.9 の続きの練習と見ました)。「4. 熱力学関数」が新しい章の始まりです。</li>
+      <li><b>方法2の最終行の符号(p.9)</b>:板書の最後の行は符号が読み取りにくいので、方法1と一致するよう $+R\log\dfrac{V}{V_0}$ として書きました(上の方法2の本文の導出は、$+$ になります)。</li>
+      <li><b>方法2の点 D(p.9)</b>:板書の D は $(T_0,V)$(温度 $T_0$ の等温線上、体積 $V$)と読みました($S_D-S_A=R\log\frac V{V_0}$ から)。</li>
+      <li><b>$n$ の扱い(p.9)</b>:板書は $n=1$ mol として $R$ と書いています。本文は $nR$ で統一しました。</li>
+      <li><b>断熱で到達できる領域の図(p.9)</b>:斜線の領域は、準静的でない断熱過程で到達できる範囲と読み、$S$ が増える側(断熱曲線の上側)として描きました。</li>
+      <li><b>$S(U,V)$ の欄外の書き込み(p.10)</b>:「$V(S,U)$」のように見える書き込みは、$S(U,V)$ の変数の組についての注記と読み、本文には入れていません。</li>
+    </ol>
+
+    <nav class="pager">
+      <a href="week-07.html">← 前の週</a>
+      <a href="../index.html">一覧へ</a>
+      <a href="week-09.html">次の週 →</a>
+    </nav>熱容量は、$left(dfrac{partial T}{partial S}ight)_V=dfrac{2T}{3nR}$ より $C_V=dfrac{T}{(partial T/partial S)_V}=dfrac32nR$ ✓。</p></div>
+
+    <div class="box ex">
+      <div class="label">問題 B:準静的な断熱変化で、$S$ が変わらないことの確認</div>
+      <p>理想気体の準静的断熱変化 $TV^{\gamma-1}=$ 一定 で、$S(T,V)=C_V\log T+nR\log V+$ 定数 が一定であることを示せ。</p>
+    </div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>$S=C_V\log T+nR\log V+c=C_V\left[\log T+(\gamma-1)\log V\right]+c=C_V\log\left(TV^{\gamma-1}\right)+c$($nR=C_V(\gamma-1)$)。断熱変化では $TV^{\gamma-1}$ が一定なので、$S$ も一定。</p></div>
+
+    <div class="box ex">
+      <div class="label">問題 C:$U(S,V)$ から、理想気体の状態方程式を出す</div>
+      <p>単原子分子の理想気体では、$U(S,V)=A\,V^{-2/3}\exp\!\left(\dfrac{2S}{3nR}\right)$($A$ は、$n$ だけで決まる正の定数)と書ける。$T$、$P$ を求め、$PV=nRT$ と $U=\frac32nRT$ を確かめよ。</p>
+    </div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>$T=\left(\dfrac{\partial U}{\partial S}\right)_V=\dfrac{2}{3nR}U$。よって $U=\dfrac32nRT$ ✓。$-P=\left(\dfrac{\partial U}{\partial V}\right)_S=-\dfrac{2}{3}\dfrac UV$、$P=\dfrac{2U}{3V}=\dfrac{nRT}{V}$、つまり $PV=nRT$ ✓。$U(S,V)$ 1つから、状態方程式とエネルギーの両方が出た(完全)。熱容量は、$C_V=\dfrac{T}{(\partial T/\partial S)_V}=\dfrac{T}{\frac{2}{3nR}T}\cdot\dfrac{2}{3nR}\cdot$ …より、$(\partial T/\partial S)_V=\dfrac{2}{3nR}T$ から $C_V=T/\left(\dfrac{2T}{3nR}\right)=\dfrac32nR$ ✓。</p></div>
+
+    <!-- ===================== 9 ===================== -->
+    <h2 id="s9">9. まとめ(この回で覚えること)</h2>
+    <ul>
+      <li>$\int_{A\to B}\dfrac{\dbar Q}{T}\le S_B-S_A$。熱伝導の例:$C_V\left(1-\dfrac{T_0}{T}\right)\le C_V\log\dfrac T{T_0}$。</li>
+      <li>理想気体:$S(T,V)=C_V\log T+nR\log V+$ 定数。方法1(断熱+定積)と方法2(等温+定積)で、同じ。断熱で到達できるのは、$S$ が増える側。</li>
+      <li><b>基本関係式</b> $dU=T\,dS-P\,dV$。<b>完全な熱力学関数</b>:$U(S,V)$($T=U_S$、$-P=U_V$、$C_V=T/U_{SS}$)、$S(U,V)$($\frac1T=S_U$、$\frac PT=S_V$)。$U(T,V)$ は不完全。</li>
+    </ul>
+
+    <!-- ===================== 10 ===================== -->
+    <h2 id="s10">10. この回のノートについてのメモ</h2>
+    <p>板書は手書きの画像です。画像の順に p.9(下端に「4. 熱力学関数」の書き出し)、p.10 としました。板書の画像は、このサイトには載せていません。黄色の枠、基礎ページの内容、練習問題と解答は、Claude が書き足したもので、板書にはありません。</p>
+    <ol>
+      <li><b>節番号(p.9)</b>:Clausius の不等式から「断熱過程でのエントロピー変化」までは、見出しの番号がありません(3.9 の続きの練習と見ました)。「4. 熱力学関数」が新しい章の始まりです。</li>
+      <li><b>方法2の最終行の符号(p.9)</b>:板書の最後の行は符号が読み取りにくいので、方法1と一致するよう $+R\log\dfrac{V}{V_0}$ として書きました(上の方法2の本文の導出は、$+$ になります)。</li>
+      <li><b>方法2の点 D(p.9)</b>:板書の D は $(T_0,V)$(温度 $T_0$ の等温線上、体積 $V$)と読みました($S_D-S_A=R\log\frac V{V_0}$ から)。</li>
+      <li><b>$n$ の扱い(p.9)</b>:板書は $n=1$ mol として $R$ と書いています。本文は $nR$ で統一しました。</li>
+      <li><b>断熱で到達できる領域の図(p.9)</b>:斜線の領域は、準静的でない断熱過程で到達できる範囲と読み、$S$ が増える側(断熱曲線の上側)として描きました。</li>
+      <li><b>$S(U,V)$ の欄外の書き込み(p.10)</b>:「$V(S,U)$」のように見える書き込みは、$S(U,V)$ の変数の組についての注記と読み、本文には入れていません。</li>
+    </ol>
+
+    <nav class="pager">
+      <a href="week-07.html">← 前の週</a>
+      <a href="../index.html">一覧へ</a>
+      <a href="week-09.html">次の週 →</a>
+    </nav>
+
+  </main>
+
+  <footer>© Aセメまとめノート</footer>
+</body>
+</html>

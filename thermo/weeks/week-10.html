@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>第10回 熱力学的変化の方向 | Aセメまとめノート</title>
+  <link rel="stylesheet" href="../../assets/style.css">
+  <script defer src="../../assets/nav.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],macros:{'\\R':'\\mathbb{R}','\\bm':'\\boldsymbol{#1}','\\dd':'\\mathrm{d}','\\dbar':'\\mathrm{d}^{\\prime}'}});window.__navReady&&window.__navReady()"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="inner">
+      <a class="site-title" href="../../index.html">Aセメまとめノート</a>
+      <span class="links"><a href="../index.html">熱力学</a><a href="../basics.html">基礎のまとめ</a><a href="../../calc/index.html">微積</a><a href="../../linalg/index.html">線形代数</a><a href="../../em/index.html">電磁気学</a><a href="../../mech/index.html">力学A</a></span>
+    </div>
+  </header>
+
+  <main class="note">
+    <h1>第10回:熱力学的変化の方向</h1>
+    <div class="meta">熱力学(東京大学 教養学部 秋学期)／板書 p.10(下部)〜p.11(上部)(画像の順に数えています)／ノートの見出し「4.3 熱力学的変化の方向」</div>
+
+    <nav class="toc">
+      <div class="toc-title">目次</div>
+      <ol start="0">
+        <li><a href="#s0">この回の全体像</a></li>
+        <li><a href="#s1">準備:基礎の確認</a>
+          <div class="sub">熱源と等温過程／外圧と仕事／最小値と変化の向き</div></li>
+        <li><a href="#s2">4.3 Clausius の不等式から:$\dbar Q\le T\,dS$</a>(p.10)</li>
+        <li><a href="#s3">最大仕事の原理</a>(p.10〜11)</li>
+        <li><a href="#s4">定積条件:$dF\le0$</a>(p.10)</li>
+        <li><a href="#s5">断熱条件:$dS\ge0$</a>(p.11)</li>
+        <li><a href="#s6">定圧条件:$dG\le0$</a>(p.11)</li>
+        <li><a href="#s7">具体例で練習</a></li>
+        <li><a href="#s8">まとめ(この回で覚えること)</a></li>
+        <li><a href="#s9">この回のノートについてのメモ</a></li>
+      </ol>
+    </nav>
+
+    <!-- ===================== 0 ===================== -->
+    <h2 id="s0">0. この回の全体像 <span class="page-tag">板書 p.10–11</span></h2>
+    <p>第8〜9回で、$S,F,G$ などの関数を作りました。この回は、それらが、本当に「<b>変化の向きを決める</b>」ことを示します。条件によって、どの量が増える(減る)のか。これが分かれば、「与えられた条件のもとで、系が最終的にどの状態に落ち着くか」を、計算で決められます。</p>
+    <div class="box thm">
+      <div class="label">この回のゴール</div>
+      <p>① Clausius の不等式から、$\dbar Q\le T\,dS$。第1法則と合わせて、等温過程で $dF\le\dbar W$。<br>
+      ② <b>最大仕事の原理</b>:等温過程で、系が外にできる仕事の最大値は、自由エネルギーの減少 $-\Delta F$。<br>
+      ③ 変化の向き(自発的な変化では):<b>断熱</b>(孤立系)では $dS\ge0$、<b>等温・定積</b>では $dF\le0$、<b>等温・定圧</b>では $dG\le0$。平衡状態は、それぞれ、$S$ 最大、$F$ 最小、$G$ 最小。</p>
+    </div>
+    <figure class="fig">
+      <svg viewBox="0 0 600 232" width="600" role="img" aria-label="変化の方向"><line x1="36" y1="150" x2="186" y2="150" style="stroke:var(--muted);stroke-width:1.4"/><line x1="36" y1="150" x2="36" y2="50" style="stroke:var(--muted);stroke-width:1.4"/><text class="t" x="186" y="166" style="text-anchor:end">t</text><text class="t" x="30" y="58" style="text-anchor:end">S</text><polyline points="36,138 39,133.9 42,130.1 45,126.5 48,123.1 51,119.9 54,116.8 57,114 60,111.3 63,108.8 66,106.4 69,104.2 72,102.1 75,100.1 78,98.2 81,96.5 84,94.8 87,93.2 90,91.8 93,90.4 96,89.1 99,87.9 102,86.7 105,85.6 108,84.6 111,83.6 114,82.7 117,81.9 120,81 123,80.3 126,79.6 129,78.9 132,78.3 135,77.7 138,77.1 141,76.6 144,76.1 147,75.6 150,75.2 153,74.7 156,74.4 159,74 162,73.6 165,73.3 168,73 171,72.7 174,72.4 177,72.2 180,71.9 183,71.7 186,71.5" style="fill:none;stroke:var(--thm);stroke-width:3"/><line x1="36" y1="68" x2="186" y2="68" style="stroke:var(--muted);stroke-width:1.1;stroke-dasharray:5 4;fill:none"/><text class="tt" x="111" y="38" style="text-anchor:middle">断熱</text><text class="tj" x="111" y="186" style="text-anchor:middle">(孤立系)</text><text class="tm" x="182" y="62" style="text-anchor:end">熱平衡</text><line x1="236" y1="150" x2="386" y2="150" style="stroke:var(--muted);stroke-width:1.4"/><line x1="236" y1="150" x2="236" y2="50" style="stroke:var(--muted);stroke-width:1.4"/><text class="t" x="386" y="166" style="text-anchor:end">t</text><text class="t" x="230" y="58" style="text-anchor:end">F</text><polyline points="236,68 239,72.1 242,75.9 245,79.5 248,82.9 251,86.1 254,89.2 257,92 260,94.7 263,97.2 266,99.6 269,101.8 272,103.9 275,105.9 278,107.8 281,109.5 284,111.2 287,112.8 290,114.2 293,115.6 296,116.9 299,118.1 302,119.3 305,120.4 308,121.4 311,122.4 314,123.3 317,124.1 320,125 323,125.7 326,126.4 329,127.1 332,127.7 335,128.3 338,128.9 341,129.4 344,129.9 347,130.4 350,130.8 353,131.3 356,131.6 359,132 362,132.4 365,132.7 368,133 371,133.3 374,133.6 377,133.8 380,134.1 383,134.3 386,134.5" style="fill:none;stroke:var(--accent);stroke-width:3"/><line x1="236" y1="138" x2="386" y2="138" style="stroke:var(--muted);stroke-width:1.1;stroke-dasharray:5 4;fill:none"/><text class="tt" x="311" y="38" style="text-anchor:middle">等温 + 定積</text><text class="tj" x="311" y="186" style="text-anchor:middle">T, V 一定</text><text class="tm" x="382" y="132" style="text-anchor:end">熱平衡</text><line x1="436" y1="150" x2="586" y2="150" style="stroke:var(--muted);stroke-width:1.4"/><line x1="436" y1="150" x2="436" y2="50" style="stroke:var(--muted);stroke-width:1.4"/><text class="t" x="586" y="166" style="text-anchor:end">t</text><text class="t" x="430" y="58" style="text-anchor:end">G</text><polyline points="436,68 439,72.1 442,75.9 445,79.5 448,82.9 451,86.1 454,89.2 457,92 460,94.7 463,97.2 466,99.6 469,101.8 472,103.9 475,105.9 478,107.8 481,109.5 484,111.2 487,112.8 490,114.2 493,115.6 496,116.9 499,118.1 502,119.3 505,120.4 508,121.4 511,122.4 514,123.3 517,124.1 520,125 523,125.7 526,126.4 529,127.1 532,127.7 535,128.3 538,128.9 541,129.4 544,129.9 547,130.4 550,130.8 553,131.3 556,131.6 559,132 562,132.4 565,132.7 568,133 571,133.3 574,133.6 577,133.8 580,134.1 583,134.3 586,134.5" style="fill:none;stroke:var(--ex);stroke-width:3"/><line x1="436" y1="138" x2="586" y2="138" style="stroke:var(--muted);stroke-width:1.1;stroke-dasharray:5 4;fill:none"/><text class="tt" x="511" y="38" style="text-anchor:middle">等温 + 定圧</text><text class="tj" x="511" y="186" style="text-anchor:middle">T, P 一定</text><text class="tm" x="582" y="132" style="text-anchor:end">熱平衡</text><text class="tj" x="300" y="218" style="text-anchor:middle">時間がたつと、(S 最大、F 最小、G 最小の)熱平衡状態へ</text></svg>
+      <figcaption>条件ごとに、時間とともに単調に変わる量。断熱では $S$ が増え、等温・定積では $F$ が、等温・定圧では $G$ が減って、それぞれ、熱平衡状態($S$ 最大、$F$ 最小、$G$ 最小)に落ち着く。</figcaption>
+    </figure>
+
+    <!-- ===================== 1 ===================== -->
+    <h2 id="s1">1. 準備:基礎の確認</h2>
+
+    <h3 id="w-res10">1.1 熱源と等温過程</h3>
+    <div class="box basic">
+      <div class="label">基礎:温度が変わらない相手と、熱をやりとりする <a class="xref-link" href="../basics.html#reservoir" data-xref>→ 詳しい解説</a></div>
+      <p>大きな熱源(温度 $T$)に接触した系は、熱を出し入れしても、系の温度が熱源と同じ $T$ に保たれる(等温過程)。この回では、系と熱源の温度は、いつも等しいとします($T$ は、熱源の温度でも、系の温度でも、同じ)。</p>
+    </div>
+
+    <h3 id="w-ext10">1.2 外圧と気体の仕事</h3>
+    <div class="box basic">
+      <div class="label">基礎:外から一定の圧力 $P$ がかかるときの仕事 <a class="xref-link" href="../basics.html#work" data-xref>→ 詳しい解説</a></div>
+      <p>重りの乗ったピストンのように、外から、一定の圧力 $P$ が気体にかかっているとき、体積が $dV$ 増える間に、外から気体にされる仕事は $\dbar W=-P\,dV$(第3回)。膨張($dV\gt0$)なら、負(気体が仕事をする)。</p>
+    </div>
+
+    <h3 id="w-min10">1.3 最小値と変化の向き</h3>
+    <div class="box basic">
+      <div class="label">基礎:ボールは、位置エネルギーが減る向きに転がる <a class="xref-link" href="../basics.html#extremum" data-xref>→ 詳しい解説</a></div>
+      <p>丘の斜面にボールを置くと、位置エネルギーが<b>減る</b>向きに転がり、谷底(位置エネルギーの<b>最小</b>)で止まる。谷底では傾きが 0。熱力学でも、「ある量が減る向きにだけ変化が起こり、最小になったところで止まる(平衡)」という形の法則が、条件ごとに成り立ちます。</p>
+    </div>
+
+    <!-- ===================== 2 ===================== -->
+    <h2 id="s2">2. 4.3 Clausius の不等式から:$\dbar Q\le T\,dS$ <span class="page-tag">板書 p.10</span></h2>
+    <p>板書:「<b>4.3 熱力学的変化の方向</b>。Clausius の不等式 $\displaystyle\int_{A\to B}\frac{\dbar Q}{T}\le S_B-S_A$ ⇒ $\dbar Q\le T\,dS$(熱源の温度)。熱力学第1法則 $dU=\dbar Q+\dbar W$ ⇒ $dU-\dbar W\le T\,dS$ ⇒ $dU-T\,dS\le\dbar W$。」</p>
+    <p>第7〜8回の不等式 $\int_{A\to B}\dfrac{\dbar Q}{T}\le S_B-S_A$ の、微小な変化の形が、$\dfrac{\dbar Q}{T}\le dS$、つまり $\dbar Q\le T\,dS$($T$:熱源の温度)。等号は可逆。第1法則 $dU=\dbar Q+\dbar W$ で、$\dbar Q=dU-\dbar W$ を代入すると、
+    $$dU-\dbar W\le T\,dS\quad\Longleftrightarrow\quad dU-T\,dS\le\dbar W.$$
+    「(内部エネルギーの増加)−(熱源の温度)×(エントロピーの増加)」が、「外からされた仕事」以下。</p>
+
+    <!-- ===================== 3 ===================== -->
+    <h2 id="s3">3. 最大仕事の原理 <span class="page-tag">板書 p.10–11</span></h2>
+    <p>板書:「※ 等温過程(系と熱源の温度が常に等しい):$dU-T\,dS-S\,dT\le\dbar W$。$dF\le\dbar W$(自由エネルギーの増分 ≤ 外からもらう仕事)。⇒ $-\dbar W\le-dF$(外にする仕事 ≤ 自由エネルギーの減少)。→ 外にとりだす仕事(自由に使える)の最大値は、自由エネルギー差。<b>最大仕事の原理</b>。」</p>
+    <ol class="step-list">
+      <li>等温過程($T$ 一定、$dT=0$)なら、$S\,dT=0$ なので、左辺 $dU-T\,dS$ に $-S\,dT$ を加えても同じ:$dU-T\,dS-S\,dT=d(U-TS)=dF$。</li>
+      <li>よって、$dF\le\dbar W$。有限の変化では、$\Delta F\le W$:自由エネルギーの増加は、外からされた仕事 $W$ 以下。</li>
+      <li>符号を変えて、<b>外にする仕事</b> $-W$ で書くと、$-W\le-\Delta F$。</li>
+    </ol>
+    <div class="box thm">
+      <div class="label">最大仕事の原理</div>
+      <p>温度 $T$ の熱源に接して、等温で変化する系が、外にする仕事 $W_{\rm out}=-W$ は、自由エネルギーの減少 $-\Delta F$ 以下:
+      $$W_{\rm out}\le F_{\rm 始}-F_{\rm 終}.$$
+      等号は、可逆(準静的)な過程のとき。つまり、<b>外にとり出せる(自由に使える)仕事の最大値は、自由エネルギーの差</b>。</p>
+    </div>
+    <p>これが「<b>自由</b>エネルギー」という名前の由来です。内部エネルギー $U$ の減少が、全部仕事にとり出せるのではなく、一部($T\,\Delta S$ の分)は、熱として、熱源に逃げる。外に自由にとり出せるのは、$-\Delta F=-\Delta U+T\Delta S$(エントロピーが増えるときは、熱源から熱をもらって、$U$ の減少以上の仕事をとり出せることもある)。</p>
+
+    <!-- ===================== 4 ===================== -->
+    <h2 id="s4">4. 定積条件:$dF\le0$ <span class="page-tag">板書 p.10</span></h2>
+    <p>板書:「⇒ 定積条件のとき($\dbar W=0$):$0\le-dF$ ⇒ $dF\le0$。(図:温度 $T$ の2つの部屋で、仕切りが動く。)$F_1(T,V_1)+F_2(T,V_2)\ge F_1(T,V_1')+F_2(T,V_2')$。」</p>
+    <p>全体の体積が一定で、外と仕事のやりとりがない($\dbar W=0$)とき、$dF\le0$:温度一定・体積一定の系では、<b>自由エネルギーが減る向きにだけ</b>変化が進む。</p>
+    <figure class="fig">
+      <svg viewBox="0 0 480 204" width="480" role="img" aria-label="仕切りの移動と自由エネルギー"><line x1="40" y1="36" x2="190" y2="36" style="stroke:var(--text);stroke-width:3"/><line x1="40" y1="116" x2="190" y2="116" style="stroke:var(--text);stroke-width:3"/><line x1="40" y1="36" x2="40" y2="116" style="stroke:var(--text);stroke-width:3"/><line x1="190" y1="36" x2="190" y2="116" style="stroke:var(--text);stroke-width:3"/><line x1="95" y1="36" x2="95" y2="116" style="stroke:var(--thm);stroke-width:4"/><circle cx="62.3" cy="45.6" r="2.4" style="fill:var(--muted)"/><circle cx="78.1" cy="82.7" r="2.4" style="fill:var(--muted)"/><circle cx="72.6" cy="63.5" r="2.4" style="fill:var(--muted)"/><circle cx="67.6" cy="61.9" r="2.4" style="fill:var(--muted)"/><circle cx="53.9" cy="73.6" r="2.4" style="fill:var(--muted)"/><circle cx="69.5" cy="92" r="2.4" style="fill:var(--muted)"/><circle cx="87.2" cy="92.6" r="2.4" style="fill:var(--muted)"/><circle cx="63.6" cy="63.9" r="2.4" style="fill:var(--muted)"/><circle cx="144.5" cy="69" r="2.4" style="fill:var(--muted)"/><circle cx="176.5" cy="73.2" r="2.4" style="fill:var(--muted)"/><circle cx="132.7" cy="80.7" r="2.4" style="fill:var(--muted)"/><circle cx="151" cy="92.4" r="2.4" style="fill:var(--muted)"/><circle cx="133" cy="68.7" r="2.4" style="fill:var(--muted)"/><circle cx="172.9" cy="96.2" r="2.4" style="fill:var(--muted)"/><circle cx="119.4" cy="54.7" r="2.4" style="fill:var(--muted)"/><circle cx="116.7" cy="78.7" r="2.4" style="fill:var(--muted)"/><circle cx="109.7" cy="43" r="2.4" style="fill:var(--muted)"/><circle cx="161.7" cy="46.7" r="2.4" style="fill:var(--muted)"/><text class="t" x="60" y="136" style="text-anchor:middle">V₁</text><text class="t" x="140" y="136" style="text-anchor:middle">V₂</text><line x1="210" y1="76" x2="260.6" y2="76" style="stroke:var(--text);stroke-width:2.6;fill:none"/><polygon points="270,76 260,80.6 260,71.4" style="fill:var(--text)"/><text class="tm" x="240" y="66" style="text-anchor:middle">仕切りが動く</text><line x1="290" y1="36" x2="440" y2="36" style="stroke:var(--text);stroke-width:3"/><line x1="290" y1="116" x2="440" y2="116" style="stroke:var(--text);stroke-width:3"/><line x1="290" y1="36" x2="290" y2="116" style="stroke:var(--text);stroke-width:3"/><line x1="440" y1="36" x2="440" y2="116" style="stroke:var(--text);stroke-width:3"/><line x1="375" y1="36" x2="375" y2="116" style="stroke:var(--thm);stroke-width:4"/><circle cx="326.4" cy="102.4" r="2.4" style="fill:var(--muted)"/><circle cx="334.8" cy="97.3" r="2.4" style="fill:var(--muted)"/><circle cx="336.8" cy="67.8" r="2.4" style="fill:var(--muted)"/><circle cx="297.5" cy="52.5" r="2.4" style="fill:var(--muted)"/><circle cx="368.7" cy="72.4" r="2.4" style="fill:var(--muted)"/><circle cx="304.7" cy="93" r="2.4" style="fill:var(--muted)"/><circle cx="333.7" cy="100.2" r="2.4" style="fill:var(--muted)"/><circle cx="303.3" cy="84.6" r="2.4" style="fill:var(--muted)"/><circle cx="354.1" cy="72.3" r="2.4" style="fill:var(--muted)"/><circle cx="410.8" cy="57.8" r="2.4" style="fill:var(--muted)"/><circle cx="418.2" cy="87.8" r="2.4" style="fill:var(--muted)"/><circle cx="398.1" cy="85" r="2.4" style="fill:var(--muted)"/><circle cx="387.4" cy="83" r="2.4" style="fill:var(--muted)"/><circle cx="390.6" cy="67.5" r="2.4" style="fill:var(--muted)"/><circle cx="404.4" cy="97.2" r="2.4" style="fill:var(--muted)"/><circle cx="423.5" cy="62.2" r="2.4" style="fill:var(--muted)"/><circle cx="428.5" cy="99.4" r="2.4" style="fill:var(--muted)"/><circle cx="410.1" cy="101.2" r="2.4" style="fill:var(--muted)"/><text class="t" x="332" y="136" style="text-anchor:middle">V₁′</text><text class="t" x="405" y="136" style="text-anchor:middle">V₂′</text><text class="tt" x="240" y="168" style="text-anchor:middle">温度 T、全体の体積一定 ⇒ 自由エネルギーの和は、減る方向</text><text class="tj" x="240" y="190" style="text-anchor:middle">F₁(T,V₁) + F₂(T,V₂) ≥ F₁(T,V₁′) + F₂(T,V₂′)</text></svg>
+      <figcaption>温度 $T$ の容器を、動ける仕切りで2つの部屋に分ける。全体の体積は一定。仕切りは、自由エネルギーの和が減る向きに動き、最小になったところで止まる(圧力がつり合う)。</figcaption>
+    </figure>
+    <p>板書の図は、こうした例です。仕切りが動くと、部屋1の体積は $V_1\to V_1'$、部屋2は $V_2\to V_2'$($V_1+V_2=V_1'+V_2'$ は一定)。それぞれの部屋の自由エネルギーの和 $F_1+F_2$ は、減る向きに変わる:$F_1(T,V_1)+F_2(T,V_2)\ge F_1(T,V_1')+F_2(T,V_2')$。止まった状態($F_1+F_2$ が最小)では、$\dfrac{\partial}{\partial V_1}(F_1+F_2)=-P_1+P_2=0$、つまり、<b>2つの部屋の圧力が等しい</b>。力学的平衡の条件が、$F$ の最小条件から出ました。</p>
+
+    <!-- ===================== 5 ===================== -->
+    <h2 id="s5">5. 断熱条件:$dS\ge0$ <span class="page-tag">板書 p.11</span></h2>
+    <p>板書(p.11 の最上部):「Clausius の不等式(エントロピーの増大則)(断熱過程)$\dfrac{\dbar Q}{T}\le dS$ ⇒ $0\le dS$。最大仕事の原理(等温過程)$-\dbar W\le-dF$ ← $d(U-TS)$。+ 定積過程($\dbar W=0$)$dF\le0$($\dbar W=-P\,dV$)。」</p>
+    <p>断熱過程($\dbar Q=0$)では、$\dfrac{\dbar Q}{T}\le dS$ から $0\le dS$:<b>断熱された系では、エントロピーは減らない</b>(第7回)。孤立系(熱も仕事も出入りなし)では、$S$ が増える向きにだけ変化が進み、$S$ が最大になったとき、変化が止まる(熱平衡)。</p>
+
+    <!-- ===================== 6 ===================== -->
+    <h2 id="s6">6. 定圧条件:$dG\le0$ <span class="page-tag">板書 p.11</span></h2>
+    <p>板書:「◎ 定圧過程。(図:ピストンつきの容器、気体 $\mathrm{Gas}$ と液体 $\mathrm{Liquid}$。重り $P$、温度 $T$。)$dG(T,P)=d(F+PV)=d(U-TS+PV)=dF+P\,dV+V\,dP$($V\,dP=0$、$S\,dT=0$ の部分に印)$\le0$(∵ $-\dbar W=P\,dV\le-dF$)。」</p>
+    <figure class="fig">
+      <svg viewBox="0 0 560 184" width="560" role="img" aria-label="定温・定圧での変化"><line x1="40" y1="30" x2="40" y2="150" style="stroke:var(--text);stroke-width:3"/><line x1="160" y1="30" x2="160" y2="150" style="stroke:var(--text);stroke-width:3"/><line x1="40" y1="150" x2="160" y2="150" style="stroke:var(--text);stroke-width:3"/><rect x="42" y="110" width="116" height="38" rx="0" style="fill:var(--accent);fill-opacity:.35;stroke:none"/><circle cx="94.7" cy="93" r="2.4" style="fill:var(--muted)"/><circle cx="80.6" cy="65.2" r="2.4" style="fill:var(--muted)"/><circle cx="99.7" cy="81.7" r="2.4" style="fill:var(--muted)"/><circle cx="105.3" cy="64.7" r="2.4" style="fill:var(--muted)"/><circle cx="130.9" cy="81.2" r="2.4" style="fill:var(--muted)"/><circle cx="121.7" cy="94.6" r="2.4" style="fill:var(--muted)"/><circle cx="55" cy="102.6" r="2.4" style="fill:var(--muted)"/><rect x="42" y="52" width="116" height="7" rx="0" style="fill:var(--thm);fill-opacity:.8;stroke:none"/><text class="tm" x="100" y="24" style="text-anchor:middle">気体 + 液体</text><text class="tj" x="100" y="170" style="text-anchor:middle">(T, P 一定)</text><text class="tm" x="100" y="118" style="text-anchor:middle">気</text><text class="tj" x="100" y="142" style="text-anchor:middle">液</text><line x1="180" y1="90" x2="240.6" y2="90" style="stroke:var(--text);stroke-width:2.6;fill:none"/><polygon points="250,90 240,94.6 240,85.4" style="fill:var(--text)"/><text class="tm" x="215" y="80" style="text-anchor:middle">自然に</text><line x1="270" y1="30" x2="270" y2="150" style="stroke:var(--text);stroke-width:3"/><line x1="390" y1="30" x2="390" y2="150" style="stroke:var(--text);stroke-width:3"/><line x1="270" y1="150" x2="390" y2="150" style="stroke:var(--text);stroke-width:3"/><rect x="272" y="110" width="116" height="38" rx="0" style="fill:var(--accent);fill-opacity:.35;stroke:none"/><circle cx="324.7" cy="98.5" r="2.4" style="fill:var(--muted)"/><circle cx="310.6" cy="84.6" r="2.4" style="fill:var(--muted)"/><circle cx="329.7" cy="92.9" r="2.4" style="fill:var(--muted)"/><circle cx="335.3" cy="84.3" r="2.4" style="fill:var(--muted)"/><circle cx="360.9" cy="92.6" r="2.4" style="fill:var(--muted)"/><circle cx="351.7" cy="99.3" r="2.4" style="fill:var(--muted)"/><circle cx="285" cy="103.3" r="2.4" style="fill:var(--muted)"/><rect x="272" y="72" width="116" height="7" rx="0" style="fill:var(--thm);fill-opacity:.8;stroke:none"/><text class="tm" x="330" y="24" style="text-anchor:middle">液体が増える(例)</text><text class="tj" x="420" y="80">重り(圧力 P)つきの</text><text class="tj" x="420" y="100">ピストンの中で、</text><text class="tt" x="420" y="120">dG ≤ 0 の向きへ進む</text></svg>
+      <figcaption>温度 $T$ の熱源に接して、重り(一定の圧力 $P$)つきのピストンに入った、気体と液体。実験で、いちばんよく見る条件。</figcaption>
+    </figure>
+    <ol class="step-list">
+      <li>圧力 $P$ 一定の外圧のもとで、体積が $dV$ 変わると、外から系にされる仕事は $\dbar W=-P\,dV$(外にする仕事は $-\dbar W=P\,dV$)。</li>
+      <li>等温($T$ 一定)なので、最大仕事の原理 $-\dbar W\le-dF$ が使えて、$P\,dV\le-dF$、つまり $dF+P\,dV\le0$。</li>
+      <li>$P$ 一定($dP=0$)、$T$ 一定($dT=0$)のとき、$dG=d(F+PV)=dF+P\,dV+V\,dP=dF+P\,dV$。よって $dG\le0$。</li>
+    </ol>
+    <div class="box thm">
+      <div class="label">変化の方向(まとめ)</div>
+      <table class="cmp">
+        <tr><th>条件</th><th>自発的な変化</th><th>平衡状態</th></tr>
+        <tr><td>断熱(孤立系)</td><td>$dS\ge0$</td><td>$S$ 最大</td></tr>
+        <tr><td>等温・定積</td><td>$dF\le0$</td><td>$F$ 最小</td></tr>
+        <tr><td>等温・定圧</td><td>$dG\le0$</td><td>$G$ 最小</td></tr>
+      </table>
+    </div>
+    <p>板書の下部のグラフ:横軸は時間 $t$、縦軸は、断熱で $S$(増えて熱平衡)、等温+定積で $F$(減って平衡)、等温+定圧で $G$(減って平衡)。図の「relax」と同じです。</p>
+    <div class="box supp">
+      <div class="label">板書にない補足:他の条件の組み合わせ</div>
+      <p>同じ議論で、$(S,V)$ 一定なら $dU\le0$(内部エネルギー最小)、$(S,P)$ 一定なら $dH\le0$(エンタルピー最小)。どの関数が使えるかは、「何を一定にして実験するか」で決まる。実験室(温度一定、大気圧一定)では、$G$ を使うことが多く、化学反応や相変化の自発性($\Delta G\lt0$ なら進む)は、$G$ で判定される。</p>
+    </div>
+
+    <!-- ===================== 7 ===================== -->
+    <h2 id="s7">7. 具体例で練習(板書にない補足) <span class="page-tag">補足</span></h2>
+    <div class="box ex">
+      <div class="label">問題 A:理想気体の等温膨張で、とり出せる最大仕事</div>
+      <p>$1\ \mathrm{mol}$ の理想気体($T=300\ \mathrm K$)を、体積 $V$ から $2V$ まで、等温で膨張させるとき、外にとり出せる仕事の最大値は。</p>
+    </div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>最大仕事 $=-\Delta F$。$F=U-TS$ で、$T$ 一定なら、$\Delta U=0$、$\Delta S=nR\log2$(第8回)。$-\Delta F=T\Delta S=nRT\log2=8.31\times300\times0.693=1.73\times10^3\ \mathrm J$。これは、準静的な等温膨張で、外にする仕事 $nRT\log\frac{V_B}{V_A}$(第3回)と一致する。</p></div>
+
+    <div class="box ex">
+      <div class="label">問題 B:自由膨張は、$F$ が減る(自発的)</div>
+      <p>問題 A の気体が、真空へ自由膨張して、体積が $2V$ になった(外にする仕事は 0)。$F$ の変化を求め、$dF\le0$ を確かめよ。</p>
+    </div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>始状態と終状態は、問題 A と同じなので、$\Delta F=-nRT\log2=-1.73\times10^3\ \mathrm J\lt0$。外にする仕事は 0 で、とり出せた最大仕事 $1.73\times10^3\ \mathrm J$ を、使わずに捨てた。$\Delta F\lt0$ なので、確かに自発的に起こる。(自由エネルギーが、使われないまま、失われた。)</p></div>
+
+    <div class="box ex">
+      <div class="label">問題 C:氷は、何度で融けるか($\Delta G$ の符号)</div>
+      <p>氷 $1\ \mathrm g$ が融けるとき、(1気圧)$\Delta H=334\ \mathrm J$、$\Delta S=334/273.15=1.223\ \mathrm{J/K}$(どちらも、温度によらないと近似)。$\Delta G=\Delta H-T\Delta S$ の符号を、$T=263.15\ \mathrm K$ と $283.15\ \mathrm K$ で調べよ。</p>
+    </div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>$T=283.15\ \mathrm K$($10\,{}^\circ\mathrm C$):$\Delta G=334-283.15\times1.223=334-346.3=-12.3\ \mathrm J\lt0$:融ける(自発)。$T=263.15\ \mathrm K$($-10\,{}^\circ\mathrm C$):$\Delta G=334-321.8=+12.2\ \mathrm J\gt0$:融けない(逆に、水が凍る)。$T=273.15\ \mathrm K$ では $\Delta G=0$:氷と水が共存する平衡(融点)。</p></div>
+
+    <div class="box ex">
+      <div class="label">問題 D:最大仕事と熱効率</div>
+      <p>等温の熱源 1つだけと接する系が、外に正の仕事をし続けること(1周するたびに)は、できない。最大仕事の原理から、これを説明せよ。</p>
+    </div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>1周して元の状態に戻るなら、$\Delta F=0$。最大仕事の原理 $W_{\rm out}\le-\Delta F=0$。つまり、外にとり出せる仕事は、0 以下。1つの熱源だけで正の仕事をとり続けることは、できない(Kelvin の原理)。</p></div>
+
+    <!-- ===================== 8 ===================== -->
+    <h2 id="s8">8. まとめ(この回で覚えること)</h2>
+    <ul>
+      <li>$\dbar Q\le T\,dS$(Clausius)+ 第1法則 ⇒ $dU-T\,dS\le\dbar W$。等温なら $dF\le\dbar W$。</li>
+      <li><b>最大仕事の原理</b>:等温で外にとり出せる仕事 $\le-\Delta F$(等号は可逆)。「自由エネルギー」の名の由来。</li>
+      <li>自発的な変化の向き:断熱で $dS\ge0$、等温・定積で $dF\le0$、等温・定圧で $dG\le0$。平衡は、それぞれ $S$ 最大、$F$ 最小、$G$ 最小。</li>
+      <li>(実験の条件に合わせて、使う関数を選ぶ。)</li>
+    </ul>
+
+    <!-- ===================== 9 ===================== -->
+    <h2 id="s9">9. この回のノートについてのメモ</h2>
+    <p>板書は手書きの画像です。画像の順に、p.10(下部)から p.11(上部)としました。板書の画像は、このサイトには載せていません。黄色の枠、基礎ページの内容、練習問題と解答は、Claude が書き足したもので、板書にはありません。</p>
+    <ol>
+      <li><b>ページの切れ目(p.10〜p.11)</b>:4.3 の内容は、p.10 の下部で書き始められ、p.11 の最上部(「Clausius の不等式 → エントロピー増大則」「最大仕事の原理」「定積過程」)に続いています。本文では、論理の順に並べ直しました。</li>
+      <li><b>定圧過程の式(p.11)</b>:「$dG=d(F+PV)=d(U-TS+PV)=dF+P\,dV+V\,dP$」の、下線・印のついた項は、$S\,dT=0$ と $V\,dP=0$(等温・定圧)を指す印と読みました。</li>
+      <li><b>$-\dbar W=P\,dV$(p.11)</b>:定圧のとき、外にする仕事 $-\dbar W$ が $P\,dV$ になる、と読みました(外圧が $P$ で一定)。</li>
+      <li><b>時間変化のグラフ(p.11)</b>:3つのグラフ(断熱の $S$、等温+定積の $F$、等温+定圧の $G$)は、図のとおり、描き直しました。</li>
+    </ol>
+
+    <nav class="pager">
+      <a href="week-09.html">← 前の週</a>
+      <a href="../index.html">一覧へ</a>
+      <a href="week-11.html">次の週 →</a>
+    </nav>
+
+  </main>
+
+  <footer>© Aセメまとめノート</footer>
+</body>
+</html>

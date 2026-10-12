@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>第6回 第2法則(2):Carnot サイクルと熱力学温度 | Aセメまとめノート</title>
+  <link rel="stylesheet" href="../../assets/style.css">
+  <script defer src="../../assets/nav.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],macros:{'\\R':'\\mathbb{R}','\\bm':'\\boldsymbol{#1}','\\dd':'\\mathrm{d}','\\dbar':'\\mathrm{d}^{\\prime}'}});window.__navReady&&window.__navReady()"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="inner">
+      <a class="site-title" href="../../index.html">Aセメまとめノート</a>
+      <span class="links"><a href="../index.html">熱力学</a><a href="../basics.html">基礎のまとめ</a><a href="../../calc/index.html">微積</a><a href="../../linalg/index.html">線形代数</a><a href="../../em/index.html">電磁気学</a><a href="../../mech/index.html">力学A</a></span>
+    </div>
+  </header>
+
+  <main class="note">
+    <h1>第6回:第2法則(2)Carnot サイクルと熱力学温度</h1>
+    <div class="meta">熱力学(東京大学 教養学部 秋学期)／板書 p.7(画像の順に数えています)／ノートの見出し「3.6 Carnot サイクルの熱効率」「3.7 熱力学的温度」</div>
+
+    <nav class="toc">
+      <div class="toc-title">目次</div>
+      <ol start="0">
+        <li><a href="#s0">この回の全体像</a></li>
+        <li><a href="#s1">準備:基礎の確認</a>
+          <div class="sub">熱機関と熱効率／理想気体の等温・断熱変化</div></li>
+        <li><a href="#s2">3.6 Carnot サイクルの熱効率:上限であること</a>(p.7)</li>
+        <li><a href="#s3">理想気体の Carnot サイクル:$\eta_C=1-T_2/T_1$</a>(p.7)</li>
+        <li><a href="#s4">3.7 熱力学的温度</a>(p.7)</li>
+        <li><a href="#s5">熱力学温度の非負性と、換算熱</a>(p.7)</li>
+        <li><a href="#s6">具体例で練習</a></li>
+        <li><a href="#s7">まとめ(この回で覚えること)</a></li>
+        <li><a href="#s8">この回のノートについてのメモ</a></li>
+      </ol>
+    </nav>
+
+    <!-- ===================== 0 ===================== -->
+    <h2 id="s0">0. この回の全体像 <span class="page-tag">板書 p.7</span></h2>
+    <p>前回、Kelvin と Clausius の原理から、「熱を全部仕事に変えることはできない」ことが分かりました。では、熱機関の<b>熱効率の上限</b>はいくらなのか。この回は、その問いに、数式で答えます。そして、その答えが、<b>物質によらない温度(熱力学温度)</b>の定義につながる、という、熱力学の核心を学びます。</p>
+    <div class="box thm">
+      <div class="label">この回のゴール</div>
+      <p>① 2つの熱源の間で働く、どんなサイクルの熱効率 $\eta'$ も、Carnot サイクルの熱効率 $\eta_C$ 以下。$\eta'\lt\eta_C$ なら不可逆。<br>
+      ② 理想気体の Carnot サイクルの熱効率 $\eta_C=1-\dfrac{T_2}{T_1}$。<br>
+      ③ Carnot サイクルが熱源とやりとりする熱の比 $\dfrac{Q_2}{Q_1}$ は、作業物質にも、仕事の大きさにもよらず、熱源の温度だけで決まる。ここから、<b>物質によらない温度</b>(熱力学温度、Kelvin の温度)$T$ が $\dfrac{Q_2}{Q_1}=\dfrac{T_2}{T_1}$ で定義できる($T\gt0$)。<br>
+      ④ Carnot サイクルでは $\dfrac{Q_1}{T_1}=\dfrac{Q_2}{T_2}$(換算熱が等しい)。次回の Clausius の不等式への入口。</p>
+    </div>
+    <figure class="fig">
+      <svg viewBox="0 0 440 236" width="440" role="img" aria-label="熱効率の上限"><line x1="70" y1="210" x2="392.6" y2="210" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><polygon points="400,210 392,213.4 392,206.6" style="fill:var(--muted)"/><line x1="70" y1="210" x2="70" y2="37.4" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><polygon points="70,30 73.4,38 66.6,38" style="fill:var(--muted)"/><text class="t" x="400" y="228" style="text-anchor:end">T₂/T₁</text><text class="t" x="62" y="38" style="text-anchor:end">η</text><line x1="70" y1="50" x2="350" y2="210" style="stroke:var(--thm);stroke-width:3"/><line x1="70" y1="50" x2="350" y2="50" style="stroke:var(--muted);stroke-width:1.1;stroke-dasharray:5 4;fill:none"/><line x1="350" y1="50" x2="350" y2="210" style="stroke:var(--muted);stroke-width:1.1;stroke-dasharray:5 4;fill:none"/><circle cx="70" cy="50" r="5.5" style="fill:var(--surface);stroke:var(--thm);stroke-width:2.2"/><circle cx="350" cy="210" r="5.5" style="fill:var(--thm)"/><text class="tm" x="64" y="54" style="text-anchor:end">1</text><text class="tm" x="350" y="226" style="text-anchor:middle">1</text><text class="tm" x="64" y="214" style="text-anchor:end">0</text><circle cx="238" cy="146" r="6" style="fill:var(--ex)"/><text class="tj" x="248" y="138">T₂=300 K, T₁=500 K:</text><text class="tt" x="248" y="154">η = 0.4</text><text class="tm" x="81.2" y="40">η = 1 は T₂ = 0 のときだけ(到達できない)</text><text class="tt" x="190" y="90" style="text-anchor:start">η = 1 − T₂/T₁</text></svg>
+      <figcaption>Carnot サイクルの熱効率 $\eta=1-T_2/T_1$。低温熱源と高温熱源の温度比だけで決まる。$\eta=1$ になるのは $T_2=0$ のときだけで、現実には到達できない。</figcaption>
+    </figure>
+
+    <!-- ===================== 1 ===================== -->
+    <h2 id="s1">1. 準備:基礎の確認</h2>
+
+    <h3 id="w-eta">1.1 熱機関と熱効率</h3>
+    <div class="box basic">
+      <div class="label">基礎:$\eta=W/Q_1=1-Q_2/Q_1$ <a class="xref-link" href="../basics.html#heatengine" data-xref>→ 詳しい解説</a></div>
+      <p>熱機関が、高温熱源から熱 $Q_1$ をもらい、仕事 $W$ をして、低温熱源に熱 $Q_2$ を捨てる(1周)。第1法則 $Q_1=W+Q_2$。熱効率 $\eta=\dfrac{W}{Q_1}=1-\dfrac{Q_2}{Q_1}$。第5回の板書では、吸収する熱を $Q$、捨てる熱を $Q'$ と書いた。この回の板書は、$Q_1,Q_2$($T_1,T_2$ の熱源とやりとりする熱)の書き方も使う。</p>
+    </div>
+
+    <h3 id="w-gas6">1.2 理想気体の等温変化・断熱変化</h3>
+    <div class="box basic">
+      <div class="label">基礎:$PV=nRT$、$PV^\gamma=$ 一定、$\Delta U=C_V\Delta T$ <a class="xref-link" href="../basics.html#gasproc" data-xref>→ 詳しい解説</a></div>
+      <p>理想気体では、<b>等温変化</b>($T$ 一定):$\Delta U=0$、気体が吸う熱 $Q=$ 気体が外にする仕事 $=nRT\log\dfrac{V_B}{V_A}$。<b>断熱変化</b>(準静的):$Q=0$、$PV^\gamma=$ 一定、$TV^{\gamma-1}=$ 一定、外からされる仕事 $W=\Delta U=C_V\Delta T$(第3回、第4回)。</p>
+    </div>
+
+    <!-- ===================== 2 ===================== -->
+    <h2 id="s2">2. 3.6 Carnot サイクルの熱効率:上限であること <span class="page-tag">板書 p.7</span></h2>
+    <p>板書:「<b>3.6 Carnot サイクルの熱効率</b>。※ 2つの熱源と熱のやりとりをするサイクル C′ の熱効率 $\eta'$ は、$\eta'\le\eta_C$ である($\eta_C$:Carnot サイクルの熱効率)。かつ、$\eta'\lt\eta_C$ となるサイクルは、不可逆サイクルである。」</p>
+    <div class="box thm">
+      <div class="label">Carnot サイクルの熱効率の定理</div>
+      <p>同じ2つの熱源 $T_1\gt T_2$ の間で働く、任意のサイクル C′ の熱効率 $\eta'$ は、Carnot サイクルの熱効率 $\eta_C$ 以下:$\eta'\le\eta_C$。さらに、$\eta'\lt\eta_C$ であるようなサイクルは、<b>不可逆</b>。</p>
+    </div>
+    <p>つまり、Carnot サイクルは、2つの熱源の間で、<b>最も効率のよい</b>サイクルです。</p>
+    <h3 id="s2a">証明($\eta'\le\eta_C$)</h3>
+    <p>板書:「証明。サイクル C′ の熱効率 $\eta'$ が、$\eta_C$ より大きいとする。Carnot サイクル C は、高温から Q をもらって、仕事 W をする。サイクル C′ は、高温から熱 Q をもらい、仕事 $W'=W+\Delta W$($\Delta W\gt0$)。→ $Q'-Q''=\Delta W$ を熱源からもらい、$\Delta W$ の仕事をする。⇒ Kelvin に反する。」</p>
+    <figure class="fig">
+      <svg viewBox="0 0 520 298" width="520" role="img" aria-label="熱効率の上限の証明"><rect x="40" y="30" width="440" height="26" rx="4" style="fill:var(--thm);fill-opacity:.22;stroke:var(--thm);stroke-width:2"/><text class="t" x="260" y="48" style="text-anchor:middle">T₁(高温熱源)</text><rect x="40" y="224" width="440" height="26" rx="4" style="fill:var(--accent);fill-opacity:.22;stroke:var(--accent);stroke-width:2"/><text class="t" x="260" y="242" style="text-anchor:middle">T₂(低温熱源)</text><circle cx="150" cy="130" r="28" style="fill:var(--ex);fill-opacity:.18;stroke:var(--ex);stroke-width:2.2"/><text class="t" x="150" y="135" style="text-anchor:middle">C′</text><line x1="138" y1="56" x2="138" y2="93.6" style="stroke:var(--thm);stroke-width:2.4;fill:none"/><polygon points="138,102 134,93 142,93" style="fill:var(--thm)"/><text class="t" x="130" y="82" style="text-anchor:end">Q</text><line x1="138" y1="158" x2="138" y2="215.6" style="stroke:var(--accent);stroke-width:2.4;fill:none"/><polygon points="138,224 134,215 142,215" style="fill:var(--accent)"/><text class="t" x="130" y="196" style="text-anchor:end">Q′−ΔW</text><circle cx="370" cy="130" r="28" style="fill:var(--accent);fill-opacity:.18;stroke:var(--accent);stroke-width:2.2"/><text class="t" x="370" y="135" style="text-anchor:middle">C(逆)</text><line x1="382" y1="102" x2="382" y2="64.4" style="stroke:var(--thm);stroke-width:2.4;fill:none"/><polygon points="382,56 386,65 378,65" style="fill:var(--thm)"/><text class="t" x="390" y="82">Q</text><line x1="382" y1="224" x2="382" y2="166.4" style="stroke:var(--accent);stroke-width:2.4;fill:none"/><polygon points="382,158 386,167 378,167" style="fill:var(--accent)"/><text class="t" x="390" y="196">Q′</text><line x1="180" y1="130" x2="329.6" y2="130" style="stroke:var(--ex);stroke-width:2.4;fill:none"/><polygon points="338,130 329,134 329,126" style="fill:var(--ex)"/><text class="t" x="259" y="120" style="text-anchor:middle">W</text><line x1="120" y1="130" x2="68.4" y2="130" style="stroke:var(--ex);stroke-width:2.4;fill:none"/><polygon points="60,130 69,126 69,134" style="fill:var(--ex)"/><text class="tt" x="90" y="120" style="text-anchor:middle">ΔW</text><text class="tj" x="260" y="264" style="text-anchor:middle">C′ の仕事 W′ = W + ΔW のうち、W を C(逆)に渡し、ΔW を外に出す。</text><text class="tt" x="260" y="284" style="text-anchor:middle">T₁ は出入りなし。T₂ から ΔW をとって、外に ΔW の仕事 ⇒ Kelvin に反する。</text></svg>
+      <figcaption>C′(効率が C より高いと仮定)で、逆向きに回した C を動かす。T₁ との熱のやりとりは、打ち消しあって、正味、T₂ から ΔW の熱をとって、ΔW の仕事を外に出す機関ができてしまう。</figcaption>
+    </figure>
+    <ol class="step-list">
+      <li>背理法:C′ の熱効率 $\eta'$ が、C の熱効率 $\eta_C$ より<b>大きい</b>と仮定する。</li>
+      <li>C は、高温熱源から熱 $Q$ をもらって、仕事 $W=\eta_CQ$ をする(低温熱源に $Q'=Q-W$ を捨てる)。</li>
+      <li>C′ も、高温熱源から<b>同じ熱 $Q$</b> をもらうとする。$\eta'\gt\eta_C$ だから、仕事は $W'=\eta'Q=W+\Delta W$($\Delta W\gt0$)。低温熱源へは、$Q-W'=Q'-\Delta W$ を捨てる。</li>
+      <li>C′ を正の向きに回し、その仕事 $W'$ のうち $W$ を使って、C を<b>逆向き</b>に回す(逆 Carnot サイクルは、仕事 $W$ を使って、低温から $Q'$ を、高温へ $Q$ を運ぶ:第5回)。残りの $\Delta W$ は、外に出す。</li>
+      <li>高温熱源:C′ に $Q$ を渡し、逆 C から $Q$ をもらう:<b>正味 0</b>。低温熱源:C′ から $Q'-\Delta W$ をもらい、逆 C に $Q'$ を渡す:<b>正味 $\Delta W$ を失う</b>。外に出る仕事:$\Delta W$。</li>
+      <li>全体として、<b>低温の1つの熱源だけから熱 $\Delta W$ をとって、同じ大きさの仕事 $\Delta W$ を外に出す</b>。Kelvin の原理に反する。よって、$\eta'\gt\eta_C$ は不可能。$\eta'\le\eta_C$。</li>
+    </ol>
+    <div class="box supp">
+      <div class="label">板書にない補足:$\eta'\lt\eta_C$ なら不可逆である理由</div>
+      <p>板書の定理の後半、「$\eta'\lt\eta_C$ なら C′ は不可逆」は、次のように示せます。もし、C′ が<b>可逆</b>だったとすると、C′ も、逆向きに回せる。そこで、上の証明の C と C′ の役割を入れかえる:C′ を逆に、C を正に回すと、$\eta_C\le\eta'$ が導かれる(同じ議論)。すると、$\eta'\le\eta_C$ と合わせて、$\eta'=\eta_C$。つまり、<b>可逆なサイクルの熱効率は、必ず $\eta_C$ に等しい</b>。ゆえに、$\eta'\lt\eta_C$ のサイクルは、可逆ではありえない(不可逆)。熱伝導や摩擦など、不可逆な過程が混ざると、効率が下がる、ということです。</p>
+    </div>
+    <p>板書の次の行:「※ Carnot サイクルの性質は、作業物質に依存しない。→ ゴム・酸素・(他の物質)でもよい。」</p>
+    <p>これも、上の定理から出ます。作業物質が違う、2つの Carnot サイクル C、C̃ を考えると、どちらも可逆なので、(補足の結果から)熱効率は、どちらも「可逆なサイクルの熱効率」で、等しい。したがって、<b>$\eta_C$ は、作業物質によらず、2つの熱源の温度だけで決まる</b>。これが、次節の、物質によらない温度の土台になります。</p>
+
+    <!-- ===================== 3 ===================== -->
+    <h2 id="s3">3. 理想気体の Carnot サイクル:$\eta_C=1-T_2/T_1$ <span class="page-tag">板書 p.7</span></h2>
+    <p>作業物質が何でもよいので、いちばん計算しやすい<b>理想気体</b>で、$\eta_C$ を具体的に計算します。(板書:「◎ 理想気体の Carnot サイクル」。$P$–$V$ 図で A→B→C→D、$T_1\gt T_2$。)</p>
+    <figure class="fig">
+      <svg viewBox="0 0 560 290" width="560" role="img" aria-label="理想気体の Carnot サイクル"><line x1="56" y1="262" x2="458.6" y2="262" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><polygon points="466,262 458,265.4 458,258.6" style="fill:var(--muted)"/><line x1="56" y1="262" x2="56" y2="34.4" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><polygon points="56,27 59.4,35 52.6,35" style="fill:var(--muted)"/><text class="t" x="466" y="280" style="text-anchor:end">V</text><text class="t" x="48" y="35" style="text-anchor:end">P</text><polygon points="118,62 119.6,66.9 121.1,71.5 122.7,76 124.2,80.2 125.8,84.2 127.3,88.1 128.9,91.8 130.4,95.3 132,98.7 133.5,102 135.1,105.1 136.6,108.2 138.1,111.1 139.7,113.9 141.3,116.5 142.8,119.1 144.4,121.6 145.9,124.1 147.5,126.4 149,128.7 150.6,130.9 152.1,133 153.6,135 155.2,137 156.8,138.9 158.3,140.8 159.9,142.6 161.4,144.4 163,146.1 164.5,147.7 166.1,149.3 167.6,150.9 169.1,152.4 170.7,153.9 172.3,155.3 173.8,156.7 175.4,158.1 176.9,159.4 178.5,160.7 180,162 180,162 185.7,169.2 191.3,175.6 197,181.3 202.7,186.4 208.3,191 214,195.2 219.7,199 225.3,202.5 231,205.7 236.7,208.6 242.3,211.3 248,213.8 253.7,216 259.4,218.2 265,220.1 270.7,221.9 276.4,223.6 282,225.2 287.7,226.7 293.4,228.1 299,229.4 304.7,230.6 310.4,231.8 316,232.9 321.7,233.9 327.4,234.9 333,235.8 338.7,236.7 344.4,237.5 350,238.3 355.7,239 361.4,239.7 367,240.4 372.7,241 378.4,241.7 384.1,242.2 389.7,242.8 395.4,243.3 401.1,243.8 406.7,244.3 406.7,244.3 402.3,244.1 398,243.9 393.6,243.6 389.2,243.4 384.8,243.1 380.4,242.9 376,242.6 371.7,242.4 367.3,242.1 362.9,241.8 358.5,241.5 354.1,241.2 349.7,240.9 345.3,240.6 341,240.2 336.6,239.9 332.2,239.6 327.8,239.2 323.4,238.8 319,238.4 314.7,238 310.3,237.6 305.9,237.2 301.5,236.7 297.1,236.3 292.7,235.8 288.4,235.3 284,234.8 279.6,234.3 275.2,233.7 270.8,233.1 266.4,232.5 262.1,231.9 257.7,231.3 253.3,230.6 248.9,229.9 244.5,229.1 240.1,228.3 235.7,227.5 231.4,226.6 231.4,226.6 228.5,225.7 225.7,224.7 222.9,223.6 220,222.5 217.2,221.3 214.4,220.1 211.5,218.8 208.7,217.5 205.9,216.1 203,214.6 200.2,213 197.4,211.4 194.5,209.6 191.7,207.8 188.9,205.8 186,203.8 183.2,201.6 180.3,199.3 177.5,196.8 174.7,194.2 171.8,191.4 169,188.5 166.2,185.3 163.3,181.9 160.5,178.2 157.7,174.3 154.8,170.1 152,165.5 149.2,160.6 146.3,155.2 143.5,149.4 140.7,143 137.8,136.1 135,128.5 132.2,120.1 129.3,110.8 126.5,100.6 123.7,89.1 120.8,76.4 118,62" style="fill:var(--accent);fill-opacity:.18;stroke:none"/><polyline points="118,62 119.6,66.9 121.1,71.5 122.7,76 124.2,80.2 125.8,84.2 127.3,88.1 128.9,91.8 130.4,95.3 132,98.7 133.5,102 135.1,105.1 136.6,108.2 138.1,111.1 139.7,113.9 141.3,116.5 142.8,119.1 144.4,121.6 145.9,124.1 147.5,126.4 149,128.7 150.6,130.9 152.1,133 153.6,135 155.2,137 156.8,138.9 158.3,140.8 159.9,142.6 161.4,144.4 163,146.1 164.5,147.7 166.1,149.3 167.6,150.9 169.1,152.4 170.7,153.9 172.3,155.3 173.8,156.7 175.4,158.1 176.9,159.4 178.5,160.7 180,162" style="fill:none;stroke:var(--thm);stroke-width:3"/><polyline points="180,162 185.7,169.2 191.3,175.6 197,181.3 202.7,186.4 208.3,191 214,195.2 219.7,199 225.3,202.5 231,205.7 236.7,208.6 242.3,211.3 248,213.8 253.7,216 259.4,218.2 265,220.1 270.7,221.9 276.4,223.6 282,225.2 287.7,226.7 293.4,228.1 299,229.4 304.7,230.6 310.4,231.8 316,232.9 321.7,233.9 327.4,234.9 333,235.8 338.7,236.7 344.4,237.5 350,238.3 355.7,239 361.4,239.7 367,240.4 372.7,241 378.4,241.7 384.1,242.2 389.7,242.8 395.4,243.3 401.1,243.8 406.7,244.3" style="fill:none;stroke:var(--ex);stroke-width:3"/><polyline points="406.7,244.3 402.3,244.1 398,243.9 393.6,243.6 389.2,243.4 384.8,243.1 380.4,242.9 376,242.6 371.7,242.4 367.3,242.1 362.9,241.8 358.5,241.5 354.1,241.2 349.7,240.9 345.3,240.6 341,240.2 336.6,239.9 332.2,239.6 327.8,239.2 323.4,238.8 319,238.4 314.7,238 310.3,237.6 305.9,237.2 301.5,236.7 297.1,236.3 292.7,235.8 288.4,235.3 284,234.8 279.6,234.3 275.2,233.7 270.8,233.1 266.4,232.5 262.1,231.9 257.7,231.3 253.3,230.6 248.9,229.9 244.5,229.1 240.1,228.3 235.7,227.5 231.4,226.6" style="fill:none;stroke:var(--accent);stroke-width:3"/><polyline points="231.4,226.6 228.5,225.7 225.7,224.7 222.9,223.6 220,222.5 217.2,221.3 214.4,220.1 211.5,218.8 208.7,217.5 205.9,216.1 203,214.6 200.2,213 197.4,211.4 194.5,209.6 191.7,207.8 188.9,205.8 186,203.8 183.2,201.6 180.3,199.3 177.5,196.8 174.7,194.2 171.8,191.4 169,188.5 166.2,185.3 163.3,181.9 160.5,178.2 157.7,174.3 154.8,170.1 152,165.5 149.2,160.6 146.3,155.2 143.5,149.4 140.7,143 137.8,136.1 135,128.5 132.2,120.1 129.3,110.8 126.5,100.6 123.7,89.1 120.8,76.4 118,62" style="fill:none;stroke:var(--ex);stroke-width:3"/><circle cx="118" cy="62" r="5" style="fill:var(--text)"/><text class="t" x="106" y="54" style="text-anchor:middle">A</text><circle cx="180" cy="162" r="5" style="fill:var(--text)"/><text class="t" x="188" y="154" style="text-anchor:middle">B</text><circle cx="406.7" cy="244.3" r="5" style="fill:var(--text)"/><text class="t" x="416.7" y="242.3" style="text-anchor:middle">C</text><circle cx="231.4" cy="226.6" r="5" style="fill:var(--text)"/><text class="t" x="229.4" y="246.6" style="text-anchor:middle">D</text><text class="tt" x="136.6" y="72">① A→B 等温 T₁</text><text class="tj" x="266.8" y="190" style="fill:var(--ex);font-weight:600">② B→C 断熱</text><text class="ta" x="260.6" y="259">③ C→D 等温 T₂</text><text class="tj" x="108" y="152" style="text-anchor:end;fill:var(--ex);font-weight:600">④ D→A</text><text class="tj" x="108" y="168" style="text-anchor:end;fill:var(--ex);font-weight:600">断熱</text><text class="t" x="180" y="183" style="text-anchor:middle">W</text><line x1="180" y1="162" x2="180" y2="262" style="stroke:var(--muted);stroke-width:1.1;stroke-dasharray:5 4;fill:none"/><line x1="118" y1="62" x2="118" y2="262" style="stroke:var(--muted);stroke-width:1.1;stroke-dasharray:5 4;fill:none"/><line x1="406.7" y1="244.3" x2="406.7" y2="262" style="stroke:var(--muted);stroke-width:1.1;stroke-dasharray:5 4;fill:none"/><line x1="231.4" y1="226.6" x2="231.4" y2="262" style="stroke:var(--muted);stroke-width:1.1;stroke-dasharray:5 4;fill:none"/><text class="tm" x="118" y="278" style="text-anchor:middle">V_A</text><text class="tm" x="180" y="278" style="text-anchor:middle">V_B</text><text class="tm" x="231.4" y="278" style="text-anchor:middle">V_D</text><text class="tm" x="406.7" y="278" style="text-anchor:middle">V_C</text></svg>
+      <figcaption>理想気体の Carnot サイクルの4つの過程。① A→B(等温、$T_1$)、② B→C(断熱)、③ C→D(等温、$T_2$)、④ D→A(断熱)。</figcaption>
+    </figure>
+    <p>以下、「$W$」は、各過程で、<b>外から気体にされた仕事</b>(符号つき)です。</p>
+    <h3 id="s3a">① A→B(準静的等温過程)</h3>
+    <p>板書:「① A→B(準静的等温過程)$PV=nRT$、$\left(\dfrac{\partial U}{\partial V}\right)_T=0$。$W_{A\to B}=\int_{V_A}^{V_B}(-P)\,dV=-\int_{V_A}^{V_B}\dfrac{nRT_1}{V}dV=-nRT_1\log\dfrac{V_B}{V_A}=-Q_{A\to B}=-Q_1$。」</p>
+    <p>等温($T_1$)なので $\Delta U=0$(理想気体では $U$ は温度だけで決まる)。第1法則から、吸収した熱 $Q_{A\to B}=-W_{A\to B}$。これを $Q_1$ と書く(気体が受け取る熱):
+    $$Q_1=nRT_1\log\frac{V_B}{V_A}\ \gt0\quad(V_B\gt V_A).$$</p>
+    <h3 id="s3b">② B→C(準静的断熱過程)</h3>
+    <p>板書:「② B→C(準静的断熱過程)$Q_{B\to C}=0$。$P_BV_B^\gamma=PV^\gamma$($\gamma=C_P/C_V$)。$W_{B\to C}=-\int_{V_B}^{V_C}\dfrac{P_BV_B^\gamma}{V^\gamma}dV=\dfrac{R}{\gamma-1}(T_2-T_1)$。」</p>
+    <p>断熱($Q=0$)では、$PV^\gamma=P_BV_B^\gamma$($=$ 一定)。積分すると、
+    $$W_{B\to C}=-P_BV_B^\gamma\int_{V_B}^{V_C}V^{-\gamma}dV=-P_BV_B^\gamma\cdot\frac{V_C^{1-\gamma}-V_B^{1-\gamma}}{1-\gamma}=\frac{P_CV_C-P_BV_B}{\gamma-1}=\frac{nR(T_2-T_1)}{\gamma-1}.$$
+    (板書は $n=1$ mol として $R$。)温度が $T_1\to T_2$ に下がるので、$W_{B\to C}\lt0$(気体は、内部エネルギーを使って、外に仕事をする)。これは、$\Delta U=C_V(T_2-T_1)=\dfrac{nR}{\gamma-1}(T_2-T_1)$(第4回)と、一致します。</p>
+    <h3 id="s3c">③ C→D(準静的等温過程)と、④ D→A(断熱)</h3>
+    <p>板書:「③ C→D 等温過程:$W_{C\to D}=-nRT_2\log\dfrac{V_D}{V_C}=-Q_{C\to D}=Q_2$。④ D→A 断熱過程:$W_{D\to A}=\dfrac{R}{\gamma-1}(T_1-T_2)$。」</p>
+    <ul>
+      <li>③ 等温($T_2$)の圧縮($V_D\lt V_C$):$W_{C\to D}=-nRT_2\log\dfrac{V_D}{V_C}=nRT_2\log\dfrac{V_C}{V_D}\gt0$。このとき、気体は熱を<b>放出</b>($Q_{C\to D}\lt0$)。放出した熱の大きさを $Q_2$ と書くと、$W_{C\to D}=-Q_{C\to D}=Q_2$:
+      $$Q_2=nRT_2\log\frac{V_C}{V_D}\ \gt0.$$</li>
+      <li>④ 断熱:$W_{D\to A}=\dfrac{nR}{\gamma-1}(T_1-T_2)$。②と、符号だけ違う。</li>
+    </ul>
+    <h3 id="s3d">熱効率</h3>
+    <p>板書:「$\eta_C=\dfrac WQ_1=\dfrac{Q_1-Q_2}{Q_1}=1-\dfrac{RT_2\log\frac{V_C}{V_D}}{RT_1\log\frac{V_B}{V_A}}=1-\dfrac{T_2}{T_1}$。等温過程:$RT_1=P_AV_A=P_BV_B$、$RT_2=P_CV_C=P_DV_D$。断熱過程:$P_BV_B^\gamma=P_CV_C^\gamma$、$P_DV_D^\gamma=P_AV_A^\gamma$ ⇒ $\dfrac{V_C}{V_D}=\dfrac{V_B}{V_A}$。」</p>
+    <ol class="step-list">
+      <li>1周の、外にする仕事 $W=-(W_{A\to B}+W_{B\to C}+W_{C\to D}+W_{D\to A})$。② と ④ は打ち消しあうので、$W=Q_1-Q_2$。</li>
+      <li>熱効率:$\eta_C=\dfrac{W}{Q_1}=1-\dfrac{Q_2}{Q_1}=1-\dfrac{T_2\log(V_C/V_D)}{T_1\log(V_B/V_A)}$。</li>
+      <li>体積の比を比べる。② と ④ の断熱関係を、辺々割ると:$\dfrac{P_BV_B^\gamma}{P_AV_A^\gamma}=\dfrac{P_CV_C^\gamma}{P_DV_D^\gamma}$。等温過程より $P_BV_B=P_AV_A$、$P_CV_C=P_DV_D$ なので、$\left(\dfrac{V_B}{V_A}\right)^{\gamma-1}=\left(\dfrac{V_C}{V_D}\right)^{\gamma-1}$、つまり、
+      $$\frac{V_B}{V_A}=\frac{V_C}{V_D}.$$</li>
+      <li>対数の中身が等しいので、約分できて、$\eta_C=1-\dfrac{T_2}{T_1}$。</li>
+    </ol>
+    <div class="box thm">
+      <div class="label">理想気体の Carnot サイクル</div>
+      <p>$$\eta_C=1-\frac{T_2}{T_1},\qquad\frac{Q_2}{Q_1}=\frac{T_2}{T_1}.$$
+      熱効率は、<b>温度比だけ</b>で決まる。</p>
+    </div>
+    <p>ここの $T$ は、理想気体の状態方程式 $PV=nRT$ で決まる温度(経験温度の一種)です。次節で、この $T$ が、物質によらない「熱力学温度」と一致する、ことが分かります。</p>
+
+    <!-- ===================== 4 ===================== -->
+    <h2 id="s4">4. 3.7 熱力学的温度 <span class="page-tag">板書 p.7</span></h2>
+    <p>板書:「<b>3.7 熱力学的温度</b>。※ Carnot サイクルの熱効率は、作業物質に依らない ⇒ <b>温度を決める</b>。」</p>
+    <p>水銀温度計やガス温度計で決める経験温度は、物質の性質に頼っています(第1回)。ところが、いま、Carnot サイクルの熱効率が、<b>作業物質によらず</b>、熱源の温度だけで決まることが分かりました。これを使えば、<b>物質に依存しない温度の目盛り</b>が作れるはずです。</p>
+    <h3 id="s4a">(a) 同じ仕事を取り出す Carnot サイクルは、同じ熱をやりとりする</h3>
+    <p>板書:「(a) Carnot サイクル C と C′ を用いて、共通の仕事 W をとりだす。$Q_1=Q_1'$、$Q_2=Q_2'$。($Q_1\lt Q_1'$、$Q_2\gt Q_2'$ ← これらはダメ。)⇒ Carnot サイクルの性質は、仕事と熱源の温度で決まる。」</p>
+    <figure class="fig">
+      <svg viewBox="0 0 500 266" width="500" role="img" aria-label="同じ仕事を出す2つの Carnot サイクル"><rect x="40" y="28" width="420" height="26" rx="4" style="fill:var(--thm);fill-opacity:.22;stroke:var(--thm);stroke-width:2"/><text class="t" x="250" y="46" style="text-anchor:middle">T₁</text><rect x="40" y="200" width="420" height="26" rx="4" style="fill:var(--accent);fill-opacity:.22;stroke:var(--accent);stroke-width:2"/><text class="t" x="250" y="218" style="text-anchor:middle">T₂</text><circle cx="150" cy="114" r="26" style="fill:var(--accent);fill-opacity:.18;stroke:var(--accent);stroke-width:2.2"/><text class="t" x="150" y="119" style="text-anchor:middle">C</text><line x1="138" y1="54" x2="138" y2="79.6" style="stroke:var(--thm);stroke-width:2.4;fill:none"/><polygon points="138,88 134,79 142,79" style="fill:var(--thm)"/><text class="t" x="130" y="74" style="text-anchor:end">Q₁</text><line x1="138" y1="140" x2="138" y2="191.6" style="stroke:var(--accent);stroke-width:2.4;fill:none"/><polygon points="138,200 134,191 142,191" style="fill:var(--accent)"/><text class="t" x="130" y="176" style="text-anchor:end">Q₂</text><line x1="176" y1="114" x2="223.6" y2="114" style="stroke:var(--ex);stroke-width:2.4;fill:none"/><polygon points="232,114 223,118 223,110" style="fill:var(--ex)"/><text class="t" x="204" y="104" style="text-anchor:middle">W</text><circle cx="350" cy="114" r="26" style="fill:var(--ex);fill-opacity:.18;stroke:var(--ex);stroke-width:2.2"/><text class="t" x="350" y="119" style="text-anchor:middle">C′</text><line x1="338" y1="54" x2="338" y2="79.6" style="stroke:var(--thm);stroke-width:2.4;fill:none"/><polygon points="338,88 334,79 342,79" style="fill:var(--thm)"/><text class="t" x="330" y="74" style="text-anchor:end">Q₁′</text><line x1="338" y1="140" x2="338" y2="191.6" style="stroke:var(--accent);stroke-width:2.4;fill:none"/><polygon points="338,200 334,191 342,191" style="fill:var(--accent)"/><text class="t" x="330" y="176" style="text-anchor:end">Q₂′</text><line x1="376" y1="114" x2="423.6" y2="114" style="stroke:var(--ex);stroke-width:2.4;fill:none"/><polygon points="432,114 423,118 423,110" style="fill:var(--ex)"/><text class="t" x="404" y="104" style="text-anchor:middle">W</text><text class="tt" x="250" y="252" style="text-anchor:middle">W が同じなら、Q₁ = Q₁′、Q₂ = Q₂′(違えば、Clausius の原理に反する)</text></svg>
+      <figcaption>同じ2つの熱源の間の、2つの Carnot サイクル C、C′ が、同じ仕事 $W$ を出すなら、やりとりする熱も同じ。</figcaption>
+    </figure>
+    <p>同じ2つの熱源($T_1,T_2$)の間で働く、2つの Carnot サイクル C、C′(作業物質が違ってもよい)が、同じ仕事 $W$ を出すとします。C は熱 $Q_1$ をもらい $Q_2$ を捨て、C′ は $Q_1'$ をもらい $Q_2'$ を捨てる。$Q_1=W+Q_2$、$Q_1'=W+Q_2'$。</p>
+    <p>もし、$Q_1\lt Q_1'$ だったとすると、$Q_2=Q_1-W\lt Q_1'-W=Q_2'$。ここで、C を正に、C′ を逆に回すと、低温熱源は $Q_2'-Q_2\gt0$ を失い、高温熱源は $Q_1'-Q_1\gt0$ を得て、仕事は $W-W=0$:<b>仕事なしに、低温から高温へ熱が移る</b>。Clausius の原理に反する(板書の「これらはダメ」)。$Q_1\gt Q_1'$ のときは、C と C′ の役割を逆にすれば、同じ。よって、$Q_1=Q_1'$、$Q_2=Q_2'$。<b>Carnot サイクルが、熱源とやりとりする熱は、出す仕事と、熱源の温度で、決まる</b>。</p>
+    <h3 id="s4b">(b) サイクルを $n$ 回まわす:熱の比は、仕事によらない</h3>
+    <p>板書:「(b) サイクルを $n$ 回まわす。1回目:$Q_1$、$W$ (C)。$Q_1'$、$W$ (C′)。2回目:$Q_1$、$2W$。⋮ $n$ 回目:$nQ_1$、$nW$。$\dfrac{Q_2}{Q_1}=\dfrac{nQ_2}{nQ_1}$。仕事に依らず熱の比は一定。→ Carnot サイクルと、熱のやりとりをする熱源の種類によらず、熱の比は、普遍的に決まっている。」</p>
+    <p>C を $n$ 回まわすと、熱 $nQ_1$ をもらい、仕事 $nW$ を出し、熱 $nQ_2$ を捨てる。この「$n$ 回分」は、仕事 $nW$ を出す Carnot サイクルとみなせるので、(a) から、仕事 $nW$ を出す<b>どの</b> Carnot サイクルも、$nQ_1$ をもらい $nQ_2$ を捨てる。熱の比は、
+    $$\frac{Q_2}{Q_1}=\frac{nQ_2}{nQ_1}$$
+    と、$n$(つまり出す仕事の大きさ)によらない。結局、<b>2つの熱源の間で動く Carnot サイクルの熱の比 $Q_2/Q_1$ は、作業物質にも、仕事の大きさにもよらず、2つの熱源の温度だけで決まる</b>。</p>
+    <h3 id="s4c">(c) 3つの熱源と、比の関数 $f$</h3>
+    <p>熱源の温度を、何か1つの経験温度(温度計の目盛り)で表して $\theta_1,\theta_2$ としましょう(板書では、これを $T_1,T_2$ と書いている)。上の結果は、熱の比が、2つの温度の関数であること、
+    $$\frac{Q_2}{Q_1}=f(T_2,T_1)$$
+    を意味します($f$ は、物質によらない、普遍的な関数)。</p>
+    <p>板書:「◎ 3つの熱源と熱のやりとりをする Carnot サイクル。$\dfrac{Q_2}{Q_1}=f(T_2,T_1)=\dfrac{Q_2}{Q_0}\cdot\dfrac{Q_0}{Q_1}=\dfrac{f(T_2,T_0)}{f(T_1,T_0)}$。⇒ $\boxed{f(T_2,T_1)\,f(T_1,T_0)=f(T_2,T_0)}$。」</p>
+    <figure class="fig">
+      <svg viewBox="0 0 500 280" width="500" role="img" aria-label="3つの熱源と Carnot サイクル"><rect x="40" y="26" width="150" height="26" rx="4" style="fill:var(--muted);fill-opacity:.22;stroke:var(--muted);stroke-width:2"/><text class="t" x="115" y="44" style="text-anchor:middle">T₀</text><rect x="40" y="134" width="150" height="26" rx="4" style="fill:var(--thm);fill-opacity:.22;stroke:var(--thm);stroke-width:2"/><text class="t" x="115" y="152" style="text-anchor:middle">T₁</text><rect x="40" y="240" width="150" height="26" rx="4" style="fill:var(--accent);fill-opacity:.22;stroke:var(--accent);stroke-width:2"/><text class="t" x="115" y="258" style="text-anchor:middle">T₂</text><circle cx="110" cy="82" r="18" style="fill:var(--accent);fill-opacity:.18;stroke:var(--accent);stroke-width:2.2"/><text class="t" x="110" y="87" style="text-anchor:middle">C₀₁</text><line x1="96" y1="52" x2="96" y2="57.6" style="stroke:var(--text);stroke-width:2.4;fill:none"/><polygon points="96,66 92,57 100,57" style="fill:var(--text)"/><line x1="96" y1="98" x2="96" y2="125.6" style="stroke:var(--text);stroke-width:2.4;fill:none"/><polygon points="96,134 92,125 100,125" style="fill:var(--text)"/><text class="t" x="88" y="60" style="text-anchor:end">Q₀</text><text class="t" x="88" y="124" style="text-anchor:end">Q₁</text><circle cx="110" cy="188" r="18" style="fill:var(--accent);fill-opacity:.18;stroke:var(--accent);stroke-width:2.2"/><text class="t" x="110" y="193" style="text-anchor:middle">C₁₂</text><line x1="96" y1="160" x2="96" y2="163.6" style="stroke:var(--text);stroke-width:2.4;fill:none"/><polygon points="96,172 92,163 100,163" style="fill:var(--text)"/><line x1="96" y1="204" x2="96" y2="231.6" style="stroke:var(--text);stroke-width:2.4;fill:none"/><polygon points="96,240 92,231 100,231" style="fill:var(--text)"/><text class="t" x="88" y="166" style="text-anchor:end">Q₁</text><text class="t" x="88" y="230" style="text-anchor:end">Q₂</text><rect x="300" y="26" width="150" height="26" rx="4" style="fill:var(--muted);fill-opacity:.22;stroke:var(--muted);stroke-width:2"/><text class="t" x="375" y="44" style="text-anchor:middle">T₀</text><rect x="300" y="240" width="150" height="26" rx="4" style="fill:var(--accent);fill-opacity:.22;stroke:var(--accent);stroke-width:2"/><text class="t" x="375" y="258" style="text-anchor:middle">T₂</text><circle cx="375" cy="133" r="24" style="fill:var(--ex);fill-opacity:.18;stroke:var(--ex);stroke-width:2.2"/><text class="t" x="375" y="138" style="text-anchor:middle">C₀₂</text><line x1="362" y1="52" x2="362" y2="100.6" style="stroke:var(--text);stroke-width:2.4;fill:none"/><polygon points="362,109 358,100 366,100" style="fill:var(--text)"/><line x1="362" y1="157" x2="362" y2="231.6" style="stroke:var(--text);stroke-width:2.4;fill:none"/><polygon points="362,240 358,231 366,231" style="fill:var(--text)"/><text class="t" x="354" y="80" style="text-anchor:end">Q₀</text><text class="t" x="354" y="214" style="text-anchor:end">Q₂</text><text class="t" x="245" y="140" style="text-anchor:middle">≃</text><text class="tm" x="245" y="120" style="text-anchor:middle">(Q₁ が</text><text class="tm" x="245" y="160" style="text-anchor:middle">打ち消す)</text></svg>
+      <figcaption>3つの熱源 $T_0,T_1,T_2$。$T_0$ と $T_1$ の間の Carnot サイクルと、$T_1$ と $T_2$ の間の Carnot サイクルを、$T_1$ との熱のやりとりが打ち消しあうように組み合わせると、$T_0$ と $T_2$ の間の1つの可逆サイクルと同じになる。</figcaption>
+    </figure>
+    <ol class="step-list">
+      <li>3つの熱源 $T_0,T_1,T_2$ を用意する。$T_0$ と $T_1$ の間の Carnot サイクルを回して、熱 $Q_0$ と $Q_1$ をやりとりする($Q_1/Q_0=f(T_1,T_0)$)。</li>
+      <li>$T_1$ と $T_2$ の間の Carnot サイクルを回して、$T_1$ から、さきほどと同じ熱 $Q_1$ をやりとりする(サイズを合わせる)。$T_2$ との熱は $Q_2$($Q_2/Q_1=f(T_2,T_1)$)。</li>
+      <li>2つをあわせると、$T_1$ との熱のやりとりは打ち消しあって、全体は、$T_0$ と $T_2$ だけと熱 $Q_0$、$Q_2$ をやりとりする可逆サイクル。(前節の結果:可逆なサイクルは、同じ熱効率をもつ、から、これも、$T_0$–$T_2$ の Carnot サイクルと同じ関数 $f$ に従う。)$Q_2/Q_0=f(T_2,T_0)$。</li>
+      <li>$\dfrac{Q_2}{Q_0}=\dfrac{Q_2}{Q_1}\cdot\dfrac{Q_1}{Q_0}$ から、$f(T_2,T_0)=f(T_2,T_1)\,f(T_1,T_0)$。</li>
+    </ol>
+    <p>板書:「$f(x,y)=F(x)G(y)$ と、変数分離型を仮定。$F(T_2)G(T_1)F(T_1)G(T_0)=F(T_2)G(T_0)$。⇒ $F(T_1)G(T_1)=1$、$F(x)=\dfrac1{G(x)}$。⇒ $\dfrac{Q_2}{Q_1}=f(T_2,T_1)=F(T_2)G(T_1)=\dfrac{F(T_2)}{F(T_1)}$ ⇒ $F(T)=aT$:<b>Kelvin の温度</b>。」</p>
+    <p>関係式 $f(T_2,T_1)f(T_1,T_0)=f(T_2,T_0)$ を満たす関数 $f$ は、「$F(x)/F(y)$」の形をしている、と考えます。板書は、$f(x,y)=F(x)G(y)$ と仮定して、これを代入し、$F(T_2)G(T_1)F(T_1)G(T_0)=F(T_2)G(T_0)$。両辺を $F(T_2)G(T_0)$ で割ると $F(T_1)G(T_1)=1$。つまり $G=1/F$:
+    $$\frac{Q_2}{Q_1}=\frac{F(T_2)}{F(T_1)}.$$</p>
+    <div class="box supp">
+      <div class="label">板書にない補足:「変数分離型の仮定」は、仮定しなくても出る</div>
+      <p>$f(T_2,T_0)=f(T_2,T_1)f(T_1,T_0)$ は、$T_0$ を基準の温度として固定すると、$f(T_2,T_1)=\dfrac{f(T_2,T_0)}{f(T_1,T_0)}$。ここで $F(T):=f(T,T_0)$ と定義すれば、そのまま $f(T_2,T_1)=\dfrac{F(T_2)}{F(T_1)}$ になります。変数分離型は、仮定でなく、関係式から<b>自動的に</b>出る形です。</p>
+    </div>
+    <div class="box def">
+      <div class="label">熱力学温度(Kelvin の温度)の定義</div>
+      <p>$\dfrac{F(T_2)}{F(T_1)}$ を、そのまま、新しい温度の比と決める。すなわち、温度 $T$ を、$T=aF$($a$ は、目盛りの大きさを決める定数)で定義すると、
+      $$\frac{Q_2}{Q_1}=\frac{T_2}{T_1}.$$
+      2つの熱源の間の Carnot サイクルが、やりとりする熱の比が、<b>熱源の温度の比</b>に等しい。これが<b>熱力学温度</b> $T$ [K]。</p>
+    </div>
+    <p>この定義は、物質の性質を、一切使っていません(熱力学の法則だけから決まる)。経験温度が、物質ごとに少しずつ違うのに対して、これは<b>普遍的な温度</b>です。目盛りの大きさ(定数 $a$)は、次で決めます。</p>
+    <h3 id="s4d">(d) 目盛りの決め方:氷点と沸点</h3>
+    <p>板書:「※ 1気圧の氷点(融点)と沸点で、Carnot サイクル。$\dfrac{Q_2(\text{氷点})}{Q_1(\text{沸点})}=\dfrac{T_0}{T_0+100}$ ⇒ $T_0=273.15\,[\mathrm K]$。経験温度 → 熱 → エネルギー。」</p>
+    <figure class="fig">
+      <svg viewBox="0 0 560 236" width="560" role="img" aria-label="氷点と沸点の間の Carnot サイクル"><rect x="60" y="26" width="190" height="26" rx="4" style="fill:var(--thm);fill-opacity:.22;stroke:var(--thm);stroke-width:2"/><text class="t" x="155" y="44" style="text-anchor:middle">沸点 100 °C = T₀ + 100</text><rect x="60" y="190" width="190" height="26" rx="4" style="fill:var(--accent);fill-opacity:.22;stroke:var(--accent);stroke-width:2"/><text class="t" x="155" y="208" style="text-anchor:middle">氷点 0 °C = T₀</text><circle cx="155" cy="110" r="26" style="fill:var(--accent);fill-opacity:.18;stroke:var(--accent);stroke-width:2.2"/><text class="t" x="155" y="115" style="text-anchor:middle">C</text><line x1="143" y1="52" x2="143" y2="75.6" style="stroke:var(--thm);stroke-width:2.4;fill:none"/><polygon points="143,84 139,75 147,75" style="fill:var(--thm)"/><text class="t" x="135" y="72" style="text-anchor:end">Q₁(沸点)</text><line x1="143" y1="136" x2="143" y2="181.6" style="stroke:var(--accent);stroke-width:2.4;fill:none"/><polygon points="143,190 139,181 147,181" style="fill:var(--accent)"/><text class="t" x="135" y="168" style="text-anchor:end">Q₂(氷点)</text><line x1="181" y1="110" x2="227.6" y2="110" style="stroke:var(--ex);stroke-width:2.4;fill:none"/><polygon points="236,110 227,114 227,106" style="fill:var(--ex)"/><text class="t" x="210" y="100" style="text-anchor:middle">W</text><text class="tj" x="280" y="76">熱の比を測る:</text><text class="tt" x="280" y="100">Q₂/Q₁ = T₀/(T₀+100)</text><text class="tt" x="280" y="128">⇒ T₀ = 273.15 K</text><text class="tm" x="280" y="162">(1 K の幅は、1 °C の幅と</text><text class="tm" x="280" y="180">同じに決めてある)</text></svg>
+      <figcaption>水の氷点と沸点を熱源にして、Carnot サイクルを回し、やりとりする熱の比を測る。目盛りの幅を、セルシウス温度と同じ($100$ 等分)にとると、氷点の熱力学温度 $T_0$ が決まる。</figcaption>
+    </figure>
+    <p>1気圧の水の氷点と沸点の間の幅を、$100$ K(セルシウス温度の $100\,{}^\circ\mathrm C$ と同じ幅)にとります。氷点の熱力学温度を $T_0$ とすると、沸点は $T_0+100$。この2つの熱源で、Carnot サイクルを回して、熱の比を測ると、$\dfrac{Q_2}{Q_1}=\dfrac{T_0}{T_0+100}$。実験の結果から、$T_0=\dfrac{100\,r}{1-r}$($r=Q_2/Q_1$)を計算すると、<b>$T_0=273.15\ \mathrm K$</b>。これが、第1回の $T\,[\mathrm K]=t\,[^\circ\mathrm C]+273.15$ の根拠です。</p>
+    <p>(板書の右の、「経験温度 → 熱 → エネルギー」は、「温度の決め方が、物質の性質(経験温度)から、熱のやりとり(Carnot サイクル)へ、さらに、エネルギーの概念へ、移った」という流れを示す、メモと読みました。)</p>
+
+    <!-- ===================== 5 ===================== -->
+    <h2 id="s5">5. 熱力学温度の非負性と、換算熱 <span class="page-tag">板書 p.7</span></h2>
+    <p>板書:「◎ 熱力学温度の非負性。$0\lt\eta=1-\dfrac{T_2}{T_1}\lt1$ ∴ $T_1,T_2\gt0$。Carnot サイクルは正の仕事をする ← 第二法則。$1\gt\dfrac{T_2}{T_1}$、$T_1\gt0$。」</p>
+    <p>熱力学温度 $T$ が、<b>正</b>であることを示します。Carnot サイクルが正の仕事をする($W\gt0$、第5回の性質1)なら、$Q_1\gt Q_2$。また、$Q_2\gt0$(もし $Q_2=0$ なら、Kelvin の原理に反する)。したがって、
+    $$0\lt\eta=1-\frac{Q_2}{Q_1}=1-\frac{T_2}{T_1}\lt1\ \Longrightarrow\ 0\lt\frac{T_2}{T_1}\lt1.$$
+    温度の比が、正で、1より小さい。熱力学温度の符号を、「高温熱源 $T_1\gt0$」にとると、低温熱源の $T_2$ も正で、$T_1\gt T_2\gt0$。つまり、<b>熱力学温度は、正の値しかとらない</b>(絶対零度より低い温度は、ない)。$\eta=1-\dfrac{T_2}{T_1}=1$ になるのは、$T_2=0$ のときだけで、これには到達できません。</p>
+    <h3 id="s5a">Clausius の不等式への入口:換算熱</h3>
+    <p>板書:「<b>Clausius の不等式</b>。Carnot サイクル:$\dfrac{Q_2}{Q_1}=\dfrac{T_2}{T_1}$ ⇒ $\dfrac{Q_2}{T_2}=\dfrac{Q_1}{T_1}$ ←<b>換算熱</b>。※ 熱源が2つ以上あるときの換算熱の性質。熱の正の向きをサイクルに入る向きにする。$\dfrac{Q_1}{T_1}+\dfrac{Q_2}{T_2}\le0$。」</p>
+    <p>熱 $Q$ を、そのときの熱源の温度 $T$ で割った量 $\dfrac QT$ を、<b>換算熱</b>といいます。Carnot サイクルでは、高温で受け取る熱の換算熱 $\dfrac{Q_1}{T_1}$ と、低温で捨てる熱の換算熱 $\dfrac{Q_2}{T_2}$ が、<b>等しい</b>:
+    $$\frac{Q_1}{T_1}=\frac{Q_2}{T_2}\qquad\text{(Carnot サイクル)}.$$
+    ここで、熱の符号を、<b>サイクル(作業物質)に入る向きを正</b>と決め直すと、低温で捨てる熱は負になるので、$\dfrac{Q_1}{T_1}+\dfrac{Q_2}{T_2}=0$(Carnot サイクル)。一般のサイクル(不可逆なものを含む)では、$\le0$ になる。これが <b>Clausius の不等式</b>で、次回の主題、エントロピーの出発点です。</p>
+
+    <!-- ===================== 6 ===================== -->
+    <h2 id="s6">6. 具体例で練習(板書にない補足) <span class="page-tag">補足</span></h2>
+    <div class="box ex">
+      <div class="label">問題 A:Carnot 効率の計算</div>
+      <p>高温熱源 $T_1=500\ \mathrm K$、低温熱源 $T_2=300\ \mathrm K$ の間で、Carnot サイクルを回す。(i) 熱効率 $\eta_C$ は。(ii) 高温熱源から $Q_1=1000\ \mathrm J$ をもらうとき、仕事 $W$ と捨てる熱 $Q_2$ は。</p>
+    </div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>(i) $\eta_C=1-\dfrac{300}{500}=0.4$。(ii) $W=\eta_CQ_1=400\ \mathrm J$、$Q_2=Q_1-W=600\ \mathrm J$($=Q_1\dfrac{T_2}{T_1}=600\ \mathrm J$ ✓)。</p></div>
+
+    <div class="box ex">
+      <div class="label">問題 B:現実のエンジンと、上限</div>
+      <p>自動車のエンジンの燃焼ガスの温度を $T_1=1000\ \mathrm K$、外気を $T_2=300\ \mathrm K$ とする。熱効率の上限を求めよ。実際のエンジンの熱効率は、約 0.3 である。この差は、何を意味するか。</p>
+    </div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>$\eta_C=1-\dfrac{300}{1000}=0.7$。実際の約 0.3 との差は、摩擦、有限の温度差での熱伝導、燃焼の不可逆性など、<b>不可逆な過程</b>で失われる分(定理:$\eta'\lt\eta_C$ なら不可逆)。上限 0.7 は、これ以上は、どんな工夫でも、達成できない限界。</p></div>
+
+    <div class="box ex">
+      <div class="label">問題 C:理想気体の Carnot サイクルの数値</div>
+      <p>$n=1\ \mathrm{mol}$ の理想気体で、$T_1=500\ \mathrm K$、$T_2=300\ \mathrm K$、$V_A=1.0\ \mathrm L$、$V_B=2.0\ \mathrm L$ の Carnot サイクルを回す。$Q_1$、$Q_2$、$W$、$\eta$ を求めよ。$R=8.31\ \mathrm{J/(mol\cdot K)}$。</p>
+    </div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>$Q_1=nRT_1\log\dfrac{V_B}{V_A}=8.31\times500\times\log2=4155\times0.693=2.88\times10^3\ \mathrm J$。断熱過程の関係から $\dfrac{V_C}{V_D}=\dfrac{V_B}{V_A}=2$ なので、$Q_2=nRT_2\log2=8.31\times300\times0.693=1.73\times10^3\ \mathrm J$。$W=Q_1-Q_2=1.15\times10^3\ \mathrm J$。$\eta=\dfrac{W}{Q_1}=0.40=1-\dfrac{300}{500}$ ✓。</p></div>
+
+    <div class="box ex">
+      <div class="label">問題 D:氷点・沸点の熱の比から $T_0$ を求める</div>
+      <p>1気圧の水の氷点と沸点を熱源にして、Carnot サイクルを回したら、$\dfrac{Q_2}{Q_1}=0.7320$ だった。氷点の熱力学温度 $T_0$ を求めよ。</p>
+    </div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>$\dfrac{T_0}{T_0+100}=r$ より $T_0=\dfrac{100r}{1-r}=\dfrac{73.20}{0.2680}=273.1\ \mathrm K$。</p></div>
+
+    <div class="box ex">
+      <div class="label">問題 E:ヒートポンプ(逆 Carnot サイクル)で暖房する</div>
+      <p>外気 $0\,{}^\circ\mathrm C$($273\ \mathrm K$)から熱をくみ上げて、室内 $20\,{}^\circ\mathrm C$($293\ \mathrm K$)を暖める。理想的な(逆 Carnot の)ヒートポンプで、電気(仕事)$W=1\ \mathrm{kJ}$ を使ったとき、室内に供給できる熱 $Q_1$ は、最大いくらか。</p>
+    </div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>逆 Carnot サイクルでは、同じ大きさの熱・仕事が、向きだけ逆。正サイクルの効率 $\eta_C=1-\dfrac{T_2}{T_1}=\dfrac{W}{Q_1}$ より、$Q_1=\dfrac{W}{\eta_C}=\dfrac{W\,T_1}{T_1-T_2}=1\ \mathrm{kJ}\times\dfrac{293}{20}\approx14.7\ \mathrm{kJ}$。電気ヒーター(1 kJ の電気が 1 kJ の熱)に比べて、約15倍。温度差が小さいほど、ヒートポンプは有利。</p></div>
+
+    <!-- ===================== 7 ===================== -->
+    <h2 id="s7">7. まとめ(この回で覚えること)</h2>
+    <ul>
+      <li><b>2つの熱源の間のどんなサイクルも、熱効率 $\eta'\le\eta_C$</b>(Kelvin の原理から)。<b>可逆なサイクルの効率は $\eta_C$ に等しい</b>。$\eta'\lt\eta_C$ なら不可逆。$\eta_C$ は、作業物質によらない。</li>
+      <li><b>理想気体の Carnot サイクル</b>:$Q_1=nRT_1\log\frac{V_B}{V_A}$、$Q_2=nRT_2\log\frac{V_C}{V_D}$、$\frac{V_B}{V_A}=\frac{V_C}{V_D}$、$\eta_C=1-\dfrac{T_2}{T_1}$。</li>
+      <li>Carnot サイクルが熱源とやりとりする熱の比は、<b>熱源の温度だけ</b>で決まる($f(T_2,T_1)$)。3つの熱源の考察から、$f(T_2,T_1)f(T_1,T_0)=f(T_2,T_0)$ ⇒ $f=\dfrac{F(T_2)}{F(T_1)}$。</li>
+      <li><b>熱力学温度</b>(Kelvin の温度):$\dfrac{Q_2}{Q_1}=\dfrac{T_2}{T_1}$ で定義。物質によらない。氷点と沸点の熱の比から $T_0=273.15\ \mathrm K$。$T\gt0$。</li>
+      <li>Carnot サイクルでは、換算熱が等しい:$\dfrac{Q_1}{T_1}=\dfrac{Q_2}{T_2}$。入る熱を正にとると、$\dfrac{Q_1}{T_1}+\dfrac{Q_2}{T_2}=0$(一般のサイクルでは $\le0$:次回)。</li>
+    </ul>
+
+    <!-- ===================== 8 ===================== -->
+    <h2 id="s8">8. この回のノートについてのメモ</h2>
+    <p>板書は手書きの画像です。画像の順に p.7(下端から、次の p.8 へ続く)としました。板書の画像は、このサイトには載せていません。黄色の枠、基礎ページの内容、練習問題と解答は、Claude が書き足したもので、板書にはありません。</p>
+    <ol>
+      <li><b>$n$ の扱い(p.7)</b>:板書の理想気体の Carnot サイクルは、$n=1$ mol として $R$ と書かれている行と、$nR$ の行が混ざっています。本文は $nR$ で統一しました。</li>
+      <li><b>$Q$ の添字(p.7)</b>:板書は、$Q_1,Q_2$、$Q$、$Q'$ を混ぜて使っています(第5回の記法と、この回の記法)。本文で、$Q_1$ を高温から受け取る熱、$Q_2$ を低温に捨てる熱として、区別を書きました。</li>
+      <li><b>(a) の図(p.7)</b>:板書は、$Q_1\lt Q_1'$、$Q_2\gt Q_2'$(「これはダメ」)と書き、$Q_1=Q_1'$、$Q_2=Q_2'$ を結論しているように読めます。本文では、$Q_1\lt Q_1'$ のとき、$Q_2\lt Q_2'$(同じ $W$ なので)となる、と計算し直して、Clausius の原理に反することを示しました。</li>
+      <li><b>$f(x,y)=F(x)G(y)$ の仮定(p.7)</b>:板書は変数分離型を仮定しています。補足の枠で、仮定しなくても、関係式から導けることを書きました。</li>
+      <li><b>氷点と沸点の記述(p.7)</b>:板書の「1気圧の氷点(融点)・沸点」と「$\dfrac{Q_2}{Q_1}=\dfrac{T_0}{T_0+100}$」は、図の読み取りが難しい箇所があります。「氷点の熱力学温度 $T_0$、沸点 $T_0+100$」と読みました。</li>
+      <li><b>「熱力学温度の非負性」の行(p.7)</b>:「$\therefore T_1=T_2$」のようにも見える箇所は、「$T_1\gt T_2$、$T_1\gt0$」の意味と読みました。</li>
+      <li>最後の「Clausius の不等式」の小節(Carnot サイクルの換算熱、熱源が2つ以上のとき)は、次の p.8 の内容(第7回)への導入です。第7回で、一般の場合を扱います。</li>
+    </ol>
+
+    <nav class="pager">
+      <a href="week-05.html">← 前の週</a>
+      <a href="../index.html">一覧へ</a>
+      <a href="week-07.html">次の週 →</a>
+    </nav>
+
+  </main>
+
+  <footer>© Aセメまとめノート</footer>
+</body>
+</html>

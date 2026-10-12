@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>基礎のまとめ(熱力学) | Aセメまとめノート</title>
+  <link rel="stylesheet" href="../assets/style.css">
+  <script defer src="../assets/nav.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],macros:{'\\R':'\\mathbb{R}','\\bm':'\\boldsymbol{#1}','\\dd':'\\mathrm{d}','\\dbar':'\\mathrm{d}^{\\prime}'}});window.__navReady&&window.__navReady()"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="inner">
+      <a class="site-title" href="../index.html">Aセメまとめノート</a>
+      <span class="links"><a href="index.html">熱力学</a><a href="basics.html">基礎のまとめ</a><a href="../calc/index.html">微積</a><a href="../linalg/index.html">線形代数</a><a href="../em/index.html">電磁気学</a><a href="../mech/index.html">力学A</a></span>
+    </div>
+  </header>
+
+  <main class="note">
+    <h1>基礎のまとめ(熱力学)</h1>
+    <div class="meta">熱力学のノートで使う、高校の物理・数学と、微積の内容を、トピックごとに一から説明したページです。本文の紫色の「基礎」の枠だけで分からなかったときに、ここへ来てください。</div>
+
+    <div class="box note-box">
+      <div class="label">このページの使い方</div>
+      <p>・各回のノートの「基礎」の枠にある<span class="xref-link" style="margin-left:0">→ 詳しい解説</span>のリンクから、対応するトピックに飛べます。</p>
+      <p>・飛んだ先には、画面の左下に<b>「元の位置にもどる」</b>ボタンが出ます。押すと、元のノートの読んでいた場所に戻れます(ブラウザの「戻る」でも同じ位置に戻ります)。</p>
+      <p>・各トピックの最後に「この回で使う場所」があり、本文の対応箇所に飛べます。</p>
+      <p>・偏微分・全微分・テイラー展開の、より詳しい説明は、<a href="../calc/basics.html#partial" data-xref>微積の「春学期のまとめ」</a>にもあります。力学の仕事・エネルギーは<a href="../mech/basics.html#newton" data-xref>力学Aの基礎のまとめ</a>、ベクトルなどは<a href="../em/basics.html#vec3" data-xref>電磁気学の基礎のまとめ</a>にもあります。</p>
+    </div>
+
+    <nav class="toc">
+      <div class="toc-title">目次</div>
+      <ol>
+        <li><b>温度・気体・熱</b>
+          <ol type="a">
+            <li><a href="#temp">温度とセルシウス温度、絶対温度</a></li>
+            <li><a href="#idealgas">理想気体の状態方程式</a></li>
+            <li><a href="#heatcap">熱量・熱容量・比熱</a></li>
+            <li><a href="#latent">潜熱</a></li>
+            <li><a href="#phase">相と相転移</a></li>
+            <li><a href="#reservoir">熱源(熱浴)</a></li>
+          </ol></li>
+        <li><b>仕事・エネルギー・気体の変化</b>
+          <ol type="a" start="7">
+            <li><a href="#work">力学の仕事と、気体の仕事</a></li>
+            <li><a href="#firstlaw">内部エネルギーと第1法則(高校)</a></li>
+            <li><a href="#pvdiagram">$P$–$V$ 図</a></li>
+            <li><a href="#gasproc">気体の変化(定積・定圧・等温・断熱)</a></li>
+            <li><a href="#heatengine">熱機関と熱効率</a></li>
+            <li><a href="#rubber">ゴムの弾性</a></li>
+          </ol></li>
+        <li><b>数学の道具</b>
+          <ol type="a" start="13">
+            <li><a href="#deriv">導関数と接線</a></li>
+            <li><a href="#partial">偏微分と全微分</a></li>
+            <li><a href="#taylor">テイラー展開</a></li>
+            <li><a href="#smallq">微小量と「高次の項」</a></li>
+            <li><a href="#mixed">偏微分の順序交換</a></li>
+            <li><a href="#logint">対数と $\int dx/x$</a></li>
+            <li><a href="#separable">変数分離形の微分方程式</a></li>
+            <li><a href="#sigma">総和記号 $\Sigma$</a></li>
+            <li><a href="#cycleint">サイクル積分と、経路によらない量</a></li>
+            <li><a href="#legendre">接線の傾きと切片(ルジャンドル変換)</a></li>
+            <li><a href="#extremum">最小値と、極値の条件</a></li>
+            <li><a href="#convex">凸関数</a></li>
+            <li><a href="#contradiction">背理法</a></li>
+          </ol></li>
+      </ol>
+    </nav>
+
+    <h2>1. 温度・気体・熱</h2>
+
+    <h3 id="temp">温度とセルシウス温度、絶対温度</h3>
+    <p>温度は、物体の熱さ・冷たさを表す量です。身のまわりでは<b>セルシウス温度</b> $t\,[^\circ\mathrm C]$ を使います:1気圧で、水の氷点を $0\,{}^\circ\mathrm C$、沸点を $100\,{}^\circ\mathrm C$ とし、その間を100等分して $1\,{}^\circ\mathrm C$。</p>
+    <p>物理では、<b>絶対温度(熱力学温度)</b> $T\,[\mathrm K]=t+273.15$ を使います。$0\ \mathrm K$ は、これより低い温度が存在しない下限(<b>絶対零度</b>)。目盛りの幅は、$1\,{}^\circ\mathrm C=1\ \mathrm K$ で同じ。ミクロには、温度は、分子の熱運動の激しさ(平均の運動エネルギーに比例)に対応します。</p>
+    <div class="box ex"><div class="label">例</div>
+      <p>$25\,{}^\circ\mathrm C=298.15\ \mathrm K$。$300\ \mathrm K$ は $26.85\,{}^\circ\mathrm C$。温度の<b>差</b>は、$\mathrm K$ でも °C でも同じ数($10\ \mathrm K$ の差 $=10\,{}^\circ\mathrm C$ の差)。ただし、$T$ に比例する式($PV=nRT$ など)では、必ず絶対温度を使う。</p></div>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-01.html#w-temp" data-xref>第1回 1.1 温度とセルシウス温度</a></p>
+
+    <h3 id="idealgas">理想気体の状態方程式</h3>
+    <p>圧力 $P$ [Pa]、体積 $V$ [m³]、物質量 $n$ [mol]、絶対温度 $T$ [K] の気体で、薄い(分子どうしが離れている)とき、$PV=nRT$ が成り立ちます。$R=8.31\ \mathrm{J/(mol\cdot K)}$ は気体定数。これが<b>理想気体の状態方程式</b>。ボイルの法則($T$ 一定で $PV=$ 一定)と、シャルルの法則($P$ 一定で $V\propto T$)をまとめたもの。</p>
+    <p>1 mol の気体は、$0\,{}^\circ\mathrm C$、1気圧($1.013\times10^5\ \mathrm{Pa}$)で、約 $22.4\ \mathrm L$($=2.24\times10^{-2}\ \mathrm{m^3}$)。</p>
+    <div class="box ex"><div class="label">例</div>
+      <p>$n=2\ \mathrm{mol}$、$T=300\ \mathrm K$、$V=0.05\ \mathrm{m^3}$ のとき、$P=\dfrac{nRT}{V}=\dfrac{2\times8.31\times300}{0.05}=9.97\times10^4\ \mathrm{Pa}$。</p></div>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-01.html#w-gas" data-xref>第1回 1.2 理想気体の状態方程式</a></p>
+
+    <h3 id="heatcap">熱量・熱容量・比熱</h3>
+    <p>物体に出入りする熱のエネルギーが<b>熱量</b> $Q$(単位 J)。物体の温度を $\Delta T$ 上げるのに必要な熱量が $\Delta Q$ のとき、$C=\Delta Q/\Delta T$ を<b>熱容量</b>(J/K)、単位質量あたりのものを<b>比熱</b>(J/(g·K) など)といいます。$Q=C\,\Delta T=mc\,\Delta T$($m$:質量、$c$:比熱)。熱容量は、示量性(物体が2倍なら2倍)、比熱は示強性。</p>
+    <p>気体では、体積を一定にして測る<b>定積熱容量</b> $C_V$ と、圧力を一定にして測る<b>定圧熱容量</b> $C_P$ が違います(膨張で仕事をする分だけ、$C_P\gt C_V$)。単原子分子の理想気体 1 mol では、$C_V=\tfrac32R$、$C_P=\tfrac52R$。</p>
+    <div class="box ex"><div class="label">例</div>
+      <p>水 $100\ \mathrm g$($c=4.2\ \mathrm{J/(g\cdot K)}$)を $20\,{}^\circ\mathrm C$ から $30\,{}^\circ\mathrm C$ に上げる熱量は、$100\times4.2\times10=4200\ \mathrm J$。</p></div>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-01.html#w-heat" data-xref>第1回 1.4 熱量と熱容量</a><a href="weeks/week-07.html#w-cv7" data-xref>第7回 1.3 定積熱容量 $C_V$</a></p>
+
+    <h3 id="latent">潜熱</h3>
+    <p>氷が融けている間や、水が沸騰している間は、熱を加え続けても、温度が上がらず、物質が別の相に変わっていきます。この間に出入りする熱が<b>潜熱</b>(融解熱、蒸発熱)。温度が一定なので、「熱量 $=$ 温度変化 $\times$ 熱容量」の式は使えず、$Q=m\,L$($L$:単位質量あたりの潜熱)。水の融解熱は約 $334\ \mathrm{J/g}$、蒸発熱は約 $2.26\times10^3\ \mathrm{J/g}$。</p>
+    <p>熱力学では、潜熱の出入りは、温度一定のままの、エントロピーの変化 $\Delta S=Q/T$ に対応します。</p>
+    <div class="box ex"><div class="label">例</div>
+      <p>$0\,{}^\circ\mathrm C$ の氷 $100\ \mathrm g$ を、全部融かすのに必要な熱量は、$334\times100=3.34\times10^4\ \mathrm J$。</p></div>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-12.html#w-latent" data-xref>第12回 1.2 潜熱</a></p>
+
+    <h3 id="phase">相と相転移</h3>
+    <p>物質が、系全体で性質が均一な状態を、<b>相</b>といいます:固相(氷)、液相(水)、気相(水蒸気)。温度と圧力を変えると、ある条件で、相が別の相に変わります(<b>相転移</b>:融解・凝固、蒸発・凝縮、昇華)。$P$–$T$ 平面は、固・液・気の領域に分かれ、境界線の上では、2つの相が共存します。3本の境界線が出会う点が<b>三重点</b>(水では $0.01\,{}^\circ\mathrm C$、$611\ \mathrm{Pa}$)。</p>
+    <p>気体と液体の境界線(沸騰曲線)は、<b>臨界点</b>で終わります。臨界点より高温・高圧では、液体と気体の区別がありません。</p>
+    <div class="box ex"><div class="label">例</div>
+      <p>1気圧の水は $100\,{}^\circ\mathrm C$ で沸騰する。圧力が低い山の上($0.7$ 気圧)では、約 $90\,{}^\circ\mathrm C$ で沸騰する。(沸騰曲線の、右上がりの傾き。)</p></div>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-12.html#w-phase" data-xref>第12回 1.1 相と相転移</a></p>
+
+    <h3 id="reservoir">熱源(熱浴)</h3>
+    <p>熱を出し入れしても、温度が(ほとんど)変わらないほど、大きな物体を<b>熱源</b>(熱浴)といいます。海、大気、大量の氷水など。熱源の温度 $T$ は一定とみなします。熱源との熱のやりとりを通じて、小さな系の温度を、$T$ に保つことができます(<b>等温過程</b>)。</p>
+    <p>熱力学の図では、熱源を、温度の書いてある長方形で表し、矢印で熱の流れを描きます。</p>
+    <div class="box ex"><div class="label">例</div>
+      <p>$1\ \mathrm{kg}$ の鉄($c=0.45\ \mathrm{J/(g\cdot K)}$)を、$20\,{}^\circ\mathrm C$ から $100\,{}^\circ\mathrm C$ に温めると、$450\times80=3.6\times10^4\ \mathrm J$ の熱が要る。この熱を、$100\ \mathrm{kg}$ の水(熱容量 $4.2\times10^5\ \mathrm{J/K}$)から取れば、水の温度は、約 $0.09\ \mathrm K$ しか下がらない:水は、この鉄にとって、熱源。</p></div>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-05.html#w-reservoir" data-xref>第5回 1.2 熱源(熱浴)</a><a href="weeks/week-10.html#w-res10" data-xref>第10回 1.1 熱源と等温過程</a></p>
+
+    <h2>2. 仕事・エネルギー・気体の変化</h2>
+
+    <h3 id="work">力学の仕事と、気体の仕事</h3>
+    <p>物体に力 $F$ を加えて、力の向きに距離 $x$ 動かしたとき、力がした<b>仕事</b>は $W=Fx$(J)。力が変わるなら、$W=\int F\,dx$。力と動く向きが逆なら、仕事は負。</p>
+    <p>気体では、断面積 $S$ のピストンが、外圧 $P$ のもとで、$\Delta l$ だけ動くとき、$F=PS$、$\Delta V=S\Delta l$ なので、仕事は $P\,\Delta V$。この授業では、<b>外から気体にされた仕事</b>を $W$ とし、膨張($\Delta V\gt0$)で負:$\dbar W=-P\,dV$。(高校では、気体が外にした仕事を $W'=P\Delta V$ と書くことが多い。$W=-W'$。)</p>
+    <div class="box ex"><div class="label">例</div>
+      <p>圧力 $1.0\times10^5\ \mathrm{Pa}$ で、体積が $2.0\times10^{-3}\ \mathrm{m^3}$ 増えた:気体が外にした仕事 $W'=200\ \mathrm J$、気体にされた仕事 $W=-200\ \mathrm J$。</p></div>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-03.html#w-mechwork" data-xref>第3回 1.1 力学の仕事</a><a href="weeks/week-10.html#w-ext10" data-xref>第10回 1.2 外圧と気体の仕事</a></p>
+
+    <h3 id="firstlaw">内部エネルギーと第1法則(高校)</h3>
+    <p>物体の中の、分子の熱運動のエネルギーや、分子間の力のエネルギーの総和を、<b>内部エネルギー</b> $U$ といいます。理想気体では、$U$ は温度だけで決まる(単原子分子で $U=\tfrac32nRT$)。</p>
+    <p>外から熱 $Q$ をもらい、仕事 $W$ をされると、内部エネルギーは、その分だけ増えます:$\Delta U=Q+W$(<b>熱力学第1法則</b>:エネルギー保存則)。$U$ は、状態だけで決まる量(状態量)で、$Q$、$W$ は、どう変化させたか(経路)で値が変わります。</p>
+    <div class="box ex"><div class="label">例</div>
+      <p>気体が $100\ \mathrm J$ の熱を吸収し、外に $30\ \mathrm J$ の仕事をした($W=-30\ \mathrm J$):$\Delta U=100-30=70\ \mathrm J$。</p></div>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-03.html#w-hsfirst" data-xref>第3回 1.2 熱力学第1法則(高校)</a></p>
+
+    <h3 id="pvdiagram">$P$–$V$ 図</h3>
+    <p>気体の状態を、横軸に体積 $V$、縦軸に圧力 $P$ をとった平面の、1点で表します(温度は、状態方程式から決まる)。状態変化は、この平面上の曲線。<b>等温変化</b>は双曲線 $P=nRT/V$、<b>定圧変化</b>は水平線、<b>定積変化</b>は垂直線、<b>断熱変化</b>は等温線より急な曲線 $PV^\gamma=$ 一定。</p>
+    <p>曲線の下の面積は、$\int P\,dV$ で、仕事の大きさ。右向き(膨張)に進むと、気体が仕事をし、左向き(圧縮)なら、仕事をされる。サイクル(元に戻る閉曲線)の囲む面積が、1周の正味の仕事。</p>
+    <div class="box ex"><div class="label">例</div>
+      <p>$P=2.0\times10^5\ \mathrm{Pa}$ の水平線で、$V=1\to3\times10^{-3}\ \mathrm{m^3}$:面積 $=2.0\times10^5\times2\times10^{-3}=400\ \mathrm J$。</p></div>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-03.html#w-pvd" data-xref>第3回 1.4 $P$–$V$ 図(気体の状態変化のグラフ)</a></p>
+
+    <h3 id="gasproc">気体の変化(定積・定圧・等温・断熱)</h3>
+    <p>理想気体の、4つの代表的な変化:</p>
+    <ul>
+      <li><b>定積変化</b>($V$ 一定):$W=0$、$Q=\Delta U=C_V\Delta T$。</li>
+      <li><b>定圧変化</b>($P$ 一定):$W=-P\Delta V=-nR\Delta T$、$Q=C_P\Delta T$。</li>
+      <li><b>等温変化</b>($T$ 一定):$\Delta U=0$、$PV=$ 一定。準静的なら $W=-nRT\log\dfrac{V_B}{V_A}$、$Q=-W$。</li>
+      <li><b>断熱変化</b>($Q=0$):$W=\Delta U=C_V\Delta T$。準静的なら $PV^\gamma=$ 一定、$TV^{\gamma-1}=$ 一定($\gamma=C_P/C_V$)。マイヤーの関係式 $C_P=C_V+nR$。</li>
+    </ul>
+    <p>理想気体の内部エネルギーは温度だけで決まるので、どんな変化でも $\Delta U=C_V\Delta T$。</p>
+    <div class="box ex"><div class="label">例</div>
+      <p>単原子分子 1 mol を、断熱的に、体積を $1/8$ に圧縮($\gamma=5/3$):$T_2=T_1\times8^{2/3}=4T_1$。温度は4倍になる。</p></div>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-04.html#w-gasproc" data-xref>第4回 1.1 高校の気体の変化と比熱</a><a href="weeks/week-06.html#w-gas6" data-xref>第6回 1.2 理想気体の等温変化・断熱変化</a><a href="weeks/week-08.html#w-gas8" data-xref>第8回 1.2 理想気体の断熱変化</a></p>
+
+    <h3 id="heatengine">熱機関と熱効率</h3>
+    <p><b>熱機関</b>は、高温の熱源から熱 $Q_1$ をもらい、一部を仕事 $W$ に変え、残りの熱 $Q_2$ を低温の熱源に捨てて、1周して元の状態に戻る装置(エンジン、火力発電所など)。1周で $\Delta U=0$ なので、$Q_1=W+Q_2$。<b>熱効率</b> $\eta=\dfrac{W}{Q_1}=1-\dfrac{Q_2}{Q_1}$。</p>
+    <p>熱効率は、決して 1 にならない(熱を全部、仕事にはできない:第2法則)。<b>冷蔵庫・エアコン</b>は、逆に、仕事を使って、低温から高温へ熱を運ぶ装置(熱ポンプ)。</p>
+    <div class="box ex"><div class="label">例</div>
+      <p>$Q_1=1000\ \mathrm J$ をもらい、$Q_2=700\ \mathrm J$ を捨てるエンジン:$W=300\ \mathrm J$、$\eta=0.3$。</p></div>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-05.html#w-engine" data-xref>第5回 1.1 熱機関と熱効率(高校)</a><a href="weeks/week-06.html#w-eta" data-xref>第6回 1.1 熱機関と熱効率</a></p>
+
+    <h3 id="rubber">ゴムの弾性</h3>
+    <p>ゴムひもを伸ばすと、縮もうとする<b>張力</b> $X$ が生じます。ゴムは、金属と違い、高分子の長い鎖が、絡み合ってできていて、伸ばすと、鎖がまっすぐそろって、エントロピー(乱雑さ)が減る。縮もうとする力は、このエントロピーの減少に逆らう効果(エントロピー弾性)が主で、<b>温度が高いほど強く</b>なります。そのため、(張力を一定に保って)ゴムを温めると、縮みます。また、急に伸ばすと、熱が出て温かくなります(唇に当てると分かる)。</p>
+    <p>ゴムひもの長さを $dl$ だけ伸ばすのに、外からする仕事は $\dbar W=X\,dl$。</p>
+    <div class="box ex"><div class="label">例</div>
+      <p>$X=2\ \mathrm N$ の張力に逆らって、$0.1\ \mathrm m$ 伸ばす仕事は、約 $0.2\ \mathrm J$(張力が一定とみなせるとき)。</p></div>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-12.html#w-rubber" data-xref>第12回 1.3 ゴムの性質</a></p>
+
+    <h2>3. 数学の道具</h2>
+
+    <h3 id="deriv">導関数と接線</h3>
+    <p>関数 $f(x)$ の<b>導関数</b>は、$f'(x)=\displaystyle\lim_{\Delta x\to0}\frac{f(x+\Delta x)-f(x)}{\Delta x}$。グラフの、点 $(x,f(x))$ での<b>接線の傾き</b>です。$\Delta x$ が小さいとき、$f(x+\Delta x)-f(x)\approx f'(x)\Delta x$。2階微分 $f''$ は、導関数をもう一度微分したもの(グラフの曲がり具合)。</p>
+    <p>主な公式:$(x^n)'=nx^{n-1}$、$(e^x)'=e^x$、$(\log x)'=1/x$、$(\sin x)'=\cos x$。</p>
+    <div class="box ex"><div class="label">例</div>
+      <p>$f(x)=x^3$:$f'=3x^2$、$f''=6x$。$x=2$ での接線の傾きは 12。</p></div>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-02.html#w-deriv" data-xref>第2回 1.1 導関数と接線</a></p>
+
+    <h3 id="partial">偏微分と全微分</h3>
+    <p>2つの変数の関数 $f(x,y)$ で、「$y$ を止めて、$x$ だけ動かしたときの変化の割合」が<b>偏微分</b> $\left(\dfrac{\partial f}{\partial x}\right)_y$。$y$ を定数とみなして、$x$ で微分する。熱力学では、何を固定するかを、右下の添字で明示します($\left(\frac{\partial P}{\partial V}\right)_T$ と $\left(\frac{\partial P}{\partial V}\right)_S$ は別のもの)。</p>
+    <p>$x$ と $y$ を同時に微小に動かしたときの、$f$ の変化は、<b>全微分</b> $df=\left(\dfrac{\partial f}{\partial x}\right)_ydx+\left(\dfrac{\partial f}{\partial y}\right)_xdy$(それぞれの方向の変化の<b>和</b>)。</p>
+    <p>偏微分どうしの関係:同じものを固定した偏微分は、逆数($\left(\frac{\partial x}{\partial y}\right)_z=1/\left(\frac{\partial y}{\partial x}\right)_z$)。3変数 $x,y,z$ のうち 2 つが独立なとき、<b>循環関係</b> $\left(\frac{\partial x}{\partial y}\right)_z\left(\frac{\partial y}{\partial z}\right)_x\left(\frac{\partial z}{\partial x}\right)_y=-1$。</p>
+    <div class="box ex"><div class="label">例</div>
+      <p>$P=nRT/V$:$\left(\dfrac{\partial P}{\partial T}\right)_V=\dfrac{nR}V$、$\left(\dfrac{\partial P}{\partial V}\right)_T=-\dfrac{nRT}{V^2}$。全微分 $dP=\dfrac{nR}VdT-\dfrac{nRT}{V^2}dV$。</p></div>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-01.html#w-partial1" data-xref>第1回 1.3 偏微分の記号 $\left(\dfrac{\partial f}{\partial x}\right)_y$</a><a href="weeks/week-02.html#w-partial2" data-xref>第2回 1.4 偏微分(復習)</a><a href="weeks/week-04.html#w-partial4" data-xref>第4回 1.3 偏微分(復習)</a><a href="weeks/week-08.html#w-partial8" data-xref>第8回 1.3 偏微分と全微分</a></p>
+
+    <h3 id="taylor">テイラー展開</h3>
+    <p>なめらかな関数は、点 $x_0$ のまわりで、$(x-x_0)$ の多項式に展開できます:
+    $$f(x)=f(x_0)+f'(x_0)(x-x_0)+\frac{f''(x_0)}{2!}(x-x_0)^2+\frac{f'''(x_0)}{3!}(x-x_0)^3+\cdots.$$
+    $x$ が $x_0$ に近いほど、最初の数項だけで、よい近似になる。2変数では、$f(x+\delta x,y+\delta y)=f+f_x\delta x+f_y\delta y+\tfrac12(f_{xx}\delta x^2+2f_{xy}\delta x\delta y+f_{yy}\delta y^2)+\cdots$。</p>
+    <p>よく使う展開($x_0=0$):$e^x=1+x+\frac{x^2}2+\cdots$、$\sin x=x-\frac{x^3}{6}+\cdots$、$\log(1+x)=x-\frac{x^2}{2}+\cdots$、$(1+x)^a=1+ax+\cdots$。</p>
+    <div class="box ex"><div class="label">例</div>
+      <p>$e^{0.1}\approx1+0.1+0.005=1.105$(真の値 $1.10517\cdots$)。</p></div>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-02.html#w-taylor" data-xref>第2回 1.2 テイラー展開</a><a href="weeks/week-11.html#w-taylor11" data-xref>第11回 1.1 2変数のテイラー展開(2次まで)</a></p>
+
+    <h3 id="smallq">微小量と「高次の項」</h3>
+    <p>$\Delta x$ が非常に小さいとき、$(\Delta x)^2,(\Delta x)^3,\dots$ は、$\Delta x$ そのものに比べて、はるかに小さい($\Delta x=0.01$ なら、$(\Delta x)^2=0.0001$)。そこで、「$\Delta x$ に比べて無視できる項」を、$O(\Delta x^2)$ や「$\cdots$」と書き、極限 $\Delta x\to0$ では、<b>1次の項だけ</b>を残します(このときの $\Delta x$ を $dx$ と書く)。</p>
+    <div class="box ex"><div class="label">例</div>
+      <p>$(1+\varepsilon)^2=1+2\varepsilon+\varepsilon^2$。$\varepsilon=0.001$ なら、$\varepsilon^2=10^{-6}$ は、$2\varepsilon=2\times10^{-3}$ の 0.05% しかなく、無視できる。</p></div>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-02.html#w-small" data-xref>第2回 1.3 微小量と「高次の項」</a></p>
+
+    <h3 id="mixed">偏微分の順序交換</h3>
+    <p>$f(x,y)$ の2階偏導関数が連続なら、$\dfrac{\partial}{\partial y}\left(\dfrac{\partial f}{\partial x}\right)=\dfrac{\partial}{\partial x}\left(\dfrac{\partial f}{\partial y}\right)$(微分の順序は、どちらが先でもよい)。熱力学では、これから、<b>Maxwell の関係式</b>が出ます。</p>
+    <div class="box ex"><div class="label">例</div>
+      <p>$f=x^2y^3$:$f_x=2xy^3$、$(f_x)_y=6xy^2$。$f_y=3x^2y^2$、$(f_y)_x=6xy^2$。一致。</p></div>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-09.html#w-mixed" data-xref>第9回 1.1 偏微分の順序交換</a></p>
+
+    <h3 id="logint">対数と $\int dx/x$</h3>
+    <p>自然対数 $\log x$ は、$e^y=x$ の $y$($e=2.718\cdots$)。$\dfrac{d}{dx}\log x=\dfrac1x$ なので、$\displaystyle\int_a^b\frac{dx}{x}=\log\frac ba$($a,b\gt0$)。性質:$\log(AB)=\log A+\log B$、$\log\dfrac AB=\log A-\log B$、$\log1=0$、$\log A^k=k\log A$。値:$\log2\approx0.693$、$\log3\approx1.099$、$\log10\approx2.303$。</p>
+    <p>不等式 $\log x\ge1-\dfrac1x$($x\gt0$、等号は $x=1$)もよく使う。</p>
+    <div class="box ex"><div class="label">例</div>
+      <p>$\displaystyle\int_{300}^{600}\frac{dT}{T}=\log2=0.693$。</p></div>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-03.html#w-logint" data-xref>第3回 1.3 $\displaystyle\int\frac{dV}{V}=\log V$ と対数</a><a href="weeks/week-08.html#w-log8" data-xref>第8回 1.1 対数と、$\int dx/x$</a></p>
+
+    <h3 id="separable">変数分離形の微分方程式</h3>
+    <p>$\dfrac{dy}{dx}=f(x)\,g(y)$ のように、右辺が「$x$ だけの式 × $y$ だけの式」の形のとき、$\dfrac{dy}{g(y)}=f(x)\,dx$ と変形して、両辺を積分します。$\displaystyle\int\frac{dy}{g(y)}=\int f(x)\,dx+C$。</p>
+    <div class="box ex"><div class="label">例</div>
+      <p>$\dfrac{dy}{dx}=-\dfrac{2y}{x}$:$\int\dfrac{dy}{y}=-2\int\dfrac{dx}{x}$、$\log y=-2\log x+C$、$y=C'x^{-2}$。</p></div>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-04.html#w-sepvar" data-xref>第4回 1.2 変数分離形の微分方程式</a></p>
+
+    <h3 id="sigma">総和記号 $\Sigma$</h3>
+    <p>$\displaystyle\sum_{k=1}^{n}a_k=a_1+a_2+\cdots+a_n$。足す順序は自由で、$\sum(a_k+b_k)=\sum a_k+\sum b_k$、$\sum ca_k=c\sum a_k$。細かく分けた和は、積分になる:$\sum_kf(x_k)\Delta x\to\int f\,dx$。</p>
+    <div class="box ex"><div class="label">例</div>
+      <p>$\displaystyle\sum_{k=1}^{3}k^2=1+4+9=14$。</p></div>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-07.html#w-sigma" data-xref>第7回 1.2 総和記号 $\Sigma$</a></p>
+
+    <h3 id="cycleint">サイクル積分と、経路によらない量</h3>
+    <p><b>$\oint$</b> は、出発点に戻る閉じた経路(サイクル)に沿った積分です。ある量の積分が、「始点と終点だけで決まり、途中の経路によらない」ことは、「どんな閉じた経路でも、$\oint=0$」と同じ意味です(行きの経路 K と、別の経路 K′ の帰りを逆にたどって、1周すると、$\int_K-\int_{K'}=0$)。</p>
+    <p>経路によらない量があるとき、基準点 O からの積分で、<b>状態の関数</b>を定義できます(力学では、保存力から位置エネルギー)。熱力学では、断熱仕事から内部エネルギー、可逆過程の換算熱から、エントロピー。</p>
+    <div class="box ex"><div class="label">例</div>
+      <p>重力による仕事:1周して元の高さに戻れば、仕事は 0($\oint F\,dx=0$)。だから、位置エネルギー $mgh$ が定義できる。摩擦力は、1周しても仕事が 0 でない(経路による)ので、位置エネルギーが定義できない。</p></div>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-07.html#w-cint" data-xref>第7回 1.1 サイクル積分と、経路によらない量</a></p>
+
+    <h3 id="legendre">接線の傾きと切片(ルジャンドル変換)</h3>
+    <p>曲線 $u=u(s)$ の、点 $s^*$ での接線は、$u=u(s^*)+u'(s^*)(s-s^*)$。傾きは $u'(s^*)$、$s=0$ での切片は $u(s^*)-u'(s^*)s^*$。傾き $p=u'$ を、「新しい変数」にとり、切片を $p$ の関数 $g(p)=u-ps$ として表し直すことを、<b>ルジャンドル変換</b>といいます。曲線が下に凸なら、傾きと接点が1対1に対応するので、$u(s)$ と $g(p)$ は、同じ情報をもつ(どちらからでも、もう一方が復元できる)。</p>
+    <p>熱力学では、$U(S)$ の傾きが $T$、切片が $F=U-TS$:変数を $S$ から $T$ に取り替えた関数が、Helmholtz の自由エネルギー。</p>
+    <div class="box ex"><div class="label">例</div>
+      <p>$u=s^2$、$s^*=3$:傾き $6$、切片 $=9-6\times3=-9$。$p=2s$、$g(p)=s^2-2s\cdot s=-s^2=-p^2/4$。</p></div>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-09.html#w-legendre" data-xref>第9回 1.2 接線の傾きと切片</a></p>
+
+    <h3 id="extremum">最小値と、極値の条件</h3>
+    <p>関数 $f(x)$ が、点 $x_0$ で<b>極小</b>になる条件は、$f'(x_0)=0$(傾き 0)で、かつ $f''(x_0)\gt0$(下に凸)。テイラー展開 $f(x_0+\delta)=f(x_0)+f'(x_0)\delta+\tfrac12f''(x_0)\delta^2+\cdots$ で、1次の項が 0 でなければ、$\delta$ の符号しだいで、値が減るので、極小にならない。1次の項が 0 で、2次の項が正なら、どちらに動いても、値が増える(極小)。</p>
+    <p>力学では、ボールは、位置エネルギーが減る向きに転がり、谷底(最小)で止まる。熱力学でも、「ある量が減る向きにだけ変化が進み、最小で止まる」という形で、平衡が決まります。</p>
+    <div class="box ex"><div class="label">例</div>
+      <p>$f=x^2-4x$:$f'=2x-4=0$ で $x=2$、$f''=2\gt0$:$x=2$ で極小($f=-4$)。</p></div>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-10.html#w-min10" data-xref>第10回 1.3 最小値と変化の向き</a><a href="weeks/week-11.html#w-extremum11" data-xref>第11回 1.2 最小になる条件</a></p>
+
+    <h3 id="convex">凸関数</h3>
+    <p>$f''(x)\ge0$ をみたす関数は、グラフが「<b>下に凸</b>」(谷の形。接線が、グラフの下にある。2点を結ぶ線分が、グラフの上にある)。$f''\le0$ は「上に凸」(山の形)。$f''\gt0$ なら、極小は、あっても1つ。</p>
+    <p>熱力学では、安定な物質の自由エネルギー $F(T,V)$ は、$V$ について下に凸:$\left(\dfrac{\partial^2F}{\partial V^2}\right)_T=-\left(\dfrac{\partial P}{\partial V}\right)_T\ge0$。</p>
+    <div class="box ex"><div class="label">例</div>
+      <p>$f=x^2$($f''=2\gt0$)は下に凸。$f=\log x$($f''=-1/x^2\lt0$)は上に凸。</p></div>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-11.html#w-convex11" data-xref>第11回 1.3 凸関数</a></p>
+
+    <h3 id="contradiction">背理法</h3>
+    <p>「A である」ことを示すとき、「A でない」と仮定して、そこから矛盾(明らかにおかしいこと、または、すでに正しいと認めた法則に反すること)を導く証明法です。矛盾が出たので、仮定(A でない)が誤りで、A が正しい。</p>
+    <p>熱力学では、「ある過程が可逆だと仮定すると、第2法則(Kelvin、Clausius の原理)に反する。だから、不可逆」という形で使います。</p>
+    <div class="box ex"><div class="label">例</div>
+      <p>「$\sqrt2$ は有理数でない」:有理数 $p/q$(既約分数)と仮定すると、$p^2=2q^2$ から $p,q$ がともに偶数になり、既約に矛盾。</p></div>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-05.html#w-contra" data-xref>第5回 1.3 背理法</a></p>
+
+  </main>
+
+  <footer>© Aセメまとめノート</footer>
+</body>
+</html>

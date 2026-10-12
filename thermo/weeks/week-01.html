@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>第1回 熱力学の基本概念 | Aセメまとめノート</title>
+  <link rel="stylesheet" href="../../assets/style.css">
+  <script defer src="../../assets/nav.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],macros:{'\\R':'\\mathbb{R}','\\bm':'\\boldsymbol{#1}','\\dd':'\\mathrm{d}','\\dbar':'\\mathrm{d}^{\\prime}'}});window.__navReady&&window.__navReady()"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="inner">
+      <a class="site-title" href="../../index.html">Aセメまとめノート</a>
+      <span class="links"><a href="../index.html">熱力学</a><a href="../basics.html">基礎のまとめ</a><a href="../../calc/index.html">微積</a><a href="../../linalg/index.html">線形代数</a><a href="../../em/index.html">電磁気学</a><a href="../../mech/index.html">力学A</a></span>
+    </div>
+  </header>
+
+  <main class="note">
+    <h1>第1回:熱力学の基本概念</h1>
+    <div class="meta">熱力学(東京大学 教養学部 秋学期)／板書 p.1(画像の順に数えています)／ノートの見出し「1. 熱力学の基本概念」(1.1〜1.3)</div>
+
+    <nav class="toc">
+      <div class="toc-title">目次</div>
+      <ol start="0">
+        <li><a href="#s0">この回の全体像</a></li>
+        <li><a href="#s1">準備:基礎の確認</a>
+          <div class="sub">温度とセルシウス温度／理想気体の状態方程式／偏微分の記号／熱量と熱容量</div></li>
+        <li><a href="#s2">1.1 温度と経験温度</a>(p.1)</li>
+        <li><a href="#s3">1.2 熱平衡と第0法則</a>(p.1)</li>
+        <li><a href="#s4">1.3 状態量と状態方程式</a>(p.1)</li>
+        <li><a href="#s5">具体例で練習</a></li>
+        <li><a href="#s6">まとめ(この回で覚えること)</a></li>
+        <li><a href="#s7">この回のノートについてのメモ</a></li>
+      </ol>
+    </nav>
+
+    <!-- ===================== 0 ===================== -->
+    <h2 id="s0">0. この回の全体像 <span class="page-tag">板書 p.1</span></h2>
+    <p>熱力学は、「熱い・冷たい」という日常の感覚を出発点にして、<b>物質の中の原子・分子の細かい動きには立ち入らずに</b>、温度・体積・圧力といった、目で見て測れる量(マクロな量)だけで、熱や仕事のやりとりを調べる学問です。最初の回では、そのための<b>言葉づかい</b>をそろえます。</p>
+    <div class="box thm">
+      <div class="label">この回のゴール</div>
+      <p>① <b>温度</b>とは何か。経験温度(セルシウス温度)と、絶対零度を基準にした<b>熱力学温度</b> $T\,[\mathrm K]=t\,[^\circ\mathrm C]+273.15$。<br>
+      ② <b>熱平衡</b>とは何か。<b>第0法則</b>(AとB、AとCが熱平衡なら、BとCも熱平衡)があるから、温度計が使える。熱を接触させると温度は中間の値に落ち着く ⇒ <b>熱容量は非負</b>。<br>
+      ③ <b>状態量</b>(温度・体積・圧力・内部エネルギー・エントロピー …)と、その2種類(<b>示量性</b>と<b>示強性</b>)。気体なら2つの状態量で状態が決まり、状態量の間の関係式が<b>状態方程式</b>。</p>
+    </div>
+    <p>以下では、先に基礎(高校の内容と、偏微分の記号)を丁寧に復習してから、板書の順に進みます。紫色の枠は「基礎の復習」、黄色の枠は「板書にないが、理解を助けるために私が補った部分」です。</p>
+    <figure class="fig">
+      <svg viewBox="0 0 520 224" width="520" role="img" aria-label="熱接触で、2つの物体の温度は中間のT*になる"><rect x="30" y="40" width="90" height="70" rx="6" style="fill:var(--accent);fill-opacity:.2;stroke:var(--accent);stroke-width:2"/><text class="tj" x="75" y="70" style="text-anchor:middle">物体 1</text><text class="tj" x="75" y="92" style="text-anchor:middle">T₁(低い)</text><rect x="120" y="40" width="90" height="70" rx="6" style="fill:var(--thm);fill-opacity:.25;stroke:var(--thm);stroke-width:2"/><text class="tj" x="165" y="70" style="text-anchor:middle">物体 2</text><text class="tj" x="165" y="92" style="text-anchor:middle">T₂(高い)</text><line x1="150" y1="28" x2="98.4" y2="28" style="stroke:var(--thm);stroke-width:2.2;fill:none"/><polygon points="90,28 99,23.6 99,32.4" style="fill:var(--thm)"/><text class="tm" x="120" y="20" style="text-anchor:middle">熱 ΔQ</text><line x1="235" y1="75" x2="276.6" y2="75" style="stroke:var(--text);stroke-width:2.4;fill:none"/><polygon points="285,75 276,79.4 276,70.6" style="fill:var(--text)"/><text class="tm" x="260" y="62" style="text-anchor:middle">接触</text><rect x="300" y="40" width="90" height="70" rx="6" style="fill:var(--ex);fill-opacity:.25;stroke:var(--ex);stroke-width:2"/><rect x="390" y="40" width="90" height="70" rx="6" style="fill:var(--ex);fill-opacity:.25;stroke:var(--ex);stroke-width:2"/><text class="tj" x="345" y="70" style="text-anchor:middle">物体 1</text><text class="t" x="345" y="92" style="text-anchor:middle">T*</text><text class="tj" x="435" y="70" style="text-anchor:middle">物体 2</text><text class="t" x="435" y="92" style="text-anchor:middle">T*</text><text class="tm" x="390" y="134" style="text-anchor:middle">熱平衡</text><line x1="60" y1="180" x2="482.6" y2="180" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><polygon points="490,180 482,183.4 482,176.6" style="fill:var(--muted)"/><text class="tm" x="492" y="198" style="text-anchor:end">温度</text><circle cx="120" cy="180" r="6" style="fill:var(--accent)"/><text class="t" x="120" y="168" style="text-anchor:middle">T₁</text><circle cx="300" cy="180" r="6" style="fill:var(--ex)"/><text class="t" x="300" y="168" style="text-anchor:middle">T*</text><circle cx="420" cy="180" r="6" style="fill:var(--thm)"/><text class="t" x="420" y="168" style="text-anchor:middle">T₂</text><text class="tt" x="270" y="212" style="text-anchor:middle">T₁ ＜ T* ＜ T₂ (中間の温度になる)</text></svg>
+      <figcaption>温度の異なる2つの物体を接触させると、熱が高温側から低温側へ移り、やがて同じ温度 $T^*$ になる(熱平衡)。$T_1\lt T^*\lt T_2$。</figcaption>
+    </figure>
+
+    <!-- ===================== 1 ===================== -->
+    <h2 id="s1">1. 準備:基礎の確認</h2>
+
+    <h3 id="w-temp">1.1 温度とセルシウス温度</h3>
+    <div class="box basic">
+      <div class="label">基礎:温度とは何か、セルシウス温度と絶対温度 <a class="xref-link" href="../basics.html#temp" data-xref>→ 詳しい解説</a></div>
+      <p>温度は、「物体の熱さ・冷たさ」を数で表したものです。身のまわりでは、<b>セルシウス温度</b> $t\,[^\circ\mathrm C]$ を使います:1気圧のもとで、水が凍る温度を $0\,{}^\circ\mathrm C$、沸騰する温度を $100\,{}^\circ\mathrm C$ と決め、その間を100等分して $1\,{}^\circ\mathrm C$ とします。</p>
+      <p>物理では、これを平行移動した<b>絶対温度(熱力学温度)</b>を使います。$T\,[\mathrm K]=t\,[^\circ\mathrm C]+273.15$。$0\,\mathrm K$ が<b>絶対零度</b>(これより低い温度はない)。単位は K(ケルビン)で、目盛りの幅は $1\,{}^\circ\mathrm C=1\,\mathrm K$。</p>
+      <p>ミクロには、温度は<b>分子の熱運動の激しさ</b>に対応します(気体なら、分子1個の平均の運動エネルギーが、絶対温度に比例)。ただし熱力学は、ミクロな話に立ち入らずに話を進めます。</p>
+    </div>
+
+    <h3 id="w-gas">1.2 理想気体の状態方程式</h3>
+    <div class="box basic">
+      <div class="label">基礎:$PV=nRT$ <a class="xref-link" href="../basics.html#idealgas" data-xref>→ 詳しい解説</a></div>
+      <p>気体の圧力 $P$、体積 $V$、物質量 $n\,[\mathrm{mol}]$、絶対温度 $T$ のあいだには、(薄い気体で、ほぼ成り立つ)関係
+      $$PV=nRT$$
+      があります。$R=8.31\ \mathrm{J/(mol\cdot K)}$ は<b>気体定数</b>。これが<b>理想気体の状態方程式</b>です。圧力 $P$ の単位は Pa(= N/m²)、体積 $V$ は m³。</p>
+      <p>例:$1\ \mathrm{mol}$、$T=300\ \mathrm K$、$V=0.0249\ \mathrm{m^3}$($=24.9\ \mathrm L$)のとき、$P=\dfrac{nRT}V=\dfrac{1\times8.31\times300}{0.0249}\approx1.0\times10^5\ \mathrm{Pa}$(約1気圧)。</p>
+    </div>
+
+    <h3 id="w-partial1">1.3 偏微分の記号 $\left(\dfrac{\partial f}{\partial x}\right)_y$</h3>
+    <div class="box basic">
+      <div class="label">基礎:2つ以上の変数をもつ関数の微分 <a class="xref-link" href="../basics.html#partial" data-xref>→ 詳しい解説</a></div>
+      <p>関数 $f(x,y)$ が2つの変数で決まるとき、「<b>$y$ を止めて</b>、$x$ だけを動かしたときの変化の割合」を<b>偏微分</b>といい、
+      $$\left(\frac{\partial f}{\partial x}\right)_y=\lim_{\Delta x\to0}\frac{f(x+\Delta x,\,y)-f(x,\,y)}{\Delta x}$$
+      と書きます。かっこの<b>右下の添字 $y$</b> は「$y$ を固定する」という意味です。熱力学では、「何を固定して微分しているのか」で値が変わる(たとえば $(\partial P/\partial V)_T$ と $(\partial P/\partial V)_S$ は別のもの)ので、添字を省略しません。</p>
+      <p>例:$f(x,y)=x^2y$ のとき、$\left(\dfrac{\partial f}{\partial x}\right)_y=2xy$($y$ は定数とみなす)、$\left(\dfrac{\partial f}{\partial y}\right)_x=x^2$。</p>
+    </div>
+
+    <h3 id="w-heat">1.4 熱量と熱容量</h3>
+    <div class="box basic">
+      <div class="label">基礎:熱量・熱容量・比熱 <a class="xref-link" href="../basics.html#heatcap" data-xref>→ 詳しい解説</a></div>
+      <p>物体に出入りする熱のエネルギーを<b>熱量</b> $Q$(単位 J)といいます。物体の温度を $\Delta T$ だけ上げるのに必要な熱量が $\Delta Q$ のとき、
+      $$C=\frac{\Delta Q}{\Delta T}\qquad(\text{熱容量},\ \text{単位 J/K})$$
+      を<b>熱容量</b>といいます(「1 K 上げるのに必要な熱量」)。質量 $m$ の物体なら $C=mc$($c$ は<b>比熱</b>、単位 J/(kg·K))。</p>
+      <p>例:水の比熱は約 $4.2\ \mathrm{J/(g\cdot K)}$。$100\ \mathrm g$ の水の熱容量は $420\ \mathrm{J/K}$。この水を $20\,{}^\circ\mathrm C$ から $30\,{}^\circ\mathrm C$ に上げる熱量は $420\times10=4.2\times10^3\ \mathrm J$。</p>
+    </div>
+
+    <!-- ===================== 2 ===================== -->
+    <h2 id="s2">2. 1.1 温度と経験温度 <span class="page-tag">板書 p.1</span></h2>
+    <p>板書:「<b>温度</b>:実生活で人間の感じる熱い・冷たいを定量的に表せる量。物質固有の“温度”と関係する特性。ex) 水銀温度計 → 体積、銅温度計 → 電気伝導度。」</p>
+    <p>温度計は、「温度が上がると性質が変わる物質」を使います。水銀は温度が上がると<b>体積</b>が増えるので、細い管の中の水銀の長さを読む。金属は温度が上がると<b>電気の通りやすさ</b>が変わるので、それを測る。こうして「温度に対応する物質の性質」を目盛りにしたものが、<b>経験温度</b>です。</p>
+    <div class="box def">
+      <div class="label">経験温度:セルシウス温度</div>
+      <p>板書:「セルシウス温度:1気圧で、氷点 $0\,{}^\circ\mathrm C$、沸点 $100\,{}^\circ\mathrm C$。100等分して $1\,{}^\circ\mathrm C$ 単位。」物質(水銀など)の性質を使って決めた目盛りなので、<b>使う物質によって、目盛りの中間の値が少しずつ違う</b>(2点を合わせても、水銀温度計と別の温度計では、中間の温度の読みが食い違う)。</p>
+    </div>
+    <p>そこで、板書の問いが出てきます。</p>
+    <div class="box thm">
+      <div class="label">板書の問いと答え</div>
+      <p><b>Q.</b> 物質固有の性質で決まる温度は、普遍(物質によらない)か? 温度概念は存在するのか?<br>
+      <b>A.</b> <b>熱力学温度</b>。$T\,[\mathrm K]=t\,[^\circ\mathrm C]+273.15$。</p>
+    </div>
+    <p>「熱力学温度」が、物質によらずに決められること(Carnot サイクルを使う)は、第6回で学びます。ここでは、「物質の性質を使った経験温度とは別に、物質によらない温度が決められて、それはセルシウス温度を平行移動したものになる」と知っておけば十分です。</p>
+    <figure class="fig">
+      <svg viewBox="0 0 560 296" width="560" role="img" aria-label="セルシウス温度と熱力学温度"><line x1="150" y1="256" x2="150" y2="30" style="stroke:var(--muted);stroke-width:3"/><line x1="400" y1="256" x2="400" y2="30" style="stroke:var(--muted);stroke-width:3"/><text class="ta" x="150" y="16" style="text-anchor:middle">セルシウス温度 t [°C]</text><text class="tt" x="400" y="16" style="text-anchor:middle">熱力学温度 T [K]</text><line x1="142" y1="250" x2="408" y2="250" style="stroke:var(--muted);stroke-width:1.1;stroke-dasharray:5 4;fill:none"/><circle cx="150" cy="250" r="5" style="fill:var(--accent)"/><circle cx="400" cy="250" r="5" style="fill:var(--thm)"/><text class="tj" x="136" y="254" style="text-anchor:end">−273.15 °C</text><text class="tj" x="414" y="254">0 K</text><text class="tm" x="275" y="244" style="text-anchor:middle">絶対零度</text><line x1="142" y1="108" x2="408" y2="108" style="stroke:var(--muted);stroke-width:1.1;stroke-dasharray:5 4;fill:none"/><circle cx="150" cy="108" r="5" style="fill:var(--accent)"/><circle cx="400" cy="108" r="5" style="fill:var(--thm)"/><text class="tj" x="136" y="112" style="text-anchor:end">0 °C</text><text class="tj" x="414" y="112">273.15 K</text><text class="tm" x="275" y="102" style="text-anchor:middle">水の氷点</text><line x1="142" y1="56" x2="408" y2="56" style="stroke:var(--muted);stroke-width:1.1;stroke-dasharray:5 4;fill:none"/><circle cx="150" cy="56" r="5" style="fill:var(--accent)"/><circle cx="400" cy="56" r="5" style="fill:var(--thm)"/><text class="tj" x="136" y="60" style="text-anchor:end">100 °C</text><text class="tj" x="414" y="60">373.15 K</text><text class="tm" x="275" y="50" style="text-anchor:middle">水の沸点</text><line x1="210" y1="148" x2="210" y2="121.4" style="stroke:var(--ex);stroke-width:2;fill:none"/><polygon points="210,114 213.5,122 206.5,122" style="fill:var(--ex)"/><text class="tm" x="220" y="136">目盛りの幅は同じ(1°C = 1 K)</text><text class="tt" x="275" y="285" style="text-anchor:middle">T [K] = t [°C] + 273.15</text></svg>
+      <figcaption>セルシウス温度と熱力学温度。目盛りの幅は同じで、原点が $273.15$ ずれているだけ。熱力学温度は $T\ge0$。</figcaption>
+    </figure>
+
+    <h3 id="s2b">定圧膨張率 $\beta$</h3>
+    <p>板書:「定圧膨張率 $\beta=\dfrac1V\left(\dfrac{\partial V}{\partial T}\right)_P$。」</p>
+    <p>圧力 $P$ を一定にして温度を $\Delta T$ だけ上げたとき、体積が $\Delta V$ 増えたとすると、$\dfrac{\Delta V}{\Delta T}$ が「温度 1 K あたりの体積の増え方」。これを元の体積 $V$ で割って「<b>体積の何割が増えるか</b>」にしたものが $\beta$ です(単位は 1/K)。<b>圧力が一定</b>という条件を、偏微分の添字 $P$ で表します。</p>
+    <div class="box def">
+      <div class="label">定圧膨張率</div>
+      <p>$$\beta=\frac1V\left(\frac{\partial V}{\partial T}\right)_P$$
+      体積 $V$ を $T$ と $P$ の関数 $V(T,P)$ とみて、$P$ を固定して $T$ で微分する。</p>
+    </div>
+    <p>板書の欄外に、赤字でこう書いてあります:「$\left(\dfrac{\partial f}{\partial x}\right)_y=\lim\dfrac{f(x+\Delta x,y)-f(x,y)}{\Delta x}$。$y$ を固定して、$x$ について微分する(多変数関数の偏微分)。<b>ただし、あくまで物理での慣習</b>。」つまり、数学では $\dfrac{\partial f}{\partial x}$ とだけ書くところを、物理では「何を固定しているか」を添字で明示する、という注意です(基礎の枠 1.3 参照)。</p>
+    <p><b>例(理想気体)</b>:板書:「$PV=nRT$ のとき、$V(T,P)=\dfrac{nRT}P$ ⇒ $\beta=\dfrac1V\left(\dfrac{\partial}{\partial T}\dfrac{nRT}P\right)_P=\dfrac{nR}{VP}=\dfrac1T\ge0$。」</p>
+    <ol class="step-list">
+      <li>$PV=nRT$ を $V$ について解く:$V(T,P)=\dfrac{nRT}{P}$。</li>
+      <li>$P$ を定数とみて $T$ で微分:$\left(\dfrac{\partial V}{\partial T}\right)_P=\dfrac{nR}{P}$。</li>
+      <li>$V$ で割る:$\beta=\dfrac1V\cdot\dfrac{nR}{P}=\dfrac{nR}{PV}$。</li>
+      <li>$PV=nRT$ をもう一度使うと $\dfrac{nR}{PV}=\dfrac{nR}{nRT}=\dfrac1T$。</li>
+    </ol>
+    <p>つまり、理想気体の定圧膨張率は<b>温度の逆数</b>($300\ \mathrm K$ なら $\beta\approx3.3\times10^{-3}\ \mathrm{K^{-1}}$)で、物質の種類にも圧力にもよりません。「$\ge0$」は、熱力学温度が負にならないことから出ます。</p>
+    <figure class="fig">
+      <svg viewBox="0 0 640 216" width="640" role="img" aria-label="定圧膨張率"><line x1="60" y1="190" x2="382.6" y2="190" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><polygon points="390,190 382,193.4 382,186.6" style="fill:var(--muted)"/><line x1="60" y1="190" x2="60" y2="47.4" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><polygon points="60,40 63.4,48 56.6,48" style="fill:var(--muted)"/><text class="t" x="390" y="208" style="text-anchor:end">T</text><text class="t" x="50" y="46" style="text-anchor:end">V</text><line x1="60" y1="190" x2="360" y2="60" style="stroke:var(--accent);stroke-width:2.8"/><circle cx="250" cy="107.7" r="5" style="fill:var(--thm)"/><line x1="250" y1="107.7" x2="320" y2="107.7" style="stroke:var(--muted);stroke-width:1.1;stroke-dasharray:5 4;fill:none"/><line x1="320" y1="107.7" x2="320" y2="77.3" style="stroke:var(--muted);stroke-width:1.1;stroke-dasharray:5 4;fill:none"/><text class="tm" x="285" y="123.7" style="text-anchor:middle">ΔT</text><text class="tm" x="328" y="92.5">ΔV</text><text class="tm" x="68" y="58">圧力 P 一定</text><text class="tm" x="68" y="78">(理想気体)</text><text class="tt" x="410" y="70">β = (1/V)(∂V/∂T)ₚ</text><text class="tj" x="410" y="94">= (傾き) ÷ V</text><text class="tj" x="410" y="130">理想気体では V ∝ T</text><text class="tj" x="410" y="150">なので β = 1/T</text></svg>
+      <figcaption>圧力一定のとき、理想気体の体積は $T$ に比例($V=\frac{nR}{P}T$)。$\beta$ は、グラフの傾き ÷ $V$ で、$=1/T$。</figcaption>
+    </figure>
+
+    <!-- ===================== 3 ===================== -->
+    <h2 id="s3">3. 1.2 熱平衡と第0法則 <span class="page-tag">板書 p.1</span></h2>
+    <p>板書:「“平衡”とは、力学:物体が力がつり合って静止している状態。熱学:“熱”の出入りがつり合っていて、マクロに静止している状態。ex) 食塩水:マクロな観測量(温度、体積…)が時間に依存せず一定。(ミクロには、NaCl が熱運動)。⇒ 熱力学は、熱力学的平衡状態とその間の遷移。」</p>
+    <p>コップの食塩水を、しばらく放置します。温度計の読みも、体積も、濃さも、時間がたっても変わらない。ところが、ミクロに見れば、水分子も Na⁺、Cl⁻ も、休みなく動き回っています。「<b>マクロな量が、時間によらず一定</b>」という状態が、<b>熱平衡状態</b>です。熱力学は、(1) こうした平衡状態そのものと、(2) ある平衡状態から別の平衡状態への移り変わり、だけを扱います。</p>
+    <div class="box def">
+      <div class="label">熱平衡(熱力学的平衡状態)</div>
+      <p>十分に時間がたって、マクロな観測量(温度・体積・圧力・濃さなど)が時間によらず一定になった状態。力学の「力のつり合い」に対して、熱力学では「熱の出入りのつり合い」。</p>
+    </div>
+
+    <h3 id="s3b">第0法則</h3>
+    <p>板書:「<b>第0法則</b>:物体 A と B が熱平衡にあり、A と C も同様のとき、B と C も熱平衡にある。→ 熱平衡の存在、温度計 A の存在。」</p>
+    <div class="box thm">
+      <div class="label">熱力学第0法則</div>
+      <p>物体 A と B が熱平衡で、A と C も熱平衡なら、B と C も熱平衡である。</p>
+    </div>
+    <figure class="fig">
+      <svg viewBox="0 0 580 184" width="580" role="img" aria-label="熱力学第0法則"><line x1="230" y1="57" x2="320" y2="122" style="stroke:var(--ex);stroke-width:2.6"/><text class="tm" x="298" y="84">A と B は熱平衡</text><line x1="170" y1="57" x2="90" y2="122" style="stroke:var(--ex);stroke-width:2.6"/><text class="tm" x="96" y="84" style="text-anchor:end">A と C は熱平衡</text><line x1="106" y1="140" x2="304" y2="140" style="stroke:var(--thm);stroke-width:2.6;stroke-dasharray:6 4"/><text class="tt" x="205" y="130" style="text-anchor:middle">B と C も熱平衡</text><text class="tm" x="205" y="162" style="text-anchor:middle">(第0法則が保証する結論)</text><rect x="125" y="22" width="150" height="36" rx="18" style="fill:var(--accent);fill-opacity:.2;stroke:var(--accent);stroke-width:2"/><text class="tj" x="200" y="45" style="text-anchor:middle">物体 A(温度計)</text><rect x="304" y="122" width="72" height="36" rx="18" style="fill:var(--accent);fill-opacity:.2;stroke:var(--accent);stroke-width:2"/><text class="tj" x="340" y="145" style="text-anchor:middle">物体 B</text><rect x="34" y="122" width="72" height="36" rx="18" style="fill:var(--accent);fill-opacity:.2;stroke:var(--accent);stroke-width:2"/><text class="tj" x="70" y="145" style="text-anchor:middle">物体 C</text><text class="tj" x="420" y="50">温度計 A の目盛りが</text><text class="tj" x="420" y="70">同じなら、B と C を</text><text class="tj" x="420" y="90">つないでも変化しない。</text><text class="tt" x="420" y="120">⇒ 目盛り(温度)が</text><text class="tt" x="420" y="140">意味をもつ</text></svg>
+      <figcaption>第0法則。A を温度計にすれば、B と C を直接つながなくても、「同じ目盛りを示すから熱平衡」と判定できる。</figcaption>
+    </figure>
+    <p>当たり前に見えますが、重要な内容を含んでいます。A を<b>温度計</b>とします。A を B につなぐと、A は B と熱平衡になり、目盛りが一定の値を示す。次に、同じ A を C につないで、同じ目盛りを示したとする。第0法則から、「B と C も熱平衡」と言える。つまり、<b>「同じ目盛りを示す物体は、たがいに熱平衡」</b>という判定ができる。これが、温度という量が意味をもつための土台です。板書の「温度計 A の存在」はこのことです。</p>
+    <div class="box supp">
+      <div class="label">板書にない補足:「同値関係」としての熱平衡</div>
+      <p>数学の言葉では、「熱平衡にある」という関係が、<b>同値関係</b>(① 自分自身と熱平衡、② A と B が熱平衡なら B と A も、③ A と B、B と C が熱平衡なら A と C も)であることを、第0法則(③)が保証している、と言えます。同値関係なら、物体を「熱平衡にあるもの同士」のグループに分けられて、各グループに1つの「温度」という名札をつけられる。これが、経験温度の考え方です。</p>
+    </div>
+
+    <h3 id="s3c">温度の性質と熱容量の非負性</h3>
+    <p>板書:「<b>温度の性質</b>:2つの物体の温度を $T_1$ と $T_2$($T_1\lt T_2$)とする。熱接触させると、$T^*$ になる、$T_1\lt T^*\lt T_2$ → 物体の熱容量は非負である。<b>熱容量</b> $C(T)=\lim_{\Delta T\to0}\dfrac{\Delta Q}{\Delta T}$(ΔQ:熱量、ΔT:単位温度)。」</p>
+    <p>温度の異なる2つの物体を、熱の出入りだけが許される形(熱接触)でつなぐと、熱は高温側から低温側へ移り、最終的に同じ温度 $T^*$ になります。そして、$T^*$ は必ず $T_1$ と $T_2$ の<b>間</b>にある(冷たい方は温まり、熱い方は冷える。どちらかが行き過ぎることはない)。これを、「温度」という量が満たすべき性質として認めます。</p>
+    <p>ここから、熱容量について何が言えるのかを、順に追います。</p>
+    <ol class="step-list">
+      <li>物体1(温度 $T_1$、熱容量 $C_1$)は、熱 $Q$ をもらって $T_1\to T^*$ に温度が上がる。$T^*-T_1\gt0$。</li>
+      <li>物体2(温度 $T_2$、熱容量 $C_2$)は、同じ熱 $Q$ を失って $T_2\to T^*$ に下がる。$T^*-T_2\lt0$。</li>
+      <li>熱容量は「もらった熱 ÷ 上がった温度」:$C_1=\dfrac{Q}{T^*-T_1}$、$C_2=\dfrac{-Q}{T^*-T_2}$。熱が高温から低温へ流れるので $Q\gt0$ で、分母の符号も考えると、$C_1\gt0$、$C_2\gt0$。</li>
+    </ol>
+    <p>もし、ある物体の熱容量が負だったら、熱をもらって温度が下がることになり、「接触した2つの物体が中間の温度で落ち着く」という性質が成り立たなくなる(行き過ぎや発散が起きる)。逆に言えば、<b>「中間の温度に落ち着く」</b>と<b>「熱容量は非負」</b>は、同じことを言っています。(熱容量が非負であることは、第11回で、「熱平衡状態の安定性」の条件 $C_V/T\gt0$ として、きちんと出てきます。)</p>
+    <div class="box supp">
+      <div class="label">板書にない補足:最終温度 $T^*$ の求め方</div>
+      <p>熱の出入りは、2つの物体の間だけで、外へは逃げないとします。物体1がもらった熱 $=C_1(T^*-T_1)$ と、物体2が失った熱 $=C_2(T_2-T^*)$ が等しいので、
+      $$C_1(T^*-T_1)=C_2(T_2-T^*)\ \Longrightarrow\ T^*=\frac{C_1T_1+C_2T_2}{C_1+C_2}.$$
+      熱容量で重みをつけた<b>加重平均</b>です。$C_1,C_2\gt0$ だから、$T^*$ は確かに $T_1$ と $T_2$ の間に入ります(熱容量が負だと、この式が $T_1\!\sim\!T_2$ の外に出うる)。(ここでは、$C$ が温度によらないとした。)</p>
+    </div>
+
+    <!-- ===================== 4 ===================== -->
+    <h2 id="s4">4. 1.3 状態量と状態方程式 <span class="page-tag">板書 p.1</span></h2>
+    <p>板書:「<b>状態量</b>:熱平衡状態で一意に定まる物理量。マクロな系では、温度、体積、圧力。熱平衡状態 A($T,V,P,\dots$)。」</p>
+    <div class="box def">
+      <div class="label">状態量</div>
+      <p>熱平衡状態が決まれば、<b>ただ1通りに値が決まる</b>量。どうやってその状態にたどりついたか(履歴)には、よらない。例:温度 $T$、体積 $V$、圧力 $P$。(後で、内部エネルギー $U$、エントロピー $S$ も、状態量であることを学びます。)</p>
+    </div>
+
+    <h3 id="s4b">状態量の2種類:示量性と示強性</h3>
+    <p>板書:「状態量には2種類。<b>示量性</b>:密度を一定にして、体系を $\alpha$ 倍にしたとき、$\alpha$ 倍になる性質。$\alpha B(T,V,N)=B(T,\alpha V,\alpha N)$。ex) 体積、内部エネルギー、エントロピー。<b>示強性</b>:そうでない性質。$B(T,V,N)=B(T,\alpha V,\alpha N)$。ex) 温度、圧力、…」</p>
+    <p>状態量の値が、「系の大きさ」に比例して増える量(<b>示量性</b>)なのか、大きさによらない量(<b>示強性</b>)なのかで、2つに分かれます。同じ状態の系を2つ合わせて「2倍の系」にしたとき、</p>
+    <ul>
+      <li><b>示量性</b>(量:extensive)は2倍になる:体積 $V$、粒子数 $N$(物質量 $n$)、質量、内部エネルギー $U$、エントロピー $S$、熱容量 $C$ など。</li>
+      <li><b>示強性</b>(強さ:intensive)は変わらない:温度 $T$、圧力 $P$、密度、モル体積(1 mol あたりの体積)など。</li>
+    </ul>
+    <figure class="fig">
+      <svg viewBox="0 0 660 130" width="660" role="img" aria-label="示量性と示強性"><rect x="30" y="30" width="90" height="70" rx="4" style="fill:var(--accent);fill-opacity:.12;stroke:var(--accent);stroke-width:2"/><text class="tj" x="75" y="58" style="text-anchor:middle">V, N, U, S</text><text class="tj" x="75" y="80" style="text-anchor:middle">T, P</text><text class="tm" x="75" y="20" style="text-anchor:middle">系(元)</text><line x1="135" y1="65" x2="181.6" y2="65" style="stroke:var(--text);stroke-width:2.4;fill:none"/><polygon points="190,65 181,69.4 181,60.6" style="fill:var(--text)"/><text class="tm" x="162" y="54" style="text-anchor:middle">2 個を</text><text class="tm" x="162" y="86" style="text-anchor:middle">合わせる</text><rect x="205" y="30" width="90" height="70" rx="4" style="fill:var(--accent);fill-opacity:.12;stroke:var(--accent);stroke-width:2"/><rect x="295" y="30" width="90" height="70" rx="4" style="fill:var(--accent);fill-opacity:.12;stroke:var(--accent);stroke-width:2"/><line x1="295" y1="30" x2="295" y2="100" style="stroke:var(--muted);stroke-width:1;stroke-dasharray:3 3"/><text class="tj" x="250" y="58" style="text-anchor:middle">V, N, U, S</text><text class="tj" x="250" y="80" style="text-anchor:middle">T, P</text><text class="tj" x="340" y="58" style="text-anchor:middle">V, N, U, S</text><text class="tj" x="340" y="80" style="text-anchor:middle">T, P</text><text class="tm" x="295" y="20" style="text-anchor:middle">合わせた系(密度は同じ)</text><text class="tt" x="430" y="52">示量性:2倍になる</text><text class="tj" x="430" y="72">V → 2V, N → 2N, U → 2U, S → 2S</text><text class="ta" x="430" y="98">示強性:変わらない</text><text class="tj" x="430" y="118">T → T, P → P</text></svg>
+      <figcaption>同じ状態の系を2つ合わせる。示量性の量は2倍、示強性の量は同じまま。</figcaption>
+    </figure>
+    <p>板書の式は、系を $\alpha$ 倍にする($V\to\alpha V$、$N\to\alpha N$:<b>密度 $N/V$ は一定</b>)操作を、状態量 $B(T,V,N)$ に対して行う、という意味です。示量性なら $B(T,\alpha V,\alpha N)=\alpha\,B(T,V,N)$(板書の式は左右が入れ替わった形)、示強性なら $B(T,\alpha V,\alpha N)=B(T,V,N)$ です。</p>
+    <div class="box supp">
+      <div class="label">板書にない補足:示量性 × 示量性 / 示量性 は示強性</div>
+      <p>示量性どうしの比は、示強性になります。たとえば、$\dfrac{N}{V}$(粒子数密度)、$\dfrac{V}{N}$(1粒子あたりの体積)、$\dfrac UN$(1粒子あたりのエネルギー)は、系を $\alpha$ 倍にしても変わらない。<b>「単位量あたり」の量は示強性</b>(比熱もこれ)。熱力学の式は、両辺で示量性と示強性の種類がそろっているので、式を検算するときに役立ちます。</p>
+    </div>
+
+    <h3 id="s4c">状態方程式</h3>
+    <p>板書:「状態量は少数で、熱平衡状態は指定できる ⇒ 気体のとき、2つでよい。∴ 状態量は独立でない → 状態量の間の関係式を<b>状態方程式</b>という。ex) 理想気体:$PV=nRT$、ファンデルワールス気体:$\left(P+\dfrac{a}{V^2}\right)(V-b)=nRT$。」</p>
+    <p>気体の熱平衡状態を指定するには、温度・体積・圧力のすべてを言う必要はなく、<b>どれか2つ</b>を決めれば(物質の量 $n$ を決めたうえで)、残りは自動的に決まります。たとえば、$T$ と $V$ を決めれば、$P$ はもう決まっている。つまり、$P$ は $T$ と $V$ の関数 $P(T,V)$。この「状態量の間の拘束」が<b>状態方程式</b>です。</p>
+    <div class="box def">
+      <div class="label">状態方程式</div>
+      <p>熱平衡状態の状態量の間の関係式。気体なら、$P=P(T,V)$ のような形で、3つの量 $T,V,P$ のうち2つを決めれば、残りの1つが決まる。</p>
+    </div>
+    <ul>
+      <li><b>理想気体</b>:$PV=nRT$。分子に大きさがなく、分子どうしに力がはたらかない、と近似した気体。</li>
+      <li><b>ファンデルワールス気体</b>:$\left(P+\dfrac{a}{V^2}\right)(V-b)=nRT$。分子の大きさ($b$:分子が動ける体積が $b$ だけ減る)と、分子間の引力($a$:引力の分だけ、圧力が小さくなるので、$P$ に $a/V^2$ を足してもとに戻す)を、補正した式。$a,b$ は、気体の種類で決まる定数(系の量 $n$ に応じても変わる)。液体との相転移まで表せる(第11回、第12回)。</li>
+    </ul>
+    <p>板書:「<b>状態方程式の作り方</b>:○だれかが思いついたモデル。○実験(実験式)。」</p>
+    <p>状態方程式は、(1) 分子のモデルを考えて理論的に導く(理想気体、ファンデルワールス)か、(2) 実験で、$T,V,P$ の組を測って、データに合う式を作る(実験式)か、のどちらかで得られます。<b>熱力学自身は、状態方程式を与えてくれません</b>。熱力学は、「どんな状態方程式でも成り立つ関係」を導く理論で、具体的な物質の状態方程式は、外から与える。</p>
+    <p>板書の最後:「状態方程式 $P(T,V)$:$T\to T+\Delta T$、$V\to V+\Delta V$ ⇒ $P\to P+\Delta P$、$\Delta P$ は $\Delta T$ と $\Delta V$ で表せる。」</p>
+    <figure class="fig">
+      <svg viewBox="0 0 640 244" width="640" role="img" aria-label="状態方程式 P(T,V)"><line x1="56" y1="220" x2="388.6" y2="220" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><polygon points="396,220 388,223.4 388,216.6" style="fill:var(--muted)"/><line x1="56" y1="220" x2="56" y2="37.4" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><polygon points="56,30 59.4,38 52.6,38" style="fill:var(--muted)"/><text class="t" x="396" y="238" style="text-anchor:end">V</text><text class="t" x="48" y="38" style="text-anchor:end">P</text><polyline points="137,60 140.8,67.1 144.5,73.6 148.3,79.5 152,85 155.8,90.1 159.5,94.8 163.3,99.2 167,103.2 170.8,107.1 174.5,110.6 178.3,114 182,117.1 185.8,120.1 189.5,122.9 193.3,125.6 197,128.1 200.8,130.5 204.5,132.7 208.3,134.9 212,136.9 215.8,138.9 219.5,140.7 223.3,142.5 227,144.2 230.8,145.8 234.5,147.4 238.3,148.9 242,150.3 245.8,151.7 249.5,153 253.3,154.3 257,155.5 260.8,156.7 264.5,157.8 268.3,158.9 272,160 275.8,161 279.5,162 283.3,163 287,163.9 290.8,164.8 294.5,165.7 298.3,166.5 302,167.3 305.8,168.1 309.5,168.9 313.3,169.6 317,170.3 320.8,171 324.5,171.7 328.3,172.4 332,173 335.8,173.7 339.5,174.3 343.3,174.9 347,175.5 350.8,176 354.5,176.6 358.3,177.1 362,177.6" style="fill:none;stroke:var(--accent);stroke-width:2.6"/><polyline points="137,15 140.8,24.1 144.5,32.4 148.3,40 152,47 155.8,53.5 159.5,59.6 163.3,65.2 167,70.4 170.8,75.3 174.5,79.9 178.3,84.2 182,88.2 185.8,92 189.5,95.6 193.3,99 197,102.2 200.8,105.3 204.5,108.2 208.3,110.9 212,113.6 215.8,116.1 219.5,118.4 223.3,120.7 227,122.9 230.8,125 234.5,127 238.3,128.9 242,130.7 245.8,132.5 249.5,134.2 253.3,135.8 257,137.4 260.8,138.9 264.5,140.4 268.3,141.8 272,143.1 275.8,144.4 279.5,145.7 283.3,146.9 287,148.1 290.8,149.3 294.5,150.4 298.3,151.5 302,152.5 305.8,153.5 309.5,154.5 313.3,155.5 317,156.4 320.8,157.3 324.5,158.2 328.3,159 332,159.8 335.8,160.6 339.5,161.4 343.3,162.2 347,162.9 350.8,163.7 354.5,164.4 358.3,165.1 362,165.7" style="fill:none;stroke:var(--thm);stroke-width:2.6"/><circle cx="200" cy="130" r="5.5" style="fill:var(--accent)"/><circle cx="236" cy="127.8" r="5.5" style="fill:var(--thm)"/><text class="tm" x="192" y="148" style="text-anchor:end">(T, V)</text><text class="tm" x="246" y="119.8">(T+ΔT, V+ΔV)</text><line x1="200" y1="130" x2="200" y2="220" style="stroke:var(--muted);stroke-width:1.1;stroke-dasharray:5 4;fill:none"/><line x1="236" y1="127.8" x2="236" y2="220" style="stroke:var(--muted);stroke-width:1.1;stroke-dasharray:5 4;fill:none"/><line x1="56" y1="130" x2="200" y2="130" style="stroke:var(--muted);stroke-width:1.1;stroke-dasharray:5 4;fill:none"/><line x1="56" y1="127.8" x2="236" y2="127.8" style="stroke:var(--muted);stroke-width:1.1;stroke-dasharray:5 4;fill:none"/><text class="tm" x="200" y="236" style="text-anchor:middle">V</text><text class="tm" x="236" y="236" style="text-anchor:middle">V+ΔV</text><text class="tm" x="50" y="142" style="text-anchor:end">P</text><text class="tm" x="50" y="125.8" style="text-anchor:end">P+ΔP</text><text class="ta" x="306" y="196">等温線 T</text><text class="tt" x="174" y="52">等温線 T+ΔT</text><text class="tm" x="306" y="40">どちらも P = nRT/V</text><text class="tj" x="420" y="150">(T, V) を少しずらすと</text><text class="tj" x="420" y="170">P も少しずれる:</text><text class="tt" x="420" y="194">ΔP は ΔT と ΔV で</text><text class="tt" x="420" y="214">表せるはず</text></svg>
+      <figcaption>状態 $(T,V)$ を少しだけずらして $(T+\Delta T,V+\Delta V)$ にしたとき、圧力 $P$ がどれだけずれるか($\Delta P$)。次回(第2回)で、この $\Delta P$ を $\Delta T$ と $\Delta V$ の1次式で表す(全微分)。</figcaption>
+    </figure>
+    <p>次の回では、この「$\Delta P$ を $\Delta T$ と $\Delta V$ で表す」ための数学(テイラー展開と全微分)を、板書(p.2)に沿って学びます。</p>
+
+    <!-- ===================== 5 ===================== -->
+    <h2 id="s5">5. 具体例で練習(板書にない補足) <span class="page-tag">補足</span></h2>
+    <div class="box ex">
+      <div class="label">問題 A:セルシウス温度と熱力学温度</div>
+      <p>(1) 人の体温 $36.5\,{}^\circ\mathrm C$ は何 K か。(2) 液体窒素の沸点 $77\ \mathrm K$ は何 °C か。</p>
+    </div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>(1) $T=36.5+273.15=309.65\ \mathrm K\approx310\ \mathrm K$。(2) $t=77-273.15=-196.15\,{}^\circ\mathrm C\approx-196\,{}^\circ\mathrm C$。</p></div>
+
+    <div class="box ex">
+      <div class="label">問題 B:熱接触の最終温度</div>
+      <p>$20\,{}^\circ\mathrm C$ の水 $100\ \mathrm g$ と、$80\,{}^\circ\mathrm C$ の水 $100\ \mathrm g$ を混ぜる。熱の逃げはないとして、最終温度を求めよ。また、$80\,{}^\circ\mathrm C$ の水が $200\ \mathrm g$ のときはどうか。</p>
+    </div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>熱容量は質量に比例($C=mc$)。$T^*=\dfrac{C_1T_1+C_2T_2}{C_1+C_2}=\dfrac{100\cdot20+100\cdot80}{100+100}=50\,{}^\circ\mathrm C$。$80\,{}^\circ\mathrm C$ の水が $200\ \mathrm g$ のとき:$T^*=\dfrac{100\cdot20+200\cdot80}{300}=60\,{}^\circ\mathrm C$。熱容量の大きい(量の多い)方に、$T^*$ が近づく。いずれも $20\lt T^*\lt80$。</p></div>
+
+    <div class="box ex">
+      <div class="label">問題 C:示量性と示強性の分類</div>
+      <p>次の状態量を、示量性・示強性に分けよ。(a) 質量、(b) 温度、(c) 密度、(d) 内部エネルギー、(e) 圧力、(f) モル体積($1\ \mathrm{mol}$ あたりの体積)、(g) 熱容量、(h) 比熱。</p>
+    </div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>示量性:(a) 質量、(d) 内部エネルギー、(g) 熱容量(系を2倍にすれば、1 K 上げる熱量も2倍)。示強性:(b) 温度、(c) 密度、(e) 圧力、(f) モル体積、(h) 比熱(単位質量あたりの熱容量)。「単位量あたり」の量(密度・モル体積・比熱)は示強性。</p></div>
+
+    <div class="box ex">
+      <div class="label">問題 D:ファンデルワールス気体の圧力</div>
+      <p>$1\ \mathrm{mol}$ のファンデルワールス気体($a=0.14\ \mathrm{Pa\cdot m^6/mol^2}$、$b=3.2\times10^{-5}\ \mathrm{m^3/mol}$、窒素に近い値)が、$T=300\ \mathrm K$、$V=1.0\times10^{-3}\ \mathrm{m^3}$($1\ \mathrm L$)にある。圧力 $P$ を求め、同じ $T,V$ の理想気体の圧力と比べよ。</p>
+    </div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>$P=\dfrac{nRT}{V-b}-\dfrac{a}{V^2}$($n=1$)。$\dfrac{8.31\times300}{1.0\times10^{-3}-3.2\times10^{-5}}=\dfrac{2493}{9.68\times10^{-4}}\approx2.58\times10^6\ \mathrm{Pa}$。$\dfrac{a}{V^2}=\dfrac{0.14}{10^{-6}}=1.4\times10^5\ \mathrm{Pa}$。$P\approx2.58\times10^6-0.14\times10^6\approx2.44\times10^6\ \mathrm{Pa}$(約 24 気圧)。理想気体なら $P=\dfrac{nRT}{V}=2.49\times10^6\ \mathrm{Pa}$。差は約2%:このくらい濃い($1\ \mathrm L$ に $1\ \mathrm{mol}$)気体でも、理想気体はそこそこよい近似。</p></div>
+
+    <!-- ===================== 6 ===================== -->
+    <h2 id="s6">6. まとめ(この回で覚えること)</h2>
+    <ul>
+      <li><b>熱力学温度</b> $T\,[\mathrm K]=t\,[^\circ\mathrm C]+273.15$。$T\ge0$。(物質によらない決め方は第6回。)</li>
+      <li><b>定圧膨張率</b> $\beta=\dfrac1V\left(\dfrac{\partial V}{\partial T}\right)_P$。理想気体では $\beta=\dfrac1T$。偏微分は「<b>何を固定するか</b>」を添字で示す。</li>
+      <li><b>熱平衡</b>:マクロな量が時間によらず一定の状態。熱力学は、平衡状態と、その間の遷移を扱う。</li>
+      <li><b>第0法則</b>:A–B、A–C が熱平衡なら B–C も熱平衡 ⇒ 温度計(温度)が意味をもつ。</li>
+      <li><b>温度の性質</b>:接触させると、温度は中間の値 $T^*$ になる ⇒ <b>熱容量は非負</b>。$T^*=\dfrac{C_1T_1+C_2T_2}{C_1+C_2}$。</li>
+      <li><b>状態量</b>:熱平衡状態で一意に決まる量。<b>示量性</b>(系を $\alpha$ 倍にすると $\alpha$ 倍:$V,U,S$)と<b>示強性</b>(変わらない:$T,P$)。</li>
+      <li><b>状態方程式</b>:状態量の間の関係式。気体なら、2つの状態量を決めれば残りが決まる。$PV=nRT$、$\left(P+\frac a{V^2}\right)(V-b)=nRT$。</li>
+    </ul>
+
+    <!-- ===================== 7 ===================== -->
+    <h2 id="s7">7. この回のノートについてのメモ</h2>
+    <p>板書は、画像(手書きノート)です。ページ番号がないので、画像の順に p.1、p.2、… と数えました(全12枚)。板書の画像は、このサイトには載せていません。黄色の枠、基礎ページの内容、練習問題と解答は、Claude が書き足したもので、板書にはありません。</p>
+    <ol>
+      <li><b>経験温度の記述(p.1)</b>:板書の「銅温度計 → 電気伝導度」は、金属の電気的性質(電気抵抗・電気伝導度)が温度で変わることを使った温度計、と読みました(板書のとおり、「電気伝導度」と書いてあります)。</li>
+      <li><b>$V$ の字(p.1)</b>:板書の体積は、$V$ に横棒のついた手書き(ノートの癖)ですが、体積 $V$ と読みました。状態方程式の例の「$PT=nRT$」と見える行は、$PV=nRT$ と読みました(同じページの上の例で $PV=nRT$ とあるため)。</li>
+      <li><b>ファンデルワールスの式(p.1)</b>:板書の「$\left(P+\dfrac{a}{V^2}\right)(V-b)=nRT$」は、このまま($a,b$ は系の量に応じた定数と考えて)書きました。1 mol あたりの定数 $a',b'$ を使うなら、$a=n^2a'$、$b=nb'$ です。</li>
+      <li><b>「ΔT←単位温度」(p.1)</b>:熱容量の式の下の矢印の書き込みは、「$\Delta Q$ は熱量、$\Delta T$ は温度(の変化)」という注釈と読みました。</li>
+      <li>最後の「状態方程式 $P(T,V)$:$T\to T+\Delta T$、…」の行は、次のページ(p.2、テイラー展開と全微分)への導入です。次回で扱います。</li>
+    </ol>
+
+    <nav class="pager">
+      <span class="disabled">← 前の週</span>
+      <a href="../index.html">一覧へ</a>
+      <a href="week-02.html">次の週 →</a>
+    </nav>
+
+  </main>
+
+  <footer>© Aセメまとめノート</footer>
+</body>
+</html>

@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>第4回 熱容量と理想気体の性質 | Aセメまとめノート</title>
+  <link rel="stylesheet" href="../../assets/style.css">
+  <script defer src="../../assets/nav.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],macros:{'\\R':'\\mathbb{R}','\\bm':'\\boldsymbol{#1}','\\dd':'\\mathrm{d}','\\dbar':'\\mathrm{d}^{\\prime}'}});window.__navReady&&window.__navReady()"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="inner">
+      <a class="site-title" href="../../index.html">Aセメまとめノート</a>
+      <span class="links"><a href="../index.html">熱力学</a><a href="../basics.html">基礎のまとめ</a><a href="../../calc/index.html">微積</a><a href="../../linalg/index.html">線形代数</a><a href="../../em/index.html">電磁気学</a><a href="../../mech/index.html">力学A</a></span>
+    </div>
+  </header>
+
+  <main class="note">
+    <h1>第4回:熱容量と理想気体の性質</h1>
+    <div class="meta">熱力学(東京大学 教養学部 秋学期)／板書 p.3(下半分)〜p.4(画像の順に数えています)／ノートの見出し「2.4 第1法則の応用」「2.4.1 熱容量」「2.4.2 理想気体の性質」</div>
+
+    <nav class="toc">
+      <div class="toc-title">目次</div>
+      <ol start="0">
+        <li><a href="#s0">この回の全体像</a></li>
+        <li><a href="#s1">準備:基礎の確認</a>
+          <div class="sub">高校の気体の変化と比熱／変数分離形の微分方程式／偏微分の復習</div></li>
+        <li><a href="#s2">2.4.1 熱容量 $C_V$ と $C_P$</a>(p.3)</li>
+        <li><a href="#s3">2.4.2 理想気体の性質</a>(p.4)</li>
+        <li><a href="#s4">マイヤーの関係式 $C_P=C_V+nR$</a>(p.4)</li>
+        <li><a href="#s5">断熱曲線 $PV^\gamma=$ 一定</a>(p.4)</li>
+        <li><a href="#s6">理想気体の内部エネルギー</a>(p.4)</li>
+        <li><a href="#s7">断熱曲線の性質:$C_P/C_V$ は「熱」と「力学」をつなぐ</a>(p.4)</li>
+        <li><a href="#s8">具体例で練習</a></li>
+        <li><a href="#s9">まとめ(この回で覚えること)</a></li>
+        <li><a href="#s10">この回のノートについてのメモ</a></li>
+      </ol>
+    </nav>
+
+    <!-- ===================== 0 ===================== -->
+    <h2 id="s0">0. この回の全体像 <span class="page-tag">板書 p.3–4</span></h2>
+    <p>第3回で、第1法則 $dU=\dbar Q+\dbar W$ と、準静的過程での仕事 $\dbar W=-P\,dV$ を学びました。この回では、これを組み合わせて、<b>「熱を加えたとき、温度がどれだけ上がるか」(熱容量)</b>を、状態量の言葉で表します。さらに、いちばん簡単な物質である<b>理想気体</b>の性質を、第1法則だけを使って、徹底的に調べます。</p>
+    <div class="box thm">
+      <div class="label">この回のゴール</div>
+      <p>① $\dbar Q=\left(\dfrac{\partial U}{\partial T}\right)_VdT+\left\{P+\left(\dfrac{\partial U}{\partial V}\right)_T\right\}dV$。熱容量:<b>定積熱容量</b> $C_V=\left(\dfrac{\partial U}{\partial T}\right)_V$、<b>定圧熱容量</b> $C_P=C_V+\left\{P+\left(\dfrac{\partial U}{\partial V}\right)_T\right\}\left(\dfrac{\partial V}{\partial T}\right)_P$。<br>
+      ② <b>理想気体</b>:$PV=nRT$、$C_V$ は温度によらず一定、$\left(\dfrac{\partial U}{\partial V}\right)_T=0$(ジュールの実験)。<br>
+      ③ <b>マイヤーの関係式</b> $C_P=C_V+nR$。<b>断熱曲線</b> $PV^\gamma=$ 一定($\gamma=C_P/C_V$)。<br>
+      ④ 一般の物質で、$\dfrac{C_P}{C_V}=\dfrac{(\partial P/\partial V)_{\rm 断熱}}{(\partial P/\partial V)_T}$(熱の量の比 = 力学の量の比)。</p>
+    </div>
+    <figure class="fig">
+      <svg viewBox="0 0 500 264" width="500" role="img" aria-label="定積と定圧の熱容量"><line x1="50" y1="52" x2="50" y2="152" style="stroke:var(--text);stroke-width:3"/><line x1="180" y1="52" x2="180" y2="152" style="stroke:var(--text);stroke-width:3"/><line x1="50" y1="152" x2="180" y2="152" style="stroke:var(--text);stroke-width:3"/><rect x="48" y="38" width="134" height="14" rx="0" style="fill:var(--muted);fill-opacity:.55;stroke:none"/><text class="tm" x="115" y="32" style="text-anchor:middle">ふた(固定)</text><circle cx="104.8" cy="133.1" r="2.4" style="fill:var(--muted)"/><circle cx="117.8" cy="127.1" r="2.4" style="fill:var(--muted)"/><circle cx="120.8" cy="92.4" r="2.4" style="fill:var(--muted)"/><circle cx="60.3" cy="74.4" r="2.4" style="fill:var(--muted)"/><circle cx="170.1" cy="97.7" r="2.4" style="fill:var(--muted)"/><circle cx="71.4" cy="122" r="2.4" style="fill:var(--muted)"/><circle cx="116.1" cy="130.4" r="2.4" style="fill:var(--muted)"/><circle cx="69.3" cy="112.1" r="2.4" style="fill:var(--muted)"/><circle cx="147.6" cy="97.6" r="2.4" style="fill:var(--muted)"/><circle cx="82.2" cy="88" r="2.4" style="fill:var(--muted)"/><circle cx="81.4" cy="116.8" r="2.4" style="fill:var(--muted)"/><circle cx="159.4" cy="125.8" r="2.4" style="fill:var(--muted)"/><circle cx="110.5" cy="133.7" r="2.4" style="fill:var(--muted)"/><circle cx="130.5" cy="138.5" r="2.4" style="fill:var(--muted)"/><circle cx="144.8" cy="73.2" r="2.4" style="fill:var(--muted)"/><circle cx="125.2" cy="134.2" r="2.4" style="fill:var(--muted)"/><circle cx="140.6" cy="124" r="2.4" style="fill:var(--muted)"/><circle cx="141.8" cy="126.5" r="2.4" style="fill:var(--muted)"/><polygon points="105,174 111,160 115,168 119,156 125,174" style="fill:var(--thm);fill-opacity:.85;stroke:none"/><line x1="115" y1="182" x2="115" y2="164.4" style="stroke:var(--thm);stroke-width:2.6;fill:none"/><polygon points="115,156 119,165 111,165" style="fill:var(--thm)"/><text class="tt" x="115" y="204" style="text-anchor:middle">定積:V 一定</text><text class="tj" x="115" y="224" style="text-anchor:middle">熱は全部 U を上げる</text><text class="tj" x="115" y="244" style="text-anchor:middle">dQ = C_V dT</text><line x1="330" y1="38" x2="330" y2="152" style="stroke:var(--text);stroke-width:3"/><line x1="460" y1="38" x2="460" y2="152" style="stroke:var(--text);stroke-width:3"/><line x1="330" y1="152" x2="460" y2="152" style="stroke:var(--text);stroke-width:3"/><rect x="332" y="56" width="126" height="7" rx="0" style="fill:var(--accent);fill-opacity:.6;stroke:none"/><rect x="377" y="32" width="36" height="22" rx="0" style="fill:var(--muted);fill-opacity:.55;stroke:none"/><text class="tm" x="395" y="26" style="text-anchor:middle">おもり(P 一定)</text><line x1="395" y1="114" x2="395" y2="87.4" style="stroke:var(--ex);stroke-width:2.4;fill:none;stroke-dasharray:3 3"/><polygon points="395,80 398.6,88 391.4,88" style="fill:var(--ex)"/><text class="tm" x="403" y="88">膨張</text><circle cx="412.1" cy="135.5" r="2.4" style="fill:var(--muted)"/><circle cx="371.9" cy="81.1" r="2.4" style="fill:var(--muted)"/><circle cx="364" cy="125.6" r="2.4" style="fill:var(--muted)"/><circle cx="360.2" cy="96.3" r="2.4" style="fill:var(--muted)"/><circle cx="429.5" cy="97" r="2.4" style="fill:var(--muted)"/><circle cx="408.5" cy="131.3" r="2.4" style="fill:var(--muted)"/><circle cx="446.6" cy="109.3" r="2.4" style="fill:var(--muted)"/><circle cx="372" cy="104.8" r="2.4" style="fill:var(--muted)"/><circle cx="388.7" cy="113.7" r="2.4" style="fill:var(--muted)"/><circle cx="367.3" cy="129.2" r="2.4" style="fill:var(--muted)"/><circle cx="351.4" cy="127.1" r="2.4" style="fill:var(--muted)"/><circle cx="342.4" cy="95.5" r="2.4" style="fill:var(--muted)"/><circle cx="388.2" cy="110.8" r="2.4" style="fill:var(--muted)"/><circle cx="405.8" cy="118.5" r="2.4" style="fill:var(--muted)"/><circle cx="421.8" cy="99.2" r="2.4" style="fill:var(--muted)"/><circle cx="433.5" cy="76.6" r="2.4" style="fill:var(--muted)"/><circle cx="345.1" cy="101.7" r="2.4" style="fill:var(--muted)"/><circle cx="436.8" cy="79.7" r="2.4" style="fill:var(--muted)"/><polygon points="385,174 391,160 395,168 399,156 405,174" style="fill:var(--thm);fill-opacity:.85;stroke:none"/><line x1="395" y1="182" x2="395" y2="164.4" style="stroke:var(--thm);stroke-width:2.6;fill:none"/><polygon points="395,156 399,165 391,165" style="fill:var(--thm)"/><text class="tt" x="395" y="204" style="text-anchor:middle">定圧:P 一定</text><text class="tj" x="395" y="224" style="text-anchor:middle">熱の一部は膨張の仕事に</text><text class="tj" x="395" y="244" style="text-anchor:middle">dQ = dU + P dV</text><text class="tj" x="250" y="112" style="text-anchor:middle">同じ熱で比べると、</text><text class="tj" x="250" y="132" style="text-anchor:middle">右(定圧)は温度が</text><text class="tj" x="250" y="152" style="text-anchor:middle">あまり上がらない</text><text class="tt" x="250" y="176" style="text-anchor:middle">⇒ C_P &gt; C_V</text></svg>
+      <figcaption>同じ熱を加えても、体積を一定にする(定積)と、全部が内部エネルギーになる。圧力を一定にする(定圧)と、一部が膨張の仕事に使われるので、温度が上がりにくい。熱容量は、定圧の方が大きい($C_P\gt C_V$)。</figcaption>
+    </figure>
+
+    <!-- ===================== 1 ===================== -->
+    <h2 id="s1">1. 準備:基礎の確認</h2>
+
+    <h3 id="w-gasproc">1.1 高校の気体の変化と比熱</h3>
+    <div class="box basic">
+      <div class="label">基礎:定積変化・定圧変化・等温変化・断熱変化 <a class="xref-link" href="../basics.html#gasproc" data-xref>→ 詳しい解説</a></div>
+      <p>気体の状態変化には、何を一定にするかで、4つの代表的な型があります。<b>定積変化</b>($V$ 一定:仕事 $W=0$)、<b>定圧変化</b>($P$ 一定:$W=-P\Delta V$)、<b>等温変化</b>($T$ 一定)、<b>断熱変化</b>(熱の出入りなし:$Q=0$)。</p>
+      <p>1 mol の気体の温度を 1 K 上げるのに必要な熱を、<b>モル比熱</b>といいます。体積を一定にして測ったものを<b>定積モル比熱</b> $C_V$、圧力を一定にして測ったものを<b>定圧モル比熱</b> $C_P$。単原子分子の理想気体では $C_V=\tfrac32R$、$C_P=\tfrac52R$($R=8.31\ \mathrm{J/(mol\cdot K)}$)。(この授業では、$n$ mol 分の熱容量を $C_V$、$C_P$ と書きます。)</p>
+    </div>
+
+    <h3 id="w-sepvar">1.2 変数分離形の微分方程式</h3>
+    <div class="box basic">
+      <div class="label">基礎:$\dfrac{dy}{dx}=f(x)\,g(y)$ の解き方 <a class="xref-link" href="../basics.html#separable" data-xref>→ 詳しい解説</a></div>
+      <p>微分方程式 $\dfrac{dy}{dx}=\dfrac{a\,y}{x}$ のように、右辺が「$x$ だけの式 × $y$ だけの式」の形のとき、$y$ の項を左辺に、$x$ の項を右辺に集めて、両辺を積分します:$\displaystyle\int\frac{dy}{y}=a\int\frac{dx}{x}$ より $\log y=a\log x+C$(積分定数)。つまり $y=C'x^a$。</p>
+      <p>例:$\dfrac{dy}{dx}=-\dfrac{2y}{x}$ なら、$\log y=-2\log x+C$、$y=C'x^{-2}$($C'=e^{C}$)。</p>
+    </div>
+
+    <h3 id="w-partial4">1.3 偏微分(復習)</h3>
+    <div class="box basic">
+      <div class="label">基礎:$(\partial U/\partial T)_V$ と全微分 <a class="xref-link" href="../basics.html#partial" data-xref>→ 詳しい解説</a></div>
+      <p>$U(T,V)$ のように、2変数の関数の微小変化は、全微分(第2回)
+      $$dU=\left(\frac{\partial U}{\partial T}\right)_VdT+\left(\frac{\partial U}{\partial V}\right)_TdV$$
+      で表されます。$\left(\dfrac{\partial U}{\partial T}\right)_V$ は「$V$ を一定にして、$T$ を変えたときの $U$ の変化の割合」。この回では、この全微分を、第1法則と組み合わせます。</p>
+    </div>
+
+    <!-- ===================== 2 ===================== -->
+    <h2 id="s2">2. 2.4.1 熱容量 $C_V$ と $C_P$ <span class="page-tag">板書 p.3</span></h2>
+    <p>板書:「<b>2.4 第1法則の応用</b>/<b>2.4.1 熱容量</b>。第1法則:$dU=dW+d'Q=-P\,dV+d'Q$、$d'Q=dU+P\,dV$。」</p>
+    <p>第1法則 $dU=\dbar Q+\dbar W$ に、準静的過程の仕事 $\dbar W=-P\,dV$ を代入して、$\dbar Q$ について解くと、
+    $$\dbar Q=dU+P\,dV.$$
+    「系に加えた熱 = 内部エネルギーの増加 + 系が膨張して外にした仕事」。エネルギーの収支そのものです。</p>
+    <h3 id="s2a">$U(T,V)$ として考える</h3>
+    <p>板書:「○ 内部エネルギーを $U(T,V)$ として考える。$(T,V)\to(T+dT,V+dV)$ ⇒ $U\to U+dU$。$dU=\left(\dfrac{\partial U}{\partial T}\right)_VdT+\left(\dfrac{\partial U}{\partial V}\right)_TdV$。→ $\dbar Q=\left(\dfrac{\partial U}{\partial T}\right)_VdT+\left\{P+\left(\dfrac{\partial U}{\partial V}\right)_T\right\}dV$。」</p>
+    <p>内部エネルギーは状態量なので、$T$ と $V$ の関数 $U(T,V)$ と見なせます。その全微分(第2回)を $\dbar Q=dU+P\,dV$ に代入して、$dV$ の項をまとめると、板書の式になります。</p>
+    <div class="box thm">
+      <div class="label">熱の出入りの式</div>
+      <p>$$\dbar Q=\left(\frac{\partial U}{\partial T}\right)_VdT+\left\{P+\left(\frac{\partial U}{\partial V}\right)_T\right\}dV.$$
+      第1項:温度が $dT$ 上がるために必要な熱。第2項:体積が $dV$ 増えるために必要な熱($P\,dV$:外にする仕事の分 + $\left(\frac{\partial U}{\partial V}\right)_TdV$:体積が変わると、分子間の距離が変わるので、内部エネルギーが変わる分)。</p>
+    </div>
+
+    <h3 id="s2b">熱容量の定義</h3>
+    <p>板書:「○ <b>熱容量</b> $C_x$:$x$ 一定の条件で、単位温度あげるための熱量。$C_x=\displaystyle\lim_{\Delta T\to0}\frac{\Delta Q}{\Delta T}\Big|_{x=\text{一定}}$。① <b>定積熱容量</b> $C_V=\dfrac{dQ}{dT}\Big|_V=\left(\dfrac{dU}{dT}\right)_V$。② <b>定圧熱容量</b> $C_P=\dfrac{dQ}{dT}\Big|_P=\left(\dfrac{\partial U}{\partial T}\right)_V+\left\{P+\left(\dfrac{\partial U}{\partial V}\right)_T\right\}\left(\dfrac{\partial V}{\partial T}\right)_P$。」</p>
+    <p>熱容量(第1回)は、「温度を 1 K 上げるのに必要な熱」です。ところが、熱 $\dbar Q$ は、経路(どう温めるか)で値が変わるので、「何を一定にして温めるか」を指定しなければ、熱容量は決まりません。それが、$C_x$ の添字 $x$ です。</p>
+    <ol class="step-list">
+      <li><b>定積熱容量</b> $C_V$($V$ 一定):$dV=0$ なので、熱の式の第2項が消えて、$\dbar Q=\left(\dfrac{\partial U}{\partial T}\right)_VdT$。よって
+      $$C_V=\frac{\dbar Q}{dT}\Big|_V=\left(\frac{\partial U}{\partial T}\right)_V.$$
+      体積一定で温めるとき、熱は全部、内部エネルギーを上げるのに使われる。</li>
+      <li><b>定圧熱容量</b> $C_P$($P$ 一定):温度が $dT$ 上がると、体積も $dV=\left(\dfrac{\partial V}{\partial T}\right)_PdT$ だけ膨張する。これを熱の式の第2項に代入して $dT$ で割ると、
+      $$C_P=\left(\frac{\partial U}{\partial T}\right)_V+\left\{P+\left(\frac{\partial U}{\partial V}\right)_T\right\}\left(\frac{\partial V}{\partial T}\right)_P=C_V+\left\{P+\left(\frac{\partial U}{\partial V}\right)_T\right\}\left(\frac{\partial V}{\partial T}\right)_P.$$
+      $C_V$ の上に、「膨張のための余分な熱」がのっている(板書で、第1項に「$C_V$」と注記)。</li>
+    </ol>
+    <p>板書の最後:「$\Rightarrow C_P-C_V=\left\{P+\left(\dfrac{\partial U}{\partial V}\right)_T\right\}\left(\dfrac{\partial V}{\partial T}\right)_P=\cdots=-T\left(\dfrac{\partial P}{\partial V}\right)_T\left(\dfrac{\partial V}{\partial T}\right)_P^2$。」</p>
+    <div class="box supp">
+      <div class="label">板書にない補足:「$\cdots$」の途中の計算(第9回の結果を先取り)</div>
+      <p>$\left(\dfrac{\partial U}{\partial V}\right)_T$ は、状態方程式からも決まる量で、第9回に学ぶ<b>エネルギー方程式</b> $\left(\dfrac{\partial U}{\partial V}\right)_T=T\left(\dfrac{\partial P}{\partial T}\right)_V-P$ を使うと、
+      $$P+\left(\frac{\partial U}{\partial V}\right)_T=T\left(\frac{\partial P}{\partial T}\right)_V.$$
+      よって $C_P-C_V=T\left(\dfrac{\partial P}{\partial T}\right)_V\left(\dfrac{\partial V}{\partial T}\right)_P$。次に、第2回の循環関係 $\left(\dfrac{\partial P}{\partial T}\right)_V=-\left(\dfrac{\partial P}{\partial V}\right)_T\left(\dfrac{\partial V}{\partial T}\right)_P$ を使うと、
+      $$C_P-C_V=-T\left(\frac{\partial P}{\partial V}\right)_T\left(\frac{\partial V}{\partial T}\right)_P^{2}.$$
+      安定な物質では、$\left(\dfrac{\partial P}{\partial V}\right)_T\lt0$(第11回)なので、右辺は<b>正</b>:$C_P\gt C_V$。冒頭の図の、「定圧では、仕事の分、余分に熱が要る」ことと、合っています。</p>
+    </div>
+
+    <!-- ===================== 3 ===================== -->
+    <h2 id="s3">3. 2.4.2 理想気体の性質 <span class="page-tag">板書 p.4</span></h2>
+    <p>板書:「<b>2.4.2 理想気体の性質</b>。① 状態方程式 $PV=nRT$。② 熱容量 $C_V$ は温度によらず一定。③ 内部エネルギーの体積依存性はない $\left(\dfrac{\partial U}{\partial V}\right)_T=0$。」</p>
+    <p>理想気体を、この3つの性質をもつ物質として<b>定義</b>します。(分子に大きさがなく、分子間に力がはたらかない、という微視的なモデルを、熱力学の言葉に言い換えたもの。)</p>
+    <h3 id="s3b">③ の根拠:ジュールの実験</h3>
+    <p>板書:「③ ← 真空への断熱膨張で、温度が変わらない。(図:$T$、真空 → 仕切りをとる)。$dU=\left(\dfrac{\partial U}{\partial T}\right)_VdT+\left(\dfrac{\partial U}{\partial V}\right)_TdV=dQ+dW$。($dT$、$dQ$、$dW$ のそれぞれに '0'。)」</p>
+    <figure class="fig">
+      <svg viewBox="0 0 620 222" width="620" role="img" aria-label="ジュールの実験"><line x1="30" y1="30" x2="270" y2="30" style="stroke:var(--text);stroke-width:3;stroke-dasharray:1 0"/><line x1="30" y1="130" x2="270" y2="130" style="stroke:var(--text);stroke-width:3"/><line x1="30" y1="30" x2="30" y2="130" style="stroke:var(--text);stroke-width:3"/><line x1="270" y1="30" x2="270" y2="130" style="stroke:var(--text);stroke-width:3"/><line x1="150" y1="30" x2="150" y2="130" style="stroke:var(--thm);stroke-width:3;stroke-dasharray:4 3"/><circle cx="89" cy="85.3" r="2.4" style="fill:var(--muted)"/><circle cx="48.5" cy="57.5" r="2.4" style="fill:var(--muted)"/><circle cx="83.9" cy="80.6" r="2.4" style="fill:var(--muted)"/><circle cx="44.5" cy="113.3" r="2.4" style="fill:var(--muted)"/><circle cx="99.7" cy="72.2" r="2.4" style="fill:var(--muted)"/><circle cx="66.7" cy="104.8" r="2.4" style="fill:var(--muted)"/><circle cx="107" cy="42.7" r="2.4" style="fill:var(--muted)"/><circle cx="89.8" cy="56.7" r="2.4" style="fill:var(--muted)"/><circle cx="108.6" cy="49.9" r="2.4" style="fill:var(--muted)"/><circle cx="96.5" cy="78.9" r="2.4" style="fill:var(--muted)"/><circle cx="55" cy="40.4" r="2.4" style="fill:var(--muted)"/><circle cx="137.4" cy="121.3" r="2.4" style="fill:var(--muted)"/><circle cx="49" cy="75.1" r="2.4" style="fill:var(--muted)"/><circle cx="139.2" cy="52.6" r="2.4" style="fill:var(--muted)"/><circle cx="81.3" cy="84.4" r="2.4" style="fill:var(--muted)"/><circle cx="108.6" cy="60.7" r="2.4" style="fill:var(--muted)"/><circle cx="54.4" cy="122.7" r="2.4" style="fill:var(--muted)"/><circle cx="84.1" cy="56.5" r="2.4" style="fill:var(--muted)"/><circle cx="95.1" cy="65.1" r="2.4" style="fill:var(--muted)"/><circle cx="52.6" cy="104" r="2.4" style="fill:var(--muted)"/><text class="t" x="90" y="80"></text><text class="tj" x="210" y="84" style="text-anchor:middle">真空</text><text class="tm" x="150" y="22" style="text-anchor:middle">仕切り(取り去る)</text><text class="t" x="90" y="152" style="text-anchor:middle">T, V</text><text class="tm" x="210" y="152" style="text-anchor:middle">真空</text><line x1="285" y1="80" x2="325.6" y2="80" style="stroke:var(--text);stroke-width:2.6;fill:none"/><polygon points="335,80 325,84.6 325,75.4" style="fill:var(--text)"/><text class="tm" x="310" y="68" style="text-anchor:middle">断熱</text><line x1="350" y1="30" x2="590" y2="30" style="stroke:var(--text);stroke-width:3;stroke-dasharray:1 0"/><line x1="350" y1="130" x2="590" y2="130" style="stroke:var(--text);stroke-width:3"/><line x1="350" y1="30" x2="350" y2="130" style="stroke:var(--text);stroke-width:3"/><line x1="590" y1="30" x2="590" y2="130" style="stroke:var(--text);stroke-width:3"/><circle cx="522.4" cy="86.7" r="2.4" style="fill:var(--muted)"/><circle cx="558.6" cy="83" r="2.4" style="fill:var(--muted)"/><circle cx="383.5" cy="114" r="2.4" style="fill:var(--muted)"/><circle cx="413.7" cy="40.6" r="2.4" style="fill:var(--muted)"/><circle cx="449.2" cy="62.6" r="2.4" style="fill:var(--muted)"/><circle cx="535.2" cy="112.9" r="2.4" style="fill:var(--muted)"/><circle cx="378.9" cy="101.1" r="2.4" style="fill:var(--muted)"/><circle cx="515.1" cy="41.5" r="2.4" style="fill:var(--muted)"/><circle cx="431.5" cy="62.1" r="2.4" style="fill:var(--muted)"/><circle cx="494" cy="121.8" r="2.4" style="fill:var(--muted)"/><circle cx="376.1" cy="48.8" r="2.4" style="fill:var(--muted)"/><circle cx="376.3" cy="79" r="2.4" style="fill:var(--muted)"/><circle cx="379" cy="43.9" r="2.4" style="fill:var(--muted)"/><circle cx="564.4" cy="114" r="2.4" style="fill:var(--muted)"/><circle cx="445.6" cy="104.8" r="2.4" style="fill:var(--muted)"/><circle cx="565.8" cy="72.7" r="2.4" style="fill:var(--muted)"/><circle cx="471.9" cy="90.4" r="2.4" style="fill:var(--muted)"/><circle cx="487.5" cy="80.9" r="2.4" style="fill:var(--muted)"/><circle cx="446.6" cy="61.5" r="2.4" style="fill:var(--muted)"/><circle cx="402.6" cy="95.3" r="2.4" style="fill:var(--muted)"/><text class="t" x="470" y="152" style="text-anchor:middle">T′ = T ?</text><text class="tj" x="310" y="184" style="text-anchor:middle">外と熱をやりとりしない(dQ=0)、真空へ広がるので仕事もしない(dW=0)⇒ dU = 0</text><text class="tt" x="310" y="206" style="text-anchor:middle">温度が変わらなければ、(∂U/∂V)ₜ = 0:U は体積によらない</text></svg>
+      <figcaption>ジュールの実験:断熱容器の中で、気体を、真空の部分へ膨張させる。温度の変化を測る。</figcaption>
+    </figure>
+    <ol class="step-list">
+      <li>断熱容器の半分に気体、もう半分は真空。仕切りを取り去ると、気体は、全体に広がる(<b>自由膨張</b>)。</li>
+      <li>断熱なので、$dQ=0$。真空へ広がるだけで、押しのけるものがないので、外にする仕事 $dW=0$。第1法則から $dU=dQ+dW=0$。</li>
+      <li>実験で、(理想気体に近い、薄い気体では)膨張の前後で、温度が変わらない:$dT=0$。</li>
+      <li>$dU=\left(\dfrac{\partial U}{\partial T}\right)_V\underbrace{dT}_{0}+\left(\dfrac{\partial U}{\partial V}\right)_TdV=0$ で、$dV\ne0$ なので、$\left(\dfrac{\partial U}{\partial V}\right)_T=0$。</li>
+    </ol>
+    <p>内部エネルギーは、体積に依存しない(温度だけで決まる)、というのが ③ です。分子間に力がなければ、分子間の距離を変えても(体積を変えても)、エネルギーは変わらないので、納得できます。(実在の気体では、分子間力があるので、わずかに温度が下がる。)</p>
+
+    <!-- ===================== 4 ===================== -->
+    <h2 id="s4">4. マイヤーの関係式 <span class="page-tag">板書 p.4</span></h2>
+    <p>板書:「● <b>Mayer の関係式</b>:$C_P=C_V+P\left(\dfrac{\partial V}{\partial T}\right)_P=C_V+P\cdot\dfrac{nR}{P}=C_V+nR$。」</p>
+    <p>前節で出した $C_P=C_V+\left\{P+\left(\frac{\partial U}{\partial V}\right)_T\right\}\left(\frac{\partial V}{\partial T}\right)_P$ に、理想気体の性質 ③($\left(\frac{\partial U}{\partial V}\right)_T=0$)を代入すると、$C_P=C_V+P\left(\dfrac{\partial V}{\partial T}\right)_P$。理想気体では、$V=\dfrac{nRT}{P}$ なので、$\left(\dfrac{\partial V}{\partial T}\right)_P=\dfrac{nR}{P}$。よって、</p>
+    <div class="box thm">
+      <div class="label">マイヤーの関係式(理想気体)</div>
+      <p>$$C_P-C_V=nR.$$
+      $n=1$ mol あたりなら、$C_P-C_V=R$。</p>
+    </div>
+    <p>定圧で温めると、定積に比べて、1 K あたり $nR$ だけ余分に熱が要る。この $nR\,\Delta T=P\Delta V$ は、定圧膨張で外にする仕事そのものです(理想気体で、$P\Delta V=nR\Delta T$ だから)。比 $\gamma=C_P/C_V$ を<b>比熱比</b>といい、$C_P\gt C_V$ なので $\gamma\gt1$。単原子分子では $\gamma=\dfrac{5/2}{3/2}=\dfrac53$、2原子分子(空気など)では $\gamma=\dfrac75=1.4$。</p>
+
+    <!-- ===================== 5 ===================== -->
+    <h2 id="s5">5. 断熱曲線 $PV^\gamma=$ 一定 <span class="page-tag">板書 p.4</span></h2>
+    <p>板書:「● <b>断熱曲線</b>($P$–$V$ 図:断熱曲線 $PV^\gamma=$ 一定、等温曲線 $P=\dfrac{nRT}{V}$)。$dQ=C_VdT+P\,dV\Rightarrow\dfrac{dV}{dT}=-\dfrac{C_V}{P}=-\dfrac{C_VV}{nRT}$。」</p>
+    <p>準静的な断熱変化($\dbar Q=0$)で、気体の状態が、$P$–$V$ 図の中で、どんな曲線を描くかを求めます。<b>断熱曲線</b>です。理想気体では、$\dbar Q=C_V\,dT+P\,dV$(理想気体の第1法則)が使えて、これを 0 とおけば、$C_VdT=-P\,dV$。</p>
+    <h3 id="s5a">一般の物質の場合</h3>
+    <p>板書(上の「断熱曲線」の詳しい式):「$dQ=dU+P\,dV=\left(\dfrac{\partial U}{\partial T}\right)_VdT+\left\{P+\left(\dfrac{\partial U}{\partial V}\right)_T\right\}dV=0\ (dQ=0)$。$\Rightarrow\left(\dfrac{\partial U}{\partial T}\right)_V+\left\{P+\left(\dfrac{\partial U}{\partial V}\right)_T\right\}\left(\dfrac{\partial V}{\partial T}\right)_{\rm ad}=0$。$\Rightarrow\dfrac{dV}{dT}\Big|_{\rm 断熱}=\dfrac{-\left(\partial U/\partial T\right)_V}{\left(\partial U/\partial V\right)_T+P}=f(T,V)$。1階微分方程式 → $V(T)$ 断熱曲線。」</p>
+    <p>熱の式(第2節)を 0 とおいて、$dT$ で割ると、断熱変化にそって、$V$ が $T$ とともにどう変わるかが決まります:
+    $$\frac{dV}{dT}\Big|_{\rm 断熱}=-\frac{(\partial U/\partial T)_V}{(\partial U/\partial V)_T+P}=f(T,V).$$
+    これは、$V(T)$ についての、1階の微分方程式です。解けば、断熱曲線 $V(T)$ が得られる。</p>
+    <h3 id="s5b">理想気体の場合:$V^{\gamma-1}T=$ 一定、$PV^\gamma=$ 一定</h3>
+    <p>板書:「○ 理想気体のとき:$\dfrac{dV}{dT}=\dfrac{-C_V}{RT/V}$($\because\left(\dfrac{\partial U}{\partial T}\right)_V=C_V$、$\left(\dfrac{\partial U}{\partial V}\right)_T=0$、$P=\dfrac{RT}{V}$)$=-\dfrac{C_V}{R}\dfrac VT$ ⇒(変数分離型)$\dfrac1V\dfrac{dV}{dT}=-\dfrac{C_V}{R}\dfrac1T$。$\displaystyle\int\frac1V\frac{dV}{dT}dT=-\frac{C_V}{R}\int\frac1TdT$ ⇒ $\log V=-\dfrac{C_V}{R}\log T+$ 積分定数。∴ $\dfrac{R}{C_V}\log V+\log T=$ 定数。$C_P-C_V=R$ より、$\gamma=\dfrac{C_P}{C_V}\gt1$。定数 $=\log V^{\frac{C_P-C_V}{C_V}}T$。∴ $V^{\gamma-1}T=$ 定数 → $PV^\gamma=$ 定数。」</p>
+    <p>(板書の、この部分は、$n=1$ mol として、$nR$ を $R$ と書いています。本文では、$nR$ のままで書きます。)</p>
+    <ol class="step-list">
+      <li>理想気体では、$\left(\dfrac{\partial U}{\partial T}\right)_V=C_V$、$\left(\dfrac{\partial U}{\partial V}\right)_T=0$、$P=\dfrac{nRT}{V}$。これらを、一般の式に代入:$\dfrac{dV}{dT}=-\dfrac{C_V}{P}=-\dfrac{C_V}{nR}\cdot\dfrac VT$。</li>
+      <li><b>変数分離</b>(基礎の枠 1.2):$V$ の項を左辺に、$T$ の項を右辺に集める。$\dfrac1V\,dV=-\dfrac{C_V}{nR}\cdot\dfrac1T\,dT$。</li>
+      <li>両辺を積分して、$\log V=-\dfrac{C_V}{nR}\log T+(\text{定数})$。つまり、$\dfrac{nR}{C_V}\log V+\log T=$ 定数。</li>
+      <li>マイヤーの関係式 $nR=C_P-C_V$ から、$\dfrac{nR}{C_V}=\dfrac{C_P-C_V}{C_V}=\gamma-1$。よって、$(\gamma-1)\log V+\log T=\log\left(V^{\gamma-1}T\right)=$ 定数。</li>
+      <li>したがって、$T\,V^{\gamma-1}=$ 定数。$T=\dfrac{PV}{nR}$ を代入すると、$P\,V\cdot V^{\gamma-1}=PV^\gamma=$ 定数。</li>
+    </ol>
+    <div class="box thm">
+      <div class="label">断熱変化(準静的、理想気体)</div>
+      <p>$$PV^\gamma=\text{一定},\qquad TV^{\gamma-1}=\text{一定}\qquad\Bigl(\gamma=\frac{C_P}{C_V}\gt1\Bigr).$$
+      断熱圧縮すると($V$ が減ると)、$T$ が上がる。断熱膨張すると、$T$ が下がる。</p>
+    </div>
+    <figure class="fig">
+      <svg viewBox="0 0 660 262" width="660" role="img" aria-label="断熱曲線と等温線"><line x1="56" y1="232" x2="408.6" y2="232" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><polygon points="416,232 408,235.4 408,228.6" style="fill:var(--muted)"/><line x1="56" y1="232" x2="56" y2="34.4" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><polygon points="56,27 59.4,35 52.6,35" style="fill:var(--muted)"/><text class="t" x="416" y="250" style="text-anchor:end">V</text><text class="t" x="48" y="35" style="text-anchor:end">P</text><polyline points="136,12.6 139.4,21.6 142.9,29.9 146.3,37.6 149.7,44.7 153.1,51.3 156.6,57.5 160,63.3 163.4,68.6 166.9,73.7 170.3,78.4 173.7,82.9 177.1,87.1 180.6,91.1 184,94.9 187.4,98.5 190.9,101.9 194.3,105.1 197.7,108.2 201.1,111.1 204.6,113.9 208,116.5 211.4,119.1 214.9,121.5 218.3,123.9 221.7,126.1 225.1,128.2 228.6,130.3 232,132.3 235.4,134.2 238.9,136 242.3,137.8 245.7,139.5 249.1,141.1 252.6,142.7 256,144.3 259.4,145.7 262.9,147.2 266.3,148.5 269.7,149.9 273.1,151.2 276.6,152.4 280,153.7 283.4,154.8 286.9,156 290.3,157.1 293.7,158.2 297.1,159.2 300.6,160.2 304,161.2 307.4,162.2 310.9,163.1 314.3,164.1 317.7,164.9 321.1,165.8 324.6,166.7 328,167.5 331.4,168.3 334.9,169.1 338.3,169.8 341.7,170.6 345.1,171.3 348.6,172 352,172.7 355.4,173.4 358.9,174.1 362.3,174.7 365.7,175.3 369.1,176 372.6,176.6 376,177.2" style="fill:none;stroke:var(--accent);stroke-width:2.8"/><polyline points="136,-50.1 139.4,-34 142.9,-19.4 146.3,-6.1 149.7,6 153.1,17 156.6,27.2 160,36.6 163.4,45.3 166.9,53.3 170.3,60.8 173.7,67.7 177.1,74.2 180.6,80.3 184,85.9 187.4,91.2 190.9,96.2 194.3,100.9 197.7,105.3 201.1,109.5 204.6,113.4 208,117.1 211.4,120.7 214.9,124 218.3,127.2 221.7,130.2 225.1,133.1 228.6,135.8 232,138.5 235.4,141 238.9,143.3 242.3,145.6 245.7,147.8 249.1,149.9 252.6,151.9 256,153.8 259.4,155.6 262.9,157.4 266.3,159.1 269.7,160.7 273.1,162.3 276.6,163.8 280,165.3 283.4,166.7 286.9,168 290.3,169.3 293.7,170.6 297.1,171.8 300.6,173 304,174.1 307.4,175.2 310.9,176.3 314.3,177.3 317.7,178.3 321.1,179.3 324.6,180.2 328,181.1 331.4,182 334.9,182.9 338.3,183.7 341.7,184.5 345.1,185.3 348.6,186.1 352,186.8 355.4,187.5 358.9,188.2 362.3,188.9 365.7,189.6 369.1,190.2 372.6,190.9 376,191.5" style="fill:none;stroke:var(--thm);stroke-width:2.8"/><circle cx="206" cy="115" r="6" style="fill:var(--text)"/><text class="t" x="198" y="105" style="text-anchor:end">A</text><text class="ta" x="256" y="132.3">等温線 PV = 一定</text><text class="tt" x="161" y="33.2" style="text-anchor:start">断熱曲線 PV^γ = 一定</text><text class="tj" x="430" y="80">同じ点 A での傾き:</text><text class="ta" x="430" y="108">等温:  dP/dV = −P/V</text><text class="tt" x="430" y="132">断熱:  dP/dV = −γP/V</text><text class="tj" x="430" y="164">γ = C_P/C_V ＞ 1</text><text class="tj" x="430" y="186">なので、断熱曲線の方が</text><text class="tj" x="430" y="206">より急な右下がり</text></svg>
+      <figcaption>同じ状態 A を通る、等温線($PV=$ 一定)と、断熱曲線($PV^\gamma=$ 一定)。$\gamma\gt1$ なので、断熱曲線の方が、傾きが急。</figcaption>
+    </figure>
+    <p>傾きを比べると:等温線 $P=\dfrac{c}{V}$ の傾きは $-\dfrac PV$、断熱曲線 $P=\dfrac{c'}{V^\gamma}$ の傾きは $-\gamma\dfrac PV$(絶対値が $\gamma$ 倍)。膨張すると、等温では、温度が保たれるので圧力があまり下がらない。断熱では、膨張とともに温度も下がるので、圧力がより大きく下がる。</p>
+
+    <!-- ===================== 6 ===================== -->
+    <h2 id="s6">6. 理想気体の内部エネルギー $U(T,V)$ <span class="page-tag">板書 p.4</span></h2>
+    <p>板書:「○ 内部エネルギー $U(T_1,V_1)$。$dU=C_VdT+\left(\dfrac{\partial U}{\partial V}\right)_TdV$($=0$)。($T$–$V$ 図:点 0$(T_0,V_0)$、A$(T_1,V_0)$、1$(T_1,V_1)$。)$U(T_1,V_1)-U(T_0,V_0)=\int_{0\to A}dU+\int_{A\to1}dU$($=0$、$\because dT=0$)$=\int_{T_0}^{T_1}C_VdT=C_V(T_1-T_0)$。」</p>
+    <p>理想気体の内部エネルギーが、温度だけで決まり、$U=U_0+C_V(T-T_0)$ となることを確かめます。状態量なので、始状態から終状態への行き方は、どれでもよい。$T$–$V$ 図の、2段の経路(0 → A → 1)をとります。</p>
+    <figure class="fig">
+      <svg viewBox="0 0 660 244" width="660" role="img" aria-label="内部エネルギーの変化の計算"><line x1="70" y1="220" x2="362.6" y2="220" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><polygon points="370,220 362,223.4 362,216.6" style="fill:var(--muted)"/><line x1="70" y1="220" x2="70" y2="37.4" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><polygon points="70,30 73.4,38 66.6,38" style="fill:var(--muted)"/><text class="t" x="370" y="238" style="text-anchor:end">T</text><text class="t" x="62" y="38" style="text-anchor:end">V</text><line x1="140" y1="180" x2="280" y2="80" style="stroke:var(--muted);stroke-width:1.6;stroke-dasharray:5 4"/><line x1="140" y1="180" x2="267.6" y2="180" style="stroke:var(--thm);stroke-width:3;fill:none"/><polygon points="278,180 267,185 267,175" style="fill:var(--thm)"/><line x1="280" y1="180" x2="280" y2="92.4" style="stroke:var(--ex);stroke-width:3;fill:none"/><polygon points="280,82 285,93 275,93" style="fill:var(--ex)"/><circle cx="140" cy="180" r="5.5" style="fill:var(--text)"/><circle cx="280" cy="180" r="5.5" style="fill:var(--text)"/><circle cx="280" cy="80" r="5.5" style="fill:var(--text)"/><text class="tm" x="134" y="198" style="text-anchor:start">0:(T₀, V₀)</text><text class="tm" x="286" y="198">A:(T₁, V₀)</text><text class="tm" x="288" y="84">1:(T₁, V₁)</text><text class="tt" x="210" y="170" style="text-anchor:middle">① V 一定</text><text class="tj" x="272" y="134" style="text-anchor:end;fill:var(--ex);font-weight:600">② T 一定</text><text class="tt" x="410" y="70">① dV = 0:dU = C_V dT</text><text class="tj" x="410" y="94">   → ΔU = C_V(T₁ − T₀)</text><text class="tj" x="410" y="130" style="fill:var(--ex);font-weight:600">② dT = 0:dU = (∂U/∂V)ₜ dV = 0</text><text class="tm" x="410" y="154">   (理想気体)</text><text class="tj" x="410" y="190">合計:U(T₁, V₁) − U(T₀, V₀)</text><text class="tt" x="410" y="212">= C_V (T₁ − T₀)</text></svg>
+      <figcaption>$U$ は状態量なので、0 から 1 への、どの経路で計算してもよい。体積一定で $T_0\to T_1$(①)、次に、温度一定で $V_0\to V_1$(②)。</figcaption>
+    </figure>
+    <ul>
+      <li>① 0 → A($V=V_0$ 一定、$dV=0$):$dU=C_V\,dT$。$\displaystyle\int_{0\to A}dU=\int_{T_0}^{T_1}C_V\,dT=C_V(T_1-T_0)$($C_V$ は一定)。</li>
+      <li>② A → 1($T=T_1$ 一定、$dT=0$):$dU=C_VdT+\left(\frac{\partial U}{\partial V}\right)_TdV=0+0=0$。</li>
+    </ul>
+    <p>合計 $U(T_1,V_1)-U(T_0,V_0)=C_V(T_1-T_0)$。<b>体積の変化は、内部エネルギーに効かない</b>。どんな変化(定圧・断熱など)でも、$\Delta U=C_V\Delta T$ が成り立つ。「$\Delta U=C_V\Delta T$」は、理想気体では、$V$ が一定でなくても使える、という点が重要です。</p>
+
+    <!-- ===================== 7 ===================== -->
+    <h2 id="s7">7. 断熱曲線の性質:$C_P/C_V$ は「熱」と「力学」をつなぐ <span class="page-tag">板書 p.4</span></h2>
+    <p>板書:「● <b>断熱曲線の性質</b>。$dQ'=dU+P\,dV=\left(\dfrac{\partial U}{\partial T}\right)_VdT+\left\{P+\left(\dfrac{\partial U}{\partial V}\right)_T\right\}dV\ (=0)=C_V\left\{\left(\dfrac{\partial T}{\partial P}\right)_VdP+\left(\dfrac{\partial T}{\partial V}\right)_PdV\right\}+\left\{\left(\dfrac{\partial U}{\partial V}\right)_T+P\right\}dV$。両辺を $dV$ でわって、$C_V\left(\dfrac{\partial T}{\partial P}\right)_V\left(\dfrac{\partial P}{\partial V}\right)_{\rm ad}=-\left\{C_V\left(\dfrac{\partial T}{\partial V}\right)_P+\left(\dfrac{\partial U}{\partial V}\right)_T+P\right\}$。$C_P=C_V+\left\{P+\left(\dfrac{\partial U}{\partial V}\right)_T\right\}\left(\dfrac{\partial V}{\partial T}\right)_P$ より、$C_V\left(\dfrac{\partial T}{\partial P}\right)_V\left(\dfrac{\partial P}{\partial V}\right)_{\rm ad}=-\left\{C_V\left(\dfrac{\partial T}{\partial V}\right)_P+(C_P-C_V)\left(\dfrac{\partial T}{\partial V}\right)_P\right\}=-C_P\left(\dfrac{\partial T}{\partial V}\right)_P$。$C_V\left(\dfrac{\partial P}{\partial V}\right)_{\rm ad}=-C_P\left(\dfrac{\partial T}{\partial V}\right)_P\left(\dfrac{\partial P}{\partial T}\right)_V=C_P\left(\dfrac{\partial P}{\partial V}\right)_T$($\because$ 循環関係)。∴ $\dfrac{C_P}{C_V}=\dfrac{(\partial P/\partial V)_{\rm ad}}{(\partial P/\partial V)_T}$。(熱 ← / → 力学)」</p>
+    <p>最後に、理想気体に限らない、<b>どんな物質でも成り立つ</b>関係を導きます。断熱変化($\dbar Q=0$)にそって、$P$ が $V$ とともにどう変わるか($\left(\dfrac{\partial P}{\partial V}\right)_{\rm ad}$:断熱曲線の傾き)を、熱容量の比で表します。</p>
+    <ol class="step-list">
+      <li>断熱($\dbar Q=0$)の条件:$C_V\,dT+\left\{P+\left(\dfrac{\partial U}{\partial V}\right)_T\right\}dV=0$。</li>
+      <li>温度を $(P,V)$ の関数 $T(P,V)$ とみて、全微分:$dT=\left(\dfrac{\partial T}{\partial P}\right)_VdP+\left(\dfrac{\partial T}{\partial V}\right)_PdV$。これを代入して、$dV$ で割る(断熱変化にそって):
+      $$C_V\left(\frac{\partial T}{\partial P}\right)_V\left(\frac{\partial P}{\partial V}\right)_{\rm ad}=-\left\{C_V\left(\frac{\partial T}{\partial V}\right)_P+\left(\frac{\partial U}{\partial V}\right)_T+P\right\}.$$</li>
+      <li>$C_P$ の式(第2節)から、$\left\{P+\left(\dfrac{\partial U}{\partial V}\right)_T\right\}=(C_P-C_V)\left(\dfrac{\partial T}{\partial V}\right)_P$($\left(\frac{\partial V}{\partial T}\right)_P$ の逆数をかけた)。これを右辺に代入すると、$C_V$ の項が打ち消しあって、
+      $$C_V\left(\frac{\partial T}{\partial P}\right)_V\left(\frac{\partial P}{\partial V}\right)_{\rm ad}=-C_P\left(\frac{\partial T}{\partial V}\right)_P.$$</li>
+      <li>両辺に $\left(\dfrac{\partial P}{\partial T}\right)_V$ をかける($\left(\frac{\partial T}{\partial P}\right)_V\left(\frac{\partial P}{\partial T}\right)_V=1$)。右辺には、循環関係(第2回)$\left(\dfrac{\partial T}{\partial V}\right)_P\left(\dfrac{\partial P}{\partial T}\right)_V=-\left(\dfrac{\partial P}{\partial V}\right)_T$ を使う:
+      $$C_V\left(\frac{\partial P}{\partial V}\right)_{\rm ad}=C_P\left(\frac{\partial P}{\partial V}\right)_T.$$</li>
+    </ol>
+    <div class="box thm">
+      <div class="label">熱容量の比と、断熱・等温の傾きの比(一般の物質で成立)</div>
+      <p>$$\frac{C_P}{C_V}=\frac{(\partial P/\partial V)_{\rm 断熱}}{(\partial P/\partial V)_T}.$$
+      左辺は「熱」の量(熱容量の比)、右辺は「力学」の量(断熱的な圧縮のしにくさと、等温的な圧縮のしにくさの比)。</p>
+    </div>
+    <p>理想気体で確かめる:$\left(\dfrac{\partial P}{\partial V}\right)_T=-\dfrac PV$、$\left(\dfrac{\partial P}{\partial V}\right)_{\rm ad}=-\gamma\dfrac PV$(前節の傾き)。比は $\gamma=\dfrac{C_P}{C_V}$ で、確かに一致します。</p>
+    <div class="box supp">
+      <div class="label">板書にない補足:この関係式の使い道 ― 音速から $\gamma$ を測る</div>
+      <p>音は、空気の圧縮・膨張が伝わる波で、振動が速いので、熱が逃げる暇がない、<b>断熱的</b>な変化です。音速 $c$ は、$c^2=\left(\dfrac{\partial P}{\partial\rho}\right)_{\rm ad}$($\rho$ は密度)。理想気体で、$PV^\gamma=$ 一定から、$c^2=\dfrac{\gamma P}{\rho}=\dfrac{\gamma RT}{M}$($M$ はモル質量)。つまり、<b>音速を測れば、$\gamma=C_P/C_V$ が分かる</b>。(問題 D。)</p>
+    </div>
+
+    <!-- ===================== 8 ===================== -->
+    <h2 id="s8">8. 具体例で練習(板書にない補足) <span class="page-tag">補足</span></h2>
+    <div class="box ex">
+      <div class="label">問題 A:$C_V$ と $C_P$ で温めるときの熱</div>
+      <p>単原子分子の理想気体 $1\ \mathrm{mol}$($C_V=\frac32R$)の温度を、$300\ \mathrm K$ から $310\ \mathrm K$ に上げる。(i) 体積一定、(ii) 圧力一定、のそれぞれで、必要な熱 $Q$、内部エネルギーの変化 $\Delta U$、外から気体にされた仕事 $W$ を求めよ。</p>
+    </div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>$C_V=\frac32\times8.31=12.5\ \mathrm{J/K}$、$C_P=C_V+R=20.8\ \mathrm{J/K}$。どちらも、理想気体なので、$\Delta U=C_V\Delta T=124.7\ \mathrm J$。(i) 定積:$W=0$、$Q=\Delta U=124.7\ \mathrm J$。(ii) 定圧:$Q=C_P\Delta T=207.8\ \mathrm J$。$W=-P\Delta V=-nR\Delta T=-83.1\ \mathrm J$。確認:$\Delta U=Q+W=207.8-83.1=124.7\ \mathrm J$ ✓。定圧では、同じ温度上昇でも、$83.1\ \mathrm J$ 多く熱が要る(膨張の仕事の分)。</p></div>
+
+    <div class="box ex">
+      <div class="label">問題 B:断熱圧縮での温度上昇(ディーゼルエンジン)</div>
+      <p>空気($\gamma=1.4$)を、$300\ \mathrm K$、体積 $V_1$ から、準静的に断熱圧縮して、体積を $V_1/10$ にした。最終温度 $T_2$ は何 K か。また、最終圧力は、初めの何倍か。</p>
+    </div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>$TV^{\gamma-1}=$ 一定より、$T_2=T_1\left(\dfrac{V_1}{V_2}\right)^{\gamma-1}=300\times10^{0.4}=300\times2.51\approx7.5\times10^2\ \mathrm K$($\approx480\,{}^\circ\mathrm C$)。$PV^\gamma=$ 一定より、$\dfrac{P_2}{P_1}=\left(\dfrac{V_1}{V_2}\right)^\gamma=10^{1.4}\approx25$ 倍。(ディーゼルエンジンは、この高温で燃料を自然発火させる。)</p></div>
+
+    <div class="box ex">
+      <div class="label">問題 C:断熱曲線と等温線の傾き</div>
+      <p>$1\ \mathrm{mol}$ の理想気体($\gamma=1.4$)が $P=1.0\times10^5\ \mathrm{Pa}$、$V=2.49\times10^{-2}\ \mathrm{m^3}$ にある。この点での、等温線と断熱曲線の傾き $dP/dV$ を求めよ。</p>
+    </div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>等温:$-\dfrac PV=-\dfrac{1.0\times10^5}{2.49\times10^{-2}}=-4.0\times10^6\ \mathrm{Pa/m^3}$。断熱:$-\gamma\dfrac PV=-1.4\times4.0\times10^6=-5.6\times10^6\ \mathrm{Pa/m^3}$。断熱の方が、1.4倍急。</p></div>
+
+    <div class="box ex">
+      <div class="label">問題 D:音速から $\gamma$ を求める</div>
+      <p>$20\,{}^\circ\mathrm C$($T=293\ \mathrm K$)の空気中の音速は $343\ \mathrm{m/s}$。空気のモル質量を $M=0.0290\ \mathrm{kg/mol}$ として、$\gamma$ を求めよ。</p>
+    </div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>$c^2=\dfrac{\gamma RT}{M}$ より $\gamma=\dfrac{Mc^2}{RT}=\dfrac{0.0290\times343^2}{8.31\times293}=\dfrac{3412}{2435}\approx1.40$。空気(おもに2原子分子)の $\gamma=7/5=1.4$ と、よく合う。</p></div>
+
+    <!-- ===================== 9 ===================== -->
+    <h2 id="s9">9. まとめ(この回で覚えること)</h2>
+    <ul>
+      <li>$\dbar Q=dU+P\,dV=\left(\dfrac{\partial U}{\partial T}\right)_VdT+\left\{P+\left(\dfrac{\partial U}{\partial V}\right)_T\right\}dV$。</li>
+      <li><b>熱容量</b>:$C_x=\dbar Q/dT\,|_{x}$。$C_V=\left(\dfrac{\partial U}{\partial T}\right)_V$、$C_P=C_V+\left\{P+\left(\dfrac{\partial U}{\partial V}\right)_T\right\}\left(\dfrac{\partial V}{\partial T}\right)_P$。$C_P-C_V=-T\left(\dfrac{\partial P}{\partial V}\right)_T\left(\dfrac{\partial V}{\partial T}\right)_P^2\gt0$。</li>
+      <li><b>理想気体</b>:① $PV=nRT$、② $C_V=$ 一定、③ $\left(\dfrac{\partial U}{\partial V}\right)_T=0$(ジュールの実験:真空への断熱膨張で $T$ は不変)。</li>
+      <li><b>マイヤー</b>:$C_P=C_V+nR$。$\gamma=C_P/C_V\gt1$(単原子 $5/3$、2原子 $7/5$)。</li>
+      <li><b>断熱曲線</b>:$PV^\gamma=$ 一定、$TV^{\gamma-1}=$ 一定。等温線より急。$\Delta U=C_V\Delta T$(理想気体では、どの変化でも)。</li>
+      <li>一般の物質:$\dfrac{C_P}{C_V}=\dfrac{(\partial P/\partial V)_{\rm ad}}{(\partial P/\partial V)_T}$。</li>
+    </ul>
+
+    <!-- ===================== 10 ===================== -->
+    <h2 id="s10">10. この回のノートについてのメモ</h2>
+    <p>板書は手書きの画像です。画像の順に、p.3、p.4 としました。板書の画像は、このサイトには載せていません。黄色の枠、基礎ページの内容、練習問題と解答は、Claude が書き足したもので、板書にはありません。</p>
+    <ol>
+      <li><b>$n$ の扱い(p.4)</b>:板書の、断熱曲線を導く部分は、$n=1$ mol として、$nR$ を $R$ と書いています($\dfrac{dV}{dT}=-\dfrac{C_V}{RT/V}$ など)。同じページの、直前の行には、$nR$ があるので、本文は $nR$ で統一し、$C_V$、$C_P$ は、$n$ mol 分の熱容量としました。</li>
+      <li><b>$dT$ と $dV$ の位置(p.4)</b>:板書の「$\dfrac{dT}{dV}=-\dfrac{C_V}{P}=\cdots$」と見える行は、断熱($dQ=0$)で、$C_VdT=-P\,dV$ から出る、$\dfrac{dV}{dT}=-\dfrac{C_V}{P}$ と読みました(次の行の、$\dfrac{dV}{dT}\Big|_{\rm 断熱}$ とも一致します)。</li>
+      <li><b>「ジュールの実験」の記述(p.4)</b>:板書は、「真空への断熱膨張で温度が変わらない」と、短く書かれています。ジュールの実験の説明は、補足として、本文に書き足しました。</li>
+      <li><b>$C_P-C_V$ の「$\cdots$」(p.3)</b>:板書は、$-T\left(\frac{\partial P}{\partial V}\right)_T\left(\frac{\partial V}{\partial T}\right)^2_P$ という結果だけで、途中は省略されています。第9回(エネルギー方程式)の内容を使う導出を、黄色の枠で補いました。</li>
+      <li><b>断熱曲線の性質の最後の式(p.4)</b>:板書の最終行の「熱 ←」「→ 力学」は、左辺($C_P/C_V$)が熱、右辺が力学(圧縮のしにくさ)であることを指す注記と読みました。</li>
+    </ol>
+
+    <nav class="pager">
+      <a href="week-03.html">← 前の週</a>
+      <a href="../index.html">一覧へ</a>
+      <a href="week-05.html">次の週 →</a>
+    </nav>
+
+  </main>
+
+  <footer>© Aセメまとめノート</footer>
+</body>
+</html>

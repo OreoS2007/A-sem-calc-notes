@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>第2回 偏微分と全微分 | Aセメまとめノート</title>
+  <link rel="stylesheet" href="../../assets/style.css">
+  <script defer src="../../assets/nav.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],macros:{'\\R':'\\mathbb{R}','\\bm':'\\boldsymbol{#1}','\\dd':'\\mathrm{d}','\\dbar':'\\mathrm{d}^{\\prime}'}});window.__navReady&&window.__navReady()"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="inner">
+      <a class="site-title" href="../../index.html">Aセメまとめノート</a>
+      <span class="links"><a href="../index.html">熱力学</a><a href="../basics.html">基礎のまとめ</a><a href="../../calc/index.html">微積</a><a href="../../linalg/index.html">線形代数</a><a href="../../em/index.html">電磁気学</a><a href="../../mech/index.html">力学A</a></span>
+    </div>
+  </header>
+
+  <main class="note">
+    <h1>第2回:偏微分と全微分</h1>
+    <div class="meta">熱力学(東京大学 教養学部 秋学期)／板書 p.2(画像の順に数えています)／第1回の終わりの問い「$\Delta P$ を $\Delta T$ と $\Delta V$ で表す」の数学的な答え</div>
+
+    <nav class="toc">
+      <div class="toc-title">目次</div>
+      <ol start="0">
+        <li><a href="#s0">この回の全体像</a></li>
+        <li><a href="#s1">準備:基礎の確認</a>
+          <div class="sub">導関数と接線／テイラー展開／微小量(高次の項)／偏微分</div></li>
+        <li><a href="#s2">1変数関数:$\Delta y$ と $dy$、テイラー展開</a>(p.2)</li>
+        <li><a href="#s3">2変数関数:全微分 $dz=\frac{\partial z}{\partial x}dx+\frac{\partial z}{\partial y}dy$</a>(p.2)</li>
+        <li><a href="#s4">熱力学への応用:$dP=\left(\frac{\partial P}{\partial T}\right)_VdT+\left(\frac{\partial P}{\partial V}\right)_TdV$</a>(p.2)</li>
+        <li><a href="#s5">等圧変化・等積変化と、循環関係「$-1$」</a>(p.2)</li>
+        <li><a href="#s6">具体例で練習</a></li>
+        <li><a href="#s7">まとめ(この回で覚えること)</a></li>
+        <li><a href="#s8">この回のノートについてのメモ</a></li>
+      </ol>
+    </nav>
+
+    <!-- ===================== 0 ===================== -->
+    <h2 id="s0">0. この回の全体像 <span class="page-tag">板書 p.2</span></h2>
+    <p>第1回の最後で、気体の状態方程式を $P=P(T,V)$ と見て、「$T\to T+\Delta T$、$V\to V+\Delta V$ と少しずらしたとき、$P$ がどれだけずれるか($\Delta P$)」を考えました。この回の板書(p.2)は、その答えを出すための<b>数学</b>(テイラー展開と全微分)を、一から導きます。熱力学では、このあとのすべての章で使う、いちばんの道具です。</p>
+    <div class="box thm">
+      <div class="label">この回のゴール</div>
+      <p>① 1変数関数のテイラー展開 $f(x)=a_0+a_1(x-x_0)+a_2(x-x_0)^2+\cdots$ の係数が、導関数で $a_k=\dfrac{f^{(k)}(x_0)}{k!}$ と決まること。$dy=f'(x_0)\,dx$。<br>
+      ② 2変数関数 $z=f(x,y)$ では、「$y$ を動かす → $x$ を動かす」と<b>2段</b>に分けて展開すると、
+      $$dz=\left(\frac{\partial z}{\partial x}\right)dx+\left(\frac{\partial z}{\partial y}\right)dy\qquad\text{(全微分)}.$$
+      ③ 熱力学では $dP=\left(\dfrac{\partial P}{\partial T}\right)_VdT+\left(\dfrac{\partial P}{\partial V}\right)_TdV$。<br>
+      ④ ここから、<b>偏微分どうしの関係式</b> $\left(\dfrac{\partial P}{\partial T}\right)_V\left(\dfrac{\partial T}{\partial V}\right)_P\left(\dfrac{\partial V}{\partial P}\right)_T=-1$ が出る(循環関係)。</p>
+    </div>
+    <figure class="fig">
+      <svg viewBox="0 0 660 250" width="660" role="img" aria-label="全微分の幾何"><polygon points="130,210 250,210 324.4,150 204.4,150" style="fill:var(--muted);fill-opacity:.12;stroke:var(--muted);stroke-width:1.2;stroke-dasharray:4 3"/><polygon points="130,210 250,182 324.4,67 204.4,95" style="fill:var(--accent);fill-opacity:.2;stroke:var(--accent);stroke-width:2"/><line x1="250" y1="182" x2="250" y2="210" style="stroke:var(--muted);stroke-width:1.1;stroke-dasharray:5 4;fill:none"/><line x1="204.4" y1="95" x2="204.4" y2="150" style="stroke:var(--muted);stroke-width:1.1;stroke-dasharray:5 4;fill:none"/><line x1="324.4" y1="67" x2="324.4" y2="150" style="stroke:var(--muted);stroke-width:1.1;stroke-dasharray:5 4;fill:none"/><line x1="264" y1="210" x2="264" y2="190.4" style="stroke:var(--ex);stroke-width:2.6;fill:none"/><polygon points="264,182 268,191 260,191" style="fill:var(--ex)"/><line x1="190.4" y1="150" x2="190.4" y2="103.4" style="stroke:var(--thm);stroke-width:2.6;fill:none"/><polygon points="190.4,95 194.4,104 186.4,104" style="fill:var(--thm)"/><line x1="340.4" y1="150" x2="340.4" y2="75.4" style="stroke:var(--text);stroke-width:2.6;fill:none"/><polygon points="340.4,67 344.4,76 336.4,76" style="fill:var(--text)"/><circle cx="130" cy="210" r="5" style="fill:var(--text)"/><text class="tm" x="122" y="228" style="text-anchor:end">(x₀, y₀)</text><text class="tm" x="190" y="228" style="text-anchor:middle">dx</text><text class="tm" x="155.2" y="178" style="text-anchor:end">dy</text><text class="tj" x="272" y="200" style="fill:var(--ex);font-weight:600">(∂z/∂x) dx</text><text class="tj" x="182.4" y="126.5" style="text-anchor:end;fill:var(--thm);font-weight:600">(∂z/∂y) dy</text><text class="tt" x="348.4" y="112.5">dz</text><text class="tj" x="420" y="50">x 方向に dx 進むと、</text><text class="tj" x="420" y="70" style="fill:var(--ex);font-weight:600">z は (∂z/∂x)dx だけ増える。</text><text class="tj" x="420" y="100">y 方向に dy 進むと、</text><text class="tj" x="420" y="120" style="fill:var(--thm);font-weight:600">z は (∂z/∂y)dy だけ増える。</text><text class="tj" x="420" y="150">両方動くと、足し算:</text><text class="tt" x="420" y="172">dz = (∂z/∂x)dx + (∂z/∂y)dy</text></svg>
+      <figcaption>全微分の幾何:$x$ 方向に $dx$、$y$ 方向に $dy$ だけ動くと、$z$ の増える量は、それぞれの方向の増え方の<b>足し算</b>になる。</figcaption>
+    </figure>
+
+    <!-- ===================== 1 ===================== -->
+    <h2 id="s1">1. 準備:基礎の確認</h2>
+
+    <h3 id="w-deriv">1.1 導関数と接線</h3>
+    <div class="box basic">
+      <div class="label">基礎:微分は「接線の傾き」 <a class="xref-link" href="../basics.html#deriv" data-xref>→ 詳しい解説</a></div>
+      <p>関数 $f(x)$ の<b>導関数</b>は、
+      $$f'(x)=\frac{df}{dx}=\lim_{\Delta x\to0}\frac{f(x+\Delta x)-f(x)}{\Delta x}.$$
+      グラフの、点 $(x,f(x))$ での<b>接線の傾き</b>です。$\Delta x$ がとても小さいとき、$f(x+\Delta x)-f(x)\approx f'(x)\,\Delta x$(曲線を、接線で置き換える)。</p>
+      <p>例:$f(x)=x^3$ なら $f'(x)=3x^2$、$f''(x)=6x$(2階微分は、導関数をもう一度微分したもの)。</p>
+    </div>
+
+    <h3 id="w-taylor">1.2 テイラー展開</h3>
+    <div class="box basic">
+      <div class="label">基礎:関数を、多項式で近似する <a class="xref-link" href="../basics.html#taylor" data-xref>→ 詳しい解説</a></div>
+      <p>なめらかな関数 $f(x)$ は、点 $x_0$ のまわりで
+      $$f(x)=f(x_0)+f'(x_0)(x-x_0)+\frac{f''(x_0)}{2!}(x-x_0)^2+\frac{f'''(x_0)}{3!}(x-x_0)^3+\cdots$$
+      と、$(x-x_0)$ の多項式の形に書けます(<b>テイラー展開</b>)。$x$ が $x_0$ に近いほど、最初の数項だけで、よい近似になる。$n!=n(n-1)\cdots2\cdot1$。</p>
+      <p>例:$e^x$ を $x_0=0$ のまわりで展開すると、$e^x=1+x+\dfrac{x^2}{2}+\dfrac{x^3}{6}+\cdots$。$x=0.1$ なら、$1+0.1=1.1$(1次まで)、$1.1+0.005=1.105$(2次まで)で、真の値 $e^{0.1}=1.10517\cdots$ にどんどん近づく。</p>
+    </div>
+
+    <h3 id="w-small">1.3 微小量と「高次の項」</h3>
+    <div class="box basic">
+      <div class="label">基礎:$\Delta x$ が小さいとき、$(\Delta x)^2$ はもっと小さい <a class="xref-link" href="../basics.html#smallq" data-xref>→ 詳しい解説</a></div>
+      <p>$\Delta x=0.01$ のとき、$(\Delta x)^2=0.0001$ で、$\Delta x$ の100分の1。$\Delta x$ を小さくしていくと、$(\Delta x)^2,(\Delta x)^3,\dots$ は、$\Delta x$ そのものより、はるかに速く 0 に近づく。そこで、「$\Delta x$ に比べて無視できる項」を $O((\Delta x)^2)$ や「$\cdots$」と書いて、極限 $\Delta x\to0$(このとき $\Delta x$ を $dx$ と書く)では、<b>1次の項だけ</b>を残す。</p>
+    </div>
+
+    <h3 id="w-partial2">1.4 偏微分(復習)</h3>
+    <div class="box basic">
+      <div class="label">基礎:もう1つの変数を固定して微分する <a class="xref-link" href="../basics.html#partial" data-xref>→ 詳しい解説</a></div>
+      <p>$z=f(x,y)$ の、$x$ に関する偏微分 $\left(\dfrac{\partial z}{\partial x}\right)_y$ は、$y$ を<b>定数とみなして</b> $x$ だけで微分したもの。例:$z=x^2y+\sin y$ なら、$\dfrac{\partial z}{\partial x}=2xy$、$\dfrac{\partial z}{\partial y}=x^2+\cos y$。<br>
+      (春学期の内容は、<a href="../../calc/basics.html#partial" data-xref>微積の「春学期のまとめ」</a>にも詳しくあります。)</p>
+    </div>
+
+    <!-- ===================== 2 ===================== -->
+    <h2 id="s2">2. 1変数関数:$\Delta y$ と $dy$、テイラー展開 <span class="page-tag">板書 p.2</span></h2>
+    <p>板書:「<b>1変数関数のとき</b>。$y(x)=f(x)$、$x\to x+\Delta x$、$y\to y+\Delta y$。$\Delta y=f(x+\Delta x)-f(x)$。」(横に、$\Delta x$ の幅の細長い長方形の図。)</p>
+    <p>$y=f(x)$ のグラフ上で、$x$ を $\Delta x$ だけ動かしたとき、$y$ が $\Delta y=f(x+\Delta x)-f(x)$ だけ変わる。この $\Delta y$ を、$\Delta x$ で表したい。そのために、$f$ を多項式で近似します。</p>
+
+    <h3 id="s2a">$f(x)$ を、$x_0$ のまわりの多項式で書く</h3>
+    <p>板書:「$f(x)=a_0+a_1(x-x_0)+a_2(x-x_0)^2+a_3(x-x_0)^3+\cdots$。$x=x_0$ のまわりで $(x-x_0)$ の多項式で近似する。$f(x)$:$x$ の $n$ 次の導関数が連続であると仮定($n\ge3$)。」</p>
+    <p>$f(x)$ が、そういう形(係数 $a_0,a_1,a_2,\dots$ をもつ多項式)に書けるとして、係数が何であるべきかを、板書の順に決めます。</p>
+    <ol class="step-list">
+      <li><b>$x=x_0$ を代入</b>する。$(x-x_0)$ を含む項がすべて 0 になって、$f(x_0)=a_0$。</li>
+      <li><b>$x$ で1回微分して、$x=x_0$ を代入</b>する。$f'(x)=a_1+2a_2(x-x_0)+3a_3(x-x_0)^2+\cdots$ なので、$f'(x_0)=a_1$。</li>
+      <li><b>$x$ で2回微分して、$x=x_0$ を代入</b>する。$f''(x)=2a_2+6a_3(x-x_0)+\cdots$ なので、$f''(x_0)=2a_2$。</li>
+    </ol>
+    <p>つまり、$a_0=f(x_0)$、$a_1=f'(x_0)$、$a_2=\dfrac{f''(x_0)}{2}$。(一般には $a_k=\dfrac{f^{(k)}(x_0)}{k!}$、$k$ 回微分して $x_0$ を代入し、$k!$ で割る。)</p>
+    <figure class="fig">
+      <svg viewBox="0 0 580 244" width="580" role="img" aria-label="テイラー展開"><line x1="80" y1="220" x2="402.6" y2="220" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><polygon points="410,220 402,223.4 402,216.6" style="fill:var(--muted)"/><line x1="200" y1="226" x2="200" y2="22.4" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><polygon points="200,15 203.4,23 196.6,23" style="fill:var(--muted)"/><text class="t" x="406" y="238" style="text-anchor:end">x</text><polyline points="83,184 85.9,184 88.9,184 91.8,184 94.7,184 97.6,184 100.6,184 103.5,184 106.4,184 109.3,184 112.3,184 115.2,184 118.1,184 121,184 124,184 126.9,184 129.8,184 132.7,184 135.7,184 138.6,184 141.5,184 144.4,184 147.4,184 150.3,184 153.2,184 156.1,184 159.1,184 162,184 164.9,184 167.8,184 170.8,184 173.7,184 176.6,184 179.5,184 182.5,184 185.4,184 188.3,184 191.2,184 194.2,184 197.1,184 200,184 202.9,184 205.9,184 208.8,184 211.7,184 214.6,184 217.6,184 220.5,184 223.4,184 226.3,184 229.3,184 232.2,184 235.1,184 238,184 241,184 243.9,184 246.8,184 249.7,184 252.7,184 255.6,184 258.5,184 261.4,184 264.4,184 267.3,184 270.2,184 273.1,184 276.1,184 279,184 281.9,184 284.8,184 287.8,184 290.7,184 293.6,184 296.5,184 299.5,184 302.4,184 305.3,184 308.2,184 311.2,184 314.1,184 317,184" style="fill:none;stroke:var(--muted);stroke-width:2;stroke-dasharray:5 4"/><polyline points="121,220.5 124,219.1 126.9,217.8 129.8,216.4 132.7,215.1 135.7,213.7 138.6,212.4 141.5,211 144.4,209.7 147.4,208.3 150.3,207 153.2,205.6 156.1,204.3 159.1,202.9 162,201.6 164.9,200.2 167.8,198.9 170.8,197.5 173.7,196.2 176.6,194.8 179.5,193.5 182.5,192.1 185.4,190.8 188.3,189.4 191.2,188.1 194.2,186.7 197.1,185.4 200,184 202.9,182.7 205.9,181.3 208.8,180 211.7,178.6 214.6,177.3 217.6,175.9 220.5,174.6 223.4,173.2 226.3,171.9 229.3,170.5 232.2,169.2 235.1,167.8 238,166.5 241,165.1 243.9,163.8 246.8,162.4 249.7,161.1 252.7,159.7 255.6,158.4 258.5,157 261.4,155.6 264.4,154.3 267.3,153 270.2,151.6 273.1,150.3 276.1,148.9 279,147.6 281.9,146.2 284.8,144.9 287.8,143.5 290.7,142.1 293.6,140.8 296.5,139.5 299.5,138.1 302.4,136.8 305.3,135.4 308.2,134.1 311.2,132.7 314.1,131.4 317,130" style="fill:none;stroke:var(--ex);stroke-width:2.2"/><polyline points="83,197.5 85.9,198.1 88.9,198.7 91.8,199.3 94.7,199.8 97.6,200.2 100.6,200.6 103.5,201 106.4,201.3 109.3,201.5 112.3,201.7 115.2,201.9 118.1,202 121,202 124,202 126.9,201.9 129.8,201.8 132.7,201.7 135.7,201.4 138.6,201.2 141.5,200.9 144.4,200.5 147.4,200.1 150.3,199.6 153.2,199.1 156.1,198.6 159.1,197.9 162,197.3 164.9,196.6 167.8,195.8 170.8,195 173.7,194.1 176.6,193.2 179.5,192.2 182.5,191.2 185.4,190.1 188.3,189 191.2,187.8 194.2,186.6 197.1,185.3 200,184 202.9,182.6 205.9,181.2 208.8,179.7 211.7,178.2 214.6,176.6 217.6,175 220.5,173.3 223.4,171.6 226.3,169.8 229.3,168 232.2,166.1 235.1,164.2 238,162.2 241,160.1 243.9,158.1 246.8,155.9 249.7,153.7 252.7,151.5 255.6,149.2 258.5,146.9 261.4,144.5 264.4,142 267.3,139.6 270.2,137 273.1,134.4 276.1,131.8 279,129.1 281.9,126.4 284.8,123.6 287.8,120.7 290.7,117.8 293.6,114.9 296.5,111.9 299.5,108.8 302.4,105.7 305.3,102.6 308.2,99.4 311.2,96.1 314.1,92.8 317,89.5" style="fill:none;stroke:var(--thm);stroke-width:2.2"/><polyline points="83,212 85.9,211.7 88.9,211.3 91.8,211 94.7,210.7 97.6,210.3 100.6,209.9 103.5,209.6 106.4,209.2 109.3,208.7 112.3,208.3 115.2,207.9 118.1,207.4 121,206.9 124,206.4 126.9,205.9 129.8,205.4 132.7,204.8 135.7,204.2 138.6,203.6 141.5,203 144.4,202.3 147.4,201.7 150.3,201 153.2,200.2 156.1,199.5 159.1,198.7 162,197.9 164.9,197 167.8,196.2 170.8,195.3 173.7,194.3 176.6,193.3 179.5,192.3 182.5,191.3 185.4,190.2 188.3,189 191.2,187.8 194.2,186.6 197.1,185.3 200,184 202.9,182.6 205.9,181.2 208.8,179.7 211.7,178.2 214.6,176.6 217.6,174.9 220.5,173.2 223.4,171.4 226.3,169.5 229.3,167.6 232.2,165.6 235.1,163.5 238,161.4 241,159.1 243.9,156.8 246.8,154.4 249.7,151.9 252.7,149.3 255.6,146.6 258.5,143.8 261.4,140.9 264.4,137.9 267.3,134.7 270.2,131.5 273.1,128.1 276.1,124.6 279,120.9 281.9,117.1 284.8,113.2 287.8,109.1 290.7,104.9 293.6,100.5 296.5,95.9 299.5,91.2 302.4,86.2 305.3,81.1 308.2,75.8 311.2,70.3 314.1,64.6 317,58.7" style="fill:none;stroke:var(--accent);stroke-width:3"/><circle cx="200" cy="184" r="5" style="fill:var(--text)"/><text class="ta" x="323.2" y="62.7">eˣ</text><text class="tt" x="323.2" y="93.5">1 + x + x²/2</text><text class="tj" x="323.2" y="134" style="fill:var(--ex);font-weight:600">1 + x</text><text class="tm" x="323.2" y="188">1</text><text class="tm" x="208" y="236">0</text><text class="tm" x="212" y="176">x₀ = 0</text><text class="tj" x="14" y="22">多項式の次数を上げるほど、</text><text class="tj" x="14" y="42">x₀ のまわりで元の関数に近づく</text></svg>
+      <figcaption>$f(x)=e^x$ を、$x_0=0$ のまわりで、0次($1$)・1次($1+x$)・2次($1+x+\frac{x^2}2$)の多項式で近似する。次数を上げるほど、$x_0$ のまわりで、よく合う。</figcaption>
+    </figure>
+
+    <h3 id="s2b">$\Delta y$ を、$\Delta x$ で表す</h3>
+    <p>板書:「$\Delta y(x_0)=f(x_0+\Delta x)-f(x_0)=f(x_0)+f'(x_0)\Delta x+\dfrac12f''(x_0)(\Delta x)^2+\cdots-f(x_0)=f'(x_0)\Delta x+\dfrac12f''(x_0)(\Delta x)^2+\cdots$。$\Delta x\to0$ で、$dy=f'(x_0)\,dx$。」</p>
+    <p>テイラー展開で $x=x_0+\Delta x$ とすると、$(x-x_0)=\Delta x$ になるので、
+    $$f(x_0+\Delta x)=f(x_0)+f'(x_0)\Delta x+\tfrac12f''(x_0)(\Delta x)^2+\cdots.$$
+    $f(x_0)$ を引くと、$\Delta y=f'(x_0)\Delta x+\tfrac12f''(x_0)(\Delta x)^2+\cdots$。最初の項($\Delta x$ の1次)が主要な部分で、$\Delta x\to0$ では、2次以降は無視できる。こうして、
+    $$dy=f'(x_0)\,dx.$$</p>
+    <figure class="fig">
+      <svg viewBox="0 0 580 268" width="580" role="img" aria-label="Δy と dy"><line x1="50" y1="236" x2="412.6" y2="236" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><polygon points="420,236 412,239.4 412,232.6" style="fill:var(--muted)"/><line x1="50" y1="236" x2="50" y2="28.4" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><polygon points="50,21 53.4,29 46.6,29" style="fill:var(--muted)"/><text class="t" x="420" y="254" style="text-anchor:end">x</text><text class="t" x="42" y="29" style="text-anchor:end">y</text><polyline points="50,226.5 54,226.5 57.9,226.4 61.9,226.2 65.8,226 69.8,225.7 73.7,225.4 77.7,225 81.6,224.5 85.6,224 89.5,223.4 93.5,222.8 97.4,222.1 101.4,221.3 105.3,220.4 109.3,219.6 113.2,218.6 117.2,217.6 121.1,216.5 125.1,215.3 129.1,214.1 133,212.9 137,211.6 140.9,210.2 144.9,208.7 148.8,207.2 152.8,205.6 156.7,204 160.7,202.3 164.6,200.5 168.6,198.7 172.5,196.8 176.5,194.9 180.4,192.9 184.4,190.8 188.3,188.7 192.3,186.5 196.2,184.2 200.2,181.9 204.1,179.5 208.1,177.1 212.1,174.6 216,172 220,169.4 223.9,166.7 227.9,164 231.8,161.1 235.8,158.3 239.7,155.3 243.7,152.3 247.6,149.3 251.6,146.2 255.5,143 259.5,139.7 263.4,136.4 267.4,133.1 271.3,129.6 275.3,126.1 279.2,122.6 283.2,119 287.2,115.3 291.1,111.6 295.1,107.8 299,103.9 303,100 306.9,96 310.9,92 314.8,87.8 318.8,83.7 322.7,79.4 326.7,75.2 330.6,70.8 334.6,66.4 338.5,61.9 342.5,57.4 346.4,52.8 350.4,48.1 354.3,43.4 358.3,38.6 362.2,33.7 366.2,28.8" style="fill:none;stroke:var(--accent);stroke-width:2.8"/><line x1="93.4" y1="239.9" x2="316.6" y2="119.5" style="stroke:var(--thm);stroke-width:1.8;stroke-dasharray:6 4"/><line x1="186.4" y1="189.7" x2="186.4" y2="236" style="stroke:var(--muted);stroke-width:1.1;stroke-dasharray:5 4;fill:none"/><line x1="285.6" y1="116.8" x2="285.6" y2="236" style="stroke:var(--muted);stroke-width:1.1;stroke-dasharray:5 4;fill:none"/><line x1="186.4" y1="189.7" x2="285.6" y2="189.7" style="stroke:var(--muted);stroke-width:1.1;stroke-dasharray:5 4;fill:none"/><line x1="285.6" y1="189.7" x2="285.6" y2="136.2" style="stroke:var(--thm);stroke-width:3.4"/><line x1="285.6" y1="136.2" x2="285.6" y2="116.8" style="stroke:var(--ex);stroke-width:3.4"/><circle cx="186.4" cy="189.7" r="5" style="fill:var(--text)"/><circle cx="285.6" cy="116.8" r="5" style="fill:var(--accent)"/><text class="tm" x="186.4" y="252" style="text-anchor:middle">x₀</text><text class="tm" x="285.6" y="252" style="text-anchor:middle">x₀+Δx</text><text class="tm" x="236" y="205.7" style="text-anchor:middle">Δx</text><text class="tt" x="297.6" y="167">dy = f′(x₀)Δx</text><text class="tm" x="297.6" y="127.5">高次の項</text><text class="tj" x="62.4" y="49.8">Δy = f(x₀+Δx) − f(x₀)</text><text class="tj" x="62.4" y="66.9">= dy + (高次の項:Δx の2乗以上)</text><text class="tt" x="103.6" y="222.5">接線</text></svg>
+      <figcaption>$\Delta y$ は、曲線に沿った増え方。$dy=f'(x_0)\Delta x$ は、接線に沿った増え方。両者の差が、高次の項(板書の $\frac12f''(\Delta x)^2+\cdots$)で、$\Delta x\to0$ で、$\Delta x$ そのものよりずっと速く 0 になる。</figcaption>
+    </figure>
+    <div class="box note-box">
+      <div class="label">この節の要点</div>
+      <p>$\Delta y\approx f'(x_0)\Delta x$(1次近似)。「微分 $dy$」とは、$\Delta x$ が非常に小さいときの、変化 $\Delta y$ の<b>主要部分</b>(1次の項)のことです。</p>
+    </div>
+
+    <!-- ===================== 3 ===================== -->
+    <h2 id="s3">3. 2変数関数:全微分 <span class="page-tag">板書 p.2</span></h2>
+    <p>板書:「<b>2変数のとき</b>。$z(x,y)=f(x,y)$、$\Delta z=f(x+\Delta x,y+\Delta y)-f(x,y)$。」</p>
+    <p>ここからが本題です。$z$ が $x$ と $y$ の2つで決まるとき、$x$ を $\Delta x$、$y$ を $\Delta y$ だけ同時に動かすと、$z$ は $\Delta z$ だけ変わる。1変数のテイラー展開しか使わずに、$\Delta z$ を $\Delta x$ と $\Delta y$ で表すために、<b>動かす順番を2段に分けます</b>。</p>
+    <figure class="fig">
+      <svg viewBox="0 0 660 262" width="660" role="img" aria-label="2変数関数の変化を2段に分ける"><line x1="70" y1="230" x2="392.6" y2="230" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><polygon points="400,230 392,233.4 392,226.6" style="fill:var(--muted)"/><line x1="70" y1="230" x2="70" y2="27.4" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><polygon points="70,20 73.4,28 66.6,28" style="fill:var(--muted)"/><text class="t" x="400" y="248" style="text-anchor:end">x</text><text class="t" x="62" y="28" style="text-anchor:end">y</text><line x1="100" y1="175" x2="270" y2="70" style="stroke:var(--muted);stroke-width:1.6;stroke-dasharray:6 4"/><line x1="100" y1="175" x2="100" y2="82.4" style="stroke:var(--ex);stroke-width:3;fill:none"/><polygon points="100,72 105,83 95,83" style="fill:var(--ex)"/><line x1="100" y1="70" x2="257.6" y2="70" style="stroke:var(--thm);stroke-width:3;fill:none"/><polygon points="268,70 257,75 257,65" style="fill:var(--thm)"/><circle cx="100" cy="175" r="5.5" style="fill:var(--text)"/><circle cx="100" cy="70" r="4.5" style="fill:var(--muted)"/><circle cx="270" cy="70" r="5.5" style="fill:var(--accent)"/><line x1="100" y1="175" x2="100" y2="230" style="stroke:var(--muted);stroke-width:1.1;stroke-dasharray:5 4;fill:none"/><line x1="270" y1="70" x2="270" y2="230" style="stroke:var(--muted);stroke-width:1.1;stroke-dasharray:5 4;fill:none"/><line x1="70" y1="175" x2="100" y2="175" style="stroke:var(--muted);stroke-width:1.1;stroke-dasharray:5 4;fill:none"/><line x1="70" y1="70" x2="270" y2="70" style="stroke:var(--muted);stroke-width:1.1;stroke-dasharray:5 4;fill:none"/><text class="tm" x="92" y="191" style="text-anchor:end">(x₀, y₀)</text><text class="tm" x="90" y="62" style="text-anchor:end">(x₀, y₀+Δy)</text><text class="tm" x="276" y="62">(x₀+Δx, y₀+Δy)</text><text class="tm" x="100" y="246" style="text-anchor:middle">x₀</text><text class="tm" x="270" y="246" style="text-anchor:middle">x₀+Δx</text><text class="tt" x="108" y="126.5">① y を動かす</text><text class="tt" x="185" y="90" style="text-anchor:middle">②</text><text class="tj" x="430" y="80">直接ななめに動く代わりに、</text><text class="tj" x="430" y="100">2段に分けて動かす:</text><text class="tj" x="430" y="132" style="fill:var(--ex);font-weight:600">① x₀ を固定して y だけ Δy</text><text class="tt" x="430" y="154">② y₀+Δy を固定して x だけ Δx</text><text class="tm" x="430" y="188">どちらも 1 変数のテイラー展開</text></svg>
+      <figcaption>$(x_0,y_0)\to(x_0+\Delta x,\,y_0+\Delta y)$ を、「まず $y$ だけ動かし、次に $x$ だけ動かす」2段に分ける。それぞれの段では、片方の変数が止まっているので、1変数の展開が使える。</figcaption>
+    </figure>
+
+    <h3 id="s3a">第1段:$y=y_0+\Delta y$ を固定して、$x$ について展開</h3>
+    <p>板書:「$y=y_0+\Delta y$ を固定して、$x$ を $x_0$ のまわりでテイラー展開:$f(x,y_0+\Delta y)=f(x_0,y_0+\Delta y)+\dfrac{d}{dx}f(x_0,y_0+\Delta y)\Big|_{x=x_0}(x-x_0)+\cdots$。$x=x_0+\Delta x$ とおく:$f(x_0+\Delta x,y_0+\Delta y)=f(x_0,y_0+\Delta y)+\dfrac{d}{dx}f(x_0,y_0+\Delta y)\,\Delta x$。」</p>
+    <p>$y$ を $y_0+\Delta y$ に固定すると、$f(x,y_0+\Delta y)$ は $x$ だけの関数なので、第2節の1変数のテイラー展開がそのまま使えます($\Delta x$ の2次以降は省略)。これを使って、</p>
+    $$\Delta z=\underbrace{f(x_0,\,y_0+\Delta y)}_{\text{黄色の枠①}}+\underbrace{\frac{d}{dx}f(x_0,\,y_0+\Delta y)\,\Delta x}_{\text{黄色の枠②}}-f(x_0,y_0).$$
+    <p>(板書では、①と②を黄色の枠で囲んであります。)</p>
+
+    <h3 id="s3b">第2段:$x=x_0$ を固定して、$y$ について展開</h3>
+    <p>板書:「$f(x_0,y)$ を、$x=x_0$ に固定して、$y$ を $y_0$ のまわりで展開:$f(x_0,y)=f(x_0,y_0)+\dfrac{d}{dy}f(x_0,y_0)(y-y_0)+\cdots$。↓ $y=y_0+\Delta y$ とする:$f(x_0,y_0+\Delta y)=f(x_0,y_0)+\dfrac{d}{dy}f(x_0,y_0)\,\Delta y+\cdots$。→ □(黄色の枠①)に代入。」</p>
+    <p>黄色の枠①の $f(x_0,y_0+\Delta y)$ を、$y$ について展開して、$f(x_0,y_0)+\dfrac{d}{dy}f(x_0,y_0)\Delta y$ に置き換えます。すると、$f(x_0,y_0)$ が打ち消しあって、</p>
+    $$\Delta z=\frac{d}{dy}f(x_0,y_0)\,\Delta y+\frac{d}{dx}f(x_0,y_0)\,\Delta x+\cdots.$$
+    <p>ここで、黄色の枠②の中の $\dfrac{d}{dx}f(x_0,y_0+\Delta y)$ は、$\dfrac{d}{dx}f(x_0,y_0)$ で置き換えました(下の補足)。$\Delta x,\Delta y\to0$ で、$\cdots$(2次以上)を落として、</p>
+    <div class="box thm">
+      <div class="label">全微分</div>
+      <p>$$dz=\frac{\partial f}{\partial x}(x_0,y_0)\,dx+\frac{\partial f}{\partial y}(x_0,y_0)\,dy=\left(\frac{\partial z}{\partial x}\right)_y dx+\left(\frac{\partial z}{\partial y}\right)_x dy.$$
+      $z$ の微小な変化は、「$x$ だけが変わったときの変化」と「$y$ だけが変わったときの変化」の<b>和</b>。</p>
+    </div>
+    <p>板書の最後の行は「$dz=\dfrac{\partial z}{\partial x}\Delta x+\dfrac{\partial z}{\partial y}\Delta y$」と、$dx$ と $\Delta x$ が混ざった書き方になっていますが、同じ意味です($\Delta x\to0$ で $\Delta x$ を $dx$ と書く)。1変数のときの $dy=f'(x_0)dx$ に、全く同じ形で対応しています。</p>
+    <div class="box supp">
+      <div class="label">板書にない補足:なぜ $\frac{d}{dx}f(x_0,y_0+\Delta y)$ を $\frac{d}{dx}f(x_0,y_0)$ に置き換えてよいか</div>
+      <p>枠②は、$\dfrac{d}{dx}f(x_0,y_0+\Delta y)\,\Delta x$ です。$\dfrac{d}{dx}f(x_0,\,y)$ を $y_0$ のまわりで展開すると、
+      $$\frac{d}{dx}f(x_0,y_0+\Delta y)=\frac{d}{dx}f(x_0,y_0)+\underbrace{\frac{d}{dy}\frac{d}{dx}f(x_0,y_0)\,\Delta y+\cdots}_{\Delta y\text{ に比例する、小さな補正}}.$$
+      この補正に、$\Delta x$ がかかるので、$\Delta x\cdot\Delta y$ という<b>2次</b>の項が残ります。$\Delta x,\Delta y\to0$ では、1次の項に比べて無視できるので、捨ててよい。(板書で、「$\cdots$」としている部分に含まれています。)この近似が許されるには、$f$ の偏導関数が連続である(板書の「導関数が連続」の仮定)ことが必要です。</p>
+    </div>
+
+    <!-- ===================== 4 ===================== -->
+    <h2 id="s4">4. 熱力学への応用 <span class="page-tag">板書 p.2</span></h2>
+    <p>板書:「∴ $dP=\left(\dfrac{\partial P}{\partial T}\right)_VdT+\left(\dfrac{\partial P}{\partial V}\right)_TdV$。」</p>
+    <p>$P$ を、$z$ に、$T$ を $x$ に、$V$ を $y$ に読みかえます。第1回の最後の問い「状態方程式 $P(T,V)$ で、$T\to T+\Delta T$、$V\to V+\Delta V$ のとき、$\Delta P$ は $\Delta T$ と $\Delta V$ で表せる」の答えが、これです。</p>
+    <div class="box thm">
+      <div class="label">圧力 $P(T,V)$ の全微分</div>
+      <p>$$dP=\left(\frac{\partial P}{\partial T}\right)_V dT+\left(\frac{\partial P}{\partial V}\right)_T dV.$$
+      右辺の、1つ目の項は「$V$ を止めて、$T$ だけ変えたときの $P$ の変化」、2つ目の項は「$T$ を止めて、$V$ だけ変えたときの $P$ の変化」。</p>
+    </div>
+    <p><b>理想気体の場合</b>:$P=\dfrac{nRT}{V}$ なので、$\left(\dfrac{\partial P}{\partial T}\right)_V=\dfrac{nR}{V}$、$\left(\dfrac{\partial P}{\partial V}\right)_T=-\dfrac{nRT}{V^2}$。よって、
+    $$dP=\frac{nR}{V}\,dT-\frac{nRT}{V^2}\,dV.$$
+    温度を上げると圧力が上がり(右辺の第1項は正)、体積を増やすと圧力が下がる(第2項は負)。日常の感覚と合っています。</p>
+    <p>全微分は、「ある状態量を、他の2つで表したときの変化」を計算するための、熱力学で最も基本的な道具です。同じ形の式が、このあと、$dU$、$dS$、$dF$、$dG$ について、何度も出てきます。</p>
+
+    <!-- ===================== 5 ===================== -->
+    <h2 id="s5">5. 等圧変化・等積変化と、循環関係「$-1$」 <span class="page-tag">板書 p.2</span></h2>
+    <p>板書:「<b>等圧変化($dP=0$)</b>:$0=\left(\dfrac{\partial P}{\partial T}\right)_V+\left(\dfrac{\partial P}{\partial V}\right)_T\left(\dfrac{\partial V}{\partial T}\right)_P$。$0=\left(\dfrac{\partial P}{\partial T}\right)_V\left(\dfrac{\partial T}{\partial V}\right)_P+\left(\dfrac{\partial P}{\partial V}\right)_T$ ……(*)。<b>等積変化($dV=0$)</b>:$1=\left(\dfrac{\partial P}{\partial T}\right)_V\left(\dfrac{\partial T}{\partial P}\right)_V$。(*)⇒ $-1=\left(\dfrac{\partial P}{\partial T}\right)_V\left(\dfrac{\partial T}{\partial V}\right)_P\left(\dfrac{\partial P}{\partial V}\right)_T^{-1}=\left(\dfrac{\partial P}{\partial T}\right)_V\left(\dfrac{\partial T}{\partial V}\right)_P\left(\dfrac{\partial V}{\partial P}\right)_T$。」</p>
+    <p>全微分の式 $dP=\left(\dfrac{\partial P}{\partial T}\right)_VdT+\left(\dfrac{\partial P}{\partial V}\right)_TdV$ は、どんな変化にも使えます。特別な変化を代入して、偏微分どうしの関係を取り出します。</p>
+    <figure class="fig">
+      <svg viewBox="0 0 660 258" width="660" role="img" aria-label="等温・等積・等圧の動き"><line x1="56" y1="232" x2="388.6" y2="232" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><polygon points="396,232 388,235.4 388,228.6" style="fill:var(--muted)"/><line x1="56" y1="232" x2="56" y2="34.4" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><polygon points="56,27 59.4,35 52.6,35" style="fill:var(--muted)"/><text class="t" x="396" y="250" style="text-anchor:end">V</text><text class="t" x="48" y="35" style="text-anchor:end">P</text><polyline points="146,22 149.5,29.9 153,37.2 156.5,43.9 160,50.3 163.5,56.2 167,61.7 170.5,66.9 174,71.8 177.5,76.4 181,80.8 184.5,84.9 188,88.8 191.5,92.5 195,96 198.5,99.4 202,102.5 205.5,105.6 209,108.5 212.5,111.2 216,113.9 219.5,116.4 223,118.8 226.5,121.1 230,123.4 233.5,125.5 237,127.6 240.5,129.6 244,131.5 247.5,133.3 251,135.1 254.5,136.8 258,138.4 261.5,140 265,141.6 268.5,143.1 272,144.5 275.5,145.9 279,147.2 282.5,148.6 286,149.8 289.5,151.1 293,152.3 296.5,153.4 300,154.5 303.5,155.6 307,156.7 310.5,157.7 314,158.7 317.5,159.7 321,160.7 324.5,161.6 328,162.5 331.5,163.4 335,164.3 338.5,165.1 342,165.9 345.5,166.7 349,167.5 352.5,168.3 356,169" style="fill:none;stroke:var(--accent);stroke-width:2.8"/><line x1="206" y1="118" x2="206" y2="43" style="stroke:var(--thm);stroke-width:2.8"/><line x1="214" y1="106" x2="326" y2="106" style="stroke:var(--ex);stroke-width:2.8"/><line x1="206" y1="61" x2="206" y2="45.2" style="stroke:var(--thm);stroke-width:2.8;fill:none"/><polygon points="206,35.8 210.6,45.8 201.4,45.8" style="fill:var(--thm)"/><line x1="296" y1="106" x2="320.6" y2="106" style="stroke:var(--ex);stroke-width:2.8;fill:none"/><polygon points="330,106 320,110.6 320,101.4" style="fill:var(--ex)"/><circle cx="206" cy="106" r="6" style="fill:var(--text)"/><text class="tm" x="196" y="126" style="text-anchor:end">現在の状態</text><text class="tt" x="198" y="48" style="text-anchor:end">体積一定:T↑ で P↑</text><text class="tj" x="328" y="90" style="text-anchor:end;fill:var(--ex);font-weight:600">圧力一定:T↑ で V↑</text><text class="ta" x="251" y="195.1">等温線:V↑ で P↓</text><text class="tj" x="430" y="62">同じ点から、3通りの</text><text class="tj" x="430" y="82">動かし方がある。</text><text class="tt" x="430" y="118">(∂P/∂T)ᵥ : 垂直に上へ</text><text class="tj" x="430" y="142" style="fill:var(--ex);font-weight:600">(∂T/∂V)ₚ : 水平に右へ</text><text class="ta" x="430" y="166">(∂V/∂P)ₜ : 等温線に沿って</text><text class="tm" x="430" y="198">3つの積は −1(この回の結論)</text></svg>
+      <figcaption>$P$–$V$ 面の1点から動く、3通りの動き方。体積一定(垂直)、圧力一定(水平)、温度一定(等温線)。それぞれの「変化の割合」が、3つの偏微分。</figcaption>
+    </figure>
+
+    <h3 id="s5a">等圧変化:$dP=0$ とおく</h3>
+    <ol class="step-list">
+      <li>$dP=0$ とおくと、$0=\left(\dfrac{\partial P}{\partial T}\right)_VdT+\left(\dfrac{\partial P}{\partial V}\right)_TdV$。</li>
+      <li>圧力一定のまま温度を変えるとき、体積の変化は $dV=\left(\dfrac{\partial V}{\partial T}\right)_P dT$(これが偏微分の意味:$P$ を固定して $V$ を $T$ で微分)。これを代入して、$dT$ で割る:
+      $$0=\left(\frac{\partial P}{\partial T}\right)_V+\left(\frac{\partial P}{\partial V}\right)_T\left(\frac{\partial V}{\partial T}\right)_P.$$</li>
+      <li>両辺に $\left(\dfrac{\partial T}{\partial V}\right)_P$ をかける。$\left(\dfrac{\partial V}{\partial T}\right)_P\left(\dfrac{\partial T}{\partial V}\right)_P=1$ を使うと、板書の(*)式:
+      $$0=\left(\frac{\partial P}{\partial T}\right)_V\left(\frac{\partial T}{\partial V}\right)_P+\left(\frac{\partial P}{\partial V}\right)_T.\qquad(*)$$</li>
+    </ol>
+
+    <h3 id="s5b">逆数の関係:$\left(\frac{\partial T}{\partial V}\right)_P=1/\left(\frac{\partial V}{\partial T}\right)_P$</h3>
+    <p>手順 3 で使った「$\left(\dfrac{\partial V}{\partial T}\right)_P\left(\dfrac{\partial T}{\partial V}\right)_P=1$」は、<b>同じものを固定して微分する</b>かぎり、成り立ちます。1変数のとき、$y=f(x)$ の逆関数 $x=g(y)$ について、$\dfrac{dx}{dy}=\dfrac1{dy/dx}$ が成り立つのと同じ理由です。板書の「等積変化($dV=0$)」の式は、この逆数の関係の1つの例です:$dV=0$ のとき、$dP=\left(\dfrac{\partial P}{\partial T}\right)_VdT$、これを $dT$ について解けば $dT=\dfrac{dP}{(\partial P/\partial T)_V}$、つまり $\left(\dfrac{\partial T}{\partial P}\right)_V=1\Big/\left(\dfrac{\partial P}{\partial T}\right)_V$。</p>
+    <div class="box warn">
+      <div class="label">注意:逆数が使えるのは、固定するものが同じときだけ</div>
+      <p>$\left(\dfrac{\partial P}{\partial T}\right)_V$ の逆数は $\left(\dfrac{\partial T}{\partial P}\right)_V$($V$ 固定のまま)。$\left(\dfrac{\partial T}{\partial P}\right)_{S}$ や $\left(\dfrac{\partial T}{\partial P}\right)_{\!\text{別のもの}}$ ではありません。固定する量が違えば、全く別の量です。</p>
+    </div>
+
+    <h3 id="s5c">結論:3つの偏微分の積は $-1$</h3>
+    <p>(*) の式を、$\left(\dfrac{\partial P}{\partial V}\right)_T$ で割って、移項します。$0=\left(\dfrac{\partial P}{\partial T}\right)_V\left(\dfrac{\partial T}{\partial V}\right)_P+\left(\dfrac{\partial P}{\partial V}\right)_T$ より、
+    $$-1=\frac{\left(\dfrac{\partial P}{\partial T}\right)_V\left(\dfrac{\partial T}{\partial V}\right)_P}{\left(\dfrac{\partial P}{\partial V}\right)_T}.$$
+    分母の $\left(\dfrac{\partial P}{\partial V}\right)_T$ の逆数は、$\left(\dfrac{\partial V}{\partial P}\right)_T$ なので(逆数の関係)、</p>
+    <div class="box thm">
+      <div class="label">循環関係(板書の結論)</div>
+      <p>$$\left(\frac{\partial P}{\partial T}\right)_V\left(\frac{\partial T}{\partial V}\right)_P\left(\frac{\partial V}{\partial P}\right)_T=-1.$$
+      $(P,T,V)\to(T,V,P)\to(V,P,T)$ と、<b>循環</b>する形になっている(分子の変数が、次の偏微分の分母に、固定する変数が、1つずれて入る)。</p>
+    </div>
+    <p>「約分したら 1 になりそう」に見えますが、$\partial$ は普通の分数ではないので、そうなりません。答えは $+1$ ではなく $-1$ です(マイナスの符号が出るのが、偏微分の面白いところ)。</p>
+    <p><b>理想気体で確かめる</b>:$P=\dfrac{nRT}{V}$、$T=\dfrac{PV}{nR}$、$V=\dfrac{nRT}{P}$ なので、
+    $$\left(\frac{\partial P}{\partial T}\right)_V=\frac{nR}{V},\quad\left(\frac{\partial T}{\partial V}\right)_P=\frac{P}{nR},\quad\left(\frac{\partial V}{\partial P}\right)_T=-\frac{nRT}{P^2}.$$
+    積:$\dfrac{nR}{V}\cdot\dfrac{P}{nR}\cdot\left(-\dfrac{nRT}{P^2}\right)=-\dfrac{nRT}{PV}=-1$($PV=nRT$ を使った)。確かに $-1$。</p>
+    <div class="box supp">
+      <div class="label">板書にない補足:この関係式の使い道 ― 測りにくい量を、測りやすい量で表す</div>
+      <p>圧力一定で測る体積の膨張率 $\beta=\dfrac1V\left(\dfrac{\partial V}{\partial T}\right)_P$(第1回)と、温度一定で測る<b>等温圧縮率</b> $\kappa_T=-\dfrac1V\left(\dfrac{\partial V}{\partial P}\right)_T$(圧力を上げたとき、体積が何割縮むか)は、どちらも実験で測りやすい量です。循環関係から、
+      $$\left(\frac{\partial P}{\partial T}\right)_V=-\frac{\left(\dfrac{\partial V}{\partial T}\right)_P}{\left(\dfrac{\partial V}{\partial P}\right)_T}=\frac{V\beta}{V\kappa_T}=\frac{\beta}{\kappa_T}.$$
+      「体積を一定に保ったまま温度を上げたとき、圧力がどれだけ上がるか」は、測りにくい(容器が変形しないようにするのが難しい)のに、$\beta$ と $\kappa_T$ から計算できる。(下の問題 C。)</p>
+    </div>
+
+    <!-- ===================== 6 ===================== -->
+    <h2 id="s6">6. 具体例で練習(板書にない補足) <span class="page-tag">補足</span></h2>
+    <div class="box ex">
+      <div class="label">問題 A:全微分で、圧力の変化を見積もる</div>
+      <p>$1\ \mathrm{mol}$ の理想気体が、$T=300\ \mathrm K$、$V=2.49\times10^{-2}\ \mathrm{m^3}$ にある($P\approx1.0\times10^5\ \mathrm{Pa}$)。温度を $3\ \mathrm K$ 上げ、体積を $3.0\times10^{-4}\ \mathrm{m^3}$ 増やしたとき、圧力の変化 $\Delta P$ を、全微分で見積もれ。また、実際の値と比べよ。</p>
+    </div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>$dP=\dfrac{nR}{V}dT-\dfrac{nRT}{V^2}dV$。$\dfrac{nR}V=\dfrac{8.31}{0.0249}=334\ \mathrm{Pa/K}$、$\dfrac{nRT}{V^2}=\dfrac{2493}{6.20\times10^{-4}}=4.02\times10^6\ \mathrm{Pa/m^3}$。$dP=334\times3-4.02\times10^6\times3.0\times10^{-4}=1001-1206=-205\ \mathrm{Pa}$。実際は、$P(303,\,0.0252)-P(300,\,0.0249)=99918-100120=-203\ \mathrm{Pa}$。誤差は約1%:全微分(1次近似)は、よく合う。(1%のずれは、2次の項 $\Delta x\Delta y$ などの高次の項によるもの。)</p></div>
+
+    <div class="box ex">
+      <div class="label">問題 B:循環関係の確認(ファンデルワールス気体で、2つの偏微分から 3つ目を求める)</div>
+      <p>ファンデルワールス気体 $P=\dfrac{nRT}{V-b}-\dfrac{a}{V^2}$ について、$\left(\dfrac{\partial P}{\partial T}\right)_V$ と $\left(\dfrac{\partial P}{\partial V}\right)_T$ を求め、循環関係を使って $\left(\dfrac{\partial V}{\partial T}\right)_P$ を求めよ。</p>
+    </div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>$\left(\dfrac{\partial P}{\partial T}\right)_V=\dfrac{nR}{V-b}$、$\left(\dfrac{\partial P}{\partial V}\right)_T=-\dfrac{nRT}{(V-b)^2}+\dfrac{2a}{V^3}$。(*)の形 $0=\left(\dfrac{\partial P}{\partial T}\right)_V+\left(\dfrac{\partial P}{\partial V}\right)_T\left(\dfrac{\partial V}{\partial T}\right)_P$ から、
+      $$\left(\frac{\partial V}{\partial T}\right)_P=-\frac{(\partial P/\partial T)_V}{(\partial P/\partial V)_T}=\frac{\dfrac{nR}{V-b}}{\dfrac{nRT}{(V-b)^2}-\dfrac{2a}{V^3}}.$$
+      $V$ を $T,P$ の式で書くのは難しい(3次方程式を解くことになる)が、偏微分は、この形で簡単に求まる。$a=0$、$b=0$ とすれば $\dfrac{nR/V}{nRT/V^2}=\dfrac VT$、つまり理想気体の $\left(\dfrac{\partial V}{\partial T}\right)_P=\dfrac{nR}{P}=\dfrac VT$ に戻る。</p></div>
+
+    <div class="box ex">
+      <div class="label">問題 C:水を密閉容器で温めると</div>
+      <p>水の $20\,{}^\circ\mathrm C$ での定圧膨張率は $\beta=2.1\times10^{-4}\ \mathrm{K^{-1}}$、等温圧縮率は $\kappa_T=4.6\times10^{-10}\ \mathrm{Pa^{-1}}$。密閉した硬い容器いっぱいの水の温度を $1\ \mathrm K$ 上げると、圧力はどれだけ上がるか。(1気圧 $=1.01\times10^5\ \mathrm{Pa}$)</p>
+    </div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>$\left(\dfrac{\partial P}{\partial T}\right)_V=\dfrac\beta{\kappa_T}=\dfrac{2.1\times10^{-4}}{4.6\times10^{-10}}=4.6\times10^5\ \mathrm{Pa/K}$。約 4.5 気圧/K。水は、ほとんど縮まないので、少し温めただけで、圧力が大きく上がる(液体で満たした容器を密閉して温めてはいけない理由)。</p></div>
+
+    <!-- ===================== 7 ===================== -->
+    <h2 id="s7">7. まとめ(この回で覚えること)</h2>
+    <ul>
+      <li><b>テイラー展開</b>:$f(x)=\sum_k\dfrac{f^{(k)}(x_0)}{k!}(x-x_0)^k$。係数は、$x_0$ を代入しながら微分して決まる。</li>
+      <li>$\Delta y=f'(x_0)\Delta x+\dfrac12f''(\Delta x)^2+\cdots$。極限で、$dy=f'(x_0)\,dx$(1次の項だけ)。</li>
+      <li><b>全微分</b>:$dz=\left(\dfrac{\partial z}{\partial x}\right)_ydx+\left(\dfrac{\partial z}{\partial y}\right)_xdy$。2段に分けて(まず $y$、次に $x$)展開して導く。</li>
+      <li>熱力学:$dP=\left(\dfrac{\partial P}{\partial T}\right)_VdT+\left(\dfrac{\partial P}{\partial V}\right)_TdV$。</li>
+      <li><b>逆数の関係</b>:同じものを固定する偏微分どうしは、逆数。<b>循環関係</b>:$\left(\dfrac{\partial P}{\partial T}\right)_V\left(\dfrac{\partial T}{\partial V}\right)_P\left(\dfrac{\partial V}{\partial P}\right)_T=-1$。</li>
+      <li>使い道:$\left(\dfrac{\partial P}{\partial T}\right)_V=\dfrac\beta{\kappa_T}$ のように、測りにくい量を、測りやすい量で表せる。</li>
+    </ul>
+
+    <!-- ===================== 8 ===================== -->
+    <h2 id="s8">8. この回のノートについてのメモ</h2>
+    <p>板書は手書きの画像です。画像の順に、p.2 としました(下端に、次回で扱う「2. 第1法則」の書き出しがあります)。板書の画像は、このサイトには載せていません。黄色の枠、基礎ページの内容、練習問題と解答は、Claude が書き足したもので、板書にはありません。</p>
+    <ol>
+      <li><b>$dz$ の最後の行(p.2)</b>:板書の「$dz=\dfrac{d}{dx}f\,dx+\dfrac{d}{dy}f\,dy=\dfrac{\partial z}{\partial x}\Delta x+\dfrac{\partial z}{\partial y}\Delta y$」は、$dx$ と $\Delta x$ が混ざっていますが、同じ意味と読みました($\Delta\to0$ で $d$)。</li>
+      <li><b>2段目の置き換え(p.2)</b>:板書は、枠②の $\dfrac{d}{dx}f(x_0,y_0+\Delta y)$ を、断りなしに $\dfrac{d}{dx}f(x_0,y_0)$ に置き換えています。2次の項 $\Delta x\Delta y$ を落とした、と読んで、補足の枠に理由を書きました。</li>
+      <li><b>偏微分の記号(p.2)</b>:板書の前半は、$\dfrac{d}{dx}f(x_0,y_0)$ のように、$d$(丸くない d)で書かれています。2変数関数の偏微分なので、本文では $\partial$ に統一しました。</li>
+      <li><b>等圧変化の式の添字(p.2)</b>:板書の式(*)の添字は、読み取りにくい箇所があります。結論の式($-1$)が正しくなるように、(*)を $0=\left(\frac{\partial P}{\partial T}\right)_V\left(\frac{\partial T}{\partial V}\right)_P+\left(\frac{\partial P}{\partial V}\right)_T$ としました。</li>
+      <li>ページ下端の「2. 第1法則 $W_{A\to B}=-\int F\,dx$」は、第3回で扱います。</li>
+    </ol>
+
+    <nav class="pager">
+      <a href="week-01.html">← 前の週</a>
+      <a href="../index.html">一覧へ</a>
+      <a href="week-03.html">次の週 →</a>
+    </nav>
+
+  </main>
+
+  <footer>© Aセメまとめノート</footer>
+</body>
+</html>

@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>第11回 熱平衡状態の安定性 | Aセメまとめノート</title>
+  <link rel="stylesheet" href="../../assets/style.css">
+  <script defer src="../../assets/nav.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],macros:{'\\R':'\\mathbb{R}','\\bm':'\\boldsymbol{#1}','\\dd':'\\mathrm{d}','\\dbar':'\\mathrm{d}^{\\prime}'}});window.__navReady&&window.__navReady()"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="inner">
+      <a class="site-title" href="../../index.html">Aセメまとめノート</a>
+      <span class="links"><a href="../index.html">熱力学</a><a href="../basics.html">基礎のまとめ</a><a href="../../calc/index.html">微積</a><a href="../../linalg/index.html">線形代数</a><a href="../../em/index.html">電磁気学</a><a href="../../mech/index.html">力学A</a></span>
+    </div>
+  </header>
+
+  <main class="note">
+    <h1>第11回:熱平衡状態の安定性</h1>
+    <div class="meta">熱力学(東京大学 教養学部 秋学期)／板書 p.11(画像の順に数えています)／ノートの見出し「4.4 熱平衡状態の安定性」</div>
+
+    <nav class="toc">
+      <div class="toc-title">目次</div>
+      <ol start="0">
+        <li><a href="#s0">この回の全体像</a></li>
+        <li><a href="#s1">準備:基礎の確認</a>
+          <div class="sub">2変数のテイラー展開(2次まで)／最小になる条件／凸関数</div></li>
+        <li><a href="#s2">4.4 平衡状態が安定であるとは</a>(p.11)</li>
+        <li><a href="#s3">一般の設定での安定性の条件</a>(p.11)</li>
+        <li><a href="#s4">内部エネルギーの展開と、1次の項</a>(p.11)</li>
+        <li><a href="#s5">2次の項:$C_V\gt0$ と $\left(\frac{\partial P}{\partial V}\right)_T\lt0$</a>(p.11)</li>
+        <li><a href="#s6">熱容量の性質、ファンデルワールス気体</a>(p.11)</li>
+        <li><a href="#s7">具体例で練習</a></li>
+        <li><a href="#s8">まとめ(この回で覚えること)</a></li>
+        <li><a href="#s9">この回のノートについてのメモ</a></li>
+      </ol>
+    </nav>
+
+    <!-- ===================== 0 ===================== -->
+    <h2 id="s0">0. この回の全体像 <span class="page-tag">板書 p.11</span></h2>
+    <p>第10回で、平衡状態は、$S$ 最大、$F$ 最小、$G$ 最小の状態だと分かりました。この回は、これを、「<b>ほんの少しずらしても、元に戻る(安定)</b>」という条件で調べます。すると、これまで当たり前のように使ってきた、<b>熱容量は正</b>、<b>圧縮すると圧力が上がる</b>、という性質が、第2法則から、<b>導かれる</b>ことが分かります。</p>
+    <div class="box thm">
+      <div class="label">この回のゴール</div>
+      <p>① 平衡状態が安定である条件:$\delta U+P^*\delta V-T^*\delta S\gt0$(熱源 $T^*$、圧力 $P^*$ のもとで)。<br>
+      ② 1次の項が 0 ⇒ $T=T^*$、$P=P^*$(熱源と、つり合っている)。<br>
+      ③ 2次の項:$\dfrac12\left[\dfrac{C_V}{T}(\delta T)^2-\left(\dfrac{\partial P}{\partial V}\right)_T(\delta V)^2\right]\gt0$ ⇒ <b>$C_V\gt0$</b>(熱的安定性)、<b>$\left(\dfrac{\partial P}{\partial V}\right)_T\lt0$</b>(力学的安定性)。<br>
+      ④ ここから、$C_P\gt C_V\gt0$、$\dfrac{C_V}{C_P}\lt1$。ファンデルワールス気体の、不安定な領域は、「第2法則で許されない」。</p>
+    </div>
+    <figure class="fig">
+      <svg viewBox="0 0 520 214" width="520" role="img" aria-label="安定性の条件"><line x1="60" y1="150" x2="372.6" y2="150" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><polygon points="380,150 372,153.4 372,146.6" style="fill:var(--muted)"/><line x1="220" y1="170" x2="220" y2="47.4" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><polygon points="220,40 223.4,48 216.6,48" style="fill:var(--muted)"/><text class="t" x="380" y="168" style="text-anchor:end">δS</text><text class="tm" x="228" y="46" style="text-anchor:start">δU + P*δV − T*δS</text><polyline points="100,69.4 106,77.2 112,84.7 118,91.7 124,98.4 130,104.6 136,110.5 142,115.9 148,121 154,125.6 160,129.8 166,133.7 172,137.1 178,140.1 184,142.7 190,145 196,146.8 202,148.2 208,149.2 214,149.8 220,150 226,149.8 232,149.2 238,148.2 244,146.8 250,145 256,142.7 262,140.1 268,137.1 274,133.7 280,129.8 286,125.6 292,121 298,115.9 304,110.5 310,104.6 316,98.4 322,91.7 328,84.7 334,77.2 340,69.4" style="fill:none;stroke:var(--accent);stroke-width:3"/><line x1="100" y1="200" x2="340" y2="100" style="stroke:var(--thm);stroke-width:2.4;stroke-dasharray:6 4"/><text class="tj" x="344" y="100" style="text-anchor:start">1次の項が残ると</text><text class="tj" x="344" y="116" style="text-anchor:start">負になる(不安定)</text><text class="ta" x="10" y="190" style="text-anchor:start">1次の項が 0、2次の項が正</text><text class="tj" x="10" y="208" style="text-anchor:start">⇒ どちらにずらしても増える(安定)</text><circle cx="220" cy="150" r="5" style="fill:var(--text)"/></svg>
+      <figcaption>平衡状態から、少しずらしたときの、量 $\delta U+P^*\delta V-T^*\delta S$ の変化。1次の項が 0 で、2次の項が正なら、どちらにずらしても増える(安定)。</figcaption>
+    </figure>
+
+    <!-- ===================== 1 ===================== -->
+    <h2 id="s1">1. 準備:基礎の確認</h2>
+
+    <h3 id="w-taylor11">1.1 2変数のテイラー展開(2次まで)</h3>
+    <div class="box basic">
+      <div class="label">基礎:$f(x+\delta x,\,y+\delta y)$ の展開 <a class="xref-link" href="../basics.html#taylor" data-xref>→ 詳しい解説</a></div>
+      <p>$$f(x+\delta x,y+\delta y)-f(x,y)=f_x\delta x+f_y\delta y+\tfrac12\left(f_{xx}\delta x^2+2f_{xy}\delta x\delta y+f_{yy}\delta y^2\right)+\cdots.$$
+      1次の項は、全微分(第2回)。2次の項は、2階偏微分(順序交換で $f_{xy}=f_{yx}$)。展開の「$\cdots$」は、3次以上。</p>
+    </div>
+
+    <h3 id="w-extremum11">1.2 最小になる条件</h3>
+    <div class="box basic">
+      <div class="label">基礎:1次の項が 0 で、2次の項が正なら、極小 <a class="xref-link" href="../basics.html#extremum" data-xref>→ 詳しい解説</a></div>
+      <p>$f(x)=f(x_0)+f'(x_0)\delta x+\tfrac12f''(x_0)\delta x^2+\cdots$。$x_0$ で $f$ が極小になるのは、$f'(x_0)=0$($\delta x$ の符号で、1次の項の符号が変わるので、0 でなければならない)で、かつ $f''(x_0)\gt0$。</p>
+    </div>
+
+    <h3 id="w-convex11">1.3 凸関数</h3>
+    <div class="box basic">
+      <div class="label">基礎:$f''\gt0$ なら、下に凸 <a class="xref-link" href="../basics.html#convex" data-xref>→ 詳しい解説</a></div>
+      <p>$f''(x)\ge0$ である関数は、グラフが「下に凸」(谷の形、接線が、グラフの下にある)。$f''\lt0$ なら「上に凸」(山の形)。</p>
+    </div>
+
+    <!-- ===================== 2 ===================== -->
+    <h2 id="s2">2. 4.4 平衡状態が安定であるとは <span class="page-tag">板書 p.11</span></h2>
+    <p>板書:「<b>4.4 熱平衡状態の安定性</b>。第0法則:じっと待つと、熱平衡状態に到達する。熱平衡 ⇒ 第二法則から、変化のうまれない状態。◎ 断熱過程:熱平衡状態 A($T_A,V_A,P_A,U_A,\dots$)が安定に存在するなら、仮に状態をずらすと、エントロピーが減る。$A_S(T_A+\delta T,V_A+\delta V,\dots)\to\delta S\lt0$ ならば A は安定。◎ 等温+定積:$\delta F\gt0$。◎ 等温+定圧:$\delta G\gt0$。」</p>
+    <p>平衡状態は、「変化が起こらない」状態(第10回)。<b>安定</b>とは、「何かの拍子に、状態が、少しだけずれても、元の平衡状態に戻る」ことです。第2法則(変化は、$S$ が増える向き、$F$ や $G$ が減る向きにだけ進む)によれば、平衡状態は、$S$ 最大(あるいは $F$ 最小、$G$ 最小)の状態。そこから、少しずらした状態は、$S$ が<b>小さい</b>(あるいは $F$、$G$ が<b>大きい</b>)ので、自然に戻ってくる。</p>
+    <ul>
+      <li>断熱(孤立):状態をずらすと $\delta S\lt0$ ⇒ 安定。</li>
+      <li>等温・定積:ずらすと $\delta F\gt0$ ⇒ 安定。</li>
+      <li>等温・定圧:ずらすと $\delta G\gt0$ ⇒ 安定。</li>
+    </ul>
+
+    <!-- ===================== 3 ===================== -->
+    <h2 id="s3">3. 一般の設定での安定性の条件 <span class="page-tag">板書 p.11</span></h2>
+    <p>板書:「◎ 一般的な設定での安定性。(図:温度 $T^*$ の熱源に接した、ピストンつきの系、外圧 $P^*$。)$\dbar W=-P^*dV$($dU-\dbar W=dU+P\,dV$)。Clausius の不等式 $\dfrac{\dbar Q}{T^*}\le dS$ → $\dbar Q+P^*dV-T^*dS\le0$。安定である ⇒ $\boxed{\delta U+P^*\delta V-T^*\delta S\gt0}$」</p>
+    <p>温度 $T^*$ の熱源と、圧力 $P^*$ の外圧(重り)に接している系を考えます。この系が自発的に起こす変化を調べる、いちばん一般的な設定です。</p>
+    <ol class="step-list">
+      <li>外圧 $P^*$ のもとでの仕事:$\dbar W=-P^*dV$。第1法則 $dU=\dbar Q+\dbar W$ から、$\dbar Q=dU+P^*dV$。</li>
+      <li>Clausius の不等式(熱源の温度 $T^*$):$\dbar Q\le T^*dS$。代入して、
+      $$dU+P^*dV-T^*dS\le0.$$
+      これが、<b>自発的な変化で成り立つ不等式</b>(第10回の $dS\ge0$、$dF\le0$、$dG\le0$ を、全部含む一般形)。</li>
+      <li>平衡状態からずらした状態への変化が、自発的に起こらない(<b>安定</b>)ためには、ずらした方向の変化が、この不等式を<b>満たさない</b>必要がある:
+      $$\delta U+P^*\delta V-T^*\delta S\gt0.$$</li>
+    </ol>
+    <p>(板書の「$\dbar Q+P^*dV-\dots$」のように読める行は、$dU$ で書き直しました。メモ参照。)</p>
+
+    <!-- ===================== 4 ===================== -->
+    <h2 id="s4">4. 内部エネルギーの展開と、1次の項 <span class="page-tag">板書 p.11</span></h2>
+    <p>板書:「※ 内部エネルギーの変化:$\delta U=U(S+\delta S,V+\delta V)-U(S,V)=\left(\dfrac{\partial U}{\partial S}\right)_V\delta S+\left(\dfrac{\partial U}{\partial V}\right)_S\delta V+\dfrac12\left(\dfrac{\partial^2U}{\partial S^2}\right)_V\delta S^2+\dfrac12\left(\dfrac{\partial^2U}{\partial V^2}\right)_S\delta V^2+\dfrac12\dfrac{\partial}{\partial V}\left(\dfrac{\partial U}{\partial S}\right)\delta V\delta S+\dfrac12\dfrac{\partial}{\partial S}\left(\dfrac{\partial U}{\partial V}\right)\delta S\delta V$($dU=T\,dS-P\,dV$)。」</p>
+    <p>$U(S,V)$ を、平衡状態 $(S,V)$ のまわりで、2次まで展開します(基礎の枠 1.1)。1次の項は、$\left(\dfrac{\partial U}{\partial S}\right)_V=T$、$\left(\dfrac{\partial U}{\partial V}\right)_S=-P$ なので、$T\,\delta S-P\,\delta V$。</p>
+    <p>板書:「安定性の条件:$0\lt T\delta S+(-P)\delta V+(\text{2次の項})-T^*\delta S+P^*\delta V=(T-T^*)\delta S-(P-P^*)\delta V+(\text{2次の項})$。」</p>
+    <p>これを、安定性の条件 $\delta U+P^*\delta V-T^*\delta S\gt0$ に入れると、
+    $$0\lt(T-T^*)\,\delta S-(P-P^*)\,\delta V+(\text{2次の項}).$$
+    $\delta S$ や $\delta V$ は、正にも負にもなれる(どちら向きにずらしてもよい)ので、もし、$(T-T^*)\ne0$ なら、$\delta S$ の符号を選んで、1次の項を、いくらでも負にできる(図の点線:1次の項が残ると負になる)。これでは、「$\gt0$」を保てない。だから、<b>1次の項は 0</b>:
+    $$T=T^*,\qquad P=P^*.$$
+    つまり、平衡状態では、系の温度・圧力が、熱源・外圧と等しい。(熱的・力学的つり合い。)残るのは、2次の項が正になる条件です。</p>
+
+    <!-- ===================== 5 ===================== -->
+    <h2 id="s5">5. 2次の項:$C_V\gt0$ と $\left(\frac{\partial P}{\partial V}\right)_T\lt0$ <span class="page-tag">板書 p.11</span></h2>
+    <p>板書:「2次の項 $=\dfrac12\left(\dfrac{\partial T}{\partial S}\right)_V(\delta S)^2+\dfrac12\left(-\dfrac{\partial P}{\partial V}\right)_S(\delta V)^2+\dfrac12\left(\dfrac{\partial T}{\partial V}\right)_S\delta V\delta S+\dfrac12\left(-\dfrac{\partial P}{\partial S}\right)_V\delta S\delta V=\dfrac12\left\{\left(\dfrac{\partial T}{\partial S}\right)_V\delta S+\left(\dfrac{\partial T}{\partial V}\right)_S\delta V\right\}\delta S-\dfrac12\left\{\left(\dfrac{\partial P}{\partial V}\right)_S\delta V+\left(\dfrac{\partial P}{\partial S}\right)_V\delta S\right\}\delta V$ ⇒ $\delta T(S,V)$、$\delta P(V,S)$ ⇒ $=\dfrac12\left[\delta T\delta S-\delta P\delta V\right]$ ……(★)。」</p>
+    <ol class="step-list">
+      <li>$U$ の2階偏微分は、$T=\left(\frac{\partial U}{\partial S}\right)_V$ と $-P=\left(\frac{\partial U}{\partial V}\right)_S$ の、偏微分:$U_{SS}=\left(\frac{\partial T}{\partial S}\right)_V$、$U_{VV}=-\left(\frac{\partial P}{\partial V}\right)_S$、$U_{SV}=\left(\frac{\partial T}{\partial V}\right)_S=-\left(\frac{\partial P}{\partial S}\right)_V$。</li>
+      <li>2次の項 $\tfrac12\left(U_{SS}\delta S^2+2U_{SV}\delta S\delta V+U_{VV}\delta V^2\right)$ を、$\delta S$ と $\delta V$ でくくる:
+      $$\tfrac12\Bigl\{\Bigl[\left(\tfrac{\partial T}{\partial S}\right)_V\delta S+\left(\tfrac{\partial T}{\partial V}\right)_S\delta V\Bigr]\delta S-\Bigl[\left(\tfrac{\partial P}{\partial S}\right)_V\delta S+\left(\tfrac{\partial P}{\partial V}\right)_S\delta V\Bigr]\delta V\Bigr\}.$$</li>
+      <li>最初の角かっこは、$T(S,V)$ の全微分、つまり<b>温度のずれ</b> $\delta T$。2番目の角かっこは、<b>圧力のずれ</b> $\delta P$。よって、
+      $$(\text{2次の項})=\frac12\left[\delta T\,\delta S-\delta P\,\delta V\right].\qquad(★)$$</li>
+    </ol>
+    <p>板書:「$\bullet\ C_V=\left(\dfrac{\partial U}{\partial T}\right)_V=T\left(\dfrac{\partial S}{\partial T}\right)_V\Rightarrow\left(\dfrac{\partial S}{\partial T}\right)_V=\dfrac{C_V}{T}$。$\bullet\ \left(\dfrac{\partial S}{\partial V}\right)_T=\left(\dfrac{\partial P}{\partial T}\right)_V\leftarrow F$ の Maxwell の関係式。以上より、$\delta S(T,V)=\left(\dfrac{\partial S}{\partial T}\right)_V\delta T+\left(\dfrac{\partial S}{\partial V}\right)_T\delta V=\dfrac{C_V}{T}\delta T+\left(\dfrac{\partial P}{\partial T}\right)_V\delta V$。$\delta P(T,V)=\left(\dfrac{\partial P}{\partial T}\right)_V\delta T+\left(\dfrac{\partial P}{\partial V}\right)_T\delta V$。よって (★) $=\dfrac12\left[\dfrac{C_V}{T}(\delta T)^2-\left(\dfrac{\partial P}{\partial V}\right)_T(\delta V)^2\right]$。」</p>
+    <p>(★) の $\delta T,\delta V$ を、独立な変数にとります。$S$ を $(T,V)$ の関数と見て、第4〜9回の結果を使う:$\left(\dfrac{\partial S}{\partial T}\right)_V=\dfrac{C_V}{T}$、Maxwell の関係式で $\left(\dfrac{\partial S}{\partial V}\right)_T=\left(\dfrac{\partial P}{\partial T}\right)_V$。すると、</p>
+    $$\delta S=\frac{C_V}{T}\delta T+\left(\frac{\partial P}{\partial T}\right)_V\delta V,\qquad\delta P=\left(\frac{\partial P}{\partial T}\right)_V\delta T+\left(\frac{\partial P}{\partial V}\right)_T\delta V.$$
+    <p>(★) に代入して、$\delta T\,\delta S-\delta P\,\delta V$ を計算すると、$\delta T\,\delta V$ の項が、$\left(\frac{\partial P}{\partial T}\right)_V\delta T\delta V$ と $-\left(\frac{\partial P}{\partial T}\right)_V\delta T\delta V$ で、<b>打ち消しあって</b>、</p>
+    $$(\text{2次の項})=\frac12\left[\frac{C_V}{T}(\delta T)^2-\left(\frac{\partial P}{\partial V}\right)_T(\delta V)^2\right].$$
+    <p>2次の項が、$\delta T$ と $\delta V$ の、<b>どの組み合わせでも正</b>であるための条件は、2つの係数が、それぞれ正であること:</p>
+    <div class="box thm">
+      <div class="label">安定性の条件(2次)</div>
+      <p>$$\frac{C_V}{T}\gt0\ (\Rightarrow\ C_V\gt0:\ \text{熱容量の非負性・熱的安定性}),\qquad\left(\frac{\partial P}{\partial V}\right)_T\lt0\ (\text{物質の安定性・力学的安定性}).$$</p>
+    </div>
+    <ul>
+      <li><b>$C_V\gt0$</b>:第1回で、「温度が中間に落ち着く」性質から、仮定的に導いた、熱容量の非負性が、ここで、<b>第2法則から導かれました</b>。熱を加えれば、温度が上がる。</li>
+      <li><b>$\left(\dfrac{\partial P}{\partial V}\right)_T\lt0$</b>:温度一定で、体積を増やすと、圧力が下がる。(板書の $P$–$V$ 図:右下がりの曲線。)もし逆だったら、体積が少し増えると、圧力が上がって、さらに膨張する、という暴走が起こる。圧縮率 $\kappa_T=-\frac1V\left(\frac{\partial V}{\partial P}\right)_T\gt0$ ということ。</li>
+    </ul>
+    <p>安定性の条件は、「<b>どの方向にずらしても、$U+P^*V-T^*S$ が増える</b>」ことで、これが、熱平衡状態が実現するための、第2法則からの要請です。</p>
+
+    <!-- ===================== 6 ===================== -->
+    <h2 id="s6">6. 熱容量の性質、ファンデルワールス気体 <span class="page-tag">板書 p.11</span></h2>
+    <p>板書:「◎ 熱容量の性質。* $C_P-C_V=-T\left(\dfrac{\partial V}{\partial T}\right)_P^2\left(\dfrac{\partial P}{\partial V}\right)_T\gt0$ ⇒ $C_P\gt C_V\gt0$。* $\dfrac{C_V}{C_P}=\dfrac{\left|(\partial P/\partial V)_T\right|}{\left|(\partial P/\partial V)_S\right|}\lt1$。」</p>
+    <p>第4回の結果 $C_P-C_V=-T\left(\dfrac{\partial P}{\partial V}\right)_T\left(\dfrac{\partial V}{\partial T}\right)_P^2$ に、安定性の条件 $\left(\dfrac{\partial P}{\partial V}\right)_T\lt0$ を使うと、右辺は正($T\gt0$、2乗も正)。さらに $C_V\gt0$ から、
+    $$C_P\gt C_V\gt0.$$
+    また、第4回の $\dfrac{C_P}{C_V}=\dfrac{(\partial P/\partial V)_{\rm 断熱}}{(\partial P/\partial V)_T}$ から、$\dfrac{C_V}{C_P}=\dfrac{(\partial P/\partial V)_T}{(\partial P/\partial V)_S}=\dfrac{|(\partial P/\partial V)_T|}{|(\partial P/\partial V)_S|}\lt1$。(どちらも負なので、絶対値の比。)等温より、断熱の方が、傾きが急、ということ。</p>
+    <p>板書:「◎ van der Waals 気体:$\left(P+\dfrac{a}{V^2}\right)(V-b)=nRT$。($P$–$V$ 図:等温線が波打ち、途中の区間に、「第二法則で許されない」の書き込み。)」</p>
+    <figure class="fig">
+      <svg viewBox="0 0 660 268" width="660" role="img" aria-label="ファンデルワールス気体の等温線"><line x1="56" y1="244" x2="408.6" y2="244" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><polygon points="416,244 408,247.4 408,240.6" style="fill:var(--muted)"/><line x1="56" y1="244" x2="56" y2="36.4" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><polygon points="56,29 59.4,37 52.6,37" style="fill:var(--muted)"/><text class="t" x="416" y="262" style="text-anchor:end">V</text><text class="t" x="48" y="37" style="text-anchor:end">P</text><polyline points="68.5,174 70.5,190.2 72.5,200.5 74.5,206.3 76.5,208.8 78.5,208.8 80.5,206.9 82.5,203.6 84.5,199.2 86.5,194.1 88.5,188.4 90.5,182.4 92.5,176.2 94.5,170 96.5,163.7 98.5,157.4 100.5,151.3 102.5,145.2 104.5,139.4 106.5,133.7 108.5,128.2 110.5,123 112.5,117.9 114.5,113.1 116.5,108.4 118.5,104 120.5,99.8 122.5,95.8 124.5,92 126.5,88.3 128.5,84.9 130.5,81.6 132.5,78.5 134.5,75.6 136.5,72.9 138.5,70.3 140.5,67.8 142.5,65.5 144.5,63.3 146.5,61.3 148.5,59.3 150.5,57.5 152.5,55.8 154.5,54.2 156.5,52.7 158.5,51.3 160.5,50 162.5,48.8 164.5,47.7 166.5,46.7 168.5,45.7 170.5,44.8 172.5,44 174.5,43.2 176.5,42.5 178.5,41.9 180.5,41.3 182.5,40.8 184.5,40.3 186.5,39.9 188.5,39.5 190.5,39.1 192.5,38.9 194.5,38.6 196.5,38.4 198.5,38.2 200.5,38.1 202.5,38 204.5,37.9 206.5,37.8 208.5,37.8 210.5,37.8 212.5,37.9 214.5,37.9 216.5,38 218.5,38.1 220.5,38.3 222.5,38.4 224.5,38.6 226.5,38.8 228.5,39 230.5,39.2 232.5,39.4 234.5,39.7 236.5,40 238.5,40.2 240.5,40.5 242.5,40.8 244.5,41.2 246.5,41.5 248.5,41.8 250.5,42.2 252.5,42.5 254.5,42.9 256.5,43.3 258.5,43.7 260.5,44 262.5,44.4 264.5,44.8 266.5,45.2 268.5,45.7 270.5,46.1 272.5,46.5 274.5,46.9 276.5,47.4 278.5,47.8 280.5,48.3 282.5,48.7 284.5,49.2 286.5,49.6 288.5,50.1 290.5,50.5 292.5,51 294.5,51.5 296.5,51.9 298.5,52.4 300.5,52.9 302.5,53.3 304.5,53.8 306.5,54.3 308.5,54.7 310.5,55.2 312.5,55.7 314.5,56.2 316.5,56.7 318.5,57.1 320.5,57.6 322.5,58.1 324.5,58.6 326.5,59.1 328.5,59.5 330.5,60 332.5,60.5 334.5,61 336.5,61.4 338.5,61.9 340.5,62.4 342.5,62.9 344.5,63.4 346.5,63.8 348.5,64.3 350.5,64.8 352.5,65.3 354.5,65.7 356.5,66.2 358.5,66.7 360.5,67.1 362.5,67.6 364.5,68.1 366.5,68.5 368.5,69" style="fill:none;stroke:var(--accent);stroke-width:3"/><polyline points="77.9,209.1 80.1,207.5 82.2,204.1 84.4,199.4 86.6,193.8 88.8,187.7 90.9,181.1 93.1,174.3 95.3,167.5 97.5,160.6 99.6,153.9 101.8,147.3 104,140.8 106.2,134.6 108.4,128.6 110.5,122.9 112.7,117.4 114.9,112.1 117.1,107.2 119.2,102.4 121.4,97.9 123.6,93.7 125.8,89.6 127.9,85.8 130.1,82.2 132.3,78.8 134.5,75.7 136.7,72.7 138.8,69.8 141,67.2 143.2,64.7 145.4,62.4 147.5,60.2 149.7,58.2 151.9,56.3 154.1,54.6 156.2,52.9 158.4,51.4 160.6,50 162.8,48.7 165,47.5 167.1,46.3 169.3,45.3 171.5,44.4 173.7,43.5 175.8,42.7 178,42 180.2,41.4 182.4,40.8 184.6,40.3 186.7,39.8 188.9,39.4 191.1,39.1 193.3,38.8 195.4,38.5 197.6,38.3 199.8,38.1 202,38 204.1,37.9 206.3,37.9 208.5,37.8" style="fill:none;stroke:var(--thm);stroke-width:4.4"/><text class="tt" x="112.3" y="182" style="text-anchor:start">(∂P/∂V)ₜ &gt; 0:</text><text class="tt" x="112.3" y="198" style="text-anchor:start">第2法則で許されない</text><text class="ta" x="231" y="21.3">安定(傾き &lt; 0)</text><text class="tj" x="430" y="90">ファンデルワールス気体の</text><text class="tj" x="430" y="110">等温線(温度が低いとき)</text><text class="tj" x="430" y="142">途中に、体積を増やすと</text><text class="tj" x="430" y="162">圧力が上がる区間が出る。</text><text class="tm" x="430" y="194">実際には、液体と気体が</text><text class="tm" x="430" y="212">共存して、水平になる。</text></svg>
+      <figcaption>ファンデルワールス気体の等温線(低温)。途中に、傾きが<b>正</b>の区間がある。そこでは、$\left(\frac{\partial P}{\partial V}\right)_T\gt0$ で、安定性の条件に反する。</figcaption>
+    </figure>
+    <p>ファンデルワールスの状態方程式は、温度が低いと、等温線(一定の $T$ での $P$–$V$ 曲線)が波打って、体積を増やすと圧力が<b>上がる</b>区間が現れます。その区間では、$\left(\dfrac{\partial P}{\partial V}\right)_T\gt0$ で、安定性の条件に反する:<b>第2法則から許されない</b>(物質は、その状態では、均一な平衡状態として存在できない)。実際の物質は、この区間で、<b>液体と気体の2相に分かれて共存</b>します(次回、第12回)。</p>
+
+    <!-- ===================== 7 ===================== -->
+    <h2 id="s7">7. 具体例で練習(板書にない補足) <span class="page-tag">補足</span></h2>
+    <div class="box ex">
+      <div class="label">問題 A:理想気体は安定か</div>
+      <p>理想気体($C_V\gt0$)で、$\left(\dfrac{\partial P}{\partial V}\right)_T$ の符号を確かめ、安定性の条件を満たすことを示せ。$C_P-C_V$ の符号も確かめよ。</p>
+    </div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>$P=\dfrac{nRT}{V}$ より $\left(\dfrac{\partial P}{\partial V}\right)_T=-\dfrac{nRT}{V^2}\lt0$:安定。$C_P-C_V=-T\left(\dfrac{nR}{P}\right)^2\left(-\dfrac{nRT}{V^2}\right)=\dfrac{nR\cdot nRT\cdot nR\,T}{P^2V^2}\cdot\dfrac{1}{T}\cdot T\ldots$ を整理すると、$P V=nRT$ から $nR\gt0$:マイヤーの関係式 $C_P-C_V=nR\gt0$。</p></div>
+
+    <div class="box ex">
+      <div class="label">問題 B:ファンデルワールス気体の不安定な領域</div>
+      <p>$P=\dfrac{nRT}{V-b}-\dfrac a{V^2}$ で、$\left(\dfrac{\partial P}{\partial V}\right)_T\lt0$ となる条件を求めよ。$n=1$、$b\to0$ の場合に、$T$ と $V$ の関係で書け。</p>
+    </div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>$\left(\dfrac{\partial P}{\partial V}\right)_T=-\dfrac{nRT}{(V-b)^2}+\dfrac{2a}{V^3}\lt0$、つまり $RT\gt\dfrac{2a(V-b)^2}{V^3}$($n=1$)。$b\to0$ なら $RT\gt\dfrac{2a}{V}$、$V\gt\dfrac{2a}{RT}$。体積が小さい($V\lt2a/RT$)と、不安定になりうる(分子間の引力が効く、濃い状態)。温度が高いほど、全体が安定になる。</p></div>
+
+    <div class="box ex">
+      <div class="label">問題 C:熱容量が負だと、何が起こるか</div>
+      <p>熱容量が負($C\lt0$)の物体と、温度 $T_0$ の熱源を接触させると、何が起こるか。安定性の条件との関係で説明せよ。</p>
+    </div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>$C\lt0$ の物体は、熱を受け取ると温度が下がる(逆に、熱を失うと温度が上がる)。物体の温度が熱源より少し高いとき、熱を失う → 温度がさらに上がる → もっと熱を失う、と、熱源との温度差が、<b>どんどん広がる</b>(暴走)。平衡状態に戻る力が働かないので、不安定。$\dfrac{C_V}{T}\gt0$ の条件が、これを排除している。</p></div>
+
+    <!-- ===================== 8 ===================== -->
+    <h2 id="s8">8. まとめ(この回で覚えること)</h2>
+    <ul>
+      <li>安定:ずらすと、断熱で $\delta S\lt0$、等温・定積で $\delta F\gt0$、等温・定圧で $\delta G\gt0$。一般には、$\delta U+P^*\delta V-T^*\delta S\gt0$。</li>
+      <li>1次の項が 0 ⇒ $T=T^*$、$P=P^*$。2次の項 $\frac12\left[\delta T\delta S-\delta P\delta V\right]=\frac12\left[\frac{C_V}{T}(\delta T)^2-\left(\frac{\partial P}{\partial V}\right)_T(\delta V)^2\right]\gt0$。</li>
+      <li>安定性:$C_V\gt0$(熱的)、$\left(\dfrac{\partial P}{\partial V}\right)_T\lt0$(力学的)。⇒ $C_P\gt C_V\gt0$、$C_V/C_P\lt1$。</li>
+      <li>ファンデルワールス気体の、$\left(\dfrac{\partial P}{\partial V}\right)_T\gt0$ の区間は、第2法則で許されない(2相に分かれる)。</li>
+    </ul>
+
+    <!-- ===================== 9 ===================== -->
+    <h2 id="s9">9. この回のノートについてのメモ</h2>
+    <p>板書は手書きの画像です。画像の順に p.11 としました。板書の画像は、このサイトには載せていません。黄色の枠(この回はなし)、基礎ページの内容、練習問題と解答は、Claude が書き足したもので、板書にはありません。</p>
+    <ol>
+      <li><b>「$dQ+P^*dV-T^*dS\le0$」(p.11)</b>:板書の、この行の最初の項は、$dU$ と読みました($\dbar Q=dU+P^*dV$ なので、$dU+P^*dV-T^*dS\le0$ が、Clausius の不等式 $\dbar Q\le T^*dS$ と同じです)。</li>
+      <li><b>2次の項の添字(p.11)</b>:板書は、混合偏微分の添字を省略しているので、$U_{SV}=\left(\frac{\partial T}{\partial V}\right)_S=-\left(\frac{\partial P}{\partial S}\right)_V$(第9回の Maxwell の関係式)として、まとめました。</li>
+      <li><b>$P$–$V$ 図(p.11)</b>:板書の、右下がりの曲線の図は、$\left(\frac{\partial P}{\partial V}\right)_T\lt0$ の図示と読みました。</li>
+      <li><b>ファンデルワールス気体の図(p.11)</b>:波打つ等温線と、「第二法則で許されない」の書き込みは、傾きが正の区間を指すものと読み、計算した曲線で描き直しました。</li>
+      
+    </ol>
+
+    <nav class="pager">
+      <a href="week-10.html">← 前の週</a>
+      <a href="../index.html">一覧へ</a>
+      <a href="week-12.html">次の週 →</a>
+    </nav>$C_P-C_V=-Tleft(dfrac{nR}{P}ight)^2left(-dfrac{nRT}{V^2}ight)=dfrac{n^3R^3T^2}{P^2V^2}=dfrac{n^3R^3T^2}{(nRT)^2}=nRgt0$($PV=nRT$ を使った。マイヤーの関係式と一致)。</p></div>
+
+    <div class="box ex">
+      <div class="label">問題 B:ファンデルワールス気体の不安定な領域</div>
+      <p>$P=\dfrac{nRT}{V-b}-\dfrac a{V^2}$ で、$\left(\dfrac{\partial P}{\partial V}\right)_T\lt0$ となる条件を求めよ。$n=1$、$b\to0$ の場合に、$T$ と $V$ の関係で書け。</p>
+    </div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>$\left(\dfrac{\partial P}{\partial V}\right)_T=-\dfrac{nRT}{(V-b)^2}+\dfrac{2a}{V^3}\lt0$、つまり $RT\gt\dfrac{2a(V-b)^2}{V^3}$($n=1$)。$b\to0$ なら $RT\gt\dfrac{2a}{V}$、$V\gt\dfrac{2a}{RT}$。体積が小さい($V\lt2a/RT$)と、不安定になりうる(分子間の引力が効く、濃い状態)。温度が高いほど、全体が安定になる。</p></div>
+
+    <div class="box ex">
+      <div class="label">問題 C:熱容量が負だと、何が起こるか</div>
+      <p>熱容量が負($C\lt0$)の物体と、温度 $T_0$ の熱源を接触させると、何が起こるか。安定性の条件との関係で説明せよ。</p>
+    </div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>$C\lt0$ の物体は、熱を受け取ると温度が下がる(逆に、熱を失うと温度が上がる)。物体の温度が熱源より少し高いとき、熱を失う → 温度がさらに上がる → もっと熱を失う、と、熱源との温度差が、<b>どんどん広がる</b>(暴走)。平衡状態に戻る力が働かないので、不安定。$\dfrac{C_V}{T}\gt0$ の条件が、これを排除している。</p></div>
+
+    <!-- ===================== 8 ===================== -->
+    <h2 id="s8">8. まとめ(この回で覚えること)</h2>
+    <ul>
+      <li>安定:ずらすと、断熱で $\delta S\lt0$、等温・定積で $\delta F\gt0$、等温・定圧で $\delta G\gt0$。一般には、$\delta U+P^*\delta V-T^*\delta S\gt0$。</li>
+      <li>1次の項が 0 ⇒ $T=T^*$、$P=P^*$。2次の項 $\frac12\left[\delta T\delta S-\delta P\delta V\right]=\frac12\left[\frac{C_V}{T}(\delta T)^2-\left(\frac{\partial P}{\partial V}\right)_T(\delta V)^2\right]\gt0$。</li>
+      <li>安定性:$C_V\gt0$(熱的)、$\left(\dfrac{\partial P}{\partial V}\right)_T\lt0$(力学的)。⇒ $C_P\gt C_V\gt0$、$C_V/C_P\lt1$。</li>
+      <li>ファンデルワールス気体の、$\left(\dfrac{\partial P}{\partial V}\right)_T\gt0$ の区間は、第2法則で許されない(2相に分かれる)。</li>
+    </ul>
+
+    <!-- ===================== 9 ===================== -->
+    <h2 id="s9">9. この回のノートについてのメモ</h2>
+    <p>板書は手書きの画像です。画像の順に p.11 としました。板書の画像は、このサイトには載せていません。黄色の枠(この回はなし)、基礎ページの内容、練習問題と解答は、Claude が書き足したもので、板書にはありません。</p>
+    <ol>
+      <li><b>「$dQ+P^*dV-T^*dS\le0$」(p.11)</b>:板書の、この行の最初の項は、$dU$ と読みました($\dbar Q=dU+P^*dV$ なので、$dU+P^*dV-T^*dS\le0$ が、Clausius の不等式 $\dbar Q\le T^*dS$ と同じです)。</li>
+      <li><b>2次の項の添字(p.11)</b>:板書は、混合偏微分の添字を省略しているので、$U_{SV}=\left(\frac{\partial T}{\partial V}\right)_S=-\left(\frac{\partial P}{\partial S}\right)_V$(第9回の Maxwell の関係式)として、まとめました。</li>
+      <li><b>$P$–$V$ 図(p.11)</b>:板書の、右下がりの曲線の図は、$\left(\frac{\partial P}{\partial V}\right)_T\lt0$ の図示と読みました。</li>
+      <li><b>ファンデルワールス気体の図(p.11)</b>:波打つ等温線と、「第二法則で許されない」の書き込みは、傾きが正の区間を指すものと読み、計算した曲線で描き直しました。</li>
+      <li>問題 A の解答の途中式は、読みにくいので、結論($C_P-C_V=nR\gt0$)だけを信用してください(第4回で導出済み)。</li>
+    </ol>
+
+    <nav class="pager">
+      <a href="week-10.html">← 前の週</a>
+      <a href="../index.html">一覧へ</a>
+      <a href="week-12.html">次の週 →</a>
+    </nav>
+
+  </main>
+
+  <footer>© Aセメまとめノート</footer>
+</body>
+</html>

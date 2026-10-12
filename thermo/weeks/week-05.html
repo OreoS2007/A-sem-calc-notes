@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>第5回 第2法則(1):可逆と不可逆、Clausius と Kelvin | Aセメまとめノート</title>
+  <link rel="stylesheet" href="../../assets/style.css">
+  <script defer src="../../assets/nav.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],macros:{'\\R':'\\mathbb{R}','\\bm':'\\boldsymbol{#1}','\\dd':'\\mathrm{d}','\\dbar':'\\mathrm{d}^{\\prime}'}});window.__navReady&&window.__navReady()"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="inner">
+      <a class="site-title" href="../../index.html">Aセメまとめノート</a>
+      <span class="links"><a href="../index.html">熱力学</a><a href="../basics.html">基礎のまとめ</a><a href="../../calc/index.html">微積</a><a href="../../linalg/index.html">線形代数</a><a href="../../em/index.html">電磁気学</a><a href="../../mech/index.html">力学A</a></span>
+    </div>
+  </header>
+
+  <main class="note">
+    <h1>第5回:第2法則(1)可逆と不可逆、Clausius と Kelvin</h1>
+    <div class="meta">熱力学(東京大学 教養学部 秋学期)／板書 p.5〜p.6(画像の順に数えています)／ノートの見出し「3. 熱力学第二法則」(3.1〜3.5)</div>
+
+    <nav class="toc">
+      <div class="toc-title">目次</div>
+      <ol start="0">
+        <li><a href="#s0">この回の全体像</a></li>
+        <li><a href="#s1">準備:基礎の確認</a>
+          <div class="sub">熱機関と熱効率／熱源(熱浴)／背理法</div></li>
+        <li><a href="#s2">3.1 可逆過程と不可逆過程</a>(p.5)</li>
+        <li><a href="#s3">3.2 Clausius の原理</a>(p.5)</li>
+        <li><a href="#s4">3.3 Carnot サイクル</a>(p.6)</li>
+        <li><a href="#s5">Carnot サイクルの性質1:正の仕事をする</a>(p.6)</li>
+        <li><a href="#s6">3.4 Kelvin の原理</a>(p.6)</li>
+        <li><a href="#s7">3.5 できることとできないこと</a>(p.6)</li>
+        <li><a href="#s8">具体例で練習</a></li>
+        <li><a href="#s9">まとめ(この回で覚えること)</a></li>
+        <li><a href="#s10">この回のノートについてのメモ</a></li>
+      </ol>
+    </nav>
+
+    <!-- ===================== 0 ===================== -->
+    <h2 id="s0">0. この回の全体像 <span class="page-tag">板書 p.5–6</span></h2>
+    <p>ここから、熱力学のいちばん大事な部分、<b>第2法則</b>に入ります。板書の冒頭に、法則の整理が書かれています。</p>
+    <div class="box note-box">
+      <div class="label">板書:3. 熱力学第二法則(冒頭)</div>
+      <p><b>第0法則</b>:熱平衡状態の存在。<br>
+      <b>第1法則</b>:熱と仕事のエネルギー保存則 $dU=\dbar Q+\dbar W$。熱と仕事の<b>等価性</b>。<br>
+      <b>第2法則</b>:熱と仕事の<b>非等価性</b>(できることと、できないこと)。</p>
+    </div>
+    <p>第1法則は「熱と仕事は、エネルギーとして同じもので、足し算できる」と言っています。ところが、現実には、<b>仕事は全部、熱に変えられる(摩擦)のに、熱を全部、仕事に変えることはできない</b>。熱いコーヒーは勝手に冷めるが、冷めたコーヒーが勝手に熱くなることはない。第1法則(エネルギー保存)だけでは、こうした<b>向き</b>の違いは説明できません。これを定式化したのが第2法則です。</p>
+    <div class="box thm">
+      <div class="label">この回のゴール</div>
+      <p>① <b>可逆過程</b>と<b>不可逆過程</b>の定義。不可逆であることを示す戦略(背理法)。<br>
+      ② 第2法則の2つの表現:<b>Clausius の原理</b>(低温から高温へ、他に何も残さずに熱を移すことはできない)と、<b>Kelvin の原理</b>(1つの熱源から熱をとって、他に何も残さずに、全部仕事に変えることはできない)。この2つは、同じ内容。<br>
+      ③ <b>Carnot サイクル</b>(2つの熱源を使う可逆サイクル)と、その性質(正のサイクルは正の仕事をする)。<br>
+      ④ 「できること」(仕事→熱、熱→仕事の一部、熱ポンプ、熱伝導)と「できないこと」(不可逆過程の逆過程)。</p>
+    </div>
+    <figure class="fig">
+      <svg viewBox="0 0 500 248" width="500" role="img" aria-label="自然な変化の向き"><text class="tt" x="14" y="22">(a) 温度の違う2つの気体 → (b) 同じ温度 T* に</text><rect x="30" y="36" width="80" height="56" rx="0" style="fill:var(--thm);fill-opacity:.25;stroke:var(--text);stroke-width:2.4"/><rect x="110" y="36" width="80" height="56" rx="0" style="fill:var(--accent);fill-opacity:.25;stroke:var(--text);stroke-width:2.4"/><text class="t" x="70" y="62" style="text-anchor:middle">V₁</text><text class="t" x="70" y="80" style="text-anchor:middle">T₁</text><text class="t" x="150" y="62" style="text-anchor:middle">V₂</text><text class="t" x="150" y="80" style="text-anchor:middle">T₂</text><text class="tm" x="110" y="108" style="text-anchor:middle">T₁ ＞ T₂</text><line x1="215" y1="64" x2="281.6" y2="64" style="stroke:var(--text);stroke-width:2.4;fill:none"/><polygon points="290,64 281,68 281,60" style="fill:var(--text)"/><text class="tj" x="252" y="54" style="text-anchor:middle">自然に</text><rect x="310" y="36" width="80" height="56" rx="0" style="fill:var(--ex);fill-opacity:.25;stroke:var(--text);stroke-width:2.4"/><rect x="390" y="36" width="80" height="56" rx="0" style="fill:var(--ex);fill-opacity:.25;stroke:var(--text);stroke-width:2.4"/><line x1="390" y1="36" x2="390" y2="92" style="stroke:var(--thm);stroke-width:3;stroke-dasharray:5 3"/><text class="t" x="350" y="68" style="text-anchor:middle">T*</text><text class="t" x="430" y="68" style="text-anchor:middle">T*</text><text class="tm" x="390" y="108" style="text-anchor:middle">透熱壁</text><line x1="290" y1="90" x2="223.4" y2="90" style="stroke:var(--muted);stroke-width:2.4;fill:none"/><polygon points="215,90 224,86 224,94" style="fill:var(--muted)"/><line x1="245" y1="83" x2="259" y2="97" style="stroke:#c0392b;stroke-width:5;opacity:.85"/><line x1="245" y1="97" x2="259" y2="83" style="stroke:#c0392b;stroke-width:5;opacity:.85"/><text class="tm" x="252" y="112" style="text-anchor:middle">自然には戻らない</text><text class="tt" x="14" y="148">(a′) 気体と真空 → (b′) 全体に広がる</text><rect x="30" y="160" width="160" height="56" rx="0" style="fill:none;stroke:var(--text);stroke-width:2.4"/><line x1="110" y1="160" x2="110" y2="216" style="stroke:var(--text);stroke-width:2.4"/><circle cx="61.2" cy="168.3" r="2.4" style="fill:var(--muted)"/><circle cx="85.6" cy="192.4" r="2.4" style="fill:var(--muted)"/><circle cx="77.1" cy="179.9" r="2.4" style="fill:var(--muted)"/><circle cx="69.4" cy="178.9" r="2.4" style="fill:var(--muted)"/><circle cx="48.2" cy="186.5" r="2.4" style="fill:var(--muted)"/><circle cx="72.3" cy="198.3" r="2.4" style="fill:var(--muted)"/><circle cx="99.6" cy="198.8" r="2.4" style="fill:var(--muted)"/><circle cx="63.1" cy="180.1" r="2.4" style="fill:var(--muted)"/><circle cx="59.3" cy="191.9" r="2.4" style="fill:var(--muted)"/><circle cx="38.6" cy="198.7" r="2.4" style="fill:var(--muted)"/><circle cx="85" cy="188.1" r="2.4" style="fill:var(--muted)"/><circle cx="60.8" cy="175.3" r="2.4" style="fill:var(--muted)"/><text class="tj" x="150" y="192" style="text-anchor:middle">真空</text><line x1="215" y1="188" x2="281.6" y2="188" style="stroke:var(--text);stroke-width:2.4;fill:none"/><polygon points="290,188 281,192 281,184" style="fill:var(--text)"/><text class="tj" x="252" y="178" style="text-anchor:middle">自然に</text><rect x="310" y="160" width="160" height="56" rx="0" style="fill:none;stroke:var(--text);stroke-width:2.4"/><circle cx="400.4" cy="176.2" r="2.4" style="fill:var(--muted)"/><circle cx="420.6" cy="195.7" r="2.4" style="fill:var(--muted)"/><circle cx="365.7" cy="193.8" r="2.4" style="fill:var(--muted)"/><circle cx="336.2" cy="192.5" r="2.4" style="fill:var(--muted)"/><circle cx="345" cy="182.5" r="2.4" style="fill:var(--muted)"/><circle cx="382.8" cy="201.7" r="2.4" style="fill:var(--muted)"/><circle cx="435.2" cy="179.1" r="2.4" style="fill:var(--muted)"/><circle cx="448.9" cy="203.1" r="2.4" style="fill:var(--muted)"/><circle cx="398.6" cy="204.3" r="2.4" style="fill:var(--muted)"/><circle cx="450.5" cy="194.6" r="2.4" style="fill:var(--muted)"/><circle cx="337.7" cy="184.3" r="2.4" style="fill:var(--muted)"/><circle cx="462.4" cy="172.3" r="2.4" style="fill:var(--muted)"/><line x1="290" y1="214" x2="223.4" y2="214" style="stroke:var(--muted);stroke-width:2.4;fill:none"/><polygon points="215,214 224,210 224,218" style="fill:var(--muted)"/><line x1="245" y1="207" x2="259" y2="221" style="stroke:#c0392b;stroke-width:5;opacity:.85"/><line x1="245" y1="221" x2="259" y2="207" style="stroke:#c0392b;stroke-width:5;opacity:.85"/><text class="tm" x="252" y="236" style="text-anchor:middle">自然には戻らない</text></svg>
+      <figcaption>自然には、一方向にだけ起こる変化。(上)温度の違う2つの気体が、同じ温度になる。(下)気体が真空へ広がる。どちらも、逆向きは、自然には起こらない。</figcaption>
+    </figure>
+
+    <!-- ===================== 1 ===================== -->
+    <h2 id="s1">1. 準備:基礎の確認</h2>
+
+    <h3 id="w-engine">1.1 熱機関と熱効率(高校)</h3>
+    <div class="box basic">
+      <div class="label">基礎:熱を仕事に変える装置 <a class="xref-link" href="../basics.html#heatengine" data-xref>→ 詳しい解説</a></div>
+      <p><b>熱機関</b>は、高温の熱源から熱 $Q_1$ をもらい、一部を仕事 $W$ に変え、残りの熱 $Q_2$ を低温の熱源に捨てて、1周して元の状態に戻る装置です(エンジンなど)。1周で内部エネルギーは変わらないので、第1法則から $Q_1=W+Q_2$。<b>熱効率</b>は、もらった熱のうち、仕事に変わった割合:
+      $$\eta=\frac{W}{Q_1}=1-\frac{Q_2}{Q_1}.$$
+      現実のエンジンでは、$\eta$ は 0.3〜0.5 程度。「$\eta=1$(熱を全部仕事に)」にできないのは、なぜか。これが第2法則のテーマです。</p>
+    </div>
+
+    <h3 id="w-reservoir">1.2 熱源(熱浴)</h3>
+    <div class="box basic">
+      <div class="label">基礎:温度が変わらない、巨大な熱の出入り口 <a class="xref-link" href="../basics.html#reservoir" data-xref>→ 詳しい解説</a></div>
+      <p>熱を出し入れしても、温度が変わらないほど大きな物体を、<b>熱源</b>(または<b>熱浴</b>)といいます。たとえば、海や大気、大きな氷水のタンク。熱源の温度 $T$ は一定とみなす。以下の図では、熱源を、温度 $T$ のついた長方形で表します。熱は、熱源との間で出入りする。</p>
+    </div>
+
+    <h3 id="w-contra">1.3 背理法</h3>
+    <div class="box basic">
+      <div class="label">基礎:「そうだと仮定すると矛盾する」ことで、証明する <a class="xref-link" href="../basics.html#contradiction" data-xref>→ 詳しい解説</a></div>
+      <p>「A である」ことを示したいとき、「A でない」と仮定して、そこから、明らかにおかしいこと(矛盾)を導けば、「A でなかった」ことが否定され、A が正しいと分かります。<b>背理法</b>です。この回では、「ある過程が可逆だと仮定すると、法則(Clausius や Kelvin)に反する。だから、可逆でない(不可逆だ)」という形で、何度も使います。</p>
+      <p>例:「$\sqrt2$ は有理数でない」を示すとき、「有理数だ」と仮定して矛盾を導く。</p>
+    </div>
+
+    <!-- ===================== 2 ===================== -->
+    <h2 id="s2">2. 3.1 可逆過程と不可逆過程 <span class="page-tag">板書 p.5</span></h2>
+    <p>板書:「(a):体積 $V_1$、温度 $T_1$ の気体と、体積 $V_2$、温度 $T_2$ の気体($T_1\gt T_2$)を、仕切って入れた断熱容器。→ (b):仕切りが、透熱壁になって、両方が温度 $T^*$。(a′):気体と真空 → (b′):気体が全体に広がる。(a)→(b)、(a′)→(b′) は「自然に」状態変化する。<b>状態変化には向きがある</b>。」</p>
+    <p>どちらも、ひとりでに進む変化です。(a)→(b) は、熱が高温から低温へ流れて、同じ温度になる変化。(a′)→(b′) は、気体の分子が、広い方へ広がる変化。ところが、<b>逆向き</b>((b)→(a)、(b′)→(a′))は、まず起こりません。同じ温度の2つの気体が、ひとりでに温度差をつくることも、全体に広がった気体が、ひとりでに半分に集まることも、ない。これが「<b>状態変化には向きがある</b>」の意味です。</p>
+    <p>第1法則(エネルギー保存)は、逆向きの変化も禁止していません(エネルギーは、どちらの向きでも、保存できる)。この「向き」を決めるのが、第2法則です。</p>
+
+    <h3 id="s2a">可逆過程と不可逆過程の定義</h3>
+    <p>板書:「◎ <b>可逆過程</b>:状態 A から、操作 K により、状態 B へ変化。状態 B から、操作 K′ で A に戻せるとき、可逆過程とする。◎ <b>不可逆過程</b>:可逆過程でない。→ 不可逆であることの証明は難しい。」</p>
+    <figure class="fig">
+      <svg viewBox="0 0 430 222" width="430" role="img" aria-label="可逆過程"><rect x="40" y="60" width="90" height="46" rx="23" style="fill:var(--accent);fill-opacity:.2;stroke:var(--accent);stroke-width:2.4"/><text class="tj" x="85" y="88" style="text-anchor:middle">状態 A</text><rect x="300" y="60" width="90" height="46" rx="23" style="fill:var(--ex);fill-opacity:.2;stroke:var(--ex);stroke-width:2.4"/><text class="tj" x="345" y="88" style="text-anchor:middle">状態 B</text><path d="M130 72 Q215 28 296 72" style="fill:none;stroke:var(--thm);stroke-width:2.6"/><path d="M296 94 Q215 138 130 94" style="fill:none;stroke:var(--accent);stroke-width:2.6"/><line x1="262" y1="52" x2="289.7" y2="66.6" style="stroke:var(--thm);stroke-width:2.6;fill:none"/><polygon points="298,71 287.1,70.2 291.2,62.4" style="fill:var(--thm)"/><line x1="164" y1="117" x2="137.9" y2="100.1" style="stroke:var(--accent);stroke-width:2.6;fill:none"/><polygon points="130,95 140.8,96.7 136,104.1" style="fill:var(--accent)"/><text class="tt" x="215" y="30" style="text-anchor:middle">操作 K</text><text class="ta" x="215" y="152" style="text-anchor:middle">操作 K′</text><text class="tj" x="215" y="94" style="text-anchor:middle"></text><text class="tj" x="40" y="186">K′ で A に戻れるとき、K は「可逆過程」。</text><text class="tm" x="40" y="208">(厳密には、外界にも何の変化も残さずに戻れること)</text></svg>
+      <figcaption>可逆過程:操作 K で A → B に変えたあと、別の操作 K′ で、B → A に戻せる。</figcaption>
+    </figure>
+    <div class="box def">
+      <div class="label">可逆過程・不可逆過程</div>
+      <p><b>可逆過程</b>:状態 A から、ある操作 K で状態 B に変化したとき、状態 B から、ある操作 K′ で、状態 A に戻せるような過程。<b>不可逆過程</b>:可逆でない過程。</p>
+    </div>
+    <div class="box supp">
+      <div class="label">板書にない補足:「戻せる」とは、外界も含めて、元通りになること</div>
+      <p>板書の定義は簡潔ですが、本当の意味は、「系が A に戻る」だけでなく、<b>外界(熱源や、仕事をした相手)にも、何の変化も残らない</b>ことです。たとえば、(b)→(a) に戻すために、外から仕事をして、その分、熱が外界に出たのでは、外界が元と変わってしまう。系が A に戻っても、外界に痕跡が残るなら、「戻せた」とは言いません。次の 3.2〜3.5 の議論でも、「ほかに何も残さずに」という条件が、いつも付いています。</p>
+    </div>
+
+    <h3 id="s2b">不可逆であることの証明の戦略</h3>
+    <p>板書:「<b>証明戦略</b>:基本原理を設定する。ある過程とその原理の真偽関係を考える。ex) 過程 K が可逆とすると、原理 A がまちがっている → K は不可逆!」</p>
+    <p>「可逆でない」ことを直接示すのは難しい(あらゆる操作 K′ を試して、どれも A に戻せないことを、確かめなければならない)。そこで、<b>基本原理</b>(経験的に正しいと認める法則)を1つ決めておき、背理法を使います。</p>
+    <ol class="step-list">
+      <li>基本原理 A(Clausius の原理 や Kelvin の原理)を、正しいと認める。</li>
+      <li>過程 K が可逆だと仮定する。</li>
+      <li>そこから、原理 A に反することが導ける(矛盾)。</li>
+      <li>したがって、K は可逆でない。つまり、<b>K は不可逆</b>。</li>
+    </ol>
+    <p>この形の議論を、3.5 で、実際に行います。</p>
+
+    <!-- ===================== 3 ===================== -->
+    <h2 id="s3">3. 3.2 Clausius の原理 <span class="page-tag">板書 p.5</span></h2>
+    <p>板書:「<b>Clausius の原理</b>:熱力学第二法則のひとつの表現。低温の熱源から熱を受け取って、外に何も残さないで、高温の熱源に熱をわたすことはできない。」</p>
+    <div class="box thm">
+      <div class="label">Clausius の原理</div>
+      <p>低温の熱源から熱を受け取って、<b>ほかに何も変化を残さずに</b>、高温の熱源にその熱を渡すことは、できない。</p>
+    </div>
+    <figure class="fig">
+      <svg viewBox="0 0 520 208" width="520" role="img" aria-label="Clausius の原理"><rect x="60" y="24" width="150" height="26" rx="4" style="fill:var(--thm);fill-opacity:.22;stroke:var(--thm);stroke-width:2"/><text class="t" x="135" y="42" style="text-anchor:middle">T₁(高温)</text><rect x="60" y="166" width="150" height="26" rx="4" style="fill:var(--accent);fill-opacity:.22;stroke:var(--accent);stroke-width:2"/><text class="t" x="135" y="184" style="text-anchor:middle">T₂(低温)</text><line x1="135" y1="160" x2="135" y2="67.4" style="stroke:#c0392b;stroke-width:3.4;fill:none"/><polygon points="135,56 140.6,68 129.4,68" style="fill:#c0392b"/><text class="t" x="125" y="112" style="text-anchor:end">Q</text><line x1="121" y1="94" x2="149" y2="122" style="stroke:#c0392b;stroke-width:5;opacity:.85"/><line x1="121" y1="122" x2="149" y2="94" style="stroke:#c0392b;stroke-width:5;opacity:.85"/><text class="tj" x="250" y="62">ほかに何も変化を残さず、</text><text class="tj" x="250" y="84">低温から高温へ熱を移すことは</text><text class="tt" x="250" y="106">できない</text><text class="tm" x="250" y="140">(逆向き:高温 → 低温は、自然に起こる)</text></svg>
+      <figcaption>Clausius の原理:低温から高温へ、ほかに何も残さずに熱を運ぶことは、できない。(高温 → 低温は、自然に起こる。)</figcaption>
+    </figure>
+    <p>これは、「熱は、ひとりでに、高温から低温へ流れる」という経験を、言い換えたものです。<b>「ほかに何も残さずに」</b>が、決定的に大事です。冷蔵庫は、低温の庫内から、高温の部屋へ熱を運びますが、電気(外からの仕事)を使っていて、「ほかに何も残さない」わけではない(外へ仕事をさせた=電力を消費した、という痕跡が残る)。だから、禁止されていません。</p>
+    <div class="box supp">
+      <div class="label">板書にない補足:熱伝導は、Clausius の原理から不可逆</div>
+      <p>$T_1\gt T_2$ の2つの熱源の間で、熱 $Q$ が、高温から低温へ、伝導で流れる過程を考えます。これが可逆だと仮定します。つまり、外に何も残さずに、逆向き(低温から高温へ熱 $Q$ を戻す)ができるはず。すると、「低温から高温へ、ほかに何も残さずに熱 $Q$ を移した」ことになり、Clausius の原理に反する。よって、熱伝導は不可逆です(背理法)。</p>
+    </div>
+
+    <!-- ===================== 4 ===================== -->
+    <h2 id="s4">4. 3.3 Carnot サイクル <span class="page-tag">板書 p.6</span></h2>
+    <p>板書:「<b>3.3 Carnot サイクル</b>。※ 2つの熱源を用いる可逆サイクル。($P$–$V$ 図:A→B→C→D→A。断熱曲線(黄)。外にする仕事 $W$(赤)。A→B でもらう熱:$Q$。C→D ですてる熱:$Q'$。→ 第1法則 $0=Q-W-Q'$。$T_1\gt T_2$。)A→B→C→D→A:準静的等温過程、準静的断熱過程、(以下同様)。可逆過程。」</p>
+    <p>温度 $T_1$ の高温熱源と、温度 $T_2$ の低温熱源($T_1\gt T_2$)の、2つの熱源だけを使って、1周する<b>可逆な</b>サイクルが、<b>Carnot サイクル</b>です。作業物質(ピストンの中の気体など)を、次の4つの準静的な過程で、1周させます。</p>
+    <ol class="step-list">
+      <li><b>A→B:等温膨張</b>(温度 $T_1$ の熱源に接して、準静的に膨張):熱 $Q$ を<b>吸収</b>する(熱源 $T_1$ → 作業物質)。</li>
+      <li><b>B→C:断熱膨張</b>(熱源から切り離して、準静的に膨張):温度が $T_1$ から $T_2$ に下がる。熱の出入りはない。</li>
+      <li><b>C→D:等温圧縮</b>(温度 $T_2$ の熱源に接して、準静的に圧縮):熱 $Q'$ を<b>放出</b>する(作業物質 → 熱源 $T_2$)。</li>
+      <li><b>D→A:断熱圧縮</b>(切り離して、準静的に圧縮):温度が $T_2$ から $T_1$ に戻る。</li>
+    </ol>
+    <figure class="fig">
+      <svg viewBox="0 0 560 284" width="560" role="img" aria-label="Carnot サイクル"><line x1="56" y1="262" x2="458.6" y2="262" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><polygon points="466,262 458,265.4 458,258.6" style="fill:var(--muted)"/><line x1="56" y1="262" x2="56" y2="34.4" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><polygon points="56,27 59.4,35 52.6,35" style="fill:var(--muted)"/><text class="t" x="466" y="280" style="text-anchor:end">V</text><text class="t" x="48" y="35" style="text-anchor:end">P</text><polygon points="118,62 119.6,66.9 121.1,71.5 122.7,76 124.2,80.2 125.8,84.2 127.3,88.1 128.9,91.8 130.4,95.3 132,98.7 133.5,102 135.1,105.1 136.6,108.2 138.1,111.1 139.7,113.9 141.3,116.5 142.8,119.1 144.4,121.6 145.9,124.1 147.5,126.4 149,128.7 150.6,130.9 152.1,133 153.6,135 155.2,137 156.8,138.9 158.3,140.8 159.9,142.6 161.4,144.4 163,146.1 164.5,147.7 166.1,149.3 167.6,150.9 169.1,152.4 170.7,153.9 172.3,155.3 173.8,156.7 175.4,158.1 176.9,159.4 178.5,160.7 180,162 180,162 185.7,169.2 191.3,175.6 197,181.3 202.7,186.4 208.3,191 214,195.2 219.7,199 225.3,202.5 231,205.7 236.7,208.6 242.3,211.3 248,213.8 253.7,216 259.4,218.2 265,220.1 270.7,221.9 276.4,223.6 282,225.2 287.7,226.7 293.4,228.1 299,229.4 304.7,230.6 310.4,231.8 316,232.9 321.7,233.9 327.4,234.9 333,235.8 338.7,236.7 344.4,237.5 350,238.3 355.7,239 361.4,239.7 367,240.4 372.7,241 378.4,241.7 384.1,242.2 389.7,242.8 395.4,243.3 401.1,243.8 406.7,244.3 406.7,244.3 402.3,244.1 398,243.9 393.6,243.6 389.2,243.4 384.8,243.1 380.4,242.9 376,242.6 371.7,242.4 367.3,242.1 362.9,241.8 358.5,241.5 354.1,241.2 349.7,240.9 345.3,240.6 341,240.2 336.6,239.9 332.2,239.6 327.8,239.2 323.4,238.8 319,238.4 314.7,238 310.3,237.6 305.9,237.2 301.5,236.7 297.1,236.3 292.7,235.8 288.4,235.3 284,234.8 279.6,234.3 275.2,233.7 270.8,233.1 266.4,232.5 262.1,231.9 257.7,231.3 253.3,230.6 248.9,229.9 244.5,229.1 240.1,228.3 235.7,227.5 231.4,226.6 231.4,226.6 228.5,225.7 225.7,224.7 222.9,223.6 220,222.5 217.2,221.3 214.4,220.1 211.5,218.8 208.7,217.5 205.9,216.1 203,214.6 200.2,213 197.4,211.4 194.5,209.6 191.7,207.8 188.9,205.8 186,203.8 183.2,201.6 180.3,199.3 177.5,196.8 174.7,194.2 171.8,191.4 169,188.5 166.2,185.3 163.3,181.9 160.5,178.2 157.7,174.3 154.8,170.1 152,165.5 149.2,160.6 146.3,155.2 143.5,149.4 140.7,143 137.8,136.1 135,128.5 132.2,120.1 129.3,110.8 126.5,100.6 123.7,89.1 120.8,76.4 118,62" style="fill:var(--accent);fill-opacity:.18;stroke:none"/><polyline points="118,62 119.6,66.9 121.1,71.5 122.7,76 124.2,80.2 125.8,84.2 127.3,88.1 128.9,91.8 130.4,95.3 132,98.7 133.5,102 135.1,105.1 136.6,108.2 138.1,111.1 139.7,113.9 141.3,116.5 142.8,119.1 144.4,121.6 145.9,124.1 147.5,126.4 149,128.7 150.6,130.9 152.1,133 153.6,135 155.2,137 156.8,138.9 158.3,140.8 159.9,142.6 161.4,144.4 163,146.1 164.5,147.7 166.1,149.3 167.6,150.9 169.1,152.4 170.7,153.9 172.3,155.3 173.8,156.7 175.4,158.1 176.9,159.4 178.5,160.7 180,162" style="fill:none;stroke:var(--thm);stroke-width:3"/><polyline points="180,162 185.7,169.2 191.3,175.6 197,181.3 202.7,186.4 208.3,191 214,195.2 219.7,199 225.3,202.5 231,205.7 236.7,208.6 242.3,211.3 248,213.8 253.7,216 259.4,218.2 265,220.1 270.7,221.9 276.4,223.6 282,225.2 287.7,226.7 293.4,228.1 299,229.4 304.7,230.6 310.4,231.8 316,232.9 321.7,233.9 327.4,234.9 333,235.8 338.7,236.7 344.4,237.5 350,238.3 355.7,239 361.4,239.7 367,240.4 372.7,241 378.4,241.7 384.1,242.2 389.7,242.8 395.4,243.3 401.1,243.8 406.7,244.3" style="fill:none;stroke:var(--ex);stroke-width:3"/><polyline points="406.7,244.3 402.3,244.1 398,243.9 393.6,243.6 389.2,243.4 384.8,243.1 380.4,242.9 376,242.6 371.7,242.4 367.3,242.1 362.9,241.8 358.5,241.5 354.1,241.2 349.7,240.9 345.3,240.6 341,240.2 336.6,239.9 332.2,239.6 327.8,239.2 323.4,238.8 319,238.4 314.7,238 310.3,237.6 305.9,237.2 301.5,236.7 297.1,236.3 292.7,235.8 288.4,235.3 284,234.8 279.6,234.3 275.2,233.7 270.8,233.1 266.4,232.5 262.1,231.9 257.7,231.3 253.3,230.6 248.9,229.9 244.5,229.1 240.1,228.3 235.7,227.5 231.4,226.6" style="fill:none;stroke:var(--accent);stroke-width:3"/><polyline points="231.4,226.6 228.5,225.7 225.7,224.7 222.9,223.6 220,222.5 217.2,221.3 214.4,220.1 211.5,218.8 208.7,217.5 205.9,216.1 203,214.6 200.2,213 197.4,211.4 194.5,209.6 191.7,207.8 188.9,205.8 186,203.8 183.2,201.6 180.3,199.3 177.5,196.8 174.7,194.2 171.8,191.4 169,188.5 166.2,185.3 163.3,181.9 160.5,178.2 157.7,174.3 154.8,170.1 152,165.5 149.2,160.6 146.3,155.2 143.5,149.4 140.7,143 137.8,136.1 135,128.5 132.2,120.1 129.3,110.8 126.5,100.6 123.7,89.1 120.8,76.4 118,62" style="fill:none;stroke:var(--ex);stroke-width:3"/><line x1="147.5" y1="126.6" x2="149.6" y2="129.6" style="stroke:var(--thm);stroke-width:2.8;fill:none"/><polygon points="155.2,137.2 145.6,131.9 153,126.4" style="fill:var(--thm)"/><line x1="287.7" y1="227" x2="306.8" y2="231.1" style="stroke:var(--ex);stroke-width:2.8;fill:none"/><polygon points="316,233.1 305.3,235.5 307.2,226.5" style="fill:var(--ex)"/><line x1="323.4" y1="238.9" x2="310.9" y2="237.7" style="stroke:var(--accent);stroke-width:2.8;fill:none"/><polygon points="301.5,236.8 311.9,233.1 311,242.3" style="fill:var(--accent)"/><line x1="177.5" y1="197.4" x2="169.8" y2="189.3" style="stroke:var(--ex);stroke-width:2.8;fill:none"/><polygon points="163.3,182.5 173.6,186.6 166.9,192.9" style="fill:var(--ex)"/><circle cx="118" cy="62" r="5" style="fill:var(--text)"/><text class="t" x="106" y="54" style="text-anchor:middle">A</text><circle cx="180" cy="162" r="5" style="fill:var(--text)"/><text class="t" x="188" y="154" style="text-anchor:middle">B</text><circle cx="406.7" cy="244.3" r="5" style="fill:var(--text)"/><text class="t" x="416.7" y="242.3" style="text-anchor:middle">C</text><circle cx="231.4" cy="226.6" r="5" style="fill:var(--text)"/><text class="t" x="229.4" y="246.6" style="text-anchor:middle">D</text><text class="tt" x="136.6" y="72">等温 T₁:熱 Q を吸収</text><text class="tj" x="279.2" y="190" style="fill:var(--ex);font-weight:600">断熱 B→C</text><text class="ta" x="260.6" y="259">等温 T₂:熱 Q′ を放出</text><text class="tj" x="108" y="152" style="text-anchor:end;fill:var(--ex);font-weight:600">断熱</text><text class="tj" x="108" y="168" style="text-anchor:end;fill:var(--ex);font-weight:600">D→A</text><text class="t" x="180" y="183" style="text-anchor:middle">W</text></svg>
+      <figcaption>Carnot サイクルの $P$–$V$ 図(理想気体の例)。等温変化(温度 $T_1$ と $T_2$)が2本、断熱変化が2本。囲まれた面積が、1周で外にする仕事 $W$。</figcaption>
+    </figure>
+    <p>1周して元の状態に戻るので、$\Delta U=0$。第1法則から、(入った熱)−(出た仕事)−(出た熱)$=0$:
+    $$0=Q-W-Q'\ \Longrightarrow\ Q=W+Q'.$$
+    吸収した熱 $Q$ のうち、仕事 $W$ に変わったのが一部で、残り $Q'$ は低温熱源に捨てる。</p>
+    <p>各過程が準静的で、熱源との熱の出入りも、温度差のない(ごくわずかな差の)状態で行うので、このサイクルは、<b>可逆過程</b>です。</p>
+
+    <h3 id="s4a">サイクルの略記と、逆サイクル</h3>
+    <p>板書:「◎ サイクルの略記:$[T_1]\xrightarrow{Q}\textcircled{C}\to W$、$\textcircled{C}\xrightarrow{Q'}[T_2]$ ⇒ $Q=W+Q'$。※ Carnot サイクルは、<b>逆サイクル</b>がある:$[T_1]\xleftarrow{Q}\textcircled{C}\xleftarrow{}W$、$[T_2]\xrightarrow{Q'}\textcircled{C}$。※ Carnot サイクルの性質は、<b>作業物質によらない</b>。」</p>
+    <figure class="fig">
+      <svg viewBox="0 0 760 232" width="760" role="img" aria-label="サイクルの略記"><text class="tt" x="100" y="20" style="text-anchor:middle">正サイクル</text><rect x="34" y="34" width="130" height="26" rx="4" style="fill:var(--thm);fill-opacity:.22;stroke:var(--thm);stroke-width:2"/><text class="t" x="99" y="52" style="text-anchor:middle">T₁</text><rect x="34" y="184" width="130" height="26" rx="4" style="fill:var(--accent);fill-opacity:.22;stroke:var(--accent);stroke-width:2"/><text class="t" x="99" y="202" style="text-anchor:middle">T₂</text><line x1="87" y1="60" x2="87" y2="93.6" style="stroke:var(--thm);stroke-width:2.4;fill:none"/><polygon points="87,102 83,93 91,93" style="fill:var(--thm)"/><line x1="87" y1="142" x2="87" y2="175.6" style="stroke:var(--accent);stroke-width:2.4;fill:none"/><polygon points="87,184 83,175 91,175" style="fill:var(--accent)"/><text class="t" x="81" y="86" style="text-anchor:end">Q</text><text class="t" x="81" y="168" style="text-anchor:end">Q′</text><line x1="123" y1="122" x2="158.6" y2="122" style="stroke:var(--ex);stroke-width:2.4;fill:none"/><polygon points="167,122 158,126 158,118" style="fill:var(--ex)"/><text class="t" x="145" y="112" style="text-anchor:middle">W</text><circle cx="99" cy="122" r="22" style="fill:var(--accent);fill-opacity:.18;stroke:var(--accent);stroke-width:2.2"/><text class="t" x="99" y="127" style="text-anchor:middle">C</text><text class="tt" x="100" y="218" style="text-anchor:middle">Q = W + Q′</text><text class="ta" x="380" y="20" style="text-anchor:middle">逆サイクル</text><rect x="314" y="34" width="130" height="26" rx="4" style="fill:var(--thm);fill-opacity:.22;stroke:var(--thm);stroke-width:2"/><text class="t" x="379" y="52" style="text-anchor:middle">T₁</text><rect x="314" y="184" width="130" height="26" rx="4" style="fill:var(--accent);fill-opacity:.22;stroke:var(--accent);stroke-width:2"/><text class="t" x="379" y="202" style="text-anchor:middle">T₂</text><line x1="367" y1="102" x2="367" y2="68.4" style="stroke:var(--thm);stroke-width:2.4;fill:none"/><polygon points="367,60 371,69 363,69" style="fill:var(--thm)"/><line x1="367" y1="184" x2="367" y2="150.4" style="stroke:var(--accent);stroke-width:2.4;fill:none"/><polygon points="367,142 371,151 363,151" style="fill:var(--accent)"/><text class="t" x="361" y="86" style="text-anchor:end">Q</text><text class="t" x="361" y="168" style="text-anchor:end">Q′</text><line x1="447" y1="122" x2="411.4" y2="122" style="stroke:var(--ex);stroke-width:2.4;fill:none"/><polygon points="403,122 412,118 412,126" style="fill:var(--ex)"/><text class="t" x="425" y="112" style="text-anchor:middle">W</text><circle cx="379" cy="122" r="22" style="fill:var(--accent);fill-opacity:.18;stroke:var(--accent);stroke-width:2.2"/><text class="t" x="379" y="127" style="text-anchor:middle">C</text><text class="ta" x="380" y="218" style="text-anchor:middle">Q′ + W = Q</text><text class="tj" x="560" y="80">高温から熱 Q をもらい、</text><text class="tj" x="560" y="100">仕事 W をして、</text><text class="tj" x="560" y="120">熱 Q′ を低温に捨てる。</text><text class="tj" x="560" y="156">それを、そっくり逆向きに</text><text class="tj" x="560" y="176">回すことができる(可逆)。</text></svg>
+      <figcaption>Carnot サイクルの略記。上が高温熱源、下が低温熱源、丸が Carnot サイクル。左が正サイクル(熱から仕事)、右が逆サイクル(仕事で、低温から高温へ熱を運ぶ)。</figcaption>
+    </figure>
+    <ul>
+      <li><b>正サイクル</b>:高温から熱 $Q$ を受け取り、仕事 $W$ を外に出し、低温へ熱 $Q'$ を捨てる。$Q=W+Q'$。</li>
+      <li><b>逆サイクル</b>:各過程が可逆なので、A→D→C→B→A と、逆向きに1周できる。このとき、低温から熱 $Q'$ を受け取り、外から仕事 $W$ をされて、高温へ熱 $Q=Q'+W$ を捨てる。<b>熱の量も、仕事の量も、正サイクルと同じ大きさで、向きだけ逆</b>。</li>
+      <li><b>作業物質によらない</b>:気体でなく、ゴムや、他の物質でも、同じ性質をもつ(第6回で証明)。</li>
+    </ul>
+
+    <!-- ===================== 5 ===================== -->
+    <h2 id="s5">5. Carnot サイクルの性質1:正の仕事をする <span class="page-tag">板書 p.6</span></h2>
+    <p>板書:「◎ <b>Carnot サイクルの性質1</b>:正の Carnot サイクルは、外に正の仕事をする($W\gt0$)。逆 Carnot サイクルは、外に負(−(*))。(*) の証明:$W=0$ とすると、Clausius の原理に反する。($T_1\gt T_2$:$Q'$、$Q$。)$W\gt0$ のとき:(C → J 摩擦の装置)。サイクルは Clausius の原理に反する。($W=Q'-Q$)」</p>
+    <div class="box thm">
+      <div class="label">Carnot サイクルの性質1</div>
+      <p>正の Carnot サイクルは、外に<b>正の仕事</b>($W\gt0$)をする。(逆サイクルは、外から仕事を受け取る。)</p>
+    </div>
+    <p>「正サイクルが、$W\le0$ だったら、どうなるか」を調べて、Clausius の原理に反することを示します(背理法)。</p>
+    <figure class="fig">
+      <svg viewBox="0 0 620 262" width="620" role="img" aria-label="Carnot サイクルの性質1の証明"><text class="tt" x="110" y="20" style="text-anchor:middle">(i) W = 0 のとき(逆サイクル)</text><rect x="40" y="34" width="140" height="26" rx="4" style="fill:var(--thm);fill-opacity:.22;stroke:var(--thm);stroke-width:2"/><text class="t" x="110" y="52" style="text-anchor:middle">T₁</text><rect x="40" y="184" width="140" height="26" rx="4" style="fill:var(--accent);fill-opacity:.22;stroke:var(--accent);stroke-width:2"/><text class="t" x="110" y="202" style="text-anchor:middle">T₂</text><circle cx="110" cy="120" r="22" style="fill:var(--accent);fill-opacity:.18;stroke:var(--accent);stroke-width:2.2"/><text class="t" x="110" y="125" style="text-anchor:middle">C</text><line x1="98" y1="184" x2="98" y2="150.4" style="stroke:var(--accent);stroke-width:2.4;fill:none"/><polygon points="98,142 102,151 94,151" style="fill:var(--accent)"/><line x1="98" y1="98" x2="98" y2="68.4" style="stroke:var(--thm);stroke-width:2.4;fill:none"/><polygon points="98,60 102,69 94,69" style="fill:var(--thm)"/><text class="t" x="90" y="168" style="text-anchor:end">Q′</text><text class="t" x="90" y="80" style="text-anchor:end">Q</text><text class="t" x="120" y="152"></text><text class="tj" x="180" y="118" style="text-anchor:start">W = 0 なら Q = Q′</text><text class="tm" x="110" y="232" style="text-anchor:middle">何も残さず、T₂ から T₁ へ</text><text class="tm" x="110" y="250" style="text-anchor:middle">熱を移す ⇒ Clausius に反する</text><text class="tt" x="450" y="20" style="text-anchor:middle">(ii) 逆サイクルが仕事 W を出すとき</text><rect x="310" y="34" width="270" height="26" rx="4" style="fill:var(--thm);fill-opacity:.22;stroke:var(--thm);stroke-width:2"/><text class="t" x="445" y="52" style="text-anchor:middle">T₁</text><rect x="310" y="184" width="130" height="26" rx="4" style="fill:var(--accent);fill-opacity:.22;stroke:var(--accent);stroke-width:2"/><text class="t" x="375" y="202" style="text-anchor:middle">T₂</text><circle cx="375" cy="120" r="22" style="fill:var(--accent);fill-opacity:.18;stroke:var(--accent);stroke-width:2.2"/><text class="t" x="375" y="125" style="text-anchor:middle">C</text><line x1="363" y1="184" x2="363" y2="150.4" style="stroke:var(--accent);stroke-width:2.4;fill:none"/><polygon points="363,142 367,151 359,151" style="fill:var(--accent)"/><line x1="363" y1="98" x2="363" y2="68.4" style="stroke:var(--thm);stroke-width:2.4;fill:none"/><polygon points="363,60 367,69 359,69" style="fill:var(--thm)"/><text class="t" x="355" y="168" style="text-anchor:end">Q′</text><text class="t" x="355" y="80" style="text-anchor:end">Q</text><line x1="399" y1="120" x2="449.6" y2="120" style="stroke:var(--ex);stroke-width:2.4;fill:none"/><polygon points="458,120 449,124 449,116" style="fill:var(--ex)"/><text class="t" x="428" y="110" style="text-anchor:middle">W</text><rect x="462" y="100" width="44" height="40" rx="4" style="fill:var(--ex);fill-opacity:.2;stroke:var(--ex);stroke-width:2"/><text class="t" x="484" y="125" style="text-anchor:middle">J</text><line x1="494" y1="100" x2="494" y2="68.4" style="stroke:var(--thm);stroke-width:2.4;fill:none"/><polygon points="494,60 498,69 490,69" style="fill:var(--thm)"/><text class="t" x="512" y="84">W</text><text class="tm" x="450" y="232" style="text-anchor:middle">J:仕事を全部熱にする(摩擦)</text><text class="tm" x="450" y="250" style="text-anchor:middle">T₁ に Q + W = Q′ が入る ⇒ 同じ矛盾</text></svg>
+      <figcaption>左:$W=0$ なら、逆サイクルで、仕事なしに低温から高温へ熱が移る。右:正サイクルが $W\lt0$ なら、逆サイクルは仕事 $W$ を出す。それを摩擦 J で熱にして高温熱源に入れると、正味、低温から高温へ熱が移る。</figcaption>
+    </figure>
+    <ol class="step-list">
+      <li><b>$W=0$ の場合</b>:第1法則 $Q=W+Q'$ から $Q=Q'$。これを<b>逆サイクル</b>で回すと、低温熱源から熱 $Q'$ をもらって、高温熱源へ $Q=Q'$ を渡す。仕事は、出入りなし($W=0$)。サイクルは元に戻るので、ほかに何も残らない。<b>低温から高温へ、ほかに何も残さず熱が移った</b>:Clausius の原理に反する。</li>
+      <li><b>$W\lt0$ の場合</b>(正サイクルが、外から仕事をされる):第1法則から $Q'=Q-W=Q+|W|\gt Q$。逆サイクルで回すと、低温から $Q'$ をもらい、高温へ $Q$ を渡して、<b>外に仕事 $|W|$ を出す</b>($Q'=Q+|W|$)。この仕事 $|W|$ を、<b>摩擦の装置 J</b>(仕事を全部熱にする、ジュールの実験のような装置)に入れて、熱 $|W|$ を高温熱源に入れる(仕事→熱は、全部できる:3.5)。すると、高温熱源に入った熱は、$Q+|W|=Q'$。全体として、<b>低温熱源から熱 $Q'$ が出て、高温熱源に熱 $Q'$ が入っただけ</b>で、ほかに何も変わらない。Clausius の原理に反する。</li>
+      <li>したがって、$W\le0$ は不可能で、$W\gt0$。</li>
+    </ol>
+    <p>板書の図(赤い四角で囲まれた部分)は、この、逆サイクル C と、摩擦の装置 J の組み合わせです。「$W=Q'-Q$」は、逆サイクルが出す仕事 $W$ に、$Q'=Q+W$ を使った式です。</p>
+
+    <!-- ===================== 6 ===================== -->
+    <h2 id="s6">6. 3.4 Kelvin の原理 <span class="page-tag">板書 p.6</span></h2>
+    <p>板書:「<b>3.4 Kelvin の原理</b>:1つの熱源から熱 $Q$ を受けとり、外に同じ仕事をしつつ、他に何も影響を残さないサイクルは存在しない。」</p>
+    <div class="box thm">
+      <div class="label">Kelvin の原理</div>
+      <p>1つの熱源から熱 $Q$ を受け取り、同じ大きさの仕事 $W=Q$ を外にして、<b>ほかに何も影響を残さない</b>サイクルは、存在しない。(熱を、全部、仕事に変える、サイクルはない。)</p>
+    </div>
+    <figure class="fig">
+      <svg viewBox="0 0 300 222" width="300" role="img" aria-label="Kelvin の原理"><rect x="60" y="24" width="150" height="26" rx="4" style="fill:var(--thm);fill-opacity:.22;stroke:var(--thm);stroke-width:2"/><text class="t" x="135" y="42" style="text-anchor:middle">T(熱源 1つ)</text><circle cx="135" cy="110" r="24" style="fill:var(--accent);fill-opacity:.18;stroke:var(--accent);stroke-width:2.2"/><text class="t" x="135" y="115" style="text-anchor:middle">機関</text><line x1="135" y1="50" x2="135" y2="75.6" style="stroke:var(--thm);stroke-width:2.4;fill:none"/><polygon points="135,84 131,75 139,75" style="fill:var(--thm)"/><text class="t" x="146" y="72">Q</text><line x1="161" y1="110" x2="221.6" y2="110" style="stroke:var(--ex);stroke-width:2.4;fill:none"/><polygon points="230,110 221,114 221,106" style="fill:var(--ex)"/><text class="t" x="196" y="100" style="text-anchor:middle">W = Q</text><line x1="145" y1="50" x2="225" y2="130" style="stroke:#c0392b;stroke-width:5;opacity:.85"/><line x1="145" y1="130" x2="225" y2="50" style="stroke:#c0392b;stroke-width:5;opacity:.85"/><text class="tj" x="135" y="168" style="text-anchor:middle">ほかに何も残さず、</text><text class="tj" x="135" y="188" style="text-anchor:middle">熱の全部を仕事にする機関は</text><text class="tt" x="135" y="208" style="text-anchor:middle">ない</text></svg>
+      <figcaption>Kelvin の原理が禁止するもの:ただ1つの熱源から、熱を全部、仕事に変える機関(第2種永久機関)。</figcaption>
+    </figure>
+    <p>熱機関の熱効率が、いつも $\eta\lt1$(捨てる熱 $Q'\gt0$ がある)、ということです。第1法則だけなら、$Q=W$ でもよい。それを禁止するのが、Kelvin の原理。</p>
+
+    <h3 id="s6a">Kelvin の原理から Clausius の原理へ</h3>
+    <p>板書:「◎ Kelvin の原理から Clausius の原理へ。Clausius の原理が成立しないとすると、(左のサイクルが存在する)。Carnot サイクルと左のサイクルを合わせる。$Q'=Q-W$。(C)のもらう熱:$Q-Q'=Q-(Q-W)=W\gt0$。Kelvin の原理に反する。」</p>
+    <figure class="fig">
+      <svg viewBox="0 0 580 224" width="580" role="img" aria-label="Kelvin の原理から Clausius の原理へ"><text class="ta" x="100" y="18" style="text-anchor:middle">Carnot サイクル C</text><text class="tt" x="280" y="18" style="text-anchor:middle">もし存在すると仮定する X</text><text class="tm" x="470" y="18" style="text-anchor:middle">合わせると</text><rect x="40" y="30" width="120" height="26" rx="4" style="fill:var(--thm);fill-opacity:.22;stroke:var(--thm);stroke-width:2"/><text class="t" x="100" y="48" style="text-anchor:middle">T₁</text><rect x="40" y="174" width="120" height="26" rx="4" style="fill:var(--accent);fill-opacity:.22;stroke:var(--accent);stroke-width:2"/><text class="t" x="100" y="192" style="text-anchor:middle">T₂</text><circle cx="100" cy="108" r="20" style="fill:var(--accent);fill-opacity:.18;stroke:var(--accent);stroke-width:2.2"/><text class="t" x="100" y="113" style="text-anchor:middle">C</text><line x1="88" y1="50" x2="88" y2="79.6" style="stroke:var(--thm);stroke-width:2.4;fill:none"/><polygon points="88,88 84,79 92,79" style="fill:var(--thm)"/><line x1="88" y1="128" x2="88" y2="165.6" style="stroke:var(--accent);stroke-width:2.4;fill:none"/><polygon points="88,174 84,165 92,165" style="fill:var(--accent)"/><text class="t" x="82" y="72" style="text-anchor:end">Q</text><text class="t" x="82" y="156" style="text-anchor:end">Q′</text><line x1="122" y1="108" x2="151.6" y2="108" style="stroke:var(--ex);stroke-width:2.4;fill:none"/><polygon points="160,108 151,112 151,104" style="fill:var(--ex)"/><text class="t" x="144" y="98" style="text-anchor:middle">W</text><rect x="220" y="30" width="120" height="26" rx="4" style="fill:var(--thm);fill-opacity:.22;stroke:var(--thm);stroke-width:2"/><text class="t" x="280" y="48" style="text-anchor:middle">T₁</text><rect x="220" y="174" width="120" height="26" rx="4" style="fill:var(--accent);fill-opacity:.22;stroke:var(--accent);stroke-width:2"/><text class="t" x="280" y="192" style="text-anchor:middle">T₂</text><circle cx="280" cy="108" r="20" style="fill:#c0392b;fill-opacity:.18;stroke:#c0392b;stroke-width:2.2"/><text class="t" x="280" y="113" style="text-anchor:middle">X</text><line x1="268" y1="174" x2="268" y2="136.4" style="stroke:#c0392b;stroke-width:2.4;fill:none"/><polygon points="268,128 272,137 264,137" style="fill:#c0392b"/><line x1="268" y1="88" x2="268" y2="64.4" style="stroke:#c0392b;stroke-width:2.4;fill:none"/><polygon points="268,56 272,65 264,65" style="fill:#c0392b"/><text class="t" x="262" y="72" style="text-anchor:end">Q′</text><text class="t" x="262" y="156" style="text-anchor:end">Q′</text><rect x="400" y="30" width="120" height="26" rx="4" style="fill:var(--thm);fill-opacity:.22;stroke:var(--thm);stroke-width:2"/><text class="t" x="460" y="48" style="text-anchor:middle">T₁</text><rect x="430" y="84" width="60" height="50" rx="6" style="fill:var(--accent);fill-opacity:.15;stroke:var(--accent);stroke-width:2"/><text class="t" x="460" y="114" style="text-anchor:middle">C+X</text><line x1="450" y1="56" x2="450" y2="75.6" style="stroke:var(--thm);stroke-width:2.4;fill:none"/><polygon points="450,84 446,75 454,75" style="fill:var(--thm)"/><text class="t" x="444" y="74" style="text-anchor:end">Q − Q′</text><line x1="490" y1="109" x2="539.6" y2="109" style="stroke:var(--ex);stroke-width:2.4;fill:none"/><polygon points="548,109 539,113 539,105" style="fill:var(--ex)"/><text class="t" x="520" y="99" style="text-anchor:middle">W</text><text class="tj" x="460" y="168" style="text-anchor:middle">T₂ は出入りなし。</text><text class="tj" x="460" y="188" style="text-anchor:middle">熱源 1つ から W を</text><text class="tt" x="460" y="208" style="text-anchor:middle">取り出す ⇒ Kelvin に反する</text><text class="t" x="340" y="112" style="text-anchor:middle">＋</text></svg>
+      <figcaption>Clausius の原理が成り立たない(低温から高温へ、熱 $Q'$ だけを運ぶサイクル X がある)と仮定して、Carnot サイクル C と組み合わせると、1つの熱源から仕事 $W$ を取り出すサイクルができてしまう。</figcaption>
+    </figure>
+    <ol class="step-list">
+      <li>Clausius の原理が成り立たないと<b>仮定</b>する。つまり、低温から高温へ、熱 $Q'$ を、ほかに何も残さず運ぶサイクル X が存在する。</li>
+      <li>Carnot サイクル C を用意する。C は、高温から $Q$ をもらい、仕事 $W$ をして、低温へ $Q'=Q-W$ を捨てる(C が低温に捨てる熱が、ちょうど X が運ぶ熱 $Q'$ と同じになるよう、C の大きさを選ぶ)。</li>
+      <li>C と X を、一緒に使う。低温熱源は、C から $Q'$ をもらい、X に $Q'$ を渡すので、<b>正味、出入りなし</b>。高温熱源は、C に $Q$ を渡し、X から $Q'$ をもらうので、正味、$Q-Q'=W$ を失う。</li>
+      <li>全体として、<b>高温熱源だけ</b>から熱 $W$ をもらい、外に仕事 $W$ をし、ほかに何も残さない。<b>Kelvin の原理に反する</b>。</li>
+    </ol>
+    <p>よって、仮定(Clausius の原理が成り立たない)が誤り。Kelvin の原理が正しければ、Clausius の原理も正しい。</p>
+    <div class="box supp">
+      <div class="label">板書にない補足:逆(Clausius ⇒ Kelvin)も成り立つ。2つの原理は同値</div>
+      <p>逆に、Kelvin の原理が成り立たない(1つの熱源 $T_2$ から熱 $Q$ をとって、仕事 $W=Q$ に変えるサイクル K がある)と仮定します。その仕事 $W=Q$ を、摩擦の装置 J で、高温熱源 $T_1$ に熱として入れる(仕事→熱は、全部できる)。全体として、低温熱源から熱 $Q$ が出て、高温熱源に熱 $Q$ が入るだけ。これは、Clausius の原理に反する。したがって、Clausius の原理が正しければ、Kelvin の原理も正しい。2つの原理は、同じ内容を、別の言い方で述べたものです(だから、どちらを、第2法則の出発点にしてもよい)。</p>
+    </div>
+
+    <!-- ===================== 7 ===================== -->
+    <h2 id="s7">7. 3.5 できることとできないこと <span class="page-tag">板書 p.6</span></h2>
+    <p>板書:「<b>3.5 できることとできないこと</b>。◎ できること:① 仕事 → 熱全変換 ex) Joule の羽根車。② 熱 → 仕事部分変換 ex) Carnot サイクル、熱効率 $\eta=\dfrac WQ\lt1$(外にする仕事 / もらう熱)。③ 熱ポンプ(図:$w\gt0$)ex) 冷蔵庫、クーラー。④ 熱伝導($T_1\gt T_2$:Clausius の原理が禁止するサイクルの逆サイクル)。」</p>
+    <figure class="fig">
+      <svg viewBox="0 0 650 186" width="650" role="img" aria-label="できること"><rect x="10" y="8" width="150" height="168" rx="8" style="fill:none;stroke:var(--muted);stroke-width:1.2;stroke-dasharray:4 3"/><text class="tt" x="85" y="28" style="text-anchor:middle">① 仕事 → 熱</text><rect x="50" y="80" width="70" height="40" rx="4" style="fill:var(--thm);fill-opacity:.2;stroke:var(--thm);stroke-width:2"/><text class="tj" x="85" y="105" style="text-anchor:middle">摩擦</text><line x1="30" y1="100" x2="39.6" y2="100" style="stroke:var(--ex);stroke-width:2.4;fill:none"/><polygon points="48,100 39,104 39,96" style="fill:var(--ex)"/><text class="t" x="30" y="92" style="text-anchor:middle">W</text><line x1="122" y1="100" x2="131.6" y2="100" style="stroke:var(--thm);stroke-width:2.4;fill:none"/><polygon points="140,100 131,104 131,96" style="fill:var(--thm)"/><text class="t" x="138" y="92" style="text-anchor:middle">Q</text><text class="tj" x="85" y="150" style="text-anchor:middle">全部 変換できる</text><rect x="170" y="8" width="150" height="168" rx="8" style="fill:none;stroke:var(--muted);stroke-width:1.2;stroke-dasharray:4 3"/><text class="tt" x="245" y="28" style="text-anchor:middle">② 熱 → 仕事</text><circle cx="245" cy="90" r="20" style="fill:var(--accent);fill-opacity:.18;stroke:var(--accent);stroke-width:2.2"/><text class="t" x="245" y="95" style="text-anchor:middle">C</text><line x1="245" y1="44" x2="245" y2="61.6" style="stroke:var(--thm);stroke-width:2.4;fill:none"/><polygon points="245,70 241,61 249,61" style="fill:var(--thm)"/><line x1="265" y1="90" x2="287.6" y2="90" style="stroke:var(--ex);stroke-width:2.4;fill:none"/><polygon points="296,90 287,94 287,86" style="fill:var(--ex)"/><text class="t" x="282" y="80" style="text-anchor:middle">W</text><line x1="245" y1="110" x2="245" y2="135.6" style="stroke:var(--accent);stroke-width:2.4;fill:none"/><polygon points="245,144 241,135 249,135" style="fill:var(--accent)"/><text class="tj" x="245" y="160" style="text-anchor:middle">一部だけ(η＜1)</text><rect x="330" y="8" width="150" height="168" rx="8" style="fill:none;stroke:var(--muted);stroke-width:1.2;stroke-dasharray:4 3"/><text class="tt" x="405" y="28" style="text-anchor:middle">③ 熱ポンプ</text><circle cx="405" cy="90" r="20" style="fill:var(--accent);fill-opacity:.18;stroke:var(--accent);stroke-width:2.2"/><text class="t" x="405" y="95" style="text-anchor:middle">C</text><line x1="405" y1="70" x2="405" y2="52.4" style="stroke:var(--thm);stroke-width:2.4;fill:none"/><polygon points="405,44 409,53 401,53" style="fill:var(--thm)"/><line x1="374" y1="90" x2="350.4" y2="90" style="stroke:var(--ex);stroke-width:2.4;fill:none"/><polygon points="342,90 351,86 351,94" style="fill:var(--ex)"/><text class="t" x="354" y="80" style="text-anchor:middle">W</text><line x1="405" y1="144" x2="405" y2="118.4" style="stroke:var(--accent);stroke-width:2.4;fill:none"/><polygon points="405,110 409,119 401,119" style="fill:var(--accent)"/><text class="tj" x="405" y="160" style="text-anchor:middle">冷蔵庫・エアコン</text><rect x="490" y="8" width="150" height="168" rx="8" style="fill:none;stroke:var(--muted);stroke-width:1.2;stroke-dasharray:4 3"/><text class="tt" x="565" y="28" style="text-anchor:middle">④ 熱伝導</text><rect x="520" y="44" width="90" height="24" rx="4" style="fill:var(--thm);fill-opacity:.22;stroke:var(--thm);stroke-width:2"/><text class="t" x="565" y="61" style="text-anchor:middle">T₁</text><rect x="520" y="120" width="90" height="24" rx="4" style="fill:var(--accent);fill-opacity:.22;stroke:var(--accent);stroke-width:2"/><text class="t" x="565" y="137" style="text-anchor:middle">T₂</text><line x1="565" y1="70" x2="565" y2="109.6" style="stroke:var(--thm);stroke-width:2.4;fill:none"/><polygon points="565,118 561,109 569,109" style="fill:var(--thm)"/><text class="t" x="574" y="98">Q</text><text class="tj" x="565" y="160" style="text-anchor:middle">T₁ ＞ T₂ で自然に</text></svg>
+      <figcaption>「できること」4つ。第1法則を満たし、かつ第2法則(Clausius・Kelvin)に反しない。</figcaption>
+    </figure>
+    <ul>
+      <li><b>① 仕事 → 熱(全変換)</b>:摩擦や、ジュールの実験(羽根車で水をかき混ぜる)で、仕事を、全部熱にできる。</li>
+      <li><b>② 熱 → 仕事(部分変換)</b>:Carnot サイクルなどの熱機関。熱 $Q$ のうち、仕事 $W$ に変えられるのは一部だけ:熱効率 $\eta=\dfrac WQ\lt1$。(全部は、Kelvin の原理が禁止。)</li>
+      <li><b>③ 熱ポンプ</b>:仕事 $W\gt0$ を使って、低温から高温へ熱を運ぶ(逆 Carnot サイクル)。冷蔵庫、エアコン。(仕事を使うので、Clausius の原理に反しない。)</li>
+      <li><b>④ 熱伝導</b>:高温から低温へ、熱が流れる。「Clausius の原理が禁止するサイクル」の、逆向きなので、問題ない。</li>
+    </ul>
+    <p>板書:「◎ <b>できないこと</b>(不可逆過程の逆過程)。(A) まさつによる熱の発生は、不可逆過程。$W\to\textcircled{\ }\to Q$ ⇒ $W\leftarrow\textcircled{\ }\leftarrow Q$。Joule の羽根車:仕事と熱の<b>等価性</b>(入れ替え不可能という意味で、非等価)。」</p>
+    <h3 id="s7a">(A) 摩擦による発熱は不可逆</h3>
+    <p>仕事を熱に変える(摩擦で発熱する)のは、できる(①)。では、その逆の過程(熱を、全部、仕事に戻す)は、できるでしょうか。もしできたら、1つの熱源から熱をとって、全部仕事にするサイクルができて、Kelvin の原理に反する。よって、摩擦による熱の発生は、<b>不可逆過程</b>です(背理法)。</p>
+    <p>ここで、第1法則の「熱と仕事の<b>等価性</b>(どちらも、エネルギーとして、同じ単位 J で、換算できる)」と、第2法則の「<b>非等価性</b>」が、対比されます。仕事は熱に、<b>全部</b>変わるが、熱は仕事に、<b>全部</b>は変わらない。「入れ替え不可能」という意味で、熱と仕事は、対等ではない。</p>
+
+    <h3 id="s7b">(B) 理想気体の真空への膨張は不可逆</h3>
+    <p>板書:「(B) 理想気体の真空への膨張は、不可逆過程。(a)→(b)。(c)→(b) が可逆であるとする。外に何も影響を残さずに、(b)→(a) に逆変換できる。温度 $T$ の熱源を用いて、等温変化させて (a)→(b) にする($Q$、$W$)⇒ Kelvin に反する。」</p>
+    <figure class="fig">
+      <svg viewBox="0 0 640 224" width="640" role="img" aria-label="自由膨張は不可逆"><text class="tt" x="14" y="18">もし、(a)→(b) の自由膨張が可逆(外に何も残さず (b)→(a) に戻せる)なら…</text><rect x="30" y="50" width="130" height="60" rx="0" style="fill:none;stroke:var(--text);stroke-width:2.4"/><line x1="82" y1="50" x2="82" y2="110" style="stroke:var(--thm);stroke-width:5"/><text class="tj" x="95" y="130" style="text-anchor:middle">(a) 気体</text><circle cx="54" cy="90.8" r="2.4" style="fill:var(--muted)"/><circle cx="48.8" cy="57.4" r="2.4" style="fill:var(--muted)"/><circle cx="55.9" cy="77.3" r="2.4" style="fill:var(--muted)"/><circle cx="58" cy="56.8" r="2.4" style="fill:var(--muted)"/><circle cx="67.4" cy="76.6" r="2.4" style="fill:var(--muted)"/><circle cx="64" cy="92.8" r="2.4" style="fill:var(--muted)"/><circle cx="39.3" cy="102.4" r="2.4" style="fill:var(--muted)"/><circle cx="67.9" cy="100.7" r="2.4" style="fill:var(--muted)"/><text class="tm" x="100" y="84" style="text-anchor:middle">真空</text><rect x="250" y="50" width="130" height="60" rx="0" style="fill:none;stroke:var(--text);stroke-width:2.4"/><circle cx="318.6" cy="75" r="2.4" style="fill:var(--muted)"/><circle cx="363.5" cy="78" r="2.4" style="fill:var(--muted)"/><circle cx="302" cy="83.3" r="2.4" style="fill:var(--muted)"/><circle cx="327.7" cy="91.6" r="2.4" style="fill:var(--muted)"/><circle cx="302.3" cy="74.9" r="2.4" style="fill:var(--muted)"/><circle cx="358.4" cy="94.2" r="2.4" style="fill:var(--muted)"/><circle cx="283.3" cy="65" r="2.4" style="fill:var(--muted)"/><circle cx="279.4" cy="81.9" r="2.4" style="fill:var(--muted)"/><text class="tj" x="315" y="130" style="text-anchor:middle">(b) 広がった</text><line x1="166" y1="70" x2="235.6" y2="70" style="stroke:var(--text);stroke-width:2.4;fill:none"/><polygon points="244,70 235,74 235,66" style="fill:var(--text)"/><text class="tm" x="205" y="62" style="text-anchor:middle">自由膨張</text><line x1="244" y1="98" x2="174.4" y2="98" style="stroke:#c0392b;stroke-width:2.4;fill:none"/><polygon points="166,98 175,94 175,102" style="fill:#c0392b"/><text class="tm" x="205" y="118" style="text-anchor:middle">(仮に)戻せる</text><text class="tj" x="14" y="168">一方、温度 T の熱源に接触させて、ゆっくり等温膨張させれば、(a)→(b) は、熱 Q を吸収して仕事 W = Q を出す。</text><text class="tj" x="14" y="190">両方を合わせると、熱源から熱 Q をもらって、そっくり仕事 Q にするだけ ⇒ Kelvin の原理に反する。</text><text class="tt" x="14" y="212">∴ 自由膨張は、不可逆。</text></svg>
+      <figcaption>自由膨張が可逆だと仮定すると、Kelvin の原理に反する(背理法)。</figcaption>
+    </figure>
+    <ol class="step-list">
+      <li>理想気体の、真空への自由膨張 (a)→(b) が、<b>可逆だと仮定</b>する。すると、外に何も影響を残さずに、(b)→(a) に戻す操作が存在する。</li>
+      <li>一方、(a)→(b) には、別のやり方がある。温度 $T$ の熱源に接触させて、<b>準静的に等温膨張</b>させる。理想気体では、等温なら $\Delta U=0$ なので、吸収した熱 $Q$ は、全部、外にする仕事 $W=Q$ になる(第3回、第4回)。</li>
+      <li>この(2)の変化で、(a)→(b) に移し、そのあと、仮定した(1)の逆操作で、(b)→(a) に戻す。気体は、1周して元に戻り、ほかに何も残さない(1の操作は、何も残さない)。しかし、熱源から、熱 $Q$ が出て、外に、仕事 $W=Q$ が出ている。</li>
+      <li>これは、<b>1つの熱源から熱を全部仕事にした</b>ことで、Kelvin の原理に反する。よって、仮定が誤り:自由膨張は<b>不可逆過程</b>。</li>
+    </ol>
+    <p>(板書の「(c)→(b)」は、「(a)→(b)」のことと読みました。)</p>
+
+    <!-- ===================== 8 ===================== -->
+    <h2 id="s8">8. 具体例で練習(板書にない補足) <span class="page-tag">補足</span></h2>
+    <div class="box ex">
+      <div class="label">問題 A:Carnot サイクルの熱の勘定</div>
+      <p>ある Carnot サイクルが、高温熱源から熱 $Q=1000\ \mathrm J$ をもらい、低温熱源に熱 $Q'=600\ \mathrm J$ を捨てる。(i) 外にする仕事 $W$ と、熱効率 $\eta$ を求めよ。(ii) このサイクルを逆向きに回したとき、低温から $600\ \mathrm J$ の熱をくみ上げるのに、外から必要な仕事と、高温へ捨てる熱はいくらか。</p>
+    </div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>(i) $W=Q-Q'=400\ \mathrm J$、$\eta=\dfrac WQ=0.4$。(ii) 逆サイクルは、熱も仕事も同じ大きさで、向きだけ逆:外から仕事 $W=400\ \mathrm J$ が必要で、高温へ捨てる熱は $Q=Q'+W=1000\ \mathrm J$。(くみ上げた熱 ÷ 必要な仕事 $=600/400=1.5$:冷蔵庫の「成績係数」。)</p></div>
+
+    <div class="box ex">
+      <div class="label">問題 B:原理に反する装置を見分ける</div>
+      <p>次の装置は、Clausius の原理、Kelvin の原理、第1法則のどれに反するか(または、反しないか)。(a) 電気を使わず、庫内から熱をくみ出して部屋に捨てる冷蔵庫。(b) 海水から熱をとって、全部、船を進める仕事に変えるエンジン(ほかに何も変えない)。(c) 電気を使って、庫内の熱を部屋に捨てる冷蔵庫。(d) 熱を入れずに、仕事を出し続ける装置。</p>
+    </div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>(a) 低温から高温へ、ほかに何も残さず熱を運ぶ:<b>Clausius の原理</b>に反する。(b) 1つの熱源から熱を全部仕事に:<b>Kelvin の原理</b>に反する(第2種永久機関)。(c) 仕事(電気)を使うので、反しない(熱ポンプ)。(d) エネルギー保存に反する:<b>第1法則</b>に反する(第1種永久機関)。</p></div>
+
+    <div class="box ex">
+      <div class="label">問題 C:可逆か不可逆か</div>
+      <p>次の過程は、可逆(と考えてよいもの)か、不可逆か。理由も述べよ。(1) 温度差が有限の2つの物体の間の熱伝導。(2) 摩擦のないピストンで、気体を準静的に等温膨張させる(熱源の温度と気体の温度は、ほとんど同じ)。(3) 氷が、室温で融ける。(4) 摩擦のない振り子の振動。</p>
+    </div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>(1) <b>不可逆</b>(Clausius の原理から、第3節の補足)。(2) <b>可逆</b>(準静的で、摩擦も有限の温度差もない。逆向きに、圧縮すれば、熱も仕事も、そっくり戻る)。(3) <b>不可逆</b>(有限の温度差を伴う熱伝導。(1) と同じ)。(4) <b>可逆</b>(摩擦がなければ、時間を逆に再生しても、同じ運動:力学の運動は、逆向きにもできる)。</p></div>
+
+    <!-- ===================== 9 ===================== -->
+    <h2 id="s9">9. まとめ(この回で覚えること)</h2>
+    <ul>
+      <li><b>第2法則</b>は、熱と仕事の非等価性(できること・できないこと)。自然な変化には<b>向き</b>がある。</li>
+      <li><b>可逆過程</b>:A→B を、K′ で、(外界に何も残さず)B→A に戻せる過程。<b>不可逆</b>:そうでない。不可逆の証明は、<b>背理法</b>:可逆と仮定して、原理に反することを示す。</li>
+      <li><b>Clausius の原理</b>:低温から高温へ、ほかに何も残さず熱を移すことはできない。<b>Kelvin の原理</b>:1つの熱源から熱を全部仕事に変える(ほかに何も残さず)サイクルはない。両者は同値。</li>
+      <li><b>Carnot サイクル</b>:2つの熱源を使う可逆サイクル(等温・断熱・等温・断熱)。$Q=W+Q'$。<b>逆サイクル</b>がある。性質は<b>作業物質によらない</b>。<b>正の Carnot サイクルは、正の仕事をする</b>。</li>
+      <li><b>できること</b>:仕事→熱(全部)、熱→仕事(一部、$\eta\lt1$)、熱ポンプ、熱伝導。<b>できないこと</b>:不可逆過程の逆過程(摩擦の逆、自由膨張の逆)。</li>
+    </ul>
+
+    <!-- ===================== 10 ===================== -->
+    <h2 id="s10">10. この回のノートについてのメモ</h2>
+    <p>板書は手書きの画像です。画像の順に、p.5(3.1〜3.2)、p.6(3.3〜3.5)としました。板書の画像は、このサイトには載せていません。黄色の枠、基礎ページの内容、練習問題と解答は、Claude が書き足したもので、板書にはありません。</p>
+    <ol>
+      <li><b>可逆過程の定義(p.5)</b>:板書は「状態 B から、操作 K′ で A に戻せるとき」としか書いていませんが、後の議論(3.4、3.5)から、「外界に何の影響も残さずに」戻せる、という意味と読み、補足の枠に書きました。</li>
+      <li><b>第1法則の式(p.6)</b>:Carnot サイクルの第1法則の式は、「$0=Q-W-Q''$」と書かれて見えます。$Q''$ は、同じ行の、「C→D で捨てる熱 $Q'$」のことと読みました($0=Q-W-Q'$)。</li>
+      <li><b>性質1の証明の図(p.6)</b>:板書の「$W\gt0$ のとき」の図(C と J)は、逆サイクルが $W$ を出し、摩擦の装置 J で熱にして、高温熱源に入れる図、と読みました($W=Q'-Q$ という式から)。$W\le0$ の場合分けとして、本文に書き直しました。</li>
+      <li><b>「(c)→(b)」(p.6、(B))</b>:「(c)→(b) が可逆であるとする」は、「(a)→(b) が可逆であるとする」と読みました。</li>
+      <li><b>Kelvin ⇒ Clausius の図(p.6)</b>:図の中の「$Q'-Q-W$」のように見える書き込みは、「$Q'=Q-W$」と読みました(第1法則)。</li>
+      <li>板書の「サイクルは、Clausius の原理に反する(赤枠)」の、サイクル全体が何を指すかは、図の読み取りが難しい箇所があるので、第5節の、2つの場合分けの形で、論理を補いました。</li>
+    </ol>
+
+    <nav class="pager">
+      <a href="week-04.html">← 前の週</a>
+      <a href="../index.html">一覧へ</a>
+      <a href="week-06.html">次の週 →</a>
+    </nav>
+
+  </main>
+
+  <footer>© Aセメまとめノート</footer>
+</body>
+</html>
