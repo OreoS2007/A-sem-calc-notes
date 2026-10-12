@@ -6,6 +6,7 @@
   <meta name="robots" content="noindex">
   <title>第11回 熱平衡状態の安定性 | Aセメまとめノート</title>
   <link rel="stylesheet" href="../../assets/style.css">
+  <style>main.note p, main.note li { overflow-x: auto; overflow-y: hidden; }</style>
   <script defer src="../../assets/nav.js"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
@@ -159,7 +160,7 @@
       <p>理想気体($C_V\gt0$)で、$\left(\dfrac{\partial P}{\partial V}\right)_T$ の符号を確かめ、安定性の条件を満たすことを示せ。$C_P-C_V$ の符号も確かめよ。</p>
     </div>
     <div class="box proof"><div class="label">解答</div>
-      <p>$P=\dfrac{nRT}{V}$ より $\left(\dfrac{\partial P}{\partial V}\right)_T=-\dfrac{nRT}{V^2}\lt0$:安定。$C_P-C_V=-T\left(\dfrac{nR}{P}\right)^2\left(-\dfrac{nRT}{V^2}\right)=\dfrac{nR\cdot nRT\cdot nR\,T}{P^2V^2}\cdot\dfrac{1}{T}\cdot T\ldots$ を整理すると、$P V=nRT$ から $nR\gt0$:マイヤーの関係式 $C_P-C_V=nR\gt0$。</p></div>
+      <p>$P=\dfrac{nRT}{V}$ より $\left(\dfrac{\partial P}{\partial V}\right)_T=-\dfrac{nRT}{V^2}\lt0$:安定。$C_P-C_V=-T\left(\dfrac{nR}{P}\right)^2\left(-\dfrac{nRT}{V^2}\right)=\dfrac{n^3R^3T^2}{P^2V^2}=\dfrac{n^3R^3T^2}{(nRT)^2}=nR\gt0$($PV=nRT$ を使った。マイヤーの関係式と一致)。</p></div>
 
     <div class="box ex">
       <div class="label">問題 B:ファンデルワールス気体の不安定な領域</div>
@@ -193,46 +194,6 @@
       <li><b>$P$–$V$ 図(p.11)</b>:板書の、右下がりの曲線の図は、$\left(\frac{\partial P}{\partial V}\right)_T\lt0$ の図示と読みました。</li>
       <li><b>ファンデルワールス気体の図(p.11)</b>:波打つ等温線と、「第二法則で許されない」の書き込みは、傾きが正の区間を指すものと読み、計算した曲線で描き直しました。</li>
       
-    </ol>
-
-    <nav class="pager">
-      <a href="week-10.html">← 前の週</a>
-      <a href="../index.html">一覧へ</a>
-      <a href="week-12.html">次の週 →</a>
-    </nav>$C_P-C_V=-Tleft(dfrac{nR}{P}ight)^2left(-dfrac{nRT}{V^2}ight)=dfrac{n^3R^3T^2}{P^2V^2}=dfrac{n^3R^3T^2}{(nRT)^2}=nRgt0$($PV=nRT$ を使った。マイヤーの関係式と一致)。</p></div>
-
-    <div class="box ex">
-      <div class="label">問題 B:ファンデルワールス気体の不安定な領域</div>
-      <p>$P=\dfrac{nRT}{V-b}-\dfrac a{V^2}$ で、$\left(\dfrac{\partial P}{\partial V}\right)_T\lt0$ となる条件を求めよ。$n=1$、$b\to0$ の場合に、$T$ と $V$ の関係で書け。</p>
-    </div>
-    <div class="box proof"><div class="label">解答</div>
-      <p>$\left(\dfrac{\partial P}{\partial V}\right)_T=-\dfrac{nRT}{(V-b)^2}+\dfrac{2a}{V^3}\lt0$、つまり $RT\gt\dfrac{2a(V-b)^2}{V^3}$($n=1$)。$b\to0$ なら $RT\gt\dfrac{2a}{V}$、$V\gt\dfrac{2a}{RT}$。体積が小さい($V\lt2a/RT$)と、不安定になりうる(分子間の引力が効く、濃い状態)。温度が高いほど、全体が安定になる。</p></div>
-
-    <div class="box ex">
-      <div class="label">問題 C:熱容量が負だと、何が起こるか</div>
-      <p>熱容量が負($C\lt0$)の物体と、温度 $T_0$ の熱源を接触させると、何が起こるか。安定性の条件との関係で説明せよ。</p>
-    </div>
-    <div class="box proof"><div class="label">解答</div>
-      <p>$C\lt0$ の物体は、熱を受け取ると温度が下がる(逆に、熱を失うと温度が上がる)。物体の温度が熱源より少し高いとき、熱を失う → 温度がさらに上がる → もっと熱を失う、と、熱源との温度差が、<b>どんどん広がる</b>(暴走)。平衡状態に戻る力が働かないので、不安定。$\dfrac{C_V}{T}\gt0$ の条件が、これを排除している。</p></div>
-
-    <!-- ===================== 8 ===================== -->
-    <h2 id="s8">8. まとめ(この回で覚えること)</h2>
-    <ul>
-      <li>安定:ずらすと、断熱で $\delta S\lt0$、等温・定積で $\delta F\gt0$、等温・定圧で $\delta G\gt0$。一般には、$\delta U+P^*\delta V-T^*\delta S\gt0$。</li>
-      <li>1次の項が 0 ⇒ $T=T^*$、$P=P^*$。2次の項 $\frac12\left[\delta T\delta S-\delta P\delta V\right]=\frac12\left[\frac{C_V}{T}(\delta T)^2-\left(\frac{\partial P}{\partial V}\right)_T(\delta V)^2\right]\gt0$。</li>
-      <li>安定性:$C_V\gt0$(熱的)、$\left(\dfrac{\partial P}{\partial V}\right)_T\lt0$(力学的)。⇒ $C_P\gt C_V\gt0$、$C_V/C_P\lt1$。</li>
-      <li>ファンデルワールス気体の、$\left(\dfrac{\partial P}{\partial V}\right)_T\gt0$ の区間は、第2法則で許されない(2相に分かれる)。</li>
-    </ul>
-
-    <!-- ===================== 9 ===================== -->
-    <h2 id="s9">9. この回のノートについてのメモ</h2>
-    <p>板書は手書きの画像です。画像の順に p.11 としました。板書の画像は、このサイトには載せていません。黄色の枠(この回はなし)、基礎ページの内容、練習問題と解答は、Claude が書き足したもので、板書にはありません。</p>
-    <ol>
-      <li><b>「$dQ+P^*dV-T^*dS\le0$」(p.11)</b>:板書の、この行の最初の項は、$dU$ と読みました($\dbar Q=dU+P^*dV$ なので、$dU+P^*dV-T^*dS\le0$ が、Clausius の不等式 $\dbar Q\le T^*dS$ と同じです)。</li>
-      <li><b>2次の項の添字(p.11)</b>:板書は、混合偏微分の添字を省略しているので、$U_{SV}=\left(\frac{\partial T}{\partial V}\right)_S=-\left(\frac{\partial P}{\partial S}\right)_V$(第9回の Maxwell の関係式)として、まとめました。</li>
-      <li><b>$P$–$V$ 図(p.11)</b>:板書の、右下がりの曲線の図は、$\left(\frac{\partial P}{\partial V}\right)_T\lt0$ の図示と読みました。</li>
-      <li><b>ファンデルワールス気体の図(p.11)</b>:波打つ等温線と、「第二法則で許されない」の書き込みは、傾きが正の区間を指すものと読み、計算した曲線で描き直しました。</li>
-      <li>問題 A の解答の途中式は、読みにくいので、結論($C_P-C_V=nR\gt0$)だけを信用してください(第4回で導出済み)。</li>
     </ol>
 
     <nav class="pager">

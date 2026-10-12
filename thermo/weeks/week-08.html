@@ -6,6 +6,7 @@
   <meta name="robots" content="noindex">
   <title>第8回 エントロピーの計算と熱力学関数 | Aセメまとめノート</title>
   <link rel="stylesheet" href="../../assets/style.css">
+  <style>main.note p, main.note li { overflow-x: auto; overflow-y: hidden; }</style>
   <script defer src="../../assets/nav.js"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
@@ -187,47 +188,7 @@
       <p>単原子分子の理想気体では、$U(S,V)=A\,V^{-2/3}\exp\!\left(\dfrac{2S}{3nR}\right)$($A$ は、$n$ だけで決まる正の定数)と書ける。$T$、$P$ を求め、$PV=nRT$ と $U=\frac32nRT$ を確かめよ。</p>
     </div>
     <div class="box proof"><div class="label">解答</div>
-      <p>$T=\left(\dfrac{\partial U}{\partial S}\right)_V=\dfrac{2}{3nR}U$。よって $U=\dfrac32nRT$ ✓。$-P=\left(\dfrac{\partial U}{\partial V}\right)_S=-\dfrac{2}{3}\dfrac UV$、$P=\dfrac{2U}{3V}=\dfrac{nRT}{V}$、つまり $PV=nRT$ ✓。$U(S,V)$ 1つから、状態方程式とエネルギーの両方が出た(完全)。熱容量は、$C_V=\dfrac{T}{(\partial T/\partial S)_V}=\dfrac{T}{\frac{2}{3nR}T}\cdot\dfrac{2}{3nR}\cdot$ …より、$(\partial T/\partial S)_V=\dfrac{2}{3nR}T$ から $C_V=T/\left(\dfrac{2T}{3nR}\right)=\dfrac32nR$ ✓。</p></div>
-
-    <!-- ===================== 9 ===================== -->
-    <h2 id="s9">9. まとめ(この回で覚えること)</h2>
-    <ul>
-      <li>$\int_{A\to B}\dfrac{\dbar Q}{T}\le S_B-S_A$。熱伝導の例:$C_V\left(1-\dfrac{T_0}{T}\right)\le C_V\log\dfrac T{T_0}$。</li>
-      <li>理想気体:$S(T,V)=C_V\log T+nR\log V+$ 定数。方法1(断熱+定積)と方法2(等温+定積)で、同じ。断熱で到達できるのは、$S$ が増える側。</li>
-      <li><b>基本関係式</b> $dU=T\,dS-P\,dV$。<b>完全な熱力学関数</b>:$U(S,V)$($T=U_S$、$-P=U_V$、$C_V=T/U_{SS}$)、$S(U,V)$($\frac1T=S_U$、$\frac PT=S_V$)。$U(T,V)$ は不完全。</li>
-    </ul>
-
-    <!-- ===================== 10 ===================== -->
-    <h2 id="s10">10. この回のノートについてのメモ</h2>
-    <p>板書は手書きの画像です。画像の順に p.9(下端に「4. 熱力学関数」の書き出し)、p.10 としました。板書の画像は、このサイトには載せていません。黄色の枠、基礎ページの内容、練習問題と解答は、Claude が書き足したもので、板書にはありません。</p>
-    <ol>
-      <li><b>節番号(p.9)</b>:Clausius の不等式から「断熱過程でのエントロピー変化」までは、見出しの番号がありません(3.9 の続きの練習と見ました)。「4. 熱力学関数」が新しい章の始まりです。</li>
-      <li><b>方法2の最終行の符号(p.9)</b>:板書の最後の行は符号が読み取りにくいので、方法1と一致するよう $+R\log\dfrac{V}{V_0}$ として書きました(上の方法2の本文の導出は、$+$ になります)。</li>
-      <li><b>方法2の点 D(p.9)</b>:板書の D は $(T_0,V)$(温度 $T_0$ の等温線上、体積 $V$)と読みました($S_D-S_A=R\log\frac V{V_0}$ から)。</li>
-      <li><b>$n$ の扱い(p.9)</b>:板書は $n=1$ mol として $R$ と書いています。本文は $nR$ で統一しました。</li>
-      <li><b>断熱で到達できる領域の図(p.9)</b>:斜線の領域は、準静的でない断熱過程で到達できる範囲と読み、$S$ が増える側(断熱曲線の上側)として描きました。</li>
-      <li><b>$S(U,V)$ の欄外の書き込み(p.10)</b>:「$V(S,U)$」のように見える書き込みは、$S(U,V)$ の変数の組についての注記と読み、本文には入れていません。</li>
-    </ol>
-
-    <nav class="pager">
-      <a href="week-07.html">← 前の週</a>
-      <a href="../index.html">一覧へ</a>
-      <a href="week-09.html">次の週 →</a>
-    </nav>熱容量は、$left(dfrac{partial T}{partial S}ight)_V=dfrac{2T}{3nR}$ より $C_V=dfrac{T}{(partial T/partial S)_V}=dfrac32nR$ ✓。</p></div>
-
-    <div class="box ex">
-      <div class="label">問題 B:準静的な断熱変化で、$S$ が変わらないことの確認</div>
-      <p>理想気体の準静的断熱変化 $TV^{\gamma-1}=$ 一定 で、$S(T,V)=C_V\log T+nR\log V+$ 定数 が一定であることを示せ。</p>
-    </div>
-    <div class="box proof"><div class="label">解答</div>
-      <p>$S=C_V\log T+nR\log V+c=C_V\left[\log T+(\gamma-1)\log V\right]+c=C_V\log\left(TV^{\gamma-1}\right)+c$($nR=C_V(\gamma-1)$)。断熱変化では $TV^{\gamma-1}$ が一定なので、$S$ も一定。</p></div>
-
-    <div class="box ex">
-      <div class="label">問題 C:$U(S,V)$ から、理想気体の状態方程式を出す</div>
-      <p>単原子分子の理想気体では、$U(S,V)=A\,V^{-2/3}\exp\!\left(\dfrac{2S}{3nR}\right)$($A$ は、$n$ だけで決まる正の定数)と書ける。$T$、$P$ を求め、$PV=nRT$ と $U=\frac32nRT$ を確かめよ。</p>
-    </div>
-    <div class="box proof"><div class="label">解答</div>
-      <p>$T=\left(\dfrac{\partial U}{\partial S}\right)_V=\dfrac{2}{3nR}U$。よって $U=\dfrac32nRT$ ✓。$-P=\left(\dfrac{\partial U}{\partial V}\right)_S=-\dfrac{2}{3}\dfrac UV$、$P=\dfrac{2U}{3V}=\dfrac{nRT}{V}$、つまり $PV=nRT$ ✓。$U(S,V)$ 1つから、状態方程式とエネルギーの両方が出た(完全)。熱容量は、$C_V=\dfrac{T}{(\partial T/\partial S)_V}=\dfrac{T}{\frac{2}{3nR}T}\cdot\dfrac{2}{3nR}\cdot$ …より、$(\partial T/\partial S)_V=\dfrac{2}{3nR}T$ から $C_V=T/\left(\dfrac{2T}{3nR}\right)=\dfrac32nR$ ✓。</p></div>
+      <p>$T=\left(\dfrac{\partial U}{\partial S}\right)_V=\dfrac{2}{3nR}U$。よって $U=\dfrac32nRT$ ✓。$-P=\left(\dfrac{\partial U}{\partial V}\right)_S=-\dfrac{2}{3}\dfrac UV$、$P=\dfrac{2U}{3V}=\dfrac{nRT}{V}$、つまり $PV=nRT$ ✓。$U(S,V)$ 1つから、状態方程式とエネルギーの両方が出た(完全)。熱容量は、$\left(\dfrac{\partial T}{\partial S}\right)_V=\dfrac{2T}{3nR}$ より $C_V=\dfrac{T}{(\partial T/\partial S)_V}=\dfrac32nR$ ✓。</p></div>
 
     <!-- ===================== 9 ===================== -->
     <h2 id="s9">9. まとめ(この回で覚えること)</h2>
