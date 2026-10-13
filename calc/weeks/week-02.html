@@ -1,0 +1,538 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>第2回 ラグランジュの未定乗数法 | Aセメまとめノート</title>
+  <link rel="stylesheet" href="../../assets/style.css">
+  <script defer src="../../assets/nav.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],macros:{'\\R':'\\mathbb{R}'}});window.__navReady&&window.__navReady()"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="inner">
+      <a class="site-title" href="../../index.html">Aセメまとめノート</a>
+      <span class="links"><a href="../index.html">微積</a><a href="../basics.html">春学期のまとめ</a><a href="../../linalg/index.html">線形代数</a></span>
+    </div>
+  </header>
+
+  <main class="note">
+    <h1>第2回:ラグランジュの未定乗数法(条件付き極値問題)</h1>
+    <div class="meta">微分積分学②(東京大学 教養学部 秋学期)／板書 p.1〜p.16(途中まで)</div>
+
+    <div class="box note-box">
+      <div class="label">このノートは途中までです</div>
+      <p>この回の板書のうち、p.1〜p.16(2変数の場合の定理と証明、例、3変数・条件1つの場合、3変数・条件2つの場合の書き出し)まで作成しました。続きの板書を受け取り次第、このページに追記します。</p>
+    </div>
+
+    <nav class="toc">
+      <div class="toc-title">目次</div>
+      <ol start="0">
+        <li><a href="#s0">この回の全体像</a></li>
+        <li><a href="#s1">準備:これまでの内容の確認(基礎)</a>
+          <div class="sub">極値と臨界点／等高線と等位面／勾配ベクトル／陰関数の定理／連鎖律／平行と線型独立</div></li>
+        <li><a href="#s2">条件付き極値問題とは</a>(p.1–2)</li>
+        <li><a href="#s3">ラグランジュの未定乗数法(主張)</a>(p.2–3)</li>
+        <li><a href="#s4">証明(2変数)</a>(p.4–6)</li>
+        <li><a href="#s5">注意:必要条件であること、$\nabla g=\vec 0$ の点</a>(p.7)</li>
+        <li><a href="#s6">例:点と曲線の最短距離</a>(p.8–10)</li>
+        <li><a href="#s7">3変数・条件1つの場合</a>(p.11–15)</li>
+        <li><a href="#s8">3変数・条件2つの場合</a>(p.16〜、途中)</li>
+        <li><a href="#s9">具体例で練習(板書にない補足)</a></li>
+        <li><a href="#s10">ここまでのまとめ</a></li>
+        <li><a href="#s11">この回のノートについてのメモ(板書の読み取り)</a></li>
+      </ol>
+    </nav>
+
+    <!-- ===================== 0 ===================== -->
+    <h2 id="s0">0. この回の全体像 <span class="page-tag">板書 p.1</span></h2>
+    <p>授業計画(第1回のノート参照)の2つ目の項目、<b>ラグランジュの未定乗数法</b>(条件付き極大・極小問題)です。前回の<b>陰関数の定理</b>と、<b>勾配ベクトル</b>の知識が、そのまま使われます。</p>
+
+    <div class="box thm">
+      <div class="label">この回のゴール</div>
+      <p>変数 $x,y$ が自由に動けず、<b>条件 $g(x,y)=0$ を満たす点だけ</b>を動けるとき、その中で $f(x,y)$ が最大・最小になる点(極値をとる点)は、次の条件を満たします:
+      $$\nabla f(a,b)=\lambda\,\nabla g(a,b)\qquad(\lambda\ \text{はある定数})$$
+      つまり、<b>$f$ の勾配と $g$ の勾配が平行</b>になります。これを使うと、「条件つきの最大・最小」の候補を、連立方程式を解いて見つけられます。</p>
+    </div>
+
+    <div class="box intuit">
+      <div class="label">直感で理解する:山道の上の最高地点</div>
+      <p>$f(x,y)$ を地図の標高、$g(x,y)=0$ を山の中の一本道とします。道の上だけを歩いて、<b>道の上でいちばん高い地点</b>を探します。その地点に着くと、道に沿ってそれ以上は登れません(前へ進んでも後ろへ進んでも下り)。つまり、そこで<b>道の向きが、標高の等高線の向きと一致します</b>(道が等高線に「接する」)。もし道が等高線を斜めに横切っていたら、そのまま進めば、まだ登れる(または下れる)からです。</p>
+      <p>「道と等高線が接する」を、勾配で言い換えたものが $\nabla f=\lambda\nabla g$ です。どちらの勾配も、等高線・道の向きに直角なので、接していれば(同じ向きの接線をもてば)、2つの勾配も同じ直線の上に並ぶ(平行)からです。</p>
+    </div>
+
+    <!-- ===================== 1 ===================== -->
+    <h2 id="s1">1. 準備:これまでの内容の確認(基礎)</h2>
+    <p>この回で使う道具を、先に並べておきます。くわしい説明は、各枠の「→ 詳しい解説」から、春学期のまとめのページに飛べます(戻るときは、画面左下の「元の位置にもどる」を押してください)。</p>
+
+    <h3 id="w-ext">1.1 極値と臨界点</h3>
+    <div class="box basic">
+      <div class="label">基礎:極値と臨界点 <a class="xref-link" href="../basics.html#extremum" data-xref>→ 詳しい解説</a></div>
+      <p>・<b>1変数:</b> $g(x)$ が $x=a$ で極大(または極小)をとり、$a$ で微分可能ならば、$g'(a)=0$。</p>
+      <p>・<b>2変数:</b> $f(x,y)$ が $(a,b)$ で<b>極小</b>とは、ある $\varepsilon\gt0$ が存在して、$(a,b)$ の $\varepsilon$-近傍 $U_\varepsilon(a,b)$ の中の、$(a,b)$ 以外のすべての点 $(x,y)$ で $f(x,y)\gt f(a,b)$ となること。<b>極大</b>は不等号が逆($f(x,y)\lt f(a,b)$)。極大と極小をあわせて<b>極値</b>といいます。</p>
+      <p>・$f$ が $(a,b)$ で極値をとり、偏微分可能ならば、$f_x(a,b)=f_y(a,b)=0$。$f_x=f_y=0$ となる点を<b>臨界点</b>といいます。逆は成り立ちません($f=x^2-y^2$ の原点は臨界点ですが、極大でも極小でもない<b>鞍点</b>です)。</p>
+      <p>・<b>条件付き</b>:「$g(x,y)=0$ の下で $f$ が $(a,b)$ で極値をとる」とは、曲線 $g(x,y)=0$ の上の点だけを考えたとき、$(a,b)$ の近くで $f(a,b)$ が最大(または最小)になる、という意味です(曲線の外の点は考えません)。</p>
+      <p><b>直感:</b> 山頂や谷底では、どの向きに進んでも「登りも下りもしない」平らな点です(傾きが $0$)。ただし、平らでも峠(鞍点)のように、山頂でも谷底でもない点があります。</p>
+    </div>
+
+    <h3 id="w-level">1.2 等高線と等位面</h3>
+    <div class="box basic">
+      <div class="label">基礎:等高線と等位面 <a class="xref-link" href="../basics.html#level" data-xref>→ 詳しい解説</a></div>
+      <p>$f(x,y)=C$($C$ は定数)をみたす点の集まりを、$f$ の<b>等高線</b>といいます(同じ高さの点を結んだ線)。$C$ を変えると、別の高さの等高線になります。3変数の $f(x,y,z)=d$ をみたす点の集まりは曲面になり、<b>等位面</b>といいます。</p>
+      <p><b>直感:</b> 地図の等高線、天気図の等圧線のように、「値が同じ場所を結んだもの」です。等高線に沿って歩けば、値は変わりません。</p>
+    </div>
+
+    <h3 id="w-grad">1.3 勾配ベクトル</h3>
+    <div class="box basic">
+      <div class="label">基礎:勾配ベクトル <a class="xref-link" href="../basics.html#grad" data-xref>→ 詳しい解説</a><a class="xref-link" href="week-01.html#w-grad" data-xref>→ 第1回 1.9</a></div>
+      <p>$\nabla f=(f_x,\,f_y)$(3変数なら $(f_x,f_y,f_z)$)を<b>勾配ベクトル</b>といい、$\operatorname{grad}f$ とも書きます。$\nabla f\ne\vec0$ のとき、<b>$\nabla f$ は、等高線(等位面)に直交</b>し、$f$ がいちばん急に増える向きを向きます(第1回で示したこと)。</p>
+      <p><b>直感:</b> 等高線に沿って歩けば高さは変わらないので、いちばん急に登る向きは、等高線に沿う向きとは直角です。</p>
+    </div>
+
+    <h3 id="w-impl">1.4 陰関数の定理</h3>
+    <div class="box basic">
+      <div class="label">基礎:陰関数の定理 <a class="xref-link" href="week-01.html#s4" data-xref>→ 第1回 4節</a><a class="xref-link" href="week-01.html#s10" data-xref>→ 第1回 10節(3変数)</a></div>
+      <p>$g$ が $C^1$ 級、$g(a,b)=0$、$g_y(a,b)\ne0$ ならば、$x=a$ を含むある開区間で定義された関数 $y=\varphi(x)$ で、$\varphi(a)=b$、$g(x,\varphi(x))=0$ をみたすものが存在する。さらに $\varphi$ は微分可能で
+      $$\varphi'(x)=-\frac{g_x(x,y)}{g_y(x,y)}\quad(y=\varphi(x)).$$
+      3変数のときは、$g_z(a,b,c)\ne0$ ならば、$(a,b)$ を含むある開集合で $z=\varphi(x,y)$ が存在し、$\varphi_x=-g_x/g_z,\ \varphi_y=-g_y/g_z$。</p>
+      <p><b>直感:</b> $g=0$ の曲線(海岸線)のある点のそばで、「$x$ を決めると $y$ が1つに決まる」ように見える(縦向きでない)なら、そこでは曲線を $y=\varphi(x)$ のグラフとして扱えます。</p>
+    </div>
+
+    <h3 id="w-chain">1.5 連鎖律</h3>
+    <div class="box basic">
+      <div class="label">基礎:連鎖律 <a class="xref-link" href="../basics.html#chain" data-xref>→ 詳しい解説</a></div>
+      <p>$f(x,y)$ が $C^1$ 級で、$y=\varphi(x)$ が微分可能のとき、
+      $$\frac{d}{dx}f\bigl(x,\varphi(x)\bigr)=\frac{\partial f}{\partial x}+\frac{\partial f}{\partial y}\,\varphi'(x).$$
+      3変数で $z=\varphi(x,y)$ のときは、$x$ で偏微分して $\dfrac{\partial}{\partial x}f(x,y,\varphi(x,y))=f_x+f_z\,\varphi_x$($y$ で偏微分するなら $f_y+f_z\,\varphi_y$)。</p>
+      <p><b>直感:</b> 曲線の上を歩く人が感じる標高の変化の速さは、「東向きの坂 × 東への速さ」+「北向きの坂 × 北への速さ」です。</p>
+    </div>
+
+    <h3 id="w-lindep">1.6 平行と線型独立</h3>
+    <div class="box basic">
+      <div class="label">基礎:平行と線型独立 <a class="xref-link" href="../basics.html#lindep" data-xref>→ 詳しい解説</a></div>
+      <p>・零でない2つのベクトル $\vec u,\vec v$ が<b>平行</b>であるとは、$\vec u=\lambda\vec v$ となる定数 $\lambda$ があること(一方が他方の定数倍)。</p>
+      <p>・2つのベクトル $\vec u,\vec v$ が<b>線型独立</b>であるとは、$\alpha\vec u+\beta\vec v=\vec0$ ならば $\alpha=\beta=0$ であること。2つのベクトルが線型独立であることは、<b>平行でない</b>(どちらも相手の定数倍でない)ことと同じです。</p>
+      <p><b>直感:</b> 線型独立なベクトルは、「別々の向きを向いている」ベクトルです(平行なら同じ直線上に並ぶので、独立ではありません)。</p>
+    </div>
+
+    <!-- ===================== 2 ===================== -->
+    <h2 id="s2">2. 条件付き極値問題とは <span class="page-tag">板書 p.1–2</span></h2>
+
+    <h3>2.1 問題の設定(板書 p.1 左)</h3>
+    <div class="box def">
+      <div class="label">条件付き極値問題</div>
+      <p>$g(x,y)=0$ の下で、$f(x,y)$ の極大・極小を求める。</p>
+    </div>
+    <p>ふつうの極値問題では、$(x,y)$ は平面のどこにでも動けます。ここでは、$(x,y)$ は<b>曲線 $g(x,y)=0$ の上だけ</b>を動けます。たとえば「面積が決まっている長方形のうち、周の長さが最小のもの」「予算が決まっている中で、満足度を最大にする買い方」のように、<b>何かが固定されている中での最大・最小</b>の問題が、広く(板書 p.4 の言葉でいう「最適化問題」などに)現れます。</p>
+
+    <h3>2.2 考え方:等高線が曲線に接するとき(板書 p.1 右)</h3>
+    <p>板書 p.1 の図は、次のことを表しています。$f(x,y)=C$ という等高線を、$C$ を変えながら動かしてみます。</p>
+    <ul>
+      <li>等高線 $f=C$ が曲線 $g=0$ と<b>斜めに交わっている</b>とき、その交点のすぐ近くの曲線上には、$C$ より大きい値も、小さい値も、両方ある(交点で曲線が、等高線の両側へ出ていくので)。だから、そこは極値ではありません。</li>
+      <li>$C$ を変えていくと、等高線が曲線に<b>ちょうど接する</b>ところがあります。そのとき、曲線は等高線の片側にとどまる(等高線を越えない)ので、その点が極値の候補になります。</li>
+    </ul>
+    <p>そこで、板書の「<b>$f(x,y)=C$ と $g(x,y)=0$ が接線を共有する点を求める</b>」ことが、極値の点を見つける方法になります。</p>
+
+    <figure class="fig">
+      <svg viewBox="0 0 520 300" width="520" role="img" aria-label="等高線と条件の曲線">
+        <ellipse class="cv" cx="230" cy="190" rx="120" ry="80"/>
+        <path class="thin" d="M70 85.6 Q230 34.4 390 85.6" style="stroke-width:1.4"/>
+        <path class="thin" d="M70 110.6 Q230 59.4 390 110.6" style="stroke-width:1.4"/>
+        <path class="cv2" d="M70 135.6 Q230 84.4 390 135.6" style="stroke-width:3.2"/>
+        <path class="thin" d="M70 160.6 Q230 109.4 390 160.6" style="stroke-width:1.4"/>
+        <circle class="dot" cx="230" cy="110" r="5.5"/>
+        <text class="t" x="238" y="104">(a, b)</text>
+        <text class="tm" x="396" y="86">f=C₁</text><text class="tm" x="396" y="111">f=C₂</text>
+        <text class="tt" x="396" y="136">f=C*(接する)</text><text class="tm" x="396" y="161">f=C₃</text>
+        <text class="ta" x="332" y="268">g(x,y) = 0</text>
+        <text class="tm" x="40" y="26">青:条件の曲線 g=0 ／ 細い線:f の等高線(C を変えたもの)</text>
+        <text class="tm" x="40" y="44">C₁・C₂:曲線に届かない(あるいは触れない)</text>
+        <text class="tm" x="40" y="62">C₃:曲線と斜めに交わる → 両側に値が出るので極値でない</text>
+      </svg>
+      <figcaption>$f=C^*$ の等高線(オレンジ)が、曲線 $g=0$(青)に点 $(a,b)$ でちょうど接しています。ここが「共有する点」で、極値の候補です。それより少し大きい $C_3$ の等高線は曲線と2点で斜めに交わり、その点は極値ではありません(板書 p.1 の図)。</figcaption>
+    </figure>
+
+    <h3>2.3 勾配ベクトルで言い換える(板書 p.2 左)</h3>
+    <p>接線を共有するとは、2つの曲線 $f=C$ と $g=0$ の、点 $(a,b)$ での接線が<b>同じ直線</b>になることです。勾配ベクトル $\nabla f(a,b)$ は等高線 $f=C$ の接線に直交し、$\nabla g(a,b)$ は曲線 $g=0$ の接線に直交します(1.3)。接線が同じなら、それに直交する向きも同じ。したがって、</p>
+    <div class="box ex">
+      <div class="label">言い換え(板書 p.2 左)</div>
+      <p>$\nabla f(a,b)$ と $\nabla g(a,b)$ が<b>平行になる</b> $(a,b)$ を求める。</p>
+    </div>
+    <p>板書にはさらに、<b>仮定</b>として「$f(x,y),\ g(x,y)$ は $C^1$ 級とする」と書かれています($C^1$ 級でないと、勾配ベクトルや陰関数の定理が使えないからです)。</p>
+
+    <figure class="fig">
+      <svg viewBox="0 0 420 250" width="420" role="img" aria-label="接線を共有し勾配が平行">
+        <path class="cv" d="M80 205 Q210 105 340 205"/>
+        <path class="cv2" d="M80 185 Q210 125 340 185"/>
+        <line class="dash" x1="60" y1="155" x2="360" y2="155"/>
+        <circle class="dot" cx="210" cy="155" r="5"/>
+        <line class="arr" x1="210" y1="155" x2="210" y2="70" style="stroke:var(--accent)"/><polygon points="210,62 205,74 215,74" fill="var(--accent)"/>
+        <line class="arr" x1="214" y1="155" x2="214" y2="105"/><polygon class="arrh" points="214,97 209,109 219,109"/>
+        <path d="M222 155 L222 143 L210 143" fill="none" stroke="var(--muted)" stroke-width="1.4"/>
+        <text class="ta" x="120" y="75">∇g(a,b)(青の曲線 g=0 に直交)</text>
+        <text class="tt" x="226" y="100">∇f(a,b)</text>
+        <text class="tm" x="64" y="172">共通の接線</text>
+        <text class="t" x="170" y="178">(a, b)</text>
+        <text class="ta" x="350" y="205">g=0</text><text class="tt" x="350" y="186">f=C*</text>
+        <text class="tm" x="40" y="236">∇f と ∇g は同じ直線上 → ∇f = λ∇g(この図では 0 < λ < 1)</text>
+      </svg>
+      <figcaption>2本の曲線が点 $(a,b)$ で同じ接線をもつ(水平の点線)と、それぞれに直交する勾配ベクトルは、同じ直線(縦)の上に並びます。長さは違っても向きは同じ(または逆)なので、一方は他方の定数倍、つまり $\nabla f=\lambda\nabla g$ です。</figcaption>
+    </figure>
+
+    <!-- ===================== 3 ===================== -->
+    <h2 id="s3">3. ラグランジュの未定乗数法(主張) <span class="page-tag">板書 p.2–3</span></h2>
+
+    <div class="box thm">
+      <div class="label">定理(ラグランジュの未定乗数法)</div>
+      <p>$f(x,y),\ g(x,y)$ は $C^1$ 級とする。$g(x,y)=0$ の下で、$f(x,y)$ が $(a,b)$ で極値をとるとする(ただし $\bigl(g_x(a,b),\,g_y(a,b)\bigr)\ne(0,0)$、つまり $\nabla g(a,b)\ne\vec0$ とする)。このとき、ある定数 $\lambda$ が存在して
+      $$\boxed{\ \begin{aligned}f_x(a,b)&=\lambda\,g_x(a,b)\\ f_y(a,b)&=\lambda\,g_y(a,b)\end{aligned}\ }\qquad(\ast)$$
+      が成り立つ。すなわち
+      $$\nabla f(a,b)=\lambda\,\nabla g(a,b)\qquad(\operatorname{grad}f(a,b)\ \text{とも書く}).$$</p>
+    </div>
+    <p>板書 p.3 で、この結果が<b>ラグランジュの未定乗数法</b>(Lagrange)と名づけられました。定数 $\lambda$ は、最初は値が分からない(未定)ので「未定乗数」といいます。</p>
+
+    <h3>3.1 どう使うか</h3>
+    <p>点 $(a,b)$ は、次の<b>3本の連立方程式</b>の解です:
+    $$f_x(a,b)=\lambda g_x(a,b),\qquad f_y(a,b)=\lambda g_y(a,b),\qquad g(a,b)=0.$$
+    最後の式は、「$(a,b)$ が条件の曲線の上にある」という条件で、$(\ast)$ とは別に必要です。未知数は $a,b,\lambda$ の3つなので、式の数と合っています。この連立方程式を解けば、極値をとる点の<b>候補</b>が見つかります(具体例は第9節)。</p>
+
+    <div class="box intuit">
+      <div class="label">直感で理解する:なぜ「平行」なのか</div>
+      <p>曲線 $g=0$ に沿って動ける方向は、曲線の接線の方向だけです。そこで $f$ が極値をとるなら、その接線の方向には、$f$ はもう変わりません(1変数の極値で、傾きが $0$ になるのと同じ)。つまり、$\nabla f$ は、接線の方向には何も成分をもちません(接線と直交)。一方、接線と直交する向きは、平面では1つの直線(法線)に決まっていて、$\nabla g$ もその上にあります。だから $\nabla f$ と $\nabla g$ は、同じ直線上にあります。</p>
+    </div>
+
+    <!-- ===================== 4 ===================== -->
+    <h2 id="s4">4. 証明(2変数) <span class="page-tag">板書 p.4–6</span></h2>
+    <p>板書 p.4 の左上に「「最適化問題」等に応用」とあり、そのあとに「$(\ast)$ の証明」が始まります。方針は、「<b>陰関数の定理を用いる</b>」です。</p>
+
+    <div class="box note-box">
+      <div class="label">証明の方針</div>
+      <p>条件の曲線 $g=0$ を、陰関数の定理で $y=\varphi(x)$ という関数のグラフとして表す。すると、曲線の上の $f$ の値は、1変数の関数 $h(x)=f(x,\varphi(x))$ になる。この $h$ が $x=a$ で極値をとるので、$h'(a)=0$。この式を整理すると、$(\ast)$ になる。</p>
+    </div>
+
+    <div class="box intuit">
+      <div class="label">直感で理解する:道を歩くと、標高は1変数の関数になる</div>
+      <p>道($g=0$)の上の位置を、1つの数(東西の位置 $x$)で表すと、道に沿った標高は $h(x)$ という1変数の関数になります。この関数が山頂(谷底)にあるなら、そこで傾き $h'(a)$ は $0$ です。1変数のおなじみの話に、条件付き問題を持ち込むのが、陰関数の定理の役割です。</p>
+    </div>
+
+    <h3>Step 0:$g_y(a,b)\ne0$ としてよい(板書 p.4 右)</h3>
+    <p>$\nabla g(a,b)=(g_x,g_y)\ne(0,0)$ とするので、$g_x$ か $g_y$ の少なくとも一方は $0$ ではありません。そこで、<b>$g_y(a,b)\ne0$ と仮定</b>します($g_x\ne0$ のときは、$x$ と $y$ の役割を入れ替えて、次の Step 1 以降をまねすればよい。板書 p.6 右)。</p>
+
+    <h3>Step 1:陰関数 $y=\varphi(x)$ をとる(板書 p.4 右)</h3>
+    <p>陰関数の定理(1.4、第1回)より、$a$ を含むある開区間で、陰関数 $y=\varphi(x)$ が存在し、
+    $$b=\varphi(a),\qquad g(x,\varphi(x))=0.$$
+    $a$ の近くでは、条件の曲線 $g=0$ の上の点は、すべて $(x,\varphi(x))$ の形に書けます。</p>
+
+    <h3>Step 2:$f$ を曲線の上で見る(板書 p.5 左)</h3>
+    <p>曲線の上では $y=\varphi(x)$ なので、$f(x,y)=f(x,\varphi(x))$。この1変数関数 $h(x)=f(x,\varphi(x))$ は、$f$ が $(a,b)$ で(条件付きの)極値をとることから、$x=a$ で極値をとります。したがって(1.1)、
+    $$\frac{d}{dx}f(x,\varphi(x))\Bigr|_{x=a}=0.$$
+    連鎖律(1.5)で左辺を計算すると
+    $$f_x(a,b)+f_y(a,b)\,\varphi'(a)=0\qquad(b=\varphi(a)).$$
+    これが、極値になるための条件です(板書 p.5 左)。</p>
+
+    <h3>Step 3:$\varphi'(a)$ を代入する(板書 p.5 右)</h3>
+    <p>陰関数の定理より $\varphi'(a)=-\dfrac{g_x(a,b)}{g_y(a,b)}$。これを上の式に代入すると、
+    $$f_x(a,b)-f_y(a,b)\,\frac{g_x(a,b)}{g_y(a,b)}=0\qquad(\dagger)$$
+    が得られます。(板書では、この式にも丸付きの星印がついています。p.3 の $(\ast)$ と区別するため、このノートでは $(\dagger)$ と書きます。)</p>
+
+    <h3>Step 4:$\lambda$ をおく(板書 p.6)</h3>
+    <p>$\lambda=\dfrac{f_y(a,b)}{g_y(a,b)}$ とおきます($g_y(a,b)\ne0$ だから定義できる)。すると、</p>
+    <ul>
+      <li>$(\dagger)$ より、$f_x(a,b)-\lambda\,g_x(a,b)=0$。($f_y/g_y$ が $\lambda$ だから)</li>
+      <li>$\lambda$ の定義から、$f_y(a,b)-\lambda\,g_y(a,b)=0$。</li>
+    </ul>
+    <p>つまり $(\ast)$ の2本の式が成り立ち、$\nabla f(a,b)=\lambda\nabla g(a,b)$ が示されました。$\blacksquare$</p>
+
+    <details><summary>板書の p.4–6 の対応(メモ)</summary>
+      <p>p.4 左:「$(\ast)$ の証明 / 陰関数定理を用いる」。p.4 右:$g_y\ne0$ と仮定、陰関数 $\varphi$。p.5 左:$\dfrac{d}{dx}f(x,\varphi(x))=f_x+f_y\varphi'$、極値になる条件 $f_x+f_y\varphi'=0$。p.5 右:$\varphi'(a)=-g_x/g_y$ を代入して $(\dagger)$。p.6 左:$\lambda=f_y/g_y$ とおく。p.6 右:「つまり $\nabla f=\lambda\nabla g$」、$g_x\ne0$ のときは $y=b$ のまわりの陰関数 $x=\psi(y)$ で同様に示す。</p>
+    </details>
+
+    <!-- ===================== 5 ===================== -->
+    <h2 id="s5">5. 注意:必要条件であること、$\nabla g=\vec0$ の点 <span class="page-tag">板書 p.7</span></h2>
+
+    <h3>5.1 必要条件であって、十分条件ではない(板書 p.7 左)</h3>
+    <div class="box warn">
+      <div class="label">注意(板書 p.7 左)</div>
+      <p>$\nabla f(a,b)=\lambda\nabla g(a,b)$ は、極値をとるための<b>必要条件</b>。実際に $(a,b)$ で極値をとるかどうかは、<b>個別に調べる</b>。</p>
+    </div>
+    <p>「極値をとるなら、この式が成り立つ」とは言えても、「この式が成り立つなら、極値をとる」とは言えません。この式をみたす点は、あくまで<b>候補</b>で、そこが本当に最大・最小・極値かは、別に確かめる必要があります。</p>
+
+    <div class="box intuit">
+      <div class="label">直感で理解する:接していれば山頂とは限らない</div>
+      <p>道が等高線に接する点は、道の上の「最高地点」か「最低地点」のほかに、「峠のように、一方からは登り、他方へは下る」点でも起こります(道が等高線に接していても、そこを越えると、値は増え続ける、または減り続けることがある)。山頂と谷底の見分けは、等高線に接しただけでは分かりません。</p>
+    </div>
+    <div class="box supp">
+      <div class="label">板書にない補足:必要条件だけの例</div>
+      <p>$g(x,y)=y$(条件は $y=0$、つまり $x$ 軸)、$f(x,y)=x^3$ とします。$\nabla g=(0,1)\ne\vec 0$。$\nabla f=(3x^2,0)=\lambda(0,1)$ をみたすのは $x=0,\ \lambda=0$ で、候補は原点です。ところが、$x$ 軸の上で $f=x^3$ は原点を越えて増え続けるので、原点は極値ではありません(候補であって、極値とは限りません)。</p>
+    </div>
+
+    <h3>5.2 $\nabla g(a,b)=\vec0$ となる点(板書 p.7 右)</h3>
+    <div class="box warn">
+      <div class="label">注意(板書 p.7 右)</div>
+      <p>$\nabla g(a,b)=\vec0$ となる $(a,b)$ については、<b>別に求める必要がある</b>。</p>
+    </div>
+    <p>定理の仮定に「$\nabla g(a,b)\ne\vec0$」がありました。この仮定が成り立たない点(条件の曲線上で $g_x=g_y=0$ となる点)では、定理が使えないので、ラグランジュの条件では<b>見つかりません</b>。そのような点は、別に調べる必要があります。</p>
+
+    <h3>例(板書 p.7 右):$g(x,y)=x^3-y^2$</h3>
+    <p>$g_x=3x^2,\ g_y=-2y$。したがって $\nabla g(0,0)=(0,0)$。条件の曲線 $x^3-y^2=0$(すなわち $y^2=x^3$)は、原点でとがった形(<b>カスプ</b>、板書の図)をしています。</p>
+
+    <figure class="fig">
+      <svg viewBox="0 0 440 250" width="440" role="img" aria-label="カスプの例">
+        <line class="ax" x1="40" y1="125" x2="420" y2="125"/><line class="ax" x1="100" y1="236" x2="100" y2="14"/>
+        <text class="t" x="408" y="143">x</text><text class="t" x="108" y="24">y</text>
+        <polyline class="cv" fill="none" stroke-linejoin="round" points="100,125 109,123.6 122.5,119.4 145,109.1 167.5,95.8 190,80 212.5,62.1 235,42.3 262,16.4"/>
+        <polyline class="cv" fill="none" stroke-linejoin="round" points="100,125 109,126.4 122.5,130.6 145,140.9 167.5,154.2 190,170 212.5,187.9 235,207.7 262,233.6"/>
+        <line class="dash" x1="150" y1="14" x2="150" y2="236"/><line class="dash" x1="220" y1="14" x2="220" y2="236"/>
+        <line class="cv2" x1="100" y1="14" x2="100" y2="236" style="stroke-width:2.2;stroke-dasharray:6 4"/>
+        <circle class="dot" cx="100" cy="125" r="5.5"/>
+        <line class="arr" x1="100" y1="125" x2="140" y2="125"/><polygon class="arrh" points="148,125 136,120 136,130"/>
+        <text class="ta" x="280" y="60">g = x³ − y² = 0(カスプ)</text>
+        <text class="tt" x="150" y="112">∇f=(1,0)</text>
+        <text class="tm" x="274" y="205">f = x の等高線は縦線</text>
+        <text class="tm" x="300" y="224">原点では ∇g=(0,0)</text>
+        <text class="tm" x="110" y="244" style="font-size:11px">原点でとがっている</text>
+      </svg>
+      <figcaption>曲線 $y^2=x^3$ は、原点で、左へは出ない(とがった先端)形をしています。原点では $\nabla g=\vec0$ で、「接線の方向」が1つに決まりません。</figcaption>
+    </figure>
+
+    <div class="box supp">
+      <div class="label">板書にない補足:ラグランジュの条件で見つからない最小点</div>
+      <p>$f(x,y)=x$ を、条件 $g(x,y)=x^3-y^2=0$ の下で最小にしてみます。曲線上では $x^3=y^2\ge0$ なので $x\ge0$。したがって、最小値は $x=0$ のとき、最小点は<b>原点</b>です。ところが、$\nabla f=(1,0)$ で、$\nabla g(0,0)=(0,0)$ なので、$(1,0)=\lambda(0,0)$ となる $\lambda$ は存在しません。つまり、<b>本当の最小点が、ラグランジュの条件では見つからない</b>のです。だから、$\nabla g=\vec0$ となる点は別に調べる必要があります。</p>
+    </div>
+    <div class="box intuit">
+      <div class="label">直感で理解する:なぜ、とがった点は別扱いなのか</div>
+      <p>「道と等高線が接する」という考え方は、道に<b>接線</b>があること(なめらかな道)を前提にしています。道の途中に尖った点(カスプ)や折れ曲がりがあると、そこでは接線が1つに決まらず、「接する」ことを論じられません。そういう点では、等高線は、尖った先端にそっと触れるだけでも、最小点や最大点になりえます。</p>
+    </div>
+
+    <!-- ===================== 6 ===================== -->
+    <h2 id="s6">6. 例:点と曲線の最短距離 <span class="page-tag">板書 p.8–10</span></h2>
+
+    <h3>6.1 問題(板書 p.8)</h3>
+    <div class="box ex">
+      <div class="label">例</div>
+      <p>曲線 $g(x,y)=0$ の上にない点 $P(p,q)$ をとる。曲線上の点 $Q(x,y)$ で、<b>$PQ$ の長さが最小</b>になるものを求める。</p>
+    </div>
+
+    <h3>6.2 ラグランジュの未定乗数法を使う(板書 p.9)</h3>
+    <p>$PQ$ の長さが最小 ⟺ $PQ$ の長さの2乗が最小。そこで、
+    $$f(x,y)=(x-p)^2+(y-q)^2$$
+    とおき、$g(x,y)=0$ の下で $f$ を最小にします(長さの2乗にすると、ルートが消えて計算が楽になります)。$\nabla g(a,b)\ne\vec0$ として、$f$ が $(a,b)$ で極値をとるなら、ラグランジュの未定乗数法より、$\lambda$ が存在して
+    $$f_x(a,b)=\lambda g_x(a,b),\qquad f_y(a,b)=\lambda g_y(a,b).$$
+    ここで $f_x=2(x-p),\ f_y=2(y-q)$ なので、
+    $$2(a-p)=\lambda\,g_x(a,b),\qquad 2(b-q)=\lambda\,g_y(a,b).$$</p>
+
+    <h3>6.3 幾何学的な意味(板書 p.10)</h3>
+    <p>この2式は、まとめると $\bigl(a-p,\ b-q\bigr)=\dfrac\lambda2\,\nabla g(a,b)$。したがって:</p>
+    <div class="box thm">
+      <div class="label">結論(板書 p.10)</div>
+      <p>ベクトル $(a-p,\ b-q)$ は $\nabla g(a,b)$ と<b>平行</b>。つまり、$(a-p,\,b-q)$ は、曲線 $g(x,y)=0$ の $(a,b)$ における<b>接線方向に直交</b>する。</p>
+    </div>
+    <p>言い換えると、<b>点 $P$ から曲線への最短距離を与える線分 $PQ$ は、曲線に直角に当たる</b>(垂線になる)、ということです。</p>
+
+    <figure class="fig">
+      <svg viewBox="0 0 460 320" width="460" role="img" aria-label="最短距離は垂線">
+        <ellipse class="cv" cx="200" cy="230" rx="110" ry="70"/>
+        <circle cx="330" cy="90" r="104" fill="none" stroke="var(--thm)" stroke-width="1.6" stroke-dasharray="6 5"/>
+        <line class="arr" x1="330" y1="90" x2="276" y2="179"/>
+        <line class="dash" x1="327" y1="210" x2="225" y2="148" style="stroke:var(--ex);stroke-width:2"/>
+        <path d="M282.2 168.7 L292.5 174.9 L286.3 185.2" fill="none" stroke="var(--muted)" stroke-width="1.4"/>
+        <circle class="dot" cx="330" cy="90" r="5"/><circle class="dotb" cx="276" cy="179" r="5"/>
+        <text class="t" x="338" y="86">P(p, q)</text>
+        <text class="t" x="214" y="172">Q = (a, b)</text>
+        <text class="ta" x="60" y="310">g(x,y) = 0</text>
+        <text class="tt" x="14" y="66">PQ が最短 → 円が曲線に接する</text>
+        <text class="tm" x="352" y="186" style="fill:var(--ex)">緑の点線:Q での接線</text>
+        <text class="tm" x="14" y="26">点線の円:P を中心に、半径を大きくしていったもの</text>
+      </svg>
+      <figcaption>$P$ を中心とする円(オレンジの点線)の半径を $0$ から大きくしていくと、はじめて曲線に触れるのが、最短距離の点 $Q$ です。円は曲線に接するので、円の半径 $PQ$ は、接線(緑)と直角になります(板書 p.10 の図)。</figcaption>
+    </figure>
+
+    <div class="box intuit">
+      <div class="label">直感で理解する:風船をふくらませる</div>
+      <p>$P$ の位置で、風船(円)を少しずつふくらませます。曲線に最初に触れた点が、$P$ から最も近い点 $Q$ です。その瞬間、風船は曲線に<b>接している</b>ので、風船の半径($PQ$)は接線と直角です。これは、第2節の「等高線 $f=C$(いまの場合は、$P$ を中心とする円)が、曲線 $g=0$ に接する点が極値」という考え方そのものです。</p>
+    </div>
+    <p>なお、板書 p.10 の左側の図には、曲線の上の点 $(a,b)$、勾配ベクトル $\nabla g(a,b)$、点 $(p,q)$ が描かれていて、「ベクトル $(a-p,b-q)$ は $\nabla g(a,b)$ と平行」であることを表しています。</p>
+
+    <!-- ===================== 7 ===================== -->
+    <h2 id="s7">7. 3変数・条件1つの場合 <span class="page-tag">板書 p.11–15</span></h2>
+
+    <h3>7.1 主張(板書 p.11)</h3>
+    <div class="box thm">
+      <div class="label">定理(3変数・条件1つ)</div>
+      <p>$f(x,y,z),\ g(x,y,z)$ は $C^1$ 級とする。$g(x,y,z)=0$ の下で、$f(x,y,z)$ が $(a,b,c)$ で極値をとるとする。ただし $\nabla g(a,b,c)\ne\vec0$ とする。このとき、ある定数 $\lambda$ が存在して
+      $$\nabla f(a,b,c)=\lambda\,\nabla g(a,b,c)$$
+      が成り立つ。</p>
+    </div>
+    <p>2変数のときと同じ形です。変数が3つになっただけで、条件 $g=0$ は、平面の曲線ではなく、<b>空間の曲面</b>になります。</p>
+
+    <h3>7.2 幾何学的な意味(板書 p.12)</h3>
+    <p>板書 p.12 の図は、次のことを表しています。</p>
+    <ul>
+      <li>$g(x,y,z)=0$ は、空間の中の<b>曲面</b>(図のドームのような形)。</li>
+      <li>$f(x,y,z)=d$ は、$d$ ごとに決まる曲面で、$f$ の<b>等位面</b>(1.2)。$d$ を変えると、別の等位面になる(図では、重なった薄い曲面)。</li>
+      <li>$f$ が $(a,b,c)$ で極値をとる点では、<b>2つの曲面 $g=0$ と $f=d$ が、$(a,b,c)$ で接平面を共有</b>します。</li>
+    </ul>
+    <p>接平面の法線ベクトルが、それぞれ $\nabla g(a,b,c)$ と $\nabla f(a,b,c)$ です(第1回 10.4)。同じ接平面なら、法線ベクトルも同じ向きなので、$\nabla f=\lambda\nabla g$ です。</p>
+
+    <figure class="fig">
+      <svg viewBox="0 0 480 300" width="480" role="img" aria-label="2つの曲面が接平面を共有">
+        <path class="cv" d="M90 260 C100 90 360 90 370 260" style="stroke-width:2.8"/>
+        <path d="M110 55 Q230 191 350 55" fill="none" stroke="var(--thm)" stroke-width="2.4" stroke-dasharray="7 5"/>
+        <polygon points="120,140 300,98 380,112 200,155" fill="var(--ex)" opacity=".13" stroke="var(--ex)" stroke-width="1.8"/>
+        <line class="arr" x1="230" y1="123" x2="232" y2="40"/><polygon class="arrh" points="232,32 227,44 237,44"/>
+        <circle class="dot" cx="230" cy="123" r="5.5"/>
+        <text class="t" x="240" y="118">(a, b, c)</text>
+        <text class="tt" x="242" y="36">∇f(a,b,c) ∥ ∇g(a,b,c)</text>
+        <text class="ta" x="64" y="160">g = 0(曲面)</text>
+        <text class="tt" x="360" y="62">f = d(等位面)</text>
+        <text class="tm" x="388" y="132" style="fill:var(--ex)">共有する接平面</text>
+      </svg>
+      <figcaption>ドーム(青、$g=0$)の頂上付近に、おわん形の等位面(オレンジの点線、$f=d$)が、上から1点でそっと接しています。2つの曲面は、点 $(a,b,c)$ で同じ平らな板(緑)に接していて、その板に垂直な向き($\nabla f$ と $\nabla g$)は同じです(板書 p.12 の図)。</figcaption>
+    </figure>
+
+    <div class="box intuit">
+      <div class="label">直感で理解する:風船をふくらませる(3次元)</div>
+      <p>第6節と同じ話が、3次元でも成り立ちます。$f(x,y,z)$ の等位面 $f=d$ を、$d$ を大きくしながら動かすと、ドームの表面($g=0$)に、はじめて触れるところがあります。そこで $f$ は、ドーム上の最小(または最大)になります。触れた瞬間、2つの面は接していて、接平面を共有します。</p>
+    </div>
+
+    <h3>7.3 証明(板書 p.13–15)</h3>
+    <p>方針は2変数のときと同じで、<b>陰関数の定理</b>を使います(板書 p.13 の左:「$g_z(a,b,c)\ne0$ と仮定して、陰関数定理を用いる」)。</p>
+
+    <h4>Step 0:$g_z(a,b,c)\ne0$ としてよい</h4>
+    <p>$\nabla g(a,b,c)\ne\vec0$ なので、$g_x,g_y,g_z$ のどれかは $0$ ではありません。$g_z\ne0$ と仮定します(他の場合は、変数の役割を入れ替えるだけです)。</p>
+
+    <h4>Step 1:陰関数 $z=\varphi(x,y)$ をとる(板書 p.13)</h4>
+    <p>陰関数の定理(1.4、3変数)より、$(a,b)$ を含むある開集合で、陰関数 $z=\varphi(x,y)$ が存在し、
+    $$c=\varphi(a,b),\qquad g\bigl(x,y,\varphi(x,y)\bigr)=0.$$
+    この恒等式を $x$ と $y$ で偏微分すると(板書 p.13 右):
+    $$g_x+g_z\,\frac{\partial\varphi}{\partial x}=0,\qquad g_y+g_z\,\frac{\partial\varphi}{\partial y}=0.$$
+    $g_z\ne0$ なので、$\dfrac{\partial\varphi}{\partial x}=-\dfrac{g_x}{g_z},\ \dfrac{\partial\varphi}{\partial y}=-\dfrac{g_y}{g_z}$ と書けます。</p>
+
+    <h4>Step 2:$f$ を曲面の上で見る(板書 p.14 左)</h4>
+    <p>曲面の上では $z=\varphi(x,y)$ なので、$f$ の値は、2変数の関数
+    $$F(x,y)=f\bigl(x,y,\varphi(x,y)\bigr)$$
+    になります。$f$ が $(a,b,c)$ で(条件付きの)極値をとるので、$F$ は $(a,b)$ で極値をとります。したがって(1.1)、$F_x(a,b)=F_y(a,b)=0$。連鎖律(1.5)で計算すると(板書 p.14 左):
+    $$F_x=\frac{\partial}{\partial x}f(x,y,\varphi(x,y))=f_x+f_z\frac{\partial\varphi}{\partial x},\qquad F_y=f_y+f_z\frac{\partial\varphi}{\partial y}.$$</p>
+
+    <h4>Step 3:$\varphi_x,\varphi_y$ を代入する(板書 p.14 右)</h4>
+    <p>$F_x=0,\ F_y=0$ に $\varphi_x=-g_x/g_z,\ \varphi_y=-g_y/g_z$ を代入して、
+    $$f_x(a,b,c)-f_z(a,b,c)\frac{g_x(a,b,c)}{g_z(a,b,c)}=0,\qquad f_y(a,b,c)-f_z(a,b,c)\frac{g_y(a,b,c)}{g_z(a,b,c)}=0.$$</p>
+
+    <h4>Step 4:$\lambda$ をおく(板書 p.15)</h4>
+    <p>$\lambda=\dfrac{f_z(a,b,c)}{g_z(a,b,c)}$ とおきます。すると、Step 3 の2式は
+    $$f_x(a,b,c)-\lambda\,g_x(a,b,c)=0,\qquad f_y(a,b,c)-\lambda\,g_y(a,b,c)=0,$$
+    $\lambda$ の定義から
+    $$f_z(a,b,c)-\lambda\,g_z(a,b,c)=0.$$
+    3本まとめて、$\nabla f(a,b,c)=\lambda\nabla g(a,b,c)$。$\blacksquare$</p>
+
+    <div class="box note-box">
+      <div class="label">2変数のときとの対応</div>
+      <p>2変数では「$g_y\ne0$ を仮定し、$y=\varphi(x)$ をとり、$f(x,\varphi(x))$ の微分が $0$」でした。3変数では「$g_z\ne0$ を仮定し、$z=\varphi(x,y)$ をとり、$f(x,y,\varphi(x,y))$ の<b>2つの偏微分が $0$</b>」です。偏微分の式が1本から2本になるぶん、結論の式も2本から3本になります($\lambda=f_z/g_z$ が、残りの1本を作る)。</p>
+    </div>
+
+    <!-- ===================== 8 ===================== -->
+    <h2 id="s8">8. 3変数・条件2つの場合 <span class="page-tag">板書 p.16〜(途中)</span></h2>
+
+    <h3>8.1 設定(板書 p.16)</h3>
+    <div class="box def">
+      <div class="label">設定</div>
+      <p>$f(x,y,z),\ g(x,y,z),\ h(x,y,z)$ は $C^1$ 級とする。$g(x,y,z)=0,\ h(x,y,z)=0$ のとき、$f(x,y,z)$ が $(a,b,c)$ で極値をとるとする。ただし、<b>$\nabla g(a,b,c)$ と $\nabla h(a,b,c)$ は線型独立</b>とする。</p>
+    </div>
+    <p>条件が2つあると、動ける範囲は、2枚の曲面 $g=0$ と $h=0$ の<b>交わり</b>、つまり<b>空間の曲線</b>になります。この曲線の上で、$f$ の極値を考える問題です。</p>
+
+    <div class="box warn">
+      <div class="label">板書の読み取りについて</div>
+      <p>板書 p.16 の右上では、線型独立の仮定が「$\nabla f(a,b,c)$ と $\nabla g(a,b,c)$ は線型独立」と読める書き方になっていました。しかし、この問題の条件は $g=0$ と $h=0$ の2つで、仮定は<b>条件の曲面の勾配 $\nabla g$ と $\nabla h$ の線型独立</b>のはずなので、このノートでは「$\nabla g$ と $\nabla h$」と読みました。</p>
+    </div>
+
+    <h3>8.2 線型独立の意味</h3>
+    <p>$\nabla g$ と $\nabla h$ が線型独立(平行でない)であることは、2つの曲面 $g=0$ と $h=0$ が、点 $(a,b,c)$ で<b>斜めに交わっている</b>(接していない)ことを意味します。斜めに交わるので、交わりはきれいな1本の曲線になります。もし $\nabla g\parallel\nabla h$ なら、2つの曲面は、そこで接してしまい、交わりが曲線にならない(つぶれたり、複雑な形になったりする)ことがあります。</p>
+
+    <figure class="fig">
+      <svg viewBox="0 0 460 205" width="460" role="img" aria-label="線型独立と平行">
+        <text class="ta" x="40" y="22">線型独立(別々の向き)</text>
+        <circle class="dot" cx="110" cy="130" r="4.5"/>
+        <line class="arr" x1="110" y1="130" x2="110" y2="52" style="stroke:var(--accent)"/><polygon points="110,44 105,56 115,56" fill="var(--accent)"/>
+        <line class="arr" x1="110" y1="130" x2="180" y2="100"/><polygon class="arrh" points="188,97 177,95 181,105"/>
+        <text class="ta" x="60" y="42">∇g</text><text class="tt" x="190" y="96">∇h</text>
+        <text class="tm" x="40" y="172">2つの曲面は斜めに交わる</text><text class="tm" x="40" y="190">→ 交わりは1本の曲線</text>
+        <text class="ta" x="270" y="22">平行(同じ向き)</text>
+        <circle class="dot" cx="340" cy="130" r="4.5"/>
+        <line class="arr" x1="340" y1="130" x2="340" y2="52" style="stroke:var(--accent)"/><polygon points="340,44 335,56 345,56" fill="var(--accent)"/>
+        <line class="arr" x1="344" y1="130" x2="344" y2="82"/><polygon class="arrh" points="344,74 339,86 349,86"/>
+        <text class="ta" x="296" y="42">∇g</text><text class="tt" x="352" y="82">∇h</text>
+        <text class="tm" x="266" y="172">2つの曲面が接する</text><text class="tm" x="266" y="190">→ 交わりが曲線にならないことも</text>
+      </svg>
+      <figcaption>$\nabla g$ と $\nabla h$ が別の向きなら、2つの曲面は斜めに交わります。同じ向き(平行)なら、そこで接しています。</figcaption>
+    </figure>
+
+    <div class="box supp">
+      <div class="label">板書にない補足:この続きの見通し(結論は板書で確認)</div>
+      <p>板書は p.16 のここまでで、結論はまだ書かれていません。ここから先は、これまでの話の流れから見える<b>見通し</b>です(結論は、続きの板書で確認します)。</p>
+      <p>交わりの曲線の上で $f$ が極値をとるなら、その点で、$f$ は曲線の接線方向には変化しません(つまり $\nabla f$ は接線と直交)。一方、$\nabla g$ も $\nabla h$ も、曲線の接線と直交しています(曲線は両方の曲面の上にあるので)。接線に直交するベクトルは、空間では<b>1枚の平面</b>をつくり、線型独立な $\nabla g,\nabla h$ が、その平面を張ります。だから、$\nabla f$ は、$\nabla g$ と $\nabla h$ の1次結合
+      $$\nabla f(a,b,c)=\lambda\,\nabla g(a,b,c)+\mu\,\nabla h(a,b,c)$$
+      になる、と見通せます($\lambda,\mu$ は定数)。条件が1つ増えるごとに、乗数も1つ増えます。</p>
+    </div>
+
+    <!-- ===================== 9 ===================== -->
+    <h2 id="s9">9. 具体例で練習(板書にない補足)</h2>
+    <p>公式の使い方を、簡単な例で確かめます。</p>
+
+    <h3>例1:円の上での $xy$ の最大・最小</h3>
+    <p>$g(x,y)=x^2+y^2-1=0$ の下で、$f(x,y)=xy$ の最大値・最小値を求めます。$\nabla g=(2x,2y)$ は、円の上($x^2+y^2=1$)では $\vec0$ になりません。$\nabla f=(y,x)$ なので、ラグランジュの条件は
+    $$y=\lambda\cdot2x,\qquad x=\lambda\cdot2y,\qquad x^2+y^2=1.$$
+    第1式を第2式に代入すると $x=4\lambda^2x$。$x=0$ とすると、第1式から $y=0$ となり、$x^2+y^2=1$ に反します。だから $x\ne0$ で、$\lambda^2=\tfrac14$、$\lambda=\pm\tfrac12$。</p>
+    <ul>
+      <li>$\lambda=\tfrac12$:$y=x$。$2x^2=1$ より $(x,y)=\pm\left(\tfrac1{\sqrt2},\tfrac1{\sqrt2}\right)$。$f=\tfrac12$。</li>
+      <li>$\lambda=-\tfrac12$:$y=-x$。$(x,y)=\pm\left(\tfrac1{\sqrt2},-\tfrac1{\sqrt2}\right)$。$f=-\tfrac12$。</li>
+    </ul>
+    <p>円は閉じた有界な曲線で、連続関数 $f$ は最大値と最小値をとるので、最大値は $\tfrac12$、最小値は $-\tfrac12$ です。</p>
+
+    <h3>例2:球面の上での $x+y+z$ の最大・最小</h3>
+    <p>$g=x^2+y^2+z^2-1=0$ の下で、$f=x+y+z$ を調べます。$\nabla f=(1,1,1)$、$\nabla g=(2x,2y,2z)$(球面の上では $\vec0$ でない)。$(1,1,1)=\lambda(2x,2y,2z)$ より $x=y=z=\dfrac1{2\lambda}$。$x^2+y^2+z^2=1$ に代入すると $3x^2=1$ で、$x=y=z=\pm\dfrac1{\sqrt3}$。$f=\pm\sqrt3$ なので、最大値 $\sqrt3$、最小値 $-\sqrt3$ です。</p>
+    <p>(幾何学的には、「球面に接する平面 $x+y+z=\text{一定}$ のうち、いちばん外側のもの」を探していることになります。$\nabla f=(1,1,1)$ は、等位面(平面)の法線です。)</p>
+
+    <div class="box supp">
+      <div class="label">板書にない補足:$\lambda$ の意味</div>
+      <p>条件を $g(x,y)=c$($c$ は定数)とし、その条件の下での最大値(または最小値)を $M(c)$ とします。ラグランジュの条件 $\nabla f=\lambda\nabla g$ を満たす点を、条件を $c$ から $c+\Delta c$ に変えたときに、少し動かすと(動かすベクトル $\vec v$)、条件の変化は $\nabla g\cdot\vec v=\Delta c$、$f$ の変化は $\nabla f\cdot\vec v=\lambda\nabla g\cdot\vec v=\lambda\,\Delta c$ です。したがって
+      $$\frac{dM}{dc}=\lambda.$$
+      つまり、<b>$\lambda$ は、条件を少し緩めたときに、最大値(最小値)がどれだけ変わるかの割合</b>です。「予算を 1 円増やすと、満足度の最大値が $\lambda$ だけ増える」というように、経済学などで「ラグランジュ乗数は、条件の価値を表す」と解釈されます。</p>
+    </div>
+
+    <!-- ===================== 10 ===================== -->
+    <h2 id="s10">10. ここまでのまとめ</h2>
+    <ol>
+      <li><b>条件付き極値問題</b>:$g(x,y)=0$ の下で、$f(x,y)$ の極大・極小を求める。</li>
+      <li><b>ラグランジュの未定乗数法</b>:$f,g$ が $C^1$ 級、$\nabla g(a,b)\ne\vec0$ で、$(a,b)$ で極値をとるなら、ある $\lambda$ が存在して $\nabla f(a,b)=\lambda\nabla g(a,b)$。連立方程式 $f_x=\lambda g_x,\ f_y=\lambda g_y,\ g=0$ を解いて、候補を見つける。</li>
+      <li><b>幾何学的な意味</b>:等高線 $f=C$ が条件の曲線 $g=0$ に接する点。勾配ベクトルが平行。</li>
+      <li><b>証明</b>:陰関数の定理で $y=\varphi(x)$ とし、$f(x,\varphi(x))$ の微分を $0$ とおく。$\lambda=f_y/g_y$ とおくと $(\ast)$。</li>
+      <li><b>注意</b>:必要条件にすぎない(候補)。$\nabla g=\vec0$ となる点は別に調べる(例:カスプ $x^3-y^2=0$ の原点)。</li>
+      <li><b>例</b>:点と曲線の最短距離 → 線分は曲線に直交。</li>
+      <li><b>3変数・条件1つ</b>:$\nabla f=\lambda\nabla g$。証明は $z=\varphi(x,y)$ をとり、2つの偏微分が $0$。2つの曲面が接平面を共有。</li>
+      <li><b>3変数・条件2つ</b>(途中):$\nabla g,\nabla h$ が線型独立のとき、(続きの板書で確認)。</li>
+    </ol>
+
+    <!-- ===================== 11 ===================== -->
+    <h2 id="s11">11. この回のノートについてのメモ(板書の読み取り)</h2>
+    <p>板書の写真は人が写っているため、公開しないことにしています(ノートの図は、描き直したものです)。次のように読み取りました。もし違うところがあれば、教えてください。</p>
+    <ul>
+      <li><b>ページ番号</b>:写真は2ページずつ(上下の黒板)で、上と下で番号の順が前後している写真が多かった(たとえば上が p.4、下が p.3)ので、黒板の右上の番号の順にまとめました。p.1〜p.16 までのすべてがそろっています(p.16 の続きは、まだありません)。</li>
+      <li><b>丸付きの星印</b>:板書では、p.3 の $(\ast)$ と、p.5 の「$\varphi'(a)$ を代入した式」の両方に、丸付きの星印がついています。別の式なので、後者を $(\dagger)$ と書いて区別しました。</li>
+      <li><b>p.16 の線型独立の仮定</b>:「$\nabla f$ と $\nabla g$」と読める書き方でしたが、条件が $g=0,\ h=0$ の2つなので、「$\nabla g$ と $\nabla h$」と読みました(第8節)。</li>
+      <li><b>黄色い枠(板書にない補足)</b>は、私(Claude)が書き足したもので、授業の内容とは限りません。具体例(第9節)、必要条件だけの例、カスプの最小点の例、$\lambda$ の意味、条件2つの場合の見通しです。</li>
+      <li>この回は<b>途中まで</b>です。続きの板書を受け取り次第、追記します。</li>
+    </ul>
+
+    <nav class="pager">
+      <a href="week-01.html">← 前の週</a>
+      <a href="../index.html">一覧へ</a>
+      <span class="disabled">次の週 →</span>
+    </nav>
+  </main>
+
+  <footer>© Aセメまとめノート</footer>
+</body>
+</html>

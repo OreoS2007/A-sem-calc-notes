@@ -57,9 +57,17 @@
             <li><a href="#mvt2">2変数の平均値の定理</a></li>
           </ol></li>
         <li><b>幾何との結びつき</b>
+
+
           <ol type="a" start="11">
             <li><a href="#grad">内積・勾配ベクトル・方向微分</a></li>
             <li><a href="#tangent">接線と接平面</a></li>
+          </ol></li>
+        <li><b>条件付き極値の準備</b>
+          <ol type="a" start="13">
+            <li><a href="#extremum">極値と臨界点</a></li>
+            <li><a href="#level">等高線と等位面</a></li>
+            <li><a href="#lindep">平行と線型独立</a></li>
           </ol></li>
       </ol>
     </nav>
@@ -556,7 +564,7 @@
     <h3 id="chain3">3変数の場合</h3>
     <p>$f(x,y,z)$ で $x=x(t),y=y(t),z=z(t)$ のとき、道が3本になるだけで:
     $$\frac{d}{dt}f(x(t),y(t),z(t))=\frac{\partial f}{\partial x}\frac{dx}{dt}+\frac{\partial f}{\partial y}\frac{dy}{dt}+\frac{\partial f}{\partial z}\frac{dz}{dt}.$$</p>
-    <p class="used-in">この回で使う場所:<a href="weeks/week-01.html#w-chain" data-xref>1.7 連鎖律</a><a href="weeks/week-01.html#s7" data-xref>7. 連鎖律で公式を出す</a><a href="weeks/week-01.html#s10" data-xref>10. 3変数の連鎖律</a></p>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-01.html#w-chain" data-xref>1.7 連鎖律</a><a href="weeks/week-01.html#s7" data-xref>7. 連鎖律で公式を出す</a><a href="weeks/week-01.html#s10" data-xref>10. 3変数の連鎖律</a><a href="weeks/week-02.html#w-chain" data-xref>第2回 1.5 連鎖律</a></p>
 
     <!-- ===================== j: 2変数の平均値の定理 ===================== -->
     <h2 id="mvt2">j. 2変数の平均値の定理</h2>
@@ -651,7 +659,8 @@
       </svg>
       <figcaption>$f=x^2+y^2$ では $\nabla f=(2x,2y)$。等高線(円)と直角に、外へ向かう矢印になっています。</figcaption>
     </figure>
-    <p class="used-in">この回で使う場所:<a href="weeks/week-01.html#w-grad" data-xref>1.9 勾配ベクトル</a><a href="weeks/week-01.html#w-gradperp" data-xref>9.3 勾配ベクトルと接線</a></p>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-01.html#w-grad" data-xref>1.9 勾配ベクトル</a><a href="weeks/week-01.html#w-gradperp" data-xref>9.3 勾配ベクトルと接線</a><a href="weeks/week-02.html#w-grad" data-xref>第2回 1.3 勾配ベクトル</a><a href="weeks/week-02.html#s2" data-xref>第2回 2. 勾配が平行</a></p>
+
 
     <!-- ===================== l: 接線と接平面 ===================== -->
     <h2 id="tangent">l. 接線と接平面</h2>
@@ -716,6 +725,158 @@
       <figcaption>曲面(青)と、点 $(a,b,c)$ で接する平面(赤)。法線ベクトルは接平面と直角に立ちます。</figcaption>
     </figure>
     <p class="used-in">この回で使う場所:<a href="weeks/week-01.html#s9" data-xref>9. 曲線の接線</a><a href="weeks/week-01.html#w-tplane" data-xref>10.4 接平面の方程式</a></p>
+
+    <!-- ===================== m: 極値と臨界点 ===================== -->
+    <h2 id="extremum">m. 極値と臨界点</h2>
+
+    <h3>1変数:極大・極小とフェルマーの定理</h3>
+    <div class="box def">
+      <div class="label">定義(極大・極小)</div>
+      <p>関数 $g(x)$ が $x=a$ で<b>極小</b>であるとは、ある $\varepsilon\gt0$ が存在して、$0\lt|x-a|\lt\varepsilon$ をみたすすべての $x$ で $g(x)\gt g(a)$ となること。<b>極大</b>は不等号が逆($g(x)\lt g(a)$)。極大と極小をあわせて<b>極値</b>といいます。</p>
+    </div>
+    <p>「最大・最小」が、定義域全体での一番を指すのに対して、「極大・極小」は、<b>そのまわりの近くだけ</b>で一番になっていることを指します(山の頂上は、遠くの高い山に負けていても、極大)。</p>
+    <div class="box thm">
+      <div class="label">定理(極値と微分:フェルマー)</div>
+      <p>$g$ が $a$ で極値をとり、$a$ で微分可能ならば、$g'(a)=0$。</p>
+    </div>
+    <details><summary>理由(証明)</summary>
+      <div class="box proof"><div class="label">証明</div>
+      <p>$g'(a)\gt0$ だとすると、$h$ が小さいとき $\dfrac{g(a+h)-g(a)}{h}\gt0$(極限が正だから、符号の保存)。すると $h\gt0$ では $g(a+h)\gt g(a)$、$h\lt0$ では $g(a+h)\lt g(a)$ となり、$a$ は極小でも極大でもありません。$g'(a)\lt0$ でも同様です。したがって、極値をとるなら $g'(a)=0$ しかありえません。</p></div>
+    </details>
+    <div class="box intuit">
+      <div class="label">直感で理解する</div>
+      <p><b>山頂と谷底:</b> 山の頂上に立つと、どちらに進んでも下りです。つまり、登りの傾きは $0$(水平)でなければなりません。もし傾きが $0$ でなければ、傾きのある向きにまだ登れるか、反対向きに登れるので、頂上ではありません。谷底も同様です。</p>
+      <p><b>逆は成り立たない:</b> 傾き $0$ でも、頂上や谷底とは限りません。$g(x)=x^3$ は $x=0$ で傾きが $0$ ですが、そこを越えて増え続けます(平らな階段の踊り場のような点)。</p>
+    </div>
+
+    <h3>2変数・3変数の極値と臨界点</h3>
+    <div class="box def">
+      <div class="label">定義(2変数の極値)</div>
+      <p>$f(x,y)$ が $(a,b)$ で<b>極小</b>であるとは、ある $\varepsilon\gt0$ が存在して、$(a,b)$ の $\varepsilon$-近傍 $U_\varepsilon(a,b)$ の中の、$(a,b)$ 以外のすべての点 $(x,y)$ で $f(x,y)\gt f(a,b)$ となること。<b>極大</b>は不等号が逆。</p>
+    </div>
+    <div class="box thm">
+      <div class="label">定理(極値と偏微分)</div>
+      <p>$f$ が $(a,b)$ で極値をとり、$x,y$ について偏微分可能ならば、
+      $$f_x(a,b)=0,\qquad f_y(a,b)=0.$$
+      $f_x=f_y=0$ をみたす点 $(a,b)$ を、$f$ の<b>臨界点</b>(critical point)といいます。すなわち、「<b>極値をとる点は、臨界点</b>」です。</p>
+    </div>
+    <details><summary>理由(証明)</summary>
+      <div class="box proof"><div class="label">証明</div>
+      <p>$y=b$ に固定して、1変数の関数 $x\mapsto f(x,b)$ を考えます。$f$ が $(a,b)$ で極値をとれば、この1変数関数は $x=a$ で極値をとります。フェルマーの定理より、その微分 $f_x(a,b)$ は $0$ です。$f_y(a,b)=0$ も、$x=a$ に固定して同様に示せます。</p></div>
+    </details>
+    <p>3変数以上でも同様で、極値をとる点では $f_x=f_y=f_z=0$ です。</p>
+
+    <h3>逆は成り立たない:鞍点</h3>
+    <p>臨界点であっても、極値とは限りません。</p>
+    <ul>
+      <li>$f(x,y)=x^2+y^2$:$f_x=2x,\ f_y=2y$ で、原点が臨界点。原点のまわりでは、$f\gt0=f(0,0)$ なので、原点は<b>極小</b>。</li>
+      <li>$f(x,y)=x^2-y^2$:$f_x=2x,\ f_y=-2y$ で、原点が臨界点。ところが、$x$ 軸の上では $f=x^2\gt0$、$y$ 軸の上では $f=-y^2\lt0$ なので、原点のまわりに、$f(0,0)=0$ より大きい点も小さい点もあります。極大でも極小でもありません。このような点を<b>鞍点</b>(saddle point)といいます。</li>
+    </ul>
+    <figure class="fig">
+      <svg viewBox="0 0 520 230" width="520" role="img" aria-label="極小と鞍点">
+        <circle class="thin" cx="130" cy="115" r="25"/><circle class="thin" cx="130" cy="115" r="50"/><circle class="thin" cx="130" cy="115" r="75"/>
+        <circle class="dot" cx="130" cy="115" r="4.5"/>
+        <text class="ta" x="66" y="212">f = x²+y²:原点は極小</text>
+        <text class="tm" x="40" y="20">等高線(同心円)。原点から離れるほど高い</text>
+        <line class="dash" x1="300" y1="25" x2="480" y2="205"/><line class="dash" x1="300" y1="205" x2="480" y2="25"/>
+        <polyline class="cv" fill="none" points="488.7,25 462.1,55 440,85 430,115 440,145 462.1,175 488.7,205"/>
+        <polyline class="cv" fill="none" points="291.3,25 317.9,55 340,85 350,115 340,145 317.9,175 291.3,205"/>
+        <polyline class="cv2" fill="none" points="300,16.3 330,42.9 360,65 390,75 420,65 450,42.9 480,16.3"/>
+        <polyline class="cv2" fill="none" points="300,213.7 330,187.1 360,165 390,155 420,165 450,187.1 480,213.7"/>
+        <circle class="dot" cx="390" cy="115" r="4.5"/>
+        <text class="ta" x="322" y="226">f = x²−y²:原点は鞍点(峠)</text>
+        <text class="tm" x="408" y="112" style="font-size:11px">f&gt;0</text><text class="tm" x="352" y="112" style="font-size:11px">f&gt;0</text>
+        <text class="tm" x="372" y="52" style="font-size:11px">f&lt;0</text><text class="tm" x="372" y="185" style="font-size:11px">f&lt;0</text>
+      </svg>
+      <figcaption>左:同心円の等高線。中心は谷底(極小)。右:原点で等高線(双曲線)が交差している。左右($x$ 方向)へは登り、上下($y$ 方向)へは下り。このような点が、鞍(馬の背中)の形に似ているので、鞍点です。</figcaption>
+    </figure>
+    <div class="box intuit">
+      <div class="label">直感で理解する:峠</div>
+      <p>山の2つの頂の間の峠は、尾根(頂から頂への道)に沿っては最低、谷(峠をまたぐ道)に沿っては最高になる、平らな点です。登りも下りもありませんが、頂上でも谷底でもありません。「傾きが $0$」は、極値の必要条件であって、十分条件ではない、ということです。</p>
+    </div>
+
+    <h3>条件付きの極値</h3>
+    <div class="box def">
+      <div class="label">定義(条件付き極値)</div>
+      <p>「$g(x,y)=0$ の下で、$f(x,y)$ が $(a,b)$ で極値をとる」とは、<b>曲線 $g(x,y)=0$ の上の点だけ</b>を考えたとき、$(a,b)$ の近くで $f(a,b)$ が極大(または極小)になること。(曲線の外の点は、$f$ の値が大きくても小さくても関係ありません。)</p>
+    </div>
+    <p>曲線が $y=\varphi(x)$ の形に書けるなら、曲線の上の $f$ の値は、1変数の関数 $h(x)=f(x,\varphi(x))$ です。「条件付きの極値」は、この $h(x)$ の<b>ふつうの極値</b>になり、フェルマーの定理が使えます。</p>
+    <div class="box intuit">
+      <div class="label">直感で理解する:道の上の最高地点</div>
+      <p>山の中の一本道だけを歩いて、道の上での最高地点を探します。道の外には、もっと高い場所があっても関係ありません。この問題は、道に沿った位置(1つの数)の関数 $h$ の山頂を探すことなので、道に沿って傾きが $0$ になる点が候補になります。</p>
+    </div>
+
+    <h3>最大・最小の存在</h3>
+    <p>「閉じた有界な集合の上の連続関数は、最大値と最小値をとる」という事実があります(1変数では、閉区間の上の連続関数、2変数以上でも、円周や球面のような閉じた有界な曲線・曲面の上で成り立ちます)。たとえば、「円周の上の連続関数は、必ず最大値と最小値をもつ」ので、極値の候補を全部調べて、いちばん大きいものが最大値、いちばん小さいものが最小値と言えます。</p>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-02.html#w-ext" data-xref>第2回 1.1 極値と臨界点</a><a href="weeks/week-02.html#s4" data-xref>第2回 4. 証明(2変数)</a><a href="weeks/week-02.html#s9" data-xref>第2回 9. 具体例(最大・最小の存在)</a></p>
+
+    <!-- ===================== n: 等高線と等位面 ===================== -->
+    <h2 id="level">n. 等高線と等位面</h2>
+
+    <div class="box def">
+      <div class="label">定義(等高線・等位面)</div>
+      <p>・2変数関数 $f(x,y)$ と定数 $C$ に対して、方程式 $f(x,y)=C$ をみたす点 $(x,y)$ の集まり(通常は平面の曲線)を、$f$ の<b>等高線</b>(level curve)といいます。<br>
+      ・3変数関数 $f(x,y,z)$ と定数 $d$ に対して、$f(x,y,z)=d$ をみたす点の集まり(通常は空間の曲面)を、$f$ の<b>等位面</b>(level surface)といいます。</p>
+    </div>
+    <p>$C$ を変えると、別の等高線になります。「方程式 $g(x,y)=0$ の曲線」は、$g$ の高さが $0$ の等高線にほかなりません。</p>
+
+    <h3>例</h3>
+    <ul>
+      <li>$f=x^2+y^2$:等高線 $x^2+y^2=C$($C\gt0$)は、原点中心・半径 $\sqrt C$ の円。</li>
+      <li>$f=x+y+z$:等位面 $x+y+z=d$ は、平面。</li>
+      <li>$f=x^2+y^2+z^2$:等位面 $x^2+y^2+z^2=d$($d\gt0$)は、半径 $\sqrt d$ の球面。</li>
+      <li>$f=xy$:等高線 $xy=C$ は、双曲線($C=0$ なら、2本の軸)。</li>
+    </ul>
+
+    <h3>性質</h3>
+    <ul>
+      <li><b>異なる値の等高線は交わりません。</b> 1つの点 $(x,y)$ では、$f$ の値はただ1つなので、同時に2つの値をとれないからです。</li>
+      <li><b>勾配ベクトルは、等高線(等位面)に直交します。</b> $\nabla f\ne\vec0$ のとき、$\nabla f$ は等高線の接線(等位面の接平面)と直交し、$f$ が増える向きを向きます(<a href="#gradperp">勾配は等高線に直交する</a>、<a href="#tangent">接平面</a>)。</li>
+      <li>等高線が混んでいる(間隔が狭い)ところは、$|\nabla f|$ が大きい(急な坂)ところです。</li>
+    </ul>
+    <div class="box intuit">
+      <div class="label">直感で理解する</div>
+      <p><b>地図と天気図:</b> 登山地図の等高線、天気図の等圧線は、「同じ値の場所を結んだ線」です。等高線に沿って歩けば高さは変わらず、等高線を横切れば高さが変わります。等高線が混んでいるのは、急な斜面です。3次元の等位面は、温度が同じ場所を結んだ面(等温面)のようなものです。電磁気学の「等電位面」も同じ考え方です。</p>
+    </div>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-02.html#w-level" data-xref>第2回 1.2 等高線と等位面</a><a href="weeks/week-02.html#s2" data-xref>第2回 2. 条件付き極値問題とは</a><a href="weeks/week-02.html#s7" data-xref>第2回 7. 3変数・条件1つ</a></p>
+
+    <!-- ===================== o: 平行と線型独立 ===================== -->
+    <h2 id="lindep">o. 平行と線型独立</h2>
+    <p>線型代数で学ぶ内容の、ここで使う部分だけを説明します。</p>
+
+    <div class="box def">
+      <div class="label">定義(平行・線型独立)</div>
+      <p>・零ベクトルでない2つのベクトル $\vec u,\vec v$ が<b>平行</b>であるとは、$\vec u=\lambda\vec v$ となる定数 $\lambda$ が存在すること($\lambda$ は正でも負でもよい。負なら反対向き)。<br>
+      ・2つのベクトル $\vec u,\vec v$ が<b>線型独立</b>(1次独立)であるとは、
+      $$\alpha\vec u+\beta\vec v=\vec0\ \Longrightarrow\ \alpha=\beta=0$$
+      が成り立つこと。線型独立でないとき、<b>線型従属</b>といいます。</p>
+    </div>
+
+    <h3>2つのベクトルの場合:線型独立 ⟺ 平行でない</h3>
+    <p>$\vec u,\vec v$ がどちらも零ベクトルでないとき、「線型独立」と「平行でない」は同じです。</p>
+    <details><summary>理由</summary>
+      <div class="box proof"><div class="label">説明</div>
+      <p>線型従属なら、$\alpha\vec u+\beta\vec v=\vec0$ で $\alpha,\beta$ の少なくとも一方が $0$ でないものがあります。たとえば $\alpha\ne0$ なら $\vec u=-\dfrac\beta\alpha\vec v$ で、平行です。逆に、$\vec u=\lambda\vec v$ なら $1\cdot\vec u-\lambda\vec v=\vec0$ で、$1\ne0$ なので、線型従属です。</p></div>
+    </details>
+
+    <h3>例</h3>
+    <ul>
+      <li>$(1,0,0)$ と $(0,1,0)$:平行でない ⟹ 線型独立。</li>
+      <li>$(1,2,3)$ と $(2,4,6)$:$(2,4,6)=2(1,2,3)$ なので、平行 ⟹ 線型従属。</li>
+      <li>$(1,1,0)$ と $(1,0,1)$:一方が他方の定数倍でない ⟹ 線型独立。</li>
+    </ul>
+
+    <h3>3次元で、2つの線型独立なベクトルが張る平面</h3>
+    <p>3次元空間で、線型独立な2つのベクトル $\vec u,\vec v$ から、すべての1次結合 $\alpha\vec u+\beta\vec v$ をつくると、原点を通る<b>1枚の平面</b>になります(2つのベクトルが<b>張る</b>平面)。ベクトル $\vec w$ がこの平面の上にあることは、
+    $$\vec w=\lambda\vec u+\mu\vec v$$
+    と書けることと同じです。</p>
+    <div class="box intuit">
+      <div class="label">直感で理解する</div>
+      <p><b>別々の向きの2本の矢:</b> 同じ向きを向いた矢は、同じ直線の上に並ぶだけです。別々の向きを向いた2本の矢(線型独立)があれば、伸ばしたり縮めたりして足し合わせることで、その2本が決める平面のどこにでも行けます。</p>
+      <p><b>2つの曲面の交わり:</b> 空間の曲面 $g=0$ と $h=0$ の、点 $P$ での法線ベクトルが $\nabla g,\nabla h$ です。$\nabla g,\nabla h$ が線型独立(別々の向き)なら、2つの曲面は $P$ で斜めに交わり、交わりは、きれいな1本の曲線になります。同じ向き(平行)なら、2つの曲面は $P$ で接していて、交わりが曲線にならないことがあります。</p>
+    </div>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-02.html#w-lindep" data-xref>第2回 1.6 平行と線型独立</a><a href="weeks/week-02.html#s8" data-xref>第2回 8. 3変数・条件2つ</a></p>
+
 
     <p style="margin-top:48px;color:var(--muted);font-size:.9rem">このページは、新しい回で春学期の内容が必要になるたびに、トピックを追加していきます。</p>
     <!--END-->
