@@ -52,3 +52,12 @@ h2 { font-size: 1.3rem; margin: 32px 0 8px; }
 .tbl { border-collapse: collapse; width: 100%; font-size: .95rem; }
 .tbl th, .tbl td { border: 1px solid var(--border); padding: 6px 10px; vertical-align: top; text-align: left; }
 .tbl th { background: var(--accent-soft); }
+
+/* 横幅が広いとき(パソコン、スマホの横向き)は、本文と日本語訳を左右に並べる。単語集は下に全幅で置く */
+@media (min-width: 640px) {
+  main:has(.para .en) { max-width: 1180px; }
+  .para:has(> .en) { display: grid; grid-template-columns: 1fr 1fr; gap: 0 22px; align-items: start; }
+  .para:has(> .en) > .en, .para:has(> .en) > .ja { margin: 0; }
+  .para:has(> .en) > .vocab { grid-column: 1 / -1; }
+  body.hide-ja .para:has(> .en) { grid-template-columns: 1fr; }
+}
