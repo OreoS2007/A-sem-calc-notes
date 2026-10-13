@@ -525,6 +525,16 @@
       <div class="label">例</div>
       <p>$A=\begin{pmatrix}1&1\1&1\end{pmatrix}$。列は両方 $(1,1)^{\mathsf T}$:像 $=\langle(1,1)^{\mathsf T}\rangle$、rank $=1$。$Ax=0\iff x_1+x_2=0$:核 $=\langle(1,-1)^{\mathsf T}\rangle$、$\dim=1$。$1+1=2$ ✓。</p>
     </div>
+    <h3>掃き出し法の手順(行基本変形)</h3>
+    <p>行列に、① 2つの行を入れ替える、② 行を 0 でない定数倍する、③ ある行の定数倍を別の行に足す、の3種類の<b>行基本変形</b>を繰り返して、階段状の形にします(連立方程式 $Ax=0$ の解は変わらない)。各段の先頭を 1 にして、その列の他の成分を 0 にしたものが<b>簡約階段形</b>。先頭の 1 の個数が<b>階数</b>、先頭の 1 がある列が<b>主列</b>、ない列が<b>自由な列</b>(対応する変数が<b>自由変数</b>)です。</p>
+    <ul>
+      <li><b>核</b>:主列の変数を、自由変数で表して(解のパラメータ表示)、自由変数に $(1,0,\dots),(0,1,\dots)$ を代入して基底を作る。$\dim\operatorname{Ker}=$ 自由変数の個数。</li>
+      <li><b>像</b>:基底は、<b>元の行列の</b>主列に対応する列(簡約階段形の列ではない)。簡約階段形の自由な列の成分は、「その列を主列の一次結合で表す係数」。</li>
+    </ul>
+    <div class="box ex">
+      <div class="label">例</div>
+      <p>$A=\begin{pmatrix}1&2&3\\2&4&7\end{pmatrix}$ → $R_2-2R_1$:$\begin{pmatrix}1&2&3\\0&0&1\end{pmatrix}$ → $R_1-3R_2$:$\begin{pmatrix}1&2&0\\0&0&1\end{pmatrix}$。主列は1列目と3列目、自由変数は $x_2$。$Ax=0$ の解:$x_1=-2x_2,\ x_3=0$、核の基底 $(-2,1,0)^{\mathsf T}$。像の基底は、元の $A$ の1列目 $(1,2)^{\mathsf T}$ と3列目 $(3,7)^{\mathsf T}$(階数2)。</p>
+    </div>
     <p class="used-in">この回で使う場所:<a href="exercises/ex-01.html#p2" data-xref>演習 第1回 [2] 像と核の基底</a></p>
 
     <!-- ===================== k: 多項式 ===================== -->
@@ -552,6 +562,8 @@
       <div class="label">例</div>
       <p>$\det\begin{pmatrix}1&2\0&3\end{pmatrix}=3$(ブロックなら $1\cdot3$)。$\overline{\begin{pmatrix}1+i&2\0&i\end{pmatrix}}$ の $\det$ は $\overline{(1+i)i}=\overline{i-1}=-1-i$。</p>
     </div>
+    <h3>ブロック行列の積と、ブロック行(列)の足し算</h3>
+    <p>行列を小さな正方行列(ブロック)に区切ると、区切り方がそろっていれば、積はブロックを成分のように扱って計算できます(順序は保つ):$\begin{pmatrix}P&Q\\R&S\end{pmatrix}\begin{pmatrix}X&Y\\Z&W\end{pmatrix}=\begin{pmatrix}PX+QZ&PY+QW\\RX+SZ&RY+SW\end{pmatrix}$。特に、左から $\begin{pmatrix}I&0\\C&I\end{pmatrix}$ を掛けると、「第1行ブロックの $C$ 倍を第2行ブロックに足す」操作になり、右から掛けると「ブロック列の足し算」になります。この行列の $\det$ は 1(対角が $I$ のブロック三角行列)だから、これらの操作は $\det$ を変えません。</p>
     <p>これらの詳しい扱いは、授業が行列式に進んだときに足します。ここでは、演習 [4] を解くために必要な性質だけを書きました。</p>
     <p class="used-in">この回で使う場所:<a href="exercises/ex-01.html#p4" data-xref>演習 第1回 [4] ブロック行列の行列式</a></p>
 
