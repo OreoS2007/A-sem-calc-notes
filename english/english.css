@@ -40,3 +40,15 @@ body.hide-mark .w:not(.open) { border-bottom-color: transparent; }
 .pb { text-align: center; color: var(--muted); font-size: .8rem; margin: 22px 0 10px; }
 .para .vocab { margin: 8px 0 0; font-family: Georgia, "Times New Roman", serif; line-height: 2.1; }
 .para .vocab .w { margin-right: 6px; white-space: nowrap; }
+
+h2 { font-size: 1.3rem; margin: 32px 0 8px; }
+.q { margin: 0 0 22px; padding: 14px 18px; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; }
+.q h3 { font-size: 1.02rem; margin: 0 0 8px; }
+.q .opts { list-style: none; padding: 0; margin: 0 0 8px; }
+.q .opts li { padding: 4px 10px; border-radius: 6px; }
+.q .opts li.ok { background: var(--accent-soft); font-weight: 700; }
+.q .ans { color: var(--accent); font-weight: 700; margin: 4px 0; }
+.box-ans { padding: 10px 16px; border-left: 4px solid var(--accent); background: var(--accent-soft); border-radius: 0 8px 8px 0; font-family: Georgia, serif; }
+.tbl { border-collapse: collapse; width: 100%; font-size: .95rem; }
+.tbl th, .tbl td { border: 1px solid var(--border); padding: 6px 10px; vertical-align: top; text-align: left; }
+.tbl th { background: var(--accent-soft); }
