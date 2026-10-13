@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>基礎のまとめ(構造化学) | Aセメまとめノート</title>
+  <link rel="stylesheet" href="../assets/style.css">
+  <style>main.note p, main.note li { overflow-x: auto; overflow-y: hidden; }</style>
+  <script defer src="../assets/nav.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],macros:{'\\R':'\\mathbb{R}','\\bm':'\\boldsymbol{#1}','\\dd':'\\mathrm{d}','\\dbar':'\\mathrm{d}^{\\prime}'}});window.__navReady&&window.__navReady()"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="inner">
+      <a class="site-title" href="../index.html">Aセメまとめノート</a>
+      <span class="links"><a href="index.html">構造化学</a><a href="basics.html">基礎のまとめ</a><a href="../calc/index.html">微積</a><a href="../linalg/index.html">線形代数</a><a href="../em/index.html">電磁気学</a><a href="../mech/index.html">力学A</a><a href="../thermo/index.html">熱力学</a></span>
+    </div>
+  </header>
+
+  <main class="note">
+    <h1>基礎のまとめ(構造化学)</h1>
+    <div class="meta">構造化学のノートで使う、高校の物理・数学と、微積・力学・電磁気学の内容を、トピックごとに一から説明したページです。本文の紫色の「基礎」の枠だけで分からなかったときに、ここへ来てください。</div>
+
+    <div class="box note-box">
+      <div class="label">このページの使い方</div>
+      <p>・各回のノートの「基礎」の枠にある<span class="xref-link" style="margin-left:0">→ 詳しい解説</span>のリンクから、対応するトピックに飛べます。</p>
+      <p>・飛んだ先には、画面の左下に<b>「元の位置にもどる」</b>ボタンが出ます。押すと、元のノートの読んでいた場所に戻れます(ブラウザの「戻る」でも同じ位置に戻ります)。</p>
+      <p>・各トピックの最後に「この回で使う場所」があり、本文の対応箇所に飛べます。</p>
+      <p>・複素数・偏微分・微分方程式などの、より詳しい説明は、<a href="../linalg/basics.html#complex" data-xref>線形代数の基礎のまとめ(複素数)</a>、<a href="../calc/basics.html#partial" data-xref>微積の「春学期のまとめ」(偏微分)</a>にもあります。力学の運動方程式は<a href="../mech/basics.html#newton" data-xref>力学Aの基礎のまとめ</a>にもあります。</p>
+    </div>
+
+    <nav class="toc">
+      <div class="toc-title">目次</div>
+      <ol>
+        <li><b>力学と電磁気学</b>
+          <ol type="a">
+            <li><a href="#newton">運動方程式と、速度・加速度</a></li>
+            <li><a href="#potential">ポテンシャルエネルギーと力</a></li>
+            <li><a href="#coulomb">クーロンの法則(電荷どうしの力)</a></li>
+            <li><a href="#circular">円運動と向心力</a></li>
+            <li><a href="#conserve">運動量とエネルギーの保存</a></li>
+          </ol></li>
+        <li><b>波と光</b>
+          <ol type="a" start="6">
+            <li><a href="#wave">波の基本量(波長・振動数・波数・速さ)</a></li>
+            <li><a href="#units">エネルギーの単位と、換算</a></li>
+            <li><a href="#superpos">波の重ね合わせと干渉</a></li>
+          </ol></li>
+        <li><b>数学の道具</b>
+          <ol type="a" start="9">
+            <li><a href="#expapprox">指数関数 $e^x$ の大きさと近似</a></li>
+            <li><a href="#complex">複素数とオイラーの式</a></li>
+            <li><a href="#sho">単振動の微分方程式</a></li>
+            <li><a href="#partial">偏微分($\partial/\partial x$ と $\partial^2/\partial x^2$)</a></li>
+            <li><a href="#separation">変数分離</a></li>
+          </ol></li>
+        <li><b>原子のスケール</b>
+          <ol type="a" start="14">
+            <li><a href="#atomscale">原子の大きさと、基本定数</a></li>
+          </ol></li>
+      </ol>
+    </nav>
+
+    <h2>1. 力学と電磁気学</h2>
+
+    <h3 id="newton">運動方程式と、速度・加速度</h3>
+    <p>質量 $m$ の粒子の、時刻 $t$ での位置を $\vec r(t)=(x(t),y(t),z(t))$ とします。位置の時間変化の割合が<b>速度</b>、速度の時間変化の割合が<b>加速度</b>です:
+    $$\vec v=\frac{d\vec r}{dt},\qquad \vec a=\frac{d\vec v}{dt}=\frac{d^2\vec r}{dt^2}.$$
+    <b>Newton の運動方程式</b>は、力 $\vec F$ をうけた粒子の加速度が、力に比例し質量に反比例することをいいます:
+    $$m\vec a=\vec F\quad\Longleftrightarrow\quad \frac{d\vec v}{dt}=\frac{\vec F}{m}.$$
+    成分でかけば、$m\,d^2x/dt^2=F_x$ など、3本の式です。</p>
+    <p><b>運動の予測のしかた。</b>時間を細かく $\Delta t$ ずつに区切ると、$\Delta t$ が十分小さいときは、速度は一定、力も一定とみなせるので、
+    $$\vec v(t+\Delta t)\approx\vec v(t)+\frac{\vec F}{m}\Delta t,\qquad \vec r(t+\Delta t)\approx\vec r(t)+\vec v(t)\,\Delta t.$$
+    これを繰り返せば、「いまの位置と速度」と「力」から、あとの位置と速度が全部決まります。</p>
+    <div class="box ex"><div class="label">例:自由落下(重力 $F=-mg$)</div>
+      <p>はじめ、高さ $h_0=100\ \mathrm m$、速度 $0$。$g=9.8\ \mathrm{m/s^2}$、$\Delta t=1\ \mathrm s$ とすると、$v(1)\approx0-9.8\times1=-9.8\ \mathrm{m/s}$、$h(1)\approx100+0\times1=100\ \mathrm m$(最初の1秒は、はじめの速度 $0$ で進む近似)。次の1秒:$v(2)\approx-19.6$、$h(2)\approx100+(-9.8)\times1=90.2\ \mathrm m$。正確な値($h=h_0-\frac12gt^2$)は $h(2)=80.4\ \mathrm m$ なので、$\Delta t=1\ \mathrm s$ では粗すぎます。$\Delta t$ を小さくするほど、正確な値に近づきます。</p></div>
+    <p>詳しくは、<a href="../mech/basics.html#newton" data-xref>力学Aの基礎のまとめ</a>にもあります。</p>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-01.html#w-newton" data-xref>第1回 1.1 運動方程式と、速度・加速度</a></p>
+
+    <h3 id="potential">ポテンシャルエネルギーと力</h3>
+    <p>力が、位置だけで決まっていて、「位置エネルギー」(<b>ポテンシャルエネルギー</b>)$U$ から作れるとき、力は、$U$ の<b>傾き(勾配)にマイナスをつけたもの</b>です。1次元では
+    $$F=-\frac{dU}{dx}.$$
+    ($U$ が下がる向きに力がはたらく、ということ。)3次元では、$x,y,z$ それぞれについての偏微分を並べて
+    $$\vec F=-\nabla U=\left(-\frac{\partial U}{\partial x},\,-\frac{\partial U}{\partial y},\,-\frac{\partial U}{\partial z}\right).$$
+    勾配ベクトル $\nabla U$ については、<a href="../calc/basics.html#grad" data-xref>微積の「春学期のまとめ」</a>を見てください。</p>
+    <div class="box ex"><div class="label">例</div>
+      <p>① バネ:$U=\frac12kx^2$ ⇒ $F=-kx$(つり合いの位置 $x=0$ に引き戻す力)。<br>
+      ② 重力(地表近く):$U=mgh$ ⇒ $F=-mg$(下向き)。<br>
+      ③ 距離 $r$ だけ離れた2つの電荷:$U=\dfrac{q_1q_2}{4\pi\varepsilon_0\,r}$ ⇒ 力の大きさは $\dfrac{q_1q_2}{4\pi\varepsilon_0\,r^2}$(下の「クーロンの法則」)。</p></div>
+    <p>$U(x)$ のグラフでは、<b>谷の底</b>($dU/dx=0$ で、まわりより低い点)が、力がつり合う安定な位置です。分子は、原子どうしの $U$ が最も低い距離(結合距離)で、安定になります。</p>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-01.html#w-potential" data-xref>第1回 1.2 ポテンシャルエネルギーと力</a></p>
+
+    <h3 id="coulomb">クーロンの法則(電荷どうしの力)</h3>
+    <p>電荷 $q_1,q_2$ をもつ2つの粒子が、距離 $r$ だけ離れているとき、はたらく力の大きさは
+    $$F=\frac{1}{4\pi\varepsilon_0}\frac{|q_1q_2|}{r^2}\quad(\varepsilon_0=8.854\times10^{-12}\ \mathrm{F/m}),$$
+    <b>距離の2乗に反比例</b>します(万有引力 $F=GMm/r^2$ と同じ形:<b>逆自乗の法則</b>)。同じ符号の電荷は反発し、逆符号の電荷は引き合います。電子の電荷は $-e$、陽子は $+e$($e=1.602\times10^{-19}\ \mathrm C$)。</p>
+    <p>無限に遠いところを $U=0$ とした、ポテンシャルエネルギーは
+    $$U(r)=\frac{1}{4\pi\varepsilon_0}\frac{q_1q_2}{r}$$
+    (電荷が逆符号なら、$q_1q_2\lt0$ で $U\lt0$:引き合って、くっついたほうがエネルギーが低い)。</p>
+    <div class="box ex"><div class="label">例:水素原子の電子と陽子</div>
+      <p>$r=a_0=5.29\times10^{-11}\ \mathrm m$(水素原子の大きさ)のとき、
+      $U=-\dfrac{e^2}{4\pi\varepsilon_0a_0}=-\dfrac{(1.602\times10^{-19})^2}{4\pi(8.854\times10^{-12})(5.29\times10^{-11})}\approx-4.36\times10^{-18}\ \mathrm J=-27.2\ \mathrm{eV}$。</p></div>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-01.html#w-coulomb" data-xref>第1回 1.3 クーロンの法則</a><a href="weeks/week-02.html#w-coulomb" data-xref>第2回 1.7 クーロンの法則</a></p>
+
+    <h3 id="circular">円運動と向心力</h3>
+    <p>半径 $r$ の円周上を、一定の速さ $v$ で回る粒子の加速度は、円の中心に向かい、大きさは
+    $$a=\frac{v^2}{r}.$$
+    したがって、円運動を続けるには、中心に向かって
+    $$F=m\frac{v^2}{r}\qquad(\text{向心力})$$
+    の力が必要です(「遠心力」は、粒子と一緒に回る立場で見たときの、見かけの力)。回転の勢いの量である<b>角運動量</b>は、大きさ $L=mvr$。1周の長さは $2\pi r$、周期は $T=2\pi r/v$。</p>
+    <div class="box ex"><div class="label">例:太陽と惑星、原子核と電子</div>
+      <p>向心力の役目は、惑星では万有引力、水素原子の電子では<b>クーロン力</b>(電子と陽子の引力)です。$m\dfrac{v^2}{r}=\dfrac{e^2}{4\pi\varepsilon_0r^2}$ から、速さ $v$ と半径 $r$ の関係が出ます(第2回)。</p></div>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-02.html#w-circular" data-xref>第2回 1.6 円運動と向心力</a></p>
+
+    <h3 id="conserve">運動量とエネルギーの保存</h3>
+    <p>質量 $m$、速度 $\vec v$ の粒子の<b>運動量</b>は $\vec p=m\vec v$、運動エネルギーは $\frac12mv^2=\dfrac{p^2}{2m}$。外から力がはたらかない(粒子どうしの衝突だけがある)とき、衝突の前後で、<b>全運動量(ベクトル)</b>と<b>全エネルギー</b>が変わりません。</p>
+    <p>光子のような、質量が $0$ の粒子には、Einstein の相対性理論の式
+    $$E^2=(mc^2)^2+(pc)^2$$
+    を使います。$m=0$ なら $E=pc$。速さが光速より十分遅い粒子($p\ll mc$)では、$E\approx mc^2+\dfrac{p^2}{2m}$ となり、静止エネルギー $mc^2$ に、おなじみの運動エネルギーが足された形になります。</p>
+    <div class="box ex"><div class="label">例:2つの玉の衝突</div>
+      <p>質量 $m$ の玉が速さ $v$ で、静止している同じ質量の玉に正面衝突し、完全に止まって、相手が動き出した(弾性衝突)。運動量保存:$mv=mv'$ ⇒ $v'=v$。エネルギー保存:$\frac12mv^2=\frac12mv'^2$ ⇒ 矛盾なし。</p></div>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-01.html#w-conserve" data-xref>第1回 1.7 運動量とエネルギーの保存</a></p>
+
+    <h2>2. 波と光</h2>
+
+    <h3 id="wave">波の基本量(波長・振動数・波数・速さ)</h3>
+    <p>一定の形で進む正弦波(サイン波)は、位置 $x$ と時刻 $t$ の関数として
+    $$u(x,t)=A\sin(kx-\omega t)$$
+    とかけます。$A$ は<b>振幅</b>。波の山と山の間隔が<b>波長</b> $\lambda$(単位 m、nm など)。1秒間に通りすぎる山の数が<b>振動数</b> $\nu$(単位 Hz = 1/s)、1回の振動にかかる時間が<b>周期</b> $T=1/\nu$。山が進む速さは
+    $$v=\lambda\nu.$$
+    $\omega=2\pi\nu$(角振動数)、$k=2\pi/\lambda$(波数ベクトルの大きさ)とすると、$v=\omega/k$。</p>
+    <p>化学では、$1/\lambda$(「1 cm あたりに入る波の数」)を<b>波数</b> $\tilde\nu=1/\lambda$ とよび、単位は $\mathrm{cm^{-1}}$ を使います。$k=2\pi\tilde\nu$ とは、$2\pi$ だけ違うので、混同に注意。</p>
+    <p>光(電磁波)の速さは真空中で $c=2.998\times10^8\ \mathrm{m/s}$。したがって
+    $$c=\lambda\nu,\qquad \nu=\frac{c}{\lambda}=c\tilde\nu.$$
+    光は、波長によって、電波・マイクロ波・赤外線・可視光・紫外線・X線・γ線に分かれます(第1回の図)。可視光は、およそ $400\ \mathrm{nm}$(紫)〜$700\ \mathrm{nm}$(赤)。</p>
+    <div class="box ex"><div class="label">例</div>
+      <p>波長 $500\ \mathrm{nm}$(緑)の光:$\nu=\dfrac{3.0\times10^8}{500\times10^{-9}}=6.0\times10^{14}\ \mathrm{Hz}$、$\tilde\nu=\dfrac1{5.0\times10^{-5}\ \mathrm{cm}}=2.0\times10^4\ \mathrm{cm^{-1}}$。</p></div>
+    <p><b>波の強さ。</b>波のもつエネルギーの流れ(強さ)は、振幅 $A$ の<b>2乗</b>に比例します。古典物理学では、明るい光(振幅が大きい)ほど、エネルギーが大きい、と考えます。</p>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-01.html#w-wave" data-xref>第1回 1.4 波の基本量</a></p>
+
+    <h3 id="units">エネルギーの単位と、換算</h3>
+    <p>エネルギーの単位は J(ジュール)ですが、原子・分子のエネルギーはとても小さいので、別の単位がよく使われます。</p>
+    <ul>
+      <li><b>電子ボルト(eV)</b>:電子が $1\ \mathrm V$ の電位差で加速されて得るエネルギー。$1\ \mathrm{eV}=1.602\times10^{-19}\ \mathrm J$。水素原子の電子は、$13.6\ \mathrm{eV}$ でイオン化する。</li>
+      <li><b>波数 $\mathrm{cm^{-1}}$</b>:光子のエネルギー $E=h\nu=hc\tilde\nu$ を、波数で表す。$1\ \mathrm{cm^{-1}}\leftrightarrow hc\times(100\ \mathrm{m^{-1}})=1.986\times10^{-23}\ \mathrm J$。</li>
+      <li><b>kJ/mol</b>:1 mol(アボガドロ数 $N_A=6.022\times10^{23}$ 個)あたりのエネルギー。$1\ \mathrm{eV}=96.5\ \mathrm{kJ/mol}$。</li>
+    </ul>
+    <p>光子1個のエネルギー(プランクの式 $E=h\nu$、$h=6.626\times10^{-34}\ \mathrm{J\,s}$)は、
+    $$E=h\nu=\frac{hc}{\lambda}=hc\,\tilde\nu.$$
+    便利な値:$hc=1239.8\ \mathrm{eV\,nm}$。つまり
+    $$E\,[\mathrm{eV}]=\frac{1239.8}{\lambda\,[\mathrm{nm}]},\qquad 1\ \mathrm{eV}\leftrightarrow8065.5\ \mathrm{cm^{-1}}.$$</p>
+    <div class="box ex"><div class="label">例</div>
+      <p>$\lambda=500\ \mathrm{nm}$ の緑の光子:$E=1239.8/500=2.48\ \mathrm{eV}=3.97\times10^{-19}\ \mathrm J$($=239\ \mathrm{kJ/mol}$)。波数 $2.0\times10^4\ \mathrm{cm^{-1}}$ は、$2.0\times10^4/8065.5=2.48\ \mathrm{eV}$ で一致。</p></div>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-01.html#w-units" data-xref>第1回 1.5 エネルギーの単位</a></p>
+
+    <h3 id="superpos">波の重ね合わせと干渉</h3>
+    <p>2つの波が同じ場所に来ると、そこでの波の高さは、それぞれの波の高さの<b>和</b>になります(重ね合わせの原理)。山と山が重なれば高く(<b>強め合い</b>)、山と谷が重なれば打ち消されます(<b>弱め合い</b>)。この現象を<b>干渉</b>といいます。</p>
+    <p>同じ波長 $\lambda$、同じ振幅の波が、異なる経路を通って同じ点に来たとき、経路の長さの差(<b>行路差</b>)$\Delta$ が
+    $$\Delta=m\lambda\ (m=0,\pm1,\pm2,\dots)\ \Rightarrow\ \text{強め合い},\qquad \Delta=\left(m+\tfrac12\right)\lambda\ \Rightarrow\ \text{弱め合い}.$$
+    2つの波の合計の振幅は、位相のずれ $\delta=2\pi\Delta/\lambda$ とすると $2A\cos(\delta/2)$、<b>強さ(振幅の2乗)</b>は $4A^2\cos^2(\delta/2)$。つまり、スクリーン上では、$\cos^2$ の形の<b>明暗の縞</b>が現れます。</p>
+    <div class="box ex"><div class="label">例:2本のスリット</div>
+      <p>間隔 $d$ の2本のスリットから、距離 $L$ のスクリーンに光(波長 $\lambda$)を当てる。中心から $y$ の点での行路差は、近似的に $\Delta\approx dy/L$。明るい縞は $y=m\lambda L/d$。縞の間隔は $\lambda L/d$。$\lambda=500\ \mathrm{nm}$、$d=0.1\ \mathrm{mm}$、$L=1\ \mathrm m$ なら、間隔 $=\dfrac{500\times10^{-9}\times1}{10^{-4}}=5\ \mathrm{mm}$。</p></div>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-02.html#w-superpos" data-xref>第2回 1.5 波の重ね合わせと干渉</a></p>
+
+    <h2>3. 数学の道具</h2>
+
+    <h3 id="expapprox">指数関数 $e^x$ の大きさと近似</h3>
+    <p>指数関数 $e^x$ は、$x$ が大きいと急に大きくなり、$x$ が小さい($|x|\ll1$)ときは、$x=0$ のまわりのテイラー展開
+    $$e^x=1+x+\frac{x^2}{2!}+\cdots\approx1+x$$
+    で近似できます(<a href="../thermo/basics.html#taylor" data-xref>熱力学の基礎のまとめ(テイラー展開)</a>も参照)。次の2つの近似を覚えておくと便利です。</p>
+    <ul>
+      <li>$x\gg1$ のとき:$e^x\gg1$ なので、$e^x-1\approx e^x$。</li>
+      <li>$x\ll1$ のとき:$e^x\approx1+x$ なので、$e^x-1\approx x$。</li>
+    </ul>
+    <table class="cmp">
+      <tr><th>$x$</th><th>$e^x-1$</th><th>$x$ との比</th><th>$e^x$ との比</th></tr>
+      <tr><td>0.01</td><td>0.01005</td><td>1.005</td><td>0.00995</td></tr>
+      <tr><td>0.1</td><td>0.1052</td><td>1.05</td><td>0.095</td></tr>
+      <tr><td>1</td><td>1.718</td><td>1.72</td><td>0.63</td></tr>
+      <tr><td>5</td><td>147.4</td><td>29.5</td><td>0.993</td></tr>
+      <tr><td>10</td><td>22025</td><td>2203</td><td>0.99995</td></tr>
+    </table>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-01.html#w-exp" data-xref>第1回 1.6 指数関数の大きさと近似</a></p>
+
+    <h3 id="complex">複素数とオイラーの式</h3>
+    <p>複素数は $z=x+iy$($i^2=-1$)とかけます。絶対値 $|z|=\sqrt{x^2+y^2}$、共役 $\bar z=x-iy$、そして $|z|^2=z\bar z$。詳しくは<a href="../linalg/basics.html#complex" data-xref>線形代数の基礎のまとめ(複素数)</a>を見てください。</p>
+    <div class="box thm"><div class="label">オイラーの式</div>
+      <p>$$e^{i\theta}=\cos\theta+i\sin\theta.$$
+      複素平面では、絶対値 $1$、偏角 $\theta$ の点です(単位円の上)。</p></div>
+    <p>どうして、こうなるのか(ひとつの説明):指数関数のテイラー展開 $e^{x}=\sum x^n/n!$ に $x=i\theta$ を入れて、$i^2=-1,\ i^3=-i,\ i^4=1,\dots$ を使って、実部と虚部に分けると、
+    $$e^{i\theta}=\left(1-\frac{\theta^2}{2!}+\frac{\theta^4}{4!}-\cdots\right)+i\left(\theta-\frac{\theta^3}{3!}+\cdots\right)=\cos\theta+i\sin\theta.$$
+    括弧の中が、$\cos\theta$ と $\sin\theta$ のテイラー展開になっているからです。</p>
+    <p><b>使い方。</b>(1) 積:$e^{i\theta_1}e^{i\theta_2}=e^{i(\theta_1+\theta_2)}$(偏角の足し算)。(2) 微分:$\dfrac{d}{d\theta}e^{i\theta}=ie^{i\theta}$。(3) $\cos\theta=\dfrac{e^{i\theta}+e^{-i\theta}}2$、$\sin\theta=\dfrac{e^{i\theta}-e^{-i\theta}}{2i}$。</p>
+    <div class="box ex"><div class="label">例</div>
+      <p>$\theta=\pi$ のとき、$e^{i\pi}=\cos\pi+i\sin\pi=-1$。$\theta=\pi/2$ のとき、$e^{i\pi/2}=i$。</p></div>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-02.html#w-complex" data-xref>第2回 1.1 複素数とオイラーの式</a></p>
+
+    <h3 id="sho">単振動の微分方程式</h3>
+    <p>バネにつながれた物体は、$m\dfrac{d^2x}{dt^2}=-kx$ にしたがいます。$\omega=\sqrt{k/m}$ とおくと、
+    $$\frac{d^2x}{dt^2}=-\omega^2x.$$
+    「2回微分すると、もとの関数にマイナス $\omega^2$ をかけたものになる」関数を探す方程式です。$x=\cos\omega t$ は、$x'=-\omega\sin\omega t$、$x''=-\omega^2\cos\omega t$ で解、$x=\sin\omega t$ も解。</p>
+    <div class="box thm"><div class="label">単振動の一般解</div>
+      <p>$$x(t)=A\cos\omega t+B\sin\omega t.$$
+      $A,B$ は、はじめの位置と速度で決まる定数(2階の微分方程式なので定数が2つ)。同じ解を、複素数で
+      $$x(t)=C_+e^{i\omega t}+C_-e^{-i\omega t}$$
+      とも、$x(t)=C\sin(\omega t+\delta)$ ともかけます(オイラーの式 $e^{\pm i\omega t}=\cos\omega t\pm i\sin\omega t$ で、書き換えられる)。</p></div>
+    <p><b>解き方の一例(複素数で)。</b>$(d/dt+i\omega)(d/dt-i\omega)x=x''+\omega^2x=0$ と因数分解します。$(d/dt-i\omega)x=0$ の解は $x=e^{i\omega t}$、$(d/dt+i\omega)x=0$ の解は $x=e^{-i\omega t}$。どちらも元の方程式の解で、線形結合も解です。</p>
+    <div class="box ex"><div class="label">例</div>
+      <p>$t=0$ で $x=A_0$、速度 $0$ のとき:$x(0)=A=A_0$、$x'(0)=\omega B=0$ ⇒ $B=0$。$x(t)=A_0\cos\omega t$。周期 $T=2\pi/\omega$。</p></div>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-02.html#w-sho" data-xref>第2回 1.2 単振動</a></p>
+
+    <h3 id="partial">偏微分($\partial/\partial x$ と $\partial^2/\partial x^2$)</h3>
+    <p>$u(x,t)$ のように、2つ以上の変数をもつ関数で、<b>1つの変数だけを動かして</b>(ほかは定数とみなして)微分することを<b>偏微分</b>といい、
+    $$\frac{\partial u}{\partial x}=\lim_{\Delta x\to0}\frac{u(x+\Delta x,t)-u(x,t)}{\Delta x}$$
+    と書きます($\partial$ は「ラウンド」と読む)。2回偏微分したものは $\dfrac{\partial^2u}{\partial x^2}$ です。詳しくは<a href="../calc/basics.html#partial" data-xref>微積の「春学期のまとめ」</a>を見てください。</p>
+    <div class="box ex"><div class="label">例:進行波 $u=\sin(kx-\omega t)$</div>
+      <p>$\dfrac{\partial u}{\partial x}=k\cos(kx-\omega t)$、$\dfrac{\partial^2u}{\partial x^2}=-k^2\sin(kx-\omega t)=-k^2u$。同じく、$\dfrac{\partial^2u}{\partial t^2}=-\omega^2u$。したがって、$\dfrac{\partial^2u}{\partial t^2}=\dfrac{\omega^2}{k^2}\dfrac{\partial^2u}{\partial x^2}=v^2\dfrac{\partial^2u}{\partial x^2}$($v=\omega/k$)。この形の方程式が、波動方程式です(第2回)。</p></div>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-02.html#w-partial" data-xref>第2回 1.3 偏微分</a></p>
+
+    <h3 id="separation">変数分離</h3>
+    <p>偏微分を含む方程式(<b>偏微分方程式</b>)の解を、「$x$ だけの関数 $X(x)$」と「$t$ だけの関数 $T(t)$」の<b>積</b> $u(x,t)=X(x)T(t)$ の形で探す方法を、<b>変数分離</b>といいます。方程式に入れて両辺を $XT$ で割ると、「$x$ だけの式」=「$t$ だけの式」の形になります。$x$ と $t$ は独立に動かせるので、両辺は、<b>定数</b>(分離定数)でなければなりません。こうして、偏微分方程式が、定数をはさんだ<b>2本の常微分方程式</b>に分かれます。</p>
+    <div class="box ex"><div class="label">例</div>
+      <p>$\dfrac{\partial u}{\partial t}=D\dfrac{\partial^2u}{\partial x^2}$ に $u=XT$ を入れる:$XT'=DX''T$ ⇒ $\dfrac{T'}{DT}=\dfrac{X''}{X}=K$(定数)。$T'=DKT$ と $X''=KX$ の2本に分かれる。</p></div>
+    <p>得られた方程式の解の形は、$K$ の符号で変わります。$X''=KX$ では、$K\gt0$ なら指数関数 $e^{\pm\sqrt Kx}$、$K=0$ なら1次関数、$K\lt0$ なら三角関数 $\cos(\sqrt{-K}\,x),\ \sin(\sqrt{-K}\,x)$(単振動と同じ)。<b>境界条件</b>(両端での値など)を満たす解だけが残ります。</p>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-02.html#w-separation" data-xref>第2回 1.4 変数分離</a></p>
+
+    <h2>4. 原子のスケール</h2>
+
+    <h3 id="atomscale">原子の大きさと、基本定数</h3>
+    <p>原子の大きさは、およそ $1\ \text{Å}=0.1\ \mathrm{nm}=10^{-10}\ \mathrm m$、原子核の大きさは、およそ $10^{-15}\ \mathrm m$(原子の10万分の1)です。電子の質量は、陽子の約 $1/1836$ しかありません。</p>
+    <table class="cmp">
+      <tr><th>量</th><th>記号</th><th>値</th></tr>
+      <tr><td>プランク定数</td><td>$h$</td><td>$6.626\times10^{-34}\ \mathrm{J\,s}$</td></tr>
+      <tr><td>換算プランク定数</td><td>$\hbar=h/2\pi$</td><td>$1.055\times10^{-34}\ \mathrm{J\,s}$</td></tr>
+      <tr><td>光速</td><td>$c$</td><td>$2.998\times10^{8}\ \mathrm{m/s}$</td></tr>
+      <tr><td>電気素量</td><td>$e$</td><td>$1.602\times10^{-19}\ \mathrm C$</td></tr>
+      <tr><td>真空の誘電率</td><td>$\varepsilon_0$</td><td>$8.854\times10^{-12}\ \mathrm{F/m}$</td></tr>
+      <tr><td>電子の質量</td><td>$m$($m_e$)</td><td>$9.109\times10^{-31}\ \mathrm{kg}$</td></tr>
+      <tr><td>ボルツマン定数</td><td>$k_B$</td><td>$1.381\times10^{-23}\ \mathrm{J/K}$</td></tr>
+      <tr><td>アボガドロ定数</td><td>$N_A$</td><td>$6.022\times10^{23}\ \mathrm{mol^{-1}}$</td></tr>
+      <tr><td>Bohr 半径</td><td>$a_0$</td><td>$5.29\times10^{-11}\ \mathrm m$</td></tr>
+      <tr><td>水素原子のイオン化エネルギー</td><td></td><td>$13.6\ \mathrm{eV}$</td></tr>
+    </table>
+    <p>$\hbar=h/2\pi$ は、量子力学で、とてもよく使われる記号です(「エイチバー」)。$\hbar$ を使うと、$h\nu=\hbar\omega$($\omega=2\pi\nu$)のように、$2\pi$ が消えます。</p>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-01.html#w-atomscale" data-xref>第1回 1.8 原子の大きさと、基本定数</a></p>
+
+  </main>
+
+  <footer>© Aセメまとめノート</footer>
+</body>
+</html>
