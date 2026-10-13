@@ -71,6 +71,13 @@
             <li><a href="#closed">閉集合・有界集合と最大・最小の存在</a></li>
             <li><a href="#det">連立1次方程式・1次従属・行列式</a></li>
           </ol></li>
+        <li><b>演習で使う解析の道具</b>
+          <ol type="a" start="18">
+            <li><a href="#unifcont">一様連続</a></li>
+            <li><a href="#taylor">テイラーの定理(1変数・多変数)</a></li>
+            <li><a href="#sup">上限・下限</a></li>
+            <li><a href="#metric">距離</a></li>
+          </ol></li>
       </ol>
     </nav>
 
@@ -999,6 +1006,187 @@
     <h3>「係数が $0$ なら矛盾」という議論</h3>
     <p>1次従属から1次結合を取り出すとき、よく使われる議論です。$\alpha\vec a+\beta\vec b+\gamma\vec c=\vec0$($(\alpha,\beta,\gamma)\ne(0,0,0)$)があるとします。もし $\alpha=0$ なら、$\beta\vec b+\gamma\vec c=\vec0$ で、$(\beta,\gamma)\ne(0,0)$。つまり、$\vec b,\vec c$ が1次従属になります。もし「$\vec b,\vec c$ は1次独立」と分かっていれば、これは矛盾なので、$\alpha\ne0$ です。$\alpha\ne0$ なら、$\alpha$ で割って、$\vec a=-\dfrac\beta\alpha\vec b-\dfrac\gamma\alpha\vec c$ と、$\vec a$ を残りの1次結合で表せます。</p>
     <p class="used-in">この回で使う場所:<a href="weeks/week-02.html#w-det" data-xref>第2回 1.7 連立1次方程式・1次従属・行列式</a><a href="weeks/week-02.html#s8" data-xref>第2回 8. 証明(Step 3–5)</a><a href="weeks/week-02.html#s9" data-xref>第2回 9. 例題(行列式)</a></p>
+
+    <!-- ===================== r: 一様連続 ===================== -->
+    <h2 id="unifcont">r. 一様連続</h2>
+
+    <h3>連続と一様連続</h3>
+    <p>$D$ 上の関数 $f$ について、2点 $p,q$ の距離を $|p-q|$ と書きます(1変数なら $|x-x'|$、2変数なら $\sqrt{(x-x')^2+(y-y')^2}$)。</p>
+    <div class="box def">
+      <div class="label">定義(連続・一様連続)</div>
+      <p><b>$D$ で連続</b>:すべての $p\in D$、すべての $\varepsilon\gt0$ に対して、ある $\delta\gt0$ が存在して、$|q-p|\lt\delta$ ならば $|f(q)-f(p)|\lt\varepsilon$。($\delta$ は、$p$ と $\varepsilon$ に依存してよい。)</p>
+      <p><b>$D$ で一様連続</b>:すべての $\varepsilon\gt0$ に対して、ある $\delta\gt0$ が存在して、<b>すべての</b> $p,q\in D$ について、$|p-q|\lt\delta$ ならば $|f(p)-f(q)|\lt\varepsilon$。($\delta$ は $\varepsilon$ だけで決まり、場所によらない。)</p>
+    </div>
+    <p>論理の順序の違いは、
+    $$\text{連続:}\ \forall p\ \forall\varepsilon\ \exists\delta\ \ \cdots\qquad\text{一様連続:}\ \forall\varepsilon\ \exists\delta\ \forall p,q\ \ \cdots$$
+    です。$\delta$ を、場所 $p$ より前に決める(一様)か、後で決めてよい(連続)かの違いです。一様連続なら、連続です(逆は成り立ちません)。</p>
+    <div class="box intuit">
+      <div class="label">直感で理解する</div>
+      <p><b>どこでも同じ細かさで追従できるか:</b> $\varepsilon$ は「許容する出力のずれ」、$\delta$ は「それを守るために、入力をずらしてよい量」です。連続は、「場所ごとに、その場所用の $\delta$ を用意してよい」。一様連続は、「<b>全域で共通の $\delta$</b> で足りる」。急な坂のある場所では、小さな $\delta$ が必要なので、<b>坂がいくらでも急になりうる</b>関数は、共通の $\delta$ が見つかりません。</p>
+    </div>
+
+    <h3>例</h3>
+    <ul>
+      <li>$f(x)=2x+1$($\R$ 上):$|f(x)-f(x')|=2|x-x'|$。$\delta=\varepsilon/2$。一様連続。</li>
+      <li>$f(x)=x^2$($[0,1]$ 上):$|x^2-x'^2|=|x-x'|\,|x+x'|\le2|x-x'|$。$\delta=\varepsilon/2$。一様連続。</li>
+      <li>$f(x)=x^2$($\R$ 上):連続だが一様連続でない。$p_n=n,\ q_n=n+\tfrac1n$ で、$|p_n-q_n|=\tfrac1n\to0$ なのに $f(q_n)-f(p_n)=2+\tfrac1{n^2}\ge2$。遠くほど坂が急。</li>
+      <li>$f(x)=1/x$($(0,1)$ 上):連続だが一様連続でない。$p_n=\tfrac1n,\ q_n=\tfrac1{n+1}$ で、$|p_n-q_n|=\tfrac1{n(n+1)}\to0$ なのに $f(p_n)-f(q_n)=1$。$x=0$ の近く(縁)で、いくらでも急になる。</li>
+    </ul>
+
+    <h3>一様連続でないことの示し方</h3>
+    <p>定義の否定は、
+    $$\exists\,\varepsilon_0\gt0\ \ \forall\delta\gt0\ \ \exists\,p,q\in D:\ |p-q|\lt\delta\ \text{かつ}\ |f(p)-f(q)|\ge\varepsilon_0.$$
+    実際には、点列 $p_n,q_n$ で、「$|p_n-q_n|\to0$ なのに、$|f(p_n)-f(q_n)|\ge\varepsilon_0$($n$ によらない定数)」となるものを見つけます。任意の $\delta$ に対して、$|p_n-q_n|\lt\delta$ となる大きな $n$ をとれば、否定が成り立ちます。</p>
+
+    <h3>傾きが抑えられていれば一様連続</h3>
+    <div class="box thm">
+      <div class="label">定理(傾きと一様連続)</div>
+      <p>$D$ が<b>凸</b>(2点を結ぶ線分が、いつも $D$ に含まれる)で、$f$ が $C^1$ 級、$D$ で $|\nabla f|\le M$ ならば、$|f(p)-f(q)|\le M\,|p-q|$。したがって $f$ は一様連続($\delta=\varepsilon/M$)。1変数では、$|f'|\le M$ のとき $|f(x)-f(x')|\le M|x-x'|$。</p>
+    </div>
+    <details><summary>理由(証明)</summary>
+      <div class="box proof"><div class="label">証明</div>
+      <p>2変数の平均値の定理(<a href="#mvt2">j</a>)より、線分上のある点 $\xi$ で $f(q)-f(p)=\nabla f(\xi)\cdot(q-p)$。内積の不等式 $|\vec u\cdot\vec v|\le|\vec u||\vec v|$ より、$|f(q)-f(p)|\le|\nabla f(\xi)|\,|q-p|\le M|q-p|$。</p></div>
+    </details>
+    <div class="box intuit">
+      <div class="label">直感で理解する</div>
+      <p>$|\nabla f|$ は坂の急さです。坂の急さが全体で $M$ 以下なら、距離 $\delta$ だけ動いても、高さは $M\delta$ 以下しか変わりません。逆に、遠くへ行くほど急になる関数($f=x^2+y^2$ で $|\nabla f|=2\sqrt{x^2+y^2}$)は、有界でない領域では一様連続になれません。</p>
+    </div>
+
+    <h3>有界閉集合の上では、連続なら一様連続</h3>
+    <div class="box thm">
+      <div class="label">定理(ハイネ・カントール)</div>
+      <p>$K$ が有界な閉集合で、$f$ が $K$ 上の連続関数ならば、$f$ は $K$ 上で一様連続。</p>
+    </div>
+    <p>「有界閉集合の上の連続関数は、最大・最小をもつ」(<a href="#closed">閉集合と最大・最小</a>)と並ぶ、有界閉集合の大事な性質で、証明は難しいので結果を使います。応用:$f$ が有界な開集合(たとえば開区間 $(0,1)$)の「縁を含む閉包 $[0,1]$」まで連続に延ばせるなら、$f$ は元の開集合上でも一様連続です。</p>
+    <p class="used-in">この回で使う場所:<a href="exercises/ex-01.html#p1" data-xref>微積演習 第1回 [1]</a></p>
+
+    <!-- ===================== s: テイラーの定理 ===================== -->
+    <h2 id="taylor">s. テイラーの定理(1変数・多変数)</h2>
+
+    <h3>1変数</h3>
+    <div class="box thm">
+      <div class="label">定理(テイラーの定理)</div>
+      <p>$f$ が $x=a$ を含む開区間で $n$ 回微分可能とする。$x$ をその区間の点とすると、$a$ と $x$ の間に点 $\xi$ があって、
+      $$f(x)=f(a)+f'(a)(x-a)+\frac{f''(a)}{2!}(x-a)^2+\cdots+\frac{f^{(n-1)}(a)}{(n-1)!}(x-a)^{n-1}+R_n,\qquad R_n=\frac{f^{(n)}(\xi)}{n!}(x-a)^n.$$
+      $R_n$ を<b>剰余項</b>(誤差)といいます。別の書き方:$x=a+h$、$\xi=a+\theta h$($0\lt\theta\lt1$)として、$R_n=\dfrac{f^{(n)}(a+\theta h)}{n!}h^n$。</p>
+    </div>
+    <p><b>$n=1$</b> は平均値の定理($f(x)=f(a)+f'(\xi)(x-a)$)、<b>$n=2$</b>(「2階微分の項を剰余項とする」)は
+    $$f(x)=f(a)+f'(a)(x-a)+\frac{f''(\xi)}{2}(x-a)^2.$$
+    テイラーの定理は、平均値の定理の精密化です。</p>
+    <details><summary>$n=2$ の証明(コーシーの平均値の定理を使う)</summary>
+      <div class="box proof"><div class="label">証明</div>
+      <p>$F(x)=f(x)-\{f(a)+f'(a)(x-a)\}$、$G(x)=(x-a)^2$ とおく。$F(a)=G(a)=0,\ F'(x)=f'(x)-f'(a),\ F'(a)=0,\ G'(x)=2(x-a),\ G'(a)=0,\ F''=f'',\ G''=2$。</p>
+      <p>コーシーの平均値の定理を、$F,G$ に使うと、$a$ と $x$ の間の $y$ で $\dfrac{F(x)}{G(x)}=\dfrac{F(x)-F(a)}{G(x)-G(a)}=\dfrac{F'(y)}{G'(y)}$。もう一度、$F',G'$ に使うと、$a$ と $y$ の間の $\xi$ で $\dfrac{F'(y)}{G'(y)}=\dfrac{F'(y)-F'(a)}{G'(y)-G'(a)}=\dfrac{F''(\xi)}{G''(\xi)}=\dfrac{f''(\xi)}2$。したがって $F(x)=\tfrac12f''(\xi)(x-a)^2$、すなわち $f(x)=f(a)+f'(a)(x-a)+\tfrac12f''(\xi)(x-a)^2$。</p></div>
+    </details>
+    <div class="box intuit">
+      <div class="label">直感で理解する</div>
+      <p><b>接線と、そのずれ:</b> 1次の項 $f(a)+f'(a)(x-a)$ は、点 $a$ での接線の値です。剰余項 $R_2=\tfrac12f''(\xi)(x-a)^2$ は、「接線からのずれ」で、曲がり具合 $f''$ に比例し、距離の2乗に比例します。まっすぐな関数($f''=0$)ならずれはなく、強く曲がる関数ほどずれが大きい。近くなら(2乗なので)ずれは非常に小さくなります。</p>
+    </div>
+
+    <h3>多変数</h3>
+    <p>2変数以上の関数は、<b>点 $(a,b)$ から $(a+h,b+k)$ へ線分上を動く1変数関数</b>に直して、1変数のテイラーを使います。</p>
+    <div class="box thm">
+      <div class="label">定理(2変数のテイラーの定理)</div>
+      <p>$f(x,y)$ が $(a,b)$ を含む開集合で $C^n$ 級(線分が含まれる範囲で)とすると、ある $\theta$($0\lt\theta\lt1$)で
+      $$f(a+h,b+k)=f(a,b)+\sum_{j=1}^{n-1}\frac1{j!}\Bigl(h\frac\partial{\partial x}+k\frac\partial{\partial y}\Bigr)^{\!j}f(a,b)+R_n,\qquad R_n=\frac1{n!}\Bigl(h\frac\partial{\partial x}+k\frac\partial{\partial y}\Bigr)^{\!n}f(a+\theta h,\,b+\theta k).$$
+      $n=2$ のときは
+      $$f(a+h,b+k)=f(a,b)+f_x(a,b)h+f_y(a,b)k+R_2,\quad R_2=\tfrac12\bigl\{f_{xx}h^2+2f_{xy}hk+f_{yy}k^2\bigr\}\big|_{(a+\theta h,\,b+\theta k)}.$$</p>
+    </div>
+    <details><summary>理由(証明の流れ)</summary>
+      <div class="box proof"><div class="label">証明</div>
+      <p>$F(t)=f(a+th,\,b+tk)$($0\le t\le1$)とおく。$F(0)=f(a,b)$、$F(1)=f(a+h,b+k)$。連鎖律より $F'(t)=f_x(a+th,b+tk)h+f_y(a+th,b+tk)k$、さらに微分して $F''(t)=f_{xx}h^2+2f_{xy}hk+f_{yy}k^2$(偏微分は $(a+th,b+tk)$ での値、順序交換は $C^2$ 級から)。1変数のテイラーの定理($n=2$)より、$F(1)=F(0)+F'(0)+\tfrac12F''(\theta)$。これが上の式。</p></div>
+    </details>
+    <p><b>記号:</b> $\Bigl(h\dfrac\partial{\partial x}+k\dfrac\partial{\partial y}\Bigr)f=hf_x+kf_y$ のように、「$f$ に作用して、$hf_x+kf_y$ にうつす」と見た式を、<b>作用素</b>の記号で書いています。2乗は、「作用を2回行う」。3変数以上も同じ($x,y,z$ なら $x\partial_x+y\partial_y+z\partial_z$)。</p>
+    <div class="box intuit">
+      <div class="label">直感で理解する</div>
+      <p>多変数のテイラーの1次の項は、グラフの<b>接平面</b>、剰余項 $R_2$ は<b>接平面からのずれ</b>(曲面の曲がり具合 $f_{xx},f_{xy},f_{yy}$ に比例し、移動距離の2乗に比例)です。接平面で近似できる(全微分可能)ことの、誤差まで調べた精密版です。</p>
+    </div>
+
+    <h3>例</h3>
+    <ul>
+      <li>$f(x)=e^x$、$a=0$:$e^x=1+x+\tfrac12e^{\xi}x^2$。たとえば $x=0.1$ で、$1+0.1=1.1$ と $e^{0.1}=1.10517\ldots$ の差は $0.00517$(剰余項)。</li>
+      <li>$f(x,y)=e^{x+y}$、$(a,b)=(0,0)$:$f_x=f_y=e^{x+y}$ なので、$e^{x+y}=1+(x+y)+\tfrac12e^{\theta(x+y)}(x+y)^2$。</li>
+    </ul>
+    <p class="used-in">この回で使う場所:<a href="exercises/ex-01.html#p3" data-xref>微積演習 第1回 [3]</a></p>
+
+    <!-- ===================== t: 上限・下限 ===================== -->
+    <h2 id="sup">t. 上限・下限</h2>
+
+    <div class="box def">
+      <div class="label">定義(上界・上限)</div>
+      <p>実数の集合 $A$ について、すべての $x\in A$ に対して $x\le M$ となる実数 $M$ を、$A$ の<b>上界</b>という。上界をもつとき、$A$ は<b>上に有界</b>。上界のうち<b>最小のもの</b>を、$A$ の<b>上限</b>といい、$\sup A$ と書く。</p>
+      <p>同様に、すべての $x\in A$ に対して $m\le x$ となる $m$ を<b>下界</b>、下界のうち最大のものを<b>下限</b> $\inf A$ という。</p>
+    </div>
+    <p>$A$ の最大の元(最大元)があれば、それが上限です。しかし上限は、$A$ に入っていなくてもよい点が、最大元との違いです。</p>
+
+    <h3>例</h3>
+    <ul>
+      <li>$A=[1,2]$:最大元 $2$ があり、$\sup A=2$。</li>
+      <li>$A=[1,2)$:最大元はないが、上界のうち最小のものは $2$。$\sup A=2$($2\notin A$)。</li>
+      <li>$A=\{1-\tfrac1n\mid n=1,2,\dots\}=\{0,\tfrac12,\tfrac23,\dots\}$:$\sup A=1$($1\notin A$)。</li>
+      <li>$A=\{x\in\R\mid x^2\lt2\}$:$\sup A=\sqrt2$(有理数の中だけで考えると、上限が存在しない)。</li>
+    </ul>
+
+    <h3>上限の性質</h3>
+    <div class="box thm">
+      <div class="label">命題(上限の特徴づけ)</div>
+      <p>実数 $a$ が集合 $A$ の上限であるためには、次の (1)(2) がともに成り立つことが必要十分:<br>
+      (1) すべての $x\in A$ について $x\le a$($a$ は上界)。<br>
+      (2) 任意の $\varepsilon\gt0$ に対して、$a-\varepsilon\lt x$ となる $x\in A$ が存在する($a$ より少しでも小さい数は、上界でない)。</p>
+    </div>
+    <details><summary>理由(証明)</summary>
+      <div class="box proof"><div class="label">証明</div>
+      <p>$a=\sup A$ とする。$a$ は上界なので (1)。$\varepsilon\gt0$ に対して、$a$ は最小の上界だから、$a-\varepsilon$ は上界でない。よって $a-\varepsilon\lt x$ となる $x\in A$ がある(2)。逆に (1)(2) が成り立つとする。$b\lt a$ なら、$\varepsilon=a-b$ とおくと、(2) より $b\lt x$ となる $x\in A$ があり、$b$ は上界でない。したがって、上界 $b$ は $a\le b$ をみたし、$a$ は最小の上界。</p></div>
+    </details>
+    <p>この命題から、よく使う2つの言い換えが出ます:(1) <b>$\sup A$ は上界</b>(すべての $x\in A$ で $x\le\sup A$)、(2) <b>$M$ が上界なら $\sup A\le M$</b>(最小の上界だから)。</p>
+
+    <h3>実数の連続性</h3>
+    <div class="box thm">
+      <div class="label">実数の連続性</div>
+      <p>$\R$ の空でない部分集合は、上に有界ならば上限をもち、下に有界ならば下限をもつ。</p>
+    </div>
+    <p>これは、「実数には、すき間がない」ことを正確に述べたものです(有理数の中では、$\{x\mid x^2\lt2\}$ の上限が存在しません)。</p>
+
+    <h3>関数の上限</h3>
+    <p>関数 $h:X\to\R$ について、値の集合 $\{h(x)\mid x\in X\}$ の上限を、関数の<b>上限</b>といい、$\sup_{x\in X}h(x)$ と書きます。$h$ が最大値をとるなら、上限は最大値に一致します。上に有界でなければ、$\sup=\infty$ と書くこともあります。</p>
+    <div class="box intuit">
+      <div class="label">直感で理解する</div>
+      <p><b>いちばん低い天井:</b> 集合の上界は、「その集合の上にある、天井」のようなものです。上限は、<b>天井のうち、いちばん低いもの</b>。集合のどの要素も天井にぶつかりますが、天井のすぐ下まで、限りなく近づく要素があります((2) の意味)。天井そのものに届くとは限りません($[1,2)$ では $2$ に届かない)。</p>
+    </div>
+    <p class="used-in">この回で使う場所:<a href="exercises/ex-01.html#p4" data-xref>微積演習 第1回 [4]</a></p>
+
+    <!-- ===================== u: 距離 ===================== -->
+    <h2 id="metric">u. 距離</h2>
+
+    <div class="box def">
+      <div class="label">定義(距離)</div>
+      <p>集合 $S$ の2つの元 $a,b$ に対して、実数 $d(a,b)$ を対応させる規則 $d$ が、$S$ 上の<b>距離</b>であるとは、次の3条件をみたすこと。<br>
+      (D1) <b>正値性:</b> $d(a,b)\ge0$、かつ $d(a,b)=0\iff a=b$。<br>
+      (D2) <b>対称性:</b> $d(a,b)=d(b,a)$。<br>
+      (D3) <b>三角不等式:</b> $d(a,c)\le d(a,b)+d(b,c)$。</p>
+    </div>
+    <div class="box intuit">
+      <div class="label">直感で理解する</div>
+      <p>距離は「2つのものの離れ具合」の、ひな形です。(D1) 離れ具合は $0$ 以上で、$0$ なのは同じものどうしだけ。(D2) 行きと帰りは同じ。(D3) <b>寄り道は遠回り</b>(A から C へ、B を経由すると、直接行くより、遠いか同じ)。この3つさえあれば、「近い・遠い」や「$\varepsilon$ 以内」の話が、長さを測れないもの(関数など)にも使えます。</p>
+    </div>
+
+    <h3>例</h3>
+    <ul>
+      <li>$\R$ で $d(a,b)=|a-b|$。(D3) は実数の三角不等式 $|a-c|\le|a-b|+|b-c|$。</li>
+      <li>$\R^2$ で、通常の距離 $d(p,q)=\sqrt{(x-x')^2+(y-y')^2}$。(D3) は「三角形の2辺の和は、他の1辺より長い」。</li>
+      <li>どんな集合でも、$d(a,b)=1\ (a\ne b)$、$d(a,a)=0$ とおいたもの(「同じか違うか」だけ測る距離)。</li>
+    </ul>
+
+    <h3>関数の空間の距離(一様距離)</h3>
+    <p>$X$ を有界閉集合として、$X$ 上の連続関数全体を $C(X)$ と書きます。$f,g\in C(X)$ に対して
+    $$d(f,g)=\sup_{x\in X}|f(x)-g(x)|$$
+    とおくと、これは $C(X)$ 上の距離になります(<a href="exercises/ex-01.html#p4" data-xref>演習 [4]</a> で証明)。</p>
+    <p><b>意味:</b> 2つのグラフの<b>縦方向の、いちばん大きなズレ</b>です。$d(f,g)\lt\varepsilon$ は、「$g$ のグラフが、$f$ のグラフの上下 $\varepsilon$ の帯の中にすっぽり入る」ことと同じです。有限であること(上限が $\infty$ でないこと)は、$X$ が有界閉集合で、$f,g$ が連続であることから出ます(最大値の存在)。</p>
+    <div class="box intuit">
+      <div class="label">直感で理解する</div>
+      <p>関数を「1つの点」と見て、点どうしの距離を、「グラフの最大のズレ」で決めます。この距離で $d(f_n,f)\to0$ となることは、「グラフ全体が、$f$ のグラフに、場所によらず同じ速さで近づく」(<b>一様収束</b>)ということです。</p>
+    </div>
+    <p class="used-in">この回で使う場所:<a href="exercises/ex-01.html#p4" data-xref>微積演習 第1回 [4]</a></p>
 
     <p style="margin-top:48px;color:var(--muted);font-size:.9rem">このページは、新しい回で春学期の内容が必要になるたびに、トピックを追加していきます。</p>
     <!--END-->

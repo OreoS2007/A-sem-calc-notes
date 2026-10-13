@@ -1,0 +1,498 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>微積演習 第1回(一様連続・陰関数と条件付き極値・テイラーの定理・距離) | Aセメまとめノート</title>
+  <link rel="stylesheet" href="../../assets/style.css">
+  <script defer src="../../assets/nav.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],macros:{'\\R':'\\mathbb{R}'}});window.__navReady&&window.__navReady()"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="inner">
+      <a class="site-title" href="../../index.html">Aセメまとめノート</a>
+      <span class="links"><a href="../index.html">微積</a><a href="../basics.html">春学期のまとめ</a><a href="../../linalg/index.html">線形代数</a><a href="../../structchem/index.html">構造化学</a><a href="../../mech/index.html">力学A</a><a href="../../thermo/index.html">熱力学</a><a href="../../em/index.html">電磁気学</a></span>
+    </div>
+  </header>
+
+  <main class="note">
+    <h1>微積演習 第1回:解説</h1>
+    <div class="meta">2026年10月13日(火)／担当:榎園／問題用紙の [1]〜[4](一様連続、陰関数と条件付き極値、テイラーの定理、連続関数の空間の距離)</div>
+
+    <div class="box note-box">
+      <div class="label">このページの使い方</div>
+      <p>各問は、次の順に書いてあります。</p>
+      <p>① <b>問題</b> → ② <b>この問題で問われていること</b>(何を示せば「解けた」ことになるのか)→ ③ <b>必要な概念</b>(紫色の枠。定義、意味、小さな例まで)→ ④ <b>解答</b>(答案にそのまま書ける形。各行の理由つき)→ ⑤ <b>確かめ・つまずきやすい点</b>。</p>
+      <p>③ を読めば、その問題を解くのに必要な内容が一通りそろうようにしてあります。さらに詳しい説明は、<a href="../basics.html" data-xref>春学期のまとめ</a>の各トピックへのリンクから読めます。授業のノートとの関係は、<a href="../weeks/week-01.html" data-xref>第1回(陰関数の定理)</a>、<a href="../weeks/week-02.html" data-xref>第2回(ラグランジュの未定乗数法)</a>にあります。</p>
+    </div>
+
+    <nav class="toc">
+      <div class="toc-title">目次</div>
+      <ol>
+        <li><a href="#p1">[1] $f=x^2+y^2$ は一様連続か(3つの領域)</a>
+          <div class="sub">連続と一様連続／否定の示し方／傾きを抑える(平均値の定理)／(1)(2) 一様連続でない／(3) 一様連続</div></li>
+        <li><a href="#p2">[2] 曲線 $x^2+xy+y^2=3$:陰関数・導関数・$x+y$ の最大最小</a>
+          <div class="sub">陰関数の定理と $C^\infty$／陰関数の微分／ラグランジュの未定乗数法と最大・最小の存在／(1)(2)(3)</div></li>
+        <li><a href="#p3">[3] $\psi(2x+3y+5z)$ のテイラーの定理</a>
+          <div class="sub">1変数・多変数のテイラーの定理／合成関数の偏微分／解答／別解／具体例</div></li>
+        <li><a href="#p4">[4] 連続関数の空間 $C(X)$ の距離 $d(f,g)=\sup|f-g|$</a>
+          <div class="sub">距離とは／上限／最大値の存在／解答(有限性・距離の3条件)</div></li>
+        <li><a href="#sum">まとめ(この回で身につけること)</a></li>
+      </ol>
+    </nav>
+
+    <!-- ===================== [1] ===================== -->
+    <h2 id="p1">[1] $f=x^2+y^2$ は一様連続か(3つの領域)</h2>
+    <div class="box ex">
+      <div class="label">問題 [1]</div>
+      <p>$\R^2$ の部分集合 $D$ 上定義された関数 $f(x,y)=x^2+y^2$ を考える。$D$ が以下の場合に $f$ が一様連続かどうかを(証明を付けて)答えよ。<br>
+      (1) $\R^2$　(2) $\{(x,y)\in\R^2\mid 0\lt x\lt1\}$　(3) $\{(x,y)\in\R^2\mid 0\lt x\lt1,\ 0\lt y\lt1\}$</p>
+    </div>
+
+    <h3>この問題で問われていること</h3>
+    <ul>
+      <li>「一様連続である」か「一様連続でない」かを、領域ごとに<b>判定して、証明する</b>問題です。</li>
+      <li>一様連続である場合は、「$\varepsilon$ だけで決まる $\delta$ を、具体的に示す」のが証明です。一様連続でない場合は、定義の<b>否定</b>を満たす例(点の組)を、具体的に挙げて示します。</li>
+      <li>$f=x^2+y^2$ は、どの領域でも<b>連続</b>です。問題は、連続より強い「一様連続」かどうかです。</li>
+    </ul>
+
+    <h3>必要な概念</h3>
+    <div class="box basic">
+      <div class="label">概念 1:連続と一様連続 <a class="xref-link" href="../basics.html#unifcont" data-xref>→ 詳しい解説</a></div>
+      <p>$D\subset\R^2$ 上の関数 $f$ について、$|p-q|$ で、2点 $p,q$ の距離を表します($p=(x,y),\ q=(x',y')$ なら $|p-q|=\sqrt{(x-x')^2+(y-y')^2}$)。</p>
+      <p><b>連続</b>(各点で):どの点 $p\in D$ でも、「任意の $\varepsilon\gt0$ に対して、ある $\delta\gt0$ が存在して、$|q-p|\lt\delta$ ならば $|f(q)-f(p)|\lt\varepsilon$」。このとき $\delta$ は、$\varepsilon$ だけでなく、<b>点 $p$ にも依存してよい</b>。</p>
+      <p><b>一様連続</b>:「任意の $\varepsilon\gt0$ に対して、ある $\delta\gt0$ が存在して、<b>すべての</b> $p,q\in D$ について、$|p-q|\lt\delta$ ならば $|f(p)-f(q)|\lt\varepsilon$」。このとき $\delta$ は、<b>$\varepsilon$ だけで決まり、場所 $p$ によらない</b>。</p>
+      <p>(論理の順序の違い:連続は「$\forall p\ \forall\varepsilon\ \exists\delta$」、一様連続は「$\forall\varepsilon\ \exists\delta\ \forall p,q$」。$\delta$ を選ぶのが、$p$ より先か後か、の違いです。)</p>
+      <p><b>小さな例:</b> $g(x)=2x+1$($\R$ 上)は、$|g(x)-g(x')|=2|x-x'|$ なので、$\delta=\varepsilon/2$ と、場所によらずに選べます。一様連続です。一方、$g(x)=x^2$($\R$ 上)は連続ですが、一様連続ではありません(場所が遠いほど、小さな $\delta$ が必要。概念 2 の実演)。</p>
+      <p><b>直感:</b> 「地形のどこでも、同じ細かさで追従できるか」です。急な坂があちこちに(特に、遠くへ行くほど)あると、坂の急なところでは、小さな $\delta$ でないと値のずれを $\varepsilon$ 以内に収められません。全体で同じ $\delta$ が通用するには、<b>坂の急さが全体で抑えられている</b>必要があります。</p>
+    </div>
+
+    <figure class="fig">
+      <svg viewBox="0 0 460 265" width="460" role="img" aria-label="入力の幅が同じでも出力のずれが違う">
+        <line class="ax" x1="40" y1="230" x2="440" y2="230"/><line class="ax" x1="40" y1="230" x2="40" y2="15"/>
+        <text class="t" x="426" y="248">x</text><text class="t" x="22" y="26">y</text>
+        <polyline class="cv" fill="none" points="40,230 70,228.6 100,224.5 130,217.6 160,208 190,195.6 220,180.5 250,162.6 280,142 310,118.6 340,92.5 370,63.6 400,32"/>
+        <line class="dash" x1="70" y1="228.6" x2="40" y2="228.6"/><line class="dash" x1="130" y1="217.6" x2="40" y2="217.6"/>
+        <line class="dash" x1="310" y1="118.6" x2="40" y2="118.6"/><line class="dash" x1="370" y1="63.6" x2="40" y2="63.6"/>
+        <line class="dash" x1="70" y1="228.6" x2="70" y2="230"/><line class="dash" x1="130" y1="217.6" x2="130" y2="230"/>
+        <line class="dash" x1="310" y1="118.6" x2="310" y2="230"/><line class="dash" x1="370" y1="63.6" x2="370" y2="230"/>
+        <line class="cv" x1="70" y1="230" x2="130" y2="230" style="stroke-width:5"/><line class="cv2" x1="310" y1="230" x2="370" y2="230" style="stroke-width:5"/>
+        <line class="cv" x1="40" y1="228.6" x2="40" y2="217.6" style="stroke-width:5"/><line class="cv2" x1="40" y1="118.6" x2="40" y2="63.6" style="stroke-width:5"/>
+        <text class="ta" x="64" y="252">入力の幅 0.5</text><text class="tt" x="304" y="252">入力の幅 0.5</text>
+        <text class="tm" x="52" y="200">出力のずれ ≈ 0.5(小)</text><text class="tm" x="52" y="92">出力のずれ ≈ 2.5(大)</text>
+        <text class="ta" x="340" y="40">y = x²</text>
+      </svg>
+      <figcaption>同じ幅 $0.5$ の入力でも、原点の近く(青)では出力が $0.5$ しか変わらず、遠く(オレンジ)では $2.5$ も変わります。遠くへ行くほど坂が急になる関数は、全体に共通の $\delta$ が選べません(1変数で描いたもので、$f=x^2+y^2$ でも同じことが起こります)。</figcaption>
+    </figure>
+
+    <div class="box basic">
+      <div class="label">概念 2:一様連続でないことの示し方 <a class="xref-link" href="../basics.html#unifcont" data-xref>→ 詳しい解説</a></div>
+      <p>一様連続の定義を<b>否定</b>します(「任意」と「存在」を入れ替え、最後の不等号を逆にする)。
+      $$\text{一様連続でない}\iff\exists\,\varepsilon\gt0\ \ \forall\delta\gt0\ \ \exists\,p,q\in D:\ |p-q|\lt\delta\ \text{かつ}\ |f(p)-f(q)|\ge\varepsilon.$$
+      言葉でいうと、「<b>ある $\varepsilon$ があって、どんなに小さい $\delta$ をとっても、$\delta$ より近い2点なのに、値が $\varepsilon$ 以上離れているものがある</b>」です。</p>
+      <p><b>使い方(点列で示す):</b> 距離が $\to0$ なのに、値の差が一定以上のままの点の組を、$n=1,2,\dots$ で作ります。$|p_n-q_n|\to0$、かつ $|f(p_n)-f(q_n)|\ge\varepsilon_0$($\varepsilon_0$ は $n$ によらない定数)。すると、どんな $\delta$ に対しても、$|p_n-q_n|\lt\delta$ となる大きな $n$ をとれば、否定が成り立ちます。</p>
+      <p><b>実演:</b> $g(x)=x^2$($\R$ 上)。$p_n=n,\ q_n=n+\tfrac1n$ とすると、$|p_n-q_n|=\tfrac1n\to0$、$g(q_n)-g(p_n)=\left(n+\tfrac1n\right)^2-n^2=2+\tfrac1{n^2}\ge2$。$\varepsilon_0=1$ ととれば、どんな $\delta\gt0$ に対しても、$n\gt1/\delta$ なる $n$ で $|p_n-q_n|\lt\delta$ かつ $|g(p_n)-g(q_n)|\ge2\gt1$。よって一様連続でない。</p>
+    </div>
+    <div class="box basic">
+      <div class="label">概念 3:傾きを抑えれば、一様連続(平均値の定理の使い方) <a class="xref-link" href="../basics.html#mvt2" data-xref>→ 詳しい解説</a></div>
+      <p>$D$ が<b>凸</b>($D$ の2点 $p,q$ を結ぶ線分が、いつも $D$ に含まれる。$\R^2$、帯、正方形はどれも凸)で、$f$ が $C^1$ 級、かつ $D$ で $|\nabla f|\le M$ とします。2変数の平均値の定理($f(q)-f(p)=\nabla f(\xi)\cdot(q-p)$、$\xi$ は線分上の点)と、内積の不等式 $|\vec u\cdot\vec v|\le|\vec u||\vec v|$ から、
+      $$|f(q)-f(p)|\le|\nabla f(\xi)|\,|q-p|\le M\,|q-p|.$$
+      したがって、$\delta=\varepsilon/M$ ととれば、$|p-q|\lt\delta$ のとき $|f(p)-f(q)|\lt\varepsilon$。$\delta$ は $\varepsilon$ だけで決まるので、<b>一様連続</b>です。</p>
+      <p><b>直感:</b> 勾配の大きさ $|\nabla f|$ は「坂の急さ」です。坂の急さが全体で $M$ 以下なら、距離 $\delta$ だけ動いても、高さは $M\delta$ 以下しか変わりません。</p>
+    </div>
+    <div class="box basic">
+      <div class="label">概念 4:有界閉集合の上の連続関数は一様連続 <a class="xref-link" href="../basics.html#unifcont" data-xref>→ 詳しい解説</a></div>
+      <p>$K$ が $\R^2$ の<b>有界な閉集合</b>(第2回の第10節)で、$f$ が $K$ 上で連続ならば、$f$ は $K$ 上で一様連続です(<b>ハイネ・カントールの定理</b>)。「有界閉集合上の連続関数は最大・最小をもつ」と並ぶ、有界閉集合の大事な性質です。証明は難しいので、結果だけを使います。</p>
+    </div>
+
+    <h3>(1) $D=\R^2$:一様連続でない</h3>
+    <p><b>方針。</b> 遠くへ行くほど坂が急になる($|\nabla f|=2\sqrt{x^2+y^2}$ がいくらでも大きくなる)ので、一様連続でなさそうです。概念 2 の実演と同じ点列を使います。</p>
+    <div class="box proof"><div class="label">解答</div>
+      <p><b>答え:</b> 一様連続でない。</p>
+      <p>$p_n=(n,0),\ q_n=\left(n+\tfrac1n,\,0\right)$($n=1,2,\dots$)とおく。どちらも $\R^2$ の点で、</p>
+      <p>・$|p_n-q_n|=\dfrac1n$。</p>
+      <p>・$f(q_n)-f(p_n)=\left(n+\dfrac1n\right)^2-n^2=2+\dfrac1{n^2}\ge2$。</p>
+      <p>$\varepsilon_0=1$ とする。任意の $\delta\gt0$ に対して、$n\gt1/\delta$ なる自然数 $n$ をとると、$|p_n-q_n|=\tfrac1n\lt\delta$ なのに $|f(p_n)-f(q_n)|\ge2\gt\varepsilon_0$。これは、一様連続の否定である。したがって、$f$ は $\R^2$ 上で一様連続でない。 $\square$</p>
+    </div>
+
+    <h3>(2) $D=\{0\lt x\lt1\}$:一様連続でない</h3>
+    <p><b>方針。</b> $x$ は $0$ と $1$ の間に閉じ込められていますが、<b>$y$ は、いくらでも大きくなれます</b>(縦に無限に伸びた帯)。$y$ の方向に遠くへ行けば、坂は急になります。(1) と同じように、$y$ 方向に動く点列をとります。</p>
+    <div class="box proof"><div class="label">解答</div>
+      <p><b>答え:</b> 一様連続でない。</p>
+      <p>$p_n=\left(\tfrac12,\,n\right),\ q_n=\left(\tfrac12,\,n+\tfrac1n\right)$($n=1,2,\dots$)とおく。どちらも $0\lt x=\tfrac12\lt1$ なので $D$ の点である。</p>
+      <p>・$|p_n-q_n|=\dfrac1n$。</p>
+      <p>・$f(q_n)-f(p_n)=\left(\tfrac14+\left(n+\tfrac1n\right)^2\right)-\left(\tfrac14+n^2\right)=2+\dfrac1{n^2}\ge2$。</p>
+      <p>(1) と同様に、任意の $\delta\gt0$ に対して $n\gt1/\delta$ をとれば、$|p_n-q_n|\lt\delta$ かつ $|f(p_n)-f(q_n)|\ge2\gt1$。したがって、$f$ は $D$ 上で一様連続でない。 $\square$</p>
+    </div>
+
+    <h3>(3) $D=\{0\lt x\lt1,\ 0\lt y\lt1\}$:一様連続</h3>
+    <p><b>方針。</b> $D$ は有界(正方形)で、この中では坂の急さが抑えられています($|\nabla f|=2\sqrt{x^2+y^2}\lt2\sqrt2$)。$\varepsilon$ だけで決まる $\delta$ を、具体的に作ります。</p>
+    <div class="box proof"><div class="label">解答</div>
+      <p><b>答え:</b> 一様連続である。</p>
+      <p>$p=(x,y),\ q=(x',y')\in D$ とする。$0\lt x,x',y,y'\lt1$ なので、$x+x'\lt2,\ y+y'\lt2$。したがって
+      $$|f(p)-f(q)|=\bigl|(x^2-x'^2)+(y^2-y'^2)\bigr|\le|x-x'|\,(x+x')+|y-y'|\,(y+y')\lt2|x-x'|+2|y-y'|.$$
+      ここで $|x-x'|\le|p-q|,\ |y-y'|\le|p-q|$($|p-q|=\sqrt{(x-x')^2+(y-y')^2}$ の一部だから)なので、
+      $$|f(p)-f(q)|\lt4\,|p-q|.$$
+      任意の $\varepsilon\gt0$ に対して、$\delta=\varepsilon/4$ とおくと、$|p-q|\lt\delta$ ならば $|f(p)-f(q)|\lt4\delta=\varepsilon$。この $\delta$ は $\varepsilon$ だけで決まり、$p,q$ によらない。したがって $f$ は $D$ 上で一様連続である。 $\square$</p>
+    </div>
+    <details><summary>別解1:平均値の定理(概念 3)</summary>
+      <div class="box proof"><div class="label">別解</div>
+        <p>$D$ は凸で、$\nabla f=(2x,2y)$、$|\nabla f|=2\sqrt{x^2+y^2}\lt2\sqrt2$($0\lt x,y\lt1$ だから)。$M=2\sqrt2$ として、概念 3 より $|f(p)-f(q)|\le2\sqrt2\,|p-q|$。$\delta=\varepsilon/(2\sqrt2)$ とおけば一様連続。(上の解答の定数 $4$ より、良い定数になっています。)</p></div>
+    </details>
+    <details><summary>別解2:有界閉集合上の連続関数は一様連続(概念 4)</summary>
+      <div class="box proof"><div class="label">別解</div>
+        <p>$D$ の閉包 $K=\{0\le x\le1,\ 0\le y\le1\}$(縁を含む正方形)は、有界な閉集合です。$f=x^2+y^2$ は $K$ 上で連続なので、ハイネ・カントールの定理により、$K$ 上で一様連続。$D\subset K$ なので、$D$ 上でも一様連続(「すべての $p,q\in K$」の条件が、$D$ の点にも成り立つため)。</p></div>
+    </details>
+
+    <div class="box warn"><div class="label">つまずきやすい点</div>
+      <p>① <b>(2) は、帯が有界ではないことが原因です。</b>$x$ の範囲は有界($0\lt x\lt1$)でも、$y$ が自由なので、$y$ 方向に遠くへ行けば、(1) と同じ理由で一様連続でなくなります。「$x$ が $0$ と $1$ の間だから大丈夫」と思わないこと。</p>
+      <p>② <b>(3) は、有界なことが効いています。</b>(3) と (2) の差は、$y$ が有界($0\lt y\lt1$)かどうかだけです。有界だと、坂の急さが全体で抑えられます。</p>
+      <p>③ <b>「連続」と「一様連続」の混同。</b>この問題の $f$ は、(1)(2)(3) のどれでも連続です。「連続だから一様連続」とは言えません(一様連続は、連続より強い条件)。</p>
+      <p>④ <b>否定の示し方。</b>点列を1つ挙げるだけでは足りません。「<b>任意の $\delta$</b> に対して、$|p-q|\lt\delta$ なのに値の差が $\varepsilon_0$ 以上となる点がある」ことを、$n\gt1/\delta$ の取り方まで書いて示します。</p>
+    </div>
+    <div class="box ex">
+      <div class="label">具体例での確かめ</div>
+      <p>(2) の点列で、$n=10$:$p=(\tfrac12,10),\ q=(\tfrac12,10.1)$。距離 $0.1$。$f(p)=0.25+100=100.25$、$f(q)=0.25+102.01=102.26$ なので、値の差は $2.01$($=2+\tfrac1{100}$)。$n=100$ では距離 $0.01$ で差 $2.0001$。距離をいくら縮めても、差が $2$ 以上のまま、というのが一様連続でない理由です。</p>
+      <p>(3) の評価:$p=(0.9,0.9),\ q=(0.91,0.9)$。距離 $0.01$。$f(q)-f(p)=0.91^2-0.9^2=0.0181\lt4\times0.01=0.04$。いくつか試しても、差が距離の $4$ 倍を超えることはありません(実際には、最大でも約 $2\sqrt2$ 倍です)。</p>
+    </div>
+
+    <figure class="fig">
+      <svg viewBox="0 0 520 175" width="520" role="img" aria-label="3つの領域">
+        <rect x="14" y="26" width="140" height="95" fill="var(--accent)" opacity=".10" stroke="var(--accent)" stroke-width="1.5" stroke-dasharray="5 4"/>
+        <text class="tj" x="14" y="144">(1) R² 全体</text><text class="tm" x="14" y="162">上下左右に無限に広がる</text>
+        <text class="tm" x="52" y="78" style="font-size:20px">↔ ↕</text>
+        <rect x="233" y="26" width="46" height="95" fill="var(--thm)" opacity=".13" stroke="var(--thm)" stroke-width="1.8" stroke-dasharray="5 4"/>
+        <text class="tt" x="248" y="20">↑</text><text class="tt" x="248" y="136">↓</text>
+        <text class="tj" x="190" y="152">(2) 0 &lt; x &lt; 1</text><text class="tm" x="190" y="168">縦に無限に伸びた帯</text>
+        <rect x="402" y="48" width="64" height="64" fill="var(--ex)" opacity=".16" stroke="var(--ex)" stroke-width="1.8" stroke-dasharray="5 4"/>
+        <text class="tj" x="352" y="144">(3) 0 &lt; x, y &lt; 1</text><text class="tm" x="352" y="162">有界(正方形)</text>
+      </svg>
+      <figcaption>3つの領域。(1) と (2) は、遠くへ行ける(有界でない)ので、坂がいくらでも急になり、一様連続でない。(3) は有界なので、坂の急さが抑えられ、一様連続です。</figcaption>
+    </figure>
+
+    <!-- ===================== [2] ===================== -->
+    <h2 id="p2">[2] 曲線 $x^2+xy+y^2=3$:陰関数・導関数・$x+y$ の最大最小</h2>
+    <div class="box ex">
+      <div class="label">問題 [2]</div>
+      <p>方程式 $x^2+xy+y^2=3$ を考える。<br>
+      (1) 点 $(1,1)$ の周りで、この方程式が $y$ を $x$ の $C^\infty$ 関数 $y=f(x)$ として定まることを示せ。<br>
+      (2) $f'(1)$ および $f''(1)$ を求めよ。<br>
+      (3) この方程式によって定まる曲線上で、$x+y$ の最大値と最小値を求めよ。</p>
+    </div>
+
+    <h3>この問題で問われていること</h3>
+    <ul>
+      <li>(1) は「<b>陰関数の定理が使える</b>ことを確かめ、さらに、その陰関数が<b>何回でも微分できる</b>($C^\infty$)ことを示す」問題です。</li>
+      <li>(2) は、陰関数 $y=f(x)$ を<b>求めずに</b>、$x=1$ での傾き $f'(1)$ と曲がり具合 $f''(1)$ を計算する問題です(第1回の公式)。</li>
+      <li>(3) は、曲線の上だけを動く点で、$x+y$ が最大・最小になる値を求める問題です(<b>ラグランジュの未定乗数法</b>、第2回)。「最大値・最小値が<b>存在する</b>」ことの確認も必要です。</li>
+    </ul>
+
+    <h3>必要な概念</h3>
+    <div class="box basic">
+      <div class="label">概念 1:陰関数の定理と $C^\infty$ <a class="xref-link" href="../weeks/week-01.html#s4" data-xref>→ 第1回 4節</a><a class="xref-link" href="../basics.html#c1c2" data-xref>→ $C^n$ 級</a></div>
+      <p><b>定理(第1回):</b> $F(x,y)$ が $C^1$ 級、$F(a,b)=0$、$F_y(a,b)\ne0$ ならば、$x=a$ を含むある開区間で定義された関数 $y=f(x)$ で、$f(a)=b$、$F(x,f(x))=0$ をみたすものが存在し、$f$ は微分可能で $f'(x)=-\dfrac{F_x(x,f(x))}{F_y(x,f(x))}$。</p>
+      <p><b>$C^\infty$ であること:</b> $F$ が $C^\infty$ 級(たとえば多項式)なら、$f$ も $C^\infty$ 級です。次の「くり返し」で分かります。上の公式の右辺は、$F_x,F_y$(これも $C^\infty$)に、$x$ と $f(x)$ を代入したものです。</p>
+      <p>・$f$ は $C^1$ 級(微分可能で、$f'$ が右辺の連続関数と等しいので連続)。<br>
+      ・$f$ が $C^m$ 級なら、右辺 $-F_x(x,f(x))/F_y(x,f(x))$ は $C^m$ 級(なめらかな関数になめらかな関数を代入し、分母は $F_y\ne0$ だから割れる)。したがって $f'$ が $C^m$ 級で、$f$ は $C^{m+1}$ 級。<br>
+      ・これを $m=1,2,3,\dots$ とくり返して、$f$ はすべての $m$ について $C^m$ 級、すなわち $C^\infty$ 級。</p>
+      <p><b>直感:</b> 導関数が、$f$ 自身のなめらかな式で書けるので、「$f$ がなめらか ⇒ $f'$ もなめらか ⇒ $f$ はもう1段なめらか」と、なめらかさが雪だるま式に上がっていきます。</p>
+    </div>
+    <div class="box basic">
+      <div class="label">概念 2:陰関数の導関数・2階導関数 <a class="xref-link" href="../weeks/week-01.html#s7" data-xref>→ 第1回 7節</a><a class="xref-link" href="../basics.html#chain" data-xref>→ 連鎖律</a></div>
+      <p>$F(x,f(x))=0$ は $x$ についての恒等式なので、両辺を $x$ で微分できます(連鎖律)。
+      $$F_x+F_y\,f'=0\ \Longrightarrow\ f'=-\frac{F_x}{F_y}.$$
+      もう一度微分(積の微分と連鎖律を使う)すると、$f''$ が出ます。公式を暗記するより、<b>「恒等式を2回微分する」という手順</b>が確実です。公式で書くと(第1回)
+      $$f''=-\frac{F_{xx}F_y^{\,2}-2F_{xy}F_xF_y+F_{yy}F_x^{\,2}}{F_y^{\,3}}.$$</p>
+    </div>
+    <div class="box basic">
+      <div class="label">概念 3:条件付き極値と、最大・最小の存在 <a class="xref-link" href="../weeks/week-02.html#s3" data-xref>→ 第2回 3節</a><a class="xref-link" href="../weeks/week-02.html#s10" data-xref>→ 第2回 10節</a><a class="xref-link" href="../basics.html#closed" data-xref>→ 閉集合</a></div>
+      <p><b>ラグランジュの未定乗数法:</b> $f,g$ が $C^1$ 級で、$g(x,y)=0$ の下で $f$ が $(a,b)$ で極値をとり、$\nabla g(a,b)\ne\vec0$ ならば、ある $\lambda$ があって $\nabla f(a,b)=\lambda\nabla g(a,b)$。(候補を見つける道具。)</p>
+      <p><b>最大・最小の存在:</b> $K$ が有界な閉集合で、$h$ が $K$ 上の連続関数なら、$h$ は $K$ 上で最大値・最小値をもつ。条件の曲線 $\{g=0\}$ が<b>有界な閉集合</b>なら、最大値・最小値は存在するので、ラグランジュの条件を満たす候補の値を比べれば、最大・最小が決まります。</p>
+      <p><b>有界・閉の確かめ方:</b> ・<b>閉</b>:$g$ が連続なら、$\{g=0\}$ は閉集合です(補集合 $\{g\ne0\}$ が開集合になる。連続関数は、値が $0$ でない点の近くでも $0$ でないため)。・<b>有界</b>:不等式で、$x^2+y^2$ が上から押さえられることを示す(例:$x^2+xy+y^2\ge\tfrac12(x^2+y^2)$)。</p>
+    </div>
+
+    <h3>(1) 陰関数として定まること:解答</h3>
+    <p><b>方針。</b> $F(x,y)=x^2+xy+y^2-3$ とおいて、陰関数の定理の仮定(3つ)を確かめます。</p>
+    <div class="box proof"><div class="label">解答</div>
+      <p>$F(x,y)=x^2+xy+y^2-3$ とおく。曲線は $F(x,y)=0$。</p>
+      <p>・$F(1,1)=1+1+1-3=0$。点 $(1,1)$ は曲線の上にある。</p>
+      <p>・$F$ は多項式なので $C^\infty$ 級(特に $C^1$ 級)。</p>
+      <p>・$F_y=x+2y$ より、$F_y(1,1)=3\ne0$。</p>
+      <p>陰関数の定理より、$x=1$ を含むある開区間で定義された関数 $y=f(x)$ で、$f(1)=1$、$F(x,f(x))=0$ をみたすものが存在する。つまり、点 $(1,1)$ の周りで、方程式は $y$ を $x$ の関数 $y=f(x)$ として定める。</p>
+      <p>さらに、$F$ が $C^\infty$ 級なので、$f$ も $C^\infty$ 級である(概念 1:$f'=-F_x/F_y=-\dfrac{2x+f}{x+2f}$ は、$f$ のなめらかな式で、$f$ が $C^m$ 級なら $f'$ も $C^m$ 級、したがって $f$ は $C^{m+1}$ 級、をくり返す)。 $\square$</p>
+    </div>
+    <details><summary>別解:$y$ について2次方程式を解く(明示的に表す)</summary>
+      <div class="box proof"><div class="label">別解</div>
+        <p>$y^2+xy+(x^2-3)=0$ は $y$ の2次方程式で、解の公式より
+        $$y=\frac{-x\pm\sqrt{x^2-4(x^2-3)}}{2}=\frac{-x\pm\sqrt{12-3x^2}}2.$$
+        $x=1$ のとき $\sqrt{9}=3$ で、$y=1$ になるのは「$+$」のほう:$f(x)=\dfrac{-x+\sqrt{12-3x^2}}{2}$。$x=1$ の近くでは $12-3x^2\gt0$ なので、ルートの中が正で、$\sqrt{\ }$ は(正の数の上で)$C^\infty$ 級。したがって $f$ は $C^\infty$ 級です。(この具体形は、次の (2) の確かめにも使えます。)</p></div>
+    </details>
+
+    <h3>(2) $f'(1)$ と $f''(1)$:解答</h3>
+    <div class="box proof"><div class="label">解答</div>
+      <p><b>$f'(1)$。</b> $F(x,f(x))=0$ の両辺を $x$ で微分する。$y=f(x)$ と書くと
+      $$2x+y+(x+2y)\,y'=0\quad\Longrightarrow\quad y'=-\frac{2x+y}{x+2y}.$$
+      $(x,y)=(1,1)$ を代入して $f'(1)=-\dfrac{2+1}{1+2}=\boxed{-1}$。</p>
+      <p><b>$f''(1)$。</b> 上の式 $2x+y+(x+2y)y'=0$ を、もう一度 $x$ で微分する(積の微分に注意)。
+      $$2+y'+(1+2y')\,y'+(x+2y)\,y''=0\ \Longrightarrow\ 2+2y'+2y'^2+(x+2y)\,y''=0.$$
+      $(x,y)=(1,1),\ y'=-1$ を代入して $2-2+2+3y''=0$、$y''=-\dfrac23$。すなわち $f''(1)=\boxed{-\dfrac23}$。</p>
+    </div>
+    <details><summary>確かめ1:公式 $f''=-\dfrac{F_{xx}F_y^2-2F_{xy}F_xF_y+F_{yy}F_x^2}{F_y^3}$</summary>
+      <div class="box proof"><div class="label">確かめ</div>
+        <p>$F_x=2x+y,\ F_y=x+2y,\ F_{xx}=2,\ F_{xy}=1,\ F_{yy}=2$。$(1,1)$ で $F_x=3,\ F_y=3$。$f''(1)=-\dfrac{2\cdot9-2\cdot1\cdot3\cdot3+2\cdot9}{27}=-\dfrac{18}{27}=-\dfrac23$。一致します。</p></div>
+    </details>
+    <details><summary>確かめ2:(1) の別解の具体形を直接微分する</summary>
+      <div class="box proof"><div class="label">確かめ</div>
+        <p>$f(x)=\dfrac{-x+(12-3x^2)^{1/2}}{2}$。$f'(x)=\dfrac12\left(-1-\dfrac{3x}{\sqrt{12-3x^2}}\right)$ で、$f'(1)=\dfrac12\left(-1-\dfrac33\right)=-1$。さらに微分して $f''(x)=-\dfrac32\left[\dfrac1{\sqrt{12-3x^2}}+\dfrac{3x^2}{(12-3x^2)^{3/2}}\right]$、$x=1$ では $12-3x^2=9$ で、$(12-3x^2)^{-1/2}=\dfrac13$、$\dfrac{3x^2}{(12-3x^2)^{3/2}}=\dfrac3{27}=\dfrac19$。よって $f''(1)=-\dfrac32\left[\dfrac13+\dfrac19\right]=-\dfrac32\cdot\dfrac49=-\dfrac23$。一致します。(数値でも、$h=10^{-4}$ の差分で、$f'(1)\approx-1.000$、$f''(1)\approx-0.6667$ になります。)</p></div>
+    </details>
+    <div class="box intuit">
+      <div class="label">直感で理解する:この値の意味</div>
+      <p>$f'(1)=-1$ は、点 $(1,1)$ で曲線の接線の傾きが $-1$(右下がり)ということ。この点では、接線が $x+y=2$ で、$x+y$ が最大になる点でもあります(次の (3))。そこでは、曲線は山頂のようにふくらんでいて、$f''(1)=-\tfrac23\lt0$(上に凸)という値と合っています。</p>
+    </div>
+
+    <h3>(3) $x+y$ の最大値・最小値:解答</h3>
+    <p><b>方針。</b> $g(x,y)=x^2+xy+y^2-3=0$ の下での、$f(x,y)=x+y$ の最大・最小です。ラグランジュの未定乗数法で候補を出し、最大・最小の存在を確認して、値を比べます。</p>
+    <div class="box proof"><div class="label">解答</div>
+      <p><b>(a) 曲線は有界な閉集合。</b> $C=\{(x,y)\mid g(x,y)=0\}$ とおく。・$g$ は連続なので、$C$ は閉集合。・$xy\ge-\tfrac12(x^2+y^2)$($(x+y)^2\ge0$ から)より、$x^2+xy+y^2\ge\tfrac12(x^2+y^2)$。$C$ 上では $3\ge\tfrac12(x^2+y^2)$、すなわち $x^2+y^2\le6$。したがって $C$ は有界。よって $C$ は有界な閉集合で、連続関数 $f=x+y$ は $C$ 上で最大値・最小値をもつ。</p>
+      <p><b>(b) $\nabla g\ne\vec0$。</b> $\nabla g=(2x+y,\ x+2y)$。$\nabla g=\vec0$ とすると、$2x+y=0$ と $x+2y=0$ から $x=y=0$。しかし $(0,0)$ は $C$ の上にない($g(0,0)=-3\ne0$)。したがって、$C$ の上では $\nabla g\ne\vec0$。</p>
+      <p><b>(c) ラグランジュの条件。</b> $\nabla f=(1,1)$ なので、$\nabla f=\lambda\nabla g$ より
+      $$1=\lambda(2x+y),\qquad 1=\lambda(x+2y).$$
+      左辺が $1$ なので $\lambda\ne0$ で、$2x+y=x+2y\,(=1/\lambda)$、よって $x=y$。$g=0$ に代入して $3x^2=3$、$x=\pm1$。候補は $(1,1)$ と $(-1,-1)$($\lambda=\tfrac13$ と $-\tfrac13$)。</p>
+      <p><b>(d) 値を比べる。</b> $f(1,1)=2,\ f(-1,-1)=-2$。最大値・最小値は存在し(a)、それをとる点は(b)のもとで候補(c)のどれかなので、</p>
+      <p><b>最大値 $2$($(x,y)=(1,1)$)、最小値 $-2$($(x,y)=(-1,-1)$)。</b> $\square$</p>
+    </div>
+    <details><summary>別解1:ラグランジュを使わず、不等式で(おすすめ)</summary>
+      <div class="box proof"><div class="label">別解</div>
+        <p>$s=x+y$ とおく。$x^2+xy+y^2=(x+y)^2-xy=s^2-xy$。曲線上では $s^2-xy=3$、すなわち $xy=s^2-3$。一方、$(x-y)^2\ge0$ より $xy\le\dfrac{(x+y)^2}{4}=\dfrac{s^2}4$。したがって
+        $$s^2-3\le\frac{s^2}4\ \Longrightarrow\ \frac34s^2\le3\ \Longrightarrow\ s^2\le4\ \Longrightarrow\ -2\le s\le2.$$
+        等号は $x=y$ のとき。$x=y$ で曲線上の点は $(1,1),(-1,-1)$ で、$s=2,\ -2$ を実際にとる。よって最大値 $2$、最小値 $-2$。(最大・最小の存在の確認が不要になります。)</p></div>
+    </details>
+    <details><summary>別解2:座標を45°回転する</summary>
+      <div class="box proof"><div class="label">別解</div>
+        <p>$u=\dfrac{x+y}{\sqrt2},\ v=\dfrac{x-y}{\sqrt2}$ とおく。$x^2+y^2=u^2+v^2,\ xy=\dfrac{u^2-v^2}2$ なので、$x^2+xy+y^2=\tfrac32u^2+\tfrac12v^2$。曲線は $\tfrac32u^2+\tfrac12v^2=3$、すなわち $\dfrac{u^2}2+\dfrac{v^2}6=1$(楕円)。$u$ の範囲は $-\sqrt2\le u\le\sqrt2$($v=0$ で端)。$x+y=\sqrt2\,u$ なので、$-2\le x+y\le2$。</p></div>
+    </details>
+
+    <figure class="fig">
+      <svg viewBox="0 0 460 300" width="460" role="img" aria-label="曲線と x+y の等高線">
+        <line class="ax" x1="30" y1="150" x2="440" y2="150"/><line class="ax" x1="230" y1="290" x2="230" y2="12"/>
+        <text class="t" x="428" y="168">x</text><text class="t" x="238" y="24">y</text>
+        <ellipse class="cv" cx="230" cy="150" rx="147" ry="85" transform="rotate(45 230 150)" style="stroke-width:3"/>
+        <line class="cv2" x1="220" y1="20" x2="360" y2="160" style="stroke-width:2.4"/>
+        <line class="cv2" x1="100" y1="140" x2="240" y2="280" style="stroke-width:2.4"/>
+        <line class="thin" x1="150" y1="70" x2="310" y2="230"/>
+        <circle class="dot" cx="290" cy="90" r="5"/><circle class="dot" cx="170" cy="210" r="5"/>
+        <line class="arr" x1="290" y1="90" x2="326" y2="54"/><polygon class="arrh" points="332,48 320,52 328,60"/>
+        <text class="t" x="296" y="108">(1, 1)</text><text class="t" x="110" y="226">(−1, −1)</text>
+        <text class="tt" x="336" y="48">∇f=(1,1)</text>
+        <text class="tm" x="104" y="14">x+y = 2(接する)</text><text class="tm" x="252" y="292">x+y = −2(接する)</text>
+        <text class="tm" x="40" y="44">青:曲線 x²+xy+y²=3(楕円)</text><text class="tm" x="40" y="60">細い線:x+y=0</text>
+      </svg>
+      <figcaption>曲線(楕円、青)と、$x+y=$ 一定の直線(等高線)。$x+y=2$ と $x+y=-2$ が、楕円に接する点(赤)が、最大・最小の点 $(1,1),(-1,-1)$ です。接点では $\nabla f=(1,1)$ が、$\nabla g$ と平行になっています。</figcaption>
+    </figure>
+
+    <div class="box warn"><div class="label">つまずきやすい点</div>
+      <p>① (1) は「陰関数の定理が使える」で終わりではなく、「<b>$C^\infty$</b>」を示す必要があります。$F$ が多項式なので $C^\infty$、と書いたうえで、$f$ も $C^\infty$ になる理由(くり返し)か、別解のように具体形を書きます。</p>
+      <p>② (2) の $f''$ は、$y'$ を代入する前に、<b>積の微分</b>($(x+2y)y'$ の微分)を正しく行う。$(x+2y)'=1+2y'$ を忘れやすい。</p>
+      <p>③ (3) は、「極値の候補が2点出た」だけでは、最大・最小とは言えません。<b>最大・最小が存在する</b>(曲線が有界閉集合)ことを書いて、はじめて、候補の値の比較で決まります。別解1の不等式の方法なら、この確認が不要です。</p>
+      <p>④ $\nabla g\ne\vec0$ の確認も、定理の仮定なので必要です(ここでは、原点が曲線上にないことで確認)。</p>
+    </div>
+    <div class="box ex">
+      <div class="label">具体例での確かめ</div>
+      <p>曲線上の点 $(\sqrt3,0)$($3+0+0=3$)では、$x+y=\sqrt3\approx1.732\lt2$。点 $(1,1)$ は $x+y=2$ で、これより大きい値は、曲線上にありません。$(2,-1)$ は $4-2+1=3$ で曲線上、$x+y=1$。</p>
+    </div>
+
+    <!-- ===================== [3] ===================== -->
+    <h2 id="p3">[3] $\psi(2x+3y+5z)$ のテイラーの定理</h2>
+    <div class="box ex">
+      <div class="label">問題 [3]</div>
+      <p>$\psi(t)$ を $0$ を含むある開区間で定義された $C^\infty$ 関数とする。このとき3変数関数
+      $$f(x,y,z)=\psi(2x+3y+5z)$$
+      に対し、原点 $(0,0,0)$ の周りで2階微分の項を剰余項とするようにテイラーの定理を適用せよ($\psi$ の高階微分を用いて表せ)。</p>
+    </div>
+
+    <h3>この問題で問われていること</h3>
+    <ul>
+      <li>テイラーの定理を、「$f(x,y,z)=f(0,0,0)+(\text{1次の項})+R_2$、$R_2$ は2階の偏微分を含む剰余項」という形で書く問題です。</li>
+      <li>しかも、$f$ のままではなく、<b>$\psi$ とその導関数</b>($\psi(0),\psi'(0),\psi''(\cdots)$)を用いて表すことが求められています。</li>
+    </ul>
+
+    <h3>必要な概念</h3>
+    <div class="box basic">
+      <div class="label">概念 1:テイラーの定理(1変数) <a class="xref-link" href="../basics.html#taylor" data-xref>→ 詳しい解説</a></div>
+      <p>$f$ が $a$ を含む開区間で $n$ 回微分可能なら、$x$ に対して、$a$ と $x$ の間のある $\xi$ があって
+      $$f(x)=f(a)+f'(a)(x-a)+\cdots+\frac{f^{(n-1)}(a)}{(n-1)!}(x-a)^{n-1}+R_n,\qquad R_n=\frac{f^{(n)}(\xi)}{n!}(x-a)^n.$$
+      <b>$n=2$ の場合</b>(「2階微分の項を剰余項とする」):
+      $$f(x)=f(a)+f'(a)(x-a)+\frac{f''(\xi)}{2}(x-a)^2.$$
+      別の書き方では、$x=a+h$ として $f(a+h)=f(a)+f'(a)h+\tfrac12f''(a+\theta h)h^2$($0\lt\theta\lt1$)。</p>
+      <p><b>注意:</b> 剰余項の2階微分は、点 $a$ ではなく、<b>$a$ と $x$ の間のどこかの点</b>($a+\theta h$)での値です。</p>
+    </div>
+    <div class="box basic">
+      <div class="label">概念 2:テイラーの定理(多変数) <a class="xref-link" href="../basics.html#taylor" data-xref>→ 詳しい解説</a></div>
+      <p>$f(x,y,z)$ が $C^2$ 級のとき、原点から $(x,y,z)$ へ、線分上を $t$($0\le t\le1$)で動く関数 $F(t)=f(tx,ty,tz)$ を考えます。$F(1)=f(x,y,z)$、$F(0)=f(0,0,0)$。1変数のテイラー($n=2$)より、$F(1)=F(0)+F'(0)+\tfrac12F''(\theta)$($0\lt\theta\lt1$)。連鎖律で $F'(t)=f_x\,x+f_y\,y+f_z\,z$(偏微分は $(tx,ty,tz)$ での値)、$F''(t)=\sum_{i,j}f_{ij}\,x_ix_j$。したがって
+      $$f(x,y,z)=f(0)+f_x(0)x+f_y(0)y+f_z(0)z+R_2,$$
+      $$R_2=\frac12\Bigl\{f_{xx}x^2+f_{yy}y^2+f_{zz}z^2+2f_{xy}xy+2f_{xz}xz+2f_{yz}yz\Bigr\}\Bigr|_{(\theta x,\theta y,\theta z)}.$$
+      (記号 $(x\partial_x+y\partial_y+z\partial_z)^2f$ で、$R_2=\tfrac12(x\partial_x+y\partial_y+z\partial_z)^2f(\theta x,\theta y,\theta z)$ とも書きます。)</p>
+      <p><b>直感:</b> 1次の項は「接平面」、剰余項 $R_2$ は「接平面からのずれ」(曲がり具合)です。</p>
+    </div>
+    <div class="box basic">
+      <div class="label">概念 3:合成関数の偏微分 <a class="xref-link" href="../basics.html#chain" data-xref>→ 連鎖律</a></div>
+      <p>$u=2x+3y+5z$ とおくと、$f=\psi(u)$。連鎖律より $f_x=\psi'(u)\cdot\dfrac{\partial u}{\partial x}=2\psi'(u)$、同様に $f_y=3\psi'(u),\ f_z=5\psi'(u)$。もう一度微分して、$f_{xx}=2\cdot2\psi''(u)=4\psi''(u)$、$f_{xy}=2\cdot3\psi''(u)=6\psi''(u)$、など。($u$ の係数どうしの積に、$\psi''$ をかけたものになる。)</p>
+    </div>
+
+    <h3>解答</h3>
+    <p><b>方針。</b> $f(0,0,0)$、1階偏微分、2階偏微分を、$\psi$ の導関数で表して、多変数のテイラーの定理($n=2$)に入れます。</p>
+    <div class="box proof"><div class="label">解答</div>
+      <p>$u=2x+3y+5z$ とおくと $f=\psi(u)$。</p>
+      <p><b>(i) 値と1階偏微分。</b> $f(0,0,0)=\psi(0)$。
+      $$f_x=2\psi'(u),\quad f_y=3\psi'(u),\quad f_z=5\psi'(u)\qquad\Longrightarrow\qquad f_x(0)=2\psi'(0),\ f_y(0)=3\psi'(0),\ f_z(0)=5\psi'(0).$$
+      したがって、1次の項は $f_x(0)x+f_y(0)y+f_z(0)z=\psi'(0)(2x+3y+5z)$。</p>
+      <p><b>(ii) 2階偏微分。</b>
+      $$f_{xx}=4\psi''(u),\ f_{yy}=9\psi''(u),\ f_{zz}=25\psi''(u),\ f_{xy}=6\psi''(u),\ f_{xz}=10\psi''(u),\ f_{yz}=15\psi''(u).$$</p>
+      <p><b>(iii) 剰余項。</b> テイラーの定理($n=2$)の剰余項に代入する(偏微分は $(\theta x,\theta y,\theta z)$ での値、そこでの $u$ は $\theta(2x+3y+5z)$):
+      $$R_2=\frac12\psi''\bigl(\theta(2x+3y+5z)\bigr)\Bigl\{4x^2+9y^2+25z^2+2\cdot6xy+2\cdot10xz+2\cdot15yz\Bigr\}.$$
+      中括弧の中は $(2x+3y+5z)^2$ に等しい($4x^2+9y^2+25z^2+12xy+20xz+30yz$)。したがって</p>
+      <p><b>答え:</b> ある $\theta$($0\lt\theta\lt1$)があって、
+      $$\boxed{\,f(x,y,z)=\psi(0)+\psi'(0)\,(2x+3y+5z)+\frac12\,\psi''\bigl(\theta(2x+3y+5z)\bigr)\,(2x+3y+5z)^2\,}$$
+      が成り立つ。(ただし、$(x,y,z)$ は、$2x+3y+5z$ が $\psi$ の定義域の開区間に入る範囲で考える。区間は $0$ を含み、$\theta(2x+3y+5z)$ は $0$ と $2x+3y+5z$ の間にあるので、$\psi''$ の中身も定義域に入る。) $\square$</p>
+    </div>
+    <details><summary>別解:1変数のテイラーの定理を $\psi$ に使う</summary>
+      <div class="box proof"><div class="label">別解</div>
+        <p>$f(x,y,z)=\psi(u)$ で、$u=2x+3y+5z$ は<b>1つの数</b>です。$\psi$ に、1変数のテイラーの定理($n=2$、$a=0$、$x\to u$)を使えば、そのまま
+        $$\psi(u)=\psi(0)+\psi'(0)\,u+\tfrac12\psi''(\theta u)\,u^2\qquad(0\lt\theta\lt1)$$
+        で、答えと一致します。この問題の $f$ は、実質1変数の関数 $\psi(u)$ なので、3変数のテイラーの定理は、「$u$ についての1変数のテイラー」を、$u=2x+3y+5z$ で書き直したものになっているのです。</p></div>
+    </details>
+    <figure class="fig">
+      <svg viewBox="0 0 440 250" width="440" role="img" aria-label="接線と剰余項">
+        <line class="ax" x1="30" y1="215" x2="425" y2="215"/>
+        <polyline class="cv" fill="none" points="42,191.9 60,187.9 105,173.6 150,150 195,111.1 222,76.5 240,46.9 249,29.8"/>
+        <line class="cv2" x1="50" y1="216.7" x2="250" y2="83.3" style="stroke-width:2"/>
+        <line class="dash" x1="240" y1="46.9" x2="240" y2="215"/><line class="dash" x1="150" y1="150" x2="150" y2="215"/>
+        <line class="cv3" x1="240" y1="46.9" x2="240" y2="90" style="stroke-width:5"/>
+        <circle class="dot" cx="150" cy="150" r="4.5"/><circle class="dotb" cx="240" cy="46.9" r="4.5"/><circle class="dot" cx="240" cy="90" r="4"/>
+        <text class="t" x="144" y="233">0</text><text class="t" x="236" y="233">u</text>
+        <text class="ta" x="262" y="40">ψ(u)</text><text class="tt" x="258" y="100">ψ(0)+ψ′(0)u(接線)</text>
+        <text class="tj" x="256" y="72" style="fill:var(--ex)">R₂ = ½ψ″(θu)u²</text>
+        <text class="tm" x="40" y="30">曲線 ψ と、t=0 での接線</text>
+      </svg>
+      <figcaption>$\psi$ のグラフと、$t=0$ での接線。接線の値 $\psi(0)+\psi'(0)u$ と、実際の値 $\psi(u)$ の差(緑)が、剰余項 $R_2=\tfrac12\psi''(\theta u)u^2$ です。曲がりが大きいほど、$\psi''$ が大きく、ずれも大きくなります。</figcaption>
+    </figure>
+    <div class="box warn"><div class="label">つまずきやすい点</div>
+      <p>① <b>剰余項の $\psi''$ の中身は、$\theta(2x+3y+5z)$ です。</b>$\psi''(0)$ ではありません。$\psi''(0)$ を使った $\tfrac12\psi''(0)u^2$ は、「2次のテイラー項」と呼ばれる別の項で、そのときの剰余項は3階微分を含む形になります。この問題は「2階微分の項を剰余項とする」ので、途中の点 $\theta u$ での $\psi''$ を使う形です。</p>
+      <p>② $(2x+3y+5z)^2$ に、まとまることに気づく。2階偏微分を1つずつ書いて、$4x^2+\cdots+30yz$ を作り、因数分解してもよいし、「係数の積」($2\cdot3=6$ など)のパターンを見て $u^2$ とまとめてもよい。</p>
+      <p>③ $\theta$ は、$(x,y,z)$ に依存する(未知の)数で、$0\lt\theta\lt1$ としか言えません。具体的な値は求めなくてよい。</p>
+    </div>
+    <div class="box ex">
+      <div class="label">具体例での確かめ($\psi(t)=e^t$)</div>
+      <p>$\psi=e^t$ なら、$\psi^{(k)}(0)=1$ なので、定理は $e^u=1+u+\tfrac12e^{\theta u}u^2$。$u=0.1$ のとき、左辺 $e^{0.1}=1.10517\ldots$、$1+u=1.1$、差 $0.005171$。これを $\tfrac12e^{0.1\theta}\cdot0.01$ と等しいとおくと $e^{0.1\theta}=1.0342$、$\theta\approx0.336$($0\lt\theta\lt1$ をみたす)。ちゃんと成り立っています。</p>
+    </div>
+
+    <!-- ===================== [4] ===================== -->
+    <h2 id="p4">[4] 連続関数の空間 $C(X)$ の距離 $d(f,g)=\sup|f-g|$</h2>
+    <div class="box ex">
+      <div class="label">問題 [4]</div>
+      <p>$\R^2$ の有界閉集合 $X$ 上の連続関数 $f,g$ に対し、
+      $$d(f,g):=\sup_{x\in X}\{|f(x)-g(x)|\}$$
+      とおく。これは $X$ 上の連続関数のなす集合 $C(X)$ 上の距離を定めることを示せ。</p>
+    </div>
+
+    <h3>この問題で問われていること</h3>
+    <ul>
+      <li>$d$ が「<b>距離</b>」であることを示す問題です。距離の定義(3つの条件)を、1つずつ確かめます。</li>
+      <li>その前に、<b>$d(f,g)$ が、きちんと(有限の)実数として定まる</b>こと(上限が $\infty$ にならない)を確認する必要があります。ここで、$X$ が<b>有界閉集合</b>であることと、$f,g$ が<b>連続</b>であることが使われます。</li>
+    </ul>
+
+    <h3>必要な概念</h3>
+    <div class="box basic">
+      <div class="label">概念 1:距離とは <a class="xref-link" href="../basics.html#metric" data-xref>→ 詳しい解説</a></div>
+      <p>集合 $S$ の2つの元 $a,b$ に、実数 $d(a,b)$ を対応させる規則が、$S$ 上の<b>距離</b>であるとは、次の3条件をみたすこと。<br>
+      (D1) <b>正値性:</b>$d(a,b)\ge0$ で、$d(a,b)=0\iff a=b$。<br>
+      (D2) <b>対称性:</b>$d(a,b)=d(b,a)$。<br>
+      (D3) <b>三角不等式:</b>$d(a,c)\le d(a,b)+d(b,c)$。</p>
+      <p><b>例:</b> 数直線 $\R$ で $d(a,b)=|a-b|$。平面 $\R^2$ で、2点間の通常の距離 $\sqrt{(x-x')^2+(y-y')^2}$。</p>
+      <p><b>直感:</b> 距離は「2つの元の離れ具合」です。(D1) 離れ具合は $0$ 以上で、$0$ なのは同じものだけ。(D2) A から B までと、B から A までは同じ。(D3) <b>寄り道は遠回り</b>:A から C へ直接行くより、B を経由するほうが、遠いか同じ。</p>
+    </div>
+    <div class="box basic">
+      <div class="label">概念 2:上限(sup)とその性質 <a class="xref-link" href="../basics.html#sup" data-xref>→ 詳しい解説</a></div>
+      <p>実数の集合 $A$ について、すべての $x\in A$ に対して $x\le M$ となる実数 $M$ を、$A$ の<b>上界</b>といいます。上界のうち<b>最小のもの</b>が、$A$ の<b>上限</b> $\sup A$ です。</p>
+      <p>・<b>実数の連続性:</b>空でなく、上に有界(上界がある)な実数の集合は、上限をもつ。<br>
+      ・上限の性質:(1) $\sup A$ は上界。すなわち、すべての $x\in A$ で $x\le\sup A$。(2) 上界 $M$ に対して $\sup A\le M$(最小の上界だから)。<br>
+      ・$\sup A$ が $A$ の元なら、それが最大値(最大元)。ただし、$\sup A\notin A$ のこともある($\sup[1,2)=2$、でも $2\notin[1,2)$)。</p>
+      <p>関数 $h$ の上限は、値の集合の上限: $\sup_{x\in X}h(x)=\sup\{h(x)\mid x\in X\}$。</p>
+      <p><b>直感:</b> 「天井(上界)のうち、いちばん低い天井」です。届かなくてもよい(限りなく近づければ)。</p>
+    </div>
+    <div class="box basic">
+      <div class="label">概念 3:有界閉集合上の連続関数は最大値をもつ <a class="xref-link" href="../basics.html#closed" data-xref>→ 詳しい解説</a><a class="xref-link" href="../weeks/week-02.html#s10" data-xref>→ 第2回 10節</a></div>
+      <p>$X$ が有界な閉集合で、$h$ が $X$ 上の連続関数なら、$h$ は最大値をもちます(第2回)。このとき、$\sup_Xh$ は(上限が最大値に一致するので)有限の実数で、実際にとられる値です。</p>
+      <p>また、連続関数の差・絶対値・合成は連続です。したがって、$f,g$ が連続なら、$|f-g|$ も連続です。</p>
+    </div>
+    <div class="box basic">
+      <div class="label">概念 4:関数どうしの「距離」 <a class="xref-link" href="../basics.html#metric" data-xref>→ 詳しい解説</a></div>
+      <p>$C(X)$ は、連続関数を「点」とする集合で、2つの関数 $f,g$ の離れ具合を $d(f,g)=\sup_x|f(x)-g(x)|$ で測ります。これは、<b>2つのグラフの縦方向の、いちばん大きなズレ</b>です。$d(f,g)\lt\varepsilon$ とは、「$g$ のグラフが、$f$ のグラフの上下 $\varepsilon$ の帯の中にすっぽり入る」ということです。</p>
+    </div>
+
+    <figure class="fig">
+      <svg viewBox="0 0 440 255" width="440" role="img" aria-label="2つのグラフの最大のずれ">
+        <line class="ax" x1="30" y1="225" x2="425" y2="225"/><line class="ax" x1="40" y1="238" x2="40" y2="15"/>
+        <line class="cv" x1="40" y1="220" x2="400" y2="40"/>
+        <polyline class="cv2" fill="none" points="40,220 130,208.75 220,175 310,118.75 400,40"/>
+        <line class="cv3" x1="220" y1="175" x2="220" y2="130" style="stroke-width:5"/>
+        <line class="dash" x1="220" y1="130" x2="220" y2="225"/>
+        <text class="t" x="214" y="244">1/2</text><text class="t" x="394" y="244">1</text>
+        <text class="ta" x="330" y="64">f(x) = x</text><text class="tt" x="330" y="140">g(x) = x²</text>
+        <text class="tj" x="230" y="158" style="fill:var(--ex)">最大のずれ</text>
+        <text class="tm" x="230" y="174" style="fill:var(--ex)">d(f,g) = 1/4</text>
+        <text class="tm" x="52" y="30">X = [0,1] 上の f と g</text>
+      </svg>
+      <figcaption>$X=[0,1]$ 上の $f=x$ と $g=x^2$。縦方向のズレ $|f-g|=x-x^2$ が最大になるのは $x=\tfrac12$ で、$d(f,g)=\tfrac14$ です。</figcaption>
+    </figure>
+
+    <h3>解答</h3>
+    <p><b>方針。</b> (0) $d(f,g)$ が有限の実数であること。(D1)〜(D3) を、定義(各点での不等式)から示す。</p>
+    <div class="box proof"><div class="label">解答</div>
+      <p>$X\ne\emptyset$ とする。$f,g,h\in C(X)$ とする。</p>
+      <p><b>(0) $d(f,g)$ が有限の実数として定まる。</b> $|f-g|$ は $X$ 上の連続関数で($f,g$ が連続だから)、$X$ は有界閉集合なので、最大値をもつ(概念 3)。したがって、値の集合 $\{|f(x)-g(x)|\mid x\in X\}$ は上に有界(最大値が上界)で、その上限は最大値に一致し、有限の実数である。また $|f(x)-g(x)|\ge0$ なので、$d(f,g)\ge0$。</p>
+      <p><b>(D1) 正値性。</b> $d(f,g)\ge0$ は (0) で示した。</p>
+      <p>・$f=g$ ならば、すべての $x$ で $|f(x)-g(x)|=0$ なので、$d(f,g)=0$。</p>
+      <p>・逆に $d(f,g)=0$ とする。上限の性質(1)から、すべての $x\in X$ で $0\le|f(x)-g(x)|\le d(f,g)=0$。したがって、すべての $x$ で $f(x)=g(x)$、すなわち $f=g$(関数として等しい)。</p>
+      <p>以上より、$d(f,g)=0\iff f=g$。</p>
+      <p><b>(D2) 対称性。</b> $|f(x)-g(x)|=|g(x)-f(x)|$ がすべての $x$ で成り立つので、集合 $\{|f(x)-g(x)|\}$ と $\{|g(x)-f(x)|\}$ は同じ。よって、上限も同じで、$d(f,g)=d(g,f)$。</p>
+      <p><b>(D3) 三角不等式。</b> 任意の $x\in X$ について、実数の三角不等式と、上限の性質(1)より
+      $$|f(x)-h(x)|\le|f(x)-g(x)|+|g(x)-h(x)|\le d(f,g)+d(g,h).$$
+      これは、すべての $x\in X$ について成り立つ。したがって、$d(f,g)+d(g,h)$ は、集合 $\{|f(x)-h(x)|\mid x\in X\}$ の<b>上界</b>である。上限は最小の上界なので(性質(2))、
+      $$d(f,h)\le d(f,g)+d(g,h).$$</p>
+      <p>(0)、(D1)〜(D3) より、$d$ は $C(X)$ 上の距離である。 $\square$</p>
+    </div>
+    <div class="box warn"><div class="label">つまずきやすい点</div>
+      <p>① <b>(0) を飛ばさない。</b>上限が $\infty$ になると、$d$ は実数の値をとる距離になりません。たとえば、$X=(0,1)$(有界だが閉でない)で、$f=1/x,\ g=0$ は連続ですが、$\sup|f-g|=\infty$。$X$ が有界閉集合であること、$f,g$ が連続であることが、<b>有限性</b>のために使われます。(最大値の存在を使わず、$f,g$ が有界であることから $|f-g|\le\|f\|+\|g\|$ とする言い方もあります。)</p>
+      <p>② (D1) で、「$d(f,g)=0\Rightarrow f=g$」には、「<b>上限が $0$ なら、全部の値が $0$</b>」という上限の性質(1)を使う。「最大値が $0$」とも言える。</p>
+      <p>③ (D3) で、「$d(f,g)+d(g,h)$ が上界である」→「上限はそれ以下」という、<b>上限が最小の上界</b>であることを使うところが肝心。「各 $x$ で成り立つから、上限でも成り立つ」と、理由なしで言わない。</p>
+      <p>④ $\sup\{|f(x)-g(x)|\}$ の「$x$」は $X$ の点を動く変数で、$f,g$ は固定。結果の $d(f,g)$ は、$x$ によらない1つの数。</p>
+    </div>
+    <div class="box ex">
+      <div class="label">具体例での確かめ</div>
+      <p>$X=[0,1]$、$f=x,\ g=x^2,\ h=0$(定数関数)。$d(f,g)=\tfrac14$(図)。$d(g,h)=\sup x^2=1$、$d(f,h)=\sup x=1$。三角不等式:$d(f,h)=1\le d(f,g)+d(g,h)=\tfrac14+1=\tfrac54$。成り立っています。また $d(f,h)=1\gt\tfrac14$ なので、$f\ne h$ と $d\ne0$ が対応しています。</p>
+    </div>
+
+    <!-- ===================== まとめ ===================== -->
+    <h2 id="sum">まとめ(この回で身につけること)</h2>
+    <ol>
+      <li><b>一様連続</b>は「$\delta$ が $\varepsilon$ だけで決まる(場所によらない)」。坂の急さが全体で抑えられているか(有界か)がカギ。有界でないと、一様連続でなくなることがある($x^2+y^2$ の $\R^2$、帯)。有界な領域では、平均値の定理で傾きを抑えて $\delta=\varepsilon/M$。一様連続でないことは、距離が $\to0$ で値の差が一定以上の点列で示す。</li>
+      <li><b>陰関数の定理</b>の使い方:$F=0$、$F_y\ne0$ を確かめる。$C^\infty$ は、導関数が $f$ のなめらかな式で書けることから(雪だるま式)。導関数は恒等式を微分して $f'=-F_x/F_y$、$f''$ は恒等式を2回微分。</li>
+      <li><b>条件付き最大・最小</b>:ラグランジュの条件で候補を出し、条件の曲線が有界閉集合であること(最大・最小の存在)を確認して、値を比べる。不等式による別解も有効。</li>
+      <li><b>テイラーの定理</b>(多変数):$f=\psi(u)$ のように、実質1変数なら、1変数のテイラーでよい。剰余項の2階微分は、途中の点($\theta u$)での値。</li>
+      <li><b>距離</b>:正値性・対称性・三角不等式。$\sup|f-g|$ は、有界閉集合上の連続関数なら有限で、距離になる。「上限 = 最小の上界」の性質(1)(2)を使い分ける。</li>
+    </ol>
+
+    <nav class="pager">
+      <a href="../index.html">微積の一覧へ</a>
+    </nav>
+  </main>
+
+  <footer>© Aセメまとめノート</footer>
+</body>
+</html>
