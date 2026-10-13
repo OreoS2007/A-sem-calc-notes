@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>演習 第1回(ベクトル空間・線形写像・行列式) | Aセメまとめノート</title>
+  <link rel="stylesheet" href="../../assets/style.css">
+  <script defer src="../../assets/nav.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],macros:{'\\R':'\\mathbb{R}'}});window.__navReady&&window.__navReady()"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="inner">
+      <a class="site-title" href="../../index.html">Aセメまとめノート</a>
+      <span class="links"><a href="../index.html">線形代数</a><a href="../basics.html">春学期のまとめ</a><a href="../../calc/index.html">微積</a><a href="../../structchem/index.html">構造化学</a><a href="../../mech/index.html">力学A</a><a href="../../thermo/index.html">熱力学</a><a href="../../em/index.html">電磁気学</a></span>
+    </div>
+  </header>
+
+  <main class="note">
+    <h1>線形代数演習 第1回:解説</h1>
+    <div class="meta">2026年10月6日(火)／担当:榎園／問題用紙の [1]〜[4](多項式の空間の基底と内積、像と核、次元公式、ブロック行列の行列式)</div>
+
+    <div class="box note-box">
+      <div class="label">このページについて</div>
+      <p>演習問題の<b>解説</b>です。各問は「問題 → 考え方 → 解答 → 確かめ・注意」の順に書きました。使う基礎は紫色の枠にまとめ、<a href="../basics.html" data-xref>春学期のまとめ</a>の対応トピックへのリンクを付けています。解答は、そのまま答案に書ける形にしてあります(自分の言葉で書き直すと、理解が深まります)。</p>
+    </div>
+
+    <nav class="toc">
+      <div class="toc-title">目次</div>
+      <ol>
+        <li><a href="#p1">[1] 多項式のなすベクトル空間:基底・次元・内積</a></li>
+        <li><a href="#p2">[2] 線形写像 $\R^4\to\R^3$ の像と核の基底</a></li>
+        <li><a href="#p3">[3] 次元公式 $\dim V_1+\dim V_2=\dim(V_1+V_2)+\dim(V_1\cap V_2)$</a></li>
+        <li><a href="#p4">[4] ブロック行列の行列式 $\det\begin{pmatrix}A&-B\\B&A\end{pmatrix}=|\det(A+\sqrt{-1}B)|^2$</a></li>
+        <li><a href="#sum">まとめ(この回で身につけること)</a></li>
+      </ol>
+    </nav>
+
+    <!-- ===================== 1 ===================== -->
+    <h2 id="p1">[1] 多項式のなすベクトル空間:基底・次元・内積</h2>
+    <div class="box ex">
+      <div class="label">問題 [1]</div>
+      <p>$V$ を $n$ 次以下の実係数多項式 $a_0+a_1x+\cdots+a_nx^n$ 全体のなす $\R$ ベクトル空間とする。(1) $V$ の基底を1組求めよ。また $V$ の次元を求めよ。(2) $f,g\in V$ に対して $(f,g):=\displaystyle\int_0^1f(x)g(x)\,dx$ と定めると、これは $V$ の内積であることを示せ。</p>
+    </div>
+    <div class="box basic">
+      <div class="label">使う基礎 <a class="xref-link" href="../basics.html#basis" data-xref>→ 基底・次元</a><a class="xref-link" href="../basics.html#poly" data-xref>→ 多項式の零点</a><a class="xref-link" href="../basics.html#intpos" data-xref>→ 積分の性質</a></div>
+      <p><b>基底</b>=「生成する」+「一次独立」。<b>多項式</b>は、無限個の点で $0$ なら係数がすべて $0$。<b>内積</b>=双線形・対称・正定値((P1) $(f,f)\ge0$、(P2) $f\ne0\Rightarrow(f,f)\ne0$)。連続で $\ge0$ の関数の積分が $0$ なら、その関数は恒等的に $0$。</p>
+    </div>
+
+    <h3>(1) 基底と次元</h3>
+    <p><b>考え方。</b> 多項式 $a_0+a_1x+\cdots+a_nx^n$ は、「単項式 $1,x,\dots,x^n$ の係数 $a_0,\dots,a_n$ を並べたもの」そのものです。だから、$1,x,\dots,x^n$ が基底になるはずです。基底の2条件(生成する・一次独立)を確かめます。</p>
+    <div class="box proof"><div class="label">解答</div>
+      <p><b>答え:</b> $1,x,x^2,\dots,x^n$ は $V$ の基底で、$\dim V=n+1$。</p>
+      <p><b>生成する:</b> $V$ の元は、定義より $a_0\cdot1+a_1x+\cdots+a_nx^n$ の形、すなわち $1,x,\dots,x^n$ の一次結合。</p>
+      <p><b>一次独立:</b> $c_0\cdot1+c_1x+\cdots+c_nx^n=0$($V$ の零元、つまり関数として恒等的に $0$)とする。左辺は高々 $n$ 次の多項式で、すべての実数 $x$ で $0$(無限個の零点)。零点が無限個ある多項式は零多項式だから、$c_0=c_1=\cdots=c_n=0$。よって一次独立。</p>
+      <p>したがって $1,x,\dots,x^n$ は基底。基底の個数が次元だから $\dim V=n+1$。 $\square$</p>
+    </div>
+    <p><b>注意。</b> 次元は「$n$ 次以下」なので $n+1$ です(定数項 $x^0$ の分を忘れない)。たとえば $n=2$ なら $\{1,x,x^2\}$ で3次元。他の基底もあります(たとえば $1,\ x-1,\ (x-1)^2,\dots,(x-1)^n$)。「1組求めよ」なので、標準的なものを答えれば十分です。</p>
+
+    <h3>(2) $(f,g)=\int_0^1f(x)g(x)\,dx$ は内積</h3>
+    <p><b>考え方。</b> 内積の定義(第1回ノートの定義1.2.1)は、(BL1)〜(BL4) 双線形、(S) 対称、(P1)(P2) 正定値でした。まず、$(f,g)$ が実数として定まること(多項式は連続なので、積 $fg$ も連続で積分できる)を確認して、1つずつ調べます。難所は (P2) です。</p>
+    <div class="box proof"><div class="label">解答</div>
+      <p>$f,g\in V$ なら $fg$ は多項式(連続関数)だから、$(f,g)\in\R$ が定まる。</p>
+      <p><b>双線形性:</b> 積分の線形性より、$f_1,f_2,g\in V$、$\alpha\in\R$ について
+      $$(f_1+f_2,g)=\int_0^1(f_1+f_2)g\,dx=\int_0^1f_1g\,dx+\int_0^1f_2g\,dx=(f_1,g)+(f_2,g)\quad(\text{BL1}),$$
+      $$(\alpha f,g)=\int_0^1\alpha fg\,dx=\alpha(f,g)\quad(\text{BL2}).$$
+      第2変数についても同様に (BL3),(BL4) が成り立つ(下の対称性から、第1変数の結果を移してもよい)。</p>
+      <p><b>対称性 (S):</b> $f(x)g(x)=g(x)f(x)$ だから $(f,g)=(g,f)$。</p>
+      <p><b>(P1) $(f,f)\ge0$:</b> $(f,f)=\int_0^1f(x)^2\,dx$。被積分関数 $f(x)^2\ge0$ だから、積分も $\ge0$。</p>
+      <p><b>(P2) $f\ne0$ なら $(f,f)\ne0$:</b> 対偶「$(f,f)=0$ ならば $f=0$」を示す。$(f,f)=\int_0^1f^2dx=0$ とする。$f^2$ は $[0,1]$ 上で連続かつ $\ge0$ だから、積分が $0$ なら $f^2$ は $[0,1]$ 上で恒等的に $0$(連続関数の積分の性質)。よって $[0,1]$ のすべての $x$ で $f(x)=0$。これは無限個の零点だから、$f$ は零多項式、すなわち $V$ の零元。 $\square$</p>
+    </div>
+    <div class="box warn"><div class="label">つまずきやすい点</div>
+      <p>(P2) で、「$\int f^2=0\Rightarrow f=0$」を、理由なしに使わないこと。この性質は、<b>$f$ が連続</b>だから成り立ちます(1点だけ値が違う不連続な関数は、積分が $0$ でも $f\ne0$ になりうる)。そして、「$[0,1]$ 上で関数として $0$」から「多項式として $0$($V$ の零元)」へ進む一歩に、「多項式は、無限個の零点をもてば零多項式」を使います。この2段階を書くと、答案が完成します。</p>
+    </div>
+    <p><b>確かめ。</b> $n=1$ で $(1,1)=1$、$(1,x)=\tfrac12$、$(x,x)=\tfrac13$。グラム行列 $\begin{pmatrix}1&1/2\\1/2&1/3\end{pmatrix}$ の行列式は $\tfrac13-\tfrac14=\tfrac1{12}\gt0$。正定値になっていて、第1回ノートの「グラム行列」の話ともつながります。</p>
+
+    <!-- ===================== 2 ===================== -->
+    <h2 id="p2">[2] 線形写像 $\R^4\to\R^3$ の像と核の基底</h2>
+    <div class="box ex">
+      <div class="label">問題 [2]</div>
+      <p>線形写像 $f:\R^4\to\R^3$ を $\begin{pmatrix}x\\y\\z\\w\end{pmatrix}\mapsto\begin{pmatrix}x+2y+3z+4w\\2x+4y+6z+8w\\y-z+2w\end{pmatrix}$ と定める。この像と核の基底をそれぞれ1組ずつ求めよ。</p>
+    </div>
+    <div class="box basic">
+      <div class="label">使う基礎 <a class="xref-link" href="../basics.html#kerim" data-xref>→ 核と像・次元定理</a><a class="xref-link" href="../basics.html#basis" data-xref>→ 基底</a></div>
+      <p>$f(v)=Av$($A$ は行列)のとき、<b>像</b>は $A$ の列ベクトルの生成する空間、<b>核</b>は $Av=0$ の解全体。$\dim\operatorname{Ker}f+\dim\operatorname{Im}f=4$(次元定理)。</p>
+    </div>
+    <p><b>考え方。</b> まず、写像を行列で書きます。
+    $$A=\begin{pmatrix}1&2&3&4\\2&4&6&8\\0&1&-1&2\end{pmatrix}\qquad(f(v)=Av).$$
+    第2行は第1行の2倍なので、本質的な式は2本しかなさそうです(階数 $2$ の予想)。像は列ベクトルから、核は連立方程式から求めます。</p>
+    <figure class="fig">
+      <svg viewBox="0 0 560 190" width="560" role="img" aria-label="核と像の模式図">
+        <rect x="20" y="30" width="200" height="130" rx="10" style="fill:var(--accent);fill-opacity:.08;stroke:var(--accent);stroke-width:2"/>
+        <ellipse cx="120" cy="105" rx="70" ry="30" style="fill:var(--thm);fill-opacity:.25;stroke:var(--thm);stroke-width:2"/>
+        <text class="tj" x="20" y="22">定義域 ℝ⁴(4次元)</text>
+        <text class="tt" x="120" y="110" style="text-anchor:middle">核(2次元)</text>
+        <line x1="225" y1="95" x2="335" y2="95" style="stroke:var(--text);stroke-width:2"/><polygon points="342,95 332,90 332,100" style="fill:var(--text)"/>
+        <text class="t" x="283" y="84" style="text-anchor:middle">f</text>
+        <rect x="345" y="30" width="195" height="130" rx="10" style="fill:var(--accent);fill-opacity:.08;stroke:var(--accent);stroke-width:2"/>
+        <ellipse cx="442" cy="105" rx="70" ry="30" style="fill:var(--ex);fill-opacity:.25;stroke:var(--ex);stroke-width:2"/>
+        <text class="tj" x="345" y="22">値域 ℝ³(3次元)</text>
+        <text class="tt" x="442" y="110" style="text-anchor:middle;fill:var(--ex)">像(2次元)</text>
+        <text class="tm" x="20" y="182">核の元は、ぜんぶ 0 に写る</text>
+        <text class="tm" x="300" y="182">像=実際に写り先に現れるベクトルの集まり</text>
+      </svg>
+      <figcaption>$\dim\operatorname{Ker}f+\dim\operatorname{Im}f=2+2=4=\dim\R^4$。つぶれた分(核)と、残って写る分(像)の和が、定義域の次元。</figcaption>
+    </figure>
+
+    <h3>像の基底</h3>
+    <div class="box proof"><div class="label">解答(像)</div>
+      <p>$\operatorname{Im}f$ は、$A$ の列ベクトル
+      $$a_1=\begin{pmatrix}1\\2\\0\end{pmatrix},\ a_2=\begin{pmatrix}2\\4\\1\end{pmatrix},\ a_3=\begin{pmatrix}3\\6\\-1\end{pmatrix},\ a_4=\begin{pmatrix}4\\8\\2\end{pmatrix}$$
+      の生成する空間(実際 $f(x,y,z,w)=xa_1+ya_2+za_3+wa_4$)。</p>
+      <p>$a_3,a_4$ を $a_1,a_2$ で表す。$a_3=\alpha a_1+\beta a_2$ とおくと、第3成分から $\beta=-1$、第1成分から $\alpha+2\beta=3$ で $\alpha=5$(第2成分 $2\alpha+4\beta=6$ も成立)。すなわち $a_3=5a_1-a_2$。同様に $a_4=2a_2$($\beta=2,\ \alpha=0$)。よって $\operatorname{Im}f=\langle a_1,a_2\rangle$。</p>
+      <p>$a_1,a_2$ は一次独立($a_2$ は $a_1$ の定数倍でない。第3成分が $a_1$ では $0$、$a_2$ では $1\ne0$)。したがって
+      $$\text{像の基底の一例:}\ \ \begin{pmatrix}1\\2\\0\end{pmatrix},\ \begin{pmatrix}2\\4\\1\end{pmatrix}\qquad(\dim\operatorname{Im}f=2).$$</p>
+    </div>
+    <p>別の基底も可能です(たとえば $(1,2,0)^{\mathsf T},(0,0,1)^{\mathsf T}$)。像 $=\{(s,2s,t)^{\mathsf T}\mid s,t\in\R\}$ と書けます。</p>
+
+    <h3>核の基底</h3>
+    <div class="box proof"><div class="label">解答(核)</div>
+      <p>$f(x,y,z,w)=0$ とすると
+      $$x+2y+3z+4w=0,\quad 2x+4y+6z+8w=0,\quad y-z+2w=0.$$
+      第2式は第1式の2倍だから、条件は第1式と第3式の2本。第3式から $y=z-2w$。これを第1式に代入して $x=-2y-3z-4w=-2(z-2w)-3z-4w=-5z$。$z,w$ が自由に動けるので
+      $$\begin{pmatrix}x\\y\\z\\w\end{pmatrix}=\begin{pmatrix}-5z\\z-2w\\z\\w\end{pmatrix}=z\begin{pmatrix}-5\\1\\1\\0\end{pmatrix}+w\begin{pmatrix}0\\-2\\0\\1\end{pmatrix}.$$
+      2つのベクトルは、$(z,w)$ 成分がそれぞれ $(1,0)$、$(0,1)$ なので一次独立。よって
+      $$\text{核の基底の一例:}\ \ \begin{pmatrix}-5\\1\\1\\0\end{pmatrix},\ \begin{pmatrix}0\\-2\\0\\1\end{pmatrix}\qquad(\dim\operatorname{Ker}f=2).$$</p>
+    </div>
+    <p><b>確かめ。</b> $f(-5,1,1,0)=(-5+2+3,\ -10+4+6,\ 1-1)=(0,0,0)$。$f(0,-2,0,1)=(-4+4,\ -8+8,\ -2+2)=(0,0,0)$。次元定理:$2+2=4$ ✓。</p>
+    <div class="box warn"><div class="label">つまずきやすい点</div>
+      <p>・像の基底は<b>$A$ の列</b>から選ぶ(行ではない)。行基本変形で整理したあとの列をそのまま基底にすると、元の $A$ の列とは別のベクトルになる。選んだ列の番号(ここでは1列目と2列目)に対応する、<b>元の行列の列</b>を基底にする。<br>
+      ・核は「$Av=0$ の解」で、$\R^4$ の中のベクトル(成分が4個)。像は $\R^3$ の中のベクトル(成分が3個)。ベクトルの長さが違う。</p>
+    </div>
+
+    <!-- ===================== 3 ===================== -->
+    <h2 id="p3">[3] 次元公式</h2>
+    <div class="box ex">
+      <div class="label">問題 [3]</div>
+      <p>$V_1,V_2$ がベクトル空間 $V$ の部分ベクトル空間であるとき、等式 $\dim V_1+\dim V_2=\dim(V_1+V_2)+\dim(V_1\cap V_2)$ を示せ。</p>
+    </div>
+    <div class="box basic">
+      <div class="label">使う基礎 <a class="xref-link" href="../basics.html#subsp" data-xref>→ 部分空間・和・共通部分・基底の延長</a><a class="xref-link" href="../basics.html#basis" data-xref>→ 基底・次元</a></div>
+      <p>$V_1+V_2=\{v_1+v_2\}$、$V_1\cap V_2$ は共通部分(どちらも部分空間)。<b>基底の延長定理</b>:一次独立なベクトルは、基底に延長できる。次元=基底の個数。(次元は有限とする。)</p>
+    </div>
+    <p><b>考え方。</b> 両辺の次元を、基底の個数として数える作戦です。まず共通部分 $V_1\cap V_2$ の基底を取り、それを、$V_1$ の基底、$V_2$ の基底に<b>延長</b>します。すると、$V_1+V_2$ の基底が、「共通の部分」+「$V_1$ だけの部分」+「$V_2$ だけの部分」でつくれて、個数が数えられます。</p>
+    <figure class="fig">
+      <svg viewBox="0 0 560 225" width="560" role="img" aria-label="次元公式の模式図">
+        <ellipse cx="215" cy="100" rx="130" ry="75" style="fill:var(--accent);fill-opacity:.15;stroke:var(--accent);stroke-width:2"/>
+        <ellipse cx="345" cy="100" rx="130" ry="75" style="fill:var(--ex);fill-opacity:.15;stroke:var(--ex);stroke-width:2"/>
+        <text class="tt" x="110" y="30" style="fill:var(--accent)">V₁</text><text class="tt" x="440" y="30" style="fill:var(--ex)">V₂</text>
+        <text class="tj" x="140" y="95" style="text-anchor:middle">x₁,…,x_p</text><text class="tm" x="140" y="113" style="text-anchor:middle">V₁だけ(p個)</text>
+        <text class="tj" x="280" y="95" style="text-anchor:middle">w₁,…,w_m</text><text class="tm" x="280" y="113" style="text-anchor:middle">V₁∩V₂(m個)</text>
+        <text class="tj" x="420" y="95" style="text-anchor:middle">y₁,…,y_q</text><text class="tm" x="420" y="113" style="text-anchor:middle">V₂だけ(q個)</text>
+        <text class="tj" x="20" y="205">dim V₁ = m+p、 dim V₂ = m+q、 dim(V₁+V₂) = m+p+q、 dim(V₁∩V₂) = m</text>
+      </svg>
+      <figcaption>基底のベクトルを、「共通の分」「$V_1$ だけの分」「$V_2$ だけの分」に仕分ける。共通の分 $m$ 個は、左辺で2回、右辺でも2回(和で1回+共通部分で1回)数えられる。</figcaption>
+    </figure>
+    <div class="box proof"><div class="label">解答</div>
+      <p>$V_1\cap V_2$ の基底を $w_1,\dots,w_m$ とする($m=\dim(V_1\cap V_2)$。$V_1\cap V_2=\{0\}$ なら $m=0$ で、空の組)。これは $V_1$ の中の一次独立な組なので、延長して $V_1$ の基底
+      $$w_1,\dots,w_m,\ x_1,\dots,x_p\qquad(\dim V_1=m+p)$$
+      を作れる。同様に、$V_2$ の基底
+      $$w_1,\dots,w_m,\ y_1,\dots,y_q\qquad(\dim V_2=m+q)$$
+      を作れる。</p>
+      <p><b>主張:</b> $w_1,\dots,w_m,x_1,\dots,x_p,y_1,\dots,y_q$($m+p+q$ 個)は $V_1+V_2$ の基底。</p>
+      <p><b>生成する:</b> $V_1+V_2$ の元は $v_1+v_2$($v_1\in V_1,\,v_2\in V_2$)。$v_1$ は $w,x$ の一次結合、$v_2$ は $w,y$ の一次結合だから、和は $w,x,y$ の一次結合。</p>
+      <p><b>一次独立:</b> $\displaystyle\sum a_iw_i+\sum b_jx_j+\sum c_ky_k=0$ とする。移項して
+      $$\sum c_ky_k=-\Bigl(\sum a_iw_i+\sum b_jx_j\Bigr).$$
+      左辺は $V_2$ の元、右辺は $V_1$ の元。したがってこれは $V_1\cap V_2$ の元で、$w$ の一次結合として $\sum c_ky_k=\sum d_iw_i$ と書ける。すると $\sum d_iw_i-\sum c_ky_k=0$。$w_1,\dots,w_m,y_1,\dots,y_q$ は $V_2$ の基底(一次独立)だから、$c_k=0$(すべての $k$)(と $d_i=0$)。元の式は $\sum a_iw_i+\sum b_jx_j=0$ になる。$w,x$ は $V_1$ の基底だから $a_i=0$、$b_j=0$。以上で、すべての係数が $0$。</p>
+      <p>よって $\dim(V_1+V_2)=m+p+q$。したがって
+      $$\dim V_1+\dim V_2=(m+p)+(m+q)=(m+p+q)+m=\dim(V_1+V_2)+\dim(V_1\cap V_2).\ \square$$</p>
+    </div>
+    <details><summary>別解:次元定理を使う</summary>
+      <div class="box proof"><div class="label">別解</div>
+        <p>線形写像 $T:V_1\times V_2\to V$、$(v_1,v_2)\mapsto v_1+v_2$ を考える($V_1\times V_2$ は、組 $(v_1,v_2)$ のなすベクトル空間で、$\dim=\dim V_1+\dim V_2$)。像は $V_1+V_2$。核は $\{(v_1,v_2)\mid v_1+v_2=0\}=\{(v,-v)\mid v\in V_1\cap V_2\}$ で、$V_1\cap V_2$ と同型(次元が同じ)。次元定理 $\dim(V_1\times V_2)=\dim\operatorname{Ker}T+\dim\operatorname{Im}T$ より、$\dim V_1+\dim V_2=\dim(V_1\cap V_2)+\dim(V_1+V_2)$。 $\square$</p></div>
+    </details>
+    <div class="box ex"><div class="label">具体例で確かめ</div>
+      <p>$V=\R^3$、$V_1=\{z=0\}$($xy$ 平面、$\dim2$)、$V_2=\{x=0\}$($yz$ 平面、$\dim2$)。$V_1+V_2=\R^3$($\dim3$)、$V_1\cap V_2=y$ 軸($\dim1$)。$2+2=3+1$ ✓。</p>
+    </div>
+
+    <!-- ===================== 4 ===================== -->
+    <h2 id="p4">[4] ブロック行列の行列式</h2>
+    <div class="box ex">
+      <div class="label">問題 [4]</div>
+      <p>$A,B$ を $n$ 次実正方行列とする。このとき $\det\begin{pmatrix}A&-B\\B&A\end{pmatrix}=\bigl|\det(A+\sqrt{-1}\,B)\bigr|^2$ を示せ。</p>
+    </div>
+    <div class="box basic">
+      <div class="label">使う基礎 <a class="xref-link" href="../basics.html#det" data-xref>→ 行列式の性質とブロック行列</a><a class="xref-link" href="../basics.html#complex" data-xref>→ 複素数</a></div>
+      <p>$\det(MN)=\det M\det N$。ブロック三角(対角)行列の $\det$ は、対角ブロックの $\det$ の積。行の定数倍を他の行に足しても $\det$ は不変。$\det\overline M=\overline{\det M}$、$z\bar z=|z|^2$。</p>
+    </div>
+    <p><b>考え方。</b> $A+iB$($i=\sqrt{-1}$)という複素行列が出てくるので、$M=\begin{pmatrix}A&-B\\B&A\end{pmatrix}$ を、複素数の世界で<b>$A+iB$ と $A-iB$ のブロック対角行列に変形</b>できないかと考えます。スカラーの場合($n=1$、$A=a,B=b$)は、$\det\begin{pmatrix}a&-b\\b&a\end{pmatrix}=a^2+b^2=(a+ib)(a-ib)=|a+ib|^2$ で、確かに成り立ちます。この計算を行列に拡張するイメージです。</p>
+    <p>鍵は、$M$ に、うまいブロックの列をかけると、$A\pm iB$ が出ることです:
+    $$M\begin{pmatrix}I\\-iI\end{pmatrix}=\begin{pmatrix}A+iB\\B-iA\end{pmatrix}=\begin{pmatrix}I\\-iI\end{pmatrix}(A+iB),\qquad M\begin{pmatrix}I\\iI\end{pmatrix}=\begin{pmatrix}A-iB\\B+iA\end{pmatrix}=\begin{pmatrix}I\\iI\end{pmatrix}(A-iB).$$
+    (下の成分は、$B-iA=-i(A+iB)$、$B+iA=i(A-iB)$ となることを使った。)</p>
+    <div class="box proof"><div class="label">解答</div>
+      <p>$i=\sqrt{-1}$、$I$ を $n$ 次単位行列とし、$2n$ 次の複素行列
+      $$Q=\begin{pmatrix}I&I\\-iI&iI\end{pmatrix}$$
+      を考える。上の2つの計算を並べると
+      $$MQ=\begin{pmatrix}A&-B\\B&A\end{pmatrix}\begin{pmatrix}I&I\\-iI&iI\end{pmatrix}=\begin{pmatrix}A+iB&A-iB\\B-iA&B+iA\end{pmatrix}=Q\begin{pmatrix}A+iB&0\\0&A-iB\end{pmatrix}.$$
+      (最後の等号は、右辺を計算して確かめる:$Q$ の第1行ブロックは $(A+iB,\ A-iB)$、第2行ブロックは $(-i(A+iB),\ i(A-iB))=(B-iA,\ B+iA)$。)</p>
+      <p>両辺の行列式をとると、$\det M\cdot\det Q=\det Q\cdot\det(A+iB)\cdot\det(A-iB)$(ブロック対角行列の $\det$ は、対角ブロックの $\det$ の積)。</p>
+      <p><b>$\det Q\ne0$ の確認:</b> $Q$ の第1行ブロックの $i$ 倍を第2行ブロックに足すと($\det$ は変わらない)、$\begin{pmatrix}I&I\\0&2iI\end{pmatrix}$。ブロック上三角だから $\det Q=\det I\cdot\det(2iI)=(2i)^n\ne0$。</p>
+      <p>両辺を $\det Q$ で割って
+      $$\det M=\det(A+iB)\cdot\det(A-iB).$$
+      ここで $A,B$ は実行列だから、$A-iB=\overline{A+iB}$(各成分の複素共役)。よって $\det(A-iB)=\overline{\det(A+iB)}$。したがって
+      $$\det M=\det(A+iB)\,\overline{\det(A+iB)}=\bigl|\det(A+iB)\bigr|^2.\ \square$$</p>
+    </div>
+    <p><b>確かめ。</b> $n=1$ で $a=2,b=3$:$\det\begin{pmatrix}2&-3\\3&2\end{pmatrix}=4+9=13=|2+3i|^2$ ✓。(整数のランダムな $3\times3$ 行列でも、両辺が一致することを数値で確かめました。)</p>
+    <div class="box warn"><div class="label">つまずきやすい点</div>
+      <p>・$\det M\cdot\det Q=\det Q\cdot(\cdots)$ から $\det Q$ で割るので、<b>$\det Q\ne0$ の確認が必要</b>。<br>
+      ・$A,B$ が<b>実行列</b>であることを、最後の「共役」の段階で使っています。複素行列なら、$\det(A-iB)$ は $\overline{\det(A+iB)}$ とは限りません。<br>
+      ・$A$ と $B$ が交換可能($AB=BA$)なら、$\det\begin{pmatrix}A&-B\\B&A\end{pmatrix}=\det(A^2+B^2)$ という別の公式もありますが、一般の $A,B$ には使えません。この問題は、交換可能性を仮定していないので、上の方法が必要です。</p>
+    </div>
+    <details><summary>別の見方(意味)</summary>
+      <div class="box proof"><div class="label">意味</div>
+        <p>$\R^{2n}$ のベクトル $(x,y)$ を、複素ベクトル $x+iy\in\mathbb{C}^n$ と同一視すると、$M\binom{x}{y}=\binom{Ax-By}{Bx+Ay}$ は、複素ベクトル $(A+iB)(x+iy)$ に対応します。つまり $M$ は、複素線形写像 $z\mapsto(A+iB)z$ を、実数の言葉で表した行列です。「実の行列式 = 複素の行列式の絶対値の2乗」という関係が、問題の等式です(複素 $n$ 次元は、実 $2n$ 次元)。</p></div>
+    </details>
+
+    <!-- ===================== まとめ ===================== -->
+    <h2 id="sum">まとめ(この回で身につけること)</h2>
+    <ul>
+      <li><b>基底を示す=「生成する」+「一次独立」。</b>多項式空間は $1,x,\dots,x^n$、次元 $n+1$。一次独立は「零点が無限個の多項式は零多項式」で示す。</li>
+      <li><b>内積を示す=双線形・対称・正定値。</b>正定値の (P2) には、「連続で $\ge0$ の関数の積分が $0$ なら、恒等的に $0$」を使う。</li>
+      <li><b>像と核:</b>像は列ベクトルの生成する空間(元の列から基底を選ぶ)、核は $Av=0$ の解(自由変数でパラメータ表示)。$\dim\operatorname{Ker}+\dim\operatorname{Im}=$ 定義域の次元で確かめられる。</li>
+      <li><b>次元公式:</b>共通部分の基底を、両方の部分空間の基底に延長して、基底の個数を数える。</li>
+      <li><b>行列式:</b>うまい行列 $Q$ をかけて、ブロック対角にする($MQ=Q\,\mathrm{diag}(A+iB,A-iB)$)。割るときは $\det Q\ne0$ を確認。実行列では $A-iB=\overline{A+iB}$。</li>
+    </ul>
+
+    <nav class="pager">
+      <span class="disabled">← 前の回</span>
+      <a href="../index.html">一覧へ</a>
+      <span class="disabled">次の回 →</span>
+    </nav>
+  </main>
+
+  <footer>© Aセメまとめノート</footer>
+</body>
+</html>

@@ -52,6 +52,13 @@
             <li><a href="#quad">2次式と判別式</a></li>
             <li><a href="#intpos">連続関数の積分の性質</a></li>
           </ol></li>
+        <li><b>演習のための道具</b>
+          <ol type="a" start="9">
+            <li><a href="#subsp">部分空間・和・共通部分</a></li>
+            <li><a href="#kerim">核と像・次元定理・階数</a></li>
+            <li><a href="#poly">多項式と、その零点の個数</a></li>
+            <li><a href="#det">行列式の性質とブロック行列</a></li>
+          </ol></li>
       </ol>
     </nav>
 
@@ -476,6 +483,77 @@
     <h3>よく使う積分</h3>
     <p>$\displaystyle\int_0^1x^k\,dx=\frac{1}{k+1}$($k=0,1,2,\dots$)。すなわち $\int_0^11\,dx=1,\ \int_0^1x\,dx=\tfrac12,\ \int_0^1x^2dx=\tfrac13,\ \int_0^1x^3dx=\tfrac14$。</p>
     <p class="used-in">この回で使う場所:<a href="weeks/week-01.html#w-intpos" data-xref>1.8 連続関数の積分</a><a href="weeks/week-01.html#s3" data-xref>3. (抽象)内積</a><a href="weeks/week-01.html#s9" data-xref>9. 具体例で練習</a></p>
+
+    <!-- ===================== i: 部分空間 ===================== -->
+    <h2 id="subsp">i. 部分空間・和・共通部分</h2>
+    <div class="box def">
+      <div class="label">定義(部分空間)</div>
+      <p>$V$ を $K$-ベクトル空間とする。$W\subset V$ が<b>部分空間</b>であるとは、(S1) $0\in W$、(S2) $w_1,w_2\in W\Rightarrow w_1+w_2\in W$、(S3) $w\in W,\ a\in K\Rightarrow aw\in W$ をみたすこと。(「$V$ の中にある、それ自身がベクトル空間になっている部分」。)</p>
+    </div>
+    <p>例:$v_1,\dots,v_k$ の一次結合全体 $\langle v_1,\dots,v_k\rangle_K$(<b>生成する部分空間</b>、span)は部分空間。$\{0\}$ と $V$ 自身も部分空間。</p>
+    <div class="box def">
+      <div class="label">定義(和と共通部分)</div>
+      <p>部分空間 $V_1,V_2\subset V$ に対し、<b>共通部分</b> $V_1\cap V_2$(両方に入るベクトル全体)と、<b>和</b> $V_1+V_2=\{v_1+v_2\mid v_1\in V_1,\ v_2\in V_2\}$ は、どちらも $V$ の部分空間。</p>
+    </div>
+    <p><b>意味:</b> $V_1+V_2$ は、「$V_1$ と $V_2$ の両方を含む、最も小さい部分空間」です(和集合 $V_1\cup V_2$ は一般に部分空間でない:$x$ 軸と $y$ 軸の和集合は、$(1,0)+(0,1)=(1,1)$ を含まない)。たとえば $\R^3$ の中で、2枚の平面 $V_1,V_2$(原点を通る)の和は $\R^3$ 全体、共通部分は直線(1枚の平面と、もう1枚の平面の交線)。$\dim V_1+\dim V_2=2+2=3+1=\dim(V_1+V_2)+\dim(V_1\cap V_2)$ となっていることに注意(演習で一般に示す)。</p>
+    <details><summary>理由($V_1\cap V_2$ が部分空間)</summary>
+      <div class="box proof"><div class="label">確かめ</div>
+      <p>(S1) $0\in V_1$ かつ $0\in V_2$ だから $0\in V_1\cap V_2$。(S2) $w,w'\in V_1\cap V_2$ なら、$V_1$ の部分空間性から $w+w'\in V_1$、$V_2$ からも $w+w'\in V_2$。(S3) も同様。和 $V_1+V_2$ については、$0=0+0$、$(v_1+v_2)+(v_1'+v_2')=(v_1+v_1')+(v_2+v_2')$、$a(v_1+v_2)=av_1+av_2$。</p></div>
+    </details>
+    <p><b>基底の延長定理</b>(春学期):$\dim V=n$ のとき、$V$ の一次独立なベクトル $v_1,\dots,v_k$($k\le n$)は、$n-k$ 個のベクトルを付け足して、$V$ の基底にできる。部分空間 $W$ の基底は、$V$ の基底に延長できる。</p>
+    <p class="used-in">この回で使う場所:<a href="exercises/ex-01.html#p3" data-xref>演習 第1回 [3] 次元公式</a></p>
+
+    <!-- ===================== j: 核と像 ===================== -->
+    <h2 id="kerim">j. 核と像・次元定理・階数</h2>
+    <div class="box def">
+      <div class="label">定義(核・像・階数)</div>
+      <p>線形写像 $T:V\to W$ に対し、<b>核</b>(kernel)$\operatorname{Ker}T=\{v\in V\mid T(v)=0\}$、<b>像</b>(image)$\operatorname{Im}T=\{T(v)\mid v\in V\}$。$\operatorname{Ker}T$ は $V$ の、$\operatorname{Im}T$ は $W$ の部分空間。$\operatorname{rank}T=\dim\operatorname{Im}T$(<b>階数</b>)。</p>
+    </div>
+    <p><b>意味:</b> 核は「つぶれて 0 になるベクトル」の集まり、像は「写った先に実際に現れるベクトル」の集まりです。$T$ が単射 $\iff\operatorname{Ker}T=\{0\}$。</p>
+    <div class="box thm">
+      <div class="label">次元定理</div>
+      <p>$\dim V=n$ のとき、$\ \dim\operatorname{Ker}T+\dim\operatorname{Im}T=n$。</p>
+    </div>
+    <p>意味:「$n$ 次元のうち、つぶれた分(核)と、残って写る分(像)の合計が $n$」。</p>
+    <h3>行列で求める</h3>
+    <p>$T=T_A:K^n\to K^m$、$x\mapsto Ax$($A$ は $m\times n$ 行列)のとき:</p>
+    <ul>
+      <li><b>像</b>は、$A$ の列ベクトル $a_1,\dots,a_n$ の生成する空間 $\langle a_1,\dots,a_n\rangle$(実際、$Ax=x_1a_1+\cdots+x_na_n$)。だから、列ベクトルのうち一次独立な最大個数の組が、像の基底。$\operatorname{rank}$ はその個数。</li>
+      <li><b>核</b>は、同次連立方程式 $Ax=0$ の解全体。行基本変形(掃き出し)で解くと、「自由変数」の個数が $\dim\operatorname{Ker}$。解を自由変数でパラメータ表示し、パラメータの係数ベクトルを並べたものが基底。</li>
+    </ul>
+    <div class="box ex">
+      <div class="label">例</div>
+      <p>$A=\begin{pmatrix}1&1\1&1\end{pmatrix}$。列は両方 $(1,1)^{\mathsf T}$:像 $=\langle(1,1)^{\mathsf T}\rangle$、rank $=1$。$Ax=0\iff x_1+x_2=0$:核 $=\langle(1,-1)^{\mathsf T}\rangle$、$\dim=1$。$1+1=2$ ✓。</p>
+    </div>
+    <p class="used-in">この回で使う場所:<a href="exercises/ex-01.html#p2" data-xref>演習 第1回 [2] 像と核の基底</a></p>
+
+    <!-- ===================== k: 多項式 ===================== -->
+    <h2 id="poly">k. 多項式と、その零点の個数</h2>
+    <p>実係数の多項式 $f(x)=a_0+a_1x+\cdots+a_nx^n$ について、次の事実を使います。</p>
+    <div class="box thm">
+      <div class="label">事実</div>
+      <p>$f$ が、$a_n\ne0$ をみたす $n$ 次の多項式($n\ge1$)なら、$f(x)=0$ をみたす実数 $x$ は<b>高々 $n$ 個</b>。したがって、<b>無限個の $x$ で $f(x)=0$ ならば、$f$ は零多項式</b>(すべての係数が 0)。</p>
+    </div>
+    <p>理由:$f(c)=0$ なら $f(x)=(x-c)g(x)$($g$ は $n-1$ 次)と因数分解でき、これを繰り返すと、零点は $n$ 個を超えない。</p>
+    <p><b>意味:</b>「関数として恒等的に 0」と「係数がすべて 0」は、多項式では同じことです。これで、$1,x,x^2,\dots,x^n$ の一次独立性($\sum a_kx^k=0$(関数として)$\Rightarrow$ 全部の $a_k=0$)が言えます。</p>
+    <p class="used-in">この回で使う場所:<a href="exercises/ex-01.html#p1" data-xref>演習 第1回 [1] 多項式の空間</a></p>
+
+    <!-- ===================== l: 行列式 ===================== -->
+    <h2 id="det">l. 行列式の性質とブロック行列</h2>
+    <p>$n$ 次正方行列 $M$ の<b>行列式</b> $\det M$ について、次を使います($K=\R$ でも $\mathbb{C}$ でも成り立つ)。</p>
+    <ul>
+      <li><b>積:</b>$\det(MN)=\det M\cdot\det N$。</li>
+      <li><b>行(列)基本変形:</b>ある行に、別の行の定数倍を足しても、$\det$ は変わらない。</li>
+      <li><b>ブロック三角行列:</b>$\det\begin{pmatrix}P&Q\0&S\end{pmatrix}=\det P\cdot\det S$($P,S$ は正方行列)。特に、ブロック対角行列 $\begin{pmatrix}P&0\0&S\end{pmatrix}$ も $\det P\det S$。</li>
+      <li><b>共役:</b>複素行列 $M$ の各成分を複素共役にした行列を $\overline M$ とすると、$\det\overline M=\overline{\det M}$(行列式は成分の和と積だけで書けるので、共役をとる操作と交換できる)。</li>
+      <li>複素数 $z$ について $z\bar z=|z|^2$。</li>
+    </ul>
+    <div class="box ex">
+      <div class="label">例</div>
+      <p>$\det\begin{pmatrix}1&2\0&3\end{pmatrix}=3$(ブロックなら $1\cdot3$)。$\overline{\begin{pmatrix}1+i&2\0&i\end{pmatrix}}$ の $\det$ は $\overline{(1+i)i}=\overline{i-1}=-1-i$。</p>
+    </div>
+    <p>これらの詳しい扱いは、授業が行列式に進んだときに足します。ここでは、演習 [4] を解くために必要な性質だけを書きました。</p>
+    <p class="used-in">この回で使う場所:<a href="exercises/ex-01.html#p4" data-xref>演習 第1回 [4] ブロック行列の行列式</a></p>
 
   </main>
 

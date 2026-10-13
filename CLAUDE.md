@@ -87,3 +87,4 @@ weeks/week-01.html, basics.html   旧URLからの転送(消さない)
 - 実行したサーバーは、確認が終わったら止める。
 - 図・本文を一括で生成するツール(`lib.js`、`build.js` など)は `reference/mech/build/` に保存してある(`reference/mech/README.md` に使い方)。新しい教科(熱力学 `thermo` など)を作るときは、これを手本にコピーして使う。ツールが見えない作業コピーのときは、`mech/` の公開済みHTMLを手本にして、図を直接SVGで書く。
 - 新しい教科の手順:フォルダ(`<教科>/index.html`、`basics.html`、`weeks/`)と `index.html` の教科カードを足し、各教科のヘッダーのリンクも揃える。PDFは `reference/<教科>/lecture/` に置き、ページ画像(`png/pNN.png`)にして読む(`pdf2png.ps1` 相当の PowerShell で Windows の PDF API を使う)。
+- **演習(線形代数演習など)の解説ページ**:`<教科>/exercises/ex-NN.html`(例:`linalg/exercises/ex-01.html`)。問題の写真を送ってもらい、各問を「問題 → 考え方 → 解答 → 確かめ・注意」の順に解説する。使う基礎は紫の `box basic` に書いて `basics.html` のトピックへリンクし、基礎にないトピックは `basics.html` に足して、`used-in` から演習の問題(`#p1` など)へ戻す。教科の `index.html` の「演習の解説」に、カードを足す。数値で答え(核・像の基底、等式)を確かめてから書く。問題用紙にある日付・担当者名は、メタ行に書いてよい。
