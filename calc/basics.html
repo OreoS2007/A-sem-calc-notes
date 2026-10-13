@@ -68,6 +68,8 @@
             <li><a href="#extremum">極値と臨界点</a></li>
             <li><a href="#level">等高線と等位面</a></li>
             <li><a href="#lindep">平行と線型独立</a></li>
+            <li><a href="#closed">閉集合・有界集合と最大・最小の存在</a></li>
+            <li><a href="#det">連立1次方程式・1次従属・行列式</a></li>
           </ol></li>
       </ol>
     </nav>
@@ -877,6 +879,126 @@
     </div>
     <p class="used-in">この回で使う場所:<a href="weeks/week-02.html#w-lindep" data-xref>第2回 1.6 平行と線型独立</a><a href="weeks/week-02.html#s8" data-xref>第2回 8. 3変数・条件2つ</a></p>
 
+
+    <!-- ===================== p: 閉集合と最大・最小 ===================== -->
+    <h2 id="closed">p. 閉集合・有界集合と最大・最小の存在</h2>
+
+    <h3>補集合と閉集合</h3>
+    <p>集合 $V\subset\R^2$ に対して、$V$ に入っていない点全体を、$V$ の<b>補集合</b>といい、$\R^2\setminus V$ と書きます。</p>
+    <div class="box def">
+      <div class="label">定義(閉集合)</div>
+      <p>$\R^2\supset V$ が<b>閉集合</b>であるとは、補集合 $\R^2\setminus V$ が $\R^2$ の<b>開集合</b>となること。(開集合は、「どの点にも、そのまわりの小さな円板が含まれる」集合です。<a href="#eps">開区間・近傍・開集合</a>を参照。)</p>
+    </div>
+    <p>1変数($\R$ の部分集合)でも同じです。</p>
+    <div class="box intuit">
+      <div class="label">直感で理解する</div>
+      <p><b>開集合は縁(境界)を含まない集合、閉集合は縁を含む集合</b>です。縁を含む集合では、縁の上に立つと、外側には余白がありませんが、その代わり、「縁まで行き着ける」(縁も集合の一部)。開集合は、縁の手前までしかなく、縁には届きません。</p>
+    </div>
+
+    <h3>例と非例</h3>
+    <ul>
+      <li>$[a,b]$ は閉集合。補集合 $(-\infty,a)\cup(b,\infty)$ が開集合だから。</li>
+      <li>単位円周 $S=\{(x,y)\mid x^2+y^2=1\}$ は閉集合。補集合は、円の内側 $\{x^2+y^2\lt1\}$ と外側 $\{x^2+y^2\gt1\}$ の和で、どちらも開集合だから。</li>
+      <li>閉円板 $\{x^2+y^2\le1\}$ は閉集合(補集合 $\{x^2+y^2\gt1\}$ が開集合)。一方、開円板 $\{x^2+y^2\lt1\}$ は開集合で、閉集合ではありません(補集合に、円周の点が含まれ、その点のまわりには、円の内側の点があるため、補集合は開集合になれない)。</li>
+      <li>$(a,b)$ は開集合で、閉集合ではありません。$[0,1)$ のように、片側だけ縁を含むものは、開でも閉でもありません。</li>
+    </ul>
+
+    <h3>有界</h3>
+    <p>集合 $K$ が<b>有界</b>であるとは、ある大きな $R$ があって、$K$ のすべての点が、原点からの距離 $R$ 以下に収まること(ある大きな円板に入ってしまうこと)。単位円周、閉円板、閉区間は有界です。直線や放物線は、どこまでも伸びるので、有界ではありません。</p>
+
+    <h3>最大・最小の存在</h3>
+    <div class="box thm">
+      <div class="label">定理(最大・最小の存在)</div>
+      <p>$K$ を $\R^2$(または $\R$)の<b>有界な閉集合</b>とする。このとき、$K$ 上の連続関数は、最大値と最小値をもつ。</p>
+    </div>
+    <p>1変数では、「閉区間 $[a,b]$ で連続な関数は、最大値と最小値をもつ」という、おなじみの定理です(ロルの定理の証明などで使いました)。これを、2変数以上の有界閉集合に広げたものです。証明は難しい(実数の連続性を使う)ので、結果を使います。</p>
+
+    <figure class="fig">
+      <svg viewBox="0 0 520 175" width="520" role="img" aria-label="最大・最小が存在しない例">
+        <g>
+          <line class="ax" x1="20" y1="130" x2="150" y2="130"/><line class="ax" x1="20" y1="130" x2="20" y2="20"/>
+          <line class="cv" x1="40" y1="110" x2="130" y2="40"/>
+          <circle cx="40" cy="110" r="4.5" fill="var(--surface)" stroke="var(--accent)" stroke-width="2"/><circle cx="130" cy="40" r="4.5" fill="var(--surface)" stroke="var(--accent)" stroke-width="2"/>
+          <text class="tj" x="20" y="150">(0,1) 上の f=x</text><text class="tm" x="20" y="167">縁を含まない:最大・最小なし</text>
+        </g>
+        <g transform="translate(175,0)">
+          <line class="ax" x1="20" y1="130" x2="150" y2="130"/><line class="ax" x1="20" y1="130" x2="20" y2="20"/>
+          <line class="cv" x1="40" y1="110" x2="130" y2="40"/>
+          <circle class="dotb" cx="40" cy="110" r="4.5"/><circle class="dotb" cx="130" cy="40" r="4.5"/>
+          <text class="tj" x="20" y="150">[0,1] 上の f=x</text><text class="tm" x="20" y="167">最大 1、最小 0(あり)</text>
+        </g>
+        <g transform="translate(350,0)">
+          <line class="ax" x1="20" y1="130" x2="150" y2="130"/><line class="ax" x1="20" y1="130" x2="20" y2="20"/>
+          <line class="cv" x1="25" y1="125" x2="150" y2="30"/>
+          <text class="tj" x="20" y="150">R 上の f=x</text><text class="tm" x="20" y="167">有界でない:最大・最小なし</text>
+        </g>
+      </svg>
+      <figcaption>同じ関数 $f=x$ でも、縁を含まない集合(左)や、有界でない集合(右)では、最大・最小が存在しません。有界な閉集合(中央)の上では、存在します。</figcaption>
+    </figure>
+
+    <div class="box intuit">
+      <div class="label">直感で理解する:必ず頂上に着ける</div>
+      <p>有界閉集合は、「どこまでも行ける(有界でない)ことも、端の手前で止まる(縁を含まない)こともない」場所です。そこを歩く人は、必ず最高地点と最低地点に<b>たどり着けます</b>。縁を含まない場所では、「限りなく近づくが届かない」ことがあり、有界でない場所では、どこまでも登り続けられます。</p>
+    </div>
+
+    <h3>使い方:候補を全部比べる</h3>
+    <p>条件付き極値の問題($g=0$ の下での $f$ の最大・最小)で、条件の集合 $\{g=0\}$ が有界な閉集合(円周、球面など)なら、次の手順が使えます。</p>
+    <ol class="step-list">
+      <li>最大値・最小値が存在することを、この定理で保証する。</li>
+      <li>最大値・最小値をとる点は、極値の点でもあるので、ラグランジュの条件をみたす点(候補)のどれかである。($\nabla g=\vec0$ となる点があれば、それも候補に加える。)</li>
+      <li>候補での $f$ の値を全部比べる。いちばん大きいものが最大値、いちばん小さいものが最小値。</li>
+    </ol>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-02.html#w-closed" data-xref>第2回 1.8 閉集合と最大・最小</a><a href="weeks/week-02.html#s9" data-xref>第2回 9. 例題</a><a href="weeks/week-02.html#s10" data-xref>第2回 10. 最大・最小の存在</a></p>
+
+    <!-- ===================== q: 連立1次方程式・1次従属・行列式 ===================== -->
+    <h2 id="det">q. 連立1次方程式・1次従属・行列式</h2>
+    <p>線形代数で学ぶ内容の、ここで使う部分だけを説明します。</p>
+
+    <h3>1次従属・1次独立(3つのベクトル)</h3>
+    <div class="box def">
+      <div class="label">定義(1次従属・1次独立)</div>
+      <p>ベクトル $\vec a_1,\vec a_2,\vec a_3$ が<b>1次独立</b>(線型独立)であるとは、
+      $$\alpha_1\vec a_1+\alpha_2\vec a_2+\alpha_3\vec a_3=\vec0\ \Longrightarrow\ \alpha_1=\alpha_2=\alpha_3=0.$$
+      <b>1次従属</b>(線型従属)であるとは、1次独立でないこと、つまり、$(\alpha_1,\alpha_2,\alpha_3)\ne(0,0,0)$ で $\alpha_1\vec a_1+\alpha_2\vec a_2+\alpha_3\vec a_3=\vec0$ となるものがあること。</p>
+    </div>
+    <p>2つのベクトルのときは、「平行 ⟺ 1次従属」でした(<a href="#lindep">平行と線型独立</a>)。3つのとき、1次従属なら、どれか1つが、残りの2つの1次結合で書けます(係数が $0$ でない1つについて解く)。</p>
+
+    <h3>連立1次方程式 $M\vec v=\vec0$</h3>
+    <p>正方行列 $M$(たとえば $3\times3$)に対して、
+    $$M\vec v=\vec0$$
+    という連立1次方程式(右辺がすべて $0$ のもの)を考えます。$\vec v=\vec0$ は、いつでも解です(<b>自明な解</b>)。問題は、<b>零でない解 $\vec v\ne\vec0$</b>(自明でない解)があるかどうかです。</p>
+    <div class="box thm">
+      <div class="label">定理(自明でない解をもつ条件)</div>
+      <p>$n\times n$ の行列 $M$ について、次は同値です:<br>
+      (a) $M\vec v=\vec0$ は、零でない解をもつ。<br>
+      (b) $M$ の<b>列</b>のベクトルが1次従属。<br>
+      (c) $M$ の<b>行</b>のベクトルが1次従属。<br>
+      (d) $M$ の行列式が $0$($\det M=0$)。</p>
+    </div>
+    <details><summary>(a) ⟺ (b) の理由</summary>
+      <div class="box proof"><div class="label">説明</div>
+      <p>$M$ の列を $\vec m_1,\dots,\vec m_n$ とし、$\vec v=(v_1,\dots,v_n)^{\mathsf T}$ とすると、$M\vec v=v_1\vec m_1+\dots+v_n\vec m_n$。したがって、$M\vec v=\vec0$ は、$\vec m_1,\dots,\vec m_n$ の1次結合が $\vec0$ になる式で、$\vec v\ne\vec0$ の解があることは、「係数が全部は $0$ でない1次結合が $\vec0$ になる」こと、つまり列のベクトルが1次従属であることです。</p></div>
+    </details>
+    <p>(b)と(c)が同値なのは、行列の「階数」が、行で数えても、列で数えても同じだからです。(d)は、計算で確かめるための条件です。行列式の計算法は、線形代数の授業で学びますが、$2\times2$ なら、
+    $$\det\begin{pmatrix}a&b\\c&d\end{pmatrix}=ad-bc$$
+    です。</p>
+
+    <h3>例</h3>
+    <ul>
+      <li>$M=\begin{pmatrix}-2\lambda&1\\1&-2\lambda\end{pmatrix}$ に対して、$M\vec v=\vec0$ が零でない解をもつ $\lambda$ を求める。$\det M=4\lambda^2-1=0$ より、$\lambda=\pm\dfrac12$。$\lambda=\tfrac12$ のとき、$M=\begin{pmatrix}-1&1\\1&-1\end{pmatrix}$ で、$-x+y=0$ から $\vec v=(x,x)$(たとえば $(1,1)$)が解。</li>
+      <li>$M=\begin{pmatrix}1&2\\2&4\end{pmatrix}$:行 $(1,2)$ と $(2,4)$ は平行(1次従属)。$\det M=1\cdot4-2\cdot2=0$。$M\vec v=\vec0$ の解は $x+2y=0$ をみたす $\vec v$(たとえば $(2,-1)$)。</li>
+    </ul>
+
+    <div class="box intuit">
+      <div class="label">直感で理解する</div>
+      <p><b>無駄な方程式:</b> 方程式が「他の方程式から出てくる無駄なもの」を含んでいると、実質の方程式の数が未知数の数より少なくなり、自由度(動ける余地)が残ります。それが、零でない解です。方程式が全部「独立」(無駄なし)なら、解は $\vec v=\vec0$ しかありません。</p>
+      <p><b>つぶれた平行六面体:</b> 3次元で、3本のベクトルが1次従属とは、3本が同じ平面の上にある(平らにつぶれている)ことです。3本を3辺とする平行六面体は、厚みがなく、<b>体積が $0$</b> になります。その体積が行列式の絶対値です。$2\times2$ なら、2本のベクトルが張る平行四辺形の面積が行列式の絶対値で、平行(1次従属)なら、面積が $0$ です。</p>
+      <p><b>垂直と1次従属:</b> 零でないベクトル $\vec v$ に、3本のベクトルがすべて垂直なら、その3本は、$\vec v$ に垂直な平面(2次元)の上にあります。2次元の平面には、独立なベクトルは2本しかとれないので、3本は1次従属です。($M\vec v=\vec0$ は、「$M$ の各行が $\vec v$ に垂直」という意味でもあります。)</p>
+    </div>
+
+    <h3>「係数が $0$ なら矛盾」という議論</h3>
+    <p>1次従属から1次結合を取り出すとき、よく使われる議論です。$\alpha\vec a+\beta\vec b+\gamma\vec c=\vec0$($(\alpha,\beta,\gamma)\ne(0,0,0)$)があるとします。もし $\alpha=0$ なら、$\beta\vec b+\gamma\vec c=\vec0$ で、$(\beta,\gamma)\ne(0,0)$。つまり、$\vec b,\vec c$ が1次従属になります。もし「$\vec b,\vec c$ は1次独立」と分かっていれば、これは矛盾なので、$\alpha\ne0$ です。$\alpha\ne0$ なら、$\alpha$ で割って、$\vec a=-\dfrac\beta\alpha\vec b-\dfrac\gamma\alpha\vec c$ と、$\vec a$ を残りの1次結合で表せます。</p>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-02.html#w-det" data-xref>第2回 1.7 連立1次方程式・1次従属・行列式</a><a href="weeks/week-02.html#s8" data-xref>第2回 8. 証明(Step 3–5)</a><a href="weeks/week-02.html#s9" data-xref>第2回 9. 例題(行列式)</a></p>
 
     <p style="margin-top:48px;color:var(--muted);font-size:.9rem">このページは、新しい回で春学期の内容が必要になるたびに、トピックを追加していきます。</p>
     <!--END-->
