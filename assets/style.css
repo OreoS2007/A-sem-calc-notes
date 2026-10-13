@@ -1,4 +1,4 @@
-﻿:root {
+:root {
   --bg: #fafaf7;
   --surface: #ffffff;
   --text: #22252a;
@@ -194,3 +194,6 @@ main h2[id], main h3[id], main section[id], main div[id] { scroll-margin-top: 68
 .imp { display: inline-block; padding: 3px 10px; margin: 3px 4px 3px 0; border: 1px solid var(--border); border-radius: 8px; background: var(--surface); font-size: .92rem; }
 .imp.no { color: var(--muted); }
 
+/* ---- 直感で理解する(厳密な証明より先に、感覚的な理解の足がかりを示す枠) ---- */
+.box.intuit { border-left-color: var(--ex); background: color-mix(in srgb, var(--surface) 92%, var(--ex) 8%); }
+.box.intuit .label { color: var(--ex); }
