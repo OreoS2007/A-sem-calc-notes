@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>第二週 解説 | 基礎化学実験 | Aセメまとめノート</title>
+  <link rel="stylesheet" href="../../assets/style.css">
+  <script defer src="../../assets/nav.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});window.__navReady&&window.__navReady()"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="inner">
+      <a class="site-title" href="../../index.html">Aセメまとめノート</a>
+      <span class="links"><a href="../index.html">基礎化学実験</a><a href="index.html">第二週</a><a href="prep.html">予習ノート</a><a href="../w1/index.html">第一週</a></span>
+    </div>
+  </header>
+
+  <main class="note">
+    <h1>第二週(第六回)解説:反応速度定数と活性化エネルギー</h1>
+    <div class="meta">基礎化学実験 実験6「反応速度定数と活性化エネルギー」(テキスト p.71〜77)／高校化学は既習の前提で、必要なところで復習を入れています</div>
+
+    <nav class="toc">
+      <div class="toc-title">目次</div>
+      <ol start="0">
+        <li><a href="#s0">この実験の全体像</a></li>
+        <li><a href="#s1">準備:高校化学の復習</a><div class="sub">反応速度と速度式／活性化エネルギーと触媒／対数／気体(分圧・水蒸気圧)</div></li>
+        <li><a href="#s2">原理:一次反応と速度定数</a></li>
+        <li><a href="#s3">原理:アレニウスの式と活性化エネルギー</a></li>
+        <li><a href="#s4">原理:触媒のはたらき</a></li>
+        <li><a href="#s5">実験操作とその理由</a></li>
+        <li><a href="#s6">データ処理(グラフの描き方)</a></li>
+        <li><a href="#s7">予習問題・課題の解答</a></li>
+        <li><a href="#s8">まとめ(予習で押さえること)</a></li>
+        <li><a href="#s9">このページについてのメモ</a></li>
+      </ol>
+    </nav>
+
+    <h2 id="s0">0. この実験の全体像 <span class="page-tag">テキスト p.71</span></h2>
+    <div class="box thm">
+      <div class="label">ひとことで言うと</div>
+      <p>過酸化水素 $\mathrm{H_2O_2}$ が、触媒の力でどのくらいの速さで分解するかを測り、<b>「速さの定数 $k$」</b>と、<b>「反応を始めるのに越える山の高さ $E$(活性化エネルギー)」</b>を求める実験です。</p>
+      <ul>
+        <li>測るもの:発生する酸素の<b>体積 $v$</b> を、時間を追って読む。</li>
+        <li>① 一定温度で $v$ を測り、<b>$k$</b> を決める(一次反応であることも確認)。</li>
+        <li>② 温度を変えて $k$ を測り、<b>アレニウスプロット</b>から $E$ を決める。</li>
+        <li>③ 触媒(鉄ミョウバン $\mathrm{Fe^{3+}}$ と KI)で $E$ が違うことを確かめる。</li>
+      </ul>
+    </div>
+    <p>反応の進み方(濃度の時間変化)を定量的に扱う学問が<b>反応速度論</b>です(実験6のテーマ)。これに対して、フェムト秒($10^{-15}$ s)で分子の動きを追うのが<b>反応動力学</b>で、こちらはこの実験では扱いません。</p>
+
+    <h2 id="s1">1. 準備:高校化学の復習</h2>
+
+    <h3 id="w-rate">1.1 反応速度と速度式</h3>
+    <div class="box basic">
+      <div class="label">基礎:反応速度、速度定数、反応次数</div>
+      <p><b>反応速度</b>は、単位時間あたりに反応物の濃度がどれだけ減るか(または生成物がどれだけ増えるか)です。反応物 A の減る速さは $-\dfrac{\mathrm d[\mathrm A]}{\mathrm dt}$ と書きます($\mathrm d[\mathrm A]/\mathrm dt$ は濃度の時間変化率で、減るときは負なので、符号をつけて速さを正にします)。</p>
+      <p>高校化学では、反応速度が反応物の濃度のべき乗に比例すると習いました:$v=k[\mathrm A]^n$。この比例定数 $k$ が<b>速度定数</b>、$n$ が<b>反応次数</b>です。</p>
+      <ul>
+        <li>$n=1$:<b>一次反応</b>。速さが濃度に比例($v=k[\mathrm A]$)。例:過酸化水素の分解($\mathrm{H_2O_2}\to\mathrm{H_2O}+\tfrac12\mathrm{O_2}$)。</li>
+        <li>$n=2$:二次反応。$k$ の単位は(濃度)$^{-1}$(時間)$^{-1}$。</li>
+      </ul>
+      <p>一次反応の $k$ の単位は(時間)$^{-1}$(s⁻¹、min⁻¹ など)です。この実験では min⁻¹ を使います。</p>
+      <p><b>直感:</b> 一次反応は「今ある分子の何割かが、毎分こわれていく」反応です。多いときは多く、少なくなればゆっくりと減るので、減り方はだんだんゆるやかな曲線になります。</p>
+    </div>
+
+    <h3 id="w-ea">1.2 活性化エネルギーと触媒</h3>
+    <div class="box basic">
+      <div class="label">基礎:活性化エネルギー、触媒</div>
+      <p>反応が起きるには、反応物が一度エネルギーの高い<b>活性化状態</b>(遷移状態)を通る必要があります。反応物と活性化状態のエネルギー差が<b>活性化エネルギー</b> $E$ です(図1)。$E$ が大きいほど、越えられる分子が少なく、反応は遅くなります。</p>
+      <p><b>触媒</b>は、反応式には現れず、反応の前後で自分は変化しないが、<b>$E$ の小さい別の道</b>を提供して反応を速める物質です。反応熱 $\Delta H$(反応物と生成物のエネルギー差)は変えません。</p>
+      <p>温度を上げると、エネルギーの高い分子の割合が増えて、反応は速くなります(高校の「反応速度と温度」)。</p>
+      <p><b>直感:</b> 山を越える道。活性化エネルギーは「峠の高さ」、触媒は「低い峠を通るトンネルを掘ること」、温度は「歩く人の元気さ」です。</p>
+    </div>
+
+    <h3 id="w-log">1.3 対数(常用対数と自然対数)</h3>
+    <div class="box basic">
+      <div class="label">基礎:対数</div>
+      <p>$a^x=y$ のとき $x=\log_a y$ です。常用対数は $\log_{10}$、自然対数は $\ln=\log_e$($e\approx2.718$)。</p>
+      <ul>
+        <li>$\ln(AB)=\ln A+\ln B$、$\ln\dfrac AB=\ln A-\ln B$、$\ln A^n=n\ln A$。</li>
+        <li>変換:$\ln x=2.303\,\log_{10}x$($2.303=\ln10$)。この実験で出てくる「2.303」の正体。</li>
+        <li>$\ln e^{-kt}=-kt$。指数関数的に減るものは、対数をとると<b>直線</b>になる。</li>
+      </ul>
+      <p><b>片対数方眼紙</b>:縦軸が対数目盛(1、10、100 の間隔が等しい)の方眼紙。$\log_{10}$ を計算しなくても、数値をそのままプロットすれば、$\log_{10}$ をとったのと同じ位置に点が打てます。</p>
+    </div>
+
+    <h3 id="w-gas">1.4 気体の体積:水蒸気圧と温度</h3>
+    <div class="box basic">
+      <div class="label">基礎:気体の状態方程式、水上置換、水蒸気圧</div>
+      <p>気体は温度と圧力で体積が変わります。標準状態($0\,{}^\circ\mathrm C$、1 atm = 760 mmHg)で 1 mol は 22.4 L。体積 $V$、圧力 $P$、温度 $T$(K)の気体の物質量は一定なら $\dfrac{PV}{T}$ が一定です(ボイル・シャルルの法則)。</p>
+      <p>水の上で捕集した気体(水上置換)は、水蒸気を含みます。全体の圧力 $P$(外圧)は、酸素の分圧と水蒸気圧 $P_{\mathrm{H_2O}}$ の和なので、酸素の分圧は $P-P_{\mathrm{H_2O}}$。水蒸気圧は温度で決まり、高温ほど大きい(下表は 27〜45 ℃:テキストより)。</p>
+      <table>
+        <tr><th>温度 [℃]</th><th>27</th><th>33</th><th>39</th><th>45</th></tr>
+        <tr><td>水蒸気圧 [mmHg]</td><td>26.741</td><td>37.733</td><td>52.452</td><td>71.89</td></tr>
+      </table>
+    </div>
+
+    <h2 id="s2">2. 原理:一次反応と速度定数 <span class="page-tag">テキスト p.71〜72、p.76</span></h2>
+
+    <h3 id="w-first">2.1 速度式の積分(6・1)〜(6・5)</h3>
+    <p>$\mathrm{H_2O_2}$ の濃度を $C$ とすると、反応速度は $C$ に比例します:
+    $$-\frac{\mathrm dC}{\mathrm dt}=kC\qquad(6\cdot1)$$
+    (左辺の負の符号は、濃度が減るのに対し、速度を正とするため)。</p>
+    <p><b>積分の手順</b>:$C$ の項を左に、$t$ の項を右に集めて(変数分離)
+    $$-\frac{\mathrm dC}{C}=k\,\mathrm dt\qquad(6\cdot2)$$
+    両辺を積分($\int\dfrac{\mathrm dC}{C}=\ln C$):
+    $$-\ln C=kt+a\qquad(6\cdot3)$$
+    $a$ は積分定数。$t=0$ のとき $C=C_0$(初濃度)なので $a=-\ln C_0$ (6・4)。代入して
+    $$\boxed{\ln\frac{C_0}{C}=kt}\qquad(6\cdot5)$$
+    $\ln C_0-\ln C=kt$ と書いても同じです。</p>
+    <div class="box intuit">
+      <div class="label">直感で理解する:半減期は一定</div>
+      <p>(6・5) で $C=C_0/2$ になる時間(半減期)は $t_{1/2}=\ln2/k$ で、<b>$C_0$ によりません</b>。つまり「濃度が半分になるまでの時間は、いつから数えても同じ」。1 分で 2 割ずつ減る反応は、いつでも 1 分で 2 割ずつ減ります。これが「濃度に比例して減る」ことの意味で、対数をとると直線になる理由でもあります(1 分ごとに同じ定数 $k$ ずつ $\ln C$ が減る)。</p>
+    </div>
+
+    <h3 id="w-volume">2.2 濃度の代わりに、酸素の体積で表す(6・6)〜(6・11)</h3>
+    <p>この実験では濃度を直接測らず、<b>発生した酸素の体積 $v$</b> を測ります。反応式 $\mathrm{H_2O_2}\to\mathrm{H_2O}+\tfrac12\mathrm{O_2}$ より、分解した $\mathrm{H_2O_2}$ の量 $x$ と発生した $\mathrm{O_2}$ の量は比例するからです。</p>
+    <ul>
+      <li>時間 $t$ までに分解した量 $x$ ∝ そのときの酸素の体積 $v$。</li>
+      <li>初濃度 $C_0$(全部分解したときの酸素の体積 $V_0$ に対応)∝ $V_0$。</li>
+      <li>まだ残っている量 $C=C_0-x$(6・6)∝ $V_0-v$。</li>
+    </ul>
+    <p>$C_0\to V_0$、$C\to V_0-v$ と置き換えると、(6・5) は
+    $$\ln\frac{V_0}{V_0-v}=kt\;\;\Longrightarrow\;\;\log_{10}\frac{V_0-v}{V_0}=-\frac{k}{2.303}\,t\qquad(6\cdot11)$$
+    ($\ln=2.303\log_{10}$ を使い、逆数をとって符号を変えた)。左辺を $\log_{10}(V_0-v)-\log_{10}V_0$ と分ければ、
+    <b>$\log_{10}(V_0-v)$ を縦軸、$t$ を横軸にとった直線の傾き $=-k/2.303$</b> とわかります(右辺の $\log_{10}V_0$ は定数なので、切片に入るだけ)。</p>
+    <figure class="fig">
+      <svg viewBox="0 0 640 256" width="640" role="img" aria-label="一次反応の体積と片対数プロット(模式図)"><line class="ax" x1="50" y1="220" x2="290" y2="220"/><line class="ax" x1="50" y1="220" x2="50" y2="26"/><path class="cv" d="M50.0 220.0L53.8 210.7L57.7 201.9L61.5 193.5L65.3 185.6L69.2 178.0L73.0 170.8L76.8 163.9L80.7 157.4L84.5 151.1L88.3 145.2L92.2 139.6L96.0 134.3L99.8 129.2L103.7 124.4L107.5 119.7L111.3 115.4L115.2 111.2L119.0 107.2L122.8 103.5L126.7 99.9L130.5 96.5L134.3 93.2L138.2 90.2L142.0 87.2L145.8 84.4L149.7 81.8L153.5 79.3L157.3 76.9L161.2 74.6L165.0 72.4L168.8 70.3L172.7 68.4L176.5 66.5L180.3 64.7L184.2 63.0L188.0 61.4L191.8 59.9L195.7 58.4L199.5 57.0L203.3 55.7L207.2 54.5L211.0 53.3L214.8 52.1L218.7 51.1L222.5 50.0L226.3 49.0L230.2 48.1L234.0 47.2L237.8 46.4L241.7 45.6L245.5 44.8L249.3 44.1L253.2 43.4L257.0 42.8L260.8 42.1L264.7 41.6L268.5 41.0L272.3 40.5L276.2 39.9L280.0 39.5"/><line class="dash" x1="50" y1="30" x2="290" y2="30"/><text class="tt" x="56" y="25">V₀(全酸素量)</text><text class="tm" x="8" y="20">酸素の体積 v [mL]</text><text class="tm" x="220" y="244">時間 t [min]</text><text class="tj" x="45" y="236">0</text><text class="tj" x="121.66666666666666" y="236">5</text><text class="tj" x="198.33333333333331" y="236">10</text><text class="tj" x="275" y="236">15</text><line class="ax" x1="370" y1="220" x2="610" y2="220"/><line class="ax" x1="370" y1="220" x2="370" y2="26"/><line class="thin" x1="366" y1="220" x2="370" y2="220"/><text class="tj" x="352" y="224">1</text><line class="thin" x1="366" y1="125" x2="370" y2="125"/><text class="tj" x="346" y="129">10</text><line class="thin" x1="366" y1="30" x2="370" y2="30"/><text class="tj" x="340" y="34">100</text><text class="tj" x="365" y="236">0</text><text class="tj" x="441.66666666666663" y="236">5</text><text class="tj" x="518.3333333333333" y="236">10</text><text class="tj" x="595" y="236">15</text><line class="cv2" x1="370" y1="51.07563121355386" x2="600" y2="174.84955855598062"/><circle class="dot" cx="370" cy="51.07563121355386" r="3.6"/><circle class="dot" cx="416" cy="75.83041668203921" r="3.6"/><circle class="dot" cx="462" cy="100.58520215052458" r="3.6"/><circle class="dot" cx="508" cy="125.33998761900992" r="3.6"/><circle class="dot" cx="554" cy="150.0947730874953" r="3.6"/><circle class="dot" cx="600" cy="174.84955855598062" r="3.6"/><text class="tm" x="330" y="20">V₀−v [mL](対数目盛)</text><text class="tm" x="540" y="244">時間 t [min]</text><text class="tt" x="430" y="47.07563121355386">直線:傾き = −k/2.303</text><text class="tm" x="105" y="16">(a) 体積 v は曲線</text><text class="tm" x="420" y="38">(b) 片対数にすると直線</text></svg>
+      <figcaption>図2:$k=0.2\ \mathrm{min^{-1}}$、$V_0=60\ \mathrm{mL}$ とした模式図。(a) 酸素の体積 $v$ は、だんだんゆるやかに増えて $V_0$ に近づく曲線。(b) $V_0-v$(まだ出ていない酸素)を対数目盛でとると直線になり、傾きから $k$ がわかる。</figcaption>
+    </figure>
+    <div class="box warn">
+      <div class="label">注意:$V_0$ は 45 ℃ のデータで決める</div>
+      <p>$V_0$ は「過酸化水素が全部分解したときに発生する酸素の体積」で、温度によらず同じ量の過酸化水素を使うので、<b>45 ℃ で反応が終わったあとに実測した体積</b>を全温度の計算で使います(45 ℃ は反応が速く、短時間で完全に分解するため)。$V_0$ が不正確だと、直線にならないので注意。</p>
+    </div>
+    <div class="box ex">
+      <div class="label">$V_0$ の目安(予習用の見積もり)</div>
+      <p>約 1.5 % の過酸化水素水(密度 ≈ 1 g/mL)は、$15\ \mathrm{g/L}\div34.0\ \mathrm{g/mol}\approx0.44\ \mathrm{mol/L}$。10 mL では $4.4\ \mathrm{mmol}$、発生する $\mathrm{O_2}$ はその半分の $2.2\ \mathrm{mmol}$。標準状態では $2.2\times22.4\approx49\ \mathrm{mL}$。45 ℃・1 atm の湿った気体では
+      $$V_0\approx49\times\frac{318}{273}\times\frac{760}{760-71.9}\approx64\ \mathrm{mL}$$
+      程度(テキストの脚注の式 $V_0=V\times\frac{T}{273}\times\frac{760}{P-P_{\mathrm{H_2O}}}$ そのまま)。実際の濃度は「約」1.5 % なので、数値はおおよその目安です。実測の $V_0$ と比べて、大きくずれていないかの確認に使えます。</p>
+    </div>
+
+    <h2 id="s3">3. 原理:アレニウスの式と活性化エネルギー <span class="page-tag">テキスト p.72〜73</span></h2>
+    <p>アレニウス(1889 年)は、速度定数と温度の関係を
+    $$\frac{\mathrm d\ln k}{\mathrm dT}=\frac{E}{RT^2}\qquad(6\cdot9)$$
+    と表しました($R$:気体定数、$E$:反応に固有の定数で、<b>活性化エネルギー</b>)。$E$ が温度によらないとして積分すると($\int\dfrac{\mathrm dT}{T^2}=-\dfrac1T$)、$B$ を積分定数として
+    $$\ln k=B-\frac{E}{RT}\qquad(6\cdot10)$$
+    つまり、$\ln k$ は $1/T$ の<b>一次関数(直線)</b>で、傾きは $-E/R$ です。常用対数なら
+    $$\log_{10}k=\text{(定数)}-\frac{E}{2.303R}\cdot\frac1T$$
+    <b>傾き $=-\dfrac{E}{2.303R}$</b> から
+    $$E=-2.303R\times(\text{傾き}),\qquad R=8.314\ \mathrm{J\,K^{-1}mol^{-1}}$$
+    $E$ は J mol⁻¹ で求めます(kJ mol⁻¹ にするなら 1000 で割る)。このグラフが<b>アレニウスプロット</b>です。</p>
+    <div class="box intuit">
+      <div class="label">直感で理解する:なぜ $e^{-E/RT}$ なのか</div>
+      <p>(6・10) は $k=A\,e^{-E/RT}$($A=e^B$)と同じです。分子の熱運動のエネルギーは温度 $T$ のもとでばらつき、<b>エネルギーが $E$ 以上の分子の割合が $e^{-E/RT}$</b>(ボルツマン因子)。つまり $k$ は「峠を越えられる分子の割合」に比例します。$T$ が高いほど割合が増える(温度で $k$ が上がる)、$E$ が大きいほど割合が小さい(越えにくい)。割合が $1/T$ の指数なので、$\ln k$ と $1/T$ が直線になります。</p>
+    </div>
+    <div class="box warn">
+      <div class="label">つまずきやすい点</div>
+      <ul>
+        <li>温度は<b>必ず K(ケルビン)</b>:$T=t\,[{}^\circ\mathrm C]+273.15$。横軸は $1/T$ なので、温度が<b>高いほど左</b>(右下がり)。</li>
+        <li>傾きは<b>負</b>($E>0$ なので)。「傾き $=-E/(2.303R)$」に符号を合わせる。</li>
+        <li>グラフの横軸は $10^{-3}\ \mathrm{K^{-1}}$ 単位:たとえば 300 K → $3.33$。</li>
+        <li>テキストのグラフの縦軸は $k/\mathrm{min^{-1}}$($k$ を min⁻¹ のまま)、横軸の範囲は 3.1〜3.5(1/T)。</li>
+      </ul>
+    </div>
+
+    <h2 id="s4">4. 原理:触媒のはたらき <span class="page-tag">テキスト p.73</span></h2>
+    <figure class="fig">
+      <svg viewBox="0 0 450 262" width="450" role="img" aria-label="活性化エネルギーと触媒のエネルギー図"><line class="ax" x1="40" y1="14" x2="40" y2="236"/><line class="ax" x1="40" y1="236" x2="430" y2="236"/><text class="tm" x="6" y="16">エネルギー</text><text class="tm" x="340" y="254">反応の進行 →</text><path class="cv" d="M60 170 C130 170 150 40 215 40 C280 40 300 205 390 205"/><path class="cv2" d="M60 170 C120 170 160 100 215 100 C270 100 300 205 390 205" stroke-dasharray="7 5"/><line class="dash" x1="70" y1="40" x2="215" y2="40"/><line class="dash" x1="100" y1="100" x2="215" y2="100"/><line class="dash" x1="60" y1="170" x2="215" y2="170"/><line class="arr" x1="70" y1="170" x2="70" y2="50"/><polygon class="arrh" points="70,40 64,52 76,52"/><text class="tj" x="76" y="110">E</text><line class="arr" x1="100" y1="170" x2="100" y2="110"/><polygon class="arrh" points="100,100 94,112 106,112"/><text class="tt" x="106" y="140">E′(触媒あり)</text><line class="dash" x1="330" y1="170" x2="390" y2="170"/><line class="thin" x1="350" y1="172" x2="350" y2="203"/><text class="tj" x="356" y="192">ΔH</text><text class="tj" x="222" y="34">活性化状態(触媒なし)</text><text class="tt" x="222" y="94">触媒あり:山が低い</text><text class="tj" x="46" y="190">H₂O₂</text><text class="tj" x="330" y="226">H₂O + ½O₂</text></svg>
+      <figcaption>図1:$\mathrm{H_2O_2}$ の分解反応のエネルギー図(テキスト図 6・1 をもとに、触媒ありを点線で足した)。触媒は山(活性化状態)を低くして活性化エネルギーを $E\to E'$ に下げるが、反応熱 $\Delta H$ は変えない。</figcaption>
+    </figure>
+    <p>この実験では、$\mathrm{Fe^{3+}}$(鉄ミョウバンの水溶液)と KI(ヨウ化カリウム)の<b>2 種類の触媒</b>を使い、$E$ が違うことを確かめます。過酸化水素の分解は、触媒がないと常温ではなかなか進行しませんが、触媒があると速く効率よく進みます。身のまわりの化学製品の多くや、自動車の排ガス浄化装置・燃料電池にも触媒が使われています。</p>
+
+    <h2 id="s5">5. 実験操作とその理由 <span class="page-tag">テキスト p.74〜76</span></h2>
+    <figure class="fig">
+      <svg viewBox="0 0 470 236" width="470" role="img" aria-label="過酸化水素分解槽の模式図"><path d="M70 60 L70 180 Q70 196 86 196 L134 196 Q150 196 150 180 L150 60" fill="none" stroke="var(--muted)" stroke-width="2"/><rect x="72" y="140" width="76" height="54" fill="var(--accent)" opacity=".22"/><rect x="96" y="184" width="28" height="8" rx="3" fill="var(--thm)"/><path d="M150 100 L205 62 L222 88 L162 126" fill="none" stroke="var(--muted)" stroke-width="2"/><path d="M168 112 L212 82 L218 90 L170 124 Z" fill="var(--thm)" opacity=".28"/><rect x="66" y="48" width="92" height="12" fill="var(--muted)" opacity=".5"/><text class="tj" x="80" y="40">ゴム栓(ガラス管へ)</text><text class="tj" x="154" y="150">H₂O₂ 溶液 10 mL</text><text class="tj" x="100" y="216">磁気回転子</text><text class="tt" x="228" y="78">側管:触媒溶液 2 mL</text><text class="tm" x="228" y="96">傾けて混ぜる前は、液が</text><text class="tm" x="228" y="112">ふれ合わない角度で保つ</text><path class="arr" d="M215 130 C240 150 215 180 190 176" /><polygon class="arrh" points="186,174 197,168 196,182"/><text class="tm" x="236" y="168">反転して流し込む → t = 0</text></svg>
+      <figcaption>図3:分解槽の模式図(テキスト図 6・2 をもとに描き直した)。主室に $\mathrm{H_2O_2}$ 溶液と磁気回転子、斜めの側管に触媒溶液を、<b>混ざらないように</b>別々に入れる。組み立て後、全体を反転(傾け)て側管の触媒を流し込んだ瞬間を $t=0$ とする。</figcaption>
+    </figure>
+    <table>
+      <tr><th>操作</th><th>理由</th></tr>
+      <tr><td>触媒を側管に分けて入れる</td><td>温度を恒温槽にそろえてから、<b>決まった瞬間に反応を始める</b>($t=0$ をはっきりさせる)ため。混ざると、反応が始まってしまう。</td></tr>
+      <tr><td>三方コックを (a) にして約 10 分静置</td><td>分解槽内の温度を恒温槽の温度にそろえる。温度が変わると $k$ が変わる。</td></tr>
+      <tr><td>ビュレットの水位を目盛り 0 に合わせる</td><td>集まった酸素の体積を、0 からの増加分 $v$ としてそのまま読めるように。</td></tr>
+      <tr><td>気密に注意、コックは両手で押さえて回す</td><td>酸素がもれると、$v$ が実際より小さくなり、反応終期で直線からずれる(テキスト p.77)。</td></tr>
+      <tr><td>回転子を一定速度で回す</td><td>触媒を均一に混ぜ、発生した酸素が溶液から気相へ一定に出るようにする。回転が不規則だと、体積の増え方が不規則になる。</td></tr>
+      <tr><td>体積を読む前に水準管を上げ、水位を一致させる</td><td>下の図:ビュレット内の気体の圧力を外圧(大気圧)に等しくして、体積を同じ条件で比べるため(予習問題 6.1)。</td></tr>
+      <tr><td>同じ瓶の試薬を使い、体積を正確に量る</td><td>反応速度は触媒濃度と pH で大きく変わる。瓶が違うと濃度が違う可能性がある。</td></tr>
+      <tr><td>恒温槽は設定を変えず、槽を移動する/実測温度を記録</td><td>設定温度は「約」27 ℃ などでよいが、<b>$E$ の計算には実測温度</b>を使う。</td></tr>
+      <tr><td>45 ℃ は終了後さらに 5〜10 分反応させて $V_0$ を測る</td><td>体積が変わらなくなった(完全に分解した)ときの値が、全酸素量 $V_0$。</td></tr>
+    </table>
+    <figure class="fig">
+      <svg viewBox="0 0 480 256" width="480" role="img" aria-label="水準管とガスビュレットの水位と圧力"><rect x="58" y="30" width="24" height="170" fill="none" stroke="var(--muted)"/><rect x="128" y="30" width="24" height="170" fill="none" stroke="var(--muted)"/><rect x="58" y="150" width="24" height="50" fill="var(--accent)" opacity=".22"/><rect x="128" y="150" width="24" height="50" fill="var(--accent)" opacity=".22"/><rect x="58" y="196" width="94" height="8" fill="var(--accent)" opacity=".22"/><line class="cv" x1="58" y1="150" x2="82" y2="150"/><line class="cv" x1="128" y1="150" x2="152" y2="150"/><line class="dash" x1="82" y1="150" x2="128" y2="150"/><text class="tm" x="54" y="24">気体 P</text><text class="tm" x="120" y="24">大気 P₀</text><text class="tt" x="30" y="226">(a) 水位が一致</text><text class="tm" x="30" y="244">P = P₀(大気圧)→ 体積を正しく読める</text><rect x="278" y="30" width="24" height="170" fill="none" stroke="var(--muted)"/><rect x="348" y="30" width="24" height="170" fill="none" stroke="var(--muted)"/><rect x="278" y="142" width="24" height="58" fill="var(--accent)" opacity=".22"/><rect x="348" y="110" width="24" height="90" fill="var(--accent)" opacity=".22"/><rect x="278" y="196" width="94" height="8" fill="var(--accent)" opacity=".22"/><line class="cv" x1="278" y1="142" x2="302" y2="142"/><line class="cv" x1="348" y1="110" x2="372" y2="110"/><line class="dash" x1="302" y1="142" x2="348" y2="142"/><text class="tm" x="274" y="24">気体 P</text><text class="tm" x="340" y="24">大気 P₀</text><text class="tt" x="250" y="226">(b) 水準管が高い</text><text class="tm" x="250" y="244">P ＞ P₀ → 体積が小さく読める</text></svg>
+      <figcaption>図4:水準管の高さと圧力。ビュレット内の気体の圧力は、水位差 $h$ ぶん(水柱の圧力)だけ外圧からずれる。水位を一致させる($h=0$)と、気体の圧力は大気圧 $P_0$ に等しい。</figcaption>
+    </figure>
+
+    <h2 id="s6">6. データ処理(グラフの描き方) <span class="page-tag">テキスト p.76〜77</span></h2>
+    <h3 id="w-k">6.1 $k$ の決定(図 6・6 (a))</h3>
+    <ol class="step-list">
+      <li>各時刻の $v$ から、$V_0-v$ を計算する($V_0$ は 45 ℃ で実測)。</li>
+      <li>片対数方眼紙の<b>上半分</b>に、横軸 $t$ [min]、縦軸 $V_0-v$ [mL](対数目盛)でプロット。</li>
+      <li>直線部分に直線を引き、傾き(1 目盛りでなく $\log_{10}$ の差)を読む。傾き $=-k/2.303$ より <b>$k=-2.303\times$(傾き)</b> [min⁻¹]。</li>
+    </ol>
+    <div class="box ex">
+      <div class="label">傾きの読み方の例</div>
+      <p>$V_0-v$ が $t=0$ で 60 mL、$t=10$ で 8.1 mL なら、$\log_{10}60=1.778$、$\log_{10}8.1=0.908$。傾き $=(0.908-1.778)/10=-0.0870\ \mathrm{min^{-1}}$。$k=2.303\times0.0870=0.20\ \mathrm{min^{-1}}$。(片対数紙では、$\log_{10}$ を計算せず、2 点の値を直線に当てはめてから比を読む。)</p>
+    </div>
+    <div class="box warn">
+      <div class="label">直線にならないとき</div>
+      <p>酸素の漏れ、水位の読み違い、$V_0$ の誤差などで、終期(右側)が直線からずれることがある。まったく直線にならない場合は、指導教員の指示を受ける。直線部分(初期〜中期)から $k$ を決める。</p>
+    </div>
+    <h3 id="w-arrh">6.2 $E$ の決定(図 6・6 (b))</h3>
+    <ol class="step-list">
+      <li>各温度の $k$ を求め、$T$ [K] から $1/T$($10^{-3}\ \mathrm{K^{-1}}$)を計算する。</li>
+      <li>片対数方眼紙の<b>下半分</b>に、横軸 $1/T$、縦軸 $k$ [min⁻¹](対数目盛)でプロット。</li>
+      <li>自班の 2 点(45 ℃ と低温側)に、<b>同じ触媒を使った他グループ</b>の全点を加える。もう一方の触媒の点は、<b>別のマーカー</b>でプロット。</li>
+      <li>触媒ごとに直線を引き、傾き(縦軸 $\log_{10}k$ vs 横軸 $1/T$ の傾き)を読む。$E=-2.303R\times$(傾き)。</li>
+    </ol>
+    <figure class="fig">
+      <svg viewBox="0 0 440 280" width="440" role="img" aria-label="アレニウスプロットの模式図"><line class="ax" x1="60" y1="235" x2="420" y2="235"/><line class="ax" x1="60" y1="235" x2="60" y2="16"/><line class="thin" x1="70" y1="235" x2="70" y2="240"/><text class="tj" x="60" y="254">3.1</text><line class="thin" x1="180.0000000000001" y1="235" x2="180.0000000000001" y2="240"/><text class="tj" x="170.0000000000001" y="254">3.2</text><line class="thin" x1="289.9999999999998" y1="235" x2="289.9999999999998" y2="240"/><text class="tj" x="279.9999999999998" y="254">3.3</text><line class="thin" x1="399.99999999999983" y1="235" x2="399.99999999999983" y2="240"/><text class="tj" x="389.99999999999983" y="254">3.4</text><line class="thin" x1="56" y1="20" x2="60" y2="20"/><text class="tj" x="26" y="24">1</text><line class="thin" x1="56" y1="154.375" x2="60" y2="154.375"/><text class="tj" x="26" y="158.375">0.1</text><text class="tm" x="8" y="14">k [min⁻¹]</text><text class="tm" x="300" y="270">1/T [10⁻³ K⁻¹]</text><line class="cv" x1="324.83424954189616" y1="130.71273706439283" x2="117.48860600345753" y2="77.7884532724979"/><circle class="dotb" cx="324.83424954189616" cy="130.71273706439283" r="4"/><circle class="dotb" cx="253.00996243671406" cy="112.37982739223717" r="4"/><circle class="dotb" cx="183.9468204388915" cy="94.75169079733881" r="4"/><circle class="dotb" cx="117.48860600345753" cy="77.7884532724979" r="4"/><text class="ta" x="123.48860600345753" y="63.788453272497904">触媒X:傾きがゆるい(E 小)</text><line class="cv2" x1="324.83424954189616" y1="194.82590566734748" x2="117.48860600345753" y2="102.20840903153133"/><circle class="dot" cx="324.83424954189616" cy="194.82590566734748" r="4"/><circle class="dot" cx="253.00996243671406" cy="162.74331374107504" r="4"/><circle class="dot" cx="183.9468204388915" cy="131.8940747000029" r="4"/><circle class="dot" cx="117.48860600345753" cy="102.20840903153133" r="4"/><text class="tt" x="316.83424954189616" y="216.82590566734748" text-anchor="end">触媒Y:傾きが急(E 大)</text><text class="tm" x="250" y="30">高温 ← → 低温</text><text class="tm" x="100" y="50">模式図:数値は仮のもの</text></svg>
+      <figcaption>図5:アレニウスプロットの模式図(数値は仮のもの。実験結果のグラフではない)。触媒により直線の傾きが違う:傾きが急なほど、温度が変わったときの $k$ の変化が大きく、活性化エネルギーが大きい。</figcaption>
+    </figure>
+    <div class="box ex">
+      <div class="label">傾きから $E$ への換算の例</div>
+      <p>片対数紙で、$1/T=3.2$ と $3.4\ (\times10^{-3}\ \mathrm{K^{-1}})$ のあいだで $k$ が 10 倍(1 桁)変わるとする。傾き $=-1\ /\ (0.2\times10^{-3})=-5000\ \mathrm K$。
+      $E=2.303\times8.314\times5000\approx9.6\times10^4\ \mathrm{J/mol}\approx96\ \mathrm{kJ/mol}$。</p>
+    </div>
+    <p>(テキストの脚注:本来なら、同一の実験者が同一の試料で少なくとも 3 点以上の温度で測るべきだが、授業時間内では難しいため、他の実験者による結果を利用している。班による試料のばらつきが、グラフの点のばらつきになりうる。)</p>
+
+    <h2 id="s7">7. 予習問題・課題の解答</h2>
+    <h3 id="p61">予習問題 6.1 体積を読み取る際に、水準管を上げて水準管とビュレットの水位を一致させるのはなぜか</h3>
+    <div class="box basic">
+      <div class="label">この問題で問われていること・必要な概念</div>
+      <p>気体の体積は圧力で変わります(ボイルの法則)。測った体積から酸素の量(物質量)を比べるには、圧力を毎回そろえる必要があります。</p>
+    </div>
+    <div class="box ex">
+      <div class="label">解答</div>
+      <p>水準管とビュレットの水位が同じなら、ビュレット内の気体にかかる圧力は<b>外圧(大気圧)に等しい</b>。水位に差があると、気体の圧力は水位差ぶんだけ大気圧からずれ(水準管が高ければ圧縮され、低ければ膨張する)、読んだ体積が大気圧での体積と一致しない。すべての測定で圧力を大気圧にそろえるために、水位を一致させる。</p>
+    </div>
+
+    <h3 id="c61">課題 6.1 もう一方の触媒を用いた分解反応について、他のグループによる測定結果を参照し、活性化エネルギーが触媒によって異なることを確認せよ</h3>
+    <div class="box basic">
+      <div class="label">この問題で問われていること・必要な概念</div>
+      <p>2 種類の触媒それぞれのアレニウスプロットを描き、<b>傾きから $E$ を計算して比べる</b>問題です。「違う」ことを、言葉ではなく数値(2 つの $E$)で示します。</p>
+    </div>
+    <div class="box ex">
+      <div class="label">解答の方針</div>
+      <ol>
+        <li>自班の触媒:自班 2 点 + 他班の全点でアレニウスプロットを作り、直線の傾きから $E_1=-2.303R\times$(傾き)。</li>
+        <li>もう一方の触媒:他班の全点を別のマーカーでプロットし、直線を引いて $E_2$ を求める。</li>
+        <li>$E_1$ と $E_2$ を並べて書き、<b>差があること</b>(直線の傾きが違うこと)を確認する。差は、点のばらつきによる誤差より大きいか考える。</li>
+        <li>考察:触媒が違うと、反応の道筋(活性化状態)が違い、越える山の高さが違う。</li>
+      </ol>
+      <p>(どちらの触媒の $E$ が大きいかは、実験結果で決まるので、ここでは書きません。)</p>
+    </div>
+
+    <h3 id="c62">課題 6.2 一般に高い活性化エネルギーを与える触媒を用いると反応速度は低下する。今回使用した触媒を用いて、もう一方の触媒と同程度の反応速度を得るには、反応温度を何度にすればよいか。アレニウスプロットを利用して、33 ℃ の場合について計算せよ</h3>
+    <div class="box basic">
+      <div class="label">この問題で問われていること・必要な概念</div>
+      <p>「$E$ が大きい触媒(遅い方)でも、<b>温度を上げれば</b>、$E$ が小さい触媒(速い方)の 33 ℃ のときと同じ $k$ になる。その温度はいくらか」。アレニウスプロットの直線(2 本)を使います。</p>
+    </div>
+    <div class="box ex">
+      <div class="label">解答の手順</div>
+      <ol>
+        <li>$E$ が小さい触媒の直線から、<b>33 ℃(306 K)の $k_1$</b> を読む(または、直線の式から計算)。</li>
+        <li>$E$ が大きい触媒の直線上で、$k=k_1$ になる $1/T$ を読む。</li>
+        <li>$T=1/(1/T)$ を K → ℃ に直す(33 ℃ より高くなる)。</li>
+      </ol>
+      <p>計算で出すなら、$E$ が大きい触媒の直線を、基準の点 $(T_{\mathrm{ref}},k_{\mathrm{ref}})$ を使って
+      $$\ln k=\ln k_{\mathrm{ref}}-\frac ER\left(\frac1T-\frac1{T_{\mathrm{ref}}}\right)$$
+      と書き、$k=k_1$ とおいて
+      $$\frac1T=\frac1{T_{\mathrm{ref}}}-\frac RE\ln\frac{k_1}{k_{\mathrm{ref}}}$$</p>
+    </div>
+    <div class="box ex">
+      <div class="label">計算例(仮の数値:図5と同じ)</div>
+      <p>触媒 X($E=40\ \mathrm{kJ/mol}$)と触媒 Y($E=70\ \mathrm{kJ/mol}$)を仮定。27 ℃ で $k_\mathrm X=0.15$、$k_\mathrm Y=0.05\ \mathrm{min^{-1}}$ とすると、33 ℃(306.15 K)では、$k_\mathrm X\approx$0.205、$k_\mathrm Y\approx$0.087($\mathrm{min^{-1}}$)。<br>
+      触媒 Y で $k=$0.205 にするには、
+      $$\frac1T=\frac1{306.15}-\frac{8.314}{70000}\ln\frac{0.205}{0.087}\approx3.1639\times10^{-3}\ \mathrm{K^{-1}}\;\;\Rightarrow\;\;T\approx316\ \mathrm K\approx43\ {}^\circ\mathrm C$$
+      つまり、触媒 Y は、触媒 X の 33 ℃ と同程度の速さにするには約 43 ℃ が必要(この仮の数値の場合)。実際の答えは、自分たちのグラフの値で計算する。</p>
+    </div>
+
+    <h2 id="s8">8. まとめ(予習で押さえること)</h2>
+    <div class="box thm">
+      <div class="label">この実験の要点</div>
+      <ul>
+        <li>$\mathrm{H_2O_2}$ の分解は<b>一次反応</b>:$-\mathrm dC/\mathrm dt=kC$ → $\ln(C_0/C)=kt$。</li>
+        <li>$C_0\to V_0$、$C\to V_0-v$ と置き換えて、<b>$\log_{10}(V_0-v)$ vs $t$ の傾き $=-k/2.303$</b>($k$:min⁻¹)。$V_0$ は 45 ℃ で実測。</li>
+        <li>アレニウス:$\ln k=B-E/(RT)$ → <b>$\log_{10}k$ vs $1/T$ の傾き $=-E/(2.303R)$</b>、$R=8.314\ \mathrm{J\,K^{-1}mol^{-1}}$、$E$ は J mol⁻¹。温度は K。</li>
+        <li>触媒は活性化エネルギー $E$ を下げる(反応熱 $\Delta H$ は変えない)。2 種類の触媒で $E$ を比べる。</li>
+        <li>操作の要点:触媒と過酸化水素水は反応開始まで混ぜない、10 分静置で温度を平衡に、気密、水位を一致させて体積を読む、実測温度を記録。</li>
+        <li>課題 6.2:$E$ の大きい触媒で、$E$ の小さい触媒の 33 ℃ と同じ $k$ になる温度を、アレニウスプロットから求める。</li>
+      </ul>
+    </div>
+
+    <h2 id="s9">9. このページについてのメモ</h2>
+    <ul>
+      <li>範囲は、写真のテキスト p.71(実験の目的・概要)〜p.77(課題 6.1・6.2、図 6・6)です。巻末の点検表や報告書のグラフ用紙の様式は、写真になく、扱っていません。</li>
+      <li>$V_0$ の見積もり、傾きの読み方の例、アレニウスプロットの模式図、課題 6.2 の計算例(触媒 X・Y)は、テキストにない補足で、<b>仮の数値</b>です(Claude が書き足したもの)。実験の結果としては、自分たちの測定値を使ってください。</li>
+      <li>図 1 と図 3 は、テキストの図 6・1、6・2 をもとに描き直した模式図です。装置全体の図(図 6・3)と三方コックの図(図 6・4)は、テキストを見てください。</li>
+      <li>$R$ の値($8.314\ \mathrm{J\,K^{-1}mol^{-1}}$)と式は、テキストの記載です。</li>
+    </ul>
+
+    <nav class="pager">
+      <a href="index.html">← 第二週(第六回)</a>
+      <a href="prep.html">実験予習ノート</a>
+      <span class="disabled">次へ →</span>
+    </nav>
+  </main>
+
+  <footer>© Aセメまとめノート</footer>
+</body>
+</html>

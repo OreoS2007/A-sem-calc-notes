@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>第二週 実験予習ノート | 基礎化学実験 | Aセメまとめノート</title>
+  <link rel="stylesheet" href="../../assets/style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]})"></script>
+  <style>
+    .flow { list-style: none; margin: 14px 0 22px; padding: 0; }
+    .flow > li { position: relative; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 8px 12px; margin: 0 0 22px; }
+    .flow > li:not(:last-child)::after { content: "↓"; position: absolute; left: 50%; bottom: -21px; transform: translateX(-50%); color: var(--accent); font-weight: 700; font-size: 1.1rem; line-height: 1; }
+    .flow .sub { display: block; color: var(--muted); font-size: .88em; margin-top: 2px; }
+    .flow .key { color: var(--thm); font-weight: 700; }
+    .cap { display: inline-block; background: var(--accent); color: #fff; border-radius: 6px; padding: 1px 10px; font-weight: 700; font-size: .9rem; margin: 6px 0; }
+    .goal { border: 2px solid var(--accent); border-radius: 10px; padding: 10px 14px; margin: 14px 0; }
+    .goal ol { margin: 4px 0 0; padding-left: 1.4em; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="inner">
+      <a class="site-title" href="../../index.html">Aセメまとめノート</a>
+      <span class="links"><a href="../index.html">基礎化学実験</a><a href="index.html">第二週</a><a href="explanation.html">解説</a><a href="../w1/index.html">第一週</a></span>
+    </div>
+  </header>
+
+  <main class="note">
+    <h1>第二週(第六回)実験予習ノート:反応速度定数と活性化エネルギー</h1>
+    <div class="meta">基礎化学実験 実験6(テキスト p.71〜77)／目的と実験手順を、フローチャートでまとめた予習ノート</div>
+
+    <h2>目的</h2>
+    <div class="goal">
+      <p>過酸化水素 $\mathrm{H_2O_2}\to\mathrm{H_2O}+\tfrac12\mathrm{O_2}$ の触媒分解の速さを、<b>発生する酸素の体積</b>から測る。</p>
+      <ol>
+        <li>この反応が<b>一次反応</b>であることを確かめ、<b>速度定数 $k$</b> を求める。</li>
+        <li>異なる温度での $k$ から<b>アレニウスプロット</b>をつくり、<b>活性化エネルギー $E$</b> を求める。</li>
+        <li>触媒($\mathrm{Fe^{3+}}$ か KI)によって $E$ が異なることを確かめる。</li>
+      </ol>
+    </div>
+
+    <h2>使う式(まとめ)</h2>
+    <ul>
+      <li>一次反応:$-\dfrac{\mathrm dC}{\mathrm dt}=kC\;\Rightarrow\;\ln\dfrac{C_0}{C}=kt$ (6・5)。分解量 $x=C_0-C$ は、発生した酸素の体積 $v$ に比例。</li>
+      <li>体積で書くと:$\log_{10}\dfrac{V_0-v}{V_0}=-\dfrac{k}{2.303}\,t$ (6・11)。<b>$\log_{10}(V_0-v)$ vs $t$ の傾き $=-k/2.303$</b>($k$ は min⁻¹)。</li>
+      <li>アレニウス:$\ln k=B-\dfrac{E}{RT}$ (6・10)。<b>$\log_{10}k$ vs $1/T$ の傾き $=-E/(2.303R)$</b>、$R=8.314\ \mathrm{J\,K^{-1}mol^{-1}}$、$E$ は J mol⁻¹。</li>
+      <li>全酸素量(温度 $T$、外圧 $P$ [mmHg]、水蒸気圧 $P_{\mathrm{H_2O}}$):$V_0=V\times\dfrac{T}{273}\times\dfrac{760}{P-P_{\mathrm{H_2O}}}$。</li>
+    </ul>
+
+    <h2>実験前の確認</h2>
+    <ul>
+      <li>器具・薬品を表 6・1 で確認 → 巻末の点検表に記入。</li>
+      <li>各班:触媒は <b>鉄ミョウバン($\mathrm{Fe^{3+}}$)か KI のどちらか一方</b>。温度は <b>[27, 45 ℃]、[33, 45 ℃]、[39, 45 ℃] のうち 1 組</b>(指導教員の指示)。</li>
+      <li>保護眼鏡を着用。こぼしたらすぐふく。純水はイオン交換水。</li>
+      <li>過酸化水素水・触媒溶液は<b>必ず同じ瓶</b>のものを使い、体積は正確に。途中で瓶を替えない・つぎ足さない。</li>
+      <li>恒温槽の設定は<b>変えない</b>(各温度の槽へ移動して測定)。反応温度は一定に保ち、<b>実測温度</b>を記録(計算にはこの温度を使う)。</li>
+      <li>ホールピペットは口で吸わず、安全ピペッターを使う。</li>
+    </ul>
+
+    <h2>実験手順(フローチャート)</h2>
+    <span class="cap">A. 装置の準備</span>
+    <ol class="flow">
+      <li>分解槽の下部に<b>磁気回転子</b> → <b>1.5 % $\mathrm{H_2O_2}$ 10 mL</b>(ホールピペット)</li>
+      <li>側管に<b>触媒溶液 2 mL</b>(ホールピペット)<span class="sub">両溶液が<span class="key">混ざらない</span>ように注意(図 6・2)</span></li>
+      <li>ガラス管付きゴム栓をつけ、クランプで固定<span class="sub">毛管部の液を混ぜない</span></li>
+      <li>分解槽をスターラーに装着、<b>三方コックの水平部が水平</b>になるようガスビュレットの高さを調整 → 全体を固定 → 回転子を<b>一定速度</b>で回転(図 6・3)</li>
+      <li>三方コックを <b>(a)</b> の位置 → <b>約 10 分静置</b><span class="sub">分解槽の温度を恒温槽の温度にそろえる</span></li>
+      <li>コックは動かさず、水準管を静かに上げて、ガスビュレットの水位を<b>目盛り 0</b> に → コックを <b>(b)</b> の位置へ → 水準管を下げる</li>
+    </ol>
+    <p><b>注意:</b>気体がもれないよう<b>気密</b>に注意。コックは緩まないよう<b>両手で押さえて</b>回す。</p>
+
+    <span class="cap">B. 反応の追跡</span>
+    <ol class="flow">
+      <li>時計を見ながら、分解槽の側管を<b>反転</b>して触媒溶液を過酸化水素水に流し込む(図 6・5)</li>
+      <li>軽くゆすって完全に混合(素早く) → この瞬間を <b>$t=0$</b></li>
+      <li>一定間隔で、ガスビュレットに集まった <b>酸素の体積 $v$</b> を読む<span class="sub">読む前に必ず水準管を上げて、<span class="key">水準管とビュレットの水位を一致</span>させる</span>
+        <table>
+          <tr><th>温度</th><th>間隔</th><th>測定時間</th></tr>
+          <tr><td>27 ℃</td><td>1 分ごと</td><td>15 分</td></tr>
+          <tr><td>33、39 ℃</td><td>30 秒ごと</td><td>15 分</td></tr>
+          <tr><td>45 ℃</td><td>30 秒ごと</td><td>10 分</td></tr>
+        </table>
+      </li>
+      <li><b>45 ℃ の場合:</b>測定後さらに 5〜10 分反応させ、体積が変わらなくなったときの体積を<b>全酸素量 $V_0$</b> とする</li>
+    </ol>
+    <p><b>注意:</b>回転子が正しく動かないと、体積の増加が不規則になる。</p>
+
+    <span class="cap">C. データ処理</span>
+    <ol class="flow">
+      <li><b>$k$ の決定</b>:$\log_{10}(V_0-v)$ を縦軸、$t$ を横軸にして片対数方眼紙の<b>上半分</b>(図 6・6 (a))にプロット<span class="sub">$V_0$ は 45 ℃ で実測した値を使う。直線 → 一次反応。傾き $=-k/2.303$($k$:min⁻¹)。酸素がもれていると終期が直線からずれる</span></li>
+      <li>各温度の $k$ を求める(自班:45 ℃ と低温側の 2 点)</li>
+      <li><b>アレニウスプロット</b>:$\log_{10}k$ vs $1/T$(図 6・6 (b))<span class="sub">自班の 2 点 + 他グループの全点(同じ触媒)。もう一方の触媒は他グループの点を<span class="key">別のマーカー</span>で</span></li>
+      <li>それぞれの触媒について直線を引く → 傾き $=-E/(2.303R)$ より <b>活性化エネルギー $E$</b>(J mol⁻¹)</li>
+    </ol>
+
+    <h2>予想・考察のポイント</h2>
+    <ul>
+      <li>温度が高いほど $k$ は大きい(傾きは負、$1/T$ が小さいほど $\log k$ は大きい)。</li>
+      <li>$\log_{10}(V_0-v)$ vs $t$ が直線 ⇒ 一次反応。</li>
+      <li>触媒が変わると $E$(直線の傾き)が変わる。どちらが大きいかは、実験結果で確かめる。</li>
+      <li>$E$ が大きい触媒ほど、同じ温度では $k$ が小さい(反応が遅い)。</li>
+    </ul>
+
+    <h2>課題・予習問題(解答の方針)</h2>
+    <div class="box basic">
+      <div class="label">予習問題 6.1 水準管を上げて、水位を一致させるのはなぜか</div>
+      <p>水位が同じなら、ビュレット内の気体の圧力が<b>外圧(大気圧)に等しい</b>から。水位に差があると、気体は圧縮・膨張して圧力が外圧からずれ、読んだ体積が「大気圧での体積」にならない。体積から酸素の量を正しく比べるために、圧力をそろえる。</p>
+    </div>
+    <div class="box ex">
+      <div class="label">課題 6.1(方針)</div>
+      <p>もう一方の触媒の結果を他グループのデータで見て、2 本のアレニウスプロットの<b>傾きが違う</b>こと(=$E$ が違う)を、数値で示す。</p>
+    </div>
+    <div class="box ex">
+      <div class="label">課題 6.2(方針)</div>
+      <p>$E$ の大きい触媒は、33 ℃ では遅い。同じ速さ(同じ $k$)にするための温度を求める:① $E$ の小さい触媒の <b>33 ℃ の $k$</b> を読む → ② $E$ の大きい触媒の直線上で、その $k$ になる <b>$1/T$</b> を読む → ③ $T$ を求める(33 ℃ より高い温度になる)。</p>
+    </div>
+
+    <nav class="pager">
+      <a href="index.html">← 第二週(第六回)</a>
+      <a href="explanation.html">解説</a>
+      <span class="disabled">次へ →</span>
+    </nav>
+  </main>
+
+  <footer>© Aセメまとめノート</footer>
+</body>
+</html>
