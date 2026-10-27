@@ -6,7 +6,7 @@
   <meta name="robots" content="noindex">
   <title>基礎のまとめ(構造化学) | Aセメまとめノート</title>
   <link rel="stylesheet" href="../assets/style.css">
-  <style>main.note p, main.note li { overflow-x: auto; overflow-y: hidden; }</style>
+  <style>main.note p, main.note li { overflow-x: auto; overflow-y: hidden; } main.note table.cmp { display: block; overflow-x: auto; max-width: 100%; }</style>
   <script defer src="../assets/nav.js"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
@@ -61,6 +61,20 @@
         <li><b>原子のスケール</b>
           <ol type="a" start="14">
             <li><a href="#atomscale">原子の大きさと、基本定数</a></li>
+          </ol></li>
+        <li><b>座標と積分</b>
+          <ol type="a" start="15">
+            <li><a href="#polar">極座標(2次元と3次元)</a></li>
+            <li><a href="#volelem">微小体積(ヤコビアン)</a></li>
+            <li><a href="#laplace">ラプラシアン $\nabla^2$ の極座標表示</a></li>
+            <li><a href="#integ">積分の公式($\int r^ne^{-ar}dr$ と三角関数の積分)</a></li>
+            <li><a href="#maxmin">最大になる点の見つけ方(微分)</a></li>
+          </ol></li>
+        <li><b>確率と固有関数</b>
+          <ol type="a" start="20">
+            <li><a href="#prob">確率密度と規格化</a></li>
+            <li><a href="#lincomb">縮退と、固有関数の線形結合</a></li>
+            <li><a href="#greek">ギリシャ文字と記号</a></li>
           </ol></li>
       </ol>
     </nav>
@@ -226,7 +240,7 @@
     <div class="box ex"><div class="label">例</div>
       <p>$\dfrac{\partial u}{\partial t}=D\dfrac{\partial^2u}{\partial x^2}$ に $u=XT$ を入れる:$XT'=DX''T$ ⇒ $\dfrac{T'}{DT}=\dfrac{X''}{X}=K$(定数)。$T'=DKT$ と $X''=KX$ の2本に分かれる。</p></div>
     <p>得られた方程式の解の形は、$K$ の符号で変わります。$X''=KX$ では、$K\gt0$ なら指数関数 $e^{\pm\sqrt Kx}$、$K=0$ なら1次関数、$K\lt0$ なら三角関数 $\cos(\sqrt{-K}\,x),\ \sin(\sqrt{-K}\,x)$(単振動と同じ)。<b>境界条件</b>(両端での値など)を満たす解だけが残ります。</p>
-    <p class="used-in">この回で使う場所:<a href="weeks/week-02.html#w-separation" data-xref>第2回 1.4 変数分離</a></p>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-02.html#w-separation" data-xref>第2回 1.4 変数分離</a><a href="weeks/week-04.html#w-separation" data-xref>第4回 1.5 変数分離</a></p>
 
     <h2>4. 原子のスケール</h2>
 
@@ -247,6 +261,134 @@
     </table>
     <p>$\hbar=h/2\pi$ は、量子力学で、とてもよく使われる記号です(「エイチバー」)。$\hbar$ を使うと、$h\nu=\hbar\omega$($\omega=2\pi\nu$)のように、$2\pi$ が消えます。</p>
     <p class="used-in">この回で使う場所:<a href="weeks/week-01.html#w-atomscale" data-xref>第1回 1.8 原子の大きさと、基本定数</a></p>
+
+
+    <h2>5. 座標と積分</h2>
+
+    <h3 id="polar">極座標(2次元と3次元)</h3>
+    <p>平面上の点を、$(x,y)$ の代わりに、<b>原点からの距離 $r$</b> と、<b>$x$ 軸からの角 $\theta$</b> で表すのが<b>極座標</b>です。三角比の定義から
+    $$x=r\cos\theta,\qquad y=r\sin\theta\qquad(r\ge0,\ 0\le\theta\lt2\pi).$$
+    逆に、$r=\sqrt{x^2+y^2}$。円を扱う問題(原子核のまわりの電子、円運動)では、$x,y$ より $r,\theta$ のほうが、ずっと自然です。たとえば、「原点を中心とする半径 $R$ の円」は、極座標では「$r=R$」の一言です。</p>
+    <figure class="fig">
+      <svg viewBox="0 0 560 230" width="560" role="img" aria-label="2次元の極座標"><line x1="70" y1="200" x2="282.6" y2="200" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><polygon points="290,200 282,203.4 282,196.6" style="fill:var(--muted)"/><line x1="90" y1="220" x2="90" y2="37.4" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><polygon points="90,30 93.4,38 86.6,38" style="fill:var(--muted)"/><text class="t" x="292" y="216" style="text-anchor:end">x</text><text class="t" x="98" y="34">y</text><path d="M224.4 200 A 134.4 134.4 0 0 0 90 65.6" style="fill:none;stroke:var(--muted);stroke-width:1;stroke-dasharray:4 4"/><polygon points="195.9,117.3 194.6,115.6 193.3,114 191.9,112.4 190.5,110.8 189.1,109.2 187.7,107.7 186.2,106.1 184.7,104.6 183.2,103.2 181.7,101.7 165.3,119.3 166.6,120.5 167.8,121.7 169,122.9 170.2,124.1 171.4,125.4 172.6,126.7 173.7,128 174.8,129.3 175.9,130.7 177,132" style="fill:var(--thm);fill-opacity:.45;stroke:var(--thm);stroke-width:1.2"/><line x1="90" y1="200" x2="176.4" y2="132.5" style="stroke:var(--accent);stroke-width:3;fill:none"/><polygon points="184.6,126.1 179,136.8 172.8,129" style="fill:var(--accent)"/><circle cx="184.6" cy="126.1" r="4.5" style="fill:var(--accent)"/><line x1="184.6" y1="126.1" x2="184.6" y2="200" style="stroke:var(--muted);stroke-width:1.1;stroke-dasharray:5 4;fill:none"/><line x1="184.6" y1="126.1" x2="90" y2="126.1" style="stroke:var(--muted);stroke-width:1.1;stroke-dasharray:5 4;fill:none"/><text class="t" x="194.6" y="122.1">(x, y)</text><text class="t" x="184.6" y="217" style="text-anchor:middle">x = r cosθ</text><text class="t" x="82" y="130.1" style="text-anchor:end">y = r sinθ</text><path d="M128 200 A 38 38 0 0 0 119.94440863705543 176.604863937625" style="fill:none;stroke:var(--accent);stroke-width:1.8"/><text class="t" x="136" y="190">θ</text><text class="t" x="119.3" y="169.1" style="fill:var(--accent)">r</text><text class="tj" x="240.6" y="86.1">微小片:</text><text class="tj" x="240.6" y="104.1" style="fill:var(--thm)">縦 dr、横 r dθ</text><line x1="238.6" y1="90.1" x2="202.6" y2="118.1" style="stroke:var(--thm);stroke-width:1;stroke-dasharray:3 3"/></svg>
+      <figcaption>2次元の極座標。点 $(x,y)$ を、距離 $r$ と角 $\theta$ で表す。薄い橙の小片が、微小面積 $r\,dr\,d\theta$(次のトピック)。</figcaption>
+    </figure>
+    <p><b>3次元の極座標(球座標)</b>では、距離 $r$ と、2つの角を使います。<b>$z$ 軸からの角</b> $\theta$($0\le\theta\le\pi$:北極 $0$、赤道 $\pi/2$、南極 $\pi$)と、<b>$xy$ 平面に落とした影の、$x$ 軸からの角</b> $\varphi$($0\le\varphi\lt2\pi$:経度)です:
+    $$x=r\sin\theta\cos\varphi,\qquad y=r\sin\theta\sin\varphi,\qquad z=r\cos\theta.$$
+    $r\sin\theta$ は、点から $z$ 軸までの距離(影の長さ)で、あとは平面の極座標と同じです。</p>
+    <figure class="fig">
+      <svg viewBox="0 0 560 300" width="560" role="img" aria-label="3次元の極座標"><line x1="250" y1="168" x2="176.4" y2="219.5" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><polygon points="170.4,223.8 175,216.4 178.9,222" style="fill:var(--muted)"/><line x1="250" y1="168" x2="384.2" y2="168" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><polygon points="391.6,168 383.6,171.4 383.6,164.6" style="fill:var(--muted)"/><line x1="250" y1="168" x2="250" y2="22" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><polygon points="250,14.6 253.4,22.6 246.6,22.6" style="fill:var(--muted)"/><text class="t" x="162.4" y="237.8" style="text-anchor:end">x</text><text class="t" x="399.6" y="173">y</text><text class="t" x="258" y="18.6">z</text><polyline points="191,209.3 201.5,209.1 212.4,208.7 223.6,207.9 234.9,206.8 246.4,205.4 257.9,203.8 269.4,201.8 280.7,199.6 291.7,197.2 302.5,194.5 312.8,191.7 322.7,188.7 332,185.5 340.7,182.1 348.7,178.7 356,175.2 362.4,171.6 368,168 372.7,164.4 376.5,160.8 379.2,157.3 381.1,153.9 381.9,150.5 381.7,147.4 380.5,144.3 378.3,141.5 375.2,138.8 371,136.4 366,134.2 360.1,132.2 353.3,130.6 345.8,129.2 337.5,128.1 328.6,127.3 319.1,126.9 309,126.7 298.5,126.9 287.6,127.3 276.4,128.1 265.1,129.2 253.6,130.6 242.1,132.2 230.6,134.2 219.3,136.4 208.3,138.8 197.5,141.5 187.2,144.3 177.3,147.3 168,150.5 159.3,153.9 151.3,157.3 144,160.8 137.6,164.4 132,168 127.3,171.6 123.5,175.2 120.8,178.7 118.9,182.1 118.1,185.5 118.3,188.7 119.5,191.7 121.7,194.5 124.8,197.2 129,199.6 134,201.8 139.9,203.8 146.7,205.4 154.2,206.8 162.5,207.9 171.4,208.7 180.9,209.1 191,209.3" style="fill:none;stroke:var(--muted);stroke-width:1;stroke-dasharray:4 4"/><polyline points="250,50 260.3,50.4 270.5,51.8 280.5,54 290.4,57.1 299.9,61.1 309,65.8 317.7,71.3 325.8,77.6 333.4,84.6 340.4,92.2 346.7,100.3 352.2,109 356.9,118.1 360.9,127.6 364,137.5 366.2,147.5 367.6,157.7 368,168 367.6,178.3 366.2,188.5 364,198.5 360.9,208.4 356.9,217.9 352.2,227 346.7,235.7 340.4,243.8 333.4,251.4 325.8,258.4 317.7,264.7 309,270.2 299.9,274.9 290.4,278.9 280.5,282 270.5,284.2 260.3,285.6 250,286 239.7,285.6 229.5,284.2 219.5,282 209.6,278.9 200.1,274.9 191,270.2 182.3,264.7 174.2,258.4 166.6,251.4 159.6,243.8 153.3,235.7 147.8,227 143.1,217.9 139.1,208.4 136,198.5 133.8,188.5 132.4,178.3 132,168 132.4,157.7 133.8,147.5 136,137.5 139.1,127.6 143.1,118.1 147.8,109 153.3,100.3 159.6,92.2 166.6,84.6 174.2,77.6 182.3,71.3 191,65.8 200.1,61.1 209.6,57.1 219.5,54 229.5,51.8 239.7,50.4 250,50" style="fill:none;stroke:var(--muted);stroke-width:1;stroke-dasharray:4 4"/><line x1="284.9" y1="90.7" x2="284.9" y2="183.7" style="stroke:var(--muted);stroke-width:1.1;stroke-dasharray:5 4;fill:none"/><line x1="250" y1="168" x2="284.9" y2="183.7" style="stroke:var(--muted);stroke-width:1.1;stroke-dasharray:5 4;fill:none"/><line x1="250" y1="168" x2="280.6" y2="100.1" style="stroke:var(--thm);stroke-width:3;fill:none"/><polygon points="284.9,90.7 284.9,102.8 275.8,98.6" style="fill:var(--thm)"/><circle cx="284.9" cy="90.7" r="4.5" style="fill:var(--thm)"/><text class="t" x="294.9" y="86.7">P (x, y, z)</text><text class="t" x="279.4" y="143.3" style="fill:var(--thm)">r</text><polyline points="250,120.8 250.8,121.2 251.5,121.6 252.3,122 253,122.6 253.7,123.1 254.5,123.7 255.2,124.4 255.9,125.1 256.7,125.9 257.4,126.7 258.1,127.5 258.8,128.4 259.5,129.4 260.1,130.3 260.8,131.4 261.5,132.4 262.1,133.5 262.7,134.7 263.4,135.9 264,137.1" style="fill:none;stroke:var(--accent);stroke-width:2"/><text class="t" x="263.4" y="122.7" style="fill:var(--accent)">θ</text><polyline points="223.5,186.6 225.9,186.6 228.4,186.5 230.9,186.4 233.5,186.3 236.1,186.1 238.7,185.9 241.4,185.7 244,185.4 246.7,185.1 249.4,184.7 252.1,184.3 254.8,183.9 257.5,183.4 260.1,183 262.8,182.4 265.4,181.9 268,181.3 270.5,180.7 273,180.1 275.5,179.4" style="fill:none;stroke:var(--ex);stroke-width:2"/><text class="t" x="253.4" y="200.7" style="fill:var(--ex)">φ</text><text class="tm" x="290.9" y="199.7">影(xy 平面)</text><text class="t" x="425" y="60">x = r sinθ cosφ</text><text class="t" x="425" y="82">y = r sinθ sinφ</text><text class="t" x="425" y="104">z = r cosθ</text><text class="tj" x="425" y="140">0 ≦ r ＜ ∞</text><text class="tj" x="425" y="160">0 ≦ θ ≦ π</text><text class="tj" x="425" y="180">0 ≦ φ ＜ 2π</text></svg>
+      <figcaption>3次元の極座標。$\theta$ は $z$ 軸から測る(緯度ではなく、北極からの角)。$\varphi$ は、影の $x$ 軸からの角(経度)。</figcaption>
+    </figure>
+    <div class="box intuit"><div class="label">直感で理解する:地球の座標</div>
+      <p>地球上の位置は、「中心からの距離 $r$(高度)」「経度 $\varphi$」「緯度」で表せます。緯度は赤道から測りますが、ここでの $\theta$ は<b>北極から</b>測るので、$\theta=90^\circ-(\text{緯度})$ です。北極($\theta=0$)では、経度 $\varphi$ は意味がなくなる(どの経度の線も、北極に集まる)ことに注意。</p></div>
+    <div class="box ex"><div class="label">例</div>
+      <p>$r=2,\ \theta=60^\circ,\ \varphi=45^\circ$ の点:$x=2\sin60^\circ\cos45^\circ=2\cdot\frac{\sqrt3}2\cdot\frac{\sqrt2}2=\frac{\sqrt6}{2}\approx1.22$、$y=1.22$、$z=2\cos60^\circ=1$。確かめ:$x^2+y^2+z^2=1.5+1.5+1=4=r^2$。</p></div>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-04.html#w-polar" data-xref>第4回 1.2 極座標(2次元と3次元)</a></p>
+
+    <h3 id="volelem">微小体積(ヤコビアン)</h3>
+    <p>$x,y$ から $r,\theta$ に変数を変えると、「小さな領域の面積(体積)」を表す式も変わります。平面を、$dr\times d\theta$ の小さな区画に分けると、1つの区画は、<b>縦(半径方向)が $dr$、横(円周方向)が $r\,d\theta$</b>(半径 $r$ の円で、角 $d\theta$ に対応する弧の長さ)の、ほぼ長方形です。したがって
+    $$dx\,dy=r\,dr\,d\theta.$$
+    この「$r$」が、座標変換の<b>ヤコビアン</b>(変換による、面積の伸び縮みの倍率)です。</p>
+    <p>3次元では、小さな区画は、<b>半径方向 $dr$</b>、<b>南北方向 $r\,d\theta$</b>(緯度が $d\theta$ だけ動いたときの弧)、<b>東西方向 $r\sin\theta\,d\varphi$</b>(その緯度での、経度 $d\varphi$ に対応する弧。緯度が高いほど、円周が小さい)の、ほぼ直方体です:
+    $$dx\,dy\,dz=r^2\sin\theta\,dr\,d\theta\,d\varphi.$$</p>
+    <figure class="fig">
+      <svg viewBox="0 0 560 222" width="560" role="img" aria-label="球座標の微小体積"><polygon points="70,172 190,172 190,82 70,82" style="fill:var(--accent);fill-opacity:.12;stroke:var(--accent);stroke-width:1.6"/><polygon points="70,82 190,82 228.5,54 108.5,54" style="fill:var(--accent);fill-opacity:.25;stroke:var(--accent);stroke-width:1.6"/><polygon points="190,172 228.5,144 228.5,54 190,82" style="fill:var(--accent);fill-opacity:.18;stroke:var(--accent);stroke-width:1.6"/><line x1="108.5" y1="144" x2="108.5" y2="54" style="stroke:var(--accent);stroke-width:1;stroke-dasharray:4 3"/><line x1="70" y1="172" x2="108.5" y2="144" style="stroke:var(--accent);stroke-width:1;stroke-dasharray:4 3"/><line x1="108.5" y1="144" x2="228.5" y2="144" style="stroke:var(--accent);stroke-width:1;stroke-dasharray:4 3"/><line x1="70" y1="172" x2="181.6" y2="172" style="stroke:var(--thm);stroke-width:2.6;fill:none"/><polygon points="190,172 181,176 181,168" style="fill:var(--thm)"/><text class="t" x="90" y="192" style="fill:var(--thm)">dr(半径方向)</text><line x1="190" y1="172" x2="190" y2="90.4" style="stroke:var(--ex);stroke-width:2.6;fill:none"/><polygon points="190,82 194,91 186,91" style="fill:var(--ex)"/><text class="t" x="204" y="131" style="fill:var(--ex)">r dθ(南北方向)</text><line x1="190" y1="172" x2="221.7" y2="148.9" style="stroke:var(--accent);stroke-width:2.6;fill:none"/><polygon points="228.5,144 223.6,152.5 218.9,146.1" style="fill:var(--accent)"/><text class="t" x="227.3" y="182" style="fill:var(--accent)">r sinθ dφ(東西方向)</text><text class="tj" x="350" y="46">微小体積</text><text class="t" x="350" y="70">dV = dr × r dθ × r sinθ dφ</text><text class="t" x="350" y="96">    = r² sinθ dr dθ dφ</text><text class="tm" x="350" y="128">直方体とみなせる小さな区画</text><text class="tm" x="350" y="146">(3辺とも、直角に交わる)</text></svg>
+      <figcaption>球座標の微小体積。辺の長さは $dr$、$r\,d\theta$、$r\sin\theta\,d\varphi$。その積が $r^2\sin\theta\,dr\,d\theta\,d\varphi$。</figcaption>
+    </figure>
+    <p><b>数式での導き方。</b>変数 $(u_1,u_2,\dots)$ から $(x,y,\dots)$ への変換のヤコビ行列式(偏微分を並べた行列の行列式)の絶対値が、倍率 $|J|$ です(ヤコビ行列は、<a href="../calc/basics.html#chain" data-xref>微積の「春学期のまとめ」(連鎖律)</a>で出てきます)。平面の場合:
+    $$|J|=\begin{vmatrix}\partial x/\partial r&\partial x/\partial\theta\\ \partial y/\partial r&\partial y/\partial\theta\end{vmatrix}=\begin{vmatrix}\cos\theta&-r\sin\theta\\ \sin\theta&r\cos\theta\end{vmatrix}=r\cos^2\theta+r\sin^2\theta=r.$$
+    3次元では、$3\times3$ の行列式を計算して、$|J|=r^2\sin\theta$。上の「辺の長さの積」と、同じ結果になります。</p>
+    <div class="box intuit"><div class="label">直感で理解する:$r$ が掛かる理由</div>
+      <p>原点に近いところでは、同じ角度 $d\theta$ でも、円周が短いので、区画が小さい。遠いところほど、円周が長く、区画が大きい。だから、面積の倍率は $r$ に比例します。3次元では、半径 $r$ の球面の面積は $4\pi r^2$ なので、<b>遠くの薄い殻ほど、体積が大きい</b>($r^2$)。さらに、北極・南極の近くでは、経度の円が小さいので、$\sin\theta$ がかかります。</p></div>
+    <div class="box ex"><div class="label">例:球の体積(確かめ)</div>
+      <p>半径 $R$ の球の体積 $=\displaystyle\int_0^R\!\!\int_0^\pi\!\!\int_0^{2\pi}r^2\sin\theta\,d\varphi\,d\theta\,dr=\frac{R^3}{3}\cdot2\cdot2\pi=\frac{4\pi R^3}3$。たしかに、球の体積の公式。角度部分 $\int_0^\pi\sin\theta\,d\theta\int_0^{2\pi}d\varphi=2\cdot2\pi=4\pi$ は、「全立体角」(球面全体の、半径 $1$ のときの面積)です。</p></div>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-04.html#w-volelem" data-xref>第4回 1.3 微小体積(ヤコビアン)</a></p>
+
+    <h3 id="laplace">ラプラシアン $\nabla^2$ の極座標表示</h3>
+    <p>Schrödinger 方程式に出てくる $\nabla^2=\dfrac{\partial^2}{\partial x^2}+\dfrac{\partial^2}{\partial y^2}+\dfrac{\partial^2}{\partial z^2}$ を、<b>ラプラシアン</b>といいます(「関数の曲がり具合の、3方向の合計」。1次元の $d^2/dx^2$ の3次元版)。原子のように、球対称な問題では、これを極座標で書くと便利です。連鎖律で、地道に計算すると(ここでは結果だけ。講義では「覚えなくてよい、テストに出ない」とされています):</p>
+    <p>2次元:$\displaystyle\nabla^2f=\frac{\partial^2f}{\partial r^2}+\frac1r\frac{\partial f}{\partial r}+\frac1{r^2}\frac{\partial^2f}{\partial\theta^2}$。</p>
+    <p>3次元:$\displaystyle\nabla^2f=\frac1{r^2}\frac{\partial}{\partial r}\left(r^2\frac{\partial f}{\partial r}\right)+\frac1{r^2\sin\theta}\frac{\partial}{\partial\theta}\left(\sin\theta\frac{\partial f}{\partial\theta}\right)+\frac1{r^2\sin^2\theta}\frac{\partial^2f}{\partial\varphi^2}$。</p>
+    <p>第1項は<b>動径方向</b>(原点から離れる向き)の曲がり、第2項と第3項は<b>角度方向</b>(球面の上を動く向き)の曲がりです。球対称な関数($r$ だけの関数 $f(r)$)なら、角度の項は消えて、
+    $$\nabla^2f(r)=\frac1{r^2}\frac{d}{dr}\left(r^2\frac{df}{dr}\right)=\frac{d^2f}{dr^2}+\frac2r\frac{df}{dr}.$$</p>
+    <div class="box ex"><div class="label">例:$f=e^{-r/a}$ のラプラシアン</div>
+      <p>$f'=-\dfrac1ae^{-r/a}$、$r^2f'=-\dfrac{r^2}ae^{-r/a}$。もう一度微分すると、$\dfrac{d}{dr}(r^2f')=\left(-\dfrac{2r}a+\dfrac{r^2}{a^2}\right)e^{-r/a}$。$r^2$ で割って、
+      $$\nabla^2e^{-r/a}=\left(\frac1{a^2}-\frac2{ar}\right)e^{-r/a}.$$
+      これは、第4回の 1s 軌道の確認(「エネルギーを、実際に確かめる」)で使います。</p></div>
+    <div class="box ex"><div class="label">例:$f=\cos\theta$ のラプラシアン(角度の部分)</div>
+      <p>$\dfrac{1}{\sin\theta}\dfrac{d}{d\theta}\left(\sin\theta\cdot(-\sin\theta)\right)=\dfrac{1}{\sin\theta}(-2\sin\theta\cos\theta)=-2\cos\theta$。したがって、角度部分の $\nabla^2$ を $\cos\theta$ に作用させると、$-\dfrac{2}{r^2}\cos\theta$($\varphi$ に依存しないので、第3項は $0$)。2pz 軌道の確認で使います。</p></div>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-04.html#w-laplace" data-xref>第4回 1.4 ラプラシアン $\nabla^2$ の極座標表示</a></p>
+
+    <h3 id="integ">積分の公式($\int r^ne^{-ar}dr$ と三角関数の積分)</h3>
+    <p>水素原子の波動関数の積分では、次の3種類が出てきます。</p>
+    <p><b>(1) 動径方向:指数関数と、べき関数の積。</b>$a\gt0$、$n=0,1,2,\dots$ として、
+    $$\int_0^\infty r^ne^{-ar}\,dr=\frac{n!}{a^{n+1}}.$$
+    導き方:部分積分を繰り返す。$\int_0^\infty re^{-ar}dr=\left[-\dfrac rae^{-ar}\right]_0^\infty+\dfrac1a\int_0^\infty e^{-ar}dr=\dfrac1{a^2}$(境界の項は $0$)。一般に、$I_n=\dfrac naI_{n-1}$、$I_0=\dfrac1a$。よって $I_n=\dfrac{n!}{a^{n+1}}$。</p>
+    <div class="box ex"><div class="label">例</div>
+      <p>$\displaystyle\int_0^\infty r^2e^{-2r/a_0}dr=\frac{2!}{(2/a_0)^3}=\frac{a_0^3}{4}$。$\displaystyle\int_0^\infty r^4e^{-r/a_0}dr=4!\,a_0^5=24a_0^5$。</p></div>
+    <p><b>(2) 有限の範囲の積分(途中まで)。</b>$\displaystyle\int_0^xt^2e^{-2t}dt$ のように、範囲が有限のときも、部分積分を2回して求まります:
+    $$\int_0^xt^2e^{-2t}dt=\frac14\Bigl[1-e^{-2x}\left(1+2x+2x^2\right)\Bigr].$$
+    ($x\to\infty$ では $\frac14$。上の公式 $2!/2^3=\frac14$ と一致。)</p>
+    <p><b>(3) 角度方向:三角関数の積分。</b>$\sin\theta$ が掛かっている積分は、$u=\cos\theta$ と置換すると($du=-\sin\theta\,d\theta$)、べき関数の積分になります:
+    $$\int_0^\pi\sin\theta\,d\theta=2,\qquad\int_0^\pi\cos\theta\sin\theta\,d\theta=\int_{-1}^{1}u\,du=0,\qquad\int_0^\pi\cos^2\theta\sin\theta\,d\theta=\int_{-1}^1u^2du=\frac23.$$
+    $\varphi$ の積分は、$\displaystyle\int_0^{2\pi}d\varphi=2\pi$、$\displaystyle\int_0^{2\pi}\cos\varphi\,d\varphi=0$ など。</p>
+    <div class="box intuit"><div class="label">直感で理解する:奇関数の積分は $0$</div>
+      <p>$u$ について「正の側」と「負の側」が対称な範囲($-1$ から $1$ など)で、$u$ の奇関数($u,\ u^3,\ \cos\theta$ など)を積分すると、正の部分と負の部分が打ち消し合って $0$ になります。偶関数($u^2$ など)は、足し算になって、$0$ になりません。後で、遷移の「禁制・許容」を判定するときに、この考え方を使います。</p></div>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-04.html#w-integ" data-xref>第4回 1.6 積分の公式</a></p>
+
+    <h3 id="maxmin">最大になる点の見つけ方(微分)</h3>
+    <p>関数 $p(r)$ が最大(山のてっぺん)になる点では、グラフの接線が水平なので、<b>傾き(微分)が $0$</b> です:$\dfrac{dp}{dr}=0$。これを解いた点は、最大・最小・停留点のどれかなので、グラフ(または、前後での微分の符号)で確かめます。</p>
+    <p><b>よく使う型:$p=f(r)^2e^{-ar}$</b>。積の微分で、$p'=e^{-ar}f\,(2f'-af)$。したがって、$p'=0$ の解は、(i) $f=0$(関数の零点。ここでは $p$ も $0$ で、「谷底」)、(ii) $2f'-af=0$(山の候補)。</p>
+    <div class="box ex"><div class="label">例</div>
+      <p>$p=r^2e^{-2r}$:$p'=(2r-2r^2)e^{-2r}=2r(1-r)e^{-2r}$。$p'=0$ ⇒ $r=0,1$。$r=1$ の前($r\lt1$)で $p'\gt0$、後($r\gt1$)で $p'\lt0$:$r=1$ で最大。最大値は $p(1)=e^{-2}\approx0.135$。</p></div>
+    <p>微分の基本(接線・導関数)や、極値の条件は、<a href="../calc/basics.html#extremum" data-xref>微積の「春学期のまとめ」(極値)</a>を見てください。</p>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-04.html#w-maxmin" data-xref>第4回 1.7 最大になる点の見つけ方</a></p>
+
+    <h2>6. 確率と固有関数</h2>
+
+    <h3 id="prob">確率密度と規格化</h3>
+    <p>1次元で、粒子の位置 $x$ が、確率的にしか決まらないとき、「$x$ と $x+dx$ の間に見つかる確率」が $p(x)\,dx$ と書けるなら、$p(x)$ を<b>確率密度</b>といいます(「単位長さあたりの確率」)。範囲 $a\le x\le b$ に見つかる確率は、積分 $\displaystyle\int_a^bp(x)\,dx$。すべての範囲を足すと $1$(必ずどこかには、いる):$\displaystyle\int_{-\infty}^\infty p(x)\,dx=1$。この条件が<b>規格化</b>です。</p>
+    <p>量子力学では、波動関数 $\psi$ が複素数でもよく、確率密度は<b>絶対値の2乗</b>:
+    $$p=|\psi|^2=\psi^*\psi\qquad(\psi^*\text{ は複素共役}).$$
+    $\psi$ のままでは、複素数になったり、負になったりするので、「確率」とは解釈できません。2乗すると、実数で、$0$ 以上になるので、確率にできます。3次元では、$|\psi|^2dV$ が、体積 $dV$ の中に電子が見つかる確率で、規格化は
+    $$\iiint|\psi|^2dV=1.$$
+    球座標では、$dV=r^2\sin\theta\,dr\,d\theta\,d\varphi$。波動関数を $\psi=R(r)Y(\theta,\varphi)$ の積に書くと、積分も、動径と角度に分かれます:
+    $$\iiint|\psi|^2dV=\underbrace{\int_0^\infty R^2r^2dr}_{\text{動径}}\times\underbrace{\int_0^\pi\!\!\int_0^{2\pi}|Y|^2\sin\theta\,d\varphi\,d\theta}_{\text{角度}}.$$
+    それぞれが $1$ になるように決めておけば、全体も $1$ です(これが、各関数の前についている<b>規格化定数</b>)。</p>
+    <div class="box ex"><div class="label">例:規格化定数を求める</div>
+      <p>$\psi=Ne^{-r/a}$(球対称)を規格化する:$\displaystyle1=N^2\int_0^\infty e^{-2r/a}r^2dr\cdot4\pi=N^2\cdot\frac{a^3}{4}\cdot4\pi=N^2\pi a^3$ ⇒ $N=\dfrac{1}{\sqrt{\pi a^3}}$。</p></div>
+    <div class="box intuit"><div class="label">直感で理解する:「雲」の濃さ</div>
+      <p>$|\psi|^2$ は、電子の「雲の濃さ」です。濃い(値が大きい)ところほど、電子が見つかりやすい。ただし、濃さそのものは「確率」ではなく、<b>濃さ × 体積</b>が確率です(人口密度 × 面積 = 人数、と同じ)。だから、規格化は「雲全体の量が $1$」という条件です。</p></div>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-04.html#w-prob" data-xref>第4回 1.8 確率密度と規格化</a></p>
+
+    <h3 id="lincomb">縮退と、固有関数の線形結合</h3>
+    <p>Schrödinger 方程式 $\mathcal H\psi=E\psi$ の解(固有関数)に、<b>同じ $E$</b> をもつものが、複数あることがあります。これを<b>縮退</b>(「縮重」)といいます。水素原子では、エネルギーは $n$ だけで決まるので、$n=2$ には、2s と 3つの 2p が、同じエネルギー $-13.6/4\ \mathrm{eV}$ で、4つあります。</p>
+    <div class="box thm"><div class="label">縮退した固有関数の線形結合</div>
+      <p>$\mathcal H\psi_1=E\psi_1$、$\mathcal H\psi_2=E\psi_2$(<b>同じ $E$</b>)ならば、定数 $c_1,c_2$ を使った線形結合 $\psi=c_1\psi_1+c_2\psi_2$ も、同じ $E$ の固有関数。</p></div>
+    <p>理由:$\mathcal H$ は<b>線形</b>(足し算と定数倍に分けられる)なので、$\mathcal H(c_1\psi_1+c_2\psi_2)=c_1\mathcal H\psi_1+c_2\mathcal H\psi_2=c_1E\psi_1+c_2E\psi_2=E(c_1\psi_1+c_2\psi_2)$。($E$ が同じだから、くくり出せる。$E$ が違うと、くくり出せない。)</p>
+    <div class="box intuit"><div class="label">直感で理解する:座標軸の取り方は自由</div>
+      <p>3つの 2p 軌道(向きが違うだけで、形は同じ)は、「$z$ 軸方向のダンベル」「$x$ 軸方向」「$y$ 軸方向」の3通り、あるいは、軸を回した別の向きの組み合わせ、と選び方が自由です。どの選び方でも、エネルギーは同じ。線形結合は、この「向きの選び直し」にあたります。複素数の $e^{\pm i\varphi}$ を含む形より、実数の $\cos\varphi,\sin\varphi$ のほうが、図に描きやすいので、線形結合で、実数の関数に直して使います。</p></div>
+    <div class="box ex"><div class="label">例:複素数の $e^{\pm i\varphi}$ から、実数の $\cos\varphi,\sin\varphi$ へ</div>
+      <p>オイラーの式から、$e^{i\varphi}+e^{-i\varphi}=2\cos\varphi$、$\dfrac{e^{i\varphi}-e^{-i\varphi}}{2i}=\sin\varphi$。同じ $E$ の2つの関数 $\sin\theta\,e^{i\varphi}$ と $\sin\theta\,e^{-i\varphi}$ の、和と差から、$\sin\theta\cos\varphi\ (=x/r)$ と $\sin\theta\sin\varphi\ (=y/r)$ が作れる。</p></div>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-04.html#w-lincomb" data-xref>第4回 1.9 縮退と、固有関数の線形結合</a></p>
+
+    <h3 id="greek">ギリシャ文字と記号</h3>
+    <p>量子力学では、ギリシャ文字をたくさん使います。形と読み方を、確認しておきます。</p>
+    <table class="cmp">
+      <tr><th>文字</th><th>読み</th><th>この講義での使い方</th></tr>
+      <tr><td>$\alpha,\ \beta,\ \gamma,\ \delta$</td><td>アルファ、ベータ、ガンマ、デルタ</td><td>水素の線スペクトル(Hα, Hβ, …)、$\Delta$(差)</td></tr>
+      <tr><td>$\varepsilon$</td><td>イプシロン</td><td>真空の誘電率 $\varepsilon_0$</td></tr>
+      <tr><td>$\theta,\ \varphi$</td><td>シータ、ファイ</td><td>球座標の2つの角($\varphi$ は $\phi$ とも書く)</td></tr>
+      <tr><td>$\lambda,\ \mu$</td><td>ラムダ、ミュー</td><td>波長、双極子モーメント $\mu$</td></tr>
+      <tr><td>$\nu,\ \tilde\nu$</td><td>ニュー、ニューチルダ</td><td>振動数、波数</td></tr>
+      <tr><td>$\pi$</td><td>パイ</td><td>円周率、π軌道・π結合</td></tr>
+      <tr><td>$\rho,\ \sigma$</td><td>ロー、シグマ</td><td>密度、σ軌道・σ結合</td></tr>
+      <tr><td>$\psi,\ \Psi$</td><td>プサイ</td><td>波動関数</td></tr>
+      <tr><td>$\hbar$</td><td>エイチバー</td><td>$h/2\pi$</td></tr>
+      <tr><td>$\partial$</td><td>ラウンド</td><td>偏微分(書き方:小さい $6$ をひっくり返したような形で、丸く書く)</td></tr>
+    </table>
+    <p>$\nu$(ニュー)は $v$(速さ)に、$\rho$(ロー)は $p$(運動量)に、$\varphi$ は $\phi$ に、手書きだと、紛らわしいので、丁寧に書き分けます。</p>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-04.html#w-greek" data-xref>第4回 1.1 ギリシャ文字と記号</a></p>
 
   </main>
 
