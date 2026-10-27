@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>第4回 偏微分の応用(球面上の最大・最小、等周問題、エントロピー、最小二乗法) | Aセメまとめノート</title>
+  <link rel="stylesheet" href="../../assets/style.css">
+  <script defer src="../../assets/nav.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],macros:{'\\R':'\\mathbb{R}'}});window.__navReady&&window.__navReady()"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="inner">
+      <a class="site-title" href="../../index.html">Aセメまとめノート</a>
+      <span class="links"><a href="../index.html">微積</a><a href="../basics.html">春学期のまとめ</a><a href="../../linalg/index.html">線形代数</a><a href="../../structchem/index.html">構造化学</a><a href="../../mech/index.html">力学A</a><a href="../../thermo/index.html">熱力学</a><a href="../../em/index.html">電磁気学</a></span>
+    </div>
+  </header>
+
+  <main class="note">
+    <h1>第4回:偏微分の応用</h1>
+    <div class="meta">微分積分学②(東京大学 教養学部 秋学期)／<b>2026年10月27日(火)</b>／板書 p.1〜p.4(板書にページ番号がないため、PDF の順に数えています)</div>
+
+    <nav class="toc">
+      <div class="toc-title">目次</div>
+      <ol start="0">
+        <li><a href="#s0">この回の全体像</a></li>
+        <li><a href="#s1">準備:これまでの内容と、この回で使う基礎</a>
+          <div class="sub">ラグランジュの未定乗数法／固有値と2次形式／ヘロンの公式／$x\log x$ の極限／平均・分散・共分散</div></li>
+        <li><a href="#s2">球面上の関数の最大・最小:$f=x^2+2y^2+3z^2$</a>(p.1)</li>
+        <li><a href="#s3">一般の2次形式と固有値</a>(p.1)</li>
+        <li><a href="#s4">別解:球面を、グラフとして局所的に表す</a>(p.2)</li>
+        <li><a href="#s5">等周問題:周の長さが一定の三角形の最大面積</a>(p.2–3)</li>
+        <li><a href="#s6">エントロピーを最大にする問題</a>(p.3)</li>
+        <li><a href="#s7">最小二乗法</a>(p.4)</li>
+        <li><a href="#s8">具体例で練習</a></li>
+        <li><a href="#s9">まとめ(この回で覚えること)</a></li>
+        <li><a href="#s10">この回のノートについてのメモ(板書の読み取り)</a></li>
+      </ol>
+    </nav>
+
+    <!-- ===================== 0 ===================== -->
+    <h2 id="s0">0. この回の全体像 <span class="page-tag">板書 p.1</span></h2>
+    <p>これまでの2回で、ラグランジュの未定乗数法と、最大・最小の存在定理がそろいました。この回は、その<b>応用編</b>です。「偏微分の応用」として、4つの題材を扱います。</p>
+    <ol>
+      <li><b>曲面上の関数の最大・最小:</b>球面 $x^2+y^2+z^2=1$ の上で $f=x^2+2y^2+3z^2$。ラグランジュの条件は、行列の<b>固有値の問題</b>になる。</li>
+      <li><b>等周問題(三角形版):</b>周の長さ(辺の和)が一定の三角形で、面積が最大のものは、<b>正三角形</b>。</li>
+      <li><b>エントロピーを最大にする問題:</b>確率の分布 $(p_1,\dots,p_n)$ のランダムさを測るエントロピー $-\sum p_k\log p_k$ は、<b>一様分布</b>(すべて $\tfrac1n$)で最大。</li>
+      <li><b>最小二乗法:</b>データの点に「いちばん近い」直線(回帰直線)の傾きと切片を、偏微分で求める。</li>
+    </ol>
+    <p>どれも、「(場合によっては条件つきの)最大・最小の候補を連立方程式で見つけ、存在定理で、最大・最小があることを保証して、値を比べる」という、同じ筋書きです。</p>
+    <div class="box thm">
+      <div class="label">この回のゴール</div>
+      <p>① 球面上で $x^2+2y^2+3z^2$ は、臨界点 6 点 $(\pm1,0,0),(0,\pm1,0),(0,0,\pm1)$ で値 $1,2,3$ をとり、最大値 3、最小値 1。<br>
+      ② 周の長さ $2s$ の三角形のうち、面積最大は正三角形(各辺 $\tfrac{2s}3$)。<br>
+      ③ 確率 $p_1,\dots,p_n$ のエントロピーの最大値は $\log n$(一様分布)。<br>
+      ④ データ $(a_i,b_i)$ の回帰直線は $y=\dfrac{\operatorname{Cov}(A,B)}{V(A)}(x-\bar a)+\bar b$。</p>
+    </div>
+
+    <!-- ===================== 1 ===================== -->
+    <h2 id="s1">1. 準備:これまでの内容と、この回で使う基礎</h2>
+
+    <h3 id="w-lagr3">1.1 ラグランジュの未定乗数法と、存在定理(前回までの復習)</h3>
+    <div class="box basic">
+      <div class="label">基礎:3変数・条件1つの場合 <a class="xref-link" href="week-02.html#s7" data-xref>→ 第2回 7.(3変数)</a><a class="xref-link" href="week-03.html#s3" data-xref>→ 第3回 3.(存在定理)</a></div>
+      <p>$g(x,y,z)=0$ の下で $f(x,y,z)$ が点 $p$ で極値をとり、$\nabla g(p)\ne\vec0$ なら、$\nabla f(p)=\lambda\nabla g(p)$($\lambda$ は定数)。成分で書くと、$f_x=\lambda g_x$、$f_y=\lambda g_y$、$f_z=\lambda g_z$ と、$g=0$ の連立方程式。<b>最大・最小の存在:</b>$g=0$ が有界閉集合(球面など)なら、連続関数 $f$ は最大・最小をもつ。だから、候補の点での値を全部比べれば、最大・最小が決まる。</p>
+    </div>
+
+    <h3 id="w-eigen3">1.2 固有値と固有ベクトル、2次形式</h3>
+    <div class="box basic">
+      <div class="label">基礎:対称行列の固有値 <a class="xref-link" href="../basics.html#eigen" data-xref>→ 詳しい解説</a><a class="xref-link" href="week-03.html#s4" data-xref>→ 第3回 4.(2次形式の最大・最小)</a></div>
+      <p>正方行列 $A$ に対して、$Ax=\lambda x$ をみたす $x\ne0$ があるとき、$\lambda$ を<b>固有値</b>、$x$ を<b>固有ベクトル</b>という。$n$ 次の<b>対称行列</b>($a_{ij}=a_{ji}$)に対応する<b>2次形式</b> $f(x)=\sum_{i,j}a_{ij}x_ix_j$ について、$\nabla f=2Ax$。固有値は、$\det(A-\lambda E)=0$ の根。第3回で見たように、単位円(球面)の上の2次形式の最大・最小は、固有値で与えられる。</p>
+    </div>
+
+    <h3 id="w-heron">1.3 三角形の面積:ヘロンの公式</h3>
+    <div class="box basic">
+      <div class="label">基礎:ヘロンの公式 <a class="xref-link" href="../basics.html#heron" data-xref>→ 詳しい解説</a></div>
+      <p>3辺の長さが $x,y,z$ の三角形の面積 $S$ は、$s=\tfrac12(x+y+z)$ として $S^2=s(s-x)(s-y)(s-z)$。<b>三角形ができる条件</b>は、「どの1辺も、他の2辺の和より短い」:$x\lt y+z$、$y\lt z+x$、$z\lt x+y$。$x+y+z=2s$ のとき、これは $x\lt s$、$y\lt s$、$z\lt s$ と同値($x\lt y+z=2s-x\iff x\lt s$)。</p>
+    </div>
+
+    <h3 id="w-xlogx">1.4 対数と、$x\log x$ の極限</h3>
+    <div class="box basic">
+      <div class="label">基礎:$\log$ の微分と、$x\to+0$ のときの $x\log x$ <a class="xref-link" href="../basics.html#xlogx" data-xref>→ 詳しい解説</a></div>
+      <p>$\log$ は自然対数。$(\log x)'=\tfrac1x$、$(x\log x)'=\log x+1$。$x\to+0$ のとき $\log x\to-\infty$ ですが、$x\log x\to0$($x$ が 0 に近づくスピードのほうが勝つ)。この極限があるので、$x=0$ で $x\log x:=0$ と定めると、$x\log x$ は $[0,\infty)$ 上の連続関数になる。</p>
+    </div>
+
+    <h3 id="w-stats">1.5 平均・分散・共分散</h3>
+    <div class="box basic">
+      <div class="label">基礎:データの平均と散らばり <a class="xref-link" href="../basics.html#stats" data-xref>→ 詳しい解説</a></div>
+      <p>データ $A=\{a_1,\dots,a_n\}$ の<b>平均</b> $\bar a=\tfrac1n(a_1+\cdots+a_n)$、<b>分散</b> $V(A)=\tfrac1n\sum(a_i-\bar a)^2$(平均からのずれの2乗の平均)、<b>標準偏差</b> $\sigma=\sqrt{V(A)}$。2組のデータ $A,B$ の<b>共分散</b> $\operatorname{Cov}(A,B)=\tfrac1n\sum(a_i-\bar a)(b_i-\bar b)$(「$a$ が平均より大きいとき、$b$ も平均より大きい傾向があるか」の指標。正なら一緒に増減、負なら逆)。</p>
+    </div>
+
+    <!-- ===================== 2 ===================== -->
+    <h2 id="s2">2. 球面上の関数の最大・最小:$f=x^2+2y^2+3z^2$ <span class="page-tag">板書 p.1</span></h2>
+    <p>板書の問題:「$x^2+y^2+z^2=1$ のとき、$f(x,y,z)=x^2+2y^2+3z^2$ の<b>臨界点と最大・最小</b>を求める。」(前回の板書の最後に出題された問題です。)</p>
+    <h3>2.1 「臨界点」とは</h3>
+    <p>板書:「<b>臨界点</b>:陰関数定理を用いて、球面上で $f(x,y,z)$ を $F(u,v)$ と表したとき、$\dfrac{\partial F}{\partial u}(a,b)=\dfrac{\partial F}{\partial v}(a,b)=0$ となる点。」</p>
+    <p>つまり、球面のある点のまわりで、球面を2つのパラメータ $(u,v)$ で表す(たとえば、北半球なら $z=\sqrt{1-x^2-y^2}$ と書いて $(u,v)=(x,y)$)。すると、$f$ は 2 変数関数 $F(u,v)$ になり、その<b>偏微分が両方 0</b> になる点が、(球面上の)臨界点です。極値をとる点は、必ず臨界点(第1回の「極値の必要条件」)。</p>
+    <p>板書の脇の注:「$f(x,y,z)$ が一定値をとる曲線 ⇒ <b>等位線(contour)</b>」(等高線のこと)。球面の上で、$f$ が一定値をとる点を結ぶと曲線になる。臨界点は、この等位線の「中心」(山頂・谷底)か、「交差点」(鞍点)になる。</p>
+    <h3>2.2 ラグランジュの未定乗数法で解く</h3>
+    <ol class="step-list">
+      <li>$g(x,y,z)=x^2+y^2+z^2-1$。</li>
+      <li>$\nabla f=\lambda\nabla g$:$\nabla f=(2x,4y,6z)$、$\nabla g=(2x,2y,2z)$ だから
+      $$\begin{pmatrix}2x\\4y\\6z\end{pmatrix}=\lambda\begin{pmatrix}2x\\2y\\2z\end{pmatrix}\ \Longleftrightarrow\ \begin{cases}x=\lambda x\\2y=\lambda y\\3z=\lambda z\end{cases}\ \Longleftrightarrow\ \begin{cases}(\lambda-1)x=0\\(\lambda-2)y=0\\(\lambda-3)z=0\end{cases}$$
+      (板書では、2つ目の形の下に、移項した形が並んでいる。)</li>
+      <li>これが $x^2+y^2+z^2=1$ をみたす解 $(x,y,z)$ をもつような $\lambda$ を求める。$(x,y,z)\ne(0,0,0)$ だから、3つの式の少なくとも1つで、$x,y,z$ のどれかが 0 でない。たとえば $x\ne0$ なら $\lambda=1$。このとき $y=0$($\lambda-2=-1\ne0$)、$z=0$。球面上で $x=\pm1$。</li>
+      <li>同様に整理して、次の表を得る(板書の表):</li>
+    </ol>
+    <table class="cmp">
+      <tr><th>$\lambda$</th><th>$(x,y,z)$</th><th>$f(x,y,z)$</th></tr>
+      <tr><td>$1$</td><td>$(\pm1,0,0)$</td><td>$1$</td></tr>
+      <tr><td>$2$</td><td>$(0,\pm1,0)$</td><td>$2$</td></tr>
+      <tr><td>$3$</td><td>$(0,0,\pm1)$</td><td>$3$</td></tr>
+    </table>
+    <p>板書の青字:「この 6 点が臨界点」。</p>
+    <h3>2.3 最大・最小を決める</h3>
+    <p>板書:「$S^2=\{(x,y,z)\mid g(x,y,z)=0\}$ は<b>有界閉集合</b>なので、$f$ は $S^2$ 上で最大・最小をもつ。⇒ 臨界点での値の最大値が $f$ の最大値。」</p>
+    <p>したがって、<b>最大値は 3</b>(点 $(0,0,\pm1)$)、<b>最小値は 1</b>(点 $(\pm1,0,0)$)。$(0,\pm1,0)$ での値 2 は、最大でも最小でもない(<b>鞍点</b>:一方向には増え、もう一方向には減る)。</p>
+    <div class="box intuit">
+      <div class="label">直感で理解する:$f=x^2+2y^2+3z^2$ は、「軸ごとに重みの違う、距離の2乗」</div>
+      <p>$f$ は、原点からの距離の2乗 $x^2+y^2+z^2$ に似ていますが、$z$ 方向に3倍、$y$ 方向に2倍の重みがあります。球面の上では、$z$ 軸の方向(北極・南極)が最も「重く」て $f=3$(山頂)、$x$ 軸の方向(赤道の点)が最も「軽く」て $f=1$(谷底)。$y$ 軸の方向は、その途中です。$y$ 軸の点($f=2$)から、$x$ 方向へずれると、より「軽い」方向へ向かうので $f$ は減り、$z$ 方向へずれると、より「重い」方向へ向かうので $f$ は増えます(鞍点)。</p>
+    </div>
+    <h3>2.4 楕円面との位置関係(板書 p.1 右)</h3>
+    <p>板書:「$\dfrac{x^2}{a^2}+\dfrac{y^2}{b^2}+\dfrac{z^2}{c^2}=1$ は<b>楕円面</b>を表す。$f(x,y,z)=c$ — 楕円面と $S^2$ の位置関係を見る。」</p>
+    <p>$f=c$ の等位面 $x^2+2y^2+3z^2=c$ は、$c$ ごとに、楕円面です。この楕円面と、球面の位置関係を調べると:</p>
+    <ul>
+      <li>$c=1$:$x^2+2y^2+3z^2=1$。$x$ 軸との交点は $(\pm1,0,0)$(半径 1)、$y,z$ 軸方向はもっと内側。球面の<b>内側</b>にあって、$(\pm1,0,0)$ だけで球面に接する → ここが最小。</li>
+      <li>$c=3$:$\tfrac{x^2}3+\tfrac{2y^2}3+z^2=1$。$z$ 軸との交点は $(0,0,\pm1)$(半径 1)で、他の方向は外側へ張り出す。球面を<b>包んで</b>、$(0,0,\pm1)$ だけで球面に接する → ここが最大。</li>
+      <li>$c=2$:$(0,\pm1,0)$ で球面と交わり、$x$ 方向には外側、$z$ 方向には内側 → <b>鞍点</b>(saddle point)。</li>
+    </ul>
+    <figure class="fig">
+      <svg viewBox="0 0 580 256" width="580" role="img" aria-label="球面上の臨界点まわりの等高線"><rect x="20" y="30" width="160" height="170" rx="8" style="fill:var(--surface);stroke:var(--muted);stroke-width:1.2"/><ellipse cx="100" cy="115" rx="18.6" ry="9.8" style="fill:none;stroke:var(--accent);stroke-width:1.6;opacity:0.91"/><ellipse cx="100" cy="115" rx="37.2" ry="19.5" style="fill:none;stroke:var(--accent);stroke-width:1.6;opacity:0.8200000000000001"/><ellipse cx="100" cy="115" rx="55.8" ry="29.3" style="fill:none;stroke:var(--accent);stroke-width:1.6;opacity:0.73"/><circle cx="100" cy="115" r="4.5" style="fill:var(--text)"/><text class="tt" x="100" y="22" style="text-anchor:middle;fill:var(--accent)">(±1,0,0):f = 1</text><text class="tj" x="100" y="216" style="text-anchor:middle">最小(谷底)</text><rect x="210" y="30" width="160" height="170" rx="8" style="fill:var(--surface);stroke:var(--muted);stroke-width:1.2"/><polyline points="368,54.5 366.4,56.5 364.9,58.5 363.4,60.6 361.9,62.6 360.4,64.6 359,66.6 357.6,68.6 356.2,70.6 354.9,72.7 353.6,74.7 352.4,76.7 351.1,78.7 350,80.7 348.8,82.7 347.8,84.8 346.7,86.8 345.7,88.8 344.8,90.8 344,92.8 343.2,94.8 342.4,96.9 341.8,98.9 341.2,100.9 340.7,102.9 340.2,104.9 339.9,106.9 339.6,109 339.4,111 339.2,113 339.2,115 339.2,117 339.4,119 339.6,121.1 339.9,123.1 340.2,125.1 340.7,127.1 341.2,129.1 341.8,131.1 342.4,133.2 343.2,135.2 344,137.2 344.8,139.2 345.7,141.2 346.7,143.2 347.8,145.3 348.8,147.3 350,149.3 351.1,151.3 352.4,153.3 353.6,155.3 354.9,157.4 356.2,159.4 357.6,161.4 359,163.4 360.4,165.4 361.9,167.4 363.4,169.5 364.9,171.5 366.4,173.5 368,175.5" style="fill:none;stroke:var(--accent);stroke-width:1.6"/><polyline points="212,54.5 213.6,56.5 215.1,58.5 216.6,60.6 218.1,62.6 219.6,64.6 221,66.6 222.4,68.6 223.8,70.6 225.1,72.7 226.4,74.7 227.6,76.7 228.9,78.7 230,80.7 231.2,82.7 232.3,84.8 233.3,86.8 234.3,88.8 235.2,90.8 236,92.8 236.8,94.8 237.6,96.9 238.2,98.9 238.8,100.9 239.3,102.9 239.8,104.9 240.1,106.9 240.4,109 240.6,111 240.8,113 240.8,115 240.8,117 240.6,119 240.4,121.1 240.1,123.1 239.8,125.1 239.3,127.1 238.8,129.1 238.2,131.1 237.6,133.2 236.8,135.2 236,137.2 235.2,139.2 234.3,141.2 233.3,143.2 232.3,145.3 231.2,147.3 230,149.3 228.9,151.3 227.6,153.3 226.4,155.3 225.1,157.4 223.8,159.4 222.4,161.4 221,163.4 219.6,165.4 218.1,167.4 216.6,169.5 215.1,171.5 213.6,173.5 212,175.5" style="fill:none;stroke:var(--accent);stroke-width:1.6"/><polyline points="358.7,54.5 356.9,56.5 355.2,58.5 353.4,60.6 351.7,62.6 350,64.6 348.3,66.6 346.7,68.6 345,70.6 343.4,72.7 341.8,74.7 340.3,76.7 338.7,78.7 337.3,80.7 335.8,82.7 334.4,84.8 333.1,86.8 331.8,88.8 330.6,90.8 329.4,92.8 328.3,94.8 327.3,96.9 326.3,98.9 325.5,100.9 324.7,102.9 324.1,104.9 323.5,106.9 323.1,109 322.8,111 322.6,113 322.5,115 322.6,117 322.8,119 323.1,121.1 323.5,123.1 324.1,125.1 324.7,127.1 325.5,129.1 326.3,131.1 327.3,133.2 328.3,135.2 329.4,137.2 330.6,139.2 331.8,141.2 333.1,143.2 334.4,145.3 335.8,147.3 337.3,149.3 338.7,151.3 340.3,153.3 341.8,155.3 343.4,157.4 345,159.4 346.7,161.4 348.3,163.4 350,165.4 351.7,167.4 353.4,169.5 355.2,171.5 356.9,173.5 358.7,175.5" style="fill:none;stroke:var(--accent);stroke-width:1.6"/><polyline points="221.3,54.5 223.1,56.5 224.8,58.5 226.6,60.6 228.3,62.6 230,64.6 231.7,66.6 233.3,68.6 235,70.6 236.6,72.7 238.2,74.7 239.7,76.7 241.3,78.7 242.7,80.7 244.2,82.7 245.6,84.8 246.9,86.8 248.2,88.8 249.4,90.8 250.6,92.8 251.7,94.8 252.7,96.9 253.7,98.9 254.5,100.9 255.3,102.9 255.9,104.9 256.5,106.9 256.9,109 257.2,111 257.4,113 257.5,115 257.4,117 257.2,119 256.9,121.1 256.5,123.1 255.9,125.1 255.3,127.1 254.5,129.1 253.7,131.1 252.7,133.2 251.7,135.2 250.6,137.2 249.4,139.2 248.2,141.2 246.9,143.2 245.6,145.3 244.2,147.3 242.7,149.3 241.3,151.3 239.7,153.3 238.2,155.3 236.6,157.4 235,159.4 233.3,161.4 231.7,163.4 230,165.4 228.3,167.4 226.6,169.5 224.8,171.5 223.1,173.5 221.3,175.5" style="fill:none;stroke:var(--accent);stroke-width:1.6"/><polyline points="229.5,183.7 231.5,181.9 233.5,180.2 235.6,178.4 237.6,176.7 239.6,175 241.6,173.3 243.6,171.7 245.6,170 247.7,168.4 249.7,166.8 251.7,165.3 253.7,163.7 255.7,162.3 257.7,160.8 259.8,159.4 261.8,158.1 263.8,156.8 265.8,155.6 267.8,154.4 269.8,153.3 271.9,152.3 273.9,151.3 275.9,150.5 277.9,149.7 279.9,149.1 281.9,148.5 284,148.1 286,147.8 288,147.6 290,147.5 292,147.6 294,147.8 296.1,148.1 298.1,148.5 300.1,149.1 302.1,149.7 304.1,150.5 306.1,151.3 308.2,152.3 310.2,153.3 312.2,154.4 314.2,155.6 316.2,156.8 318.2,158.1 320.3,159.4 322.3,160.8 324.3,162.3 326.3,163.7 328.3,165.3 330.3,166.8 332.4,168.4 334.4,170 336.4,171.7 338.4,173.3 340.4,175 342.4,176.7 344.5,178.4 346.5,180.2 348.5,181.9 350.5,183.7" style="fill:none;stroke:var(--thm);stroke-width:1.6"/><polyline points="229.5,46.3 231.5,48.1 233.5,49.8 235.6,51.6 237.6,53.3 239.6,55 241.6,56.7 243.6,58.3 245.6,60 247.7,61.6 249.7,63.2 251.7,64.7 253.7,66.3 255.7,67.7 257.7,69.2 259.8,70.6 261.8,71.9 263.8,73.2 265.8,74.4 267.8,75.6 269.8,76.7 271.9,77.7 273.9,78.7 275.9,79.5 277.9,80.3 279.9,80.9 281.9,81.5 284,81.9 286,82.2 288,82.4 290,82.5 292,82.4 294,82.2 296.1,81.9 298.1,81.5 300.1,80.9 302.1,80.3 304.1,79.5 306.1,78.7 308.2,77.7 310.2,76.7 312.2,75.6 314.2,74.4 316.2,73.2 318.2,71.9 320.3,70.6 322.3,69.2 324.3,67.7 326.3,66.3 328.3,64.7 330.3,63.2 332.4,61.6 334.4,60 336.4,58.3 338.4,56.7 340.4,55 342.4,53.3 344.5,51.6 346.5,49.8 348.5,48.1 350.5,46.3" style="fill:none;stroke:var(--thm);stroke-width:1.6"/><polyline points="229.5,193 231.5,191.4 233.5,189.9 235.6,188.4 237.6,186.9 239.6,185.4 241.6,184 243.6,182.6 245.6,181.2 247.7,179.9 249.7,178.6 251.7,177.4 253.7,176.1 255.7,175 257.7,173.8 259.8,172.8 261.8,171.7 263.8,170.7 265.8,169.8 267.8,169 269.8,168.2 271.9,167.4 273.9,166.8 275.9,166.2 277.9,165.7 279.9,165.2 281.9,164.9 284,164.6 286,164.4 288,164.2 290,164.2 292,164.2 294,164.4 296.1,164.6 298.1,164.9 300.1,165.2 302.1,165.7 304.1,166.2 306.1,166.8 308.2,167.4 310.2,168.2 312.2,169 314.2,169.8 316.2,170.7 318.2,171.7 320.3,172.8 322.3,173.8 324.3,175 326.3,176.1 328.3,177.4 330.3,178.6 332.4,179.9 334.4,181.2 336.4,182.6 338.4,184 340.4,185.4 342.4,186.9 344.5,188.4 346.5,189.9 348.5,191.4 350.5,193" style="fill:none;stroke:var(--thm);stroke-width:1.6"/><polyline points="229.5,37 231.5,38.6 233.5,40.1 235.6,41.6 237.6,43.1 239.6,44.6 241.6,46 243.6,47.4 245.6,48.8 247.7,50.1 249.7,51.4 251.7,52.6 253.7,53.9 255.7,55 257.7,56.2 259.8,57.3 261.8,58.3 263.8,59.3 265.8,60.2 267.8,61 269.8,61.8 271.9,62.6 273.9,63.2 275.9,63.8 277.9,64.3 279.9,64.8 281.9,65.1 284,65.4 286,65.6 288,65.8 290,65.8 292,65.8 294,65.6 296.1,65.4 298.1,65.1 300.1,64.8 302.1,64.3 304.1,63.8 306.1,63.2 308.2,62.6 310.2,61.8 312.2,61 314.2,60.2 316.2,59.3 318.2,58.3 320.3,57.3 322.3,56.2 324.3,55 326.3,53.9 328.3,52.6 330.3,51.4 332.4,50.1 334.4,48.8 336.4,47.4 338.4,46 340.4,44.6 342.4,43.1 344.5,41.6 346.5,40.1 348.5,38.6 350.5,37" style="fill:none;stroke:var(--thm);stroke-width:1.6"/><line x1="220" y1="115" x2="360" y2="115" style="stroke:var(--muted);stroke-width:1;fill:none"/><line x1="290" y1="38" x2="290" y2="192" style="stroke:var(--muted);stroke-width:1;fill:none"/><text class="t" x="352" y="111">x</text><text class="t" x="274" y="48">z</text><text class="tm" x="220" y="190" style="fill:var(--accent)">x 方向:下がる</text><text class="tm" x="286" y="70" style="fill:var(--thm)">z 方向:上がる</text><circle cx="290" cy="115" r="4.5" style="fill:var(--text)"/><text class="tt" x="290" y="22" style="text-anchor:middle;fill:var(--text)">(0,±1,0):f = 2</text><text class="tj" x="290" y="216" style="text-anchor:middle">鞍点</text><rect x="400" y="30" width="160" height="170" rx="8" style="fill:var(--surface);stroke:var(--muted);stroke-width:1.2"/><ellipse cx="480" cy="115" rx="18.6" ry="9.8" style="fill:none;stroke:var(--thm);stroke-width:1.6;opacity:0.91"/><ellipse cx="480" cy="115" rx="37.2" ry="19.5" style="fill:none;stroke:var(--thm);stroke-width:1.6;opacity:0.8200000000000001"/><ellipse cx="480" cy="115" rx="55.8" ry="29.3" style="fill:none;stroke:var(--thm);stroke-width:1.6;opacity:0.73"/><circle cx="480" cy="115" r="4.5" style="fill:var(--text)"/><text class="tt" x="480" y="22" style="text-anchor:middle;fill:var(--thm)">(0,0,±1):f = 3</text><text class="tj" x="480" y="216" style="text-anchor:middle">最大(山頂)</text><text class="tm" x="20" y="244">球面を、臨界点のそばで(ほぼ平らな面として)真上から見たときの、f の等高線。</text></svg>
+      <figcaption>球面の臨界点のそばを、真上から見たときの、$f$ の等位線。左:谷底(最小 1)。中:鞍点($x$ 方向に下がり、$z$ 方向に上がる)。右:山頂(最大 3)。</figcaption>
+    </figure>
+    <div class="box supp"><div class="label">板書にない補足:鞍点の確かめ</div>
+      <p>$(0,1,0)$ のまわりで、球面を $y=\sqrt{1-x^2-z^2}$ と表すと、$f=x^2+2(1-x^2-z^2)+3z^2=2-x^2+z^2$。$x$ 方向($z=0$)では $f=2-x^2$(2 から減る)、$z$ 方向($x=0$)では $f=2+z^2$(2 から増える)。どちらにも動けるので、極大でも極小でもありません。</p></div>
+
+    <!-- ===================== 3 ===================== -->
+    <h2 id="s3">3. 一般の2次形式と固有値 <span class="page-tag">板書 p.1</span></h2>
+    <p>板書 p.1 右下:「一般的な2次形式 $(x_1,\dots,x_n)$:$\displaystyle\sum_{1\le i,j\le n}a_{ij}x_ix_j$(ただし $a_{ij}=a_{ji}$)。$A=(a_{ij})$ は $n$ 次行列で、$a_{ij}=a_{ji}$ のとき<b>対称行列</b>という。」</p>
+    <p>$n=3$ のとき、$f(x,y,z)=ax^2+by^2+cz^2+2dxy+2eyz+2fzx$。$g=x^2+y^2+z^2-1$ とすると、$\nabla f=\lambda\nabla g$ は、$\nabla f=(2ax+2dy+2fz,\ 2dx+2by+2ez,\ 2fx+2ey+2cz)$、$\nabla g=(2x,2y,2z)$ だから
+    $$\begin{pmatrix}a&d&f\\d&b&e\\f&e&c\end{pmatrix}\begin{pmatrix}x\\y\\z\end{pmatrix}=\lambda\begin{pmatrix}x\\y\\z\end{pmatrix}$$
+    (板書では、行列を $A$ と名づけ、成分を $\begin{pmatrix}a&d&e\\d&b&f\\e&f&c\end{pmatrix}$ と並べている。2次形式の係数の名づけ方との対応は、メモ参照。)が、$(x,y,z)\ne(0,0,0)$ の解をもつような $\lambda$ を求める問題になります。
+    $$Ax=\lambda x\ \ (x\ne0)\quad\Longrightarrow\quad\lambda\text{ を }A\text{ の}\textbf{固有値}\text{という}.$$
+    今回の例は、$A=\begin{pmatrix}1&0&0\\0&2&0\\0&0&3\end{pmatrix}$(対角行列)で、固有値が対角成分 $1,2,3$、固有ベクトルが座標軸の方向でした。</p>
+    <div class="box thm">
+      <div class="label">まとめ:球面(単位円)上の2次形式</div>
+      <p>$A$ を $n$ 次の対称行列とする。$\|x\|=1$ のもとでの $f(x)=x^{\mathsf T}Ax$ の極値の点は $A$ の固有ベクトルで、極値は固有値。最大値は最大の固有値、最小値は最小の固有値。</p>
+    </div>
+    <p>(実対称行列の固有値が、すべて実数になることは、線形代数の「対称行列の対角化」で示されます。ここでは、$n=2$ の場合の判別式 $(a-c)^2+4b^2\ge0$(第3回)を、確かめています。)</p>
+
+    <!-- ===================== 4 ===================== -->
+    <h2 id="s4">4. 別解:球面を、グラフとして局所的に表す <span class="page-tag">板書 p.2</span></h2>
+    <p>板書「別解:$x^2+y^2+z^2=1$、$z\gt0$ では $z=\sqrt{1-x^2-y^2}$ と表せる」。ラグランジュの未定乗数法を使わずに、$z$ を消去して、2変数関数の臨界点に帰着させます。</p>
+    <p>$z\gt0$ の上半球で
+    $$f(x,y,z)=x^2+2y^2+3z^2=x^2+2y^2+3(1-x^2-y^2)=-2x^2-y^2+3=:F(x,y).$$
+    臨界点:$F_x=-4x=0$、$F_y=-2y=0$ より $(x,y)=(0,0)$、すなわち $(x,y,z)=(0,0,1)$。$z\lt0$ の下半球でも、同様に $(0,0,-1)$。(板書の右の小さな絵は、$F=-2x^2-y^2+3$ のグラフ、山の形。)</p>
+    <p>この2点は、$z=\pm\sqrt{1-x^2-y^2}$ と表せる範囲(つまり $z\ne0$)の臨界点です。赤道($z=0$)の上の点は、$z$ を $(x,y)$ の関数として表せないので、別の変数を選ぶ必要があります。板書:</p>
+    <ul>
+      <li>$x\gt0$ または $x\lt0$ のとき ⇒ $y,z$ の関数(球面を $x=\pm\sqrt{1-y^2-z^2}$ と表す)</li>
+      <li>$y\gt0$ または $y\lt0$ のとき ⇒ $x,z$ の関数</li>
+      <li>$z\gt0$ または $z\lt0$ のとき ⇒ $x,y$ の関数</li>
+    </ul>
+    <p>3つの場合で、それぞれ臨界点を探す。(球面のどの点でも、$x,y,z$ のどれかは 0 でないので、3つのどれかの場合に入ります。)$x\ne0$ の場合は、$f=(1-y^2-z^2)+2y^2+3z^2=1+y^2+2z^2$ で、臨界点は $(y,z)=(0,0)$:$(x,y,z)=(\pm1,0,0)$。$y\ne0$ の場合は、$f=x^2+2(1-x^2-z^2)+3z^2=2-x^2+z^2$ で、臨界点は $(0,\pm1,0)$。ラグランジュの方法と同じ6点が得られました。</p>
+    <div class="box intuit">
+      <div class="label">直感で理解する:曲面を「地図」にして、平らな2変数関数にする</div>
+      <p>球面は曲がっていますが、小さい範囲なら、ほぼ平らな地図(2変数 $(x,y)$ の平面)で表せます。地図の上の標高 $F(x,y)$ の山頂・谷底・峠(臨界点)を探す、という見方です。地図は、曲面の部分ごとにしか使えない(北半球の地図、東半球の地図、…)ので、<b>いくつかの地図で、全体を覆う</b>必要があります。ラグランジュの方法は、地図を使わずに、曲面全体を一気に扱える方法、とも言えます。</p>
+    </div>
+
+    <!-- ===================== 5 ===================== -->
+    <h2 id="s5">5. 等周問題:周の長さが一定の三角形の最大面積 <span class="page-tag">板書 p.2–3</span></h2>
+    <p>板書:「<b>等周問題</b>:曲線の長さ $L$ を固定して、これが囲む図形の面積を最大にする。」(答えは円ですが、証明は難しい。ここでは、三角形に限って考えます。)「<b>三角形の場合</b>:辺の長さの和が一定で、面積最大の三角形は?」</p>
+    <h3>5.1 問題を式にする</h3>
+    <p>3辺の長さを $x,y,z$。<b>ヘロンの公式</b>より、$s=\tfrac12(x+y+z)$、面積 $S$ について
+    $$S^2=s(s-x)(s-y)(s-z)=:f(x,y,z)$$
+    と置く(板書では、$S^2=f$)。周の長さ(辺の和)を一定、すなわち $s$ を<b>定数</b>とする:$x+y+z=2s$。$S$ を最大にすることと、$S^2=f$ を最大にすることは同じ。</p>
+    <p>辺の長さの条件:$x\gt0,\ y\gt0,\ z\gt0$、さらに<b>三角形の成立条件</b>。板書は
+    $$x+y\lt z,\quad y+z\lt x,\quad z+x\lt y$$
+    と書いていますが、三角形ができる条件は、「どの辺も、他の2辺の和<b>より短い</b>」ですから、正しくは $z\lt x+y$、$x\lt y+z$、$y\lt z+x$ です(向きが逆。メモ参照)。$x+y+z=2s$ を使うと、これは $x\lt s$、$y\lt s$、$z\lt s$ と同値です。</p>
+    <figure class="fig">
+      <svg viewBox="0 0 640 256" width="640" role="img" aria-label="3辺の長さの領域"><polygon points="60,222 300,222 180,44" style="fill:none;stroke:var(--text);stroke-width:2"/><polygon points="180,222 240,133 120,133" style="fill:var(--thm);fill-opacity:.25;stroke:var(--thm);stroke-width:2.4"/><circle cx="180" cy="162.7" r="5.5" style="fill:var(--ex)"/><text class="tt" x="188" y="180.7" style="fill:var(--ex)">x = y = z = 2s/3</text><text class="tm" x="48" y="240" style="text-anchor:end">(2s,0,0)</text><text class="tm" x="308" y="240">(0,2s,0)</text><text class="tm" x="180" y="36" style="text-anchor:middle">(0,0,2s)</text><text class="tm" x="180" y="242" style="text-anchor:middle">(s,s,0)</text><text class="tm" x="248" y="137">(0,s,s)</text><text class="tm" x="112" y="137" style="text-anchor:end">(s,0,s)</text><text class="tj" x="380" y="60">大きい三角形:x + y + z = 2s、</text><text class="tj" x="380" y="80">          x, y, z ≥ 0 の部分</text><text class="tt" x="380" y="112" style="fill:var(--thm)">橙の三角形:三角形の成立条件</text><text class="tt" x="380" y="132" style="fill:var(--thm)">  x ≤ s, y ≤ s, z ≤ s</text><text class="tm" x="380" y="162">(辺の長さ x, y, z の三角形が</text><text class="tm" x="380" y="180"> できるのはこの内側)</text><text class="tm" x="380" y="208">境界(橙の辺)では面積 0 に潰れる</text></svg>
+      <figcaption>平面 $x+y+z=2s$ と、$x,y,z\ge0$ の部分(大きい三角形)のうち、三角形ができる条件 $x,y,z\le s$ を満たす部分(橙の三角形 $D$)。中心 $(\tfrac{2s}3,\tfrac{2s}3,\tfrac{2s}3)$ が正三角形に当たる。</figcaption>
+    </figure>
+    <h3>5.2 ラグランジュの未定乗数法</h3>
+    <p>板書:$f(x,y,z)=s(s-x)(s-y)(s-z)$、$g(x,y,z)=x+y+z-2s$。$\nabla f=\lambda\nabla g$ より
+    $$f_x=-s(s-y)(s-z)=\lambda,\quad f_y=-s(s-x)(s-z)=\lambda,\quad f_z=-s(s-x)(s-y)=\lambda.$$
+    ($\nabla g=(1,1,1)$ だから、右辺は全部 $\lambda$。)したがって $f_x=f_y=f_z$。</p>
+    <ul>
+      <li>$f_x=f_y$ より $-s(s-y)(s-z)=-s(s-x)(s-z)$、すなわち $s(s-z)\bigl((s-x)-(s-y)\bigr)=0$、つまり $(s-z)(x-y)=0$(両辺を $s\ne0$ で割った)。</li>
+      <li>三角形の内部では $z\lt s$、つまり $s-z\ne0$。よって $x=y$。</li>
+      <li>同様に $f_y=f_z$ から $y=z$。</li>
+    </ul>
+    <p>$x=y=z$ と $x+y+z=2s$ から、$x=y=z=\tfrac23s$。</p>
+    <h3>5.3 最大値の存在と、最大の点</h3>
+    <p>板書:「領域 $\triangle$ の境界を加えたものを $D$ とおく。$x+y+z=2s$、$x\ge0,y\ge0,z\ge0$、$x+y\ge z$ ... (成立条件を、等号つきにしたもの。板書は不等号が逆。)」</p>
+    <ul>
+      <li>$f$ は $D$ の<b>境界</b>で 0:境界では、$x=s$ または $y=s$ または $z=s$ で、$f$ の因数 $s-x$ などが 0 になる(つぶれた三角形で、面積 0)。</li>
+      <li>$D$ の<b>内部</b> $\triangle$ では $f\gt0$。</li>
+      <li>$D$ は<b>有界閉集合</b>(板書は「有界開集合」と書いているが、閉集合の書き誤り)なので、$f$ は $D$ 上で最大・最小をもつ(最小は 0)。</li>
+      <li>$f$ は、$D$ で最大値をもつが、境界では 0 なので、最大ではない(内部に正の値がある)。したがって、$f$ は $D$ の<b>内部 $\triangle$</b> で最大値をもつ。</li>
+      <li>内部の臨界点は $x=y=z=\tfrac23s$ <b>のみ</b>なので、ここで最大。</li>
+    </ul>
+    <p><b>結論:</b>周の長さ $2s$ が一定の三角形のうち、面積が最大なのは、$x=y=z=\tfrac23s$ の<b>正三角形</b>。最大面積は $S^2=s\bigl(\tfrac s3\bigr)^3=\tfrac{s^4}{27}$、$S=\dfrac{s^2}{3\sqrt3}$。</p>
+    <div class="box intuit">
+      <div class="label">直感で理解する:「いびつにすると面積が減る」</div>
+      <p>周りの長さが同じなら、正三角形が「いちばんふくらんだ」三角形です。1辺を長く、他を短くしていくと、三角形はだんだん細長くつぶれ、最後には、面積 0 の「線」になってしまいます(境界で $f=0$)。つぶれた形が最小で、その反対側に、最大(正三角形)がある、というのが、この証明の筋書きです。「境界で 0、内部で正」という性質が、最大が内部にあることを教えてくれます。</p>
+    </div>
+    <div class="box ex"><div class="label">確かめ</div>
+      <p>周が 12($s=6$)の三角形。正三角形(各辺 4)の面積:$S^2=6\cdot2\cdot2\cdot2=48$、$S=4\sqrt3\approx6.93$。辺 $(3,4,5)$ の直角三角形:$S^2=6\cdot3\cdot2\cdot1=36$、$S=6$。$6\lt6.93$ ✓。</p></div>
+
+    <!-- ===================== 6 ===================== -->
+    <h2 id="s6">6. エントロピーを最大にする問題 <span class="page-tag">板書 p.3</span></h2>
+    <p>板書:「$n$ 個の事象がおこる確率が $p_1,\dots,p_n$ のとき、<b>ランダムネス</b>(randomness)を与える指標として、(情報の)<b>エントロピー</b>
+    $$f(p_1,\dots,p_n)=-\sum_{k=1}^np_k\log p_k,\qquad p_1+\cdots+p_n=1,\quad p_1,\dots,p_n\ge0$$
+    を考える。」($\log$ は自然対数。)</p>
+    <div class="box intuit">
+      <div class="label">直感で理解する:エントロピーは「結果の予想のつきにくさ」</div>
+      <p>たとえば、コインが表と裏が $\tfrac12$ ずつなら、結果が予想しにくい(ランダム)。表が $0.99$ なら、ほとんど表と予想できる(あまりランダムでない)。エントロピーは、このランダムさを数にしたもので、$p_k\log p_k$ の和にマイナスをつけたもの。$p_k=1$(確実)の項は $\log1=0$ で、確実な事象は、ランダムさに寄与しません。確率がすべて等しい($\tfrac1n$)ときが、いちばんランダム、というのが、これから示すことです。</p>
+    </div>
+    <h3>6.1 $n=3$ のとき</h3>
+    <p>$x+y+z=1$、$x,y,z\ge0$ のとき、
+    $$f(x,y,z)=-x\log x-y\log y-z\log z$$
+    の最大を求める。領域 $D=\{x+y+z=1,\ x,y,z\ge0\}$ は、平面上の三角形(境界を含む)で、<b>有界閉集合</b>。</p>
+    <p>ただし、境界($x=0$ または $y=0$ または $z=0$)では、$\log0$ が定義されません。板書:「$f(x,y,z)$ は<b>境界</b>において、<b>連続関数として拡張できる</b>。」($x=0$ で、$x\log x:=0$ と定める。次の節の極限で、連続になる。)</p>
+    <h3>6.2 $x\log x\to0$($x\to+0$)</h3>
+    <p>板書:$\lim_{x\to+0}x\log x=0$。理由:$x=e^{-t}$ とおくと($x\to+0$ のとき $t\to+\infty$)、$x\log x=e^{-t}\cdot(-t)=-\dfrac{t}{e^{t}}$。
+    $$\lim_{x\to+0}x\log x=\lim_{t\to\infty}\Bigl(-\frac t{e^t}\Bigr)=0$$
+    ($e^t$ は $t$ より、はるかに速く大きくなる)。</p>
+    <h3>6.3 $n=2$ の場合:グラフ</h3>
+    <p>板書:$f(x,y)=-x\log x-y\log y$($x+y=1$)$=-x\log x-(1-x)\log(1-x)=:g(x)$($0\le x\le1$)。グラフは、$x=\tfrac12$ で最大 $\log2$ をとり、$x=0,1$ で 0 になる山形。</p>
+    <figure class="fig">
+      <svg viewBox="0 0 640 240" width="640" role="img" aria-label="エントロピーのグラフ(n = 2)"><line x1="70" y1="200" x2="390" y2="200" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><line x1="70" y1="200" x2="70" y2="30" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><text class="t" x="394" y="205">x</text><text class="t" x="76" y="26">g(x)</text><polyline points="70,200 71.5,194.6 73,190.3 74.5,186.5 76,183 77.5,179.8 79,176.7 80.5,173.7 82,170.9 83.5,168.2 85,165.6 86.5,163.1 88,160.7 89.5,158.4 91,156.1 92.5,153.9 94,151.7 95.5,149.7 97,147.6 98.5,145.6 100,143.7 101.5,141.8 103,140 104.5,138.2 106,136.5 107.5,134.8 109,133.1 110.5,131.5 112,129.9 113.5,128.3 115,126.8 116.5,125.3 118,123.9 119.5,122.5 121,121.1 122.5,119.7 124,118.4 125.5,117.1 127,115.8 128.5,114.6 130,113.4 131.5,112.2 133,111 134.5,109.9 136,108.8 137.5,107.7 139,106.6 140.5,105.6 142,104.6 143.5,103.6 145,102.6 146.5,101.7 148,100.8 149.5,99.9 151,99 152.5,98.2 154,97.3 155.5,96.5 157,95.8 158.5,95 160,94.2 161.5,93.5 163,92.8 164.5,92.1 166,91.5 167.5,90.8 169,90.2 170.5,89.6 172,89 173.5,88.5 175,87.9 176.5,87.4 178,86.9 179.5,86.4 181,85.9 182.5,85.5 184,85 185.5,84.6 187,84.2 188.5,83.8 190,83.5 191.5,83.1 193,82.8 194.5,82.5 196,82.2 197.5,82 199,81.7 200.5,81.5 202,81.2 203.5,81 205,80.9 206.5,80.7 208,80.6 209.5,80.4 211,80.3 212.5,80.2 214,80.1 215.5,80.1 217,80 218.5,80 220,80 221.5,80 223,80 224.5,80.1 226,80.1 227.5,80.2 229,80.3 230.5,80.4 232,80.6 233.5,80.7 235,80.9 236.5,81 238,81.2 239.5,81.5 241,81.7 242.5,82 244,82.2 245.5,82.5 247,82.8 248.5,83.1 250,83.5 251.5,83.8 253,84.2 254.5,84.6 256,85 257.5,85.5 259,85.9 260.5,86.4 262,86.9 263.5,87.4 265,87.9 266.5,88.5 268,89 269.5,89.6 271,90.2 272.5,90.8 274,91.5 275.5,92.1 277,92.8 278.5,93.5 280,94.2 281.5,95 283,95.8 284.5,96.5 286,97.3 287.5,98.2 289,99 290.5,99.9 292,100.8 293.5,101.7 295,102.6 296.5,103.6 298,104.6 299.5,105.6 301,106.6 302.5,107.7 304,108.8 305.5,109.9 307,111 308.5,112.2 310,113.4 311.5,114.6 313,115.8 314.5,117.1 316,118.4 317.5,119.7 319,121.1 320.5,122.5 322,123.9 323.5,125.3 325,126.8 326.5,128.3 328,129.9 329.5,131.5 331,133.1 332.5,134.8 334,136.5 335.5,138.2 337,140 338.5,141.8 340,143.7 341.5,145.6 343,147.6 344.5,149.7 346,151.7 347.5,153.9 349,156.1 350.5,158.4 352,160.7 353.5,163.1 355,165.6 356.5,168.2 358,170.9 359.5,173.7 361,176.7 362.5,179.8 364,183 365.5,186.5 367,190.3 368.5,194.6 370,200" style="fill:none;stroke:var(--thm);stroke-width:3"/><line x1="220" y1="200" x2="220" y2="80" style="stroke:var(--muted);stroke-width:1.1;stroke-dasharray:5 4;fill:none"/><line x1="70" y1="80" x2="220" y2="80" style="stroke:var(--muted);stroke-width:1.1;stroke-dasharray:5 4;fill:none"/><circle cx="220" cy="80" r="5" style="fill:var(--ex)"/><text class="t" x="64" y="84" style="text-anchor:end">log 2</text><text class="t" x="220" y="220" style="text-anchor:middle">1/2</text><text class="t" x="370" y="220" style="text-anchor:middle">1</text><text class="t" x="70" y="220" style="text-anchor:middle">0</text><circle cx="70" cy="200" r="4" style="fill:var(--text)"/><circle cx="370" cy="200" r="4" style="fill:var(--text)"/><text class="tj" x="410" y="80">x = 0, 1 では g = 0</text><text class="tm" x="410" y="104">(x log x → 0 と決めておく)</text><text class="tt" x="410" y="140" style="fill:var(--ex)">x = 1/2 で最大 log 2</text><text class="tm" x="410" y="168">(2つの事象が同じ確率のとき、</text><text class="tm" x="410" y="186">  いちばんランダム)</text></svg>
+      <figcaption>$n=2$ のエントロピー $g(x)=-x\log x-(1-x)\log(1-x)$。$x=\tfrac12$ で最大 $\log2$。</figcaption>
+    </figure>
+    <p>確かめ:$g'(x)=-\log x-1+\log(1-x)+1=\log\dfrac{1-x}x$。$g'(x)=0$ ⇔ $x=\tfrac12$。$g(\tfrac12)=-\tfrac12\log\tfrac12\cdot2=\log2$。</p>
+    <h3>6.4 $n=3$:ラグランジュの未定乗数法</h3>
+    <p>$g(x,y,z)=x+y+z-1$ とおき、$\nabla f=\lambda\nabla g$。$f_x=-\log x-1$ だから
+    $$f_x=-\log x-1=\lambda,\qquad f_y=-\log y-1=\lambda,\qquad f_z=-\log z-1=\lambda.$$
+    したがって $\log x=\log y=\log z$、すなわち $x=y=z$。$x+y+z=1$ より $x=y=z=\tfrac13$。これが<b>臨界点</b>で、$f(\tfrac13,\tfrac13,\tfrac13)=-3\cdot\tfrac13\log\tfrac13=\log3$。</p>
+    <h3>6.5 最大値は $\log3$</h3>
+    <p>板書:「$f(x,y,z)$ は $D$($x+y+z=1,\ x,y,z\ge0$)で最大値をもつ。<b>境界での最大値は $\log2$</b>。$f(x,y,z)$ は $x=y=z=\tfrac13$ で $\log3$ になるので、境界で最大値はとらず、$\log3$($x=y=z=\tfrac13$)が最大値。」</p>
+    <ul>
+      <li>境界(たとえば $z=0$)では、$f=-x\log x-y\log y$($x+y=1$)で、これは $n=2$ のエントロピー。最大は $\log2$。</li>
+      <li>内部の臨界点は $x=y=z=\tfrac13$ のみで、そこでの値 $\log3$。</li>
+      <li>$\log3\gt\log2$ なので、最大値は、境界ではなく、内部の臨界点でとられる。</li>
+    </ul>
+    <p>板書の絵(三角形のドーム状のグラフ):$D$ の上に、$f$ のグラフが盛り上がっていて、縁(境界)から中心へ向かって高くなる形。縁の最高点は $\log2$(赤の点)で、中心で $\log3$ に達する。</p>
+    <div class="box thm"><div class="label">一般の $n$</div>
+      <p>$p_1+\cdots+p_n=1$、$p_k\ge0$ の下で、エントロピー $-\sum p_k\log p_k$ は、$p_1=\cdots=p_n=\tfrac1n$ で最大値 $\log n$ をとる。(同じ議論で、臨界点は $\log p_1=\cdots=\log p_n$、すなわち一様分布のみ。境界での値は、より小さい $n-1$ 以下の場合の最大値 $\log(n-1)\lt\log n$。)</p></div>
+
+    <!-- ===================== 7 ===================== -->
+    <h2 id="s7">7. 最小二乗法 <span class="page-tag">板書 p.4</span></h2>
+    <p>板書:「データ $A=\{a_1,\dots,a_n\}$、$B=\{b_1,\dots,b_n\}$ に対して、点 $(a_k,b_k)$($k=1,\dots,n$)に<b>「最も近い」直線</b>を求める。」</p>
+    <h3>7.1 問題を式にする</h3>
+    <p>直線 $y=px+q$ を考える。データの点 $(a_i,b_i)$ と、直線上の同じ $x$ 座標の点 $(a_i,pa_i+q)$ との、縦のずれは $pa_i+q-b_i$(図の青い縦線)。<b>ずれの2乗の和</b>
+    $$f(p,q)=\sum_{i=1}^n(pa_i+q-b_i)^2$$
+    を<b>最小</b>にする $p,q$ を求める(<b>最小二乗法</b>)。最小点では $f_p=f_q=0$ なので、$f_p=f_q=0$ となる $p,q$ を求める。</p>
+    <figure class="fig">
+      <svg viewBox="0 0 640 240" width="640" role="img" aria-label="最小二乗法と回帰直線"><line x1="50" y1="210" x2="380" y2="210" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><line x1="50" y1="210" x2="50" y2="40" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><text class="t" x="386" y="215">x</text><text class="t" x="56" y="36">y</text><line x1="61.4" y1="188.8" x2="342.6" y2="38.5" style="stroke:var(--thm);stroke-width:2.8"/><line x1="88" y1="176.4" x2="88" y2="174.6" style="stroke:var(--accent);stroke-width:1.6"/><circle cx="88" cy="176.4" r="4.5" style="fill:var(--accent)"/><line x1="126" y1="147.6" x2="126" y2="154.3" style="stroke:var(--accent);stroke-width:1.6"/><circle cx="126" cy="147.6" r="4.5" style="fill:var(--accent)"/><line x1="164" y1="145.2" x2="164" y2="134" style="stroke:var(--accent);stroke-width:1.6"/><circle cx="164" cy="145.2" r="4.5" style="fill:var(--accent)"/><line x1="202" y1="106.8" x2="202" y2="113.7" style="stroke:var(--accent);stroke-width:1.6"/><circle cx="202" cy="106.8" r="4.5" style="fill:var(--accent)"/><line x1="240" y1="99.6" x2="240" y2="93.3" style="stroke:var(--accent);stroke-width:1.6"/><circle cx="240" cy="99.6" r="4.5" style="fill:var(--accent)"/><line x1="278" y1="58.8" x2="278" y2="73" style="stroke:var(--accent);stroke-width:1.6"/><circle cx="278" cy="58.8" r="4.5" style="fill:var(--accent)"/><line x1="316" y1="61.2" x2="316" y2="52.7" style="stroke:var(--accent);stroke-width:1.6"/><circle cx="316" cy="61.2" r="4.5" style="fill:var(--accent)"/><circle cx="202" cy="113.7" r="5.5" style="fill:var(--ex)"/><text class="tt" x="210" y="131.7" style="fill:var(--ex)">(ā, b̄)</text><text class="tt" x="410" y="60" style="fill:var(--accent)">青:データ (aᵢ, bᵢ)</text><text class="tm" x="410" y="84">青の縦線:ずれ (p aᵢ + q − bᵢ)</text><text class="tt" x="410" y="108" style="fill:var(--thm)">橙:回帰直線 y = px + q</text><text class="tj" x="410" y="140">ずれの2乗の和 f(p, q) を</text><text class="tj" x="410" y="160">最小にする直線</text><text class="tm" x="410" y="188" style="fill:var(--ex)">緑:平均 (ā, b̄) を必ず通る</text></svg>
+      <figcaption>データ(青い点)と回帰直線(橙)。青い縦線の長さの2乗の和が最小になるように、直線を決める。</figcaption>
+    </figure>
+    <div class="box intuit">
+      <div class="label">直感で理解する:「縦のずれ」の2乗を足す理由</div>
+      <p>ずれは、プラスにもマイナスにもなるので、そのまま足すと打ち消し合ってしまいます。2乗すれば、すべて 0 以上になり、大きなずれほど強く効きます(大きく外れるデータを、特に嫌う)。2乗は微分もやさしいので、ここでは $p,q$ の2次式になり、偏微分が 0 の連立1次方程式が解きやすい、という利点があります。</p>
+    </div>
+    <h3>7.2 定理(回帰直線)</h3>
+    <div class="box thm">
+      <div class="label">定理(板書 p.4)</div>
+      <p>直線 $y=px+q$ は
+      $$y=\frac{\operatorname{Cov}(A,B)}{V(A)}\,(x-\bar a)+\bar b$$
+      で与えられる(<b>回帰直線</b>)。ここで $\bar a=\tfrac1n(a_1+\cdots+a_n)$、$\bar b=\tfrac1n(b_1+\cdots+b_n)$ は平均、$V(A)=\tfrac1n\sum_{i=1}^n(a_i-\bar a)^2$ は $A$ の<b>分散</b>($\sqrt{V(A)}=\sigma$)、$\operatorname{Cov}(A,B)=\tfrac1n\sum_{i=1}^n(a_i-\bar a)(b_i-\bar b)$ は $A,B$ の<b>共分散</b>。($V(A)\ne0$、すなわち $a_i$ がすべて等しいわけではない、とする。)</p>
+    </div>
+    <h3>7.3 証明</h3>
+    <div class="box proof"><div class="label">証明(板書 p.4 右)</div>
+      <p><b>(1) $f_q=0$ から $q$ を求める。</b>
+      $$f_q=\sum_{i=1}^n2(pa_i+q-b_i)=0\ \Longrightarrow\ np\bar a+qn-n\bar b=0\ \Longrightarrow\ q=\bar b-p\bar a.\quad\cdots(\mathrm A)$$
+      ($\sum a_i=n\bar a$、$\sum b_i=n\bar b$ を使った。)(A) は、直線 $y=px+q$ が、平均の点 $(\bar a,\bar b)$ を通る($\bar b=p\bar a+q$)ことを表す。</p>
+      <p><b>(2) $f_p=0$ から $p$ を求める。</b>
+      $$f_p=\sum_{i=1}^n2(pa_i+q-b_i)a_i=0\ \Longrightarrow\ p\sum a_i^2+qn\bar a-\sum a_ib_i=0.$$
+      (A) を代入すると $p\sum a_i^2+n\bar a(\bar b-p\bar a)-\sum a_ib_i=0$、整理して
+      $$p\Bigl(\sum a_i^2-n\bar a^2\Bigr)+n\bar a\bar b-\sum a_ib_i=0\ \Longrightarrow\ p=\frac{\sum a_ib_i-n\bar a\bar b}{\sum a_i^2-n\bar a^2}.$$</p>
+      <p><b>(3) 分散・共分散で書く。</b>
+      $$\sum(a_i-\bar a)^2=\sum a_i^2-2\bar a\sum a_i+n\bar a^2=\sum a_i^2-2n\bar a^2+n\bar a^2=\sum a_i^2-n\bar a^2,$$
+      $$\sum(a_i-\bar a)(b_i-\bar b)=\sum a_ib_i-\bar b\sum a_i-\bar a\sum b_i+n\bar a\bar b=\sum a_ib_i-n\bar a\bar b.$$
+      したがって $p=\dfrac{\sum(a_i-\bar a)(b_i-\bar b)}{\sum(a_i-\bar a)^2}=\dfrac{\operatorname{Cov}(A,B)}{V(A)}$(分子分母の $\tfrac1n$ は約分される)。(A) から $q=\bar b-p\bar a$ なので、直線 $y=px+q=p(x-\bar a)+\bar b$ となる。 $\square$</p></div>
+    <div class="box supp"><div class="label">板書にない補足:これが最小であること</div>
+      <p>板書の証明は、$f_p=f_q=0$ を解いた(臨界点を求めた)ところまでです。この点が<b>最小</b>であることは、次のように分かります。$f(p,q)=\sum(pa_i+q-b_i)^2$ は、$(p,q)$ の2次式で、$p^2,q^2$ の係数が正(下に凸、「お椀」の形)。2階偏微分は $f_{pp}=2\sum a_i^2$、$f_{qq}=2n$、$f_{pq}=2\sum a_i$ で、ヘッセ行列式 $f_{pp}f_{qq}-f_{pq}^2=4\bigl(n\sum a_i^2-(\sum a_i)^2\bigr)=4n^2V(A)\gt0$($V(A)\gt0$ のとき)。$f_{pp}\gt0$ と合わせて、この臨界点は<b>極小</b>で、お椀の底だから、最小です。</p></div>
+    <div class="box ex"><div class="label">例</div>
+      <p>データ $(1,2),(2,3),(3,5)$。$\bar a=2$、$\bar b=\tfrac{10}3$。$\operatorname{Cov}=\tfrac13\bigl[(-1)(-\tfrac43)+0\cdot(-\tfrac13)+1\cdot\tfrac53\bigr]=1$、$V(A)=\tfrac13(1+0+1)=\tfrac23$。$p=\tfrac1{2/3}=\tfrac32$、$q=\tfrac{10}3-\tfrac32\cdot2=\tfrac13$。回帰直線 $y=\tfrac32x+\tfrac13$。(ずれの和:$(\tfrac{11}6-2)+(\tfrac{10}3-3)+(\tfrac{29}6-5)=-\tfrac16+\tfrac13-\tfrac16=0$ ✓。)</p></div>
+    <p>板書の最後の行:「偏微分のレポート 期限2週間後」(10/27 の2週間後は 11/10)。</p>
+
+    <!-- ===================== 8 ===================== -->
+    <h2 id="s8">8. 具体例で練習(板書にない補足) <span class="page-tag">補足</span></h2>
+    <div class="box ex"><div class="label">問題 A:球面上の2次形式</div>
+      <p>$x^2+y^2+z^2=1$ のとき、$f(x,y,z)=x^2+y^2+z^2+2xy$ の最大値と最小値を求めよ。</p></div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>$A=\begin{pmatrix}1&1&0\\1&1&0\\0&0&1\end{pmatrix}$。固有値:$\det(A-\lambda E)=(1-\lambda)\bigl((1-\lambda)^2-1\bigr)=(1-\lambda)\lambda(\lambda-2)=0$、$\lambda=0,1,2$。最大値 2(点 $\pm\tfrac1{\sqrt2}(1,1,0)$)、最小値 0(点 $\pm\tfrac1{\sqrt2}(1,-1,0)$)。(確かめ:$f=(x+y)^2+z^2$ で、$x+y=\sqrt2$ のとき 2、$x+y=0,z=0$ のとき 0。)</p></div>
+    <div class="box ex"><div class="label">問題 B:周の長さ一定の三角形</div>
+      <p>周が 12 の三角形の面積の最大値を求めよ。また、周が 12 で、辺が $(5,5,2)$ の三角形の面積と比べよ。</p></div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>最大は正三角形(各辺 4)で、$S=4\sqrt3\approx6.93$。$(5,5,2)$:$s=6$、$S^2=6\cdot1\cdot1\cdot4=24$、$S=2\sqrt6\approx4.90$。最大より小さい ✓。</p></div>
+    <div class="box ex"><div class="label">問題 C:エントロピーの比較</div>
+      <p>$n=4$ のとき、確率 $(\tfrac12,\tfrac14,\tfrac18,\tfrac18)$ のエントロピーと、一様分布のエントロピー($\log4$)を比べよ。</p></div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>$-\bigl[\tfrac12\log\tfrac12+\tfrac14\log\tfrac14+2\cdot\tfrac18\log\tfrac18\bigr]=\bigl(\tfrac12\cdot1+\tfrac14\cdot2+\tfrac14\cdot3\bigr)\log2=\tfrac74\log2\approx1.213$。一様分布は $\log4=2\log2\approx1.386$。一様分布のほうが大きい ✓。</p></div>
+    <div class="box ex"><div class="label">問題 D:最小二乗法の確認</div>
+      <p>データ $(0,1),(1,3),(2,4),(3,8)$ の回帰直線を求めよ。</p></div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>$\bar a=\tfrac32$、$\bar b=4$。$a_i-\bar a=-\tfrac32,-\tfrac12,\tfrac12,\tfrac32$、$b_i-\bar b=-3,-1,0,4$。$\sum(a_i-\bar a)(b_i-\bar b)=\tfrac92+\tfrac12+0+6=11$、$\sum(a_i-\bar a)^2=\tfrac94+\tfrac14+\tfrac14+\tfrac94=5$。$p=\tfrac{11}5$、$q=4-\tfrac{11}5\cdot\tfrac32=4-\tfrac{33}{10}=\tfrac7{10}$。回帰直線 $y=\tfrac{11}5x+\tfrac7{10}$。</p></div>
+
+    <!-- ===================== 9 ===================== -->
+    <h2 id="s9">9. まとめ(この回で覚えること)</h2>
+    <ul>
+      <li><b>球面上の $x^2+2y^2+3z^2$:</b>$(\lambda-1)x=(\lambda-2)y=(\lambda-3)z=0$、臨界点 6 点、値 $1,2,3$、最大 3・最小 1(球面は有界閉集合)。等位面(楕円面)との接し方で、最小・鞍点・最大。</li>
+      <li><b>2次形式 $x^{\mathsf T}Ax$ の球面上の極値は、固有値</b>($Ax=\lambda x$)。局所的に球面をグラフで表して、2変数関数の臨界点を探す「別解」も使える。</li>
+      <li><b>三角形の等周問題:</b>$f=s(s-x)(s-y)(s-z)$ を $x+y+z=2s$ の下で最大化。$f_x=f_y=f_z$、$(s-z)(x-y)=0$、$x=y=z=\tfrac23s$(正三角形)。境界で $f=0$、内部で $f\gt0$ なので、最大は内部の臨界点。</li>
+      <li><b>エントロピー:</b>$-\sum p_k\log p_k$ は $p_k=\tfrac1n$ で最大 $\log n$。$x\log x\to0$($x\to+0$)で、境界まで連続に拡張。$\log3\gt\log2$ で、境界ではなく内部で最大。</li>
+      <li><b>最小二乗法:</b>$f(p,q)=\sum(pa_i+q-b_i)^2$ の臨界点 $f_p=f_q=0$ から $q=\bar b-p\bar a$、$p=\operatorname{Cov}(A,B)/V(A)$。回帰直線は平均の点 $(\bar a,\bar b)$ を通る。</li>
+    </ul>
+
+    <!-- ===================== 10 ===================== -->
+    <h2 id="s10">10. この回のノートについてのメモ(板書の読み取り)</h2>
+    <p>板書は手書きの iPad ノート(4ページ)で、ページ番号がありません。PDF の順に p.1〜p.4 と数えました。板書の画像は、このサイトには載せていません。黄色の枠、基礎ページの内容、練習問題と解答は、Claude が書き足したもので、板書にはありません。</p>
+    <ol>
+      <li><b>三角形の成立条件の不等号の向き(p.2、p.2 右)。</b>板書は「$x+y\lt z$、$y+z\lt x$、$z+x\lt y$」と書いていますが、三角形ができる条件は「$z\lt x+y$」などで、向きが逆です。続く領域 $D$ の定義の「$x+y\le z$、$y+z\le x$、$z+x\le y$」も同様で、本文では $x,y,z\le s$(正しい向き)として扱いました。図(三角錐の断面に斜線の三角形)は、中点を頂点とする内側の三角形で、正しい条件に対応しています。</li>
+      <li><b>「有界開集合」(p.2 右下)。</b>「$D$ 有界開集合なので $f$ は $D$ 上で最大・最小をもつ」とありますが、存在定理の仮定は「有界<b>閉</b>集合」で、$D$ は境界を含めた領域として定義されているので、閉集合の書き誤りと判断しました。</li>
+      <li><b>2次形式の係数の名前(p.1 右)。</b>$n=3$ の2次形式を $f(x,y,z)=ax^2+by^2+cz^2+2dxy+2eyz+2fzx$ と書いていますが、続く行列は $\begin{pmatrix}a&d&e\\d&b&f\\e&f&c\end{pmatrix}$ と並んでいます。2次形式の定義通りなら、$(1,3)$ 成分は $zx$ の係数 $f$、$(2,3)$ 成分は $yz$ の係数 $e$ です。本文では、2次形式の定義に合わせた行列 $\begin{pmatrix}a&d&f\\d&b&e\\f&e&c\end{pmatrix}$ を書きました。結論(固有値の問題になる)は変わりません。(関数名の $f$ と係数の $f$ も重なっています。)</li>
+      <li><b>$S^2$ の等位線の絵(p.1 右)。</b>3つの絵(下の2つ、右の1つ)は、球面を、$(\pm1,0,0)$、$(0,\pm1,0)$、$(0,0,\pm1)$ の近くから見た、$f$ の等位線の図と読みました(中央の絵に「saddle point」の書き込み)。本文の図は、これを描き直したものです。</li>
+      <li><b>分散・共分散の定義(p.4)。</b>左の定理では $V(A)=\tfrac1n\sum(a_i-\bar a)^2$、$\operatorname{Cov}(A,B)=\tfrac1n\sum(a_i-\bar a)(b_i-\bar b)$ と書かれていますが、右の証明では $V(A)=\sum(a_i-\bar a)^2$、$\operatorname{Cov}(A,B)=\sum(a_i-\bar a)(b_i-\bar b)$($\tfrac1n$ なし)と書かれています。比 $p=\operatorname{Cov}/V$ は、$\tfrac1n$ があってもなくても同じなので、証明は成り立ちます。本文では、定理の定義($\tfrac1n$ あり)に統一し、証明の最後で $\tfrac1n$ が約分されることを書きました。</li>
+      <li><b>最小二乗法の「最小」の確認(p.4)。</b>板書の証明は、臨界点(偏微分が 0)を求めたところまでです。それが最小であることの確認は、補足の枠で書き足しました。</li>
+      <li><b>エントロピーの境界での最大値(p.3)。</b>「境界での最大値 $\log2$」は、$z=0$ などの境界で $f$ が $n=2$ のエントロピーになることから。図(三角形のドーム)に「赤の点」が3つあるのは、3つの辺の中点($\log2$ をとる点)と読みました。</li>
+      <li><b>「偏微分のレポート 期限2週間後」(p.4 の最後)。</b>授業の連絡の書き込みと読みました。</li>
+    </ol>
+
+    <nav class="pager">
+      <a href="week-03.html">← 前の週</a>
+      <a href="../index.html">一覧へ</a>
+      <span class="disabled">次の週 →</span>
+    </nav>
+  </main>
+
+  <footer>© Aセメまとめノート</footer>
+</body>
+</html>

@@ -78,6 +78,14 @@
             <li><a href="#sup">上限・下限</a></li>
             <li><a href="#metric">距離</a></li>
           </ol></li>
+        <li><b>最大・最小の応用のための道具</b>
+          <ol type="a" start="22">
+            <li><a href="#seq">点列の収束・部分列・ボルツァーノ・ワイエルシュトラス</a></li>
+            <li><a href="#eigen">固有値・固有ベクトルと2次形式</a></li>
+            <li><a href="#stats">平均・分散・共分散</a></li>
+            <li><a href="#heron">三角形の面積:ヘロンの公式</a></li>
+            <li><a href="#xlogx">$\log$ の微分と、$x\log x$ の極限</a></li>
+          </ol></li>
       </ol>
     </nav>
 
@@ -318,7 +326,7 @@
     </div>
 
     <p>「$(a,b)$ を含むある開集合」とは、$(a,b)$ のまわりをぐるっと(少しでも)囲む範囲、という意味です。長方形 $(a-\varepsilon,a+\varepsilon)\times(b-\varepsilon,b+\varepsilon)$(縁を含まない)も開集合です。</p>
-    <p class="used-in">この回で使う場所:<a href="weeks/week-01.html#w-eps" data-xref>1.4 開区間・近傍・$\varepsilon$</a><a href="weeks/week-01.html#w-open" data-xref>10.2 開集合</a></p>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-01.html#w-eps" data-xref>1.4 開区間・近傍・$\varepsilon$</a><a href="weeks/week-01.html#w-open" data-xref>10.2 開集合</a><a href="weeks/week-03.html#w-open" data-xref>第3回 1.2 近傍・開集合・閉集合・有界</a></p>
 
     <!-- ===================== e: 2変数の連続性 ===================== -->
     <h2 id="cont2">e. 2変数関数の連続性</h2>
@@ -955,7 +963,7 @@
       <li>最大値・最小値をとる点は、極値の点でもあるので、ラグランジュの条件をみたす点(候補)のどれかである。($\nabla g=\vec0$ となる点があれば、それも候補に加える。)</li>
       <li>候補での $f$ の値を全部比べる。いちばん大きいものが最大値、いちばん小さいものが最小値。</li>
     </ol>
-    <p class="used-in">この回で使う場所:<a href="weeks/week-02.html#w-closed" data-xref>第2回 1.8 閉集合と最大・最小</a><a href="weeks/week-02.html#s9" data-xref>第2回 9. 例題</a><a href="weeks/week-02.html#s10" data-xref>第2回 10. 最大・最小の存在</a></p>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-02.html#w-closed" data-xref>第2回 1.8 閉集合と最大・最小</a><a href="weeks/week-02.html#s9" data-xref>第2回 9. 例題</a><a href="weeks/week-02.html#s10" data-xref>第2回 10. 最大・最小の存在</a><a href="weeks/week-03.html#s3" data-xref>第3回 3. 存在定理と開集合・閉集合</a><a href="weeks/week-03.html#s4" data-xref>第3回 4. 2次形式の最大・最小</a><a href="weeks/week-04.html#w-lagr3" data-xref>第4回 1.1 存在定理の復習</a><a href="weeks/week-04.html#s2" data-xref>第4回 2. 球面上の最大・最小</a></p>
 
     <!-- ===================== q: 連立1次方程式・1次従属・行列式 ===================== -->
     <h2 id="det">q. 連立1次方程式・1次従属・行列式</h2>
@@ -1005,7 +1013,7 @@
 
     <h3>「係数が $0$ なら矛盾」という議論</h3>
     <p>1次従属から1次結合を取り出すとき、よく使われる議論です。$\alpha\vec a+\beta\vec b+\gamma\vec c=\vec0$($(\alpha,\beta,\gamma)\ne(0,0,0)$)があるとします。もし $\alpha=0$ なら、$\beta\vec b+\gamma\vec c=\vec0$ で、$(\beta,\gamma)\ne(0,0)$。つまり、$\vec b,\vec c$ が1次従属になります。もし「$\vec b,\vec c$ は1次独立」と分かっていれば、これは矛盾なので、$\alpha\ne0$ です。$\alpha\ne0$ なら、$\alpha$ で割って、$\vec a=-\dfrac\beta\alpha\vec b-\dfrac\gamma\alpha\vec c$ と、$\vec a$ を残りの1次結合で表せます。</p>
-    <p class="used-in">この回で使う場所:<a href="weeks/week-02.html#w-det" data-xref>第2回 1.7 連立1次方程式・1次従属・行列式</a><a href="weeks/week-02.html#s8" data-xref>第2回 8. 証明(Step 3–5)</a><a href="weeks/week-02.html#s9" data-xref>第2回 9. 例題(行列式)</a></p>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-02.html#w-det" data-xref>第2回 1.7 連立1次方程式・1次従属・行列式</a><a href="weeks/week-02.html#s8" data-xref>第2回 8. 証明(Step 3–5)</a><a href="weeks/week-02.html#s9" data-xref>第2回 9. 例題(行列式)</a><a href="weeks/week-03.html#s2" data-xref>第3回 2. 例題:単位円上の xy(行列式=0)</a></p>
 
     <!-- ===================== r: 一様連続 ===================== -->
     <h2 id="unifcont">r. 一様連続</h2>
@@ -1153,7 +1161,7 @@
       <div class="label">直感で理解する</div>
       <p><b>いちばん低い天井:</b> 集合の上界は、「その集合の上にある、天井」のようなものです。上限は、<b>天井のうち、いちばん低いもの</b>。集合のどの要素も天井にぶつかりますが、天井のすぐ下まで、限りなく近づく要素があります((2) の意味)。天井そのものに届くとは限りません($[1,2)$ では $2$ に届かない)。</p>
     </div>
-    <p class="used-in">この回で使う場所:<a href="exercises/ex-01.html#p4" data-xref>微積演習 第1回 [4]</a></p>
+    <p class="used-in">この回で使う場所:<a href="exercises/ex-01.html#p4" data-xref>微積演習 第1回 [4]</a><a href="weeks/week-03.html#w-sup" data-xref>第3回 1.4 上限と実数の連続性</a><a href="weeks/week-03.html#s7" data-xref>第3回 7. 連続関数は最大値をもつ</a></p>
 
     <!-- ===================== u: 距離 ===================== -->
     <h2 id="metric">u. 距離</h2>
@@ -1187,6 +1195,110 @@
       <p>関数を「1つの点」と見て、点どうしの距離を、「グラフの最大のズレ」で決めます。この距離で $d(f_n,f)\to0$ となることは、「グラフ全体が、$f$ のグラフに、場所によらず同じ速さで近づく」(<b>一様収束</b>)ということです。</p>
     </div>
     <p class="used-in">この回で使う場所:<a href="exercises/ex-01.html#p4" data-xref>微積演習 第1回 [4]</a></p>
+
+
+    <!-- ===================== v: 点列 ===================== -->
+    <h2 id="seq">v. 点列の収束・部分列・ボルツァーノ・ワイエルシュトラス</h2>
+
+    <h3>数列の収束($\varepsilon$–$N$)</h3>
+    <div class="box def">
+      <div class="label">定義(数列・点列の収束)</div>
+      <p>数列 $x_1,x_2,\dots$ が実数 $\alpha$ に<b>収束する</b>($\lim_{k\to\infty}x_k=\alpha$)とは、どんな $\varepsilon\gt0$ に対しても、ある番号 $N$ があって、$k\gt N$ をみたす<b>すべての</b> $k$ について $|x_k-\alpha|\lt\varepsilon$ となること。平面の点列 $a_1,a_2,\dots$ では、$|x_k-\alpha|$ を $\|a_k-\alpha\|$(距離)に変える。つまり $k\gt N$ のとき $a_k\in U_\varepsilon(\alpha)$($\alpha$ の $\varepsilon$-近傍)。</p>
+    </div>
+    <div class="box intuit">
+      <div class="label">直感で理解する</div>
+      <p>「$\alpha$ のまわりに、どんなに小さな円をかいても、ある番号から先の点は、全部その円の中に入る」。$\varepsilon$ は「許容する誤差」、$N$ は「そこから先は誤差が許容範囲に収まる番号」。点が $\alpha$ にどんどん近づいていく様子を、言葉で正確に言ったものです。</p>
+    </div>
+    <p><b>例:</b> $x_k=\tfrac1k$ は $0$ に収束する($\varepsilon$ が与えられたら、$N\gt\tfrac1\varepsilon$ ととればよい:$k\gt N$ なら $\tfrac1k\lt\varepsilon$)。$x_k=(-1)^k$ は収束しない(1 と $-1$ を行き来する)。</p>
+    <p><b>連続関数と極限の交換:</b> $f$ が連続で $a_k\to\alpha$ ならば、$f(a_k)\to f(\alpha)$(つまり $\lim f(a_k)=f(\lim a_k)$)。連続性の定義そのものです。</p>
+
+    <h3>部分列</h3>
+    <p>点列 $a_1,a_2,a_3,\dots$ から、番号を増える順に、いくつかを拾い出した $a_{n_1},a_{n_2},a_{n_3},\dots$($n_1\lt n_2\lt n_3\lt\cdots$)を<b>部分列</b>という。たとえば、偶数番目だけを取った $a_2,a_4,a_6,\dots$ は部分列。もとの点列が $\alpha$ に収束するなら、部分列も $\alpha$ に収束する(拾い出しても、「ある番号から先は全部近い」は保たれる)。逆に、もとの点列が収束しなくても、収束する部分列が取れることがある(例:$(-1)^k$ の、偶数番目だけを取ると、$1$ に収束する)。</p>
+
+    <h3>単調で有界な数列は収束する(実数の連続性)</h3>
+    <div class="box thm">
+      <div class="label">事実</div>
+      <p>実数の数列が、<b>単調増加</b>($x_1\le x_2\le\cdots$)で<b>上に有界</b>($x_k\le M$)ならば、収束する(極限は、$\{x_k\}$ の上限)。<b>単調減少</b>で<b>下に有界</b>でも同じ。</p>
+    </div>
+    <p>直感:ずっと増え続けるが、天井 $M$ を超えられない数列は、どこかで「天井の下にたまる」ように止まる。この性質は、実数の数直線に「すき間がない」(上限の存在)ことから出ます(→ 上限・下限のトピック)。有理数だけの世界では成り立たない:たとえば $1,\ 1.4,\ 1.41,\ 1.414,\dots$ は有理数の単調増加で、上に有界ですが、極限 $\sqrt2$ は有理数でない。</p>
+
+    <h3>ボルツァーノ・ワイエルシュトラスの定理</h3>
+    <div class="box thm">
+      <div class="label">定理</div>
+      <p>有界な閉集合 $K\subset\R^2$($\R$ でも同様)の点列 $\{a_k\}$ は、$K$ の点に収束する部分列をもつ。</p>
+    </div>
+    <p>証明の方針(第3回で詳しく):$K$ を含む長方形を4等分して、点が無限個ある部分を選ぶ操作を繰り返し、長方形を1点に縮める。「有界」が「逃げ場がない」こと、「閉集合」が「行き着く先が $K$ の中」であることを保証します。</p>
+    <p><b>閉集合と点列:</b> $V$ が閉集合で、$V$ の点列 $a_k\to\alpha$ ならば $\alpha\in V$(第3回 5.2)。</p>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-03.html#w-seq" data-xref>第3回 1.3 点列の収束と部分列</a><a href="weeks/week-03.html#s5" data-xref>第3回 5. 存在定理の証明(1)</a><a href="weeks/week-03.html#s6" data-xref>第3回 6. 存在定理の証明(2)</a></p>
+
+    <!-- ===================== w: 固有値 ===================== -->
+    <h2 id="eigen">w. 固有値・固有ベクトルと、2次形式</h2>
+
+    <div class="box def">
+      <div class="label">定義(固有値・固有ベクトル)</div>
+      <p>$n$ 次正方行列 $A$ に対して、$Ax=\lambda x$ をみたす<b>零でないベクトル</b> $x$ があるとき、$\lambda$ を $A$ の<b>固有値</b>、$x$ をその<b>固有ベクトル</b>という。</p>
+    </div>
+    <div class="box intuit">
+      <div class="label">直感で理解する</div>
+      <p>行列 $A$ は、ベクトルを「回したり、のばしたり、ゆがめたり」します。ほとんどのベクトルは、$A$ をかけると向きが変わります。けれども、<b>向きが変わらず、長さだけが $\lambda$ 倍になる</b>特別な方向があります。それが固有ベクトルで、倍率が固有値です。(例:$A=\begin{pmatrix}2&0\\0&1\end{pmatrix}$ は、$x$ 方向を2倍、$y$ 方向を1倍にする。固有値 $2$、$1$。固有ベクトルは座標軸の方向。)</p>
+    </div>
+    <h3>求め方</h3>
+    <p>$Ax=\lambda x$ は $(A-\lambda E)x=0$($E$ は単位行列)。この同次の連立1次方程式が、$x\ne0$ の解をもつ条件は、<b>係数行列式が 0</b>:$\det(A-\lambda E)=0$(<b>特性方程式</b>)。2×2 の場合、$A=\begin{pmatrix}a&b\\c&d\end{pmatrix}$ なら
+    $\det\begin{pmatrix}a-\lambda&b\\c&d-\lambda\end{pmatrix}=\lambda^2-(a+d)\lambda+(ad-bc)=\lambda^2-(\operatorname{Tr}A)\lambda+\det A=0.$
+    ($\operatorname{Tr}A=a+d$ は<b>トレース</b>=対角成分の和。)各固有値 $\lambda$ について、$(A-\lambda E)x=0$ を解いて、固有ベクトルを求める。</p>
+    <div class="box ex">
+      <div class="label">例</div>
+      <p>$A=\begin{pmatrix}2&1\\1&2\end{pmatrix}$:$\lambda^2-4\lambda+3=0$、$\lambda=1,3$。$\lambda=1$:$\begin{pmatrix}1&1\\1&1\end{pmatrix}x=0$、$x+y=0$、固有ベクトル $(1,-1)$。$\lambda=3$:$\begin{pmatrix}-1&1\\1&-1\end{pmatrix}x=0$、$x-y=0$、固有ベクトル $(1,1)$。確かめ:$A(1,1)^{\mathsf T}=(3,3)^{\mathsf T}=3(1,1)^{\mathsf T}$ ✓。</p>
+    </div>
+
+    <h3>対称行列と2次形式</h3>
+    <p>$a_{ij}=a_{ji}$ をみたす行列 $A=(a_{ij})$ を<b>対称行列</b>という。これに対応する<b>2次形式</b>は
+    $f(x_1,\dots,x_n)=\sum_{i,j}a_{ij}x_ix_j=x^{\mathsf T}Ax.$
+    $n=2$ なら $f=ax^2+2bxy+cy^2$($A=\begin{pmatrix}a&b\\b&c\end{pmatrix}$)。勾配は $\nabla f=2Ax$。$\|x\|=1$ のもとでの $f$ の極値(ラグランジュ)は、$Ax=\lambda x$ をみたす点(固有ベクトル)で、値は $f=x^{\mathsf T}(\lambda x)=\lambda\|x\|^2=\lambda$(固有値)。</p>
+    <p><b>2×2 の実対称行列の固有値は実数:</b>判別式 $(a+c)^2-4(ac-b^2)=(a-c)^2+4b^2\ge0$。(一般の $n$ でも、実対称行列の固有値は実数ですが、それは線形代数で示されます。)</p>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-03.html#w-eigen" data-xref>第3回 1.5 固有値と固有ベクトル</a><a href="weeks/week-03.html#s4" data-xref>第3回 4. 応用例:2次形式の最大・最小</a><a href="weeks/week-04.html#w-eigen3" data-xref>第4回 1.2 固有値と固有ベクトル、2次形式</a><a href="weeks/week-04.html#s3" data-xref>第4回 3. 一般の2次形式と固有値</a></p>
+
+    <!-- ===================== x: 平均・分散 ===================== -->
+    <h2 id="stats">x. 平均・分散・共分散</h2>
+    <p>データ $A=\{a_1,\dots,a_n\}$ について:</p>
+    <ul>
+      <li><b>平均</b> $\bar a=\dfrac1n(a_1+\cdots+a_n)$:データの「中心」。</li>
+      <li><b>分散</b> $V(A)=\dfrac1n\sum_{i=1}^n(a_i-\bar a)^2$:平均からのずれの2乗の平均。「散らばり」の大きさ。<b>標準偏差</b> $\sigma=\sqrt{V(A)}$。</li>
+      <li>等価な式:$V(A)=\dfrac1n\sum a_i^2-\bar a^2$(「2乗の平均」−「平均の2乗」)。展開すると $\sum(a_i-\bar a)^2=\sum a_i^2-2\bar a\cdot n\bar a+n\bar a^2=\sum a_i^2-n\bar a^2$。</li>
+    </ul>
+    <p>2組のデータ $A=\{a_i\}$、$B=\{b_i\}$ について、<b>共分散</b> $\operatorname{Cov}(A,B)=\dfrac1n\sum_{i=1}^n(a_i-\bar a)(b_i-\bar b)=\dfrac1n\sum a_ib_i-\bar a\bar b$。$a_i$ が平均より大きいとき、$b_i$ も平均より大きい傾向(右上がりの関係)があれば正、逆(右下がり)なら負、関係がなければ 0 に近い。$\operatorname{Cov}(A,A)=V(A)$。</p>
+    <div class="box ex">
+      <div class="label">例</div>
+      <p>$A=\{1,2,3\}$、$B=\{2,3,5\}$:$\bar a=2$、$\bar b=\tfrac{10}3$、$V(A)=\tfrac13(1+0+1)=\tfrac23$、$\operatorname{Cov}(A,B)=\tfrac13\bigl[(-1)(-\tfrac43)+0+1\cdot\tfrac53\bigr]=1$。右上がりなので正。</p>
+    </div>
+    <p>(回帰直線の傾きは $\operatorname{Cov}(A,B)/V(A)$。第4回で、最小二乗法として導く。)</p>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-04.html#w-stats" data-xref>第4回 1.5 平均・分散・共分散</a><a href="weeks/week-04.html#s7" data-xref>第4回 7. 最小二乗法</a></p>
+
+    <!-- ===================== y: ヘロン ===================== -->
+    <h2 id="heron">y. 三角形の面積:ヘロンの公式</h2>
+    <div class="box thm">
+      <div class="label">ヘロンの公式</div>
+      <p>3辺の長さが $x,y,z$ の三角形の面積 $S$ は、$s=\tfrac12(x+y+z)$(周の長さの半分)として
+      $S=\sqrt{s(s-x)(s-y)(s-z)}.$</p>
+    </div>
+    <div class="box ex">
+      <div class="label">例</div>
+      <p>辺 $3,4,5$:$s=6$、$S^2=6\cdot3\cdot2\cdot1=36$、$S=6$(直角を挟む辺 3, 4 の三角形の面積 $\tfrac12\cdot3\cdot4=6$ ✓)。正三角形(1辺 $a$):$s=\tfrac{3a}2$、$S^2=\tfrac{3a}2\bigl(\tfrac a2\bigr)^3=\tfrac{3a^4}{16}$、$S=\tfrac{\sqrt3}4a^2$ ✓。</p>
+    </div>
+    <p><b>三角形ができる条件</b>(三角不等式):3辺 $x,y,z$ で三角形ができるのは、「どの1辺も、他の2辺の和<b>より短い</b>」とき:$x\lt y+z$、$y\lt z+x$、$z\lt x+y$。直感:2辺の和が、残りの1辺より短いと、2辺が届かない(つながらない)。等号のときは、つぶれて、3点が一直線に並ぶ(面積 0)。周が $2s$($x+y+z=2s$)のときは、$x\lt y+z=2s-x$ なので、$x\lt s$。</p>
+    <p>(公式の理由:$S=\tfrac12 xy\sin\theta$ に、余弦定理 $z^2=x^2+y^2-2xy\cos\theta$ を使うと、$16S^2=(x+y+z)(x+y-z)(x-y+z)(-x+y+z)$ が出て、$s$ を使って書き直したのがヘロンの公式です。)</p>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-04.html#w-heron" data-xref>第4回 1.3 三角形の面積:ヘロンの公式</a><a href="weeks/week-04.html#s5" data-xref>第4回 5. 等周問題</a></p>
+
+    <!-- ===================== z: x log x ===================== -->
+    <h2 id="xlogx">z. $\log$ の微分と、$x\log x$ の極限</h2>
+    <p>$\log$ は自然対数($e$ を底とする対数)。$(\log x)'=\tfrac1x$。積の微分で $(x\log x)'=\log x+x\cdot\tfrac1x=\log x+1$。$\log1=0$、$\log$ は増加関数、$\log(ab)=\log a+\log b$、$\log\tfrac1a=-\log a$。</p>
+    <p><b>$x\to+0$ のとき:</b> $\log x\to-\infty$(いくらでも小さくなる)。けれど、$x$ を掛けると $x\log x\to0$。理由:$x=e^{-t}$ とおくと、$x\to+0$ は $t\to+\infty$ で、$x\log x=-te^{-t}=-\dfrac t{e^t}$。<b>$e^t$ は $t$ よりはるかに速く増える</b>($t=10$ で $t=10$、$e^t\approx22026$)ので、$\dfrac t{e^t}\to0$。</p>
+    <div class="box intuit">
+      <div class="label">直感で理解する:綱引き</div>
+      <p>$\log x$ は 0 に近づくときに $-\infty$ へ向かう力、$x$ は 0 へ向かう力。結果は、<b>0 へ向かう力が勝つ</b>($\log$ の発散はとてもゆっくり)。たとえば $x=10^{-6}$ で $\log x\approx-13.8$、$x\log x\approx-1.4\times10^{-5}$。</p>
+    </div>
+    <p>この極限があるので、$x=0$ で $x\log x:=0$ と<b>定義すれば</b>、$x\log x$ は $x\ge0$ 全体で連続な関数になります。確率 $p_k=0$ の事象を含むエントロピー $-\sum p_k\log p_k$ を、境界まで連続に拡張できる理由です。</p>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-04.html#w-xlogx" data-xref>第4回 1.4 対数と $x\log x$ の極限</a><a href="weeks/week-04.html#s6" data-xref>第4回 6. エントロピー</a></p>
 
     <p style="margin-top:48px;color:var(--muted);font-size:.9rem">このページは、新しい回で春学期の内容が必要になるたびに、トピックを追加していきます。</p>
     <!--END-->
