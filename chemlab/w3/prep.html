@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>第三週(第四回) 実験予習ノート | 基礎化学実験 | Aセメまとめノート</title>
+  <link rel="stylesheet" href="../../assets/style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]})"></script>
+  <style>
+    .flow { list-style: none; margin: 14px 0 22px; padding: 0; }
+    .flow > li { position: relative; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 8px 12px; margin: 0 0 22px; }
+    .flow > li:not(:last-child)::after { content: "↓"; position: absolute; left: 50%; bottom: -21px; transform: translateX(-50%); color: var(--accent); font-weight: 700; font-size: 1.1rem; line-height: 1; }
+    .flow .sub { display: block; color: var(--muted); font-size: .88em; margin-top: 2px; }
+    .flow .key { color: var(--thm); font-weight: 700; }
+    .cap { display: inline-block; background: var(--accent); color: #fff; border-radius: 6px; padding: 1px 10px; font-weight: 700; font-size: .9rem; margin: 6px 0; }
+    .goal { border: 2px solid var(--accent); border-radius: 10px; padding: 10px 14px; margin: 14px 0; }
+    .goal ol { margin: 4px 0 0; padding-left: 1.4em; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="inner">
+      <a class="site-title" href="../../index.html">Aセメまとめノート</a>
+      <span class="links"><a href="../index.html">基礎化学実験</a><a href="index.html">第三週</a><a href="explanation.html">解説</a><a href="../w2/index.html">第二週</a></span>
+    </div>
+  </header>
+
+  <main class="note">
+    <h1>第三週(第四回)実験予習ノート:原子スペクトル</h1>
+    <div class="meta">基礎化学実験 実験4(テキスト p.49〜58)／目的と実験手順を、フローチャートでまとめた予習ノート</div>
+
+    <h2>目的</h2>
+    <div class="goal">
+      <p>水素原子の可視光の発光スペクトル(<b>バルマー系列</b>)を、<b>回折格子分光計</b>で観測し、リュードベリ定数を求める。</p>
+      <ol>
+        <li>水銀の既知の波長で、回折格子の<b>格子定数 $d$</b> を決める(波長の校正)。</li>
+        <li>水素の線の<b>波長</b>を求め、波数 $\tilde\nu$ を $1/n^2$ に対してプロットして、<b>リュードベリ定数 $R_{\mathrm H}$</b> を決める。</li>
+        <li>スペクトル系列の規則性と、原子の離散的なエネルギー準位の関係を確かめる。</li>
+      </ol>
+    </div>
+
+    <h2>使う式(まとめ)</h2>
+    <ul>
+      <li>回折格子:$d\sin\theta=m\lambda$(垂直入射、$m$:回折次数、$d=1/600$ mm に近い)。</li>
+      <li>バルマー系列:$\tilde\nu=\dfrac1\lambda=R_{\mathrm H}\left(\dfrac1{2^2}-\dfrac1{n^2}\right)$($n=3,4,5,6$)。直線:縦軸 $\tilde\nu$、横軸 $1/n^2$、<b>傾き $=-R_{\mathrm H}$</b>。</li>
+      <li>理論値:$R_{\mathrm H}=\dfrac{\mu e^4}{8\varepsilon_0^2h^3c}=1.0968\times10^7\ \mathrm{m^{-1}}$(換算質量 $\mu$)。</li>
+      <li>空気中 → 真空中の波長:$\lambda_{\mathrm{vac}}=1.00028\,\lambda_{\mathrm{air}}$。角度:$1^\circ=60'$、小数の度に直してから計算。</li>
+    </ul>
+
+    <h2>実験手順(フローチャート)</h2>
+    <span class="cap">A. 分光計の調整</span>
+    <ol class="flow">
+      <li>水銀ランプを点灯し、放電(青白い光)と、像が入射スリットに結ぶことを確認</li>
+      <li>ねじ④⑤⑥の役割を確認<span class="sub">指示のないねじは<span class="key">触らない</span>。緩めるときは十分に</span></li>
+      <li>接眼鏡を合わせて十字線を見る(❶)→ 格子を置き、望遠鏡で<b>プリズム像</b>を探す(❷)</li>
+      <li>格子台を 180° 回して像の位置を確認・ねじⒸで調整(❸)→ ねじ⑧で像を対称に(❹)</li>
+      <li>望遠鏡とコリメーターを一直線に(❺)→ スリット像が最も鮮明になるようラックピニオン②で調整(❻)→ スリット幅をねじ①で細く(❼)</li>
+      <li>スリット像を十字線の中心に合わせ、格子台を回してプリズム像を所定の位置に(❽)→ このときの円盤値を <b>$\theta=0^\circ$ の基準値</b> として記録(❾)</li>
+    </ol>
+    <p><b>注意</b>:プリズム像が見えないときは、無理をせず TA・教員に報告。調整は 3 条件(スリット像が鮮明/光軸が回転軸に垂直/格子面がコリメーターに垂直)を満たすため。</p>
+
+    <span class="cap">B. 測定</span>
+    <ol class="flow">
+      <li><b>水銀</b>:望遠鏡を回して、$\theta=0^\circ\sim90^\circ$ のスペクトル線を探す<span class="sub">探すときは豆ランプを消し、十字線に合わせるときは点灯。1 次光・2 次光の両方(6 本ずつ。404.656、491.604 nm は弱い)</span></li>
+      <li>各線を十字線の中心に合わせ、<b>色と円盤値</b>(主尺 + 副尺、<b>常に同じ副尺</b>)を記録</li>
+      <li>光源を<b>水素放電管</b>に切り替え、同様に測定<span class="sub">赤・青緑・青紫・紫。点灯時間は短く(劣化すると不純物の線が出る)</span></li>
+      <li>電源をすべて切り、格子を台から降ろす</li>
+    </ol>
+
+    <span class="cap">C. データ処理</span>
+    <ol class="flow">
+      <li>円盤値 − 基準値 = $\theta$(度分 → 小数の度)</li>
+      <li><b>課題 4.1</b>:$m=1$ の水銀の線で、$d=\lambda_{\mathrm{表}}/\sin\theta$ を求め、<b>平均</b>して格子定数とする</li>
+      <li><b>課題 4.2</b>:水素の $\lambda_{\mathrm{air}}=d\sin\theta/m$ → $\lambda_{\mathrm{vac}}=1.00028\lambda_{\mathrm{air}}$ → $\tilde\nu=1/\lambda$</li>
+      <li>$\tilde\nu$ vs $1/n^2$ を<b>最小二乗法</b>で直線にし、傾きから $R_{\mathrm H}$。理論値と<b>誤差を考えて</b>比較</li>
+    </ol>
+
+    <h2>予想・考察のポイント</h2>
+    <ul>
+      <li>波長が長い線(赤)ほど、回折角が大きい。</li>
+      <li>プロットは、傾きが負の直線(切片 $R_{\mathrm H}/4$)になる。</li>
+      <li>誤差の見積もり:$\Delta\lambda/\lambda=\cot\theta\,\Delta\theta$。角度が大きい(2 次光)ほど相対誤差が小さい。</li>
+      <li>誤差の原因:基準値のずれ、スリット幅、副尺の読み、格子の調整不足、不純物の線の取り違え。</li>
+    </ul>
+
+    <h2>予習問題の答えの要点</h2>
+    <div class="box basic">
+      <div class="label">予習問題 4.1・4.2</div>
+      <p>$R_{\mathrm H}=\dfrac{\mu e^4}{8\varepsilon_0^2h^3c}=1.0968\times10^5\ \mathrm{cm^{-1}}$($\mu=\dfrac{m_{\mathrm e}m_{\mathrm p}}{m_{\mathrm e}+m_{\mathrm p}}$)。バルマー系列(真空中):$n=3,4,5,6$ で 656.47、486.27、434.17、410.29 nm。</p>
+    </div>
+    <div class="box ex">
+      <div class="label">予習問題 4.3($d=1/600$ mm、400〜800 nm)</div>
+      <p>$\sin\theta=m\lambda/d$ より、$m=1$:$13^\circ53'\sim28^\circ41'$、$m=2$:$28^\circ41'\sim73^\circ44'$、$m=3$:$46^\circ03'\sim90^\circ$(555 nm 以下のみ)。</p>
+    </div>
+
+    <nav class="pager">
+      <a href="index.html">← 第三週(第四回)</a>
+      <a href="explanation.html">解説</a>
+      <span class="disabled">次へ →</span>
+    </nav>
+  </main>
+
+  <footer>© Aセメまとめノート</footer>
+</body>
+</html>

@@ -6,23 +6,94 @@
   <meta name="robots" content="noindex">
   <title>第一週(第五回) 実験予習ノート | 基礎化学実験 | Aセメまとめノート</title>
   <link rel="stylesheet" href="../../assets/style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]})"></script>
+  <style>
+    .flow { list-style: none; margin: 14px 0 22px; padding: 0; }
+    .flow > li { position: relative; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 8px 12px; margin: 0 0 22px; }
+    .flow > li:not(:last-child)::after { content: "↓"; position: absolute; left: 50%; bottom: -21px; transform: translateX(-50%); color: var(--accent); font-weight: 700; font-size: 1.1rem; line-height: 1; }
+    .flow .sub { display: block; color: var(--muted); font-size: .88em; margin-top: 2px; }
+    .flow .key { color: var(--thm); font-weight: 700; }
+    .cap { display: inline-block; background: var(--accent); color: #fff; border-radius: 6px; padding: 1px 10px; font-weight: 700; font-size: .9rem; margin: 6px 0; }
+    .goal { border: 2px solid var(--accent); border-radius: 10px; padding: 10px 14px; margin: 14px 0; }
+    .goal ol { margin: 4px 0 0; padding-left: 1.4em; }
+  </style>
 </head>
 <body>
   <header class="site-header">
     <div class="inner">
       <a class="site-title" href="../../index.html">Aセメまとめノート</a>
-      <span class="links"><a href="../../chemlab/index.html">基礎化学実験</a><a href="../../calc/index.html">微積</a><a href="../../linalg/index.html">線形代数</a><a href="../../em/index.html">電磁気学</a><a href="../../mech/index.html">力学A</a><a href="../../thermo/index.html">熱力学</a><a href="../../structchem/index.html">構造化学</a></span>
+      <span class="links"><a href="../index.html">基礎化学実験</a><a href="index.html">第一週</a><a href="explanation.html">解説</a><a href="../w2/index.html">第二週</a></span>
     </div>
   </header>
 
-  <main>
-    <section class="hero">
-      <h1>実験予習ノート</h1>
-      <p>基礎化学実験 第一週(第五回)</p>
-    </section>
+  <main class="note">
+    <h1>第一週(第五回)実験予習ノート:電子スペクトルと計算化学</h1>
+    <div class="meta">基礎化学実験 実験5(テキスト p.59〜67)／目的と実験手順を、フローチャートでまとめた予習ノート</div>
 
-    <div class="box"><div class="label">準備中</div><p>実験の目的・原理・手順・器具・注意点をまとめるページです。実験の資料(テキスト・手順書など)を送ってもらったら、ここに書きます。</p></div>
-    <nav class="pager"><a href="index.html">← 第一週(第五回)</a><a href="explanation.html">解説 →</a></nav>
+    <h2>目的</h2>
+    <div class="goal">
+      <p>共役した分子の光吸収が、<b>電子を一次元の箱に閉じ込めたモデル</b>で説明できるかを、測定と計算で確かめる。</p>
+      <ol>
+        <li><b>実験A(測定)</b>:共役鎖の長さ $k$ の異なる 8 種のシアニン色素の吸収スペクトルを測り、最長波長の吸収極大 $\lambda_0$ と $k$ の関係を調べ、箱モデルの予測と比べる。</li>
+        <li><b>実験B(計算)</b>:WinMOPAC で、水・二酸化炭素の構造と、エチレン・ブタジエン・ヘキサトリエンの分子軌道(HOMO・LUMO)を計算する。</li>
+      </ol>
+    </div>
+
+    <h2>使う式(まとめ)</h2>
+    <ul>
+      <li>箱のエネルギーと波動関数:$E_n=\dfrac{n^2h^2}{8mL^2}$、$\psi_n=\sqrt{\dfrac2L}\sin\dfrac{n\pi x}L$。</li>
+      <li>π電子 $2k+6$ 個 → HOMO は $n=k+3$、LUMO は $n=k+4$。</li>
+      <li>吸収波長:$\lambda_0=\dfrac{hc}{E_{k+4}-E_{k+3}}=\dfrac{8mL^2c}{(2k+7)h}$、$L=(2k+7)a$($a=0.14$ nm)より
+      $\lambda_0=\dfrac{8mca^2}h(2k+7)\approx129.2\,k+452.4$ nm。</li>
+    </ul>
+
+    <h2>実験手順(フローチャート)</h2>
+    <span class="cap">A. シアニン色素の吸収スペクトル</span>
+    <ol class="flow">
+      <li>分光光度計の電源を入れ、<b>約 5 分待つ</b><span class="sub">装置の安定化・自己点検</span></li>
+      <li><b>ベースライン</b>を測定(溶媒・セルのみ)<span class="sub">測定中は試料室のふたを<span class="key">開けない</span>。波長補正は済んでいるので行わない</span></li>
+      <li>8 種類の色素を、波長範囲 <b>300〜900 nm</b> で測定<span class="sub">光学セルは高価:落とさない</span></li>
+      <li>各スペクトルで、<b>最も長波長側のはっきりした極大</b>の波長 $\lambda_0$ を読む<span class="sub">肩(こぶ)ではなく極大。なだらかなら中心</span></li>
+      <li>$k$(横軸)に対し $\lambda_0$(縦軸)をグラフにする(Q 系・T 系は別の記号)</li>
+      <li>箱モデルの直線(課題 5.2)と比較</li>
+    </ol>
+
+    <span class="cap">B. 計算化学(WinMOPAC)</span>
+    <ol class="flow">
+      <li>File/New → 原子を置いて分子をつくる(sp²(1H)、Change atom)<span class="sub">水・二酸化炭素・エチレン・ブタジエン・ヘキサトリエン</span></li>
+      <li>Edit/Z-Matrix:ファイル名、<b>Geometry Optimization</b>、<b>MNDO</b>、<b>Precise</b> にチェック</li>
+      <li>Calculation/Start → 「MOPAC done」を確認</li>
+      <li>Measure で<b>結合長・結合角</b>を読む。Properties/Atomic charges で<b>原子電荷</b>を読む</li>
+      <li>Properties/Molecular orbital:<b>HOMO・LUMO のエネルギー(eV)</b>を記録し、Apply で軌道の形をノートに写す<span class="sub">ブタジエン:HOMO−1、LUMO+1 も。ヘキサトリエン:HOMO−2、LUMO+2 も</span></li>
+    </ol>
+    <p><b>注意</b>:計算が終わらないときは Stop で止める。構造最適化をしないと、結合長・角度が不正確になる。</p>
+
+    <h2>予想・考察のポイント</h2>
+    <ul>
+      <li>$k$ が増えると $\lambda_0$ は長波長側へ(ほぼ直線)。傾きはモデル(129 nm/$k$)より小さくなりそう(約 100 nm/$k$)。理由の候補:$a$ の仮定、端の環の寄与。</li>
+      <li>共役が長いほど HOMO–LUMO 間隔は小さい(エチレン > ブタジエン > ヘキサトリエン)。</li>
+      <li>エネルギーが高い軌道ほど節が多い。</li>
+      <li>吸光度の小さい($k=3$ など)ピークは読み取り誤差が大きい。</li>
+    </ul>
+
+    <h2>課題の答えの要点</h2>
+    <div class="box basic">
+      <div class="label">課題 5.1(導出)</div>
+      <p>箱の中 $\psi''=-\kappa^2\psi$($\kappa^2=8\pi^2mE/h^2$)→ $\psi=A\sin\kappa x+B\cos\kappa x$。$\psi(0)=0$ より $B=0$、$\psi(L)=0$ より $\kappa=n\pi/L$。規格化 $A=\sqrt{2/L}$。</p>
+    </div>
+    <div class="box ex">
+      <div class="label">課題 5.4・5.5</div>
+      <p><b>5.4</b> HOMO–LUMO 差は エチレン > ブタジエン > ヘキサトリエン:箱が長くなる($\Delta E\propto(N+1)/L^2$)から。<b>5.5</b> エネルギーが高い軌道ほど節が多い:波長が短く運動エネルギーが大きい。隣り合う原子で符号が逆の組は反結合性。</p>
+    </div>
+
+    <nav class="pager">
+      <a href="index.html">← 第一週(第五回)</a>
+      <a href="explanation.html">解説</a>
+      <span class="disabled">次へ →</span>
+    </nav>
   </main>
 
   <footer>© Aセメまとめノート</footer>
