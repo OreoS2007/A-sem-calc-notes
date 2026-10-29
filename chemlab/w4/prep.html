@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>第四週(第八回) 実験予習ノート | 基礎化学実験 | Aセメまとめノート</title>
+  <link rel="stylesheet" href="../../assets/style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]})"></script>
+  <style>
+    .flow { list-style: none; margin: 14px 0 22px; padding: 0; }
+    .flow > li { position: relative; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 8px 12px; margin: 0 0 22px; }
+    .flow > li:not(:last-child)::after { content: "↓"; position: absolute; left: 50%; bottom: -21px; transform: translateX(-50%); color: var(--accent); font-weight: 700; font-size: 1.1rem; line-height: 1; }
+    .flow .sub { display: block; color: var(--muted); font-size: .88em; margin-top: 2px; }
+    .flow .key { color: var(--thm); font-weight: 700; }
+    .cap { display: inline-block; background: var(--accent); color: #fff; border-radius: 6px; padding: 1px 10px; font-weight: 700; font-size: .9rem; margin: 6px 0; }
+    .goal { border: 2px solid var(--accent); border-radius: 10px; padding: 10px 14px; margin: 14px 0; }
+    .goal ol { margin: 4px 0 0; padding-left: 1.4em; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="inner">
+      <a class="site-title" href="../../index.html">Aセメまとめノート</a>
+      <span class="links"><a href="../index.html">基礎化学実験</a><a href="index.html">第四週</a><a href="explanation.html">課題の解説</a><a href="../w3/index.html">第三週</a></span>
+    </div>
+  </header>
+
+  <main class="note">
+    <h1>第四週(第八回)実験予習ノート:分光光度法による鉄の定量</h1>
+    <div class="meta">基礎化学実験 実験8「分光光度法による鉄の定量 ― 温泉水中の鉄イオンの分析」(テキスト p.99〜108)／目的と手順のフローチャート、予習問題の解答</div>
+
+    <h2>目的</h2>
+    <div class="goal">
+      <p>温泉水(草津・万座)に数 ppm 含まれる<b>鉄イオンの濃度</b>を、<b>分光光度法</b>(検量線)で決める。</p>
+      <ol>
+        <li>検量線に使う鉄ミョウバン水溶液の<b>正確な濃度</b>を、<b>EDTA によるキレート滴定</b>で決める。</li>
+        <li>鉄イオンをすべて $\mathrm{Fe^{2+}}$ に還元し、1,10-フェナントロリンで<b>赤色の錯体</b>にして、吸収極大波長での吸光度から<b>検量線</b>をつくる。</li>
+        <li>温泉水も同じように発色させ、検量線から鉄の濃度(mol/L と ppm)を求める。</li>
+        <li>希釈・調製(メスフラスコ・ピペット)と滴定(ビュレット)という、定量分析の基本操作を学ぶ。</li>
+      </ol>
+    </div>
+
+    <h2>使う式</h2>
+    <ul>
+      <li>ランベルト・ベールの法則:$A=\log_{10}\dfrac{I_0}{I}=\varepsilon cl$(テキスト (8・6))。$l$ が一定なら<b>吸光度 $A$ は濃度 $c$ に比例</b>。</li>
+      <li>モル吸光係数:$\varepsilon=\dfrac{A}{c\,l}$(単位 $\mathrm{dm^3\,cm^{-1}\,mol^{-1}}$、テキスト (8・7))。セルは $l=1$ cm。</li>
+      <li>EDTA 滴定:金属イオンと EDTA は <b>1 : 1</b> で結合(テキスト 8・5 節)。鉄ミョウバンの濃度は $c=\dfrac{0.01f\times V_{\mathrm{EDTA}}}{10\ \mathrm{mL}}$($f$:ファクター、$V_{\mathrm{EDTA}}$:滴定値 [mL]。導出)。</li>
+      <li>ppm:$1\ \mathrm{ppm}=10^{-6}\ \mathrm{g\,g^{-1}}$(テキスト脚注 *13)。密度 1 g/cm³ として、$\mathrm{ppm}=c\,[\mathrm M]\times55.85\times10^{3}$(導出。55.85 は Fe のモル質量)。</li>
+    </ul>
+
+    <h2>実験手順(フローチャート)</h2>
+    <p class="meta">「還元・発色」に約 20 分かかるので、③④の発色の待ち時間に⑤の滴定を行う(テキスト脚注 *7)。</p>
+
+    <span class="cap">準備 器具の洗浄と共洗い(予習問題 8.1)</span>
+    <ol class="flow">
+      <li>すべての器具を洗い、最後に純水でゆすぐ</li>
+      <li>ホールピペット・ビュレット・取り分け用ビーカー・セルは、<b>量り取る溶液で共洗い</b>(2〜3 回)<span class="sub">メスフラスコ・メスピペット・駒込ピペット・コニカルビーカーは<span class="key">純水洗いのまま</span>でよい</span></li>
+    </ol>
+
+    <span class="cap">③ 検量線用の検液(1,10-フェナントロリン鉄(Ⅱ)錯体)</span>
+    <ol class="flow">
+      <li>0.01 M 鉄ミョウバン水溶液 <b>2 mL</b>(ホールピペット)→ 100 mL メスフラスコで<b>50 倍に希釈</b></li>
+      <li>25 mL メスフラスコ 4 個に、希釈液 <b>2、4、6、8 mL</b>(ホールピペット)+ 空のフラスコ 1 個(ブランク)<span class="sub">8 mL は 4 mL ピペットで 2 回(2 mL で 4 回より誤差が小さい)。純水で全量の約半分に</span></li>
+      <li>5 % 塩酸ヒドロキシルアミン 0.5 mL(<b>Fe³⁺ → Fe²⁺ に還元</b>)、0.1 % 1,10-フェナントロリン 1 mL(<b>発色</b>)を駒込ピペットで加えて混ぜる</li>
+      <li>緩衝液 B(pH 4.7)2.5 mL(メスピペット)→ 純水で標線まで(25 mL)<span class="sub">メニスカスの最下部を水平に見て合わせる。ふたをして 4〜5 回逆さにして混ぜる</span></li>
+      <li>約 <b>20 分</b> 放置(発色の完了を待つ)</li>
+    </ol>
+
+    <span class="cap">④ 温泉水試料</span>
+    <ol class="flow">
+      <li>草津温泉水 <b>4 mL</b>、万座温泉水 <b>10 mL</b> を、別々の 25 mL メスフラスコに(ホールピペット)</li>
+      <li>③と同じように還元・発色させる</li>
+    </ol>
+
+    <span class="cap">⑤ EDTA 滴定(鉄ミョウバン水溶液の正確な濃度)</span>
+    <ol class="flow">
+      <li>0.01 M 鉄ミョウバン 10 mL(ホールピペット)→ コニカルビーカー、純水約 50 mL</li>
+      <li>緩衝液 A(pH 2.0)5 mL(メスピペット)→ <b>30〜40 ℃ に加温</b>(温度計で確認)</li>
+      <li>滴定の直前に、バリアミンブルー B 指示薬をミクロスパーテル 1 杯(約 0.01 g)→ <b>紫色</b></li>
+      <li>0.01 M EDTA 標準液で滴定。<b>紫色 → 淡黄色</b> が終点<span class="sub">ビュレットは 0.01 mL まで読む。終点近くは半滴ずつ。温度が下がる前に滴定</span></li>
+      <li>3 回以上。<b>最小と最大の差が 0.05 mL 以内</b>の 3 回の平均から、ファクターを考慮して濃度 $c$ を求める</li>
+    </ol>
+
+    <span class="cap">⑥ 吸収スペクトルと検量線</span>
+    <ol class="flow">
+      <li>参照セル(奥)にブランク、試料セル(手前)に<b>最も濃い 8 mL の検液</b> → スペクトルを測り、<b>吸収極大波長</b>(約 510 nm)を求め、そこでのモル吸光係数を計算(予習問題 8.2)</li>
+      <li>極大波長で、ブランク、2、4、6、8 mL の検液の吸光度を測る(セルは検液で共洗い)→ <b>検量線</b>(吸光度 vs 加えた鉄ミョウバン溶液の量 mL = CONC)<span class="sub">ばらつきが大きいときは検液を作り直す。指導教員の確認を受ける</span></li>
+    </ol>
+
+    <span class="cap">⑦ 温泉水中の鉄の濃度</span>
+    <ol class="flow">
+      <li>温泉水試料の吸光度を測る → 装置が検量線から <b>CONC</b>(相当する mL)を出す</li>
+      <li>CONC と $c$ から、温泉水原液の鉄の<b>モル濃度</b>と <b>ppm</b> を計算(予習問題 8.3)して報告</li>
+    </ol>
+
+    <h2>予想・注意のポイント</h2>
+    <ul>
+      <li>検量線は原点を通る直線になる(ベールの法則、テキスト (8・6))。</li>
+      <li>鉄ミョウバンの濃度は「0.01 M」と書かれていても正確ではないので、滴定で決める(テキスト脚注 *4)。③と⑤で同じ瓶の溶液を使う。途中で補充しない。</li>
+      <li>セルは、透明な面に光を通す。気泡、外側の水滴に注意。全測定で同じ分光光度計・同じセル。</li>
+    </ul>
+
+    <h2>予習問題の解答と解説</h2>
+
+    <h3 id="y81">予習問題 8.1 ガラス器具の使用前の準備(水洗浄のみ/水洗浄後共洗い)を、器具の使用箇所ごとに。共洗いが必要な場合は、どの溶液で共洗いするか</h3>
+    <div class="box basic">
+      <div class="label">考え方</div>
+      <p>判断の基準は 1 つ:<b>器具の内側に残った水が、量り取る溶液の量や濃度を変えてしまうか</b>(テキスト 8・4 節②)。</p>
+      <ul>
+        <li><b>共洗いが必要</b>:溶液の体積をそのまま「正確な量」として取り出す器具(ホールピペット、ビュレット)と、その器具に溶液を入れる前の取り分け用ビーカー。中の水が混ざると、取り出した溶液の<b>濃度が薄まる</b>。</li>
+        <li><b>水洗浄のみでよい</b>:あとで純水を加えて薄める容器(メスフラスコ、コニカルビーカー)や、量が厳密でなくてよい試薬を量る器具(駒込ピペット、メスピペット)。水が少し入っていても、結果は変わらない。</li>
+        <li>共洗いの溶液は、<b>その器具で次に量り取る溶液そのもの</b>。</li>
+      </ul>
+    </div>
+    <div class="box ex">
+      <div class="label">解答</div>
+      <div class="tscroll"><table class="cmp">
+        <tr><th>器具</th><th>使う場所(テキストの番号)</th><th>準備</th></tr>
+        <tr><td>ビュレット</td><td>⑤ EDTA 滴定</td><td>水洗後、<b>0.01 M EDTA 標準液</b>で共洗い</td></tr>
+        <tr><td>ホールピペット 10 mL</td><td>⑤ 鉄ミョウバン 10 mL ／ ④ 万座温泉水 10 mL</td><td>水洗後、<b>0.01 M 鉄ミョウバン水溶液</b>で共洗い。万座温泉水を量るときは、洗ってから<b>万座温泉水</b>で共洗い</td></tr>
+        <tr><td>ホールピペット 4 mL</td><td>③ 希釈液 4 mL・8 mL(2 回)／ ④ 草津温泉水 4 mL</td><td>水洗後、<b>50 倍希釈液</b>で共洗い。草津温泉水を量るときは、洗ってから<b>草津温泉水</b>で共洗い</td></tr>
+        <tr><td>ホールピペット 2 mL(2 本)</td><td>③ 0.01 M 鉄ミョウバン 2 mL ／ 希釈液 2 mL・6 mL(4 + 2)</td><td>1 本は<b>0.01 M 鉄ミョウバン水溶液</b>で、もう 1 本は<b>50 倍希釈液</b>で共洗い(<b>2 本を使い分ける</b>:課題 8.2 のように、濃い液が混じると大きな誤差)</td></tr>
+        <tr><td>ビーカー 50 mL(2 個)</td><td>溶液を取り分けて、ピペットで吸う</td><td>水洗後、<b>入れる溶液</b>(鉄ミョウバン、希釈液、温泉水など)で共洗い</td></tr>
+        <tr><td>プラスチックセル(2 個)</td><td>⑥⑦ 吸光度の測定</td><td>水洗後、<b>測る検液</b>で共洗い(検液を替えるたびに)</td></tr>
+        <tr><td>メスフラスコ 100 mL・25 mL</td><td>③④ 希釈・検液の調製</td><td>水洗浄のみ(あとで標線まで純水を加えるので)。ふたもよく洗う</td></tr>
+        <tr><td>メスピペット 10 mL</td><td>③ 緩衝液 B 2.5 mL ／ ⑤ 緩衝液 A 5 mL</td><td>水洗浄のみ(量の正確さが必要ない)。水をよく切る</td></tr>
+        <tr><td>駒込ピペット 1 mL(3 本)</td><td>③ 塩酸ヒドロキシルアミン、1,10-フェナントロリン、標線合わせの純水</td><td>水洗浄のみ。試薬ごとに使い分ける</td></tr>
+        <tr><td>コニカルビーカー 200 mL</td><td>⑤ 滴定の容器</td><td>水洗浄のみ(純水約 50 mL を加えるので、水が残っていても鉄の物質量は変わらない)</td></tr>
+      </table></div>
+    </div>
+    <div class="box warn">
+      <div class="label">つまずきやすい点</div>
+      <ul>
+        <li><b>コニカルビーカーは共洗いしない</b>:中に入る鉄の<b>物質量</b>(ピペットで正確に量った 10 mL 分)が大事で、水で薄まっても物質量は変わらない。もし鉄ミョウバンで共洗いすると、壁に残った分だけ鉄が<b>増えて</b>しまう。</li>
+        <li>同じピペットで別の溶液を量るとき(例:10 mL ピペットで鉄ミョウバンと万座温泉水)は、水で洗ってから、次の溶液で共洗いし直す。</li>
+        <li>共洗いに使った液は、元の瓶やビーカーに<b>戻さず</b>捨てる(基本操作 8・1)。</li>
+      </ul>
+    </div>
+
+    <h3 id="y82">予習問題 8.2 吸収極大波長での吸光度 ABS と、⑤で求めた 0.01 M 鉄ミョウバン水溶液(希釈する前)の正確な濃度 $c$ [M] から、モル吸光係数 $\varepsilon$ を計算する式を求めよ</h3>
+    <div class="box basic">
+      <div class="label">考え方</div>
+      <p>$\varepsilon=\dfrac{A}{c'l}$(テキスト (8・7))の $c'$ は、<b>セルに入っている液(8 mL の検液)の濃度</b>で、$c$(希釈前の濃度)ではない。そこで、$c$ が何倍に薄まったかを追いかける。</p>
+    </div>
+    <div class="box ex">
+      <div class="label">解答</div>
+      <p><b>① 1 回目の希釈</b>:2 mL を 100 mL に → $\dfrac{2}{100}=\dfrac1{50}$ 倍。濃度 $\dfrac{c}{50}$。</p>
+      <p><b>② 2 回目の希釈</b>:その 8 mL を 25 mL に → $\dfrac{8}{25}$ 倍。8 mL 検液の濃度
+      $$c'=c\times\frac{2}{100}\times\frac{8}{25}=0.0064\,c\ \ [\mathrm M]$$</p>
+      <p><b>③ 代入</b>:$l=1$ cm として
+      $$\boxed{\varepsilon=\frac{\mathrm{ABS}}{c'\cdot1}=\frac{\mathrm{ABS}}{0.0064\,c}=156.25\times\frac{\mathrm{ABS}}{c}\ \ [\mathrm{dm^3\,cm^{-1}\,mol^{-1}}]}$$</p>
+      <p>(例:$c=9.90\times10^{-3}$ M、ABS = 0.716 なら、$\varepsilon=156.25\times0.716/9.90\times10^{-3}\approx1.13\times10^{4}$。1,10-フェナントロリン鉄(Ⅱ)錯体の値としてもっともらしい大きさ。数値は他年度の結果を参考にした例。)</p>
+    </div>
+    <div class="box warn">
+      <div class="label">確かめ</div>
+      <p>加えた試薬(還元剤・フェナントロリン・緩衝液)は、鉄の物質量を変えないので、濃度の計算には関係しない。効くのは、<b>鉄を含む液の体積と、最終的な全体積(25 mL)</b>だけ。</p>
+    </div>
+
+    <h3 id="y83">予習問題 8.3 装置が算出した草津・万座温泉水試料の鉄濃度の相対値(CONC)と、$c$ [M] から、両温泉水原液の鉄のモル濃度と重量分率(ppm)を計算する式を求めよ</h3>
+    <div class="box basic">
+      <div class="label">考え方</div>
+      <p>CONC は、検量線の横軸と同じ単位で、「<b>この試料は、50 倍希釈液を何 mL 入れた検液と同じ濃さか</b>」を表す(テキスト⑥:濃度は加えた溶液の量 mL で表す)。だから、CONC mL 分の鉄が 25 mL のフラスコに入っているのと同じ。そこから、温泉水原液の濃度に戻す。</p>
+    </div>
+    <div class="box ex">
+      <div class="label">解答</div>
+      <p><b>① 試料フラスコ(25 mL)中の鉄の濃度</b>:50 倍希釈液(濃度 $c/50$)を CONC mL 入れたのと同じなので
+      $$\frac{(c/50)\times\mathrm{CONC}}{25}\ \ [\mathrm M]$$</p>
+      <p><b>② 温泉水原液に戻す</b>:草津は 4 mL を 25 mL に($\times\frac{25}4$)、万座は 10 mL を 25 mL に($\times\frac{25}{10}$)薄めているので
+      $$\boxed{c_{\text{草津}}=\frac{c\times\mathrm{CONC}}{50\times25}\times\frac{25}{4}=\frac{c\times\mathrm{CONC}}{200}\ [\mathrm M],\qquad c_{\text{万座}}=\frac{c\times\mathrm{CONC}}{50\times25}\times\frac{25}{10}=\frac{c\times\mathrm{CONC}}{500}\ [\mathrm M]}$$</p>
+      <p><b>③ ppm に直す</b>:1 L(= 1000 g、密度 1 g/cm³)の中の鉄の質量は $c_{\text{温泉}}\times55.85$ g なので
+      $$\mathrm{ppm}=\frac{c_{\text{温泉}}\times55.85\ \mathrm g}{1000\ \mathrm g}\times10^{6}=c_{\text{温泉}}\times5.585\times10^{4}$$</p>
+      <p>(例:$c=9.90\times10^{-3}$ M、草津の CONC = 6.654 なら、$c_{\text{草津}}=9.90\times10^{-3}\times6.654/200=3.29\times10^{-4}$ M、18.4 ppm。万座の CONC = 4.625 なら $9.16\times10^{-5}$ M、5.12 ppm。数値は他年度の結果を参考にした例。)</p>
+    </div>
+    <div class="box warn">
+      <div class="label">確かめ・注意</div>
+      <ul>
+        <li>CONC が検量線の範囲(0〜8 mL)に入っていることを確かめる。外れていると、直線の外挿になり、信頼性が下がる(草津 4 mL・万座 10 mL と量を変えているのは、どちらも範囲に入るようにするため)。</li>
+        <li>ppm は「g あたりの μg」。原液 1 g 中に 18.4 μg の鉄、という意味。</li>
+      </ul>
+    </div>
+    <p>課題 8.1〜8.3 の解答は、<a href="explanation.html">課題の解答と解説</a>のページにあります。</p>
+
+    <nav class="pager">
+      <a href="index.html">← 第四週(第八回)</a>
+      <a href="explanation.html">課題の解説 →</a>
+    </nav>
+  </main>
+
+  <footer>© Aセメまとめノート</footer>
+</body>
+</html>
