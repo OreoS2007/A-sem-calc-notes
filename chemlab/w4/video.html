@@ -1,0 +1,725 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>第四週 手順の解説動画 | 基礎化学実験 | Aセメまとめノート</title>
+  <link rel="stylesheet" href="../../assets/style.css">
+  <style>
+    .player { max-width: 960px; margin: 0 auto; }
+    #out { width: 100%; height: auto; display: block; border-radius: 10px; background: #dfe6ee; }
+    .ctrl { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 10px 0; }
+    .ctrl button { font: inherit; padding: 6px 12px; border-radius: 8px; border: 1px solid var(--border); background: var(--surface); color: var(--text); cursor: pointer; }
+    .ctrl button:hover { border-color: var(--accent); }
+    #bar { flex: 1 1 200px; accent-color: var(--accent); }
+    #time { font-variant-numeric: tabular-nums; color: var(--muted); font-size: .9rem; min-width: 90px; }
+    .chap { display: flex; flex-wrap: wrap; gap: 6px; margin: 6px 0 16px; }
+    .chap button { font-size: .82rem; padding: 3px 9px; }
+    .chap button.on { background: var(--accent); color: #fff; border-color: var(--accent); }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="inner">
+      <a class="site-title" href="../../index.html">Aセメまとめノート</a>
+      <span class="links"><a href="../index.html">基礎化学実験</a><a href="index.html">第四週</a><a href="prep.html">予習ノート</a><a href="explanation.html">課題の解説</a></span>
+    </div>
+  </header>
+
+  <main class="note">
+    <h1>第四週(第八回)手順の解説動画:分光光度法による鉄の定量</h1>
+    <div class="meta">基礎化学実験 実験8(テキスト p.102〜106 の手順 ①〜⑦)を、3D のアニメーションで順に見せます。器具の形・液の色・量は目安です(実際の操作は、テキストと指導教員の指示に従うこと)。</div>
+
+    <div class="player">
+      <canvas id="out" width="1280" height="720"></canvas>
+      <div class="ctrl">
+        <button id="play">▶ 再生</button>
+        <button id="prev">⏮ 前の場面</button>
+        <button id="next">次の場面 ⏭</button>
+        <input id="bar" type="range" min="0" max="1000" value="0">
+        <span id="time">0:00 / 0:00</span>
+        <button id="rec" title="この動画を webm 形式で保存します(再生しながら記録するので、全体の長さだけ時間がかかります)">⏺ 動画ファイルとして保存</button>
+      </div>
+      <div class="chap" id="chap"></div>
+    </div>
+
+    <nav class="pager">
+      <a href="index.html">← 第四週(第八回)</a>
+      <a href="prep.html">予習ノート</a>
+      <a href="explanation.html">課題の解説 →</a>
+    </nav>
+  </main>
+
+  <footer>© Aセメまとめノート</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(() => {
+const W = 1280, H = 720;
+const out = document.getElementById('out');
+const ctx = out.getContext('2d');
+const renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
+renderer.setSize(W, H, false);
+renderer.setPixelRatio(1);
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0xe7edf3);
+const camera = new THREE.PerspectiveCamera(38, W / H, 0.1, 100);
+scene.add(new THREE.HemisphereLight(0xffffff, 0xb9c3cf, 0.75));
+const sun = new THREE.DirectionalLight(0xffffff, 0.75); sun.position.set(4, 9, 6); scene.add(sun);
+const back = new THREE.DirectionalLight(0xffffff, 0.35); back.position.set(-6, 4, -5); scene.add(back);
+// 実験台
+const bench = new THREE.Mesh(new THREE.BoxGeometry(30, 0.4, 14), new THREE.MeshLambertMaterial({ color: 0x3f4a56 }));
+bench.position.y = -0.2; scene.add(bench);
+const wall = new THREE.Mesh(new THREE.PlaneGeometry(40, 20), new THREE.MeshLambertMaterial({ color: 0xdfe6ee }));
+wall.position.set(0, 8, -6); scene.add(wall);
+
+// ---------- 補助
+const ease = (x) => (x <= 0 ? 0 : x >= 1 ? 1 : x * x * (3 - 2 * x));
+const seg = (t, a, b) => ease((t - a) / (b - a));
+function kf(t, keys) {
+  if (t <= keys[0][0]) return keys[0][1];
+  for (let i = 1; i < keys.length; i++) {
+    if (t <= keys[i][0]) {
+      const [t0, v0] = keys[i - 1], [t1, v1] = keys[i];
+      const u = ease((t - t0) / (t1 - t0));
+      return Array.isArray(v0) ? v0.map((x, j) => x + (v1[j] - x) * u) : v0 + (v1 - v0) * u;
+    }
+  }
+  return keys[keys.length - 1][1];
+}
+const C = {
+  alum: new THREE.Color(0xd9b34a), water: new THREE.Color(0xbfe3f5), clear: new THREE.Color(0xf3f0e2),
+  red: new THREE.Color(0xd8361c), purple: new THREE.Color(0x6a2c9c), pale: new THREE.Color(0xf0e08a),
+  onsen: new THREE.Color(0xc9c58a), edta: new THREE.Color(0xd6ecf6)
+};
+const mix = (a, b, u) => new THREE.Color().lerpColors(a, b, Math.max(0, Math.min(1, u)));
+const glassMat = () => new THREE.MeshPhongMaterial({ color: 0xffffff, transparent: true, opacity: 0.22, shininess: 120, specular: 0xffffff, side: THREE.DoubleSide, depthWrite: false });
+const liqMat = (c) => new THREE.MeshPhongMaterial({ color: c, transparent: true, opacity: 0.82, shininess: 60 });
+
+// 文字のスプライト
+function label(text, o = {}) {
+  const fs = o.fs || 56, pad = 18;
+  const cv = document.createElement('canvas'); const g = cv.getContext('2d');
+  g.font = `bold ${fs}px "Yu Gothic","Hiragino Sans","Meiryo",sans-serif`;
+  const w = Math.ceil(g.measureText(text).width) + pad * 2, h = fs + pad * 1.4;
+  cv.width = w; cv.height = h;
+  g.font = `bold ${fs}px "Yu Gothic","Hiragino Sans","Meiryo",sans-serif`;
+  g.fillStyle = o.bg || 'rgba(255,255,255,0.92)';
+  const r = 18; g.beginPath(); g.moveTo(r, 0); g.arcTo(w, 0, w, h, r); g.arcTo(w, h, 0, h, r); g.arcTo(0, h, 0, 0, r); g.arcTo(0, 0, w, 0, r); g.fill();
+  g.fillStyle = o.color || '#1d2a3a'; g.textBaseline = 'middle'; g.fillText(text, pad, h / 2 + 2);
+  const tex = new THREE.CanvasTexture(cv); tex.minFilter = THREE.LinearFilter;
+  const sp = new THREE.Sprite(new THREE.SpriteMaterial({ map: tex, depthTest: false, transparent: true }));
+  const s = o.size || 0.36; sp.scale.set(s * w / h, s, 1); sp.renderOrder = 10;
+  return sp;
+}
+
+const at = (o, x, y, z) => { o.position.set(x, y, z); return o; };
+// 回転体の容器(ガラス + 液)
+function vessel(profile, o = {}) {
+  const g = new THREE.Group();
+  const pts = profile.map(([r, y]) => new THREE.Vector2(r, y));
+  const glass = new THREE.Mesh(new THREE.LatheGeometry(pts, 48), glassMat()); glass.renderOrder = 2; g.add(glass);
+  const inner = profile.map(([r, y]) => [r * 0.9, y]);
+  const liq = new THREE.Mesh(new THREE.BufferGeometry(), liqMat(C.water)); liq.renderOrder = 1; g.add(liq);
+  let key = '';
+  g.setLevel = (lv, color, op = 0.82) => {
+    const k = lv.toFixed(3);
+    if (k !== key) {
+      key = k; liq.geometry.dispose();
+      const p = [new THREE.Vector2(0, inner[0][1] + 0.005)];
+      for (let i = 0; i < inner.length; i++) {
+        const [r, y] = inner[i];
+        if (y < lv) p.push(new THREE.Vector2(r, Math.max(y, inner[0][1] + 0.005)));
+        else { const [r0, y0] = inner[i - 1] || inner[0]; const u = (lv - y0) / (y - y0 || 1); p.push(new THREE.Vector2(r0 + (r - r0) * u, lv)); break; }
+      }
+      p.push(new THREE.Vector2(0, lv));
+      liq.geometry = lv > inner[0][1] + 0.01 ? new THREE.LatheGeometry(p, 40) : new THREE.BufferGeometry();
+    }
+    if (color) liq.material.color.copy(color);
+    liq.material.opacity = op;
+  };
+  if (o.mark) {
+    const m = new THREE.Mesh(new THREE.TorusGeometry(o.mark[0] + 0.004, 0.008, 6, 40), new THREE.MeshBasicMaterial({ color: 0xffffff }));
+    m.rotation.x = Math.PI / 2; m.position.y = o.mark[1]; g.add(m);
+  }
+  return g;
+}
+const flaskProfile = (s) => [[0.0, 0], [0.62, 0], [0.86, 0.14], [0.96, 0.48], [0.9, 0.84], [0.6, 1.18], [0.22, 1.42], [0.16, 1.58], [0.16, 3.1], [0.19, 3.2]].map(([r, y]) => [r * s, y * s]);
+function volFlask(s = 1) {
+  const g = vessel(flaskProfile(s), { mark: [0.16 * s * 0.9, 2.55 * s] });
+  const stopper = new THREE.Mesh(new THREE.CylinderGeometry(0.2 * s, 0.15 * s, 0.25 * s, 20), new THREE.MeshPhongMaterial({ color: 0xf2f2f2, transparent: true, opacity: 0.8 }));
+  stopper.position.y = 3.3 * s; stopper.visible = false; g.add(stopper); g.stopper = stopper;
+  g.markY = 2.55 * s;
+  return g;
+}
+const beakerProfile = (s) => [[0, 0], [0.7, 0], [0.72, 0.05], [0.72, 1.6], [0.78, 1.66]].map(([r, y]) => [r * s, y * s]);
+const conicalProfile = [[0, 0], [0.95, 0], [1.0, 0.1], [0.4, 1.7], [0.34, 1.9], [0.34, 2.3], [0.4, 2.36]];
+
+// ホールピペット(先端が原点)
+function pipette(len = 3.2) {
+  const g = new THREE.Group();
+  const gm = glassMat(); gm.opacity = 0.35;
+  const tip = new THREE.Mesh(new THREE.CylinderGeometry(0.035, 0.012, 0.35, 12), gm); tip.position.y = 0.175; g.add(tip);
+  const low = new THREE.Mesh(new THREE.CylinderGeometry(0.04, 0.035, len * 0.33, 12), gm); low.position.y = 0.35 + len * 0.165; g.add(low);
+  const bulb = new THREE.Mesh(new THREE.SphereGeometry(0.14, 20, 14), gm); bulb.scale.y = 2.2; bulb.position.y = 0.35 + len * 0.33 + 0.28; g.add(bulb);
+  const up = new THREE.Mesh(new THREE.CylinderGeometry(0.04, 0.04, len * 0.45, 12), gm); up.position.y = 0.35 + len * 0.33 + 0.56 + len * 0.225; g.add(up);
+  const mark = new THREE.Mesh(new THREE.TorusGeometry(0.045, 0.006, 6, 20), new THREE.MeshBasicMaterial({ color: 0x333333 }));
+  mark.rotation.x = Math.PI / 2; mark.position.y = 0.35 + len * 0.33 + 0.56 + len * 0.12; g.add(mark);
+  const pip = new THREE.Mesh(new THREE.CylinderGeometry(0.09, 0.07, 0.5, 14), new THREE.MeshPhongMaterial({ color: 0x2e7bd6 }));
+  pip.position.y = 0.35 + len * 0.33 + 0.56 + len * 0.45 + 0.25; g.add(pip);
+  const liq = new THREE.Mesh(new THREE.CylinderGeometry(0.03, 0.03, 1, 10), liqMat(C.alum)); g.add(liq);
+  const lb = new THREE.Mesh(new THREE.SphereGeometry(0.12, 16, 12), liqMat(C.alum)); lb.scale.y = 2.1; lb.position.y = bulb.position.y; g.add(lb);
+  const markY = mark.position.y, topBulb = bulb.position.y;
+  g.setFill = (f, color) => { // f: 0..1(1 で標線)
+    const h = Math.max(0.001, 0.05 + f * (markY - 0.05));
+    liq.scale.y = h; liq.position.y = h / 2; liq.visible = f > 0.002;
+    lb.visible = h > topBulb - 0.2; lb.scale.set(1, 2.1 * Math.min(1, (h - (topBulb - 0.3)) / 0.6 + 0.01), 1);
+    if (color) { liq.material.color.copy(color); lb.material.color.copy(color); }
+  };
+  g.setFill(0, C.alum);
+  return g;
+}
+// 駒込ピペット
+function dropper(color) {
+  const g = new THREE.Group(); const gm = glassMat(); gm.opacity = 0.4;
+  const t = new THREE.Mesh(new THREE.CylinderGeometry(0.06, 0.02, 1.0, 12), gm); t.position.y = 0.5; g.add(t);
+  const l = new THREE.Mesh(new THREE.CylinderGeometry(0.045, 0.015, 0.6, 10), liqMat(color)); l.position.y = 0.3; g.add(l);
+  const b = new THREE.Mesh(new THREE.SphereGeometry(0.13, 16, 12), new THREE.MeshPhongMaterial({ color: 0xb5502c })); b.scale.y = 1.5; b.position.y = 1.12; g.add(b);
+  return g;
+}
+// ビュレット
+function burette() {
+  const g = new THREE.Group(); const gm = glassMat(); gm.opacity = 0.3;
+  const tube = new THREE.Mesh(new THREE.CylinderGeometry(0.11, 0.11, 5, 16), gm); tube.position.y = 3.1; g.add(tube);
+  for (let i = 0; i <= 10; i++) { const r = new THREE.Mesh(new THREE.TorusGeometry(0.112, 0.004, 4, 20), new THREE.MeshBasicMaterial({ color: 0x334455 })); r.rotation.x = Math.PI / 2; r.position.y = 5.4 - i * 0.45; g.add(r); }
+  const neck = new THREE.Mesh(new THREE.CylinderGeometry(0.11, 0.04, 0.3, 16), gm); neck.position.y = 0.45; g.add(neck);
+  const cock = new THREE.Mesh(new THREE.BoxGeometry(0.5, 0.1, 0.1), new THREE.MeshPhongMaterial({ color: 0x2b5fae })); cock.position.y = 0.3; g.add(cock); g.cock = cock;
+  const tip = new THREE.Mesh(new THREE.CylinderGeometry(0.035, 0.012, 0.3, 10), gm); tip.position.y = 0.1; g.add(tip);
+  const liq = new THREE.Mesh(new THREE.CylinderGeometry(0.095, 0.095, 1, 14), liqMat(C.edta)); g.add(liq);
+  g.setLevel = (f) => { const h = 0.3 + f * 5.0; liq.scale.y = h; liq.position.y = 0.6 + h / 2 - 0.3; };
+  const stand = new THREE.Mesh(new THREE.CylinderGeometry(0.05, 0.05, 6.4, 10), new THREE.MeshPhongMaterial({ color: 0x9aa4ae })); stand.position.set(-0.9, 3.0, -0.3); g.add(stand);
+  const base = new THREE.Mesh(new THREE.BoxGeometry(1.6, 0.12, 1.2), new THREE.MeshPhongMaterial({ color: 0x9aa4ae })); base.position.set(-0.6, 0.06 - 0.0, -0.3); base.visible = false; g.add(base);
+  const clamp = new THREE.Mesh(new THREE.BoxGeometry(0.9, 0.12, 0.12), new THREE.MeshPhongMaterial({ color: 0x9aa4ae })); clamp.position.set(-0.45, 4.6, -0.15); g.add(clamp);
+  return g;
+}
+// セル
+function cuvette(color) {
+  const g = new THREE.Group();
+  const gl = new THREE.Mesh(new THREE.BoxGeometry(0.34, 1.2, 0.34), glassMat()); gl.position.y = 0.6; gl.renderOrder = 2; g.add(gl);
+  const lq = new THREE.Mesh(new THREE.BoxGeometry(0.3, 0.9, 0.3), liqMat(color)); lq.position.y = 0.47; g.add(lq); g.liq = lq;
+  return g;
+}
+function drop(color) { const m = new THREE.Mesh(new THREE.SphereGeometry(0.045, 10, 8), liqMat(color)); m.scale.y = 1.4; return m; }
+// グラフの画面(キャンバスの板)
+function screen(w = 2.4, h = 1.5) {
+  const cv = document.createElement('canvas'); cv.width = 640; cv.height = 400;
+  const tex = new THREE.CanvasTexture(cv);
+  const m = new THREE.Mesh(new THREE.PlaneGeometry(w, h), new THREE.MeshBasicMaterial({ map: tex }));
+  m.draw = (fn) => { const g = cv.getContext('2d'); g.fillStyle = '#0f1d2b'; g.fillRect(0, 0, 640, 400); fn(g); tex.needsUpdate = true; };
+  const frame = new THREE.Mesh(new THREE.BoxGeometry(w + 0.12, h + 0.12, 0.06), new THREE.MeshPhongMaterial({ color: 0x2b3440 }));
+  frame.position.z = -0.04; m.add(frame);
+  return m;
+}
+function axes(g, xl, yl) {
+  g.strokeStyle = '#9fb2c6'; g.lineWidth = 3; g.beginPath(); g.moveTo(70, 30); g.lineTo(70, 340); g.lineTo(610, 340); g.stroke();
+  g.fillStyle = '#cfe0f0'; g.font = 'bold 26px "Yu Gothic",sans-serif'; g.fillText(yl, 12, 26); g.textAlign = 'right'; g.fillText(xl, 610, 322); g.textAlign = 'left';
+}
+// 時計
+function clock() {
+  const g = new THREE.Group();
+  const face = new THREE.Mesh(new THREE.CylinderGeometry(0.55, 0.55, 0.08, 40), new THREE.MeshPhongMaterial({ color: 0xffffff })); face.rotation.x = Math.PI / 2; g.add(face);
+  const rim = new THREE.Mesh(new THREE.TorusGeometry(0.56, 0.05, 8, 40), new THREE.MeshPhongMaterial({ color: 0x2e7bd6 })); g.add(rim);
+  const hand = new THREE.Mesh(new THREE.BoxGeometry(0.05, 0.45, 0.02), new THREE.MeshPhongMaterial({ color: 0xd8361c })); hand.geometry.translate(0, 0.2, 0); hand.position.z = 0.06; g.add(hand); g.hand = hand;
+  return g;
+}
+
+// ---------- 場面
+const FE_AMT = [0, 2, 4, 6, 8];
+const feColor = (mL, dev = 1) => mix(C.clear, C.red, (mL / 8) * 0.95 * dev);
+let G = null; // 今の場面のグループ
+const S = [];
+function addScene(o) { S.push(o); }
+
+addScene({
+  name: 'はじめに', dur: 6,
+  cap: ['実験8 分光光度法による鉄の定量', '温泉水に数 ppm 含まれる鉄を、赤い錯体の「色の濃さ」で測る'], title: true,
+  build(g) {
+    const f = volFlask(0.9); f.position.set(-1.3, 0, 0); f.setLevel(2.3, feColor(6)); g.add(f); g.f = f;
+    const c = cuvette(feColor(8)); c.position.set(1.4, 0, 0.4); c.scale.setScalar(1.3); g.add(c); g.c = c;
+    const b = vessel(beakerProfile(0.9)); b.position.set(0.1, 0, -0.9); b.setLevel(0.9, C.onsen); g.add(b);
+    g.add(at(label('温泉水', { size: 0.32 }), 0.1, 1.95, -0.9));
+  },
+  update(t, g) { g.rotation.y = t * 0.15; camera.position.set(0, 2.2, 8.0); camera.lookAt(0, 2.0, 0); }
+});
+
+addScene({
+  name: '① 共洗い', dur: 10,
+  cap: ['① 共洗い:量り取る液を少し吸い、内側全体をぬらして捨てる(2〜3回)', 'ホールピペット・ビュレット・セル=共洗い/メスフラスコ・コニカルビーカー=純水で洗うだけ'],
+  build(g) {
+    const b = vessel(beakerProfile(0.9)); b.position.set(-1.4, 0, 0); b.setLevel(1.0, C.alum); g.add(b);
+    const w = vessel(beakerProfile(0.9)); w.position.set(1.8, 0, 0); w.setLevel(0.25, C.alum, 0.5); g.add(w);
+    g.add(at(label('鉄ミョウバン水溶液', { size: 0.3 }), -1.4, 1.85, 0));
+    g.add(at(label('廃液', { size: 0.3 }), 1.8, 1.85, 0));
+    const p = pipette(3.0); g.add(p); g.p = p;
+    g.drops = [0, 1, 2].map(() => { const d = drop(C.alum); g.add(d); return d; });
+  },
+  update(t, g) {
+    const p = g.p;
+    const pos = kf(t, [[0, [-1.4, 2.0, 0]], [1.5, [-1.4, 0.35, 0]], [3, [-1.4, 0.35, 0]], [4.2, [0, 2.4, 0]], [7, [0, 2.4, 0]], [8.2, [1.8, 1.0, 0]]]);
+    p.position.set(...pos);
+    const tilt = kf(t, [[3, 0], [4.2, Math.PI * 0.45], [7, Math.PI * 0.45], [8.2, 0.15]]);
+    p.rotation.set(0, 0, tilt);
+    p.rotateY(t > 4.2 && t < 7 ? (t - 4.2) * 2.4 : 0);
+    p.setFill(t < 1.5 ? 0 : t < 3 ? seg(t, 1.5, 3) * 0.28 : t < 8.2 ? 0.28 : Math.max(0, 0.28 - (t - 8.2) * 0.25), C.alum);
+    g.drops.forEach((d, i) => { const tt = t - 8.3 - i * 0.35; d.visible = tt > 0 && tt < 0.5; d.position.set(1.8, 1.0 - tt * 1.6, 0); });
+    camera.position.set(0, 2.6, 9.4); camera.lookAt(0.1, 1.6, 0);
+  }
+});
+
+addScene({
+  name: '② 50倍に薄める', dur: 11,
+  cap: ['② 0.01 M 鉄ミョウバン水溶液 2 mL を、100 mL メスフラスコに入れて純水で薄める', '標線(白い線)にメニスカスの底を合わせ、栓をして逆さにして混ぜる'],
+  build(g) {
+    const b = vessel(beakerProfile(0.8)); b.position.set(-2.1, 0, 0); b.setLevel(0.9, C.alum); g.add(b);
+    g.add(at(label('0.01 M 鉄ミョウバン', { size: 0.28 }), -2.1, 1.7, 0));
+    const f = volFlask(1.0); f.position.set(0.6, 0, 0); g.add(f); g.f = f;
+    g.add(at(label('100 mL メスフラスコ', { size: 0.28 }), 0.6, 3.75, 0));
+    g.mk = at(label('標線', { size: 0.26, bg: 'rgba(255,240,180,0.95)' }), 1.25, 2.55, 0); g.add(g.mk);
+    const p = pipette(2.6); g.add(p); g.p = p;
+    g.add(at(label('2 mL', { size: 0.3, bg: 'rgba(210,235,255,0.95)' }), -0.9, 3.6, 0));
+    const stream = new THREE.Mesh(new THREE.CylinderGeometry(0.025, 0.025, 1, 8), liqMat(C.water)); g.add(stream); g.stream = stream;
+    const wb = new THREE.Mesh(new THREE.CylinderGeometry(0.3, 0.35, 0.9, 20), new THREE.MeshPhongMaterial({ color: 0xf4f8fb, transparent: true, opacity: 0.9 })); g.add(wb); g.wb = wb;
+  },
+  update(t, g) {
+    const p = g.p, f = g.f;
+    p.position.set(...kf(t, [[0, [-2.1, 1.8, 0]], [1.2, [-2.1, 0.3, 0]], [2.6, [-2.1, 0.3, 0]], [3.8, [0.6, 3.3, 0]], [5.4, [0.6, 3.3, 0]], [6.2, [-1.6, 4.0, 0]]]));
+    const fill = t < 1.2 ? 0 : t < 2.6 ? seg(t, 1.2, 2.6) : t < 3.9 ? 1 : 1 - seg(t, 3.9, 5.3);
+    p.setFill(fill, C.alum);
+    // 液面:ピペット分 → 純水で標線まで
+    let lv = 0.0 + 0.12 * seg(t, 3.9, 5.3);
+    lv += (f.markY - 0.12) * seg(t, 6.0, 8.6);
+    const col = mix(C.alum, C.clear, seg(t, 6.0, 8.6) * 0.92);
+    // 逆さにして混ぜる
+    const inv = t > 9 ? Math.sin(seg(t, 9, 11) * Math.PI * 2) * Math.PI * 0.9 : 0;
+    f.rotation.z = inv; f.position.y = t > 9 ? 1.6 * Math.sin(seg(t, 9, 11) * Math.PI) * 0.6 : 0;
+    f.setLevel(Math.min(lv, f.markY), col);
+    f.stopper.visible = t > 8.8;
+    const pour = t > 6.0 && t < 8.6;
+    g.wb.visible = t > 5.6 && t < 9; g.wb.position.set(1.25, 3.9, 0); g.wb.rotation.z = 0.9;
+    g.stream.visible = pour; g.stream.position.set(0.62, 3.35, 0); g.stream.scale.y = 0.8;
+    g.mk.visible = t > 6 && t < 9;
+    camera.position.set(...kf(t, [[0, [-0.7, 2.4, 8.2]], [6, [0.2, 2.6, 7.0]], [8.6, [0.6, 2.8, 5.6]], [9, [0.2, 2.4, 7.6]]])); camera.lookAt(-0.1, 1.6, 0);
+  }
+});
+
+addScene({
+  name: '③ 検液をつくる', dur: 11,
+  cap: ['③ 25 mL メスフラスコ5個に、薄めた液を 0・2・4・6・8 mL ずつ(ホールピペット)', '0 mL はブランク(鉄なし)。8 mL は 4 mL ピペットで2回取る'],
+  build(g) {
+    g.fl = FE_AMT.map((a, i) => { const f = volFlask(0.62); f.position.set(-2.8 + i * 1.4, 0, 0); g.add(f); g.add(at(label(a === 0 ? 'ブランク' : a + ' mL', { size: 0.26 }), -2.8 + i * 1.4, -0.0 + 2.45, 0.2)); return f; });
+    const p = pipette(2.2); g.add(p); g.p = p;
+  },
+  update(t, g) {
+    const sched = [[1, 1], [2, 3], [3, 5], [4, 7.0]]; // 何番目のフラスコに、いつ入れるか
+    const keys = [[0, [-4.2, 2.4, 0]]];
+    sched.forEach(([i, t0]) => { const x = -2.8 + i * 1.4; keys.push([t0, [x, 2.2, 0]], [t0 + 1.2, [x, 2.2, 0]]); });
+    keys.push([10.2, [4.3, 2.6, 0]]);
+    g.p.position.set(...kf(t, keys));
+    let fill = 1;
+    sched.forEach(([i, t0]) => { if (t > t0 && t < t0 + 1.4) fill = 1 - seg(t, t0, t0 + 1.2); });
+    g.p.setFill(fill, mix(C.alum, C.clear, 0.9));
+    g.fl.forEach((f, i) => {
+      const a = FE_AMT[i]; const s = sched.find((x) => x[0] === i);
+      const done = s ? seg(t, s[1], s[1] + 1.2) : 0;
+      f.setLevel(0.05 + (a / 8) * 0.35 * done, mix(C.alum, C.clear, 0.86));
+    });
+    camera.position.set(0, 2.6, 8.4); camera.lookAt(0, 1.0, 0);
+  }
+});
+
+addScene({
+  name: '③ 試薬を加える', dur: 12,
+  cap: ['③ 純水で約半分にし、還元剤 → 発色剤 → 緩衝液B の順に駒込ピペットで加える', '塩酸ヒドロキシルアミン:Fe³⁺→Fe²⁺/1,10-フェナントロリン:Fe²⁺と赤い錯体'],
+  build(g) {
+    g.fl = FE_AMT.map((a, i) => { const f = volFlask(0.62); f.position.set(-2.8 + i * 1.4, 0, 0); g.add(f); return f; });
+    const R = [['塩酸ヒドロキシルアミン 0.5 mL', C.clear], ['1,10-フェナントロリン 1 mL', C.clear], ['緩衝液B 2.5 mL(pH 4.7)', C.water]];
+    g.dr = R.map(([n, c]) => { const d = dropper(c); g.add(d); return d; });
+    g.lb = R.map(([n], k) => { const l = label(n, { size: 0.32, bg: ['rgba(255,236,210,0.95)', 'rgba(255,214,214,0.95)', 'rgba(214,236,255,0.95)'][k] }); l.position.set(0, 3.2, 0); g.add(l); return l; });
+    g.drops = Array.from({ length: 15 }, () => { const d = drop(C.clear); g.add(d); return d; });
+  },
+  update(t, g) {
+    const lvBase = 0.05 + seg(t, 0, 1.2) * 0.75;
+    const stage = [[1.5, 4.5], [4.8, 7.8], [8.1, 11.1]];
+    g.dr.forEach((d, k) => {
+      const [a, b] = stage[k];
+      const x = -3.6 + 7.6 * Math.max(0, Math.min(1, (t - a) / (b - a)));
+      d.visible = t > a - 0.4 && t < b + 0.4;
+      d.position.set(x, 1.95, 0);
+      g.lb[k].visible = t > a - 0.3 && t < b + 0.6;
+    });
+    let n = 0;
+    stage.forEach(([a, b], k) => FE_AMT.forEach((_, i) => {
+      const ti = a + (b - a) * (i + 0.5) / 5; const tt = t - ti; const d = g.drops[n++];
+      d.visible = tt > 0 && tt < 0.4; d.position.set(-2.8 + i * 1.4, 1.95 - tt * 2.2, 0);
+    }));
+    g.fl.forEach((f, i) => {
+      const a = FE_AMT[i];
+      const ti = stage[1][0] + (stage[1][1] - stage[1][0]) * (i + 0.5) / 5;
+      const dev = seg(t, ti, ti + 2.5) * 0.45;
+      f.setLevel(lvBase + 0.05 * seg(t, 1.5, 11), mix(mix(C.alum, C.clear, 0.86), feColor(a), dev * 2.2));
+    });
+    camera.position.set(0, 2.4, 8.2); camera.lookAt(0, 1.0, 0);
+  }
+});
+
+addScene({
+  name: '③ 標線 → 20分待つ', dur: 10,
+  cap: ['③ 標線まで純水 → 栓をして4〜5回逆さにして混ぜる → 約20分待つ', '鉄が多いほど濃い赤橙色になる(この色の濃さを測る)'],
+  build(g) {
+    g.fl = FE_AMT.map((a, i) => { const f = volFlask(0.62); f.position.set(-2.8 + i * 1.4, 0, 0); g.add(f); g.add(at(label(a === 0 ? 'ブランク' : a + ' mL', { size: 0.26 }), -2.8 + i * 1.4, 2.45, 0.2)); return f; });
+    const c = clock(); c.position.set(4.3, 2.0, 0); g.add(c); g.c = c;
+    g.cl = label('約20分', { size: 0.32 }); g.cl.position.set(4.3, 1.1, 0); g.add(g.cl);
+  },
+  update(t, g) {
+    g.fl.forEach((f, i) => {
+      const a = FE_AMT[i];
+      const lv = 0.85 + (f.markY - 0.85) * seg(t, 0, 2);
+      const inv = t > 2.2 && t < 4.8 ? Math.sin(seg(t, 2.2, 4.8) * Math.PI * 4) * Math.PI * 0.85 : 0;
+      f.rotation.z = inv; f.position.y = t > 2.2 && t < 4.8 ? 0.6 * Math.abs(Math.sin(seg(t, 2.2, 4.8) * Math.PI * 4)) : 0;
+      f.stopper.visible = t > 2.0;
+      f.setLevel(lv, feColor(a, 0.5 + 0.5 * seg(t, 5, 9.5)));
+    });
+    g.c.hand.rotation.z = -seg(t, 5, 9.5) * Math.PI * 2 * 0.333 * 3;
+    g.c.visible = g.cl.visible = t > 4.8;
+    camera.position.set(0, 2.6, 8.6); camera.lookAt(0.2, 1.2, 0);
+  }
+});
+
+addScene({
+  name: '④ 温泉水の試料', dur: 9,
+  cap: ['④ 温泉水も同じように還元・発色させる', '草津 4 mL、万座 10 mL をそれぞれ 25 mL メスフラスコに(濃さが検量線の範囲に入るように)'],
+  build(g) {
+    const names = [['草津 4 mL', 0.95, 4.9], ['万座 10 mL', -0.95, 3.4]];
+    g.fl = names.map(([n, x]) => { const f = volFlask(0.75); f.position.set(x * 1.3, 0, 0); g.add(f); g.add(at(label(n, { size: 0.3 }), x * 1.3, 3.0, 0.2)); return f; });
+    g.amt = names.map((n) => n[2]);
+    const b1 = vessel(beakerProfile(0.6)); b1.position.set(3.2, 0, -0.6); b1.setLevel(0.7, C.onsen); g.add(b1);
+    const b2 = vessel(beakerProfile(0.6)); b2.position.set(-3.2, 0, -0.6); b2.setLevel(0.7, C.onsen); g.add(b2);
+    g.add(at(label('温泉水', { size: 0.26 }), 3.2, 1.3, -0.6));
+    g.add(at(label('温泉水', { size: 0.26 }), -3.2, 1.3, -0.6));
+  },
+  update(t, g) {
+    g.fl.forEach((f, i) => {
+      const lv = 0.08 + 0.35 * seg(t, 0.5, 2) + (f.markY - 0.43) * seg(t, 2.5, 4.5);
+      f.setLevel(lv, mix(C.onsen, feColor(g.amt[i]), seg(t, 4, 8)));
+      f.stopper.visible = t > 4.4;
+    });
+    camera.position.set(...kf(t, [[0, [0, 2.6, 8.2]], [9, [0.6, 2.4, 6.8]]])); camera.lookAt(0, 1.2, 0);
+  }
+});
+
+addScene({
+  name: '⑤ EDTA 滴定', dur: 15,
+  cap: ['⑤ 鉄ミョウバン 10 mL + 純水約50 mL + 緩衝液A(pH 2)5 mL → 30〜40 ℃ に温める', '指示薬(バリアミンブルーB)で紫色 → EDTA を滴下 → 淡黄色になったら終点'],
+  build(g) {
+    const hp = new THREE.Mesh(new THREE.BoxGeometry(2.4, 0.35, 2.0), new THREE.MeshPhongMaterial({ color: 0x5b6470 })); hp.position.set(0, 0.175, 0); g.add(hp);
+    const top = new THREE.Mesh(new THREE.BoxGeometry(2.0, 0.05, 1.6), new THREE.MeshPhongMaterial({ color: 0x9aa2ab })); top.position.set(0, 0.38, 0); g.add(top);
+    g.add(at(label('ホットプレート', { size: 0.24 }), 0, 0.2, 1.1));
+    const cb = vessel(conicalProfile); cb.position.set(0, 0.4, 0); g.add(cb); g.cb = cb;
+    const th = new THREE.Group();
+    const tg = new THREE.Mesh(new THREE.CylinderGeometry(0.035, 0.035, 2.4, 10), glassMat()); tg.position.y = 1.2; th.add(tg);
+    const tr = new THREE.Mesh(new THREE.CylinderGeometry(0.015, 0.015, 1, 8), new THREE.MeshPhongMaterial({ color: 0xd82020 })); th.add(tr); th.tr = tr;
+    th.position.set(0.25, 0.55, 0.1); th.rotation.z = -0.18; g.add(th); g.th = th;
+    g.temp = label('35 ℃', { size: 0.3, bg: 'rgba(255,225,225,0.95)' }); g.temp.position.set(1.2, 2.9, 0); g.add(g.temp);
+    const bu = burette(); bu.position.set(0, 2.75, 0); g.add(bu); g.bu = bu;
+    g.add(at(label('ビュレット(EDTA)', { size: 0.26 }), 0.95, 7.6, 0));
+    const sp = new THREE.Mesh(new THREE.BoxGeometry(0.06, 0.03, 0.8), new THREE.MeshPhongMaterial({ color: 0xc0c8d0 })); g.add(sp); g.sp = sp;
+    g.drops = Array.from({ length: 12 }, () => { const d = drop(C.edta); g.add(d); return d; });
+    g.ind = label('指示薬', { size: 0.26 }); g.add(g.ind);
+  },
+  update(t, g) {
+    const cb = g.cb;
+    // 液の色:淡黄 → 紫(指示薬)→ 淡黄(終点)
+    let col = mix(C.alum, C.pale, 0.6);
+    if (t > 4.2) col = mix(col, C.purple, seg(t, 4.2, 5.2));
+    if (t > 11.5) col = mix(C.purple, C.pale, seg(t, 11.5, 12.6));
+    cb.setLevel(0.75 + 0.1 * seg(t, 0.5, 2) + 0.06 * seg(t, 6, 12), col);
+    cb.rotation.y = 0; cb.position.x = t > 6 && t < 12.6 ? Math.sin(t * 6) * 0.04 : 0;
+    // 温度計
+    const T = 20 + 15 * seg(t, 1, 3.5);
+    g.th.tr.scale.y = 0.4 + 1.4 * (T - 20) / 15; g.th.tr.position.y = 0.2 + g.th.tr.scale.y / 2;
+    g.th.visible = t < 4; g.temp.visible = t > 1 && t < 4.2;
+    // 指示薬
+    g.sp.visible = t > 3.5 && t < 5; g.sp.position.set(0.1, 2.9 - seg(t, 3.5, 4.3) * 0.5, 0.3); g.sp.rotation.x = 0.4;
+    g.ind.visible = g.sp.visible; g.ind.position.set(-0.9, 2.8, 0.3);
+    // ビュレット
+    g.bu.visible = t > 5; g.bu.setLevel(0.92 - 0.75 * seg(t, 6, 12));
+    g.bu.cock.rotation.y = t > 6 && t < 12 ? Math.PI / 2 : 0;
+    g.drops.forEach((d, i) => { const ti = 6 + i * 0.5; const tt = t - ti; d.visible = t < 12.1 && tt > 0 && tt < 0.45; d.position.set(0, 2.75 - tt * 3.2, 0); });
+    camera.position.set(...kf(t, [[0, [0.6, 2.0, 5.4]], [5, [0.6, 2.6, 6.8]], [12, [0.6, 3.6, 8.8]], [15, [0.3, 3.0, 7.6]]]));
+    camera.lookAt(0, t < 5 ? 1.0 : 2.4, 0);
+  }
+});
+
+addScene({
+  name: '⑤ ビュレットの読み方', dur: 8,
+  cap: ['⑤ ビュレットは最小目盛りの 1/10(0.01 mL)まで、メニスカスの底を水平に見て読む', '3回以上滴定し、差が 0.05 mL 以内の3回の平均を使う'],
+  build(g) {
+    const tube = new THREE.Mesh(new THREE.CylinderGeometry(1.0, 1.0, 4, 40, 1, true), glassMat()); tube.position.y = 2; g.add(tube);
+    const prof = [new THREE.Vector2(0, 0), new THREE.Vector2(0.97, 0), new THREE.Vector2(0.97, 2.32)];
+    for (let i = 10; i >= 0; i--) { const r = 0.97 * i / 10; prof.push(new THREE.Vector2(r, 2.1 + 0.22 * Math.pow(i / 10, 3))); }
+    const liq = new THREE.Mesh(new THREE.LatheGeometry(prof, 48), liqMat(C.edta)); g.add(liq);
+    // 目盛り
+    for (let i = 0; i <= 20; i++) {
+      const y = 0.3 + i * 0.18; const long = i % 5 === 0;
+      const m = new THREE.Mesh(new THREE.BoxGeometry(long ? 0.5 : 0.28, 0.025, 0.02), new THREE.MeshBasicMaterial({ color: 0x223344 }));
+      m.position.set(-0.75 + (long ? 0.11 : 0), y, 0.95); g.add(m);
+    }
+    const eye = new THREE.Mesh(new THREE.BoxGeometry(5.5, 0.02, 0.02), new THREE.MeshBasicMaterial({ color: 0xd8361c })); eye.position.set(0.6, 2.1, 0.9); g.add(eye); g.eye = eye;
+    g.add(at(label('メニスカスの底', { size: 0.34, bg: 'rgba(255,225,225,0.95)' }), 2.5, 2.45, 0.9));
+    g.add(at(label('目の高さ=水平', { size: 0.3 }), 2.5, 1.75, 0.9));
+    g.vals = ['1回目 9.83 mL', '2回目 9.88 mL', '3回目 9.84 mL'].map((s, i) => { const l = label(s, { size: 0.3, bg: 'rgba(214,236,255,0.95)' }); l.position.set(-3.0, 3.5 - i * 0.6, 0.5); g.add(l); return l; });
+    g.ok = label('差 0.05 mL 以内 → 平均', { size: 0.3, bg: 'rgba(214,245,220,0.95)' }); g.ok.position.set(-3.0, 1.6, 0.5); g.add(g.ok);
+  },
+  update(t, g) {
+    g.vals.forEach((l, i) => (l.visible = t > 2.5 + i * 1.2));
+    g.ok.visible = t > 6.2;
+    camera.position.set(...kf(t, [[0, [0.2, 2.2, 9.6]], [8, [-0.4, 2.2, 10.2]]])); camera.lookAt(-0.2, 2.0, 0);
+  }
+});
+
+const absCurve = (l) => 0.716 * Math.exp(-((l - 510) ** 2) / (2 * 48 * 48));
+function spectro(g) {
+  const body = new THREE.Mesh(new THREE.BoxGeometry(3.8, 0.7, 2.2), new THREE.MeshPhongMaterial({ color: 0xcfd6de })); body.position.set(0, 0.35, 0); g.add(body);
+  const lid = new THREE.Object3D(); g.add(lid); g.lid = lid;
+  const hole = new THREE.Mesh(new THREE.BoxGeometry(1.4, 0.02, 1.3), new THREE.MeshPhongMaterial({ color: 0x1d242c })); hole.position.set(0, 0.711, 0); g.add(hole);
+  const hl = new THREE.Mesh(new THREE.BoxGeometry(0.6, 0.45, 0.5), new THREE.MeshPhongMaterial({ color: 0x8b96a3 })); hl.position.set(-1.5, 0.95, 0); g.add(hl);
+  const hd = hl.clone(); hd.position.x = 1.5; g.add(hd);
+  const scr = screen(2.6, 1.6); scr.position.set(0, 2.35, -0.9); scr.rotation.x = -0.12; g.add(scr); g.scr = scr;
+  const lamp = new THREE.Mesh(new THREE.SphereGeometry(0.11, 14, 10), new THREE.MeshBasicMaterial({ color: 0xfff6c8 })); lamp.position.set(-1.2, 1.05, 0.3); g.add(lamp);
+  const det = new THREE.Mesh(new THREE.BoxGeometry(0.06, 0.26, 0.26), new THREE.MeshPhongMaterial({ color: 0x223344 })); det.position.set(1.2, 1.05, 0.3); g.add(det);
+  g.add(at(label('光源', { size: 0.24 }), -1.5, 1.5, 0.3));
+  g.add(at(label('検出器', { size: 0.24 }), 1.5, 1.5, 0.3));
+  const beam1 = new THREE.Mesh(new THREE.CylinderGeometry(0.035, 0.035, 1.0, 8), new THREE.MeshBasicMaterial({ color: 0x86e36a, transparent: true, opacity: 0.85 })); beam1.rotation.z = Math.PI / 2; g.add(beam1); g.b1 = beam1;
+  const beam2 = beam1.clone(); beam2.material = beam1.material.clone(); g.add(beam2); g.b2 = beam2;
+}
+function drawSpectrum(g2, upto) {
+  axes(g2, '波長 [nm]', '吸光度');
+  const X = (l) => 70 + (l - 380) / 300 * 540, Y = (a) => 340 - a / 0.8 * 300;
+  g2.fillStyle = '#9fb2c6'; g2.font = '22px sans-serif';
+  [400, 500, 600].forEach((l) => g2.fillText(l, X(l) - 20, 368));
+  g2.strokeStyle = '#ff7a59'; g2.lineWidth = 5; g2.beginPath();
+  for (let l = 380; l <= upto; l += 2) { const x = X(l), y = Y(absCurve(l)); l === 380 ? g2.moveTo(x, y) : g2.lineTo(x, y); }
+  g2.stroke();
+  if (upto > 560) { g2.setLineDash([8, 8]); g2.strokeStyle = '#ffe08a'; g2.lineWidth = 3; g2.beginPath(); g2.moveTo(X(510), Y(0.716)); g2.lineTo(X(510), 340); g2.stroke(); g2.setLineDash([]); g2.fillStyle = '#ffe08a'; g2.font = 'bold 28px "Yu Gothic",sans-serif'; g2.fillText('極大 約510 nm', X(510) + 10, Y(0.74)); }
+}
+
+addScene({
+  name: '⑥ 吸収スペクトル', dur: 12,
+  cap: ['⑥ 奥の参照セル=ブランク、手前の試料セル=8 mL の検液 を分光光度計に入れる', '波長を変えて吸収スペクトルを測り、吸収が最大の波長(約 510 nm)を求める'],
+  build(g) {
+    spectro(g);
+    g.ref = cuvette(feColor(0)); g.add(g.ref);
+    g.smp = cuvette(feColor(8)); g.add(g.smp);
+    g.lr = label('参照(ブランク)', { size: 0.22 }); g.add(g.lr);
+    g.ls = label('試料(8 mL)', { size: 0.22 }); g.add(g.ls);
+  },
+  update(t, g) {
+    g.ref.position.set(0, kf(t, [[0, 2.6], [1.5, 2.6], [2.6, 0.71]]), -0.3);
+    g.smp.position.set(0, kf(t, [[0, 2.6], [2.6, 2.6], [3.7, 0.71]]), 0.3);
+    g.ref.position.x = g.smp.position.x = 0;
+    g.lr.position.set(-0.75, g.ref.position.y + 1.45, -0.3); g.ls.position.set(0.75, g.smp.position.y + 1.45, 0.3);
+    g.lr.visible = g.ls.visible = t < 4.5;
+    
+    const on = t > 4.6;
+    g.b1.visible = g.b2.visible = on;
+    g.b1.position.set(-0.6, 1.05, 0.3); g.b2.position.set(0.6, 1.05, 0.3);
+    g.b2.material.opacity = 0.3; g.b2.scale.set(0.7, 1, 0.7);
+    const upto = 380 + 300 * seg(t, 5, 10.5);
+    g.scr.draw((c2) => drawSpectrum(c2, upto));
+    camera.position.set(...kf(t, [[0, [1.8, 3.4, 6.6]], [4.5, [0.8, 3.0, 6.0]], [6, [0, 3.0, 6.8]]])); camera.lookAt(0, 1.6, 0);
+  }
+});
+
+function drawCalib(g2, n, line, sample) {
+  axes(g2, '加えた量 CONC [mL]', '吸光度');
+  const X = (c) => 70 + c / 9 * 540, Y = (a) => 340 - a / 0.8 * 300;
+  g2.fillStyle = '#9fb2c6'; g2.font = '22px sans-serif';
+  [0, 2, 4, 6, 8].forEach((c) => g2.fillText(c, X(c) - 6, 368));
+  if (line) { g2.strokeStyle = '#7fc8ff'; g2.lineWidth = 4; g2.beginPath(); g2.moveTo(X(0), Y(0)); g2.lineTo(X(0) + (X(9) - X(0)) * line, Y(0.0895 * 9 * line)); g2.stroke(); }
+  for (let i = 0; i < n; i++) { g2.fillStyle = '#ff7a59'; g2.beginPath(); g2.arc(X(FE_AMT[i]), Y(0.0895 * FE_AMT[i]), 11, 0, 7); g2.fill(); }
+  if (sample) {
+    const a = 0.0895 * 6.65 * sample.u1, c = 6.65;
+    g2.setLineDash([10, 8]); g2.strokeStyle = '#ffe08a'; g2.lineWidth = 3;
+    g2.beginPath(); g2.moveTo(70, Y(0.0895 * c)); g2.lineTo(70 + (X(c) - 70) * sample.u1, Y(0.0895 * c)); g2.stroke();
+    if (sample.u2 > 0) { g2.beginPath(); g2.moveTo(X(c), Y(0.0895 * c)); g2.lineTo(X(c), Y(0.0895 * c) + (340 - Y(0.0895 * c)) * sample.u2); g2.stroke(); }
+    g2.setLineDash([]);
+    g2.fillStyle = '#ffe08a'; g2.font = 'bold 26px "Yu Gothic",sans-serif';
+    g2.fillText('草津の試料', 80, Y(0.0895 * c) - 12);
+    if (sample.u2 >= 1) { g2.font = 'bold 22px "Yu Gothic",sans-serif'; g2.fillText('CONC', X(c) - 28, 394); }
+  }
+}
+
+addScene({
+  name: '⑥ 検量線', dur: 12,
+  cap: ['⑥ 極大波長で、ブランク・2・4・6・8 mL の検液の吸光度を順に測る', '吸光度は濃度に比例 → 原点を通る直線(検量線)。セルは測る液で共洗いする'],
+  build(g) {
+    spectro(g);
+    g.row = FE_AMT.map((a, i) => { const c = cuvette(feColor(a)); c.scale.setScalar(0.8); c.position.set(-2.9 + i * 0.48, 0, 1.0); g.add(c); return c; });
+    g.smp = cuvette(feColor(0)); g.add(g.smp);
+  },
+  update(t, g) {
+    const k = Math.min(4, Math.floor(t / 1.8));
+    const u = (t % 1.8) / 1.8;
+    g.row.forEach((c, i) => (c.position.y = i === k && t < 9 ? 0.15 * Math.sin(u * Math.PI) + 0.12 : 0));
+    g.smp.liq.material.color.copy(feColor(FE_AMT[k]));
+    g.smp.position.set(0, 0.71, 0.3);
+    g.b1.visible = g.b2.visible = true;
+    g.b1.position.set(-0.6, 1.05, 0.3); g.b2.position.set(0.6, 1.05, 0.3);
+    g.b2.material.opacity = 0.85 - 0.6 * FE_AMT[k] / 8;
+    const n = Math.min(5, Math.floor((t + 0.9) / 1.8));
+    g.scr.draw((c2) => drawCalib(c2, n, seg(t, 9.2, 11), null));
+    camera.position.set(...kf(t, [[0, [0, 3.2, 7.4]], [12, [-0.4, 3.2, 6.8]]])); camera.lookAt(0, 1.5, 0);
+  }
+});
+
+addScene({
+  name: '⑦ 温泉水を測る', dur: 11,
+  cap: ['⑦ 温泉水の試料の吸光度を測る → 検量線から CONC(何 mL 分の鉄に当たるか)', '原液の濃度:草津 = c × CONC ÷ 200、万座 = c × CONC ÷ 500 [M](c は⑤で決めた濃度)'],
+  build(g) {
+    spectro(g);
+    g.smp = cuvette(feColor(6.65)); g.add(g.smp);
+    g.add(at(label('草津の試料', { size: 0.24 }), 0.95, 1.95, 0.6));
+  },
+  update(t, g) {
+    g.smp.position.set(0, kf(t, [[0, 2.5], [1.5, 0.71]]), 0.3);
+    g.b1.visible = g.b2.visible = t > 2;
+    g.b1.position.set(-0.6, 1.05, 0.3); g.b2.position.set(0.6, 1.05, 0.3); g.b2.material.opacity = 0.35;
+    g.scr.draw((c2) => drawCalib(c2, 5, 1, { u1: seg(t, 2.5, 5), u2: seg(t, 5.2, 7) }));
+    camera.position.set(...kf(t, [[0, [1.2, 3.2, 6.8]], [3, [0, 3.0, 6.0]], [11, [0, 2.9, 5.4]]])); camera.lookAt(0, 1.9, 0);
+  }
+});
+
+addScene({
+  name: 'まとめ', dur: 7,
+  cap: ['まとめ:滴定で標準液の正確な濃度 → 検量線 → 温泉水の鉄の濃度(mol/L と ppm)', 'くわしくは、予習ノート・課題の解説のページへ'], title: false,
+  build(g) {
+    const b = vessel(conicalProfile); b.scale.setScalar(0.8); b.position.set(-3.0, 0, 0); b.setLevel(0.8, C.pale); g.add(b);
+    g.add(at(label('⑤ 滴定', { size: 0.3 }), -3.0, 2.4, 0));
+    FE_AMT.forEach((a, i) => { const f = volFlask(0.45); f.position.set(-1.3 + i * 0.6, 0, 0); f.setLevel(f.markY, feColor(a)); g.add(f); });
+    g.add(at(label('③ 検液', { size: 0.3 }), -0.1, 2.0, 0));
+    const c = cuvette(feColor(6.65)); c.position.set(2.6, 0, 0); c.scale.setScalar(1.3); g.add(c);
+    g.add(at(label('⑥⑦ 吸光度', { size: 0.3 }), 2.6, 2.2, 0));
+    const ar = (x) => { const a = new THREE.Mesh(new THREE.ConeGeometry(0.15, 0.35, 12), new THREE.MeshPhongMaterial({ color: 0x2e7bd6 })); a.rotation.z = -Math.PI / 2; a.position.set(x, 1.0, 0); g.add(a); };
+    ar(-1.95); ar(1.75);
+  },
+  update(t, g) { camera.position.set(0, 2.4, 8.4 - t * 0.15); camera.lookAt(0, 1.0, 0); }
+});
+
+// ---------- 再生
+const starts = []; let total = 0; S.forEach((s) => { starts.push(total); total += s.dur; });
+let cur = -1;
+function setScene(i) {
+  if (i === cur) return;
+  if (G) { scene.remove(G); G.traverse((o) => { if (o.geometry) o.geometry.dispose(); }); }
+  G = new THREE.Group(); scene.add(G); S[i].build(G); cur = i;
+  document.querySelectorAll('#chap button').forEach((b, k) => b.classList.toggle('on', k === i));
+}
+function wrap(g, text, maxW) {
+  const lines = []; let line = '';
+  for (const ch of text) { if (g.measureText(line + ch).width > maxW && line) { lines.push(line); line = ch; } else line += ch; }
+  if (line) lines.push(line); return lines;
+}
+function overlay(i, lt) {
+  const s = S[i];
+  ctx.drawImage(renderer.domElement, 0, 0);
+  if (s.title) {
+    const a = Math.min(1, lt / 0.8);
+    ctx.fillStyle = `rgba(16,29,43,${0.78 * a})`; ctx.fillRect(0, 70, W, 170);
+    ctx.fillStyle = `rgba(255,255,255,${a})`; ctx.font = 'bold 54px "Yu Gothic","Hiragino Sans",sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText(s.cap[0], W / 2, 150); ctx.font = '30px "Yu Gothic","Hiragino Sans",sans-serif'; ctx.fillText(s.cap[1], W / 2, 205); ctx.textAlign = 'left';
+    return;
+  }
+  // 場面名(左上)
+  ctx.font = 'bold 30px "Yu Gothic","Hiragino Sans",sans-serif';
+  const nw = ctx.measureText(s.name).width + 36;
+  ctx.fillStyle = 'rgba(46,123,214,0.92)'; ctx.fillRect(24, 22, nw, 52);
+  ctx.fillStyle = '#fff'; ctx.fillText(s.name, 42, 58);
+  // 字幕(下)
+  ctx.font = 'bold 27px "Yu Gothic","Hiragino Sans",sans-serif';
+  const l1 = wrap(ctx, s.cap[0], W - 120);
+  ctx.font = '23px "Yu Gothic","Hiragino Sans",sans-serif';
+  const l2 = wrap(ctx, s.cap[1], W - 120);
+  const hh = 26 + l1.length * 38 + l2.length * 32;
+  ctx.fillStyle = 'rgba(16,29,43,0.78)'; ctx.fillRect(0, H - hh, W, hh);
+  let y = H - hh + 40;
+  ctx.fillStyle = '#ffffff'; ctx.font = 'bold 27px "Yu Gothic","Hiragino Sans",sans-serif';
+  l1.forEach((l) => { ctx.fillText(l, 60, y); y += 38; });
+  ctx.fillStyle = '#cfe3f7'; ctx.font = '23px "Yu Gothic","Hiragino Sans",sans-serif';
+  l2.forEach((l) => { ctx.fillText(l, 60, y); y += 32; });
+  // 進行バー
+  const T = starts[i] + lt;
+  ctx.fillStyle = 'rgba(255,255,255,0.35)'; ctx.fillRect(0, H - 6, W, 6);
+  ctx.fillStyle = '#2e7bd6'; ctx.fillRect(0, H - 6, W * T / total, 6);
+}
+function renderAt(T) {
+  T = Math.max(0, Math.min(total - 0.001, T));
+  let i = 0; while (i < S.length - 1 && T >= starts[i + 1]) i++;
+  setScene(i);
+  const lt = T - starts[i];
+  S[i].update(lt, G);
+  renderer.render(scene, camera);
+  overlay(i, lt);
+  bar.value = Math.round(T / total * 1000);
+  const f = (x) => Math.floor(x / 60) + ':' + String(Math.floor(x % 60)).padStart(2, '0');
+  timeEl.textContent = f(T) + ' / ' + f(total);
+}
+const bar = document.getElementById('bar'), timeEl = document.getElementById('time'), playB = document.getElementById('play');
+const chap = document.getElementById('chap');
+S.forEach((s, i) => { const b = document.createElement('button'); b.textContent = s.name; b.onclick = () => { T0 = starts[i]; if (!playing) renderAt(T0); }; chap.appendChild(b); });
+let playing = false, T0 = 0, last = 0;
+function loop(now) {
+  if (!playing) return;
+  T0 += (now - last) / 1000; last = now;
+  if (T0 >= total) { T0 = total - 0.001; renderAt(T0); playing = false; playB.textContent = '▶ 再生'; onEnd && onEnd(); return; }
+  renderAt(T0); requestAnimationFrame(loop);
+}
+let onEnd = null;
+function play() { if (T0 >= total - 0.01) T0 = 0; playing = true; last = performance.now(); playB.textContent = '⏸ 一時停止'; requestAnimationFrame(loop); }
+function pause() { playing = false; playB.textContent = '▶ 再生'; }
+playB.onclick = () => (playing ? pause() : play());
+out.onclick = () => (playing ? pause() : play());
+bar.oninput = () => { T0 = bar.value / 1000 * total; renderAt(T0); };
+document.getElementById('prev').onclick = () => { const i = Math.max(0, cur - (T0 - starts[cur] < 1 ? 1 : 0)); T0 = starts[i]; renderAt(T0); };
+document.getElementById('next').onclick = () => { const i = Math.min(S.length - 1, cur + 1); T0 = starts[i]; renderAt(T0); };
+// 動画ファイルとして保存(再生しながら記録)
+document.getElementById('rec').onclick = () => {
+  if (!window.MediaRecorder) { alert('このブラウザでは保存できません'); return; }
+  const stream = out.captureStream(30);
+  const mime = MediaRecorder.isTypeSupported('video/webm;codecs=vp9') ? 'video/webm;codecs=vp9' : 'video/webm';
+  const rec = new MediaRecorder(stream, { mimeType: mime, videoBitsPerSecond: 6e6 });
+  const chunks = []; rec.ondataavailable = (e) => e.data.size && chunks.push(e.data);
+  rec.onstop = () => {
+    const blob = new Blob(chunks, { type: 'video/webm' });
+    window.__lastVideo = blob;
+    const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'jikken8-tejun.webm'; a.click();
+  };
+  T0 = 0; onEnd = () => { onEnd = null; setTimeout(() => rec.stop(), 300); };
+  rec.start(500); play();
+};
+window.__video = { total, renderAt, starts, S };
+window.__autoRec = (url) => {
+  const stream = out.captureStream(30);
+  const mime = MediaRecorder.isTypeSupported('video/webm;codecs=vp9') ? 'video/webm;codecs=vp9' : 'video/webm';
+  const rec = new MediaRecorder(stream, { mimeType: mime, videoBitsPerSecond: 6e6 });
+  const chunks = []; rec.ondataavailable = (e) => e.data.size && chunks.push(e.data);
+  window.__recState = 'recording';
+  rec.onstop = async () => { const blob = new Blob(chunks, { type: 'video/webm' }); window.__recState = 'uploading ' + blob.size; const r = await fetch(url, { method: 'POST', body: blob }); window.__recState = 'done ' + blob.size + ' ' + (await r.text()); };
+  T0 = 0; onEnd = () => { onEnd = null; setTimeout(() => rec.stop(), 300); };
+  rec.start(1000); play();
+};
+renderAt(0);
+})();
+</script>
+</body>
+</html>
