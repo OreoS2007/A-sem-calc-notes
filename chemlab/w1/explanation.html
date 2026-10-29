@@ -74,10 +74,10 @@
       ($h$ はプランク定数)です。<b>波長が短い光ほどエネルギーが大きい</b>(紫外 &gt; 青 &gt; 赤 &gt; 赤外)。覚えやすい換算:$E\,[\mathrm{eV}] \approx 1240 / \lambda\,[\mathrm{nm}]$。</p>
       <p>分子が光を吸収するのは、光のエネルギー $h\nu$ が、<b>分子の中の 2 つの電子状態のエネルギー差 $\Delta E$ にぴったり合うとき</b>です($\Delta E = h\nu$)。電子が下の状態(基底状態)から上の状態(励起状態)へ移ります(<b>電子遷移</b>)。</p>
       <p>可視光(約 400〜750 nm)を吸収する物質は、吸収された色の<b>補色</b>が目に届くので、色がついて見えます。</p>
-      <table>
+      <div class="tscroll"><table class="cmp">
         <tr><th>吸収する光</th><th>紫(〜430)</th><th>青(〜480)</th><th>緑(〜530)</th><th>黄(〜580)</th><th>赤(〜650)</th></tr>
         <tr><td>見える色(補色)</td><td>黄緑</td><td>黄</td><td>赤紫</td><td>青</td><td>青緑</td></tr>
-      </table>
+      </table></div>
       <p>吸収の強さは<b>吸光度</b> $A=\log_{10}(I_0/I)$($I_0$:入射光、$I$:通り抜けた光の強さ)で表し、横軸を波長にしてグラフにしたものが<b>吸収スペクトル</b>です。</p>
       <p><b>直感:</b> 「$\Delta E$ が小さい分子ほど、エネルギーの小さい(波長の長い)光でも動かせる」。階段の 1 段が低ければ、小さな力でも登れる、ということです。</p>
     </div>
@@ -148,13 +148,13 @@
       <svg viewBox="0 0 480 290" width="480" role="img" aria-label="k=1 の色素の電子配置と HOMO から LUMO への遷移"><line class="ax" x1="40" y1="14" x2="40" y2="268"/><text class="tm" x="6" y="16">エネルギー ↑</text><line class="ax" x1="90" y1="253" x2="180" y2="253"/><text class="tj" x="54" y="257">n=1</text><text class="tj" x="118" y="249">↑↓</text><line class="ax" x1="90" y1="226" x2="180" y2="226"/><text class="tj" x="54" y="230">n=2</text><text class="tj" x="118" y="222">↑↓</text><line class="ax" x1="90" y1="181" x2="180" y2="181"/><text class="tj" x="54" y="185">n=3</text><text class="tj" x="118" y="177">↑↓</text><line class="cv2" x1="90" y1="118" x2="180" y2="118"/><text class="tj" x="54" y="122">n=4</text><text class="tj" x="118" y="114">↑↓</text><line class="cv" x1="90" y1="37" x2="180" y2="37"/><text class="tj" x="54" y="41">n=5</text><line class="arr" x1="220" y1="118" x2="220" y2="45"/><polygon class="arrh" points="220,37 214,48 226,48"/><text class="tt" x="235" y="81.5">光を吸収(波長 λ₀)</text><text class="tt" x="190" y="140">HOMO(n=k+3=4)</text><text class="ta" x="190" y="32">LUMO(n=k+4=5)</text><text class="tm" x="54" y="284">k=1:π電子 2k+6 = 8 個 → n=1〜4 に2個ずつ</text></svg>
       <figcaption>図2:$k=1$ の色素($\pi$ 電子 8 個)。$n=1$〜4 に 2 個ずつ入り、HOMO は $n=4$、LUMO は $n=5$。最も長波長の吸収は、$n=4\to5$ の遷移に対応する。</figcaption>
     </figure>
-    <table>
+    <div class="tscroll"><table class="cmp">
       <tr><th>$k$</th><th>π電子の数 $2k+6$</th><th>HOMO</th><th>LUMO</th></tr>
       <tr><td>0</td><td>6</td><td>$n=3$</td><td>$n=4$</td></tr>
       <tr><td>1</td><td>8</td><td>$n=4$</td><td>$n=5$</td></tr>
       <tr><td>2</td><td>10</td><td>$n=5$</td><td>$n=6$</td></tr>
       <tr><td>3</td><td>12</td><td>$n=6$</td><td>$n=7$</td></tr>
-    </table>
+    </table></div>
 
     <h3 id="w-lambda">2.5 吸収波長の式 (5・6)、(5・7)</h3>
     <p>最も長波長の吸収は、エネルギーが一番小さい遷移(HOMO → LUMO)です。そのエネルギーは
@@ -311,10 +311,10 @@
       $$\frac{8mca^2}{h}=\frac{8\times9.109\times10^{-31}\times2.998\times10^{8}\times(1.4\times10^{-10})^2}{6.626\times10^{-34}}\approx6.46\times10^{-8}\,\mathrm m=64.6\,\mathrm{nm}$$</p>
       <p><b>(3) 結論。</b>
       $$\boxed{\lambda_0\approx64.6\,(2k+7)\,\mathrm{nm}=129.2\,k+452.4\ \mathrm{nm}}$$</p>
-      <table>
+      <div class="tscroll"><table class="cmp">
         <tr><th>$k$</th><th>0</th><th>1</th><th>2</th><th>3</th></tr>
         <tr><td>予測 $\lambda_0$ [nm]</td><td>452</td><td>582</td><td>711</td><td>840</td></tr>
-      </table>
+      </table></div>
     </div>
     <figure class="fig">
       <svg viewBox="0 0 430 296" width="430" role="img" aria-label="λ0 と k の関係のグラフ(予測)"><line class="ax" x1="60" y1="250" x2="410" y2="250"/><line class="ax" x1="60" y1="250" x2="60" y2="30"/><line class="thin" x1="80" y1="250" x2="80" y2="255"/><text class="tj" x="76" y="272">0</text><line class="thin" x1="180" y1="250" x2="180" y2="255"/><text class="tj" x="176" y="272">1</text><line class="thin" x1="280" y1="250" x2="280" y2="255"/><text class="tj" x="276" y="272">2</text><line class="thin" x1="380" y1="250" x2="380" y2="255"/><text class="tj" x="376" y="272">3</text><line class="thin" x1="55" y1="250" x2="60" y2="250"/><text class="tj" x="22" y="254">400</text><line class="thin" x1="55" y1="210" x2="60" y2="210"/><text class="tj" x="22" y="214">500</text><line class="thin" x1="55" y1="170" x2="60" y2="170"/><text class="tj" x="22" y="174">600</text><line class="thin" x1="55" y1="130" x2="60" y2="130"/><text class="tj" x="22" y="134">700</text><line class="thin" x1="55" y1="90" x2="60" y2="90"/><text class="tj" x="22" y="94">800</text><line class="thin" x1="55" y1="50" x2="60" y2="50"/><text class="tj" x="22" y="54">900</text><text class="tm" x="395" y="286">k</text><text class="tm" x="8" y="22">λ₀ [nm]</text><line class="cv2" x1="80" y1="229.05" x2="380" y2="73.95000000000002"/><circle class="dot" cx="80" cy="229.05" r="4.5"/><text class="tt" x="88" y="247.05">452</text><circle class="dot" cx="180" cy="177.35" r="4.5"/><text class="tt" x="188" y="195.35">582</text><circle class="dot" cx="280" cy="125.64999999999999" r="4.5"/><text class="tt" x="288" y="143.64999999999998">711</text><circle class="dot" cx="380" cy="73.95000000000002" r="4.5"/><text class="tt" x="388" y="91.95000000000002">840</text><text class="tm" x="100" y="46">モデルの予測(直線):λ₀ = 129.2 k + 452.4 [nm]</text><text class="tm" x="100" y="62">実験値は、ここに●(別の色)で打って比べる</text></svg>
@@ -365,12 +365,12 @@
     <div class="box ex">
       <div class="label">解答(1)結果:計算で得られる値の目安</div>
       <p>MNDO 法(Precise 指定)で構造最適化したあと、軌道エネルギーを読むと、おおよそ次のようになります(値は、他の年度の出力を参考にした<b>目安</b>です。必ず自分の画面の値を書くこと)。</p>
-      <table>
+      <div class="tscroll"><table class="cmp">
         <tr><th>分子</th><th>HOMO [eV]</th><th>LUMO [eV]</th><th>差 $\Delta E$ [eV]</th></tr>
         <tr><td>エチレン($N=2$)</td><td>−10.64</td><td>1.23</td><td>11.87</td></tr>
         <tr><td>1,3-ブタジエン($N=4$)</td><td>−9.47</td><td>0.26</td><td>9.73</td></tr>
         <tr><td>1,3,5-ヘキサトリエン($N=6$)</td><td>−8.90</td><td>−0.25</td><td>8.65</td></tr>
-      </table>
+      </table></div>
       <p><b>大きい順:エチレン > 1,3-ブタジエン > 1,3,5-ヘキサトリエン</b>。共役が長いほど、<b>HOMO は上がり、LUMO は下がって</b>(両側から近づいて)差が小さくなっています。</p>
       <p><b>(2)理由その1:一次元の箱モデルで</b>。$N$ 個の炭素に $N$ 個の π電子がある鎖では、HOMO は $n=N/2$、LUMO は $n=N/2+1$。
       $$\Delta E=E_{N/2+1}-E_{N/2}=\frac{h^2}{8mL^2}\bigl[(\tfrac N2+1)^2-(\tfrac N2)^2\bigr]=\frac{(N+1)\,h^2}{8mL^2}$$
@@ -386,14 +386,14 @@
       <div class="label">直感で理解する:階数の増えるビル</div>
       <p>エネルギーの「高さ」が決まっている(幅 $4|\beta|$ の)ビルに、階(軌道)を 2 つ、4 つ、6 つと増やしていくと、1 階あたりの高さ(軌道の間隔)はどんどん低くなります。HOMO(電子の入る最上階)と LUMO(最下の空き階)は、真ん中あたりで隣り合う階なので、その段差も小さくなる。段差が小さいほど、ちょっとのエネルギー(長い波長の光)で電子が上の階に上がれます。</p>
     </div>
-    <table>
+    <div class="tscroll"><table class="cmp">
       <tr><th>$N$(炭素数)</th><th>箱モデル $(N+1)/N^2$</th><th>ヒュッケル $4\sin\frac{\pi}{2(N+1)}$ [$|\beta|$]</th><th>MNDO の差 [eV]</th></tr>
       <tr><td>2(エチレン)</td><td>0.75</td><td>2.00</td><td>11.87</td></tr>
       <tr><td>4(ブタジエン)</td><td>0.31</td><td>1.24</td><td>9.73</td></tr>
       <tr><td>6(ヘキサトリエン)</td><td>0.19</td><td>0.89</td><td>8.65</td></tr>
       <tr><td>8</td><td>0.14</td><td>0.70</td><td>—</td></tr>
       <tr><td>10</td><td>0.11</td><td>0.57</td><td>—</td></tr>
-    </table>
+    </table></div>
     <p>どのモデルでも、$N$ が増えると $\Delta E$ は単調に減ります。ただし減り方はモデルによって違い($N=2$ を 1 としたとき、$N=6$ で箱 0.26、ヒュッケル 0.45、MNDO 0.73)、6.3 の(10)で比べます。</p>
 
     <h3 id="p55">課題 5.5 エチレン、1,3-ブタジエンおよび 1,3,5-ヘキサトリエン各分子において、調べた分子軌道の形状と分子軌道のエネルギーとはどのような関係にあるか述べよ</h3>
@@ -404,12 +404,12 @@
     <div class="box ex">
       <div class="label">解答</div>
       <p><b>エネルギーが高い分子軌道ほど、節の数が多い。</b>エネルギーの低い方から節の数は $0,1,2,\dots,N-1$($N$ は炭素数)。最低の軌道は全体が同符号、最高の軌道は隣り合うすべての原子の間で符号が逆。HOMO は節が 0 個(エチレン)、1 個(ブタジエン)、2 個(ヘキサトリエン)で、LUMO は HOMO より節が 1 つ多い。</p>
-      <table>
+      <div class="tscroll"><table class="cmp">
         <tr><th>1,3-ブタジエン</th><th>$\phi_1$</th><th>$\phi_2$(HOMO)</th><th>$\phi_3$(LUMO)</th><th>$\phi_4$</th></tr>
         <tr><td>符号の並び(炭素 1→4)</td><td>＋＋＋＋</td><td>＋＋−−</td><td>＋−−＋</td><td>＋−＋−</td></tr>
         <tr><td>節の数</td><td>0</td><td>1</td><td>2</td><td>3</td></tr>
         <tr><td>エネルギー</td><td>$\alpha+1.62\beta$</td><td>$\alpha+0.62\beta$</td><td>$\alpha-0.62\beta$</td><td>$\alpha-1.62\beta$</td></tr>
-      </table>
+      </table></div>
       <p>($\beta\lt0$ なので、右にいくほどエネルギーが高い。符号の並びは、教科書・計算の軌道の図から読み取ったもの。自分の画面でも確かめること。)</p>
     </div>
     <div class="box intuit">
@@ -455,12 +455,12 @@
 
     <h4 id="k1">(1) 実験結果の整理</h4>
     <p>実験Aで測定したシアニン色素の最長波長の吸収極大 $\lambda_0$ は、次のとおりであった。</p>
-    <table>
+    <div class="tscroll"><table class="cmp">
       <tr><th>$k$</th><th>0</th><th>1</th><th>2</th><th>3</th><th>傾き</th><th>$k=0$ の値</th></tr>
       <tr><td>Q系 $\lambda_0$ [nm]</td><td><mark>520</mark></td><td><mark>605</mark></td><td><mark>705</mark></td><td><mark>805</mark></td><td><mark>96</mark> nm</td><td><mark>516</mark> nm</td></tr>
       <tr><td>T系 $\lambda_0$ [nm]</td><td><mark>425</mark></td><td><mark>555</mark></td><td><mark>650</mark></td><td><mark>740</mark></td><td><mark>104</mark> nm</td><td><mark>437</mark> nm</td></tr>
       <tr><td>箱モデル(課題 5.2)</td><td>452</td><td>582</td><td>711</td><td>840</td><td>129 nm</td><td>452 nm</td></tr>
-    </table>
+    </table></div>
     <figure class="fig">
       <svg viewBox="0 0 440 292" width="440" role="img" aria-label="予想される実験結果とモデルの比較"><line class="ax" x1="60" y1="250" x2="420" y2="250"/><line class="ax" x1="60" y1="250" x2="60" y2="30"/><line class="thin" x1="80" y1="250" x2="80" y2="255"/><text class="tj" x="76" y="272">0</text><line class="thin" x1="180" y1="250" x2="180" y2="255"/><text class="tj" x="176" y="272">1</text><line class="thin" x1="280" y1="250" x2="280" y2="255"/><text class="tj" x="276" y="272">2</text><line class="thin" x1="380" y1="250" x2="380" y2="255"/><text class="tj" x="376" y="272">3</text><line class="thin" x1="55" y1="250" x2="60" y2="250"/><text class="tj" x="22" y="254">400</text><line class="thin" x1="55" y1="210" x2="60" y2="210"/><text class="tj" x="22" y="214">500</text><line class="thin" x1="55" y1="170" x2="60" y2="170"/><text class="tj" x="22" y="174">600</text><line class="thin" x1="55" y1="130" x2="60" y2="130"/><text class="tj" x="22" y="134">700</text><line class="thin" x1="55" y1="90" x2="60" y2="90"/><text class="tj" x="22" y="94">800</text><line class="thin" x1="55" y1="50" x2="60" y2="50"/><text class="tj" x="22" y="54">900</text><text class="tm" x="395" y="286">k</text><text class="tm" x="8" y="22">λ₀ [nm]</text><line class="dash" x1="80" y1="229.04000000000002" x2="380" y2="74"/><line class="cv2" x1="80" y1="202" x2="380" y2="88" opacity=".55"/><circle class="dot" cx="80" cy="202" r="4.5"/><circle class="dot" cx="180" cy="168" r="4.5"/><circle class="dot" cx="280" cy="128" r="4.5"/><circle class="dot" cx="380" cy="88" r="4.5"/><line class="cv" x1="80" y1="240" x2="380" y2="114" opacity=".55"/><circle class="dotb" cx="80" cy="240" r="4.5"/><circle class="dotb" cx="180" cy="188" r="4.5"/><circle class="dotb" cx="280" cy="150" r="4.5"/><circle class="dotb" cx="380" cy="114" r="4.5"/><text class="tt" x="88" y="190">Q系(予想)</text><text class="ta" x="88" y="262">T系(予想)</text><text class="tm" x="186" y="68">破線:箱モデルの予測</text></svg>
       <figcaption>図7:$\lambda_0$ と $k$ の関係(例)。●は測定値(例)、実線は最小二乗直線、破線は箱モデルの予測。どちらの系列も $k$ に対してほぼ直線に並び、モデルより傾きがゆるやか。</figcaption>
@@ -493,13 +493,13 @@
 
     <h4 id="k10">(10) 3 つのモデルと実測の比較</h4>
     <p>エチレン($N=2$)を 1 としたときの、エネルギー差の比を比べる。</p>
-    <table>
+    <div class="tscroll"><table class="cmp">
       <tr><th>方法</th><th>$N=2$</th><th>$N=4$</th><th>$N=6$</th></tr>
       <tr><td>一次元の箱($(N+1)/N^2$)</td><td>1</td><td>0.42</td><td>0.26</td></tr>
       <tr><td>ヒュッケル法</td><td>1</td><td>0.62</td><td>0.45</td></tr>
       <tr><td>MNDO(HOMO–LUMO 差)</td><td>1</td><td>0.82</td><td>0.73</td></tr>
       <tr><td>実測の吸収エネルギー(165、217、253 nm)</td><td>1</td><td>0.76</td><td>0.65</td></tr>
-    </table>
+    </table></div>
     <p>どの方法も「$N$ が増えると差が減る」傾向は同じであるが、単純なモデルほど変化が極端で、精密な計算や実測ほど変化がゆるやかである。実際の分子では、鎖が伸びても HOMO–LUMO 差が 0 に向かわず、結合交替のためにある値に落ち着くことが、ゆるやかな変化の一因と考えられる。簡単なモデルは直感的だが定量は粗く、精密な方法は現実に近いが計算が重い。目的に合ったモデルを選ぶことが大切である。</p>
 
     <h4 id="k11">(11) 誤差の要因と改善できる点</h4>
@@ -550,7 +550,7 @@
     <h2 id="s8">8. このページについてのメモ</h2>
     <h3 id="cite">式の出典(どの式が教科書のもので、どれが補足か)</h3>
     <p>「テキスト」は実験の教科書、「導出」はテキストの式から私が導いたもの、「補足」はテキストにない内容(高校の知識・一般的な公式・私の追加)です。</p>
-    <table>
+    <div class="tscroll"><table class="cmp">
       <tr><th>式・内容</th><th>出典</th></tr>
       <tr><td>波動方程式 $-\frac{h^2}{8\pi^2m}\psi''+V\psi=E\psi$</td><td>テキスト (5・1)</td></tr>
       <tr><td>$E_n=\frac{n^2h^2}{8mL^2}$、$\psi_n=\sqrt{2/L}\sin\frac{n\pi x}L$</td><td>テキスト (5・4)、(5・5)(課題 5.1 で導出)</td></tr>
@@ -565,7 +565,7 @@
       <tr><td>$a\approx0.12$ nm(傾きの合わせ込み)、MNDO の HOMO・LUMO の値、考察の想定値</td><td>補足(想像・目安の値。実際の測定値・計算値に置き換えること)</td></tr>
       <tr><td>ポリエンの吸収波長(165、217、253 nm)、シアニンの約 100 nm/$k$</td><td>補足(一般的な報告値の目安。テキストにはない)</td></tr>
       <tr><td>最小二乗法 $a=\frac{\sum(x_i-\bar x)(y_i-\bar y)}{\sum(x_i-\bar x)^2}$(基礎の枠)</td><td>補足(標準的な式。テキストの説明は未確認)</td></tr>
-    </table>
+    </table></div>
 
     <ul>
       <li>範囲は、写真のテキスト p.59(実験の目的・概要)〜p.67(課題 5.4・5.5)です。5・5 節「より深く学びたい人のために」(分子軌道法・LCAO 法の説明)は、課題 5.4・5.5 の考え方の背景として、ヒュッケル近似の式を「発展」として書き添えましたが、その本文は写真になく、扱っていません。</li>

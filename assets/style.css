@@ -157,6 +157,8 @@ details.photo img { display: block; max-width: 100%; margin: 0 auto; padding: 0 
 table.cmp { border-collapse: collapse; margin: 14px 0; font-size: .92rem; }
 table.cmp th, table.cmp td { border: 1px solid var(--border); padding: 6px 12px; }
 table.cmp th { background: var(--accent-soft); }
+.tscroll { overflow-x: auto; margin: 14px 0; }
+.tscroll > table.cmp { margin: 0; }
 
 
 /* ---- 春学期のまとめへのリンク・戻るボタン ---- */

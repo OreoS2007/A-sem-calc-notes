@@ -95,10 +95,10 @@
       <div class="label">基礎:気体の状態方程式、水上置換、水蒸気圧</div>
       <p>気体は温度と圧力で体積が変わります。標準状態($0\,{}^\circ\mathrm C$、1 atm = 760 mmHg)で 1 mol は 22.4 L。体積 $V$、圧力 $P$、温度 $T$(K)の気体の物質量は一定なら $\dfrac{PV}{T}$ が一定です(ボイル・シャルルの法則)。</p>
       <p>水の上で捕集した気体(水上置換)は、水蒸気を含みます。全体の圧力 $P$(外圧)は、酸素の分圧と水蒸気圧 $P_{\mathrm{H_2O}}$ の和なので、酸素の分圧は $P-P_{\mathrm{H_2O}}$。水蒸気圧は温度で決まり、高温ほど大きい(下表は 27〜45 ℃:テキストより)。</p>
-      <table>
+      <div class="tscroll"><table class="cmp">
         <tr><th>温度 [℃]</th><th>27</th><th>33</th><th>39</th><th>45</th></tr>
         <tr><td>水蒸気圧 [mmHg]</td><td>26.741</td><td>37.733</td><td>52.452</td><td>71.89</td></tr>
-      </table>
+      </table></div>
     </div>
 
     <h2 id="s2">2. 原理:一次反応と速度定数 <span class="page-tag">テキスト p.71〜72、p.76</span></h2>
@@ -181,7 +181,7 @@
       <svg viewBox="0 0 470 236" width="470" role="img" aria-label="過酸化水素分解槽の模式図"><path d="M70 60 L70 180 Q70 196 86 196 L134 196 Q150 196 150 180 L150 60" fill="none" stroke="var(--muted)" stroke-width="2"/><rect x="72" y="140" width="76" height="54" fill="var(--accent)" opacity=".22"/><rect x="96" y="184" width="28" height="8" rx="3" fill="var(--thm)"/><path d="M150 100 L205 62 L222 88 L162 126" fill="none" stroke="var(--muted)" stroke-width="2"/><path d="M168 112 L212 82 L218 90 L170 124 Z" fill="var(--thm)" opacity=".28"/><rect x="66" y="48" width="92" height="12" fill="var(--muted)" opacity=".5"/><text class="tj" x="80" y="40">ゴム栓(ガラス管へ)</text><text class="tj" x="154" y="150">H₂O₂ 溶液 10 mL</text><text class="tj" x="100" y="216">磁気回転子</text><text class="tt" x="228" y="78">側管:触媒溶液 2 mL</text><text class="tm" x="228" y="96">傾けて混ぜる前は、液が</text><text class="tm" x="228" y="112">ふれ合わない角度で保つ</text><path class="arr" d="M215 130 C240 150 215 180 190 176" /><polygon class="arrh" points="186,174 197,168 196,182"/><text class="tm" x="236" y="168">反転して流し込む → t = 0</text></svg>
       <figcaption>図3:分解槽の模式図(テキスト図 6・2 をもとに描き直した)。主室に $\mathrm{H_2O_2}$ 溶液と磁気回転子、斜めの側管に触媒溶液を、<b>混ざらないように</b>別々に入れる。組み立て後、全体を反転(傾け)て側管の触媒を流し込んだ瞬間を $t=0$ とする。</figcaption>
     </figure>
-    <table>
+    <div class="tscroll"><table class="cmp">
       <tr><th>操作</th><th>理由</th></tr>
       <tr><td>触媒を側管に分けて入れる</td><td>温度を恒温槽にそろえてから、<b>決まった瞬間に反応を始める</b>($t=0$ をはっきりさせる)ため。混ざると、反応が始まってしまう。</td></tr>
       <tr><td>三方コックを (a) にして約 10 分静置</td><td>分解槽内の温度を恒温槽の温度にそろえる。温度が変わると $k$ が変わる。</td></tr>
@@ -192,7 +192,7 @@
       <tr><td>同じ瓶の試薬を使い、体積を正確に量る</td><td>反応速度は触媒濃度と pH で大きく変わる。瓶が違うと濃度が違う可能性がある。</td></tr>
       <tr><td>恒温槽は設定を変えず、槽を移動する/実測温度を記録</td><td>設定温度は「約」27 ℃ などでよいが、<b>$E$ の計算には実測温度</b>を使う。</td></tr>
       <tr><td>45 ℃ は終了後さらに 5〜10 分反応させて $V_0$ を測る</td><td>体積が変わらなくなった(完全に分解した)ときの値が、全酸素量 $V_0$。</td></tr>
-    </table>
+    </table></div>
     <figure class="fig">
       <svg viewBox="0 0 480 256" width="480" role="img" aria-label="水準管とガスビュレットの水位と圧力"><rect x="58" y="30" width="24" height="170" fill="none" stroke="var(--muted)"/><rect x="128" y="30" width="24" height="170" fill="none" stroke="var(--muted)"/><rect x="58" y="150" width="24" height="50" fill="var(--accent)" opacity=".22"/><rect x="128" y="150" width="24" height="50" fill="var(--accent)" opacity=".22"/><rect x="58" y="196" width="94" height="8" fill="var(--accent)" opacity=".22"/><line class="cv" x1="58" y1="150" x2="82" y2="150"/><line class="cv" x1="128" y1="150" x2="152" y2="150"/><line class="dash" x1="82" y1="150" x2="128" y2="150"/><text class="tm" x="54" y="24">気体 P</text><text class="tm" x="120" y="24">大気 P₀</text><text class="tt" x="30" y="226">(a) 水位が一致</text><text class="tm" x="30" y="244">P = P₀(大気圧)→ 体積を正しく読める</text><rect x="278" y="30" width="24" height="170" fill="none" stroke="var(--muted)"/><rect x="348" y="30" width="24" height="170" fill="none" stroke="var(--muted)"/><rect x="278" y="142" width="24" height="58" fill="var(--accent)" opacity=".22"/><rect x="348" y="110" width="24" height="90" fill="var(--accent)" opacity=".22"/><rect x="278" y="196" width="94" height="8" fill="var(--accent)" opacity=".22"/><line class="cv" x1="278" y1="142" x2="302" y2="142"/><line class="cv" x1="348" y1="110" x2="372" y2="110"/><line class="dash" x1="302" y1="142" x2="348" y2="142"/><text class="tm" x="274" y="24">気体 P</text><text class="tm" x="340" y="24">大気 P₀</text><text class="tt" x="250" y="226">(b) 水準管が高い</text><text class="tm" x="250" y="244">P ＞ P₀ → 体積が小さく読める</text></svg>
       <figcaption>図4:水準管の高さと圧力。ビュレット内の気体の圧力は、水位差 $h$ ぶん(水柱の圧力)だけ外圧からずれる。水位を一致させる($h=0$)と、気体の圧力は大気圧 $P_0$ に等しい。</figcaption>
@@ -280,7 +280,7 @@
       <p>触媒 X($E=40\ \mathrm{kJ/mol}$)と触媒 Y($E=70\ \mathrm{kJ/mol}$)を仮定。27 ℃ で $k_\mathrm X=0.15$、$k_\mathrm Y=0.05\ \mathrm{min^{-1}}$ とすると、33 ℃(306.15 K)では、$k_\mathrm X\approx$0.205、$k_\mathrm Y\approx$0.087($\mathrm{min^{-1}}$)。<br>
       触媒 Y で $k=$0.205 にするには、
       $$\frac1T=\frac1{306.15}-\frac{8.314}{70000}\ln\frac{0.205}{0.087}\approx3.1639\times10^{-3}\ \mathrm{K^{-1}}\;\;\Rightarrow\;\;T\approx316\ \mathrm K\approx43\ {}^\circ\mathrm C$$
-      つまり、触媒 Y は、触媒 X の 33 ℃ と同程度の速さにするには約 43 ℃ が必要(この仮の数値の場合)。実際の答えは、自分たちのグラフの値で計算する。</p>
+      つまり、触媒 Y は、触媒 X の 33 ℃ と同程度の速さにするには約 43 ℃ が必要(この仮の数値の場合)。実際の答えは、自分たちのグラフの値で計算する。より実際に近い数値(鉄ミョウバンと KI)での例は、<a href="#w2k6">8 節の (6)</a> にある(約 40 ℃)。</p>
     </div>
 
         <h2 id="s8">8. 考察:この実験から言えること(「今回得られた実験結果に対して考察したこと」の解答例)</h2>
@@ -291,11 +291,11 @@
 
     <h4 id="w2k1">(1) 実験結果の整理</h4>
     <p>各温度で測定した速度定数 $k$ [min⁻¹] を、全班のデータの平均で整理すると、次のようになった(例)。</p>
-    <table>
+    <div class="tscroll"><table class="cmp">
       <tr><th>温度 $T$ [K]</th><th>300</th><th>306</th><th>312</th><th>318</th></tr>
       <tr><td>鉄ミョウバン($\mathrm{Fe^{3+}}$)の $k$</td><td><mark>0.041</mark></td><td><mark>0.115</mark></td><td>—</td><td><mark>0.40</mark></td></tr>
       <tr><td>ヨウ化カリウム(KI)の $k$</td><td><mark>0.135</mark></td><td><mark>0.235</mark></td><td><mark>0.35</mark></td><td><mark>0.50</mark></td></tr>
-    </table>
+    </table></div>
     <p>最小二乗法で $\log_{10}k$ を $1/T$ に対して直線にあてはめると(テキスト (6・10))、傾きは鉄ミョウバンで約 <mark>−5100 K</mark>、KI で約 <mark>−3000 K</mark>。$E=-2.303R\times$(傾き)より、$E$ は鉄ミョウバンで約 <mark>98 kJ/mol</mark>、KI で約 <mark>57 kJ/mol</mark> となった。</p>
 
     <h4 id="w2k2">(2) 一次反応であることの確認</h4>
@@ -377,7 +377,7 @@
     <h2 id="s10">10. このページについてのメモ</h2>
     <h3 id="cite">式の出典(どの式が教科書のもので、どれが補足か)</h3>
     <p>「テキスト」は実験の教科書、「導出」はテキストの式から私が導いたもの、「補足」はテキストにない内容(高校の知識・一般的な公式・私の追加)です。</p>
-    <table>
+    <div class="tscroll"><table class="cmp">
       <tr><th>式・内容</th><th>出典</th></tr>
       <tr><td>$-\mathrm dC/\mathrm dt=kC$、$\ln(C_0/C)=kt$</td><td>テキスト (6・1)〜(6・5)</td></tr>
       <tr><td>$C=C_0-x$、体積への置き換え、$\log_{10}\frac{V_0-v}{V_0}=-\frac k{2.303}t$</td><td>テキスト (6・6)〜(6・11)</td></tr>
@@ -393,7 +393,7 @@
       <tr><td>考察(8 節)の数値(k、E、A、交点温度 約 47 ℃、誤差の見積もり)</td><td>想定・補足(他年度の傾向を参考にした想像上の値)。式は (6・5)(6・9)(6・10)(6・11) と、そこからの導出</td></tr>
       <tr><td>温度誤差の式 Δk/k≈EΔT/(RT²)、2 本の直線の交点温度の式</td><td>導出((6・9)、(6・10) から)</td></tr>
       <tr><td>触媒の機構(I⁻ の 2 段階、Fe³⁺/Fe²⁺)、文献の E 値(75、56、68、23 kJ/mol)、擬一次反応</td><td>補足(一般的な報告・知識。テキストにはない)</td></tr>
-    </table>
+    </table></div>
 
     <ul>
       <li>範囲は、写真のテキスト p.71(実験の目的・概要)〜p.77(課題 6.1・6.2、図 6・6)です。巻末の点検表や報告書のグラフ用紙の様式は、写真になく、扱っていません。</li>

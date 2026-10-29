@@ -19,6 +19,7 @@ em/     (同じ構成。春学期がないので basics.html は「基礎のま�
 mech/   (同じ構成。講義ノートは手書き24ページ(PDF)で、ページ番号がないので PDF の順に `p.N` と数える。13回への分け方はこちらで決めたもの(`reference/mech/README.md` に対応表))
 structchem/ (同じ構成。講義資料はパワーポイントの PDF(スライド)で、各PDFの表紙と「授業予定」のスライド(第2回 p.5)に、第何回かが書いてある。13回(第1回 10/6 概要と量子論の必要性、第2回 10/13 電子の回折、第3回 Schrödinger 方程式、…)。スライドの番号は PDF の順で、`スライド p.N` と書く。`reference/structchem/lecture/` に PDF・ページ画像(`png01/`、`png02/`)・読み取りメモ(`notes01.md`、`notes02.md`)と、生成ツール(`reference/structchem/build/`)がある。スライドの写真(肖像・紙幣など)は公開しない。第4回(10/27)は、ユーザーの指定で、第3回より先に作った(第3回は未作成:作るときは、week-02 と week-04 の pager、`weeks.json` を直す))
 thermo/ (同じ構成。講義ノートは板書の画像12枚(ページ番号なし)で、画像の内容の順に `p.N` と数える。12回への分け方はこちらで決めたもの。2.1・2.2 のページは画像になく、第3回で補足した。`reference/thermo/` に画像と、生成ツール(`build/`)がある)
+chemlab/ 基礎化学実験(週ごとに w1/、w2/、… を作り、それぞれ index.html・prep.html(実験予習ノート)・explanation.html(解説))。週と実験の対応:w1=第五回=実験5、w2=第六回=実験6、w3=第四回=実験4。教科書の写真から作る。生成ツールは `reference/chemlab/build/`(build-w1.js など。`node` で実行すると chemlab/ に書き出す)。シケプリ(UTaisaku-Web)の読み取りメモは `reference/chemlab/shikepuri/NOTES.md`:必ず参照するが、文章・構成は丸写ししない(先生もこのシケプリを知っている)。予習ノートは「目的 → 使う式 → 手順のフローチャート → 予想」の簡潔な形式(手本は w2/prep.html)。**式には教科書の式番号を付け、教科書にない式は「導出」「補足」と明記する**(解説ページ末尾の「式の出典」の表)。考察の数値で実測でないものは `<mark>` で黄色にし、想像上の値と明記する。表は `<table>` で書けば、生成ツールが横スクロール付きの枠線つきの表(`.tscroll` + `table.cmp`)に変える
 templates/week-template.html   週のノートのひな形
 tools/serve.ps1            ローカル確認用の簡易サーバー
 reference/                 (.gitignore 済み・非公開)春学期のノートなどの私的な資料
