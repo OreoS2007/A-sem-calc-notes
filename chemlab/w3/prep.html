@@ -89,15 +89,88 @@
       <li>誤差の原因:基準値のずれ、スリット幅、副尺の読み、格子の調整不足、不純物の線の取り違え。</li>
     </ul>
 
-    <h2>予習問題の答えの要点</h2>
+    <h2>予習問題の解答と解説</h2>
+    <p>3 問とも、テキストの式に数値を入れるだけの問題ですが、<b>どの式を使うか</b>、<b>単位</b>、<b>有効数字</b>でつまずきやすいので、途中の数値をすべて書きます(数値は、テキストの定数で私が計算して確かめたもの)。</p>
+
+    <h3>予習問題 4.1 (4・5) 式のリュードベリ定数の理論値を cm⁻¹ 単位で計算せよ</h3>
     <div class="box basic">
-      <div class="label">予習問題 4.1・4.2</div>
-      <p>$R_{\mathrm H}=\dfrac{\mu e^4}{8\varepsilon_0^2h^3c}=1.0968\times10^5\ \mathrm{cm^{-1}}$($\mu=\dfrac{m_{\mathrm e}m_{\mathrm p}}{m_{\mathrm e}+m_{\mathrm p}}$)。バルマー系列(真空中):$n=3,4,5,6$ で 656.47、486.27、434.17、410.29 nm。</p>
+      <div class="label">使う式と考え方</div>
+      <p>$R_{\mathrm H}=\dfrac{\mu e^4}{8\varepsilon_0^2h^3c}$(テキスト (4・5))、$\mu=\dfrac{m_{\mathrm e}m_{\mathrm p}}{m_{\mathrm e}+m_{\mathrm p}}$(テキスト (4・3b))。<b>電子の質量 $m_{\mathrm e}$ ではなく、換算質量 $\mu$</b> を使うのがポイント(水素の電子と陽子は、共通の重心のまわりを回るので)。SI 単位で計算すると答えは m⁻¹ で出るので、最後に cm⁻¹ に直す($1\,\mathrm m^{-1}=10^{-2}\,\mathrm{cm^{-1}}$)。</p>
     </div>
     <div class="box ex">
-      <div class="label">予習問題 4.3($d=1/600$ mm、400〜800 nm)</div>
-      <p>$\sin\theta=m\lambda/d$ より、$m=1$:$13^\circ53'\sim28^\circ41'$、$m=2$:$28^\circ41'\sim73^\circ44'$、$m=3$:$46^\circ03'\sim90^\circ$(555 nm 以下のみ)。</p>
+      <div class="label">解答</div>
+      <p><b>① 換算質量。</b>
+      $$\mu=\frac{9.109384\times10^{-31}\times1.672622\times10^{-27}}{9.109384\times10^{-31}+1.672622\times10^{-27}}=\frac{1.52366\times10^{-57}}{1.67353\times10^{-27}}=9.10443\times10^{-31}\ \mathrm{kg}$$
+      ($m_{\mathrm e}$ より約 0.054 % 小さい。陽子は電子の約 1836 倍重いので、ほとんど $m_{\mathrm e}$ に等しい。)</p>
+      <p><b>② 分子。</b>$e^4=(1.602177\times10^{-19})^4=6.58934\times10^{-76}\ \mathrm{C^4}$、
+      $\mu e^4=9.10443\times10^{-31}\times6.58934\times10^{-76}=5.99922\times10^{-106}$。</p>
+      <p><b>③ 分母。</b>$\varepsilon_0^2=7.83966\times10^{-23}$、$h^3=2.90916\times10^{-100}$ より
+      $8\varepsilon_0^2h^3c=8\times7.83966\times10^{-23}\times2.90916\times10^{-100}\times2.997925\times10^{8}=5.46986\times10^{-113}$。</p>
+      <p><b>④ 割り算と単位。</b>
+      $$R_{\mathrm H}=\frac{5.99922\times10^{-106}}{5.46986\times10^{-113}}=1.09678\times10^{7}\ \mathrm{m^{-1}}=\boxed{1.09678\times10^{5}\ \mathrm{cm^{-1}}}$$</p>
+      <p><b>単位の確かめ</b>:$\dfrac{\mathrm{kg\cdot C^4}}{(\mathrm{F/m})^2(\mathrm{J\,s})^3(\mathrm{m/s})}$ を整理すると $\mathrm{m^{-1}}$ になる($\mathrm F=\mathrm{C^2/J}$ を使う)。波数(1 m あたりの波の数)の単位なので正しい。</p>
     </div>
+    <div class="box warn">
+      <div class="label">つまずきやすい点</div>
+      <ul>
+        <li>$\mu$ でなく $m_{\mathrm e}$ を使うと $1.09737\times10^{5}\ \mathrm{cm^{-1}}$ になる。これは陽子の質量を無限大とした値 $R_\infty$(文献に「リュードベリ定数」として載っている値)で、水素の $R_{\mathrm H}$ とは 0.054 % ずれる。</li>
+        <li>$h^3$、$\varepsilon_0^2$、$e^4$ の指数の計算ミスが多い。指数だけ先に足し引きして(分子 $-31-76=-107$、分母 $-23-100+8=-115$ に係数の桁上がりを足す)、答えが $10^{7}\ \mathrm{m^{-1}}$ の桁になるかを確かめる。</li>
+      </ul>
+    </div>
+
+    <h3>予習問題 4.2 上で計算した $R_{\mathrm H}$ を用いて、(4・4b) 式からバルマー系列のスペクトル線の波長を nm 単位で $n=3\sim6$ まで計算せよ</h3>
+    <div class="box basic">
+      <div class="label">使う式と考え方</div>
+      <p>(4・4b) は $\tilde\nu=R_{\mathrm H}\left(\dfrac1{m^2}-\dfrac1{n^2}\right)$ の形(係数が (4・5) の $R_{\mathrm H}$)。<b>バルマー系列は $m=2$</b>(下の準位が $n=2$)。波数 $\tilde\nu$ を求めてから、<b>逆数をとって</b>波長 $\lambda=1/\tilde\nu$ にする。</p>
+    </div>
+    <div class="box ex">
+      <div class="label">解答</div>
+      <div class="tscroll"><table class="cmp">
+        <tr><th>$n$</th><th>$\frac14-\frac1{n^2}$</th><th>$\tilde\nu=R_{\mathrm H}\times$(左) [m⁻¹]</th><th>$\lambda=1/\tilde\nu$ [nm]</th><th>色</th></tr>
+        <tr><td>3</td><td>$\frac14-\frac19=\frac5{36}$</td><td>$1.52330\times10^{6}$</td><td><b>656.47</b></td><td>赤</td></tr>
+        <tr><td>4</td><td>$\frac14-\frac1{16}=\frac3{16}$</td><td>$2.05646\times10^{6}$</td><td><b>486.27</b></td><td>青緑</td></tr>
+        <tr><td>5</td><td>$\frac14-\frac1{25}=\frac{21}{100}$</td><td>$2.30323\times10^{6}$</td><td><b>434.17</b></td><td>青紫</td></tr>
+        <tr><td>6</td><td>$\frac14-\frac1{36}=\frac29$</td><td>$2.43728\times10^{6}$</td><td><b>410.29</b></td><td>紫</td></tr>
+      </table></div>
+      <p>例:$n=3$ では $\lambda=\dfrac{36}{5R_{\mathrm H}}=\dfrac{36}{5\times1.09678\times10^{7}}\ \mathrm m=6.5647\times10^{-7}\ \mathrm m=656.47\ \mathrm{nm}$。</p>
+    </div>
+    <div class="box warn">
+      <div class="label">解説・確かめ</div>
+      <ul>
+        <li><b>$n$ が大きいほど波長が短い</b>(紫に近づく)。上の準位が高いほど落差が大きく、光のエネルギーが大きいから。$n\to\infty$ の極限は $\lambda=4/R_{\mathrm H}=364.7$ nm で、(4・1) の $A=364.56$ nm と一致する(バルマーの式とリュードベリの式が同じものであることの確かめ)。</li>
+        <li>4 本とも 400〜700 nm の可視光に入る。これが、目で見て測れる理由。</li>
+        <li>これは<b>真空中</b>の波長。空気中で測る実験値は、屈折率 1.00028 で割った値(656.29、486.14、434.05、410.18 nm)に近くなる(テキスト課題 4.2 の脚注)。</li>
+      </ul>
+    </div>
+
+    <h3>予習問題 4.3 $d=(1/600)$ mm、可視光を 400〜800 nm として、$m=1,2,3$ のスペクトル線が現れうる角度領域 $\theta$ を (4・7) 式で計算せよ</h3>
+    <div class="box basic">
+      <div class="label">使う式と考え方</div>
+      <p>(4・7) $d\sin\theta=m\lambda$ を $\sin\theta=\dfrac{m\lambda}{d}$ と変形し、$\lambda=400$ nm と 800 nm を入れて両端の角度を出す。$d=\dfrac1{600}\ \mathrm{mm}=\dfrac{10^{-3}}{600}\ \mathrm m=1.6667\times10^{-6}\ \mathrm m$ なので、$\dfrac1d=6.00\times10^{5}\ \mathrm{m^{-1}}$。$\sin\theta\le1$ でなければならないことにも注意。</p>
+    </div>
+    <div class="box ex">
+      <div class="label">解答</div>
+      <div class="tscroll"><table class="cmp">
+        <tr><th>$m$</th><th>$\lambda=400$ nm の $\sin\theta$</th><th>$\lambda=800$ nm の $\sin\theta$</th><th>角度領域(小数の度)</th><th>角度領域(度・分)</th></tr>
+        <tr><td>1</td><td>$400\times10^{-9}\times6.00\times10^{5}=0.240$</td><td>$0.480$</td><td>$13.887^\circ\le\theta\le28.685^\circ$</td><td><b>$13^\circ53'\le\theta\le28^\circ41'$</b></td></tr>
+        <tr><td>2</td><td>$0.480$</td><td>$0.960$</td><td>$28.685^\circ\le\theta\le73.740^\circ$</td><td><b>$28^\circ41'\le\theta\le73^\circ44'$</b></td></tr>
+        <tr><td>3</td><td>$0.720$</td><td>$1.440\ (\gt1)$</td><td>$46.055^\circ\le\theta\le90^\circ$</td><td><b>$46^\circ03'\le\theta\le90^\circ$</b></td></tr>
+      </table></div>
+      <p>(右の 2 列は同じ範囲を、小数の度と、度・分の 2 通りで書いたもの。分光計の目盛りは度・分で読むので、度・分の方を覚えておく。)</p>
+      <p>度から分への直し方:$13.887^\circ=13^\circ+0.887\times60'=13^\circ53'$。$m=3$ で 800 nm は $\sin\theta=1.44\gt1$ となり、その方向は存在しない。$\sin\theta=1$($\theta=90^\circ$)になる波長は $\lambda=d/3=555.6$ nm なので、<b>3 次光は 555.6 nm より短い光(紫〜緑)だけ</b>が現れる。</p>
+    </div>
+    <div class="box warn">
+      <div class="label">解説・確かめ</div>
+      <ul>
+        <li><b>なぜ「範囲」になるのか</b>:可視光には 400 nm から 800 nm まで、いろいろな波長の光がある。(4・7) より、波長 $\lambda$ の光は $\sin\theta=m\lambda/d$ の角度に出る。$0^\circ\sim90^\circ$ では、$\theta$ が大きいほど $\sin\theta$ も大きい(増加関数)ので、<b>波長が長いほど角度も大きい</b>。だから、一番短い 400 nm の光の角度が範囲の下の端、一番長い 800 nm の光の角度が上の端になり、可視光はすべてその間に出る。これが「現れうる角度領域」で、両端を求めればよい理由。</li>
+        <li><b>記号の意味</b>:$13^\circ53'\le\theta\le28^\circ41'$ は「$\theta$ は $13^\circ53'$ 以上、$28^\circ41'$ 以下」という意味。$\le$(以上・以下)を使うのは、端の 400 nm と 800 nm そのものも範囲に含むから(問題文の「400〜800 nm」の「〜」は「から」の意味で、両端を含む)。分は四捨五入した値($13.887^\circ=13^\circ53.2'$ → $13^\circ53'$)。</li>
+        <li><b>1 次と 2 次は重ならない</b>:1 次の赤い端($800$ nm)と 2 次の紫の端($2\times400=800$ に相当)が、同じ $28^\circ41'$。だから、$28^\circ41'$ より小さい角度は 1 次光だけ、大きい角度には 2 次光(と 3 次光)が出る。</li>
+        <li><b>2 次と 3 次は重なる</b>($46^\circ\sim74^\circ$):同じ角度に 2 次の赤と 3 次の紫が来ることがあるので、色で見分ける。</li>
+        <li>実験で線を探すときの目安になる:水素の赤い線(656 nm)の 1 次光は約 $23^\circ$、2 次光は約 $52^\circ$。</li>
+        <li>計算機は<b>度モード</b>で $\sin^{-1}$ をとる。ラジアンのままだと全く違う値になる。</li>
+      </ul>
+    </div>
+    <p>課題 4.1・4.2(測定後のデータ処理)の解説は、<a href="explanation.html#k41">解説ページ</a>にあります。</p>
 
     <nav class="pager">
       <a href="index.html">← 第三週(第四回)</a>
