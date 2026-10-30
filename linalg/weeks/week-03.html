@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>第3回 シュミットの直交化の例と行列式の定義 | Aセメまとめノート</title>
+  <link rel="stylesheet" href="../../assets/style.css">
+  <script defer src="../../assets/nav.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],macros:{'\\R':'\\mathbb{R}'}});window.__navReady&&window.__navReady()"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="inner">
+      <a class="site-title" href="../../index.html">Aセメまとめノート</a>
+      <span class="links"><a href="../index.html">線形代数</a><a href="../basics.html">春学期のまとめ</a><a href="../../calc/index.html">微積</a><a href="../../structchem/index.html">構造化学</a><a href="../../mech/index.html">力学A</a><a href="../../thermo/index.html">熱力学</a><a href="../../em/index.html">電磁気学</a></span>
+    </div>
+  </header>
+
+  <main class="note">
+    <h1>第3回:シュミットの直交化の例と、行列式の定義</h1>
+    <div class="meta">線形代数学②(東京大学 教養学部 秋学期)／板書 p.1〜p.18(板書にページ番号がないため、PDF の順に数えています)</div>
+
+    <nav class="toc">
+      <div class="toc-title">目次</div>
+      <ol start="0">
+        <li><a href="#s0">この回の全体像</a></li>
+        <li><a href="#s1">準備:この回で使う基礎</a>
+          <div class="sub">正規直交基底とシュミットの直交化(第2回)／多項式の積分／平行四辺形の面積と2×2行列式／写像の合成と全単射</div></li>
+        <li><a href="#s2">正規直交基底の復習:正規直交なら自動的に基底</a>(p.2–4)</li>
+        <li><a href="#s3">例1:$\R^3$ のシュミットの直交化</a>(p.5–6)</li>
+        <li><a href="#s4">例2:多項式の空間の直交化</a>(p.7–9)</li>
+        <li><a href="#s5">行列式の動機:面積と体積</a>(§2.1、p.10–12)</li>
+        <li><a href="#s6">置換と符号</a>(§2.2、p.13–14)</li>
+        <li><a href="#s7">行列式の定義</a>(p.15–16)</li>
+        <li><a href="#s8">多重線形性</a>(§2.3、p.17–18)</li>
+        <li><a href="#s9">具体例で練習</a></li>
+        <li><a href="#s10">まとめ(この回で覚えること)</a></li>
+        <li><a href="#s11">この回のノートについてのメモ</a></li>
+      </ol>
+    </nav>
+
+    <!-- ===================== 0 ===================== -->
+    <h2 id="s0">0. この回の全体像</h2>
+    <p>前半は、第2回で証明した<b>シュミットの直交化法</b>を、実際に計算します($\R^3$ のベクトルと、多項式の空間)。後半から、授業計画の2つ目の柱、<b>行列式</b>(§2)に入ります。</p>
+    <div class="box thm">
+      <div class="label">この回のゴール</div>
+      <p>① 正規直交なベクトル $n$ 個は、自動的に一次独立(したがって $n$ 次元空間の基底)。<br>
+      ② $(1,0,0),(1,1,1),(1,0,1)$ を直交化すると $(1,0,0),\ \tfrac1{\sqrt2}(0,1,1),\ \tfrac1{\sqrt2}(0,-1,1)$。<br>
+      ③ 内積 $\langle f,g\rangle=\tfrac12\int_{-1}^1f\bar g\,dx$ で $1,x,x^2$ を直交化すると $1,\ \sqrt3\,x,\ \tfrac{3\sqrt5}2(x^2-\tfrac13)$(ルジャンドル多項式の仲間)。<br>
+      ④ 行列式は、平行四辺形の面積・平行六面体の体積(に符号をつけたもの)の一般化。定義は置換を使って $\det A=\sum_{\sigma\in\mathfrak S_n}\operatorname{sgn}(\sigma)\,a_{1\sigma(1)}\cdots a_{n\sigma(n)}$。<br>
+      ⑤ 行列式は各行について線形(多重線形性)。0 だけの行があれば $\det=0$。</p>
+    </div>
+
+    <!-- ===================== 1 ===================== -->
+    <h2 id="s1">1. 準備:この回で使う基礎</h2>
+
+    <h3 id="w-gs">1.1 正規直交基底とシュミットの直交化(第2回)</h3>
+    <div class="box basic">
+      <div class="label">基礎:影を引いて、長さを 1 にする <a class="xref-link" href="week-02.html#s8" data-xref>→ 第2回 8.</a></div>
+      <p>正規直交基底:$\langle v_i,v_j\rangle=1$($i=j$)、$0$($i\ne j$)。シュミットの直交化:$v_1'=v_1/\|v_1\|$、それまでに作った $v_1',\dots,v_k'$ を使って
+      $$\tilde v_{k+1}=v_{k+1}-\sum_{i=1}^k\langle v_{k+1},v_i'\rangle v_i',\qquad v_{k+1}'=\frac{\tilde v_{k+1}}{\|\tilde v_{k+1}\|}.$$
+      $\langle v_{k+1},v_i'\rangle v_i'$ は、$v_{k+1}$ の $v_i'$ 方向の成分(影)。</p>
+      <p><b>直感:</b> 「すでにある方向の成分を全部取りのぞいて、新しい方向だけを残す」。</p>
+    </div>
+
+    <h3 id="w-polyint">1.2 多項式の積分と、偶関数・奇関数</h3>
+    <div class="box basic">
+      <div class="label">基礎:$\int_{-1}^1x^k\,dx$ <a class="xref-link" href="../basics.html#intpos" data-xref>→ 詳しい解説</a></div>
+      <p>$\displaystyle\int_{-1}^1x^k\,dx=\Bigl[\frac{x^{k+1}}{k+1}\Bigr]_{-1}^1=\frac{1-(-1)^{k+1}}{k+1}$。$k$ が奇数なら $0$($x^k$ は奇関数で、左右の面積が打ち消し合う)、偶数なら $\dfrac2{k+1}$。だから
+      $$\frac12\int_{-1}^1x^{2k}dx=\frac1{2k+1},\qquad\frac12\int_{-1}^1x^{2k+1}dx=0.$$</p>
+      <p><b>直感:</b> 奇関数のグラフは原点について点対称なので、正の部分と負の部分がちょうど打ち消し合う。</p>
+    </div>
+
+    <h3 id="w-area">1.3 平行四辺形の面積と 2×2 行列式</h3>
+    <div class="box basic">
+      <div class="label">基礎:$|ad-bc|$ は面積 <a class="xref-link" href="../basics.html#area" data-xref>→ 詳しい解説</a></div>
+      <p>平面のベクトル $(a,c)$、$(b,d)$ が作る平行四辺形の面積は $|ad-bc|$。$ad-bc=\det\begin{pmatrix}a&b\\c&d\end{pmatrix}$。符号は、$(a,c)$ から $(b,d)$ へ反時計回りなら $+$、時計回りなら $-$(向き)。</p>
+      <p><b>直感:</b> $(a,0)$ と $(0,d)$ なら長方形で面積 $ad$。$b,c$ でゆがめると、平行四辺形になって、面積が $bc$ だけ減る。</p>
+    </div>
+
+    <h3 id="w-maps3">1.4 写像の合成と全単射</h3>
+    <div class="box basic">
+      <div class="label">基礎:全単射・合成 <a class="xref-link" href="../basics.html#maps" data-xref>→ 詳しい解説</a></div>
+      <p>写像 $\sigma:X\to X$ が<b>全単射</b>とは、どの元にもちょうど1つの元が対応して(単射)、しかも全部の元に何かが対応する(全射)こと。有限集合 $\{1,\dots,n\}$ では「並べ替え」のこと。<b>合成</b> $\sigma_1\sigma_2$ は「先に $\sigma_2$、次に $\sigma_1$」:$(\sigma_1\sigma_2)(l)=\sigma_1(\sigma_2(l))$。</p>
+    </div>
+
+    <!-- ===================== 2 ===================== -->
+    <h2 id="s2">2. 正規直交基底の復習:正規直交なら自動的に基底 <span class="page-tag">板書 p.2–4</span></h2>
+    <p>板書 p.2:$V$ を $n$ 次元 $K$-ベクトル空間、$\langle\ ,\ \rangle:V\times V\to K$ を(エルミート)内積とする。$v_1,\dots,v_n\in V$ が正規直交基底であるとは、$1\le i,j\le n$ について
+    $$(\ast)\qquad\langle v_i,v_j\rangle=\begin{cases}1&i=j\\0&i\ne j\end{cases}$$
+    をみたすこと。</p>
+    <div class="box thm">
+      <div class="label">注(板書 p.2)</div>
+      <p>$V$ が $n$ 次元で、$v_1,\dots,v_n\in V$ が $(\ast)$ をみたすだけで、自動的に $V$ の<b>基底</b>になる。</p>
+    </div>
+    <div class="box proof"><div class="label">理由(板書 p.3)</div>
+      <p>$\dim V=n$ なので、$n$ 個のベクトルが一次独立ならば基底になる。一次独立を示す。$a_1v_1+\cdots+a_nv_n=0$($a_i\in K$)とすると、各 $1\le i\le n$ について
+      $$0=\langle a_1v_1+\cdots+a_nv_n,\ v_i\rangle=a_i\langle v_i,v_i\rangle=a_i$$
+      ($j\ne i$ の項は $\langle v_j,v_i\rangle=0$ で消える)。よって $a_1=\cdots=a_n=0$。 $\square$</p></div>
+    <p>(板書は $0=\langle v_i,a_1v_1+\cdots\rangle$ と、$v_i$ を第1変数に置いて計算しています。エルミート内積では、そのときは $\overline{a_i}=0$ となりますが、結論は同じです。メモ参照。)</p>
+    <p><b>直感:</b> たがいに直角な方向は、どれも他の組み合わせで作れない(直角な方向を足し合わせても、ほかの直角な方向は作れない)。</p>
+    <p>板書 p.3–4 では、シュミットの直交化の手順をもう一度まとめています:基底 $v_1,\dots,v_n$ から、帰納的に $v_1',\dots,v_n'$ を作る。$v_1'=v_1/\|v_1\|$。$v_1',\dots,v_k'$($k\lt n$)まで
+    $\langle v_i',v_j'\rangle=\delta_{ij}$($1\le i,j\le k$)、$v_i'$ は $v_1,\dots,v_i$ の一次結合($1\le i\le k$)をみたすように作ったら、
+    $$v_{k+1}^\star=v_{k+1}-\sum_{i=1}^k\langle v_{k+1},v_i'\rangle v_i',\qquad v_{k+1}'=\frac1{\|v_{k+1}^\star\|}v_{k+1}^\star$$
+    で $v_{k+1}'$ を定めればよい。(板書の添字のずれは、メモ参照。)</p>
+
+    <!-- ===================== 3 ===================== -->
+    <h2 id="s3">3. 例1:$\R^3$ のシュミットの直交化 <span class="page-tag">板書 p.5–6</span></h2>
+    <p>板書:「$\R^3$ で標準内積を考え、$\begin{pmatrix}1\\0\\0\end{pmatrix},\begin{pmatrix}1\\1\\1\end{pmatrix},\begin{pmatrix}1\\0\\1\end{pmatrix}$ からシュミットの直交化を用いて正規直交基底 $v_1',v_2',v_3'$ を求める。」(板書では $v_1,v_2,v_3$ と書いていますが、元のベクトルと区別するため、ここでは $v_i'$ と書きます。)</p>
+    <ol class="step-list">
+      <li><b>①</b> $(1,0,0)^{\mathsf T}$ のノルムは $1$ なので、$v_1'=(1,0,0)^{\mathsf T}$。</li>
+      <li><b>②</b> $(1,1,1)^{\mathsf T}$ から、$v_1'$ 方向の成分を引く:$\langle(1,1,1),(1,0,0)\rangle=1$ だから
+      $$\begin{pmatrix}1\\1\\1\end{pmatrix}-1\cdot\begin{pmatrix}1\\0\\0\end{pmatrix}=\begin{pmatrix}0\\1\\1\end{pmatrix}.$$
+      ノルム $\sqrt2$ で割って $v_2'=\dfrac1{\sqrt2}\begin{pmatrix}0\\1\\1\end{pmatrix}$。</li>
+      <li><b>③</b> $(1,0,1)^{\mathsf T}$ から、$v_1'$ と $v_2'$ 方向の成分を引く:$\langle(1,0,1),v_1'\rangle=1$、$\langle(1,0,1),v_2'\rangle=\tfrac1{\sqrt2}$ だから
+      $$\begin{pmatrix}1\\0\\1\end{pmatrix}-\begin{pmatrix}1\\0\\0\end{pmatrix}-\frac1{\sqrt2}\cdot\frac1{\sqrt2}\begin{pmatrix}0\\1\\1\end{pmatrix}=\begin{pmatrix}0\\-\frac12\\\frac12\end{pmatrix}.$$
+      ノルムは $\sqrt{\frac14+\frac14}=\frac1{\sqrt2}$。割って $v_3'=\dfrac1{\sqrt2}\begin{pmatrix}0\\-1\\1\end{pmatrix}$。</li>
+    </ol>
+    <div class="box ex"><div class="label">確かめ</div>
+      <p>$\langle v_1',v_2'\rangle=0$、$\langle v_1',v_3'\rangle=0$、$\langle v_2',v_3'\rangle=\frac12(0-1+1)=0$、どれも長さ 1。グラム行列は単位行列 ✓。</p></div>
+
+    <!-- ===================== 4 ===================== -->
+    <h2 id="s4">4. 例2:多項式の空間の直交化 <span class="page-tag">板書 p.7–9</span></h2>
+    <p>板書:$V_n=\langle1,x,\dots,x^{n-1}\rangle_{\mathbb C}\subseteq C([-1,1])$($n-1$ 次以下の多項式)、内積
+    $$\langle f,g\rangle=\frac12\int_{-1}^1f(x)\overline{g(x)}\,dx.$$
+    $n=3$ として $v_1=1$、$v_2=x$、$v_3=x^2$ をシュミットの直交化で正規直交化する。使う積分:$\frac12\int_{-1}^1x^{2k}dx=\frac1{2k+1}$、$\frac12\int_{-1}^1x^{2k+1}dx=0$。(係数は実数なので、共役は考えなくてよい。)</p>
+    <ol class="step-list">
+      <li><b>$v_1'$:</b>$\|1\|^2=\frac12\int_{-1}^11\,dx=1$ なので $v_1'=1$。</li>
+      <li><b>$v_2'$:</b>$\langle v_2,v_1'\rangle=\frac12\int_{-1}^1x\,dx=0$ なので、引くものはなく $v_2^\star=x$。$\|x\|^2=\frac12\int x^2dx=\frac13$、$\|x\|=\frac1{\sqrt3}$。$v_2'=\sqrt3\,x$。</li>
+      <li><b>$v_3'$:</b>$\langle x^2,v_1'\rangle=\frac12\int x^2dx=\frac13$、$\langle x^2,v_2'\rangle=\sqrt3\cdot\frac12\int x^3dx=0$。よって
+      $$v_3^\star=x^2-\tfrac13\cdot1-0=x^2-\tfrac13.$$</li>
+      <li><b>ノルム:</b>$\|v_3^\star\|^2=\frac12\int_{-1}^1\bigl(x^2-\tfrac13\bigr)^2dx=\frac12\int\bigl(x^4-\tfrac23x^2+\tfrac19\bigr)dx=\frac15-\frac23\cdot\frac13+\frac19=\frac{9-10+5}{45}=\frac4{45}$。$\|v_3^\star\|=\frac2{3\sqrt5}$。</li>
+      <li>$v_3'=\dfrac{3\sqrt5}2\Bigl(x^2-\dfrac13\Bigr)$。</li>
+    </ol>
+    <figure class="fig">
+      <svg viewBox="0 0 640 240" width="640" role="img" aria-label="正規直交化した多項式"><line x1="60" y1="150" x2="380" y2="150" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><line x1="220" y1="25" x2="220" y2="220" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><text class="t" x="384" y="155">x</text><text class="t" x="70" y="170" style="text-anchor:middle">−1</text><text class="t" x="370" y="170" style="text-anchor:middle">1</text><line x1="70" y1="146" x2="70" y2="154" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><line x1="370" y1="146" x2="370" y2="154" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><polyline points="70,95 71.9,95 73.8,95 75.6,95 77.5,95 79.4,95 81.3,95 83.1,95 85,95 86.9,95 88.8,95 90.6,95 92.5,95 94.4,95 96.3,95 98.1,95 100,95 101.9,95 103.8,95 105.6,95 107.5,95 109.4,95 111.3,95 113.1,95 115,95 116.9,95 118.8,95 120.6,95 122.5,95 124.4,95 126.3,95 128.1,95 130,95 131.9,95 133.8,95 135.6,95 137.5,95 139.4,95 141.3,95 143.1,95 145,95 146.9,95 148.8,95 150.6,95 152.5,95 154.4,95 156.3,95 158.1,95 160,95 161.9,95 163.8,95 165.6,95 167.5,95 169.4,95 171.3,95 173.1,95 175,95 176.9,95 178.8,95 180.6,95 182.5,95 184.4,95 186.3,95 188.1,95 190,95 191.9,95 193.8,95 195.6,95 197.5,95 199.4,95 201.3,95 203.1,95 205,95 206.9,95 208.8,95 210.6,95 212.5,95 214.4,95 216.3,95 218.1,95 220,95 221.9,95 223.8,95 225.6,95 227.5,95 229.4,95 231.3,95 233.1,95 235,95 236.9,95 238.8,95 240.6,95 242.5,95 244.4,95 246.3,95 248.1,95 250,95 251.9,95 253.8,95 255.6,95 257.5,95 259.4,95 261.3,95 263.1,95 265,95 266.9,95 268.8,95 270.6,95 272.5,95 274.4,95 276.3,95 278.1,95 280,95 281.9,95 283.8,95 285.6,95 287.5,95 289.4,95 291.3,95 293.1,95 295,95 296.9,95 298.8,95 300.6,95 302.5,95 304.4,95 306.3,95 308.1,95 310,95 311.9,95 313.8,95 315.6,95 317.5,95 319.4,95 321.3,95 323.1,95 325,95 326.9,95 328.8,95 330.6,95 332.5,95 334.4,95 336.3,95 338.1,95 340,95 341.9,95 343.8,95 345.6,95 347.5,95 349.4,95 351.3,95 353.1,95 355,95 356.9,95 358.8,95 360.6,95 362.5,95 364.4,95 366.3,95 368.1,95 370,95" style="fill:none;stroke:var(--accent);stroke-width:2.6"/><polyline points="70,245.3 71.9,244.1 73.8,242.9 75.6,241.7 77.5,240.5 79.4,239.3 81.3,238.1 83.1,236.9 85,235.7 86.9,234.5 88.8,233.4 90.6,232.2 92.5,231 94.4,229.8 96.3,228.6 98.1,227.4 100,226.2 101.9,225 103.8,223.8 105.6,222.6 107.5,221.4 109.4,220.3 111.3,219.1 113.1,217.9 115,216.7 116.9,215.5 118.8,214.3 120.6,213.1 122.5,211.9 124.4,210.7 126.3,209.5 128.1,208.3 130,207.2 131.9,206 133.8,204.8 135.6,203.6 137.5,202.4 139.4,201.2 141.3,200 143.1,198.8 145,197.6 146.9,196.4 148.8,195.2 150.6,194.1 152.5,192.9 154.4,191.7 156.3,190.5 158.1,189.3 160,188.1 161.9,186.9 163.8,185.7 165.6,184.5 167.5,183.3 169.4,182.2 171.3,181 173.1,179.8 175,178.6 176.9,177.4 178.8,176.2 180.6,175 182.5,173.8 184.4,172.6 186.3,171.4 188.1,170.2 190,169.1 191.9,167.9 193.8,166.7 195.6,165.5 197.5,164.3 199.4,163.1 201.3,161.9 203.1,160.7 205,159.5 206.9,158.3 208.8,157.1 210.6,156 212.5,154.8 214.4,153.6 216.3,152.4 218.1,151.2 220,150 221.9,148.8 223.8,147.6 225.6,146.4 227.5,145.2 229.4,144 231.3,142.9 233.1,141.7 235,140.5 236.9,139.3 238.8,138.1 240.6,136.9 242.5,135.7 244.4,134.5 246.3,133.3 248.1,132.1 250,130.9 251.9,129.8 253.8,128.6 255.6,127.4 257.5,126.2 259.4,125 261.3,123.8 263.1,122.6 265,121.4 266.9,120.2 268.8,119 270.6,117.8 272.5,116.7 274.4,115.5 276.3,114.3 278.1,113.1 280,111.9 281.9,110.7 283.8,109.5 285.6,108.3 287.5,107.1 289.4,105.9 291.3,104.8 293.1,103.6 295,102.4 296.9,101.2 298.8,100 300.6,98.8 302.5,97.6 304.4,96.4 306.3,95.2 308.1,94 310,92.8 311.9,91.7 313.8,90.5 315.6,89.3 317.5,88.1 319.4,86.9 321.3,85.7 323.1,84.5 325,83.3 326.9,82.1 328.8,80.9 330.6,79.7 332.5,78.6 334.4,77.4 336.3,76.2 338.1,75 340,73.8 341.9,72.6 343.8,71.4 345.6,70.2 347.5,69 349.4,67.8 351.3,66.6 353.1,65.5 355,64.3 356.9,63.1 358.8,61.9 360.6,60.7 362.5,59.5 364.4,58.3 366.3,57.1 368.1,55.9 370,54.7" style="fill:none;stroke:var(--thm);stroke-width:2.6"/><polyline points="70,27 71.9,31.6 73.8,36.1 75.6,40.6 77.5,45 79.4,49.4 81.3,53.6 83.1,57.9 85,62.1 86.9,66.2 88.8,70.3 90.6,74.3 92.5,78.2 94.4,82.1 96.3,85.9 98.1,89.7 100,93.4 101.9,97.1 103.8,100.7 105.6,104.2 107.5,107.7 109.4,111.2 111.3,114.5 113.1,117.8 115,121.1 116.9,124.3 118.8,127.4 120.6,130.5 122.5,133.6 124.4,136.5 126.3,139.4 128.1,142.3 130,145.1 131.9,147.8 133.8,150.5 135.6,153.1 137.5,155.7 139.4,158.2 141.3,160.6 143.1,163 145,165.4 146.9,167.7 148.8,169.9 150.6,172 152.5,174.1 154.4,176.2 156.3,178.2 158.1,180.1 160,182 161.9,183.8 163.8,185.5 165.6,187.3 167.5,188.9 169.4,190.5 171.3,192 173.1,193.5 175,194.9 176.9,196.2 178.8,197.5 180.6,198.8 182.5,200 184.4,201.1 186.3,202.2 188.1,203.2 190,204.1 191.9,205 193.8,205.8 195.6,206.6 197.5,207.3 199.4,208 201.3,208.6 203.1,209.2 205,209.6 206.9,210.1 208.8,210.5 210.6,210.8 212.5,211 214.4,211.2 216.3,211.4 218.1,211.5 220,211.5 221.9,211.5 223.8,211.4 225.6,211.2 227.5,211 229.4,210.8 231.3,210.5 233.1,210.1 235,209.6 236.9,209.2 238.8,208.6 240.6,208 242.5,207.3 244.4,206.6 246.3,205.8 248.1,205 250,204.1 251.9,203.2 253.8,202.2 255.6,201.1 257.5,200 259.4,198.8 261.3,197.5 263.1,196.2 265,194.9 266.9,193.5 268.8,192 270.6,190.5 272.5,188.9 274.4,187.3 276.3,185.5 278.1,183.8 280,182 281.9,180.1 283.8,178.2 285.6,176.2 287.5,174.1 289.4,172 291.3,169.9 293.1,167.7 295,165.4 296.9,163 298.8,160.6 300.6,158.2 302.5,155.7 304.4,153.1 306.3,150.5 308.1,147.8 310,145.1 311.9,142.3 313.8,139.4 315.6,136.5 317.5,133.6 319.4,130.5 321.3,127.4 323.1,124.3 325,121.1 326.9,117.8 328.8,114.5 330.6,111.2 332.5,107.7 334.4,104.2 336.3,100.7 338.1,97.1 340,93.4 341.9,89.7 343.8,85.9 345.6,82.1 347.5,78.2 349.4,74.3 351.3,70.3 353.1,66.2 355,62.1 356.9,57.9 358.8,53.6 360.6,49.4 362.5,45 364.4,40.6 366.3,36.1 368.1,31.6 370,27" style="fill:none;stroke:var(--ex);stroke-width:2.6"/><line x1="64" y1="95" x2="70" y2="95" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><text class="t" x="60" y="99" style="text-anchor:end">1</text><text class="tt" x="420" y="50" style="fill:var(--accent)">青  v′₁ = 1</text><text class="tt" x="420" y="76" style="fill:var(--thm)">橙  v′₂ = √3 x</text><text class="tt" x="420" y="102" style="fill:var(--ex)">緑  v′₃ = (3√5/2)(x² − 1/3)</text><text class="tm" x="420" y="140">⟨f,g⟩ = ½∫₋₁¹ f(x) g(x) dx</text><text class="tm" x="420" y="160">について、たがいに直交し、</text><text class="tm" x="420" y="180">長さ 1(正規直交)</text></svg>
+      <figcaption>正規直交化した3つの多項式。$-1\le x\le1$ の上で「直交」している($\frac12\int$ の積がすべて 0)。</figcaption>
+    </figure>
+    <div class="box intuit">
+      <div class="label">直感で理解する:関数どうしの「直交」</div>
+      <p>関数 $f$ を「$x$ ごとに値 $f(x)$ が並んだ、とても長いベクトル」とみなすと、内積 $\frac12\int fg$ は「成分ごとに掛けて足す」の連続版です。$1$ と $x$ が直交するのは、$x$ が左半分で負、右半分で正になって、掛けて足すと打ち消し合うから。$x^2-\frac13$ は、$1$ との内積が 0 になるように、平均を 0 にずらした放物線です。</p>
+    </div>
+    <div class="box supp"><div class="label">板書にない補足:ルジャンドル多項式</div>
+      <p>同じ直交化を $1,x,x^2,x^3,\dots$ と続けると、<b>ルジャンドル多項式</b>(の定数倍)が順に出てきます($P_0=1,\ P_1=x,\ P_2=\frac12(3x^2-1),\ \dots$。上の $v_3'$ は $\sqrt5P_2$)。物理(電磁気の多重極展開、量子力学)にもよく出てきます。</p></div>
+
+    <!-- ===================== 5 ===================== -->
+    <h2 id="s5">5. 行列式の動機:面積と体積 <span class="page-tag">板書 p.10–12(§2.1)</span></h2>
+    <p>板書:「§2 行列式。2.1 Motivation。$n\times n$ 行列 $A$ に対して $\det A$ という値を定める。」</p>
+    <ul>
+      <li>$1\times1$:$\det(a)=a$。</li>
+      <li>$2\times2$:$\det\begin{pmatrix}a&b\\c&d\end{pmatrix}=ad-bc$。</li>
+      <li>$3\times3$:<b>サラスの方法</b>。$\det(a_{ij})=a_{11}a_{22}a_{33}+a_{12}a_{23}a_{31}+a_{13}a_{21}a_{32}-a_{13}a_{22}a_{31}-a_{11}a_{23}a_{32}-a_{12}a_{21}a_{33}$。</li>
+    </ul>
+    <figure class="fig">
+      <svg viewBox="0 0 640 200" width="640" role="img" aria-label="サラスの方法"><line x1="70" y1="50" x2="190" y2="162" style="stroke:var(--thm);stroke-width:2;opacity:.75"/><line x1="190" y1="50" x2="70" y2="162" style="stroke:var(--accent);stroke-width:2;opacity:.75;stroke-dasharray:6 4"/><line x1="130" y1="50" x2="250" y2="162" style="stroke:var(--thm);stroke-width:2;opacity:.75"/><line x1="250" y1="50" x2="130" y2="162" style="stroke:var(--accent);stroke-width:2;opacity:.75;stroke-dasharray:6 4"/><line x1="190" y1="50" x2="310" y2="162" style="stroke:var(--thm);stroke-width:2;opacity:.75"/><line x1="310" y1="50" x2="190" y2="162" style="stroke:var(--accent);stroke-width:2;opacity:.75;stroke-dasharray:6 4"/><text class="tj" x="70" y="66" style="text-anchor:middle">a₁₁</text><text class="tj" x="130" y="66" style="text-anchor:middle">a₁₂</text><text class="tj" x="190" y="66" style="text-anchor:middle">a₁₃</text><text class="tj" x="250" y="66" style="text-anchor:middle;fill:var(--muted)">a₁₁</text><text class="tj" x="310" y="66" style="text-anchor:middle;fill:var(--muted)">a₁₂</text><text class="tj" x="70" y="112" style="text-anchor:middle">a₂₁</text><text class="tj" x="130" y="112" style="text-anchor:middle">a₂₂</text><text class="tj" x="190" y="112" style="text-anchor:middle">a₂₃</text><text class="tj" x="250" y="112" style="text-anchor:middle;fill:var(--muted)">a₂₁</text><text class="tj" x="310" y="112" style="text-anchor:middle;fill:var(--muted)">a₂₂</text><text class="tj" x="70" y="158" style="text-anchor:middle">a₃₁</text><text class="tj" x="130" y="158" style="text-anchor:middle">a₃₂</text><text class="tj" x="190" y="158" style="text-anchor:middle">a₃₃</text><text class="tj" x="250" y="158" style="text-anchor:middle;fill:var(--muted)">a₃₁</text><text class="tj" x="310" y="158" style="text-anchor:middle;fill:var(--muted)">a₃₂</text><line x1="220" y1="44" x2="220" y2="168" style="stroke:var(--muted);stroke-width:1.1;stroke-dasharray:5 4;fill:none"/><text class="tt" x="380" y="50" style="fill:var(--thm)">右下がり(橙・実線):＋</text><text class="tt" x="380" y="76" style="fill:var(--accent)">左下がり(青・破線):−</text><text class="tm" x="380" y="116">灰色:1・2列目を右に書き足したもの</text><text class="tm" x="380" y="150">3×3 だけの覚え方。</text><text class="tm" x="380" y="170" style="fill:var(--thm)">4×4 以上では成り立たない!</text></svg>
+      <figcaption>サラスの方法。右下がりの3つの積を足し、左下がりの3つの積を引く(板書では赤と青で色分け)。</figcaption>
+    </figure>
+    <p>板書 p.11:2次元では、$(a,c)$、$(b,d)$ の作る平行四辺形の面積が $|ad-bc|=|\det|$。3次元でも、$0,v_1,v_2,v_3,v_1+v_2,v_1+v_3,v_2+v_3,v_1+v_2+v_3$ を頂点とする<b>平行六面体</b>の体積が $|\det(a_{ij})|$ になる。</p>
+    <figure class="fig">
+      <svg viewBox="0 0 640 240" width="640" role="img" aria-label="平行四辺形の面積と平行六面体の体積"><line x1="50" y1="200" x2="290" y2="200" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><line x1="60" y1="210" x2="60" y2="30" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><polygon points="60,200 195,155 240,47 105,92" style="fill:var(--accent);fill-opacity:.18;stroke:var(--accent);stroke-width:1.6"/><line x1="60" y1="200" x2="187" y2="157.7" style="stroke:var(--thm);stroke-width:2.8;fill:none"/><polygon points="195,155 187.9,162 185.1,153.7" style="fill:var(--thm)"/><text class="tt" x="201" y="169" style="fill:var(--thm)">(a, c)</text><line x1="60" y1="200" x2="101.8" y2="99.8" style="stroke:var(--ex);stroke-width:2.8;fill:none"/><polygon points="105,92 105.6,102 97.5,98.6" style="fill:var(--ex)"/><text class="tt" x="97" y="86" style="text-anchor:end;fill:var(--ex)">(b, d)</text><text class="tj" x="130" y="140">面積 = |ad − bc|</text><polygon points="407.1,104.8 508.3,95.6 564,66.6 462.8,75.8" style="fill:var(--accent);fill-opacity:.12;stroke:none"/><polygon points="481.2,190.8 536.9,161.8 564,66.6 508.3,95.6" style="fill:var(--accent);fill-opacity:.18;stroke:none"/><line x1="380" y1="200" x2="481.2" y2="190.8" style="stroke:var(--accent);stroke-width:1.4"/><line x1="380" y1="200" x2="435.7" y2="171" style="stroke:var(--accent);stroke-width:1.4"/><line x1="380" y1="200" x2="407.1" y2="104.8" style="stroke:var(--accent);stroke-width:1.4"/><line x1="481.2" y1="190.8" x2="536.9" y2="161.8" style="stroke:var(--accent);stroke-width:1.4"/><line x1="481.2" y1="190.8" x2="508.3" y2="95.6" style="stroke:var(--accent);stroke-width:1.4"/><line x1="435.7" y1="171" x2="536.9" y2="161.8" style="stroke:var(--accent);stroke-width:1.4"/><line x1="435.7" y1="171" x2="462.8" y2="75.8" style="stroke:var(--accent);stroke-width:1.4"/><line x1="407.1" y1="104.8" x2="508.3" y2="95.6" style="stroke:var(--accent);stroke-width:1.4"/><line x1="407.1" y1="104.8" x2="462.8" y2="75.8" style="stroke:var(--accent);stroke-width:1.4"/><line x1="536.9" y1="161.8" x2="564" y2="66.6" style="stroke:var(--accent);stroke-width:1.4"/><line x1="508.3" y1="95.6" x2="564" y2="66.6" style="stroke:var(--accent);stroke-width:1.4"/><line x1="462.8" y1="75.8" x2="564" y2="66.6" style="stroke:var(--accent);stroke-width:1.4"/><line x1="380" y1="200" x2="472.8" y2="191.6" style="stroke:var(--thm);stroke-width:2.6;fill:none"/><polygon points="481.2,190.8 472.6,196 471.8,187.2" style="fill:var(--thm)"/><line x1="380" y1="200" x2="428.2" y2="174.9" style="stroke:var(--ex);stroke-width:2.6;fill:none"/><polygon points="435.7,171 429.7,179.1 425.6,171.3" style="fill:var(--ex)"/><line x1="380" y1="200" x2="404.8" y2="112.9" style="stroke:var(--text);stroke-width:2.6;fill:none"/><polygon points="407.1,104.8 408.9,114.6 400.4,112.2" style="fill:var(--text)"/><text class="t" x="475.2" y="210.8" style="fill:var(--thm)">v₁</text><text class="t" x="443.7" y="185" style="fill:var(--ex)">v₂</text><text class="t" x="389.1" y="104.8">v₃</text><text class="tj" x="370" y="30">体積 = |det(v₁ v₂ v₃)|</text></svg>
+      <figcaption>左:平行四辺形の面積 $|ad-bc|$。右:$v_1,v_2,v_3$ の作る平行六面体の体積 $|\det(v_1\ v_2\ v_3)|$。</figcaption>
+    </figure>
+    <p>板書 p.12:「$n$ 次元でも、平行六面体の体積に符号をつけたものの高次元化が行列式になる。→ <b>重積分の変数変換公式</b>に行列式が出てくる。」</p>
+    <div class="box supp"><div class="label">板書の注意(p.12)</div>
+      <p>$4\times4$ 以上の行列では、サラスの方法を単純に一般化したもの(右下がりの積の和 − 左下がりの積の和)は、行列式に<b>ならない</b>。(4×4 の行列式は 24 項の和ですが、サラス流では 8 項しかありません。)だから、きちんとした定義が必要になります。</p></div>
+
+    <!-- ===================== 6 ===================== -->
+    <h2 id="s6">6. 置換と符号 <span class="page-tag">板書 p.13–14(§2.2)</span></h2>
+    <p>板書:「2.2 行列式の定義。closed な式で、具体的に定義する。」まず、行列式の定義に使う「置換」を準備します。</p>
+    <div class="box def">
+      <div class="label">定義 2.2.1(置換)</div>
+      <p>全単射 $\sigma:\{1,\dots,n\}\to\{1,\dots,n\}$ を<b>置換</b>(permutation)という。置換全体の集合を $\mathfrak S_n$ と書く。$\sigma_1,\sigma_2\in\mathfrak S_n$ の積を合成 $(\sigma_1\sigma_2)(l)=\sigma_1(\sigma_2(l))$ で定める。</p>
+    </div>
+    <p>例:$n=3$ なら $\mathfrak S_3$ は $1,2,3$ の並べ替え全部で、$3!=6$ 個。一般に $\mathfrak S_n$ は $n!$ 個。</p>
+    <div class="box def">
+      <div class="label">定義 2.2.2(互換)</div>
+      <p>$1\le i\lt j\le n$ に対し、<b>互換</b>(transposition)$(i,j)\in\mathfrak S_n$ を、$(i,j)(i)=j$、$(i,j)(j)=i$、$(i,j)(l)=l$($l\ne i,j$)で定める(「$i$ と $j$ だけを入れかえる」)。</p>
+    </div>
+    <div class="box thm">
+      <div class="label">定理 2.2.3(証明は省略)</div>
+      <p>(1) $\mathfrak S_n$ のすべての元は、いくつかの互換の合成で書ける。<br>
+      (2) 偶数個の互換の合成になる $\mathfrak S_n$ の元は、決して奇数個の互換の合成にはならない。</p>
+    </div>
+    <div class="box def">
+      <div class="label">定義 2.2.4(符号)</div>
+      <p>$\sigma\in\mathfrak S_n$ に対し、$\operatorname{sgn}(\sigma)=1$($\sigma$ が偶数個の互換の合成)、$-1$(そうでないとき)。</p>
+    </div>
+    <div class="box thm">
+      <div class="label">系 2.2.5</div>
+      <p>(1) $\operatorname{sgn}(\sigma_1\sigma_2)=\operatorname{sgn}(\sigma_1)\operatorname{sgn}(\sigma_2)$。(2) $\operatorname{sgn}((i,j))=-1$。</p>
+    </div>
+    <figure class="fig">
+      <svg viewBox="0 0 520 240" width="520" role="img" aria-label="置換の例"><circle cx="60" cy="40" r="4" style="fill:var(--text)"/><text class="t" x="60" y="30" style="text-anchor:middle">1</text><circle cx="60" cy="150" r="4" style="fill:var(--text)"/><text class="t" x="60" y="172" style="text-anchor:middle">1</text><circle cx="130" cy="40" r="4" style="fill:var(--text)"/><text class="t" x="130" y="30" style="text-anchor:middle">2</text><circle cx="130" cy="150" r="4" style="fill:var(--text)"/><text class="t" x="130" y="172" style="text-anchor:middle">2</text><circle cx="200" cy="40" r="4" style="fill:var(--text)"/><text class="t" x="200" y="30" style="text-anchor:middle">3</text><circle cx="200" cy="150" r="4" style="fill:var(--text)"/><text class="t" x="200" y="172" style="text-anchor:middle">3</text><line x1="60" y1="46" x2="125.1" y2="135.2" style="stroke:var(--accent);stroke-width:2;fill:none"/><polygon points="130,142 121.1,137.3 128.3,132.1" style="fill:var(--accent)"/><line x1="130" y1="46" x2="64.9" y2="135.2" style="stroke:var(--accent);stroke-width:2;fill:none"/><polygon points="60,142 61.7,132.1 68.9,137.3" style="fill:var(--accent)"/><line x1="200" y1="46" x2="200" y2="133.6" style="stroke:var(--accent);stroke-width:2;fill:none"/><polygon points="200,142 195.6,133 204.4,133" style="fill:var(--accent)"/><text class="tt" x="130" y="200" style="text-anchor:middle">互換 (1, 2)</text><text class="tm" x="130" y="222" style="text-anchor:middle">sgn = −1</text><circle cx="290" cy="40" r="4" style="fill:var(--text)"/><text class="t" x="290" y="30" style="text-anchor:middle">1</text><circle cx="290" cy="150" r="4" style="fill:var(--text)"/><text class="t" x="290" y="172" style="text-anchor:middle">1</text><circle cx="360" cy="40" r="4" style="fill:var(--text)"/><text class="t" x="360" y="30" style="text-anchor:middle">2</text><circle cx="360" cy="150" r="4" style="fill:var(--text)"/><text class="t" x="360" y="172" style="text-anchor:middle">2</text><circle cx="430" cy="40" r="4" style="fill:var(--text)"/><text class="t" x="430" y="30" style="text-anchor:middle">3</text><circle cx="430" cy="150" r="4" style="fill:var(--text)"/><text class="t" x="430" y="172" style="text-anchor:middle">3</text><line x1="290" y1="46" x2="355.1" y2="135.2" style="stroke:var(--accent);stroke-width:2;fill:none"/><polygon points="360,142 351.1,137.3 358.3,132.1" style="fill:var(--accent)"/><line x1="360" y1="46" x2="425.1" y2="135.2" style="stroke:var(--accent);stroke-width:2;fill:none"/><polygon points="430,142 421.1,137.3 428.3,132.1" style="fill:var(--accent)"/><line x1="430" y1="46" x2="296.9" y2="137.2" style="stroke:var(--accent);stroke-width:2;fill:none"/><polygon points="290,142 294.9,133.3 299.9,140.5" style="fill:var(--accent)"/><text class="tt" x="360" y="200" style="text-anchor:middle">σ:1→2, 2→3, 3→1</text><text class="tm" x="360" y="222" style="text-anchor:middle">= (1,3)(1,2) 互換2個 → sgn = +1</text></svg>
+      <figcaption>置換を「上の番号を下の番号へ移す矢印」で描いた図。互換は2本の線が1回交差。$\sigma=(1\,2\,3\to2\,3\,1)$ は互換2個の合成で、符号 $+1$。</figcaption>
+    </figure>
+    <div class="box intuit">
+      <div class="label">直感で理解する:並べ替えの「偶奇」</div>
+      <p>カードを並べ替えるのに、「2枚を入れかえる」操作を何回使うかを数えます。回数は手順によって変わりますが、<b>偶数か奇数かは変わらない</b>、というのが定理2.2.3 (2) です(図で、線の交差の数の偶奇が、描き方によらないのと同じ)。符号は「偶数回なら $+1$、奇数回なら $-1$」。</p>
+    </div>
+    <div class="box ex"><div class="label">例:$\mathfrak S_3$ の6つの置換</div>
+      <p>恒等置換($\operatorname{sgn}=+1$)、互換 $(1,2),(1,3),(2,3)$($-1$)、巡回 $1\to2\to3\to1$ と $1\to3\to2\to1$(互換2個で $+1$)。$+1$ が3つ、$-1$ が3つ。</p></div>
+
+    <!-- ===================== 7 ===================== -->
+    <h2 id="s7">7. 行列式の定義 <span class="page-tag">板書 p.15–16</span></h2>
+    <div class="box def">
+      <div class="label">定義 2.2.6(行列式)</div>
+      <p>$A=(a_{ij})\in M_n(\mathbb C)$ に対し、
+      $$\det A=\sum_{\sigma\in\mathfrak S_n}\operatorname{sgn}(\sigma)\,a_{1\sigma(1)}a_{2\sigma(2)}\cdots a_{n\sigma(n)}.$$
+      $|A|$ と縦棒で書くこともある($\|A\|$ と書くと行列のノルムと紛らわしい)。</p>
+    </div>
+    <p><b>意味:</b>各行から1つずつ、しかも<b>列がかぶらないように</b>成分を選んで掛け、符号をつけて足す。列の選び方 = 置換 $\sigma$($i$ 行目からは $\sigma(i)$ 列目を選ぶ)。</p>
+    <div class="box ex"><div class="label">$n=2$ で確かめ</div>
+      <p>$\mathfrak S_2=\{\mathrm{id},(1,2)\}$。$\mathrm{id}$:$a_{11}a_{22}$(符号 $+$)、$(1,2)$:$a_{12}a_{21}$(符号 $-$)。$\det A=a_{11}a_{22}-a_{12}a_{21}=ad-bc$ ✓。$n=3$ では6項になり、サラスの方法と一致します。</p></div>
+    <p>板書 p.16:すぐわかること。対角行列では
+    $$\det\begin{pmatrix}a_1&&0\\&\ddots&\\0&&a_n\end{pmatrix}=a_1a_2\cdots a_n.$$
+    (恒等置換以外では、対角でない成分(=0)を必ず1つ選ぶので、その項は 0。)特に
+    $$(\mathrm I)\qquad\det I_n=1.$$</p>
+    <p><b>直感:</b> 対角行列は、$x_i$ 軸方向を $a_i$ 倍にのばす変換。単位立方体は、辺の長さ $a_1,\dots,a_n$ の直方体になり、体積は $a_1\cdots a_n$。</p>
+
+    <!-- ===================== 8 ===================== -->
+    <h2 id="s8">8. 多重線形性 <span class="page-tag">板書 p.17–18(§2.3)</span></h2>
+    <div class="box thm">
+      <div class="label">定理 2.3.1(多重線形性、multilinearity)</div>
+      <p>$n\times n$ 行列で、$1\le i\le n$ とする。<br>
+      (ML1) 第 $i$ 行が $a+b$(行ベクトルの和)なら
+      $$\det\begin{pmatrix}\vdots\\a+b\\\vdots\end{pmatrix}=\det\begin{pmatrix}\vdots\\a\\\vdots\end{pmatrix}+\det\begin{pmatrix}\vdots\\b\\\vdots\end{pmatrix}.$$
+      (ML2) 第 $i$ 行を $\lambda$ 倍すると $\det$ も $\lambda$ 倍:$\det\begin{pmatrix}\vdots\\\lambda a\\\vdots\end{pmatrix}=\lambda\det\begin{pmatrix}\vdots\\a\\\vdots\end{pmatrix}$。<br>
+      (他の行は、すべて共通。)</p>
+    </div>
+    <div class="box supp"><div class="label">板書にない補足:定義からの証明</div>
+      <p>定義の各項 $a_{1\sigma(1)}\cdots a_{n\sigma(n)}$ には、第 $i$ 行の成分がちょうど1つ($a_{i\sigma(i)}$)だけ掛かっています。第 $i$ 行が $a+b$ なら $a_{i\sigma(i)}=a_{\sigma(i)}+b_{\sigma(i)}$ で、各項が2つに分かれ、和全体も2つの行列式の和になる((ML1))。$\lambda a$ なら各項が $\lambda$ 倍((ML2))。</p></div>
+    <div class="box intuit">
+      <div class="label">直感で理解する:1辺をのばすと体積ものびる</div>
+      <p>行列式は、行ベクトルの作る平行六面体の(符号つき)体積。1つの辺を $\lambda$ 倍にのばせば、体積も $\lambda$ 倍((ML2))。1つの辺を $a+b$ にすると、平行六面体を2つに「ずらして積み重ねた」形になって、体積も和になる((ML1))。</p>
+    </div>
+    <div class="box thm">
+      <div class="label">系 2.3.2</div>
+      <p>$A$ が 0 だけからなる行をもつならば、$\det A=0$。</p>
+    </div>
+    <div class="box proof"><div class="label">証明(板書 p.18)</div>
+      <p>0 だけの行は $0\cdot(0,\dots,0)$ と書ける。(ML2) で $\lambda=0$ とすると、$\det A=0\cdot\det A=0$。 $\square$</p></div>
+    <p><b>直感:</b> 辺の1本が長さ 0 の平行六面体は、ぺちゃんこで体積 0。</p>
+
+    <!-- ===================== 9 ===================== -->
+    <h2 id="s9">9. 具体例で練習(板書にない補足) <span class="page-tag">補足</span></h2>
+    <div class="box ex"><div class="label">問題 A:シュミットの直交化</div>
+      <p>$\R^3$ の標準内積で、$(1,1,0),(1,0,1),(0,1,1)$ を直交化せよ。</p></div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>$v_1'=\frac1{\sqrt2}(1,1,0)$。$(1,0,1)-\frac1{\sqrt2}\cdot\frac1{\sqrt2}(1,1,0)=(\frac12,-\frac12,1)$、長さ $\sqrt{\frac32}$、$v_2'=\frac1{\sqrt6}(1,-1,2)$。$(0,1,1)$ から:$\langle\cdot,v_1'\rangle=\frac1{\sqrt2}$、$\langle\cdot,v_2'\rangle=\frac1{\sqrt6}$。$(0,1,1)-\frac12(1,1,0)-\frac16(1,-1,2)=(-\frac23,\frac23,\frac23)$、長さ $\frac2{\sqrt3}$、$v_3'=\frac1{\sqrt3}(-1,1,1)$。確かめ:3つは直交 ✓。</p></div>
+    <div class="box ex"><div class="label">問題 B:置換の符号</div>
+      <p>$\sigma\in\mathfrak S_4$ を $\sigma(1)=2,\ \sigma(2)=3,\ \sigma(3)=4,\ \sigma(4)=1$ とする。$\operatorname{sgn}\sigma$ を求めよ。</p></div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>$\sigma=(1,2)(2,3)(3,4)$ と確かめられる(右の互換から順に作用させる。たとえば $4$ は $(3,4)$ で $3$、$(2,3)$ で $2$、$(1,2)$ で $1$ へ。同様に $1\mapsto2$、$2\mapsto3$、$3\mapsto4$)。互換3個なので $\operatorname{sgn}\sigma=-1$。(一般に、長さ $k$ の巡回置換は互換 $k-1$ 個の積で、符号 $(-1)^{k-1}$。)</p></div>
+    <div class="box ex"><div class="label">問題 C:サラスの方法</div>
+      <p>$\det\begin{pmatrix}1&2&0\\0&1&3\\2&0&1\end{pmatrix}$ を求めよ。</p></div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>$1\cdot1\cdot1+2\cdot3\cdot2+0\cdot0\cdot0-0\cdot1\cdot2-1\cdot3\cdot0-2\cdot0\cdot1=1+12=13$。</p></div>
+
+    <!-- ===================== 10 ===================== -->
+    <h2 id="s10">10. まとめ(この回で覚えること)</h2>
+    <ul>
+      <li>正規直交な $n$ 個のベクトルは一次独立($a_i=\langle\sum a_jv_j,v_i\rangle$)。$n$ 次元空間の基底になる。</li>
+      <li>直交化の計算:$(1,0,0),(1,1,1),(1,0,1)\to(1,0,0),\frac1{\sqrt2}(0,1,1),\frac1{\sqrt2}(0,-1,1)$。多項式:$1,\sqrt3x,\frac{3\sqrt5}2(x^2-\frac13)$。</li>
+      <li>行列式 = 平行六面体の符号つき体積の一般化。4×4 以上にサラスの方法は使えない。</li>
+      <li>置換・互換・符号:$\operatorname{sgn}$ は互換の個数の偶奇。$\operatorname{sgn}(\sigma_1\sigma_2)=\operatorname{sgn}\sigma_1\operatorname{sgn}\sigma_2$。</li>
+      <li>$\det A=\sum_{\sigma}\operatorname{sgn}(\sigma)a_{1\sigma(1)}\cdots a_{n\sigma(n)}$。$\det I_n=1$、対角行列は対角成分の積。</li>
+      <li>多重線形性 (ML1)(ML2)。0 だけの行があれば $\det=0$。</li>
+    </ul>
+
+    <!-- ===================== 11 ===================== -->
+    <h2 id="s11">11. この回のノートについてのメモ</h2>
+    <p>板書は手書きの iPad ノートで、ページ番号がありません。PDF の順に数え、表紙を p.1 としました(p.1〜p.18)。板書の画像はこのサイトには載せていません。黄色の枠・基礎ページ・練習問題は、Claude が書き足したものです。</p>
+    <ol>
+      <li><b>一次独立の証明(p.3)</b>:板書は $0=\langle v_i,\ a_1v_1+\cdots+a_nv_n\rangle=a_i\langle v_i,v_i\rangle$ と書いています。エルミート内積では第2変数から係数を出すと共役がつき、$\overline{a_i}$ になります($\overline{a_i}=0$ なら $a_i=0$ なので結論は同じ)。本文では、線形な第1変数のほうに和を置いて計算しました。</li>
+      <li><b>直交化の手順の添字(p.4)</b>:板書の「$v_{k+1}^\star=v_k-\sum_{i=1}^k\langle v_i',v_k\rangle v_i'$」は、$v_{k+1}^\star=v_{k+1}-\sum_{i=1}^k\langle v_{k+1},v_i'\rangle v_i'$ の書き誤りと判断しました(第2回の定理1.5.5 の証明と一致させた)。エルミート内積では、$\langle v_i',v_{k+1}\rangle$ と $\langle v_{k+1},v_i'\rangle$ は共役の関係なので、順番も大事です。</li>
+      <li><b>例1 の名前(p.5)</b>:求める正規直交基底を $v_1,v_2,v_3$ と書いていますが、元のベクトルと紛らわしいので、本文では $v_1',v_2',v_3'$ としました。③ の途中式で、$v_2'$ の係数 $\frac1{\sqrt2}$ と内積の $\frac1{\sqrt2}$ を掛けた $\frac12$ になっています。</li>
+      <li><b>例2 のノルムの計算(p.9)</b>:板書は $\bigl[\tfrac15-\tfrac23\cdot\tfrac13+\tfrac19\bigr]=\tfrac4{45}$(通分の途中で $\tfrac{9}{45}-\tfrac{5}{45}$ のような書き込み)。値 $\frac4{45}$ と、$v_3'=\frac{\sqrt{45}}2(x^2-\frac13)=\frac{3\sqrt5}2(x^2-\frac13)$ を確かめました。</li>
+      <li><b>定義の番号(p.14–15)</b>:符号の性質を「系2.2.5」、行列式の定義を「定義2.2.5」と、同じ番号で書いています。本文では行列式の定義を「定義2.2.6」としました(次回の板書の番号もずれているので、番号よりも内容で参照してください)。</li>
+      <li><b>定理2.3.1 の証明</b>は板書にないので、黄色の枠で補いました。</li>
+    </ol>
+
+    <nav class="pager">
+      <a href="week-02.html">← 前の週</a>
+      <a href="../index.html">一覧へ</a>
+      <a href="week-04.html">次の週 →</a>
+    </nav>
+  </main>
+
+  <footer>© Aセメまとめノート</footer>
+</body>
+</html>

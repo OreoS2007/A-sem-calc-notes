@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>第2回 グラム行列と正規直交基底 | Aセメまとめノート</title>
+  <link rel="stylesheet" href="../../assets/style.css">
+  <script defer src="../../assets/nav.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],macros:{'\\R':'\\mathbb{R}'}});window.__navReady&&window.__navReady()"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="inner">
+      <a class="site-title" href="../../index.html">Aセメまとめノート</a>
+      <span class="links"><a href="../index.html">線形代数</a><a href="../basics.html">春学期のまとめ</a><a href="../../calc/index.html">微積</a><a href="../../structchem/index.html">構造化学</a><a href="../../mech/index.html">力学A</a><a href="../../thermo/index.html">熱力学</a><a href="../../em/index.html">電磁気学</a></span>
+    </div>
+  </header>
+
+  <main class="note">
+    <h1>第2回:グラム行列と正規直交基底</h1>
+    <div class="meta">線形代数学②(東京大学 教養学部 秋学期)／板書 p.1〜p.18(板書にページ番号がないため、PDF の順に数えています)</div>
+
+    <nav class="toc">
+      <div class="toc-title">目次</div>
+      <ol start="0">
+        <li><a href="#s0">この回の全体像</a>(p.2)</li>
+        <li><a href="#s1">準備:この回で使う基礎</a>
+          <div class="sub">行列の積・転置・複素共役／内積とエルミート内積(第1回)／基底と部分空間／数学的帰納法</div></li>
+        <li><a href="#s2">グラム行列の定義</a>(§1.4、p.3)</li>
+        <li><a href="#s3">双線形形式は行列で書ける</a>(定理1.4.2、p.4–6)</li>
+        <li><a href="#s4">対称行列・エルミート行列</a>(定義1.4.3〜定理1.4.5、p.6–9)</li>
+        <li><a href="#s5">正規直交基底</a>(§1.5、p.10–12)</li>
+        <li><a href="#s6">部分空間への制限</a>(定理1.5.3、p.13)</li>
+        <li><a href="#s7">1本ずつ直交させる補題</a>(補題1.5.4、p.14–15)</li>
+        <li><a href="#s8">シュミットの直交化法</a>(定理1.5.5、p.16–18)</li>
+        <li><a href="#s9">具体例で練習</a></li>
+        <li><a href="#s10">まとめ(この回で覚えること)</a></li>
+        <li><a href="#s11">この回のノートについてのメモ</a></li>
+      </ol>
+    </nav>
+
+    <!-- ===================== 0 ===================== -->
+    <h2 id="s0">0. この回の全体像 <span class="page-tag">板書 p.2</span></h2>
+    <p>第1回で「内積」を、性質(双線形・対称・正定値)だけで抽象的に定義しました。この回は、それを<b>行列という具体物</b>に結びつけ、さらに、内積にとって最も扱いやすい基底=<b>正規直交基底</b>を、どんな基底からでも作れることを示します。</p>
+    <p>板書 p.2 には、この回の見取り図が書かれています(文字が左右反転して写っていますが、読み取れます)。</p>
+    <table class="cmp">
+      <tr><th>内積の側(抽象)</th><th></th><th>行列の側(具体)</th></tr>
+      <tr><td>双線形形式</td><td>↔</td><td>正方行列(グラム行列)</td></tr>
+      <tr><td>対称双線形形式</td><td>↔</td><td>対称行列 $A^{\mathsf T}=A$</td></tr>
+      <tr><td>内積</td><td>↔</td><td>正定値な対称行列</td></tr>
+      <tr><td>エルミート双線形形式</td><td>↔</td><td>エルミート行列 $A^{\mathsf T}=\overline A$</td></tr>
+      <tr><td>エルミート内積</td><td>↔</td><td>正定値なエルミート行列</td></tr>
+    </table>
+    <div class="box thm">
+      <div class="label">この回のゴール</div>
+      <p>① $K^n$ の(エルミート)双線形形式は、グラム行列 $A=(\langle e_i,e_j\rangle)$ を使って $\langle v,w\rangle=v^{\mathsf T}A\,\overline w$ と書ける(逆に、行列があれば形式が作れる)。<br>
+      ② 形式が対称 ⇔ グラム行列が対称行列、形式がエルミート ⇔ グラム行列がエルミート行列。<br>
+      ③ 正規直交基底:$\langle v_i,v_j\rangle=\delta_{ij}$(1 か 0)。グラム行列が単位行列になる基底のこと。<br>
+      ④ <b>シュミットの直交化法</b>:どんな基底 $v_1,\dots,v_n$ からも、「影を引いて、長さを 1 にする」操作を繰り返して、正規直交基底 $v_1',\dots,v_n'$ が作れる。</p>
+    </div>
+
+    <!-- ===================== 1 ===================== -->
+    <h2 id="s1">1. 準備:この回で使う基礎</h2>
+
+    <h3 id="w-matrix">1.1 行列の積・転置・複素共役</h3>
+    <div class="box basic">
+      <div class="label">基礎:行列の積と転置 <a class="xref-link" href="../basics.html#matrix" data-xref>→ 詳しい解説</a></div>
+      <p><b>積:</b>$m\times n$ 行列 $A$ と $n\times l$ 行列 $B$ の積 $AB$ は $m\times l$ 行列で、$(i,k)$ 成分は $\sum_{j=1}^na_{ij}b_{jk}$(「$A$ の $i$ 行目」と「$B$ の $k$ 列目」の掛け算の和)。左の列の数と右の行の数がそろっていないと掛けられない。</p>
+      <p><b>転置:</b>$A^{\mathsf T}$ は行と列を入れかえた行列($(i,j)$ 成分が $a_{ji}$)。縦ベクトル $v$ の転置 $v^{\mathsf T}$ は横ベクトル。性質:$(AB)^{\mathsf T}=B^{\mathsf T}A^{\mathsf T}$(順番が逆になる)、$(A^{\mathsf T})^{\mathsf T}=A$。</p>
+      <p><b>複素共役:</b>$\overline A$ は各成分を共役にした行列。$\overline{AB}=\overline A\,\overline B$。</p>
+      <p><b>1×1 行列は数:</b>$v^{\mathsf T}Aw$ は「$1\times n$」×「$n\times n$」×「$n\times1$」で $1\times1$ 行列。これを数と同一視する。数は転置しても同じなので $(v^{\mathsf T}Aw)^{\mathsf T}=v^{\mathsf T}Aw$。</p>
+      <p><b>直感:</b> $v^{\mathsf T}Aw$ は「$v$ と $w$ を $A$ という重みで掛け合わせて足した数」。$A=I$(単位行列)なら、ふつうの内積 $v_1w_1+\cdots+v_nw_n$ に戻ります。</p>
+    </div>
+
+    <h3 id="w-ip">1.2 内積・エルミート内積(第1回の復習)</h3>
+    <div class="box basic">
+      <div class="label">基礎:双線形・対称・正定値、エルミート <a class="xref-link" href="week-01.html#s3" data-xref>→ 第1回 3.</a><a class="xref-link" href="week-01.html#s7" data-xref>→ 第1回 7.</a></div>
+      <p>$\R$ 上:$\langle\ ,\ \rangle:V\times V\to\R$ が<b>双線形</b>(各変数について線形)なら双線形形式、さらに<b>対称</b>($\langle v,w\rangle=\langle w,v\rangle$)なら対称双線形形式、さらに<b>正定値</b>($v\ne0\Rightarrow\langle v,v\rangle\gt0$)なら内積。</p>
+      <p>$\mathbb C$ 上:第1変数について線形、第2変数について<b>共役線形</b>($\langle v,\alpha w\rangle=\bar\alpha\langle v,w\rangle$)なのが<b>エルミート双線形形式</b>(第1回の (HBL1)〜(HBL4))。<b>エルミート対称</b> $\langle w,v\rangle=\overline{\langle v,w\rangle}$ と正定値をみたせば<b>エルミート内積</b>。$\mathbb C^n$ の標準エルミート内積は $\langle v,w\rangle=\sum v_i\overline{w_i}$。ノルム $\|v\|=\sqrt{\langle v,v\rangle}$。</p>
+      <p><b>直感:</b> 第2変数に共役をつけるのは、$\langle v,v\rangle=\sum|v_i|^2$ を必ず 0 以上の実数(長さの2乗)にするため。</p>
+    </div>
+
+    <h3 id="w-basis2">1.3 基底・次元・部分空間・一次結合</h3>
+    <div class="box basic">
+      <div class="label">基礎:基底と部分空間 <a class="xref-link" href="../basics.html#basis" data-xref>→ 基底・次元</a><a class="xref-link" href="../basics.html#subsp" data-xref>→ 部分空間</a></div>
+      <p><b>基底</b> $v_1,\dots,v_n$ = 「$V$ を生成する(どのベクトルも一次結合で書ける)」+「一次独立(書き方がただ一通り)」。基底の個数が<b>次元</b>。$\dim V=n$ のとき、一次独立な $n$ 個のベクトルは自動的に基底になる。</p>
+      <p><b>部分空間</b> $W\subset V$:0 を含み、和とスカラー倍で閉じた部分。$\langle v_1,\dots,v_k\rangle_K$ は $v_1,\dots,v_k$ の一次結合全体(生成する部分空間)。</p>
+      <p><b>直感:</b> 基底は「座標軸」。正規直交基底は、その中でも「目盛りが 1 で、たがいに直角な座標軸」です。</p>
+    </div>
+
+    <h3 id="w-induction">1.4 数学的帰納法</h3>
+    <div class="box basic">
+      <div class="label">基礎:数学的帰納法 <a class="xref-link" href="../basics.html#induction" data-xref>→ 詳しい解説</a></div>
+      <p>命題 $(A_k)$($k=1,2,\dots$)をすべて示すには、(i) $(A_1)$ が正しい、(ii) $(A_k)$ が正しければ $(A_{k+1})$ も正しい、の2つを示せばよい。</p>
+      <p><b>直感:</b> ドミノ倒し。最初の1枚が倒れ、どの1枚も次の1枚を倒すなら、全部倒れる。シュミットの直交化法は「1本ずつ直交させる」手順なので、帰納法がぴったりです。</p>
+    </div>
+
+    <!-- ===================== 2 ===================== -->
+    <h2 id="s2">2. グラム行列の定義 <span class="page-tag">板書 p.3(§1.4)</span></h2>
+    <p>$K=\R$ または $\mathbb C$。$V$ を $n$ 次元 $K$-ベクトル空間とします。</p>
+    <div class="box def">
+      <div class="label">定義 1.4.1(グラム行列)</div>
+      <p>$v_1,\dots,v_n\in V$ を $V$ の基底、$\langle\ ,\ \rangle:V\times V\to K$ とする。$\langle\ ,\ \rangle$ の($v_1,\dots,v_n$ に関する)<b>グラム行列</b>を
+      $$\bigl(\langle v_i,v_j\rangle\bigr)_{\substack{1\le i\le n\\1\le j\le n}}\in M_n(K)$$
+      で定める。$V=K^n$ のときに基底を指定しなければ、<b>標準基底 $e_1,\dots,e_n$</b> についてのグラム行列とする。</p>
+    </div>
+    <p><b>意味:</b> 基底のベクトルどうしの「内積の表」です。$(i,j)$ の位置に $\langle v_i,v_j\rangle$ を書く。たとえば $\R^2$ の標準内積で $v_1=(1,0)$、$v_2=(1,1)$ なら、$\langle v_1,v_1\rangle=1$、$\langle v_1,v_2\rangle=1$、$\langle v_2,v_2\rangle=2$ なので $\begin{pmatrix}1&1\\1&2\end{pmatrix}$。</p>
+    <div class="box intuit">
+      <div class="label">直感で理解する:「掛け算九九の表」</div>
+      <p>双線形形式は、両方の変数について線形なので、基底どうしの値さえ分かれば、あとは全部「展開」して計算できます。ちょうど、九九の表があれば、どんな2桁の掛け算も筆算でできるのと同じです。グラム行列は、その「九九の表」にあたります。</p>
+    </div>
+
+    <!-- ===================== 3 ===================== -->
+    <h2 id="s3">3. 双線形形式は行列で書ける <span class="page-tag">板書 p.4–6(定理1.4.2)</span></h2>
+    <div class="box thm">
+      <div class="label">定理 1.4.2</div>
+      <p>(1) $\langle\ ,\ \rangle$ を $K^n$ 上の(エルミート)双線形形式とし、$A$ をそのグラム行列とする。このとき $v,w\in K^n$ に対して
+      $$\langle v,w\rangle=v^{\mathsf T}A\,\overline w\qquad(1\times n,\ n\times n,\ n\times1).$$
+      ただし $1\times1$ 行列と数を同一視した。$\overline w=(\overline{w_1},\dots,\overline{w_n})^{\mathsf T}$。<br>
+      (2) $A\in M_n(K)$ に対し $\langle v,w\rangle=v^{\mathsf T}A\,\overline w$($v,w\in K^n$)と定めると、$\langle\ ,\ \rangle$ は $K^n$ 上の(エルミート)双線形形式になる。</p>
+    </div>
+    <p>($K=\R$ のときは $\overline w=w$ なので、$\langle v,w\rangle=v^{\mathsf T}Aw$。)</p>
+    <div class="box proof"><div class="label">証明(板書 p.5–6)</div>
+      <p>$v=(v_1,\dots,v_n)^{\mathsf T}$、$w=(w_1,\dots,w_n)^{\mathsf T}$ とする。</p>
+      <p><b>(1)</b> $A=(\langle e_i,e_j\rangle)$ だから、$A\overline w$ の第 $i$ 成分は
+      $$\langle e_i,e_1\rangle\overline{w_1}+\cdots+\langle e_i,e_n\rangle\overline{w_n}=\langle e_i,\ w_1e_1+\cdots+w_ne_n\rangle=\langle e_i,w\rangle$$
+      (第2変数について共役線形:$\langle e_i,w_je_j\rangle=\overline{w_j}\langle e_i,e_j\rangle$)。よって
+      $$v^{\mathsf T}A\overline w=v^{\mathsf T}\begin{pmatrix}\langle e_1,w\rangle\\ \vdots\\ \langle e_n,w\rangle\end{pmatrix}=v_1\langle e_1,w\rangle+\cdots+v_n\langle e_n,w\rangle=\langle v_1e_1+\cdots+v_ne_n,\ w\rangle=\langle v,w\rangle$$
+      (第1変数について線形)。</p>
+      <p><b>(2)</b> 行列の積の分配法則と、共役の性質から:
+      $(v_1+v_2)^{\mathsf T}A\overline w=v_1^{\mathsf T}A\overline w+v_2^{\mathsf T}A\overline w$、$(\alpha v)^{\mathsf T}A\overline w=\alpha(v^{\mathsf T}A\overline w)$、
+      $v^{\mathsf T}A\,\overline{(w_1+w_2)}=v^{\mathsf T}A\overline{w_1}+v^{\mathsf T}A\overline{w_2}$、$v^{\mathsf T}A\,\overline{(\alpha w)}=\bar\alpha\,v^{\mathsf T}A\overline w$。これは(エルミート)双線形形式の条件そのもの。 $\square$</p></div>
+    <div class="box thm">
+      <div class="label">まとめ(板書 p.6 の枠)</div>
+      <p>$K^n$ 上の(エルミート)双線形形式を与えることと、$K$ 係数の $n\times n$ 行列を与えることは<b>同等</b>である。</p>
+    </div>
+    <div class="box ex"><div class="label">例</div>
+      <p>$A=\begin{pmatrix}2&1\\1&3\end{pmatrix}$ なら、$\R^2$ 上 $\langle v,w\rangle=v^{\mathsf T}Aw=2v_1w_1+v_1w_2+v_2w_1+3v_2w_2$。確かめ:$\langle e_1,e_2\rangle=1$(= $A$ の $(1,2)$ 成分)、$\langle e_2,e_2\rangle=3$。</p></div>
+
+    <!-- ===================== 4 ===================== -->
+    <h2 id="s4">4. 対称行列・エルミート行列 <span class="page-tag">板書 p.6–9(定義1.4.3〜定理1.4.5)</span></h2>
+    <div class="box def">
+      <div class="label">定義 1.4.3</div>
+      <p>(1) 正方行列 $A$ が<b>対称行列</b>であるとは $A^{\mathsf T}=A$ をみたすこと。<br>
+      (2) 正方行列 $A\in M_n(\mathbb C)$ が<b>エルミート行列</b>であるとは $A^{\mathsf T}=\overline A$ をみたすこと。$A^*=\overline{A}^{\mathsf T}$(<b>$A$ の随伴</b>、adjoint)と定めると、$A^*=A$ と同値。</p>
+    </div>
+    <p>例:$\begin{pmatrix}2&1\\1&3\end{pmatrix}$ は対称。$\begin{pmatrix}2&i\\-i&3\end{pmatrix}$ はエルミート(転置すると $\begin{pmatrix}2&-i\\i&3\end{pmatrix}$ で、元の共役と一致)。エルミート行列の対角成分は必ず実数($a_{ii}=\overline{a_{ii}}$)。</p>
+    <div class="box thm">
+      <div class="label">定理 1.4.4</div>
+      <p>$\R^n$ 上の双線形形式が<b>対称</b>になるための必要十分条件は、そのグラム行列が<b>実対称行列</b>になることである。</p>
+    </div>
+    <div class="box proof"><div class="label">証明(板書 p.8)</div>
+      <p>(⇒) 対称なら $\langle e_i,e_j\rangle=\langle e_j,e_i\rangle$。これはグラム行列の $(i,j)$ 成分と $(j,i)$ 成分が等しいということなので、グラム行列は対称。<br>
+      (⇐) $A^{\mathsf T}=A$ とすると、$1\times1$ 行列は転置しても変わらないので
+      $$\langle v,w\rangle=v^{\mathsf T}Aw=(v^{\mathsf T}Aw)^{\mathsf T}=w^{\mathsf T}A^{\mathsf T}(v^{\mathsf T})^{\mathsf T}=w^{\mathsf T}Av=\langle w,v\rangle.\ \square$$</p></div>
+    <div class="box thm">
+      <div class="label">定理 1.4.5</div>
+      <p>$\langle\ ,\ \rangle:\mathbb C^n\times\mathbb C^n\to\mathbb C$ が<b>エルミート</b>双線形形式(エルミート対称な、エルミート双線形形式)になるための必要十分条件は、そのグラム行列がエルミート行列になることである。</p>
+    </div>
+    <div class="box supp"><div class="label">板書にない補足:定理1.4.5 の証明</div>
+      <p>(⇒) $\langle e_j,e_i\rangle=\overline{\langle e_i,e_j\rangle}$ より $a_{ji}=\overline{a_{ij}}$、すなわち $A^{\mathsf T}=\overline A$。<br>
+      (⇐) $\langle w,v\rangle=w^{\mathsf T}A\overline v=(w^{\mathsf T}A\overline v)^{\mathsf T}=\overline v^{\mathsf T}A^{\mathsf T}w=\overline v^{\mathsf T}\,\overline A\,w=\overline{v^{\mathsf T}A\overline w}=\overline{\langle v,w\rangle}$。</p></div>
+    <div class="box intuit">
+      <div class="label">直感で理解する:表が対角線で折り返して同じ</div>
+      <p>グラム行列は「$i$ と $j$ の内積の表」。対称な形式では「$i$ と $j$」も「$j$ と $i$」も同じ値なので、表を対角線で折り返すと同じになる(=対称行列)。エルミートのときは、折り返すと共役になる。</p>
+    </div>
+
+    <!-- ===================== 5 ===================== -->
+    <h2 id="s5">5. 正規直交基底 <span class="page-tag">板書 p.10–12(§1.5)</span></h2>
+    <p>$V$:$n$ 次元 $K$-ベクトル空間、$\langle\ ,\ \rangle$:$V$ 上の(エルミート)内積($K=\mathbb C$ のときはエルミート内積)。</p>
+    <div class="box def">
+      <div class="label">定義 1.5.1(正規直交基底、orthonormal basis)</div>
+      <p>$V$ の基底 $v_1,\dots,v_n$ が $\langle\ ,\ \rangle$ の<b>正規直交基底</b>であるとは
+      $$\langle v_i,v_j\rangle=\begin{cases}1&(i=j)\\0&(i\ne j)\end{cases}$$
+      をみたすこと。(「正規」=長さ 1、「直交」=たがいに内積 0。)</p>
+    </div>
+    <p><b>例1(板書 p.11):</b>$\langle\ ,\ \rangle$ を $K^n$ の標準(エルミート)内積とすると、標準基底 $e_1,\dots,e_n$ は正規直交基底。</p>
+    <div class="box thm">
+      <div class="label">系 1.5.2</div>
+      <p>$V$ の基底 $v_1,\dots,v_n$ が $\langle\ ,\ \rangle$ の正規直交基底になるための必要十分条件は、$\langle\ ,\ \rangle$ の $v_1,\dots,v_n$ に関するグラム行列が<b>単位行列</b>になることである。(定義をグラム行列の言葉で言い直しただけ。)</p>
+    </div>
+    <p><b>例(板書 p.12):</b>$\R^2$ の標準内積の正規直交基底として、
+    $$\begin{pmatrix}\cos\theta\\ \sin\theta\end{pmatrix},\quad\begin{pmatrix}\cos(\theta+\frac\pi2)\\ \sin(\theta+\frac\pi2)\end{pmatrix}$$
+    がとれる。(長さはどちらも $\cos^2+\sin^2=1$、内積は $\cos\theta\cos(\theta+\frac\pi2)+\sin\theta\sin(\theta+\frac\pi2)=\cos\frac\pi2=0$(加法定理)。)</p>
+    <figure class="fig">
+      <svg viewBox="0 0 600 280" width="600" role="img" aria-label="回転した正規直交基底"><line x1="40" y1="140" x2="300" y2="140" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><line x1="170" y1="15" x2="170" y2="265" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><text class="t" x="302" y="156">x</text><text class="t" x="176" y="22">y</text><circle cx="170" cy="140" r="100" style="fill:none;stroke:var(--muted);stroke-width:1.4;stroke-dasharray:5 4"/><line x1="170" y1="140" x2="249.3" y2="94.2" style="stroke:var(--accent);stroke-width:3;fill:none"/><polygon points="256.6,90 251,98.3 246.6,90.7" style="fill:var(--accent)"/><line x1="170" y1="140" x2="124.2" y2="60.7" style="stroke:var(--thm);stroke-width:3;fill:none"/><polygon points="120,53.4 128.3,59 120.7,63.4" style="fill:var(--thm)"/><path d="M200 140 A30 30 0 0 0 196 125" style="fill:none;stroke:var(--text);stroke-width:1.3"/><text class="t" x="206" y="133">θ</text><polygon points="182.1,133 175.1,120.9 163,127.9 170,140" style="fill:none;stroke:var(--text);stroke-width:1.2"/><text class="tt" x="262.6" y="92" style="fill:var(--accent)">v₁</text><text class="tt" x="112" y="49.4" style="text-anchor:end;fill:var(--thm)">v₂</text><text class="tt" x="330" y="40" style="fill:var(--accent)">v₁ = (cos θ, sin θ)</text><text class="tt" x="330" y="62" style="fill:var(--thm)">v₂ = (cos(θ+π/2), sin(θ+π/2))</text><text class="tj" x="330" y="100">長さ 1(円周の上)</text><text class="tj" x="330" y="124">たがいに直交(直角)</text><text class="tt" x="330" y="160">⟨v₁,v₁⟩ = ⟨v₂,v₂⟩ = 1</text><text class="tt" x="330" y="184">⟨v₁,v₂⟩ = 0</text><text class="tm" x="330" y="220">θ を変えると、無数にある</text></svg>
+      <figcaption>標準基底を角 $\theta$ だけ回したものも正規直交基底。正規直交基底は、ひとつではない。</figcaption>
+    </figure>
+    <div class="box supp"><div class="label">板書にない補足:正規直交基底がうれしい理由(座標が内積で求まる)</div>
+      <p>$v_1,\dots,v_n$ が正規直交基底なら、$v=a_1v_1+\cdots+a_nv_n$ の係数は $a_i=\langle v,v_i\rangle$ で計算できる(両辺と $v_i$ の内積をとると、$\langle v_j,v_i\rangle$ は $j=i$ だけ 1)。ふつうの基底では、係数を求めるのに連立方程式を解く必要があるのに比べて、とても楽です。また、長さも $\|v\|^2=|a_1|^2+\cdots+|a_n|^2$(三平方の定理)と、成分の2乗の和で計算できます。</p></div>
+
+    <!-- ===================== 6 ===================== -->
+    <h2 id="s6">6. 部分空間への制限 <span class="page-tag">板書 p.13(定理1.5.3)</span></h2>
+    <div class="box thm">
+      <div class="label">定理 1.5.3</div>
+      <p>$V$:$K$-ベクトル空間、$\langle\ ,\ \rangle$:$V$ 上の(エルミート)内積、$W\subseteq V$:部分空間とする。$\langle\ ,\ \rangle$ の $W$ への<b>制限</b> $\langle\ ,\ \rangle|_W$ を
+      $$W\times W\to K,\qquad(w_1,w_2)\mapsto\langle w_1,w_2\rangle$$
+      で定めると、これは $W$ 上の(エルミート)内積を定める。</p>
+    </div>
+    <p><b>理由:</b>双線形・(エルミート)対称・正定値は、どれも「すべての $v,w\in V$ について成り立つ」性質なので、$W$ のベクトルに限っても成り立つ。(部分空間なので、和やスカラー倍が $W$ からはみ出さないことも使う。)</p>
+    <p><b>直感:</b> 3次元空間の「長さ・角度」の測り方を、その中の平面の上で使っても、平面の上の「長さ・角度」の測り方として、ちゃんと使える、ということです。</p>
+
+    <!-- ===================== 7 ===================== -->
+    <h2 id="s7">7. 1本ずつ直交させる補題 <span class="page-tag">板書 p.14–15(補題1.5.4)</span></h2>
+    <div class="box thm">
+      <div class="label">補題 1.5.4</div>
+      <p>$V$:$K$-ベクトル空間、$v_1,\dots,v_{n+1}\in V$ は $K$ 上一次独立、$\langle\ ,\ \rangle$:$V$ 上の(エルミート)内積。$W_1=\langle v_1,\dots,v_n\rangle_K$、$W_2=\langle v_1,\dots,v_{n+1}\rangle_K$ とし、$v_1,\dots,v_n$ は $\langle\ ,\ \rangle|_{W_1}$ について正規直交基底になっているとする。そこで
+      $$v_{n+1}'=v_{n+1}-\sum_{i=1}^n\langle v_{n+1},v_i\rangle v_i,\qquad v_{n+1}''=\frac1{\|v_{n+1}'\|}v_{n+1}'$$
+      とおくと、$v_1,\dots,v_n,v_{n+1}''$ は $\langle\ ,\ \rangle|_{W_2}$ についての $W_2$ の正規直交基底になる。</p>
+    </div>
+    <figure class="fig">
+      <svg viewBox="0 0 580 250" width="580" role="img" aria-label="グラム・シュミットの直交化"><polygon points="40,210 330,210 420,150 130,150" style="fill:var(--accent);fill-opacity:.12;stroke:var(--accent);stroke-width:1.6"/><text class="tt" x="48" y="232" style="fill:var(--accent)">W₁ = ⟨v₁,…,vₙ⟩(床)</text><line x1="190" y1="190" x2="251.6" y2="195.3" style="stroke:var(--accent);stroke-width:2.4;fill:none"/><polygon points="260,196 250.7,199.6 251.4,190.8" style="fill:var(--accent)"/><text class="t" x="230" y="216" style="fill:var(--accent)">v₁</text><line x1="190" y1="190" x2="147.9" y2="174.8" style="stroke:var(--accent);stroke-width:2.4;fill:none"/><polygon points="140,172 150,170.9 147,179.2" style="fill:var(--accent)"/><text class="t" x="130" y="164" style="fill:var(--accent)">v₂</text><line x1="190" y1="190" x2="275.2" y2="66.9" style="stroke:var(--text);stroke-width:2.6;fill:none"/><polygon points="280,60 278.5,69.9 271.3,64.9" style="fill:var(--text)"/><text class="t" x="210" y="64">vₙ₊₁</text><line x1="190" y1="190" x2="271.7" y2="179.1" style="stroke:var(--ex);stroke-width:2.4;fill:none;stroke-dasharray:6 4"/><polygon points="280,178 271.7,183.6 270.5,174.8" style="fill:var(--ex)"/><text class="tm" x="270" y="200" style="fill:var(--ex)">Σ⟨vₙ₊₁,vᵢ⟩vᵢ(W₁ への影)</text><line x1="280" y1="178" x2="280" y2="68.4" style="stroke:var(--thm);stroke-width:3;fill:none"/><polygon points="280,60 284.4,69 275.6,69" style="fill:var(--thm)"/><text class="tt" x="288" y="119" style="fill:var(--thm)">v′ₙ₊₁ = vₙ₊₁ − (影)</text><polygon points="280,166 290,166 290,178" style="fill:none;stroke:var(--text);stroke-width:1.2"/><text class="tj" x="20" y="30">影(射影)を引くと、W₁ に垂直な成分が残る。</text><text class="tj" x="20" y="50">それを長さ 1 にしたものが v″ₙ₊₁。</text></svg>
+      <figcaption>$\sum\langle v_{n+1},v_i\rangle v_i$ は、$v_{n+1}$ の $W_1$ への「影」(正射影)。$v_{n+1}$ から影を引くと、$W_1$ に垂直な成分 $v_{n+1}'$ が残る。</figcaption>
+    </figure>
+    <div class="box intuit">
+      <div class="label">直感で理解する:影を引けば垂直な部分が残る</div>
+      <p>床($W_1$)の上に斜めに立てた棒($v_{n+1}$)に、真上から光を当てると、床に影ができます。棒から影を引くと、床に垂直な部分(棒の「高さ」の分)が残ります。これが $v_{n+1}'$ です。$\langle v_{n+1},v_i\rangle$ は、棒が $v_i$ 方向にどれだけ伸びているか(座標)で、正規直交基底なので、内積だけで座標が分かります(5. の補足)。</p>
+    </div>
+    <div class="box proof"><div class="label">証明(板書 p.15)</div>
+      <p><b>$v_{n+1}'\ne0$:</b>もし $0$ なら、$v_{n+1}$ が $v_1,\dots,v_n$ の一次結合になり、一次独立に反する。だから $\|v_{n+1}'\|\gt0$ で割ってよい。</p>
+      <p><b>長さ 1:</b>$\|v_{n+1}''\|=\Bigl\|\dfrac1{\|v_{n+1}'\|}v_{n+1}'\Bigr\|=\dfrac1{\|v_{n+1}'\|}\|v_{n+1}'\|=1$。</p>
+      <p><b>直交:</b>$1\le j\le n$ について(第1変数が線形なほうで計算する)
+      $$\langle v_{n+1}',v_j\rangle=\langle v_{n+1},v_j\rangle-\sum_{i=1}^n\langle v_{n+1},v_i\rangle\langle v_i,v_j\rangle=\langle v_{n+1},v_j\rangle-\langle v_{n+1},v_j\rangle=0$$
+      ($\langle v_i,v_j\rangle$ は $i=j$ のときだけ 1)。よって $\langle v_{n+1}'',v_j\rangle=0$、$\langle v_j,v_{n+1}''\rangle=\overline{0}=0$。</p>
+      <p><b>基底になる:</b>$v_{n+1}''$ は $v_1,\dots,v_{n+1}$ の一次結合で、逆に $v_{n+1}$ も $v_1,\dots,v_n,v_{n+1}''$ の一次結合なので、$v_1,\dots,v_n,v_{n+1}''$ は $W_2$ を生成する。$n+1$ 個で $\dim W_2=n+1$、しかも(次の第3回の冒頭で示すように)正規直交なベクトルは一次独立なので、基底。 $\square$</p></div>
+
+    <!-- ===================== 8 ===================== -->
+    <h2 id="s8">8. シュミットの直交化法 <span class="page-tag">板書 p.16–18(定理1.5.5)</span></h2>
+    <div class="box thm">
+      <div class="label">定理 1.5.5(シュミットの直交化法)</div>
+      <p>$V$:$n$ 次元 $K$-ベクトル空間、$v_1,\dots,v_n$:$V$ の基底、$\langle\ ,\ \rangle$:$V$ 上の(エルミート)内積。このとき、$\langle\ ,\ \rangle$ についての $V$ の正規直交基底 $v_1',\dots,v_n'$ であって、各 $1\le i\le n$ について $v_i'$ は $v_1,\dots,v_i$ の一次結合になるようなものが存在する。</p>
+    </div>
+    <div class="box proof"><div class="label">証明(板書 p.16–18)</div>
+      <p>$1\le k\le n$ に対し $W_k=\langle v_1,\dots,v_k\rangle_K$ とおく($W_n=V$)。次の命題 $(A_k)$ を $k$ についての帰納法で示す。</p>
+      <p><b>$(A_k)$</b>:$W_k$ の $\langle\ ,\ \rangle|_{W_k}$ についての正規直交基底 $v_1',\dots,v_k'$ であって、各 $1\le i\le k$ について $v_i'$ は $v_1,\dots,v_i$ の $K$ 係数一次結合になるようなものが存在する。</p>
+      <p><b>$k=1$:</b>$v_1'=\dfrac1{\|v_1\|}v_1$ とすればよい。</p>
+      <p><b>$k\to k+1$($k\lt n$):</b>$(A_k)$ が正しいとすると、補題1.5.4 より
+      $$\tilde v_{k+1}=v_{k+1}-\sum_{i=1}^k\langle v_{k+1},v_i'\rangle v_i',\qquad v_{k+1}'=\frac1{\|\tilde v_{k+1}\|}\tilde v_{k+1}$$
+      とすると、$v_1',\dots,v_k',v_{k+1}'$ は $W_{k+1}$ の正規直交基底で、定理の条件をみたす($v_{k+1}'$ は $v_{k+1}$ と $v_1',\dots,v_k'$、つまり $v_1,\dots,v_{k+1}$ の一次結合)。$k=n$ で定理が得られる。 $\square$</p></div>
+    <div class="box thm"><div class="label">手順(アルゴリズム)</div>
+      <p>① $v_1'=\dfrac{v_1}{\|v_1\|}$。<br>
+      ② $\tilde v_2=v_2-\langle v_2,v_1'\rangle v_1'$、$v_2'=\dfrac{\tilde v_2}{\|\tilde v_2\|}$。<br>
+      ③ $\tilde v_3=v_3-\langle v_3,v_1'\rangle v_1'-\langle v_3,v_2'\rangle v_2'$、$v_3'=\dfrac{\tilde v_3}{\|\tilde v_3\|}$。<br>
+      … 「それまでに作った方向の成分(影)を全部引いて、長さ 1 にする」を繰り返す。</p></div>
+    <p>(具体例は、次の第3回の板書 p.5–9 で計算されます。)</p>
+
+    <!-- ===================== 9 ===================== -->
+    <h2 id="s9">9. 具体例で練習(板書にない補足) <span class="page-tag">補足</span></h2>
+    <div class="box ex"><div class="label">問題 A:グラム行列</div>
+      <p>$\R^2$ の標準内積で、基底 $v_1=(1,1)$、$v_2=(1,-1)$ のグラム行列を求めよ。正規直交基底か。</p></div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>$\langle v_1,v_1\rangle=2$、$\langle v_1,v_2\rangle=0$、$\langle v_2,v_2\rangle=2$。グラム行列 $\begin{pmatrix}2&0\\0&2\end{pmatrix}$。直交はしているが長さが $\sqrt2$ なので、正規直交基底ではない($\frac1{\sqrt2}v_1,\frac1{\sqrt2}v_2$ にすれば正規直交)。</p></div>
+    <div class="box ex"><div class="label">問題 B:行列から内積</div>
+      <p>$A=\begin{pmatrix}1&1\\1&2\end{pmatrix}$ で $\langle v,w\rangle=v^{\mathsf T}Aw$ と定める。$\langle v,v\rangle\gt0$($v\ne0$)を示せ(この形式は内積)。</p></div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>$\langle v,v\rangle=v_1^2+2v_1v_2+2v_2^2=(v_1+v_2)^2+v_2^2\ge0$。等号は $v_2=0$ かつ $v_1+v_2=0$、すなわち $v=0$ のときだけ。対称でもあるので($A^{\mathsf T}=A$、定理1.4.4)、内積。</p></div>
+    <div class="box ex"><div class="label">問題 C:シュミットの直交化($\R^2$)</div>
+      <p>$\R^2$ の標準内積で、$v_1=(3,4)$、$v_2=(1,0)$ からシュミットの直交化法で正規直交基底を作れ。</p></div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>$v_1'=\frac15(3,4)$。$\langle v_2,v_1'\rangle=\frac35$、$\tilde v_2=(1,0)-\frac35\cdot\frac15(3,4)=(1-\frac9{25},-\frac{12}{25})=\frac1{25}(16,-12)$。$\|\tilde v_2\|=\frac{20}{25}=\frac45$。$v_2'=\frac{25}{20}\cdot\frac1{25}(16,-12)=\frac15(4,-3)$。確かめ:$\frac1{25}(12-12)=0$ ✓、長さ 1 ✓。</p></div>
+
+    <!-- ===================== 10 ===================== -->
+    <h2 id="s10">10. まとめ(この回で覚えること)</h2>
+    <ul>
+      <li><b>グラム行列</b> $(\langle v_i,v_j\rangle)$:基底どうしの内積の表。$K^n$ では $\langle v,w\rangle=v^{\mathsf T}A\overline w$。双線形形式 ↔ 正方行列。</li>
+      <li><b>対称行列</b> $A^{\mathsf T}=A$ ↔ 対称な形式。<b>エルミート行列</b> $A^*=\overline A^{\mathsf T}=A$ ↔ エルミートな形式。</li>
+      <li><b>正規直交基底</b>:$\langle v_i,v_j\rangle=\delta_{ij}$(グラム行列が単位行列)。係数が $a_i=\langle v,v_i\rangle$ で求まる。</li>
+      <li><b>内積の制限</b>:部分空間に制限しても内積。</li>
+      <li><b>シュミットの直交化</b>:$\tilde v_{k+1}=v_{k+1}-\sum_{i\le k}\langle v_{k+1},v_i'\rangle v_i'$、$v_{k+1}'=\tilde v_{k+1}/\|\tilde v_{k+1}\|$(影を引いて、長さ1)。どの有限次元内積空間にも正規直交基底がある。</li>
+    </ul>
+
+    <!-- ===================== 11 ===================== -->
+    <h2 id="s11">11. この回のノートについてのメモ</h2>
+    <p>板書は手書きの iPad ノートで、ページ番号がありません。PDF の順に数え、表紙を p.1 としました(p.1〜p.18)。板書の画像はこのサイトには載せていません。黄色の枠・基礎ページ・練習問題は、Claude が書き足したものです。</p>
+    <ol>
+      <li><b>p.2 の見取り図</b>は、文字が左右反転した状態で写っていました。反転して読み、本文の 0. の表にしました。</li>
+      <li><b>定義1.4.3 (1)(p.6)</b>:「正方行列 $A\in M_n(\mathbb C)$ が対称行列」と書かれています。対称行列は実でも複素でも定義できるので、本文では「正方行列 $A$」としました。定理1.4.4 では「実対称行列」を扱います。</li>
+      <li><b>「adjonit」(p.7)</b>は adjoint(随伴)のつづりの書き誤りと読みました。</li>
+      <li><b>定理1.4.4 の証明(p.8)</b>の「${}^{\mathsf T}A=A$ とおくと」は、$A^{\mathsf T}=A$ の意味と読みました。</li>
+      <li><b>定理1.4.5(p.9)</b>は主張だけで証明がなかったので、黄色の枠で補いました。</li>
+      <li><b>補題1.5.4(p.14)</b>:「$\langle\ ,\ \rangle$:$K$ 上のエルミート内積」は「$V$ 上の(エルミート)内積」の意味と読みました。また、$v_1,\dots,v_{n+1}$ の $n$ は、空間の次元とは別の数です。</li>
+      <li><b>補題1.5.4 の証明(p.15)</b>:板書は $\langle v_j,v_{n+1}''\rangle$ を計算し、和の中を $\langle v_{n+1},v_i\rangle\langle v_j,v_i\rangle$ としています。エルミート内積では、第2変数から係数を出すと共役がつく($\langle v_j,c\,v_i\rangle=\bar c\langle v_j,v_i\rangle$)ので、そのままでは $\overline{\langle v_{n+1},v_i\rangle}$ が正しい式です($K=\R$ なら板書のままで正しい)。本文では、線形なほうの第1変数で $\langle v_{n+1}',v_j\rangle$ を計算して、共役の問題が起きない形にしました。結論($=0$)は同じです。</li>
+      <li><b>定理1.5.5 の証明(p.17)</b>の「$\widehat{v_{k+1}}=\frac1{\|v_{k+1}\|}\tilde v_{k+1}$」は、分母が $\|\tilde v_{k+1}\|$(引いたあとのベクトルの長さ)の書き落としと読みました。また、補題の「1次独立」の仮定から $\tilde v_{k+1}\ne0$ が出ることを、本文に書き足しました。</li>
+    </ol>
+
+    <nav class="pager">
+      <a href="week-01.html">← 前の週</a>
+      <a href="../index.html">一覧へ</a>
+      <a href="week-03.html">次の週 →</a>
+    </nav>
+  </main>
+
+  <footer>© Aセメまとめノート</footer>
+</body>
+</html>

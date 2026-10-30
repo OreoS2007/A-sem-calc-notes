@@ -59,6 +59,13 @@
             <li><a href="#poly">多項式と、その零点の個数</a></li>
             <li><a href="#det">行列式の性質とブロック行列</a></li>
           </ol></li>
+        <li><b>グラム行列・行列式のための道具</b>
+          <ol type="a" start="13">
+            <li><a href="#matrix">行列の積・転置・複素共役</a></li>
+            <li><a href="#rowred">行基本変形・基本行列・行標準形</a></li>
+            <li><a href="#induction">数学的帰納法</a></li>
+            <li><a href="#area">平行四辺形の面積と 2×2 の行列式</a></li>
+          </ol></li>
       </ol>
     </nav>
 
@@ -101,7 +108,7 @@
       </svg>
       <figcaption>「内積」は、2つのベクトルを入れると実数を1つ返す機械、つまり $V\times V\to\R$ の写像です。</figcaption>
     </figure>
-    <p class="used-in">この回で使う場所:<a href="weeks/week-01.html#w-maps" data-xref>1.1 直積と写像の記号</a><a href="weeks/week-01.html#s3" data-xref>3. (抽象)内積</a></p>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-01.html#w-maps" data-xref>1.1 直積と写像の記号</a><a href="weeks/week-01.html#s3" data-xref>3. (抽象)内積</a><a href="weeks/week-03.html#w-maps3" data-xref>第3回 1.4 写像の合成と全単射</a></p>
 
     <!-- ===================== b: 複素数 ===================== -->
     <h2 id="complex">b. 複素数(共役・絶対値・極形式)</h2>
@@ -341,7 +348,7 @@
       <div class="box proof"><div class="label">証明</div>
       <p>$\sum x_iv_i=\sum y_iv_i$ とすると $\sum(x_i-y_i)v_i=0$。一次独立から $x_i-y_i=0$、つまり $x_i=y_i$。逆に、表し方が一通りなら、$0=\sum0\cdot v_i$ 以外に $\sum a_iv_i=0$ となる表し方はないので、一次独立。</p></div>
     </details>
-    <p class="used-in">この回で使う場所:<a href="weeks/week-01.html#w-basis" data-xref>1.5 基底と次元</a><a href="weeks/week-01.html#s8" data-xref>8. グラム行列</a></p>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-01.html#w-basis" data-xref>1.5 基底と次元</a><a href="weeks/week-01.html#s8" data-xref>8. グラム行列</a><a href="weeks/week-02.html#w-basis2" data-xref>第2回 1.3 基底と部分空間</a></p>
 
     <!-- ===================== f: 平面・空間の内積 ===================== -->
     <h2 id="rnip">f. 平面・空間のベクトルと内積(高校+α)</h2>
@@ -414,7 +421,7 @@
     <p><b>意味:</b> $a\gt0$ なら、$y=q(t)$ のグラフは<b>上に開いた</b>放物線(谷の形)です。「どの $t$ でも0以上」とは、グラフが $t$ 軸の下にもぐらないこと。それは「$t$ 軸と交わらない」か「ちょうど1点で接する」ことで、判別式 $D=b^2-4ac$ でいうと $D\le0$ です。</p>
 
     <figure class="fig">
-      <svg viewBox="0 0 520 195" width="520" role="img" aria-label="判別式と放物線">
+      <svg viewBox="0 0 520 205" width="520" role="img" aria-label="判別式と放物線">
         <line class="ax" x1="10" y1="120" x2="160" y2="120"/><line class="ax" x1="180" y1="120" x2="330" y2="120"/><line class="ax" x1="350" y1="120" x2="500" y2="120"/>
         <path class="cv" d="M15 40 Q80 260 145 40"/><path class="cv" d="M185 40 Q250 200 315 40"/><path class="cv" d="M355 40 Q420 140 485 40"/>
         <circle class="dot" cx="46" cy="120" r="4.5"/><circle class="dot" cx="114" cy="120" r="4.5"/><circle class="dot" cx="250" cy="120" r="4.5"/>
@@ -482,7 +489,7 @@
 
     <h3>よく使う積分</h3>
     <p>$\displaystyle\int_0^1x^k\,dx=\frac{1}{k+1}$($k=0,1,2,\dots$)。すなわち $\int_0^11\,dx=1,\ \int_0^1x\,dx=\tfrac12,\ \int_0^1x^2dx=\tfrac13,\ \int_0^1x^3dx=\tfrac14$。</p>
-    <p class="used-in">この回で使う場所:<a href="weeks/week-01.html#w-intpos" data-xref>1.8 連続関数の積分</a><a href="weeks/week-01.html#s3" data-xref>3. (抽象)内積</a><a href="weeks/week-01.html#s9" data-xref>9. 具体例で練習</a></p>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-01.html#w-intpos" data-xref>1.8 連続関数の積分</a><a href="weeks/week-01.html#s3" data-xref>3. (抽象)内積</a><a href="weeks/week-01.html#s9" data-xref>9. 具体例で練習</a><a href="weeks/week-03.html#w-polyint" data-xref>第3回 1.2 多項式の積分</a><a href="weeks/week-03.html#s4" data-xref>第3回 4. 多項式の空間の直交化</a></p>
 
     <!-- ===================== i: 部分空間 ===================== -->
     <h2 id="subsp">i. 部分空間・和・共通部分</h2>
@@ -501,7 +508,7 @@
       <p>(S1) $0\in V_1$ かつ $0\in V_2$ だから $0\in V_1\cap V_2$。(S2) $w,w'\in V_1\cap V_2$ なら、$V_1$ の部分空間性から $w+w'\in V_1$、$V_2$ からも $w+w'\in V_2$。(S3) も同様。和 $V_1+V_2$ については、$0=0+0$、$(v_1+v_2)+(v_1'+v_2')=(v_1+v_1')+(v_2+v_2')$、$a(v_1+v_2)=av_1+av_2$。</p></div>
     </details>
     <p><b>基底の延長定理</b>(春学期):$\dim V=n$ のとき、$V$ の一次独立なベクトル $v_1,\dots,v_k$($k\le n$)は、$n-k$ 個のベクトルを付け足して、$V$ の基底にできる。部分空間 $W$ の基底は、$V$ の基底に延長できる。</p>
-    <p class="used-in">この回で使う場所:<a href="exercises/ex-01.html#p3" data-xref>演習 第1回 [3] 次元公式</a></p>
+    <p class="used-in">この回で使う場所:<a href="exercises/ex-01.html#p3" data-xref>演習 第1回 [3] 次元公式</a><a href="weeks/week-02.html#w-basis2" data-xref>第2回 1.3 基底と部分空間</a><a href="weeks/week-02.html#s6" data-xref>第2回 6. 部分空間への制限</a></p>
 
     <!-- ===================== j: 核と像 ===================== -->
     <h2 id="kerim">j. 核と像・次元定理・階数</h2>
@@ -523,7 +530,7 @@
     </ul>
     <div class="box ex">
       <div class="label">例</div>
-      <p>$A=\begin{pmatrix}1&1\1&1\end{pmatrix}$。列は両方 $(1,1)^{\mathsf T}$:像 $=\langle(1,1)^{\mathsf T}\rangle$、rank $=1$。$Ax=0\iff x_1+x_2=0$:核 $=\langle(1,-1)^{\mathsf T}\rangle$、$\dim=1$。$1+1=2$ ✓。</p>
+      <p>$A=\begin{pmatrix}1&1\\1&1\end{pmatrix}$。列は両方 $(1,1)^{\mathsf T}$:像 $=\langle(1,1)^{\mathsf T}\rangle$、rank $=1$。$Ax=0\iff x_1+x_2=0$:核 $=\langle(1,-1)^{\mathsf T}\rangle$、$\dim=1$。$1+1=2$ ✓。</p>
     </div>
     <h3>掃き出し法の手順(行基本変形)</h3>
     <p>行列に、① 2つの行を入れ替える、② 行を 0 でない定数倍する、③ ある行の定数倍を別の行に足す、の3種類の<b>行基本変形</b>を繰り返して、階段状の形にします(連立方程式 $Ax=0$ の解は変わらない)。各段の先頭を 1 にして、その列の他の成分を 0 にしたものが<b>簡約階段形</b>。先頭の 1 の個数が<b>階数</b>、先頭の 1 がある列が<b>主列</b>、ない列が<b>自由な列</b>(対応する変数が<b>自由変数</b>)です。</p>
@@ -554,18 +561,93 @@
     <ul>
       <li><b>積:</b>$\det(MN)=\det M\cdot\det N$。</li>
       <li><b>行(列)基本変形:</b>ある行に、別の行の定数倍を足しても、$\det$ は変わらない。</li>
-      <li><b>ブロック三角行列:</b>$\det\begin{pmatrix}P&Q\0&S\end{pmatrix}=\det P\cdot\det S$($P,S$ は正方行列)。特に、ブロック対角行列 $\begin{pmatrix}P&0\0&S\end{pmatrix}$ も $\det P\det S$。</li>
+      <li><b>ブロック三角行列:</b>$\det\begin{pmatrix}P&Q\\0&S\end{pmatrix}=\det P\cdot\det S$($P,S$ は正方行列)。特に、ブロック対角行列 $\begin{pmatrix}P&0\\0&S\end{pmatrix}$ も $\det P\det S$。</li>
       <li><b>共役:</b>複素行列 $M$ の各成分を複素共役にした行列を $\overline M$ とすると、$\det\overline M=\overline{\det M}$(行列式は成分の和と積だけで書けるので、共役をとる操作と交換できる)。</li>
       <li>複素数 $z$ について $z\bar z=|z|^2$。</li>
     </ul>
     <div class="box ex">
       <div class="label">例</div>
-      <p>$\det\begin{pmatrix}1&2\0&3\end{pmatrix}=3$(ブロックなら $1\cdot3$)。$\overline{\begin{pmatrix}1+i&2\0&i\end{pmatrix}}$ の $\det$ は $\overline{(1+i)i}=\overline{i-1}=-1-i$。</p>
+      <p>$\det\begin{pmatrix}1&2\\0&3\end{pmatrix}=3$(ブロックなら $1\cdot3$)。$\overline{\begin{pmatrix}1+i&2\\0&i\end{pmatrix}}$ の $\det$ は $\overline{(1+i)i}=\overline{i-1}=-1-i$。</p>
     </div>
     <h3>ブロック行列の積と、ブロック行(列)の足し算</h3>
     <p>行列を小さな正方行列(ブロック)に区切ると、区切り方がそろっていれば、積はブロックを成分のように扱って計算できます(順序は保つ):$\begin{pmatrix}P&Q\\R&S\end{pmatrix}\begin{pmatrix}X&Y\\Z&W\end{pmatrix}=\begin{pmatrix}PX+QZ&PY+QW\\RX+SZ&RY+SW\end{pmatrix}$。特に、左から $\begin{pmatrix}I&0\\C&I\end{pmatrix}$ を掛けると、「第1行ブロックの $C$ 倍を第2行ブロックに足す」操作になり、右から掛けると「ブロック列の足し算」になります。この行列の $\det$ は 1(対角が $I$ のブロック三角行列)だから、これらの操作は $\det$ を変えません。</p>
     <p>これらの詳しい扱いは、授業が行列式に進んだときに足します。ここでは、演習 [4] を解くために必要な性質だけを書きました。</p>
-    <p class="used-in">この回で使う場所:<a href="exercises/ex-01.html#p4" data-xref>演習 第1回 [4] ブロック行列の行列式</a></p>
+    <p class="used-in">この回で使う場所:<a href="exercises/ex-01.html#p4" data-xref>演習 第1回 [4] ブロック行列の行列式</a><a href="weeks/week-03.html#s7" data-xref>第3回 7. 行列式の定義</a><a href="weeks/week-04.html#s8" data-xref>第4回 8. 積公式</a></p>
+
+    <!-- ===================== m: 行列の積・転置 ===================== -->
+    <h2 id="matrix">m. 行列の積・転置・複素共役</h2>
+    <div class="box def">
+      <div class="label">定義(行列の積)</div>
+      <p>$m\times n$ 行列 $A=(a_{ij})$ と $n\times l$ 行列 $B=(b_{jk})$ の積 $AB$ は $m\times l$ 行列で、$(i,k)$ 成分は $\displaystyle\sum_{j=1}^na_{ij}b_{jk}$。</p>
+    </div>
+    <p><b>意味:</b>「$A$ の $i$ 行目」と「$B$ の $k$ 列目」を成分ごとに掛けて足したものが $(i,k)$ 成分。左の行列の<b>列の数</b>と、右の行列の<b>行の数</b>がそろっていないと掛けられない。線形写像の言葉では、$AB$ は「先に $B$、次に $A$」の合成写像の行列。</p>
+    <div class="box ex"><div class="label">例</div>
+      <p>$\begin{pmatrix}1&2\\3&4\end{pmatrix}\begin{pmatrix}0&1\\1&1\end{pmatrix}=\begin{pmatrix}1\cdot0+2\cdot1&1\cdot1+2\cdot1\\3\cdot0+4\cdot1&3\cdot1+4\cdot1\end{pmatrix}=\begin{pmatrix}2&3\\4&7\end{pmatrix}$。順番を逆にすると $\begin{pmatrix}3&4\\4&6\end{pmatrix}$ で、一般に $AB\ne BA$。</p></div>
+    <h3>転置</h3>
+    <p>$A^{\mathsf T}$ は、行と列を入れかえた行列($(i,j)$ 成分が $a_{ji}$)。縦ベクトル $v$ の転置 $v^{\mathsf T}$ は横ベクトル。</p>
+    <ul>
+      <li>$(A^{\mathsf T})^{\mathsf T}=A$、$(A+B)^{\mathsf T}=A^{\mathsf T}+B^{\mathsf T}$、$(cA)^{\mathsf T}=cA^{\mathsf T}$。</li>
+      <li><b>$(AB)^{\mathsf T}=B^{\mathsf T}A^{\mathsf T}$</b>(順番が逆になる)。理由:左辺の $(k,i)$ 成分は $AB$ の $(i,k)$ 成分 $\sum_ja_{ij}b_{jk}$、右辺の $(k,i)$ 成分は $\sum_j(B^{\mathsf T})_{kj}(A^{\mathsf T})_{ji}=\sum_jb_{jk}a_{ij}$ で同じ。</li>
+      <li>$v^{\mathsf T}w=v_1w_1+\cdots+v_nw_n$($1\times1$ 行列。数と同一視する)。$v^{\mathsf T}Aw$ も数で、数は転置しても同じ:$(v^{\mathsf T}Aw)^{\mathsf T}=w^{\mathsf T}A^{\mathsf T}v$。</li>
+    </ul>
+    <h3>複素共役と随伴</h3>
+    <p>$\overline A$ は各成分を共役にした行列。$\overline{AB}=\overline A\,\overline B$、$\overline{A+B}=\overline A+\overline B$(共役は和と積を保つ)。$A^*=\overline A^{\mathsf T}$ を<b>随伴</b>という。$\mathbb C^n$ の標準エルミート内積は $\langle v,w\rangle=v^{\mathsf T}\overline w=\sum v_i\overline{w_i}$。</p>
+    <div class="box intuit">
+      <div class="label">直感で理解する</div>
+      <p>転置で順番が逆になるのは、靴下と靴に似ています:「靴下をはいてから靴をはく」の逆は「靴を脱いでから靴下を脱ぐ」。</p>
+    </div>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-02.html#w-matrix" data-xref>第2回 1.1 行列の積・転置・複素共役</a><a href="weeks/week-02.html#s3" data-xref>第2回 3. 双線形形式は行列で書ける</a><a href="weeks/week-04.html#s9" data-xref>第4回 9. 転置と行列式</a></p>
+
+    <!-- ===================== n: 行基本変形 ===================== -->
+    <h2 id="rowred">n. 行基本変形・基本行列・行標準形</h2>
+    <p>春学期の「基本行列についての復習」の内容です。</p>
+    <div class="box def">
+      <div class="label">行基本変形と基本行列</div>
+      <p>行列の<b>行基本変形</b>は次の3種類。それぞれ、単位行列 $I_n$ に同じ操作を施した<b>基本行列</b>を<b>左から掛ける</b>ことで表せる。</p>
+      <p>(i) 第 $i$ 行を $\lambda$ 倍する($\lambda\ne0$)… $D_i(\lambda)$:$I_n$ の第 $i$ 対角成分を $\lambda$ にしたもの。<br>
+      (ii) 第 $j$ 行の $\lambda$ 倍を第 $i$ 行に足す($i\ne j$)… $T_{ij}(\lambda)$:$I_n$ の $(i,j)$ 成分を $\lambda$ にしたもの(春学期のノートでは $L_{i,j}(\mu)$ と書いていた)。<br>
+      (iii) 第 $i$ 行と第 $j$ 行を入れかえる … $S_{ij}$:$I_n$ の第 $i$ 行と第 $j$ 行を入れかえたもの。</p>
+    </div>
+    <div class="box ex"><div class="label">例($n=2$)</div>
+      <p>$T_{21}(-3)=\begin{pmatrix}1&0\\-3&1\end{pmatrix}$ を $\begin{pmatrix}1&2\\3&4\end{pmatrix}$ に左から掛けると $\begin{pmatrix}1&2\\0&-2\end{pmatrix}$(第1行の $-3$ 倍を第2行に足した)。</p></div>
+    <p><b>基本行列はすべて可逆:</b>$D_i(\lambda)^{-1}=D_i(1/\lambda)$、$T_{ij}(\lambda)^{-1}=T_{ij}(-\lambda)$、$S_{ij}^{-1}=S_{ij}$(操作を「元に戻す」操作)。</p>
+    <h3>行標準形</h3>
+    <p>行基本変形を繰り返して、各行の先頭(0 でない最初の成分)が 1 で、その列の他の成分が 0 で、先頭の位置が下の行ほど右にある形を<b>行標準形</b>という。正方行列の行標準形は、<b>単位行列</b>か、<b>0 だけの行をもつ行列</b>のどちらか。</p>
+    <div class="box thm">
+      <div class="label">事実(春学期)</div>
+      <p>正方行列 $A$ について:$A$ が可逆 ⇔ 行標準形が単位行列 ⇔ 基本行列 $E_1,\dots,E_k$ があって $E_k\cdots E_1A=I_n$(このとき $A^{-1}=E_k\cdots E_1$)。逆行列は、$(A\mid I_n)$ に同じ行基本変形を施して $(I_n\mid A^{-1})$ にすれば求まる(掃き出し法)。</p>
+    </div>
+    <p><b>直感:</b> 行基本変形は「連立方程式の式どうしを足し引きする操作」。解を変えないので、式を一番見やすい形(行標準形)まで整理できる。0 だけの行が出るのは「式が実は重複していた」とき。</p>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-04.html#w-rowred" data-xref>第4回 1.1 行基本変形・基本行列・行標準形</a><a href="weeks/week-04.html#s4" data-xref>第4回 4. 可逆 ⇔ 行列式 ≠ 0</a><a href="weeks/week-04.html#s8" data-xref>第4回 8. 積公式</a></p>
+
+    <!-- ===================== o: 帰納法 ===================== -->
+    <h2 id="induction">o. 数学的帰納法</h2>
+    <div class="box thm">
+      <div class="label">数学的帰納法</div>
+      <p>自然数 $k$ についての命題 $(A_k)$ がすべての $k\ge1$ で成り立つことを示すには、次の2つを示せばよい。(i) $(A_1)$ が成り立つ。(ii) どの $k$ についても、$(A_k)$ が成り立つならば $(A_{k+1})$ も成り立つ。</p>
+    </div>
+    <div class="box intuit">
+      <div class="label">直感で理解する:ドミノ倒し</div>
+      <p>1枚目が倒れ((i))、どの1枚も、倒れれば次の1枚を倒す((ii))なら、全部のドミノが倒れる。春学期でも「$n$ 個の和は括弧の付け方によらない」の証明などで使いました。</p>
+    </div>
+    <div class="box ex"><div class="label">例</div>
+      <p>$1+2+\cdots+k=\frac{k(k+1)}2$。(i) $k=1$:$1=\frac{1\cdot2}2$ ✓。(ii) $k$ で正しいとすると、$1+\cdots+k+(k+1)=\frac{k(k+1)}2+(k+1)=\frac{(k+1)(k+2)}2$ で $k+1$ でも正しい。</p></div>
+    <p>「手順を1段ずつ進める」構成(シュミットの直交化で $v_1',v_2',\dots$ を順に作る、など)の証明は、帰納法で書くのが自然です。</p>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-02.html#w-induction" data-xref>第2回 1.4 数学的帰納法</a><a href="weeks/week-02.html#s8" data-xref>第2回 8. シュミットの直交化法</a></p>
+
+    <!-- ===================== p: 面積と行列式 ===================== -->
+    <h2 id="area">p. 平行四辺形の面積と 2×2 の行列式</h2>
+    <div class="box thm">
+      <div class="label">事実</div>
+      <p>平面のベクトル $(a,c)$、$(b,d)$ が作る平行四辺形の面積は $|ad-bc|$。</p>
+    </div>
+    <div class="box proof"><div class="label">理由</div>
+      <p>平行四辺形の面積は $|u||v|\sin\theta$($\theta$ は2辺のなす角)。$|u|^2|v|^2\sin^2\theta=|u|^2|v|^2-(u\cdot v)^2=(a^2+c^2)(b^2+d^2)-(ab+cd)^2=a^2d^2+b^2c^2-2abcd=(ad-bc)^2$。</p></div>
+    <p><b>符号の意味:</b>$ad-bc\gt0$ なら、$(a,c)$ から $(b,d)$ へ<b>反時計回り</b>に回る(向きが標準と同じ)。$\lt0$ なら時計回り。$=0$ なら2つのベクトルは平行で、平行四辺形はつぶれている。</p>
+    <div class="box ex"><div class="label">例</div>
+      <p>$(3,1)$ と $(1,2)$:$3\cdot2-1\cdot1=5$。面積 5 で、反時計回り。$(1,2)$ と $(2,4)$:$4-4=0$、平行。</p></div>
+    <p><b>3次元</b>では、3本のベクトルの作る平行六面体の体積が $|\det(v_1\ v_2\ v_3)|$。$\det$ は $3\times3$ ではサラスの方法で計算できる(4×4 以上には使えない)。</p>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-03.html#w-area" data-xref>第3回 1.3 平行四辺形の面積と2×2行列式</a><a href="weeks/week-03.html#s5" data-xref>第3回 5. 行列式の動機</a></p>
 
   </main>
 
