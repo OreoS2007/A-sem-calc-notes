@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>第7回 静電場2の続き(導体にはたらく力と容量係数) | Aセメまとめノート</title>
+  <link rel="stylesheet" href="../../assets/style.css">
+  <script defer src="../../assets/nav.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],macros:{'\\R':'\\mathbb{R}','\\bm':'\\boldsymbol{#1}','\\rot':'\\operatorname{rot}','\\grad':'\\operatorname{grad}','\\dvg':'\\operatorname{div}','\\pd':'\\frac{\\partial #1}{\\partial #2}'}});window.__navReady&&window.__navReady()"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="inner">
+      <a class="site-title" href="../../index.html">Aセメまとめノート</a>
+      <span class="links"><a href="../index.html">電磁気学</a><a href="../basics.html">基礎のまとめ</a><a href="../../calc/index.html">微積</a><a href="../../linalg/index.html">線形代数</a><a href="../../structchem/index.html">構造化学</a><a href="../../mech/index.html">力学A</a><a href="../../thermo/index.html">熱力学</a></span>
+    </div>
+  </header>
+
+  <main class="note">
+    <h1>第7回:静電場2の続き(導体にはたらく力と容量係数)</h1>
+    <div class="meta">電磁気学(東京大学 教養学部 秋学期)／講義ノート §4「静電場2:導体とポテンシャル問題」§4.3〜§4.4(p.29〜p.30)／導体にはたらく力と、いくつもの導体の電荷と電位の関係です</div>
+
+    <nav class="toc">
+      <div class="toc-title">目次</div>
+      <ol start="0">
+        <li><a href="#s0">この回の全体像</a>(p.29)</li>
+        <li><a href="#s1">準備:基礎の確認</a>
+          <div class="sub">コンデンサー／行列と逆行列(連立方程式)／第5・6回の結果(導体の性質、鏡像法、エネルギー)</div></li>
+        <li><a href="#s2">導体に対する仕事(導体にはたらく力)</a></li>
+        <li><a href="#s3">補論:容量係数とグリーンの相反定理</a></li>
+        <li><a href="#s4">具体例で練習</a></li>
+        <li><a href="#s5">まとめ(この回で覚えること)</a></li>
+        <li><a href="#s6">この回のノートについてのメモ</a></li>
+      </ol>
+    </nav>
+
+    <!-- ===================== 0 ===================== -->
+    <h2 id="s0">0. この回の全体像 <span class="page-tag">講義ノート p.29</span></h2>
+    <p>前の回(第6回)で、導体の性質(中の電場は 0、電荷は表面だけ、電位は一定)と、鏡像法を学びました。この回は、講義ノートの §4 の残りで、導体に<b>はたらく力</b>と、いくつもの導体があるときの<b>電荷と電位の関係</b>です。</p>
+    <div class="box thm">
+      <div class="label">この回のゴール</div>
+      <p>① 導体の表面の電荷にはたらく<b>力</b>は、すぐ外の電場 $E$ ではなく、その<b>半分</b> $E/2$ で計算する。平行板コンデンサーのエネルギーの変化で確かめる。電荷を一定に保つ場合と、電位差を一定に保つ(電池につなぐ)場合の違い。<br>
+      ② 複数の導体の電荷と電位を結ぶ<b>容量係数</b>(行列)と、その対称性<b>グリーンの相反定理</b> $c_{ij}=c_{ji}$。</p>
+    </div>
+    <p>以下では、先に必要な基礎(コンデンサー、行列、前の回までの結果)を丁寧に復習してから、講義ノートの順に進みます。紫色の枠は「基礎の復習」、黄色の枠は「講義ノートにないが、理解を助けるために私が補った部分」、緑の枠は「直感で理解するための説明」です。講義ノートの <b>[4-4]</b> の問題の解答も、黄色の枠で補いました。</p>
+
+    <!-- ===================== 1 ===================== -->
+    <h2 id="s1">1. 準備:基礎の確認</h2>
+    <p>この回で使う道具と、前の回までの結果を並べます。各枠の「詳しい解説」から、基礎のまとめのページや、前の回のノートに飛べます。</p>
+
+    <h3 id="w-capacitor">1.1 コンデンサー</h3>
+    <div class="box basic">
+      <div class="label">基礎:平行板コンデンサー <a class="xref-link" href="../basics.html#capacitor" data-xref>→ 詳しい解説</a></div>
+      <p>面積 $S$ の2枚の導体板を距離 $l$ だけ離し(板の大きさは $l$ よりずっと大きい)、一方に $+Q$、他方に $-Q$ を与えたものが<b>平行板コンデンサー</b>。板の間の電場は一様で $E=\dfrac{Q}{\varepsilon_0S}$(板の外には電場はない)。電位差は $V=El=\dfrac{Ql}{\varepsilon_0S}$。<b>電気容量</b> $C=\dfrac{Q}{V}=\dfrac{\varepsilon_0S}{l}$。蓄えられるエネルギーは $U=\dfrac12CV^2=\dfrac{Q^2}{2C}=\dfrac{Q^2l}{2\varepsilon_0S}$。</p>
+    </div>
+
+    <h3 id="w-matrix">1.2 行列と逆行列(連立方程式)</h3>
+    <div class="box basic">
+      <div class="label">基礎:行列、逆行列、対称行列 <a class="xref-link" href="../basics.html#matrix" data-xref>→ 詳しい解説</a><a class="xref-link" href="../../linalg/basics.html#linmap" data-xref>→ 線形代数の基礎(線形写像)</a></div>
+      <p>連立一次方程式 $Q_i=\sum_jc_{ij}\phi_j$($i=1,\dots,n$)は、行列 $c=(c_{ij})$ と縦ベクトル $Q,\phi$ で $Q=c\phi$ と書けます。$c$ の<b>逆行列</b> $p=c^{-1}$($cp=pc=I$)があれば $\phi=pQ$。$c_{ij}=c_{ji}$ のとき<b>対称行列</b>といい、逆行列も対称です。2×2 では $\begin{pmatrix}a&b\\c&d\end{pmatrix}^{-1}=\dfrac{1}{ad-bc}\begin{pmatrix}d&-b\\-c&a\end{pmatrix}$。</p>
+    </div>
+
+    <h3 id="w-prev">1.3 第5・6回の結果(導体の性質、鏡像法、エネルギー)</h3>
+    <div class="box basic">
+      <div class="label">基礎:導体の性質、鏡像法、電場のエネルギー <a class="xref-link" href="week-06.html#s2-2" data-xref>→ 第6回 2.2(導体の3つの性質)</a><a class="xref-link" href="week-06.html#s3-4" data-xref>→ 第6回 3.4(導体球の鏡像)</a><a class="xref-link" href="week-05.html#s3-4" data-xref>→ 第5回 3.4(場が持つエネルギー)</a></div>
+      <p>・<b>導体</b>:内部で $\bm{E}=\bm{0}$、電荷は表面にだけあり、導体全体で電位は一定。すぐ外の電場は表面に垂直で、大きさは $E_n=\sigma/\varepsilon_0$($\sigma$ は表面の面電荷密度)。<br>
+      ・<b>接地</b>:電位 0 の物体とつなぎ、電荷が自由に出入りできるようにすること。電位 0 の所との電荷の出入りに、仕事はいらない。<br>
+      ・<b>鏡像法</b>:接地された導体球(半径 $l$、中心は原点)と、点 $(a,0,0)$ の点電荷 $q$ の問題は、導体球の代わりに $(l^2/a,0,0)$ に鏡像電荷 $-\dfrac laq$ を置いた問題と、球の外で同じ電場になる(例 4.2)。<br>
+      ・<b>エネルギー</b>:$U=\dfrac{\varepsilon_0}{2}\displaystyle\int|\bm{E}|^2d\bm{r}$(電場がある所だけ積分すればよい)。ほかにエネルギーの出入りがなければ、外からした仕事 = エネルギーの増加。<br>
+      ・<b>無限に広い一様な面電荷</b>(面密度 $\sigma$)の電場は、面の両側で、面から遠ざかる向きに大きさ $\dfrac{\sigma}{2\varepsilon_0}$(第4回の問 [3-2])。</p>
+      <p><b>直感:</b>導体の中の電子は、電場がなくなるまで動いて止まる。だから導体の中は電場 0 で、電荷は表面にだけたまる。</p>
+    </div>
+
+    <!-- ===================== 2 ===================== -->
+    <h2 id="s2">2. 導体に対する仕事(導体にはたらく力) <span class="page-tag">講義ノート p.29–30(§4.3)</span></h2>
+
+    <h3 id="s2-1">2.1 表面の電荷には、電場の「半分」がはたらく</h3>
+    <p>導体に働く力(正確には導体の電荷に働く力)について考えておきましょう。導体表面は、電場が導体の外側は $\bm{E}$(大きさ $E$)、導体の内部は 0 という環境にあるので、どの電場の値を用いればいいのかいささか迷うところです。<b>結論からいうと、すぐ外側の値 $E$ とすぐ内側の値 0 を平均した、$E/2$ が表面の電荷に働きます。</b></p>
+    <p>コンデンサーの場合にはすぐ後に見るように直接計算で確認することも出来るが、ここではなぜ表面電荷に働く力が $E/2$ になるのかの直観的な説明を与える、と講義ノートは書いています。面倒の原因は表面電荷及び電場の変化が導体垂直方向に<b>特異的</b>(デルタ関数的あるいは不連続)になっていることです。そのため、特異性をなくすために垂直方向に<b>有限幅</b>を与えて考えてみたい。最も直観的に分かりやすいのは、図20のように、<b>電荷は幅 $\Delta h$ で均等に広がっていて、電場の大きさは幅 $\Delta h$ を経て一次で $E$ からゼロになる</b>という状況です。この状況の下では、$E/2$ が平均して作用すると直ちに分かる。</p>
+    <figure class="fig">
+      <svg viewBox="0 0 560 236" width="560" role="img" aria-label="導体表面近傍の電場"><line x1="50" y1="180" x2="450" y2="180" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><line x1="70" y1="186" x2="70" y2="46" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><text class="t" x="456" y="184">x</text><text class="t" x="76" y="44">E(x)</text><polyline points="70,180 220,180 266,70 430,62" style="fill:none;stroke:var(--accent);stroke-width:3"/><line x1="266" y1="180" x2="266" y2="70" style="stroke:var(--muted);stroke-width:1.1;stroke-dasharray:5 4;fill:none"/><line x1="70" y1="70" x2="266" y2="70" style="stroke:var(--muted);stroke-width:1.1;stroke-dasharray:5 4;fill:none"/><text class="t" x="62" y="74" style="text-anchor:end">E</text><line x1="70" y1="125" x2="260" y2="125" style="stroke:var(--thm);stroke-width:1.8;stroke-dasharray:6 4"/><text class="t" x="62" y="129" style="text-anchor:end;fill:var(--thm)">E/2</text><path d="M220 192 H266" style="stroke:var(--ex);stroke-width:3;fill:none"/><text class="t" x="243" y="210" style="text-anchor:middle;fill:var(--ex)">Δh</text><text class="tm" x="90" y="210">導体の内部(E = 0)</text><text class="tm" x="280" y="210">導体の外側</text><text class="tm" x="290" y="147">電荷は幅 Δh に一様に広がっていて、</text><text class="tm" x="290" y="165">E は Δh のあいだに 0 → E へ直線的に増える</text><text class="ta" x="290" y="187">⇒ 電荷が受ける平均の電場は E/2</text></svg>
+      <figcaption>導体表面近傍の電場 $E$ の振る舞い(講義ノートの図20を描き直しました)。導体内部で急激に減衰しゼロになる。幅 $\Delta h$ でゼロに落ちるとみなせば、導体表面近傍の電場の平均は $E/2$ とみなせる。</figcaption>
+    </figure>
+    <p>より一般の場合、電荷密度が $\rho(x)$(ただし $x\lt0$ と $x\gt\Delta h$ では $\rho(x)=0$。また $\dfrac1{\varepsilon_0}\displaystyle\int_0^{\Delta h}\rho(x)\,dx=E$)とすると、$E(x)=\dfrac1{\varepsilon_0}\displaystyle\int_0^x\rho(x')\,dx'$ であり、そのため働く力の総和は
+    $$F=\int_0^{\Delta h}\rho(x)E(x)\,dx=\frac1{\varepsilon_0}\int_0^{\Delta h}\!\!\int_0^x\rho(x)\rho(x')\,dx'\,dx=\frac1{\varepsilon_0}\frac12\left(\int_0^{\Delta h}\rho(x)\,dx\right)^2=\frac E2\int_0^{\Delta h}\rho(x)\,dx\tag{4.7}$$
+    です。よって、電荷全体に $E/2$ が働いているとみなした場合の計算と一致する。(ここでの $F$ は、面の単位面積あたりの力。)</p>
+    <div class="box intuit">
+      <div class="label">直感で理解する:自分で自分を押すことはできない</div>
+      <p>表面の電荷のすぐ外の電場 $E$ には、「その電荷自身が作る電場」も含まれています。ところが、電荷は自分自身が作る電場からは力を受けません(自分の髪を引っぱって、自分を持ち上げることはできない)。表面の小さな一片が作る電場は、無限に広い面電荷と同じで、外側に $+\dfrac{E}{2}$、内側に $-\dfrac{E}{2}$ です。それ以外のすべての電荷が作る電場を $\bm{E}_{\text{他}}$ とすると、外側で $E_{\text{他}}+\dfrac E2=E$、内側で $E_{\text{他}}-\dfrac E2=0$ なので、$E_{\text{他}}=\dfrac E2$。その一片が実際に押されるのは、この $E_{\text{他}}=\dfrac E2$ です。</p>
+    </div>
+    <div class="box supp">
+      <div class="label">講義ノートにない補足:(4.7) の式変形のポイント</div>
+      <p>3つ目の等号は、「2重積分 $\int_0^{\Delta h}\int_0^x\rho(x)\rho(x')\,dx'dx$ は、正方形 $[0,\Delta h]^2$ の<b>半分</b>(三角形 $x'\lt x$)の積分」で、被積分関数 $\rho(x)\rho(x')$ が $x\leftrightarrow x'$ で対称なので、全体($=(\int\rho)^2$)のちょうど半分、という理由です。最後は $\int\rho\,dx=\varepsilon_0E$ を使って $\dfrac1{2\varepsilon_0}(\varepsilon_0E)\cdot\int\rho\,dx=\dfrac E2\int\rho\,dx$。単位面積あたりの力は $\dfrac E2\cdot\sigma=\dfrac12\varepsilon_0E^2$(面電荷 $\sigma=\varepsilon_0E$)。導体表面を外に引く圧力です(静電気圧)。</p>
+    </div>
+
+    <h3 id="s2-2">2.2 平行板コンデンサーで確かめる</h3>
+    <p>コンデンサーの設定では、エネルギーの変化に着目することで働く力が直接求められます。面積 $S$、距離 $l$ の平行板コンデンサーに電荷 $Q$ を蓄える(一方の板に $Q$、他方の板に $-Q$ の電荷を与える)。板の面積 $S$ は距離 $l$ と比べて十分大きく、無限に大きな導体板として近似できるとします。[3-2](<a href="week-04.html#s3-2">第4回</a>)で求めた結果を用いると、平行板の間の電場は $E=Q/\varepsilon_0S$ です。また、平行板の間以外の場所には電場は存在しません。そのため、このコンデンサーの有するエネルギーは
+    $$U=\frac12\varepsilon_0E^2Sl=\frac12\frac{Q^2l}{\varepsilon_0S}\tag{4.8}$$
+    です。さてここで、平行板の距離を $l$ から $l+\Delta l$ に少しだけ伸ばしましょう。すると、コンデンサーのエネルギーの変化は
+    $$\Delta U=\frac12\frac{Q^2}{\varepsilon_0S}\Delta l\tag{4.9}$$
+    です。エネルギー保存則より、これは平行板を動かすのに必要な仕事 $W$ に等しい。一方、必要な仕事 $W$ は、「平行板に働く力 $QE^*$」×「移動距離 $\Delta l$」でもある。よって導体の表面電荷が受ける電場 $E^*$ は
+    $$E^*=\frac{\Delta U}{Q\Delta l}=\frac12\frac{Q}{\varepsilon_0S}=\frac12E\tag{4.10}$$
+    です。</p>
+    <figure class="fig">
+      <svg viewBox="0 0 620 262" width="620" role="img" aria-label="平行板コンデンサー"><text class="ta" x="20" y="24">+Q の板と −Q の板</text><rect x="30" y="64" width="190" height="8" rx="0" style="fill:var(--thm);opacity:.9;stroke:none"/><rect x="30" y="124" width="190" height="8" rx="0" style="fill:var(--accent);opacity:.9;stroke:none"/><line x1="50" y1="74" x2="50" y2="115.6" style="stroke:var(--ex);stroke-width:1.8;fill:none"/><polygon points="50,122 46.8,115 53.2,115" style="fill:var(--ex)"/><text class="tj" x="44" y="61" style="text-anchor:middle;font-weight:700;font-size:15px;fill:var(--thm)">+</text><text class="tj" x="44" y="151" style="text-anchor:middle;font-weight:700;font-size:15px;fill:var(--accent)">−</text><line x1="80" y1="74" x2="80" y2="115.6" style="stroke:var(--ex);stroke-width:1.8;fill:none"/><polygon points="80,122 76.8,115 83.2,115" style="fill:var(--ex)"/><text class="tj" x="76" y="61" style="text-anchor:middle;font-weight:700;font-size:15px;fill:var(--thm)">+</text><text class="tj" x="76" y="151" style="text-anchor:middle;font-weight:700;font-size:15px;fill:var(--accent)">−</text><line x1="110" y1="74" x2="110" y2="115.6" style="stroke:var(--ex);stroke-width:1.8;fill:none"/><polygon points="110,122 106.8,115 113.2,115" style="fill:var(--ex)"/><text class="tj" x="108" y="61" style="text-anchor:middle;font-weight:700;font-size:15px;fill:var(--thm)">+</text><text class="tj" x="108" y="151" style="text-anchor:middle;font-weight:700;font-size:15px;fill:var(--accent)">−</text><line x1="140" y1="74" x2="140" y2="115.6" style="stroke:var(--ex);stroke-width:1.8;fill:none"/><polygon points="140,122 136.8,115 143.2,115" style="fill:var(--ex)"/><text class="tj" x="140" y="61" style="text-anchor:middle;font-weight:700;font-size:15px;fill:var(--thm)">+</text><text class="tj" x="140" y="151" style="text-anchor:middle;font-weight:700;font-size:15px;fill:var(--accent)">−</text><line x1="170" y1="74" x2="170" y2="115.6" style="stroke:var(--ex);stroke-width:1.8;fill:none"/><polygon points="170,122 166.8,115 173.2,115" style="fill:var(--ex)"/><text class="tj" x="172" y="61" style="text-anchor:middle;font-weight:700;font-size:15px;fill:var(--thm)">+</text><text class="tj" x="172" y="151" style="text-anchor:middle;font-weight:700;font-size:15px;fill:var(--accent)">−</text><line x1="200" y1="74" x2="200" y2="115.6" style="stroke:var(--ex);stroke-width:1.8;fill:none"/><polygon points="200,122 196.8,115 203.2,115" style="fill:var(--ex)"/><text class="tj" x="204" y="61" style="text-anchor:middle;font-weight:700;font-size:15px;fill:var(--thm)">+</text><text class="tj" x="204" y="151" style="text-anchor:middle;font-weight:700;font-size:15px;fill:var(--accent)">−</text><line x1="235" y1="68" x2="235" y2="128" style="stroke:var(--muted);stroke-width:1.2"/><text class="t" x="244" y="102">l</text><rect x="330" y="64" width="190" height="8" rx="0" style="fill:var(--thm);opacity:.9;stroke:none"/><rect x="330" y="136" width="190" height="8" rx="0" style="fill:var(--accent);opacity:.9;stroke:none"/><line x1="350" y1="74" x2="350" y2="127.6" style="stroke:var(--ex);stroke-width:1.8;fill:none"/><polygon points="350,134 346.8,127 353.2,127" style="fill:var(--ex)"/><text class="tj" x="344" y="61" style="text-anchor:middle;font-weight:700;font-size:15px;fill:var(--thm)">+</text><text class="tj" x="344" y="163" style="text-anchor:middle;font-weight:700;font-size:15px;fill:var(--accent)">−</text><line x1="380" y1="74" x2="380" y2="127.6" style="stroke:var(--ex);stroke-width:1.8;fill:none"/><polygon points="380,134 376.8,127 383.2,127" style="fill:var(--ex)"/><text class="tj" x="376" y="61" style="text-anchor:middle;font-weight:700;font-size:15px;fill:var(--thm)">+</text><text class="tj" x="376" y="163" style="text-anchor:middle;font-weight:700;font-size:15px;fill:var(--accent)">−</text><line x1="410" y1="74" x2="410" y2="127.6" style="stroke:var(--ex);stroke-width:1.8;fill:none"/><polygon points="410,134 406.8,127 413.2,127" style="fill:var(--ex)"/><text class="tj" x="408" y="61" style="text-anchor:middle;font-weight:700;font-size:15px;fill:var(--thm)">+</text><text class="tj" x="408" y="163" style="text-anchor:middle;font-weight:700;font-size:15px;fill:var(--accent)">−</text><line x1="440" y1="74" x2="440" y2="127.6" style="stroke:var(--ex);stroke-width:1.8;fill:none"/><polygon points="440,134 436.8,127 443.2,127" style="fill:var(--ex)"/><text class="tj" x="440" y="61" style="text-anchor:middle;font-weight:700;font-size:15px;fill:var(--thm)">+</text><text class="tj" x="440" y="163" style="text-anchor:middle;font-weight:700;font-size:15px;fill:var(--accent)">−</text><line x1="470" y1="74" x2="470" y2="127.6" style="stroke:var(--ex);stroke-width:1.8;fill:none"/><polygon points="470,134 466.8,127 473.2,127" style="fill:var(--ex)"/><text class="tj" x="472" y="61" style="text-anchor:middle;font-weight:700;font-size:15px;fill:var(--thm)">+</text><text class="tj" x="472" y="163" style="text-anchor:middle;font-weight:700;font-size:15px;fill:var(--accent)">−</text><line x1="500" y1="74" x2="500" y2="127.6" style="stroke:var(--ex);stroke-width:1.8;fill:none"/><polygon points="500,134 496.8,127 503.2,127" style="fill:var(--ex)"/><text class="tj" x="504" y="61" style="text-anchor:middle;font-weight:700;font-size:15px;fill:var(--thm)">+</text><text class="tj" x="504" y="163" style="text-anchor:middle;font-weight:700;font-size:15px;fill:var(--accent)">−</text><line x1="535" y1="68" x2="535" y2="140" style="stroke:var(--muted);stroke-width:1.2"/><text class="t" x="544" y="108">l + Δl</text><line x1="425" y1="176" x2="425" y2="200.6" style="stroke:var(--thm);stroke-width:2.6;fill:none"/><polygon points="425,210 420.4,200 429.6,200" style="fill:var(--thm)"/><text class="tt" x="436" y="202">外から引く力 F</text><text class="tt" x="30" y="198">板の間の電場 E = Q/(ε₀S)(板の外は 0)</text><text class="tt" x="30" y="220">エネルギー U = ½ε₀E²·(Sl) = Q²l/(2ε₀S)</text><text class="tm" x="330" y="246">板を Δl だけ引き離す仕事 = ΔU = Q²Δl/(2ε₀S)</text></svg>
+      <figcaption>平行板コンデンサー。左:板の間隔 $l$。右:板を $\Delta l$ だけ引き離す。外から加える力 $F=QE^*$ に移動距離 $\Delta l$ を掛けたものが、エネルギーの増加 $\Delta U$。</figcaption>
+    </figure>
+    <div class="box supp">
+      <div class="label">講義ノートにない補足:なぜ $E^*=E/2$ で、$E$ ではないのか</div>
+      <p>$+Q$ の板が受ける電場は、「もう一方の板($-Q$)が作る電場」だけです(自分自身が作る電場は、自分には力を及ぼさない)。無限に広い一様な面電荷の電場は片側 $\dfrac{\sigma}{2\varepsilon_0}$ で、板の間では2枚の板の電場が足し合わされて $E=\dfrac{\sigma}{\varepsilon_0}$。一枚が作る分は、その半分 $E/2$。それが相手の板が受ける電場です。(4.10) はこれと一致します。)</p>
+    </div>
+
+    <h3 id="s2-3">2.3 電位差を保つ(電池につなぐ)場合</h3>
+    <p>ちなみに平行板コンデンサーを動かした際のエネルギー変化は、平行板の電位差を保つ(電池につなぐ)か否かによって大きく変わります。平行板の負の側の電位を 0、正の側の電位を $\phi=El=Ql/\varepsilon_0S$ に保ったとしましょう(講義ノートは「接地」と書いていますが、電位を保つために、両平行板は電池につながれている、という設定です)。この設定の下で、先程と同様に平行板の距離を $l$ から $l+\Delta l$ に少しだけ伸ばすことを考えます。すると、今度は平行板が電池につながれているので、平行板の電位は変化しない一方、平行板の間の電場は
+    $$E'=E\frac{l}{l+\Delta l}\tag{4.11}$$
+    へと変化します(平行板の電荷もこれにあわせて $Q$ から $Ql/(l+\Delta l)$ へと変化する)。そのため、コンデンサーのエネルギーの変化量は
+    $$\Delta U'=\frac12\varepsilon_0E'^2S(l+\Delta l)-\frac12\varepsilon_0E^2Sl=-\frac12\varepsilon_0E^2Sl\frac{\Delta l}{l+\Delta l}\simeq-\frac12\varepsilon_0E^2S\Delta l\tag{4.12}$$
+    となり、電池につながなかった場合とちょうど正負が逆の値になります。これはエネルギーが消えてしまったわけではなく、<b>電池が両者の和の仕事 $\varepsilon_0E^2S\Delta l$ を受け取った</b>ためです。</p>
+    <table class="cmp">
+      <tr><th></th><th>電荷 $Q$ 一定(孤立)</th><th>電位差一定(電池につなぐ)</th></tr>
+      <tr><td>板を引き離したときの電場</td><td>$E$ のまま</td><td>$E'=E\dfrac{l}{l+\Delta l}$(弱まる)</td></tr>
+      <tr><td>電場のエネルギーの変化 $\Delta U$</td><td>$+\dfrac12\varepsilon_0E^2S\Delta l$(増える)</td><td>$-\dfrac12\varepsilon_0E^2S\Delta l$(減る)</td></tr>
+      <tr><td>外力のする仕事</td><td>$+\dfrac12\varepsilon_0E^2S\Delta l$(引力に逆らう)</td><td>$+\dfrac12\varepsilon_0E^2S\Delta l$(同じ!)</td></tr>
+      <tr><td>電池が受け取る仕事</td><td>なし</td><td>$\varepsilon_0E^2S\Delta l$</td></tr>
+    </table>
+    <div class="box supp">
+      <div class="label">講義ノートにない補足:電池を使う場合のエネルギー収支</div>
+      <p>板にはたらく力はどちらの場合も同じ($\dfrac12QE\simeq\dfrac12\varepsilon_0E^2S$)なので、引き離すために外から加える仕事はどちらも $\dfrac12\varepsilon_0E^2S\Delta l$。電池をつなぐ場合は、$\Delta U'=-\dfrac12\varepsilon_0E^2S\Delta l$ ですから、エネルギー保存 $\Delta U'=(\text{外力の仕事})+(\text{電池から入る仕事})$ より、電池から入る仕事は $-\dfrac12-\dfrac12=-\varepsilon_0E^2S\Delta l$、つまり電池が $\varepsilon_0E^2S\Delta l$ を<b>受け取った</b>ことになります。(板の電荷が減るので、電荷が電池側に戻る。)</p>
+      <p>なお、本文は「接地」という語を使っていますが、実際には「電位差を保つ」電池につないでいる設定です(講義ノート本文にも電池とあります)。</p>
+    </div>
+
+    <h3 id="s2-4">2.4 問 [4-4]:導体球を動かす仕事</h3>
+    <div class="box ex">
+      <div class="label">問 [4-4]</div>
+      <p>例 4.2 の設定で、導体球の中心位置を $(0,0,0)$ から $(x,0,0)$ まで動かす。このとき必要な仕事を求めよ。</p>
+    </div>
+    <div class="box supp">
+      <div class="label">講義ノートにない補足:[4-4] の解答</div>
+      <figure class="fig">
+        <svg viewBox="0 0 580 224" width="580" role="img" aria-label="導体球を動かす"><line x1="30" y1="162" x2="540" y2="162" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><text class="t" x="544" y="167">x</text><circle cx="130" cy="100" r="44" style="fill:var(--muted);fill-opacity:.15;stroke:var(--muted);stroke-width:2;stroke-dasharray:5 4"/><text class="tm" x="130" y="180" style="text-anchor:middle">はじめ:中心 0</text><circle cx="250" cy="100" r="44" style="fill:var(--muted);fill-opacity:.3;stroke:var(--muted);stroke-width:2.4"/><text class="tm" x="250" y="180" style="text-anchor:middle">あと:中心 x</text><line x1="180" y1="48" x2="217.6" y2="48" style="stroke:var(--ex);stroke-width:2.4;fill:none"/><polygon points="226,48 217,52 217,44" style="fill:var(--ex)"/><text class="tt" x="203" y="38" style="text-anchor:middle;fill:var(--ex)">動かす</text><circle cx="410" cy="100" r="10" style="fill:var(--thm)"/><text class="tj" x="410" y="105" style="text-anchor:middle;fill:#fff;font-weight:700;font-size:16px">+</text><text class="tm" x="410" y="128" style="text-anchor:middle">q (a,0,0) で固定</text><line x1="250" y1="64" x2="410" y2="64" style="stroke:var(--thm);stroke-width:1.4"/><text class="t" x="330" y="56" style="text-anchor:middle;fill:var(--thm)">d = a − x</text><text class="ta" x="30" y="24">U(d) = −q²l / (8πε₀(d² − l²))(接地した導体球と電荷 q のエネルギー)</text><text class="tt" x="30" y="204">必要な仕事 = U(a − x) − U(a)</text></svg>
+        <figcaption>導体球(接地)を中心 $0$ から $x$ へ動かす。点電荷 $q$ は $(a,0,0)$ に固定されている。</figcaption>
+      </figure>
+      <p>例 4.2 と同じく、<b>導体球は接地</b>、点電荷 $q$ は $(a,0,0)$ に固定して、導体球を $x$ 軸方向にゆっくり動かすとします。球が電荷に重ならないように $|a-x|\gt l$ とします。導体は接地されているので電位は 0 のままで、電荷の出入りに仕事は必要ありません(接地の電位が 0 だから)。よって、<b>必要な仕事 = 系のエネルギーの変化</b>。</p>
+      <p>導体球の中心と電荷 $q$ の距離を $d$ とすると、系のエネルギー $U(d)$ は、電荷 $q$ を無限遠から距離 $d$ まで運ぶ仕事です。鏡像電荷 $q'=-\dfrac ldq$ が、電荷 $q$ から $s=d-\dfrac{l^2}{d}=\dfrac{d^2-l^2}{d}$ の位置にあるので、引力は $\dfrac{q\,|q'|}{4\pi\varepsilon_0s^2}=\dfrac{q^2\,l\,d}{4\pi\varepsilon_0(d^2-l^2)^2}$。外から運ぶ仕事は(第6回で、平面導体の (4.6) を力から確かめたのと同様に)
+      $$U(d)=-\int_d^\infty\frac{q^2\,l\,d'}{4\pi\varepsilon_0(d'^2-l^2)^2}\,dd'=-\frac{q^2\,l}{8\pi\varepsilon_0\,(d^2-l^2)}.$$
+      (積分は $\displaystyle\int_d^\infty\frac{d'\,dd'}{(d'^2-l^2)^2}=\frac{1}{2(d^2-l^2)}$。)
+      <b>検算</b>:$l\to\infty$、$d=l+a'$ の極限(平面導体)で、$d^2-l^2\approx2la'$ なので $U\to-\dfrac{q^2}{16\pi\varepsilon_0a'}$、これは平面導体の (4.6)(第6回)と一致します。</p>
+      <p>球を動かすと、距離は $d=a$ から $d=a-x$ になるので(球が電荷に近づくなら $x\gt0$)、
+      $$W=U(a-x)-U(a)=\frac{q^2\,l}{8\pi\varepsilon_0}\left[\frac{1}{a^2-l^2}-\frac{1}{(a-x)^2-l^2}\right].$$
+      $x\gt0$(近づける)なら $(a-x)^2-l^2\lt a^2-l^2$ なので $W\lt0$:球は電荷に引かれるので、近づけるときは(外から)負の仕事(引かれる)、遠ざけるときは正の仕事です。</p>
+      <p><b>数値例</b>:$l=1$、$a=3$、$x=1$ のとき($d$ は 3 から 2 へ)。$\dfrac{q^2}{4\pi\varepsilon_0}$ を単位に $U(d)=-\dfrac{l}{2(d^2-l^2)}$ なので $U(3)=-\dfrac1{16}$、$U(2)=-\dfrac16$、$W=-\dfrac16+\dfrac1{16}=-\dfrac{5}{48}$(単位 $\dfrac{q^2}{4\pi\varepsilon_0}$)。</p>
+    </div>
+
+    <!-- ===================== 3 ===================== -->
+    <h2 id="s3">3. 補論:容量係数とグリーンの相反定理 <span class="page-tag">講義ノート p.30(§4.4)</span></h2>
+
+    <h3 id="s3-1">3.1 容量係数と電位係数</h3>
+    <p>複数の導体 $1,2,\dots$ があるとします。今、無限遠方の電位をゼロとしたうえで、導体 1 の電位を $\phi_1$、それ以外の導体の電位を 0 になるように各導体を接地(導体 1 は電位が $\phi_1$ であるような場所に接地)しましょう。このとき各導体が持つ電荷は $\phi_1$ に比例するはずです(脚注66:$\phi_1\to c\phi_1$ と変化した際、電場も $\bm{E}\to c\bm{E}$ と変化するので)。そのため、導体 $i$ の電荷は $Q_i=c_{i1}\phi_1$ という形で書けます。導体 $j$ のみに電位 $\phi_j$、他はゼロという設定を考えることで、同様に $c_{ij}$ が定義できます。この $c_{ij}$ を「<b>容量係数</b>」といいます。</p>
+    <figure class="fig">
+      <svg viewBox="0 0 620 228" width="620" role="img" aria-label="容量係数の定義"><path d="M48 110 C48 56 172 63.199999999999996 172 110 C172 160.4 48 153.2 48 110 Z" style="fill:var(--thm);fill-opacity:.22;stroke:var(--thm);stroke-width:3.2"/><text class="tj" x="110" y="106" style="text-anchor:middle;font-weight:700">導体 j</text><text class="tm" x="110" y="126" style="text-anchor:middle">φ = 1</text><path d="M248 80 C248 35 352 41 352 80 C352 122 248 116 248 80 Z" style="fill:var(--muted);fill-opacity:.2;stroke:var(--muted);stroke-width:2"/><text class="tj" x="300" y="76" style="text-anchor:middle;font-weight:700">導体 i</text><text class="tm" x="300" y="96" style="text-anchor:middle">φ = 0(接地)</text><path d="M264 180 C264 144 356 148.8 356 180 C356 213.6 264 208.8 264 180 Z" style="fill:var(--muted);fill-opacity:.2;stroke:var(--muted);stroke-width:2"/><text class="tj" x="310" y="176" style="text-anchor:middle;font-weight:700">導体 k</text><text class="tm" x="310" y="196" style="text-anchor:middle">φ = 0(接地)</text><text class="tj" x="176" y="105" style="text-anchor:middle;font-weight:700;font-size:15px;fill:var(--accent)">−</text><text class="tj" x="250" y="89" style="text-anchor:middle;font-weight:700;font-size:15px;fill:var(--accent)">−</text><text class="tj" x="268" y="173" style="text-anchor:middle;font-weight:700;font-size:15px;fill:var(--accent)">−</text><text class="tj" x="400" y="70">導体 j だけ電位 1、他は 0 にする。</text><text class="tj" x="400" y="92">すると、導体 i に誘導される電荷は</text><text class="tt" x="400" y="114">Q_i = c_ij × 1(これが c_ij の定義)</text><text class="tm" x="400" y="150">重ね合わせ:いくつかの導体に</text><text class="tm" x="400" y="168">電位 φ_j を与えると</text><text class="ta" x="400" y="192">Q_i = Σ_j c_ij φ_j  (4.13)</text></svg>
+      <figcaption>容量係数の定義。導体 $j$ だけ電位 1、他の導体は 0(接地)にしたとき、各導体 $i$ に誘導される電荷が $c_{ij}$。</figcaption>
+    </figure>
+    <div class="box intuit">
+      <div class="label">直感で理解する:「電位を決めると、電荷が決まる」</div>
+      <p>1つの導体なら、電荷 $Q$ と電位 $\phi$ は比例し、$Q=C\phi$($C$ は電気容量)でした。導体がいくつもあると、ある導体の電位を上げると、<b>ほかの導体にも</b>電荷が誘導されます(近くの導体には逆符号の電荷が引き寄せられる)。だから「どの導体の電位が、どの導体の電荷にどれだけ効くか」を、行列 $c_{ij}$ で表す必要があります。対角成分 $c_{ii}$ が普通の「電気容量」、非対角成分 $c_{ij}$($i\ne j$)が「よその導体への効き方」です。</p>
+    </div>
+    <p>すると、電荷と電位は重ね合わせが成り立つので、各 $j$ について導体 $j$ の電位を $\phi_j$ にとった際、各導体に誘導される電荷の総量は
+    $$Q_i=\sum_jc_{ij}\phi_j\tag{4.13}$$
+    と書けます。行列 $c$ の逆行列を $p$ とすると、$p$ は「各導体 $j$ に電荷 $Q_j$ を与えた際に、その導体の電位がいくつになるかを与える式」
+    $$\phi_i=\sum_jp_{ij}Q_j\tag{4.14}$$
+    の係数となります。$p_{ij}$ を「<b>電位係数</b>」といいます。</p>
+    <figure class="fig">
+      <svg viewBox="0 0 580 190" width="580" role="img" aria-label="行列で書く"><text class="ta" x="20" y="26">連立一次方程式は、行列とベクトルの式で書ける</text><text class="tj" x="20" y="66" style="font-size:15px">Q₁ = c₁₁φ₁ + c₁₂φ₂</text><text class="tj" x="20" y="92" style="font-size:15px">Q₂ = c₂₁φ₁ + c₂₂φ₂</text><line x1="220" y1="78" x2="253.6" y2="78" style="stroke:var(--muted);stroke-width:2.2;fill:none"/><polygon points="262,78 253,82 253,74" style="fill:var(--muted)"/><text class="tj" x="280" y="66" style="font-size:14px;font-family:monospace">┌ Q₁ ┐   ┌ c₁₁ c₁₂ ┐┌ φ₁ ┐</text><text class="tj" x="280" y="86" style="font-size:14px;font-family:monospace">│    │ = │         ││    │</text><text class="tj" x="280" y="106" style="font-size:14px;font-family:monospace">└ Q₂ ┘   └ c₂₁ c₂₂ ┘└ φ₂ ┘</text><text class="tt" x="20" y="150">電位 → 電荷:Q = c φ</text><text class="ta" x="20" y="172">電荷 → 電位:φ = p Q(p は c の逆行列)</text></svg>
+      <figcaption>電位から電荷へは $Q=c\phi$、電荷から電位へは $\phi=pQ$($p=c^{-1}$)。</figcaption>
+    </figure>
+
+    <h3 id="s3-2">3.2 グリーンの相反定理:$c_{ij}=c_{ji}$</h3>
+    <p>さて、導体 $j$ のみに電位 $\phi=1$、他はゼロという設定のもとで位置 $\bm{r}$ に作られる電場を $\bm{E}_j(\bm{r})$、電位を $\psi_j(\bm{r})$ と書くことにします(脚注67:再び電場の重ね合わせが成り立つため、各 $j$ について導体 $j$ の電位を $\phi_j$ ととった際の位置 $\bm{r}$ に作られる電場及び電位は $\bm{E}(\bm{r})=\sum_j\phi_j\bm{E}_j(\bm{r})$ (4.15)、$\psi(\bm{r})=\sum_j\phi_j\psi_j(\bm{r})$ (4.16) と書ける)。ここで、以下の計算が成り立ちます。
+    $$\int d\bm{r}\,\bm{E}_i\cdot\bm{E}_j=-\int d\bm{r}\,\bm{E}_i\cdot\nabla\psi_j=\int d\bm{r}\,(\nabla\cdot\bm{E}_i)\,\psi_j=\frac{c_{ji}}{\varepsilon_0}\tag{4.17}$$
+    最後の等式が成り立つのは以下の理由による。まずガウスの法則により、$\nabla\cdot\bm{E}_i$ は電荷が存在する導体表面でのみ非ゼロの値をとる。特に $\nabla\cdot\bm{E}_i$ の導体 $j$ 表面での積分は、電場 $\bm{E}_i$ を与える環境(導体 $i$ のみ電位 1、他はゼロ)の下で導体 $j$ に誘起された電荷の総量(を $\varepsilon_0$ で割った値)$c_{ji}/\varepsilon_0$ である。一方 $\psi_j$ は、その定義により導体 $j$ 表面では 1、それ以外の導体表面ではゼロをとる。よって最後の等式が成り立つ。</p>
+    <p>ところが左辺の $i$ と $j$ の役割は対等なので、両者は入れ替えても同じ計算が出来る。よって容量係数は対称
+    $$c_{ij}=c_{ji}\tag{4.18}$$
+    であることが分かります。これを「<b>グリーンの相反定理</b>」といいます。容量係数が対称なので、もちろんその逆行列である電位係数も対称、$p_{ij}=p_{ji}$、です。</p>
+    <div class="box supp">
+      <div class="label">講義ノートにない補足:(4.17) の式変形を一つずつ</div>
+      <p>① $\bm{E}_j=-\nabla\psi_j$ を代入(第1の等号)。② $\nabla\cdot(\psi_j\bm{E}_i)=\psi_j\nabla\cdot\bm{E}_i+\bm{E}_i\cdot\nabla\psi_j$ を使って、$-\bm{E}_i\cdot\nabla\psi_j=\psi_j\nabla\cdot\bm{E}_i-\nabla\cdot(\psi_j\bm{E}_i)$。最後の項の積分は、ガウスの定理で境界の面積分になり、無限遠($\psi_j\propto1/r$、$\bm{E}_i\propto1/r^2$、面積 $\propto r^2$ で $\to0$)で消え、導体の内部は $\bm{E}_i=\bm{0}$ で消える(第2の等号)。③ $\nabla\cdot\bm{E}_i=\rho_i/\varepsilon_0$ で、$\rho_i$ は導体表面にだけある面電荷。そこで $\psi_j$ は導体 $j$ 上で 1、他の導体上で 0 なので、積分は「導体 $j$ 上の電荷」$/\varepsilon_0$ だけが残る。それは $c_{ji}$(導体 $i$ のみ電位 1 のときの導体 $j$ の電荷)(第3の等号)。(講義ノートの「$\nabla\bm{E}_i$」は $\nabla\cdot\bm{E}_i$ の意味です。)</p>
+    </div>
+    <p>そのまま素通りしてしまうかもしれない関係式だが、これはかなり<b>非自明なこと</b>を述べています。特に導体たちは完全に任意の形状をしていてよいことを思い出してほしい。いびつな形状の二つの導体 1,2 があったときに、「導体 1 に電荷 $Q$ を帯電させた際の導体 2 の表面位置の電位」と「導体 2 に電荷 $Q$ を帯電させた際の導体 1 の表面位置の電位」とが等しいということを、相反定理は主張しています。</p>
+    <figure class="fig">
+      <svg viewBox="0 0 640 250" width="640" role="img" aria-label="グリーンの相反定理"><path d="M20 100 C20 55 112 61 112 100 C112 142 20 136 20 100 Z" style="fill:var(--thm);fill-opacity:0.3;stroke:var(--thm);stroke-width:2.4"/><path d="M172 108 C172 72 248 76.8 248 108 C248 141.6 172 136.8 172 108 Z" style="fill:var(--muted);fill-opacity:0.18;stroke:var(--muted);stroke-width:2.4"/><text class="tj" x="66" y="105" style="text-anchor:middle;font-weight:700">1</text><text class="tj" x="210" y="113" style="text-anchor:middle;font-weight:700">2</text><text class="tt" x="66" y="52" style="text-anchor:middle;fill:var(--thm)">電荷 Q を与える</text><circle cx="174" cy="108" r="4.5" style="fill:var(--text)"/><text class="tm" x="210" y="170" style="text-anchor:middle">導体2の表面の電位 φ</text><line x1="174" y1="112" x2="210" y2="156" style="stroke:var(--muted);stroke-width:1;stroke-dasharray:3 3"/><text class="tj" x="290" y="112" style="text-anchor:middle;font-size:28px">＝</text><path d="M330 100 C330 55 422 61 422 100 C422 142 330 136 330 100 Z" style="fill:var(--muted);fill-opacity:0.18;stroke:var(--muted);stroke-width:2.4"/><path d="M482 108 C482 72 558 76.8 558 108 C558 141.6 482 136.8 482 108 Z" style="fill:var(--accent);fill-opacity:0.3;stroke:var(--accent);stroke-width:2.4"/><text class="tj" x="376" y="105" style="text-anchor:middle;font-weight:700">1</text><text class="tj" x="520" y="113" style="text-anchor:middle;font-weight:700">2</text><text class="tt" x="520" y="52" style="text-anchor:middle;fill:var(--accent)">電荷 Q を与える</text><circle cx="420" cy="100" r="4.5" style="fill:var(--text)"/><text class="tm" x="376" y="170" style="text-anchor:middle">導体1の表面の電位 φ</text><line x1="420" y1="104" x2="376" y2="156" style="stroke:var(--muted);stroke-width:1;stroke-dasharray:3 3"/><text class="tt" x="10" y="214">どんな形の導体でも、「1 に Q を与えたときの 2 の電位」=「2 に Q を与えたときの 1 の電位」。</text><text class="tm" x="10" y="236">これが c_ij = c_ji(容量係数が対称)の意味。</text></svg>
+      <figcaption>グリーンの相反定理(電位係数の対称性 $p_{12}=p_{21}$ としての表現)。</figcaption>
+    </figure>
+    <div class="box supp">
+      <div class="label">講義ノートにない補足:相反定理の言い換えと、例(一般に知られた事実)</div>
+      <p>電位係数の言葉では:導体 1 に電荷 $Q$ を与えて、他の導体は電荷 0 のとき、導体 2 の電位は $p_{21}Q$。導体 2 に $Q$ を与えて他は電荷 0 のときの導体 1 の電位は $p_{12}Q$。$p_{12}=p_{21}$ なので、この2つは等しい(図)。</p>
+      <p><b>例1:孤立した導体球</b>(半径 $l$):電位 $\phi=\dfrac{Q}{4\pi\varepsilon_0l}$ なので $c=4\pi\varepsilon_0l$(1つだけなので $1\times1$ の行列)。<b>例2:平行板コンデンサー</b>($C=\varepsilon_0S/l$):板 1,2 の電荷は $Q_1=C(\phi_1-\phi_2)$、$Q_2=-C(\phi_1-\phi_2)$ なので $c_{11}=C,\ c_{12}=-C,\ c_{21}=-C,\ c_{22}=C$。確かに $c_{12}=c_{21}$ で対称。<b>符号の傾向</b>:対角成分 $c_{ii}\gt0$(自分に電位を与えれば正の電荷が集まる)、非対角成分 $c_{ij}\lt0$($j$ の電位を上げると、$i$ には逆符号の電荷が誘導される)。</p>
+    </div>
+
+    <!-- ===================== 4 ===================== -->
+    <h2 id="s4">4. 具体例で練習(講義ノートにない補足) <span class="page-tag">補足</span></h2>
+    <p>この節は、講義ノートの問題 [4-4] とは別に、私が作った練習問題と解答です。</p>
+
+    <div class="box ex">
+      <div class="label">問題 P:コンデンサーの力とエネルギー</div>
+      <p>面積 $S=100\ \mathrm{cm^2}$、間隔 $l=1\ \mathrm{mm}$ の平行板コンデンサーに、$Q=10\ \mathrm{nC}$ を蓄える。(1) 電場 $E$、(2) 蓄えられたエネルギー $U$、(3) 板が互いに引き合う力 $F$ を求めよ。$\varepsilon_0=8.85\times10^{-12}\ \mathrm{F/m}$。</p>
+    </div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>$S=0.01\ \mathrm{m^2}$、$l=10^{-3}\ \mathrm{m}$、$Q=10^{-8}\ \mathrm{C}$。(1) $E=\dfrac{Q}{\varepsilon_0S}=\dfrac{10^{-8}}{8.85\times10^{-14}}\approx1.13\times10^5\ \mathrm{V/m}$。(2) $U=\dfrac{Q^2l}{2\varepsilon_0S}=\dfrac{10^{-16}\times10^{-3}}{1.77\times10^{-13}}\approx5.6\times10^{-7}\ \mathrm{J}$。(3) $F=\dfrac12QE\approx0.5\times10^{-8}\times1.130\times10^5\approx5.65\times10^{-4}\ \mathrm{N}$(4.10)。(確認:$F=\dfrac{dU}{dl}=\dfrac{Q^2}{2\varepsilon_0S}=\dfrac{10^{-16}}{1.77\times10^{-13}}\approx5.65\times10^{-4}\ \mathrm{N}$。2つの求め方で一致します。)</p></div>
+
+    <div class="box ex">
+      <div class="label">問題 Q:容量係数の行列</div>
+      <p>2つの導体の容量係数が $c=\begin{pmatrix}3&-1\\-1&2\end{pmatrix}$(単位は適当)であるとき、(1) 電位係数 $p$、(2) 導体 1 に電荷 1、導体 2 に電荷 0 を与えたときの各導体の電位を求めよ。</p>
+    </div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>(1) $\det c=3\cdot2-(-1)(-1)=5$。$p=c^{-1}=\dfrac15\begin{pmatrix}2&1\\1&3\end{pmatrix}$(対称!)。確かめ:$cp=\dfrac15\begin{pmatrix}6-1&3-3\\-2+2&-1+6\end{pmatrix}=I$。(2) $\phi=pQ=\dfrac15\begin{pmatrix}2&1\\1&3\end{pmatrix}\begin{pmatrix}1\\0\end{pmatrix}=\begin{pmatrix}2/5\\1/5\end{pmatrix}$。導体 2 は電荷を持たなくても、導体 1 の影響で正の電位 $1/5$ になる。</p></div>
+
+    <!-- ===================== 5 ===================== -->
+    <h2 id="s5">5. まとめ(この回で覚えること)</h2>
+    <ul>
+      <li><b>導体表面の電荷にはたらく力</b>は、外側の電場 $E$ の<b>半分</b> $E/2$(単位面積あたり $\tfrac12\varepsilon_0E^2$、導体を外に引く向き)。電荷が自分自身の作る電場からは力を受けないため。</li>
+      <li><b>平行板コンデンサー</b>:$U=\dfrac{Q^2l}{2\varepsilon_0S}$。板を $\Delta l$ 引き離すときのエネルギーの増加から、板にはたらく力 $QE^*$ の $E^*=E/2$ が確かめられる。</li>
+      <li><b>電荷一定</b>(孤立)と<b>電位差一定</b>(電池につなぐ)では、板を引き離したときの電場のエネルギーの変化の符号が逆。外からする仕事は同じで、差は電池が受け取る。</li>
+      <li><b>容量係数</b> $c_{ij}$($Q_i=\sum_jc_{ij}\phi_j$)と<b>電位係数</b> $p_{ij}$(逆行列、$\phi_i=\sum_jp_{ij}Q_j$)。<b>グリーンの相反定理</b> $c_{ij}=c_{ji}$($p_{ij}=p_{ji}$)は、任意の形の導体に成り立つ非自明な対称性:「1 に $Q$ を与えたときの 2 の電位」=「2 に $Q$ を与えたときの 1 の電位」。</li>
+    </ul>
+
+    <!-- ===================== 6 ===================== -->
+    <h2 id="s6">6. この回のノートについてのメモ</h2>
+    <p>板書の写真ではなく、<b>文章で書かれた講義ノート(PDF)</b>の p.29〜p.30(§4.3〜§4.4)をもとにまとめました。ページ番号は、講義ノートの各ページ下に印刷されている番号です。講義ノートのPDFは p.30 までで、§4.4 は(4.18)の説明のところで終わっています(その先があるかは分かりません)。補足として足した部分(黄色の枠)、直感の説明(緑の枠)、基礎ページの内容、問 [4-4] の解答、「具体例で練習」の問題は、Claude が書き足したもので、講義ノートにはありません。図20 は描き直しました。</p>
+    <p><b>回の分け方</b>:講義ノートの §4 を、§4.1〜§4.2 を第6回、§4.3〜§4.4 をこの回に分けました(内容と分量から判断したものです)。</p>
+    <p>講義ノートの記述で、誤り(または誤記)と判断して直した箇所、読み替えた箇所は次のとおりです。</p>
+    <ol>
+      <li><b>問 [4-4] の設定(p.30)</b>:導体球が接地されているか、電荷 $q$ が固定されているかは、問題文に書かれていません。例 4.2 の設定(接地された導体球、点電荷 $q$ は $(a,0,0)$)をそのまま使い、球だけを動かすと読みました。球が電荷に重ならないよう $|a-x|\gt l$ も補いました。</li>
+      <li><b>(4.17)(p.30)</b>:「$\int d\bm{r}(\nabla\bm{E}_i)\psi_j$」の「$\nabla\bm{E}_i$」は発散 $\nabla\cdot\bm{E}_i$ の意味と読みました(本文の説明でも「ガウスの法則により $\nabla\bm{E}_i$ は電荷が存在する導体表面でのみ非ゼロ」とあり、発散のこと)。</li>
+      <li><b>§4.3 の「接地」(p.29–30)</b>:コンデンサーの両板を「接地した」とありますが、板の電位差を一定に保つのは電池なので、「電位差を保つ電池につなぐ」ことと読み、本文もそのように書き直しました(講義ノートにも「電池などにつながれている」とあります)。</li>
+      <li><b>§4.3 の「$\Delta U'$」の電池の仕事(p.30)</b>:「電池が両者の和の仕事 $\varepsilon_0E^2S\Delta l$ を受け取った」の意味を、補足の枠でエネルギー収支として確認しました。</li>
+      <li><b>講義ノートで証明が省略されていた部分</b>:$E/2$ の式変形、(4.12)、[4-4]、(4.17) の各等号は、講義ノートの記述が短いので、補足の枠で補いました(各計算に検算を付けてあります)。</li>
+    </ol>
+
+    <nav class="pager">
+      <a href="week-06.html">← 前の週</a>
+      <a href="../index.html">一覧へ</a>
+      <span class="disabled">次の週 →</span>
+    </nav>
+
+  </main>
+
+  <footer>© Aセメまとめノート</footer>
+</body>
+</html>
