@@ -326,7 +326,7 @@
     </div>
 
     <p>「$(a,b)$ を含むある開集合」とは、$(a,b)$ のまわりをぐるっと(少しでも)囲む範囲、という意味です。長方形 $(a-\varepsilon,a+\varepsilon)\times(b-\varepsilon,b+\varepsilon)$(縁を含まない)も開集合です。</p>
-    <p class="used-in">この回で使う場所:<a href="weeks/week-01.html#w-eps" data-xref>1.4 開区間・近傍・$\varepsilon$</a><a href="weeks/week-01.html#w-open" data-xref>10.2 開集合</a><a href="weeks/week-03.html#w-open" data-xref>第3回 1.2 近傍・開集合・閉集合・有界</a></p>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-01.html#w-eps" data-xref>1.4 開区間・近傍・$\varepsilon$</a><a href="weeks/week-01.html#w-open" data-xref>10.2 開集合</a><a href="weeks/week-02.html#w-opendef" data-xref>第2回 10.2 閉集合の定義</a><a href="weeks/week-03.html#w-open" data-xref>第3回 1.2 近傍・開集合・閉集合・有界</a></p>
 
     <!-- ===================== e: 2変数の連続性 ===================== -->
     <h2 id="cont2">e. 2変数関数の連続性</h2>
@@ -1271,6 +1271,26 @@
       <div class="label">例</div>
       <p>$A=\{1,2,3\}$、$B=\{2,3,5\}$:$\bar a=2$、$\bar b=\tfrac{10}3$、$V(A)=\tfrac13(1+0+1)=\tfrac23$、$\operatorname{Cov}(A,B)=\tfrac13\bigl[(-1)(-\tfrac43)+0+1\cdot\tfrac53\bigr]=1$。右上がりなので正。</p>
     </div>
+    <div class="box intuit">
+      <div class="label">直感で理解する:十字で4つに分ける</div>
+      <p>散布図に、平均の点 $(\bar a,\bar b)$ を中心とする十字を引くと、平面が4つに分かれます。右上の点は「$a$ も $b$ も平均より大きい」ので $(a_i-\bar a)(b_i-\bar b)\gt0$、左下の点は「どちらも小さい」ので、負 × 負で、やはり $\gt0$。左上と右下の点は、正 × 負で $\lt0$ です。共分散は、これらを全部足して $n$ で割ったものなので、点が右上がりに並んでいれば(右上・左下が多ければ)正、右下がりなら負、まんべんなく散らばっていれば打ち消し合って $0$ に近くなります。</p>
+      <p>分散 $V(A)=\operatorname{Cov}(A,A)$ は、「ずれ × ずれ」をいつも同じ符号どうしでかけるので、必ず $0$ 以上です。</p>
+    </div>
+    <figure class="fig">
+      <svg viewBox="0 0 380 250" width="380" role="img" aria-label="共分散の十字">
+        <line class="ax" x1="30" y1="225" x2="365" y2="225"/><line class="ax" x1="30" y1="225" x2="30" y2="15"/>
+        <text class="t" x="355" y="243">a</text><text class="t" x="14" y="24">b</text>
+        <line class="dash" x1="190" y1="20" x2="190" y2="225"/><line class="dash" x1="30" y1="120" x2="365" y2="120"/>
+        <text class="tm" x="196" y="215">a = ā</text><text class="tm" x="36" y="113">b = b̄</text>
+        <text class="ta" x="300" y="45">右上:正</text><text class="ta" x="60" y="200">左下:正</text>
+        <text class="tt" x="60" y="45">左上:負</text><text class="tt" x="300" y="200">右下:負</text>
+        <circle class="dotb" cx="80" cy="185" r="4.5"/><circle class="dotb" cx="120" cy="170" r="4.5"/><circle class="dotb" cx="150" cy="150" r="4.5"/>
+        <circle class="dotb" cx="175" cy="135" r="4.5"/><circle class="dotb" cx="215" cy="108" r="4.5"/><circle class="dotb" cx="245" cy="95" r="4.5"/>
+        <circle class="dotb" cx="280" cy="70" r="4.5"/><circle class="dotb" cx="320" cy="62" r="4.5"/><circle class="dot" cx="140" cy="100" r="4.5"/>
+        <circle class="dot" cx="250" cy="150" r="4.5"/><circle class="dot" cx="190" cy="120" r="5.5"/>
+      </svg>
+      <figcaption>平均の点(中央の橙)で十字を引くと、右上・左下の点(青)は共分散を増やし、左上・右下の点(橙)は減らします。この図では右上・左下が多いので、共分散は正です。</figcaption>
+    </figure>
     <p>(回帰直線の傾きは $\operatorname{Cov}(A,B)/V(A)$。第4回で、最小二乗法として導く。)</p>
     <p class="used-in">この回で使う場所:<a href="weeks/week-04.html#w-stats" data-xref>第4回 1.5 平均・分散・共分散</a><a href="weeks/week-04.html#s7" data-xref>第4回 7. 最小二乗法</a></p>
 

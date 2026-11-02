@@ -135,10 +135,11 @@
     <div class="box proof"><div class="label">解答</div>
       <p><b>答え:</b> 一様連続である。</p>
       <p>$p=(x,y),\ q=(x',y')\in D$ とする。$0\lt x,x',y,y'\lt1$ なので、$x+x'\lt2,\ y+y'\lt2$。したがって
-      $$|f(p)-f(q)|=\bigl|(x^2-x'^2)+(y^2-y'^2)\bigr|\le|x-x'|\,(x+x')+|y-y'|\,(y+y')\lt2|x-x'|+2|y-y'|.$$
+      $$|f(p)-f(q)|=\bigl|(x^2-x'^2)+(y^2-y'^2)\bigr|\le|x-x'|\,(x+x')+|y-y'|\,(y+y')\le2|x-x'|+2|y-y'|.$$
+      (最後を「$\lt$」でなく「$\le$」にしているのは、$p=q$ のとき両辺が $0$ になるからです。)
       ここで $|x-x'|\le|p-q|,\ |y-y'|\le|p-q|$($|p-q|=\sqrt{(x-x')^2+(y-y')^2}$ の一部だから)なので、
-      $$|f(p)-f(q)|\lt4\,|p-q|.$$
-      任意の $\varepsilon\gt0$ に対して、$\delta=\varepsilon/4$ とおくと、$|p-q|\lt\delta$ ならば $|f(p)-f(q)|\lt4\delta=\varepsilon$。この $\delta$ は $\varepsilon$ だけで決まり、$p,q$ によらない。したがって $f$ は $D$ 上で一様連続である。 $\square$</p>
+      $$|f(p)-f(q)|\le4\,|p-q|.$$
+      任意の $\varepsilon\gt0$ に対して、$\delta=\varepsilon/4$ とおくと、$|p-q|\lt\delta$ ならば $|f(p)-f(q)|\le4|p-q|\lt4\delta=\varepsilon$。この $\delta$ は $\varepsilon$ だけで決まり、$p,q$ によらない。したがって $f$ は $D$ 上で一様連続である。 $\square$</p>
     </div>
     <details><summary>別解1:平均値の定理(概念 3)</summary>
       <div class="box proof"><div class="label">別解</div>
