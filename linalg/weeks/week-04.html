@@ -85,7 +85,10 @@
       (T) $1\le i\lt j\le n$ について、第 $i$ 行と第 $j$ 行を入れかえると、$\det$ は $-1$ 倍になる。</p>
     </div>
     <div class="box supp"><div class="label">板書にない補足:(T) が定義から出る理由</div>
-      <p>第 $i$ 行と第 $j$ 行を入れかえた行列の定義式で、和の各項 $\sigma$ を $\sigma\circ(i,j)$ に置きかえると、元の行列の項と1対1に対応し、符号だけが $\operatorname{sgn}(\sigma(i,j))=-\operatorname{sgn}(\sigma)$ と反転します(系2.2.5)。よって全体が $-1$ 倍。</p></div>
+      <p>$n=2$ で見ると分かりやすい:$\det\begin{pmatrix}c&d\\a&b\end{pmatrix}=cb-da=-(ad-bc)$。2つの項 $ad$ と $bc$ が、符号を入れかえて現れます。</p>
+      <p>一般には、第 $i$ 行と第 $j$ 行を入れかえた行列を $B$ とし、$\tau=(i,j)$ とおくと、$B$ の第 $k$ 行は $A$ の第 $\tau(k)$ 行($b_{kl}=a_{\tau(k)l}$)。$B$ の定義式の、置換 $\sigma$ の項は
+      $$b_{1\sigma(1)}\cdots b_{n\sigma(n)}=a_{\tau(1)\sigma(1)}\cdots a_{\tau(n)\sigma(n)}.$$
+      掛ける順番を並べかえて、行の番号 $m=\tau(k)$ の順に書くと($k=\tau(m)$)、これは $a_{1\,\sigma\tau(1)}\cdots a_{n\,\sigma\tau(n)}$、つまり <b>$A$ の定義式の、置換 $\sigma\tau$ の項</b>です。$\sigma$ が $\mathfrak S_n$ 全体を動けば $\sigma\tau$ も全体を1回ずつ動き、符号は $\operatorname{sgn}(\sigma\tau)=-\operatorname{sgn}(\sigma)$(系2.2.5)。よって、同じ項が全部、符号を反転して現れ、$\det B=-\det A$。</p></div>
     <div class="box intuit">
       <div class="label">直感で理解する:向きが逆になる</div>
       <p>2次元で、$(a,c)$ から $(b,d)$ へ反時計回りなら面積に $+$、時計回りなら $-$ の符号がつきます。2本のベクトルの順番を入れかえると回る向きが逆になるので、符号が反転します。</p>
@@ -135,7 +138,10 @@
     <!-- ===================== 5 ===================== -->
     <h2 id="s5">5. 基本行列の行列式と、掃き出しによる計算 <span class="page-tag">板書 p.10–11</span></h2>
     <p>板書 p.10:基本行列は単位行列に行基本変形を施したものなので、定理2.4.1 を $A=I_n$ に使って
-    $$\det D_i(\lambda)=\lambda\ (\lambda\ne0),\qquad\det T_{ij}(\lambda)=1,\qquad\det S_{ij}=-1.$$</p>
+    $$\det D_i(\lambda)=\lambda\ (\lambda\ne0),\qquad\det T_{ij}(\lambda)=1,\qquad\det S_{ij}=-1.$$
+    (たとえば $T_{ij}(\lambda)$ は、$I_n$ に「ある行の $\lambda$ 倍を別の行に足す」操作をしたものなので、$\det$ は $\det I_n=1$ のまま。$S_{ij}$ は $I_n$ の2行を入れかえたものなので $-1$。)</p>
+    <div class="box ex"><div class="label">例($n=2$)</div>
+      <p>$\det D_1(5)=\det\begin{pmatrix}5&0\\0&1\end{pmatrix}=5$、$\det T_{12}(3)=\det\begin{pmatrix}1&3\\0&1\end{pmatrix}=1$、$\det S_{12}=\det\begin{pmatrix}0&1\\1&0\end{pmatrix}=-1$。</p></div>
     <div class="box thm">
       <div class="label">系(板書では「系2.4.2」)</div>
       <p>$E$ を $n\times n$ の基本行列、$A\in M_n(\mathbb C)$ とすると、$\det(EA)=\det(E)\det(A)$。</p>
@@ -158,6 +164,9 @@
     </div>
     <p><b>意味:</b>1列目が「左上の $a$ 以外 0」なら、行列式は $a$ と、右下の小さい行列 $A$ の行列式の積。1つサイズを下げて計算できる。<br>
     <b>直感:</b> 1つ目の辺が $x_1$ 軸方向に長さ $a$ で、残りの辺が $x_1$ 方向の成分を除くと $A$ の作る図形になっているので、体積は「$a$ × 残りの部分の体積」(「底面積 × 高さ」の一般化)。</p>
+    <div class="box ex"><div class="label">まず例で確かめる</div>
+      <p>$\det\begin{pmatrix}2&5&1\\0&1&3\\0&2&4\end{pmatrix}$ をサラスの方法で計算すると $2\cdot1\cdot4+5\cdot3\cdot0+1\cdot0\cdot2-1\cdot1\cdot0-2\cdot3\cdot2-5\cdot0\cdot4=8-12=-4$。系2.4.4 を使えば $2\cdot\det\begin{pmatrix}1&3\\2&4\end{pmatrix}=2\cdot(4-6)=-4$ で一致。右上の $5,1$ は結果に効きません。</p></div>
+    <p><b>証明の方針:</b>右下の $A$ だけを掃き出して、(i) 0 だけの行が出るか、(ii) 単位行列になるか、に分ける。掃き出しの操作は、大きい行列でも第1行に触れない形で同時にできる、というのがポイントです。</p>
     <div class="box proof"><div class="label">証明(板書 p.13–16)</div>
       <p>$A$ の行標準形を $A'$ とし、$(n-1)\times(n-1)$ 基本行列 $E_1,\dots,E_l$ で $E_l\cdots E_1A=A'$ とする。$E_i'=\begin{pmatrix}1&0\\0&E_i\end{pmatrix}$($1\le i\le l$)とおくと、これらも $n\times n$ の基本行列で、$\det E_i'=\det E_i$。行の操作は第1行に触れないので
       $$E_l'\cdots E_1'\begin{pmatrix}a&\ast\\0&A\end{pmatrix}=\begin{pmatrix}a&\ast\\0&E_l\cdots E_1A\end{pmatrix}=\begin{pmatrix}a&\ast\\0&A'\end{pmatrix}.$$</p>
@@ -205,6 +214,7 @@
       <div class="label">補題 2.5.2</div>
       <p>基本行列の転置は、同種の基本行列になる:$D_i(\mu)^{\mathsf T}=D_i(\mu)$、$S_{ij}^{\mathsf T}=S_{ij}$、$T_{ij}(\lambda)^{\mathsf T}=T_{ji}(\lambda)$。よって基本行列 $E$ について $\det E^{\mathsf T}=\det E$。</p>
     </div>
+    <p><b>理由:</b>$D_i(\mu)$ と $S_{ij}$ は、対角線について対称な形なので、転置しても変わらない。$T_{ij}(\lambda)$ は $(i,j)$ 成分だけに $\lambda$ がある単位行列なので、転置すると $\lambda$ が $(j,i)$ 成分に移り、$T_{ji}(\lambda)$ になる。例:$\begin{pmatrix}1&3\\0&1\end{pmatrix}^{\mathsf T}=\begin{pmatrix}1&0\\3&1\end{pmatrix}$。どちらも $\det=1$。</p>
     <div class="box thm">
       <div class="label">系(板書では「系2.6.2」)</div>
       <p>$A\in M_n(\mathbb C)$ に対して $\det A^{\mathsf T}=\det A$。</p>

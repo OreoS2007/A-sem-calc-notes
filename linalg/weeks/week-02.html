@@ -54,6 +54,8 @@
       <tr><td>エルミート双線形形式</td><td>↔</td><td>エルミート行列 $A^{\mathsf T}=\overline A$</td></tr>
       <tr><td>エルミート内積</td><td>↔</td><td>正定値なエルミート行列</td></tr>
     </table>
+    <p>(「正定値な行列」とは、$0$ でないどんな $v$ についても $v^{\mathsf T}A\,\overline v\gt0$ となる行列のこと。内積の正定値性 (P1)(P2) を、行列の言葉に言い直したものです。板書では言葉だけで、定義は出てきません。)</p>
+    <p><b>この回の流れを一言で:</b>「内積」は抽象的な規則ですが、基底を1つ決めると「数の表(行列)」になります(§2〜4)。そして、表がいちばん簡単な単位行列になる基底(正規直交基底)は、いつでも作れます(§5〜8)。</p>
     <div class="box thm">
       <div class="label">この回のゴール</div>
       <p>① $K^n$ の(エルミート)双線形形式は、グラム行列 $A=(\langle e_i,e_j\rangle)$ を使って $\langle v,w\rangle=v^{\mathsf T}A\,\overline w$ と書ける(逆に、行列があれば形式が作れる)。<br>
@@ -81,6 +83,13 @@
       <p>$\R$ 上:$\langle\ ,\ \rangle:V\times V\to\R$ が<b>双線形</b>(各変数について線形)なら双線形形式、さらに<b>対称</b>($\langle v,w\rangle=\langle w,v\rangle$)なら対称双線形形式、さらに<b>正定値</b>($v\ne0\Rightarrow\langle v,v\rangle\gt0$)なら内積。</p>
       <p>$\mathbb C$ 上:第1変数について線形、第2変数について<b>共役線形</b>($\langle v,\alpha w\rangle=\bar\alpha\langle v,w\rangle$)なのが<b>エルミート双線形形式</b>(第1回の (HBL1)〜(HBL4))。<b>エルミート対称</b> $\langle w,v\rangle=\overline{\langle v,w\rangle}$ と正定値をみたせば<b>エルミート内積</b>。$\mathbb C^n$ の標準エルミート内積は $\langle v,w\rangle=\sum v_i\overline{w_i}$。ノルム $\|v\|=\sqrt{\langle v,v\rangle}$。</p>
       <p><b>直感:</b> 第2変数に共役をつけるのは、$\langle v,v\rangle=\sum|v_i|^2$ を必ず 0 以上の実数(長さの2乗)にするため。</p>
+    </div>
+    <div class="box note-box">
+      <div class="label">用語の注意:「(エルミート)双線形形式」の読み方</div>
+      <p>この回の板書では、実の場合と複素の場合を、かっこ書きで一度に述べています。読み方は次のとおりです。</p>
+      <p>・「<b>(エルミート)双線形形式</b>」:$K=\R$ なら双線形形式((BL1)〜(BL4))、$K=\mathbb C$ なら<b>第1変数について線形・第2変数について共役線形</b>な形式((HBL1)〜(HBL4)。<b>半双線形形式</b>ともいう)。対称性はまだ要求しない。定理1.4.2 はこの意味。</p>
+      <p>・定理1.4.5 の「<b>エルミート双線形形式</b>」は、それに<b>エルミート対称性</b> (HS) $\langle w,v\rangle=\overline{\langle v,w\rangle}$ を加えたもの(実の場合の「対称双線形形式」にあたる)。</p>
+      <p>・さらに正定値性を加えると、(エルミート)内積。</p>
     </div>
 
     <h3 id="w-basis2">1.3 基底・次元・部分空間・一次結合</h3>
@@ -123,6 +132,12 @@
       (2) $A\in M_n(K)$ に対し $\langle v,w\rangle=v^{\mathsf T}A\,\overline w$($v,w\in K^n$)と定めると、$\langle\ ,\ \rangle$ は $K^n$ 上の(エルミート)双線形形式になる。</p>
     </div>
     <p>($K=\R$ のときは $\overline w=w$ なので、$\langle v,w\rangle=v^{\mathsf T}Aw$。)</p>
+    <div class="box intuit">
+      <div class="label">直感で理解する:展開すると「九九の表」で重みをつけた和になる</div>
+      <p>$v=\sum_iv_ie_i$、$w=\sum_jw_je_j$ を代入して、双線形性で全部ばらすと
+      $$\langle v,w\rangle=\sum_{i,j}v_i\,\overline{w_j}\,\langle e_i,e_j\rangle.$$
+      ($v$ の係数は第1変数からそのまま、$w$ の係数は第2変数から出るので共役がつく。)この和は、「$v_i$ と $\overline{w_j}$ を掛けて、表の $(i,j)$ の数 $\langle e_i,e_j\rangle$ で重みをつけて、全部足す」という計算で、行列の積 $v^{\mathsf T}A\overline w$ がちょうどそれを計算します。下の証明は、この展開を行列の積の形で順にたどったものです。</p>
+    </div>
     <div class="box proof"><div class="label">証明(板書 p.5–6)</div>
       <p>$v=(v_1,\dots,v_n)^{\mathsf T}$、$w=(w_1,\dots,w_n)^{\mathsf T}$ とする。</p>
       <p><b>(1)</b> $A=(\langle e_i,e_j\rangle)$ だから、$A\overline w$ の第 $i$ 成分は
@@ -138,7 +153,8 @@
       <p>$K^n$ 上の(エルミート)双線形形式を与えることと、$K$ 係数の $n\times n$ 行列を与えることは<b>同等</b>である。</p>
     </div>
     <div class="box ex"><div class="label">例</div>
-      <p>$A=\begin{pmatrix}2&1\\1&3\end{pmatrix}$ なら、$\R^2$ 上 $\langle v,w\rangle=v^{\mathsf T}Aw=2v_1w_1+v_1w_2+v_2w_1+3v_2w_2$。確かめ:$\langle e_1,e_2\rangle=1$(= $A$ の $(1,2)$ 成分)、$\langle e_2,e_2\rangle=3$。</p></div>
+      <p>$A=\begin{pmatrix}2&1\\1&3\end{pmatrix}$ なら、$\R^2$ 上 $\langle v,w\rangle=v^{\mathsf T}Aw=2v_1w_1+v_1w_2+v_2w_1+3v_2w_2$。確かめ:$\langle e_1,e_2\rangle=1$(= $A$ の $(1,2)$ 成分)、$\langle e_2,e_2\rangle=3$。</p>
+      <p>複素の例:$\mathbb C^2$ の標準エルミート内積はグラム行列が単位行列 $I$ なので、$v^{\mathsf T}I\,\overline w=v_1\overline{w_1}+v_2\overline{w_2}$ で、第1回の式に戻ります。$v=(1,i)$、$w=(i,1)$ なら $\langle v,w\rangle=1\cdot\overline i+i\cdot\overline 1=-i+i=0$(この2本は直交)。</p></div>
 
     <!-- ===================== 4 ===================== -->
     <h2 id="s4">4. 対称行列・エルミート行列 <span class="page-tag">板書 p.6–9(定義1.4.3〜定理1.4.5)</span></h2>
@@ -158,7 +174,7 @@
       $$\langle v,w\rangle=v^{\mathsf T}Aw=(v^{\mathsf T}Aw)^{\mathsf T}=w^{\mathsf T}A^{\mathsf T}(v^{\mathsf T})^{\mathsf T}=w^{\mathsf T}Av=\langle w,v\rangle.\ \square$$</p></div>
     <div class="box thm">
       <div class="label">定理 1.4.5</div>
-      <p>$\langle\ ,\ \rangle:\mathbb C^n\times\mathbb C^n\to\mathbb C$ が<b>エルミート</b>双線形形式(エルミート対称な、エルミート双線形形式)になるための必要十分条件は、そのグラム行列がエルミート行列になることである。</p>
+      <p>$\mathbb C^n$ 上の半双線形形式 $\langle\ ,\ \rangle:\mathbb C^n\times\mathbb C^n\to\mathbb C$ が<b>エルミート対称</b>($\langle w,v\rangle=\overline{\langle v,w\rangle}$)になるための必要十分条件は、そのグラム行列がエルミート行列になることである。(板書の言い方では「エルミート双線形形式になる」。上の用語の注意を参照。)</p>
     </div>
     <div class="box supp"><div class="label">板書にない補足:定理1.4.5 の証明</div>
       <p>(⇒) $\langle e_j,e_i\rangle=\overline{\langle e_i,e_j\rangle}$ より $a_{ji}=\overline{a_{ij}}$、すなわち $A^{\mathsf T}=\overline A$。<br>
@@ -225,7 +241,9 @@
       <p><b>直交:</b>$1\le j\le n$ について(第1変数が線形なほうで計算する)
       $$\langle v_{n+1}',v_j\rangle=\langle v_{n+1},v_j\rangle-\sum_{i=1}^n\langle v_{n+1},v_i\rangle\langle v_i,v_j\rangle=\langle v_{n+1},v_j\rangle-\langle v_{n+1},v_j\rangle=0$$
       ($\langle v_i,v_j\rangle$ は $i=j$ のときだけ 1)。よって $\langle v_{n+1}'',v_j\rangle=0$、$\langle v_j,v_{n+1}''\rangle=\overline{0}=0$。</p>
-      <p><b>基底になる:</b>$v_{n+1}''$ は $v_1,\dots,v_{n+1}$ の一次結合で、逆に $v_{n+1}$ も $v_1,\dots,v_n,v_{n+1}''$ の一次結合なので、$v_1,\dots,v_n,v_{n+1}''$ は $W_2$ を生成する。$n+1$ 個で $\dim W_2=n+1$、しかも(次の第3回の冒頭で示すように)正規直交なベクトルは一次独立なので、基底。 $\square$</p></div>
+      <p><b>基底になる:</b>$v_{n+1}''$ の定義の式を $v_{n+1}$ について解くと
+      $$v_{n+1}=\|v_{n+1}'\|\,v_{n+1}''+\sum_{i=1}^n\langle v_{n+1},v_i\rangle v_i$$
+      なので、$v_{n+1}$ は $v_1,\dots,v_n,v_{n+1}''$ の一次結合。$v_1,\dots,v_n$ はもちろんそう。よって $v_1,\dots,v_n,v_{n+1}''$ は $W_2=\langle v_1,\dots,v_{n+1}\rangle_K$ を生成する。$W_2$ は一次独立な $n+1$ 本で生成されているので $\dim W_2=n+1$。<b>次元と同じ個数のベクトルで生成していれば、自動的に基底</b>(春学期の事実)。 $\square$</p></div>
 
     <!-- ===================== 8 ===================== -->
     <h2 id="s8">8. シュミットの直交化法 <span class="page-tag">板書 p.16–18(定理1.5.5)</span></h2>
@@ -245,7 +263,9 @@
       ② $\tilde v_2=v_2-\langle v_2,v_1'\rangle v_1'$、$v_2'=\dfrac{\tilde v_2}{\|\tilde v_2\|}$。<br>
       ③ $\tilde v_3=v_3-\langle v_3,v_1'\rangle v_1'-\langle v_3,v_2'\rangle v_2'$、$v_3'=\dfrac{\tilde v_3}{\|\tilde v_3\|}$。<br>
       … 「それまでに作った方向の成分(影)を全部引いて、長さ 1 にする」を繰り返す。</p></div>
-    <p>(具体例は、次の第3回の板書 p.5–9 で計算されます。)</p>
+    <div class="box ex"><div class="label">小さな例で手順を確かめる</div>
+      <p>$\R^2$ の標準内積で $v_1=(3,4)$、$v_2=(1,0)$ から始めると:① $\|v_1\|=5$ なので $v_1'=\tfrac15(3,4)$。② $v_2$ の $v_1'$ 方向の成分は $\langle v_2,v_1'\rangle=\tfrac35$。影を引いて $\tilde v_2=(1,0)-\tfrac35\cdot\tfrac15(3,4)=\tfrac1{25}(16,-12)$、長さ $\tfrac45$ で割って $v_2'=\tfrac15(4,-3)$。$v_1'$ と $v_2'$ は直交し、どちらも長さ 1 です(9. の問題 C で、途中の計算を詳しく書いています)。</p></div>
+    <p>(3次元のベクトルと、多項式の例は、次の第3回の板書 p.5–9 で計算されます。)</p>
 
     <!-- ===================== 9 ===================== -->
     <h2 id="s9">9. 具体例で練習(板書にない補足) <span class="page-tag">補足</span></h2>

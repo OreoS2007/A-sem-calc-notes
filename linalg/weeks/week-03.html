@@ -164,6 +164,7 @@
       <figcaption>左:平行四辺形の面積 $|ad-bc|$。右:$v_1,v_2,v_3$ の作る平行六面体の体積 $|\det(v_1\ v_2\ v_3)|$。</figcaption>
     </figure>
     <p>板書 p.12:「$n$ 次元でも、平行六面体の体積に符号をつけたものの高次元化が行列式になる。→ <b>重積分の変数変換公式</b>に行列式が出てくる。」</p>
+    <p><b>「符号をつけた」の意味:</b>2次元では、1本目のベクトルから2本目のベクトルへ<b>反時計回り</b>に回るなら $+$、時計回りなら $-$ をつけます(例:$e_1,e_2$ の順なら $\det I=+1$、$e_2,e_1$ の順なら $\det\begin{pmatrix}0&1\\1&0\end{pmatrix}=-1$)。面積そのものは絶対値 $|\det|$ で、符号は「並べた順番の向き」を表します。3次元では、右手系か左手系かで符号が決まります。</p>
     <div class="box supp"><div class="label">板書の注意(p.12)</div>
       <p>$4\times4$ 以上の行列では、サラスの方法を単純に一般化したもの(右下がりの積の和 − 左下がりの積の和)は、行列式に<b>ならない</b>。(4×4 の行列式は 24 項の和ですが、サラス流では 8 項しかありません。)だから、きちんとした定義が必要になります。</p></div>
 
@@ -175,6 +176,10 @@
       <p>全単射 $\sigma:\{1,\dots,n\}\to\{1,\dots,n\}$ を<b>置換</b>(permutation)という。置換全体の集合を $\mathfrak S_n$ と書く。$\sigma_1,\sigma_2\in\mathfrak S_n$ の積を合成 $(\sigma_1\sigma_2)(l)=\sigma_1(\sigma_2(l))$ で定める。</p>
     </div>
     <p>例:$n=3$ なら $\mathfrak S_3$ は $1,2,3$ の並べ替え全部で、$3!=6$ 個。一般に $\mathfrak S_n$ は $n!$ 個。</p>
+    <p><b>書き方:</b>置換は、上の段に $1,\dots,n$、下の段にその行き先を書いて表すことが多いです。たとえば $\sigma(1)=2,\ \sigma(2)=3,\ \sigma(3)=1$ なら
+    $$\sigma=\begin{pmatrix}1&2&3\\2&3&1\end{pmatrix}.$$
+    (行列ではなく、「上の数が下の数へ移る」という対応表です。)</p>
+    <p><b>合成の順番:</b>$\sigma_1\sigma_2$ は「<b>右の $\sigma_2$ を先に</b>、次に $\sigma_1$」です(関数の合成 $f(g(x))$ と同じ)。例:$\sigma_1=(1,2)$、$\sigma_2=(2,3)$ とすると、$(\sigma_1\sigma_2)(2)=\sigma_1(\sigma_2(2))=\sigma_1(3)=3$、$(\sigma_1\sigma_2)(3)=\sigma_1(2)=1$、$(\sigma_1\sigma_2)(1)=\sigma_1(1)=2$。つまり $\sigma_1\sigma_2=\begin{pmatrix}1&2&3\\2&3&1\end{pmatrix}$。順番を逆にした $\sigma_2\sigma_1$ は $\begin{pmatrix}1&2&3\\3&1&2\end{pmatrix}$ で、一般に $\sigma_1\sigma_2\ne\sigma_2\sigma_1$。</p>
     <div class="box def">
       <div class="label">定義 2.2.2(互換)</div>
       <p>$1\le i\lt j\le n$ に対し、<b>互換</b>(transposition)$(i,j)\in\mathfrak S_n$ を、$(i,j)(i)=j$、$(i,j)(j)=i$、$(i,j)(l)=l$($l\ne i,j$)で定める(「$i$ と $j$ だけを入れかえる」)。</p>
@@ -194,7 +199,7 @@
     </div>
     <figure class="fig">
       <svg viewBox="0 0 520 240" width="520" role="img" aria-label="置換の例"><circle cx="60" cy="40" r="4" style="fill:var(--text)"/><text class="t" x="60" y="30" style="text-anchor:middle">1</text><circle cx="60" cy="150" r="4" style="fill:var(--text)"/><text class="t" x="60" y="172" style="text-anchor:middle">1</text><circle cx="130" cy="40" r="4" style="fill:var(--text)"/><text class="t" x="130" y="30" style="text-anchor:middle">2</text><circle cx="130" cy="150" r="4" style="fill:var(--text)"/><text class="t" x="130" y="172" style="text-anchor:middle">2</text><circle cx="200" cy="40" r="4" style="fill:var(--text)"/><text class="t" x="200" y="30" style="text-anchor:middle">3</text><circle cx="200" cy="150" r="4" style="fill:var(--text)"/><text class="t" x="200" y="172" style="text-anchor:middle">3</text><line x1="60" y1="46" x2="125.1" y2="135.2" style="stroke:var(--accent);stroke-width:2;fill:none"/><polygon points="130,142 121.1,137.3 128.3,132.1" style="fill:var(--accent)"/><line x1="130" y1="46" x2="64.9" y2="135.2" style="stroke:var(--accent);stroke-width:2;fill:none"/><polygon points="60,142 61.7,132.1 68.9,137.3" style="fill:var(--accent)"/><line x1="200" y1="46" x2="200" y2="133.6" style="stroke:var(--accent);stroke-width:2;fill:none"/><polygon points="200,142 195.6,133 204.4,133" style="fill:var(--accent)"/><text class="tt" x="130" y="200" style="text-anchor:middle">互換 (1, 2)</text><text class="tm" x="130" y="222" style="text-anchor:middle">sgn = −1</text><circle cx="290" cy="40" r="4" style="fill:var(--text)"/><text class="t" x="290" y="30" style="text-anchor:middle">1</text><circle cx="290" cy="150" r="4" style="fill:var(--text)"/><text class="t" x="290" y="172" style="text-anchor:middle">1</text><circle cx="360" cy="40" r="4" style="fill:var(--text)"/><text class="t" x="360" y="30" style="text-anchor:middle">2</text><circle cx="360" cy="150" r="4" style="fill:var(--text)"/><text class="t" x="360" y="172" style="text-anchor:middle">2</text><circle cx="430" cy="40" r="4" style="fill:var(--text)"/><text class="t" x="430" y="30" style="text-anchor:middle">3</text><circle cx="430" cy="150" r="4" style="fill:var(--text)"/><text class="t" x="430" y="172" style="text-anchor:middle">3</text><line x1="290" y1="46" x2="355.1" y2="135.2" style="stroke:var(--accent);stroke-width:2;fill:none"/><polygon points="360,142 351.1,137.3 358.3,132.1" style="fill:var(--accent)"/><line x1="360" y1="46" x2="425.1" y2="135.2" style="stroke:var(--accent);stroke-width:2;fill:none"/><polygon points="430,142 421.1,137.3 428.3,132.1" style="fill:var(--accent)"/><line x1="430" y1="46" x2="296.9" y2="137.2" style="stroke:var(--accent);stroke-width:2;fill:none"/><polygon points="290,142 294.9,133.3 299.9,140.5" style="fill:var(--accent)"/><text class="tt" x="360" y="200" style="text-anchor:middle">σ:1→2, 2→3, 3→1</text><text class="tm" x="360" y="222" style="text-anchor:middle">= (1,3)(1,2) 互換2個 → sgn = +1</text></svg>
-      <figcaption>置換を「上の番号を下の番号へ移す矢印」で描いた図。互換は2本の線が1回交差。$\sigma=(1\,2\,3\to2\,3\,1)$ は互換2個の合成で、符号 $+1$。</figcaption>
+      <figcaption>置換を「上の番号を下の番号へ移す矢印」で描いた図。互換は線が1回交差する。$\sigma=\begin{pmatrix}1&2&3\\2&3&1\end{pmatrix}$ は互換2個の合成で、符号 $+1$(線の交差も2回)。</figcaption>
     </figure>
     <div class="box intuit">
       <div class="label">直感で理解する:並べ替えの「偶奇」</div>
@@ -213,7 +218,18 @@
     </div>
     <p><b>意味:</b>各行から1つずつ、しかも<b>列がかぶらないように</b>成分を選んで掛け、符号をつけて足す。列の選び方 = 置換 $\sigma$($i$ 行目からは $\sigma(i)$ 列目を選ぶ)。</p>
     <div class="box ex"><div class="label">$n=2$ で確かめ</div>
-      <p>$\mathfrak S_2=\{\mathrm{id},(1,2)\}$。$\mathrm{id}$:$a_{11}a_{22}$(符号 $+$)、$(1,2)$:$a_{12}a_{21}$(符号 $-$)。$\det A=a_{11}a_{22}-a_{12}a_{21}=ad-bc$ ✓。$n=3$ では6項になり、サラスの方法と一致します。</p></div>
+      <p>$\mathfrak S_2=\{\mathrm{id},(1,2)\}$。$\mathrm{id}$:$a_{11}a_{22}$(符号 $+$)、$(1,2)$:$a_{12}a_{21}$(符号 $-$)。$\det A=a_{11}a_{22}-a_{12}a_{21}=ad-bc$ ✓。</p></div>
+    <div class="box ex"><div class="label">$n=3$ で確かめ:サラスの方法の6項が出てくる</div>
+      <table class="cmp">
+        <tr><th>置換 $\sigma$(下の段)</th><th>選ぶ成分</th><th>互換の個数</th><th>符号</th></tr>
+        <tr><td>$1\,2\,3$(恒等)</td><td>$a_{11}a_{22}a_{33}$</td><td>0</td><td>$+$</td></tr>
+        <tr><td>$2\,3\,1$</td><td>$a_{12}a_{23}a_{31}$</td><td>2</td><td>$+$</td></tr>
+        <tr><td>$3\,1\,2$</td><td>$a_{13}a_{21}a_{32}$</td><td>2</td><td>$+$</td></tr>
+        <tr><td>$3\,2\,1$ $=(1,3)$</td><td>$a_{13}a_{22}a_{31}$</td><td>1</td><td>$-$</td></tr>
+        <tr><td>$1\,3\,2$ $=(2,3)$</td><td>$a_{11}a_{23}a_{32}$</td><td>1</td><td>$-$</td></tr>
+        <tr><td>$2\,1\,3$ $=(1,2)$</td><td>$a_{12}a_{21}a_{33}$</td><td>1</td><td>$-$</td></tr>
+      </table>
+      <p>「下の段」は $\sigma(1),\sigma(2),\sigma(3)$ を並べたもので、$i$ 行目からは $\sigma(i)$ 列目の成分を選びます。符号 $+$ の3項がサラスの方法の右下がり、$-$ の3項が左下がりと、ちょうど一致します。</p></div>
     <p>板書 p.16:すぐわかること。対角行列では
     $$\det\begin{pmatrix}a_1&&0\\&\ddots&\\0&&a_n\end{pmatrix}=a_1a_2\cdots a_n.$$
     (恒等置換以外では、対角でない成分(=0)を必ず1つ選ぶので、その項は 0。)特に
