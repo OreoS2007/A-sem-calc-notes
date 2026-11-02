@@ -3,3 +3,6 @@
 reference/
 
 english/_*.html
+
+# Claude Code のエージェント・スキル(非公開)
+.claude/
