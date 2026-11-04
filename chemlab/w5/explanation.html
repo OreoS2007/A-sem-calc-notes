@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>第五週 課題の解答と解説 | 基礎化学実験 | Aセメまとめノート</title>
+  <link rel="stylesheet" href="../../assets/style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]})"></script>
+  <style>
+    .flow { list-style: none; margin: 14px 0 22px; padding: 0; }
+    .flow > li { position: relative; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 8px 12px; margin: 0 0 22px; }
+    .flow > li:not(:last-child)::after { content: "↓"; position: absolute; left: 50%; bottom: -21px; transform: translateX(-50%); color: var(--accent); font-weight: 700; font-size: 1.1rem; line-height: 1; }
+    .flow .sub { display: block; color: var(--muted); font-size: .88em; margin-top: 2px; }
+    .flow .key { color: var(--thm); font-weight: 700; }
+    .cap { display: inline-block; background: var(--accent); color: #fff; border-radius: 6px; padding: 1px 10px; font-weight: 700; font-size: .9rem; margin: 6px 0; }
+    .goal { border: 2px solid var(--accent); border-radius: 10px; padding: 10px 14px; margin: 14px 0; }
+    .goal ol { margin: 4px 0 0; padding-left: 1.4em; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="inner">
+      <a class="site-title" href="../../index.html">Aセメまとめノート</a>
+      <span class="links"><a href="../index.html">基礎化学実験</a><a href="index.html">第五週</a><a href="prep.html">予習ノート</a><a href="explanation.html">課題の解説</a><a href="video.html">解説動画</a></span>
+    </div>
+  </header>
+
+  <main class="note">
+    <h1>第五週(第九回)課題の解答と解説:電気泳動法によるタンパク質の分析</h1>
+    <div class="meta">基礎化学実験 実験9(テキスト p.120)の課題 9.1・9.2。原理は <a href="prep.html">予習ノート</a>、手順は <a href="video.html">解説動画</a></div>
+
+    <nav class="toc">
+      <div class="toc-title">目次</div>
+      <ol>
+        <li><a href="#k91">課題 9.1 SDS 非存在下で電気泳動を行うと、どのような結果になるか</a></li>
+        <li><a href="#k92">課題 9.2 ゲル濃度を 15 %、10 % にしたときのバンドの位置の変化</a></li>
+        <li><a href="#cite">式・内容の出典</a></li>
+      </ol>
+    </nav>
+
+    <h2 id="k91">課題 9.1 SDS 非存在下で電気泳動を行うと、どのような結果になると予想されるか</h2>
+    <div class="box basic">
+      <div class="label">考え方:SDS がしていた 2 つの仕事</div>
+      <p>テキスト 9・3 節②によると、SDS は (1) タンパク質の立体構造を壊して<b>伸びた形</b>にそろえ、(2) 大量の負電荷を与えて、<b>電荷をほぼ質量に比例</b>させる。この 2 つのおかげで、移動の速さが「分子量(大きさ)」だけで決まる。SDS がないと、この 2 つが両方なくなる、と考えればよい。</p>
+      <p><b>直感:</b> SDS は、形も荷札もばらばらな荷物を、同じ形の箱に詰めて、重さに比例した引っぱり力を付ける係。この係がいないと、荷物はそれぞれ勝手な形・勝手な力で動く。</p>
+    </div>
+    <div class="box ex">
+      <div class="label">解答</div>
+      <p>SDS がないと、タンパク質は変性せず、<b>固有の立体構造と、固有の電荷</b>をもったまま泳動される。そのため、移動度は分子量だけでは決まらず、分子量による分離ができなくなる。具体的には次のようになると予想される。</p>
+      <ol>
+        <li><b>電荷の向き・大きさがタンパク質ごとに違う</b>:タンパク質の電荷は、側鎖の酸性・塩基性アミノ酸(テキスト表 9・1)の数と、泳動用緩衝液の pH(8.3)と等電点の関係で決まる。等電点が 8.3 より低いタンパク質は負に帯電して陽極へ進むが、等電点が 8.3 より高いタンパク質は正に帯電して<b>陰極側へ</b>動き、ゲルに入らない。等電点がほぼ 8.3 なら、ほとんど動かない。</li>
+        <li><b>形の違いが効く</b>:丸くまとまったタンパク質と細長いタンパク質では、同じ分子量でも網目から受ける抵抗が違う。</li>
+        <li><b>複合体(四次構造)が壊れない</b>:いくつかのサブユニットからなるタンパク質は、まとまったまま動くので、サブユニットではなく複合体全体の大きさで移動する。</li>
+      </ol>
+      <p>このため、移動度と log(分子量) の直線関係は成り立たず、マーカーを使った分子量の推定はできない。バンドの順番も分子量の順にはならず、ゲルに入らない(ウェルに残る、または陰極側へ出ていく)タンパク質も現れる。</p>
+    </div>
+    <div class="box warn">
+      <div class="label">確かめ・補足</div>
+      <ul>
+        <li>具体例:シトクロム c は塩基性のタンパク質で、等電点は約 10 と高い(補足:一般的な値)。pH 8.3 では正に帯電するので、SDS がなければ陰極側へ動き、分離ゲルには入らないと考えられる。SDS があれば、負電荷が大量に加わり、他のタンパク質と同じように陽極へ進む。</li>
+        <li>SDS を使わない電気泳動(ネイティブ PAGE)は、タンパク質の本来の状態(複合体の有無や電荷)を調べるために、実際に使われている(補足)。分子量を測る目的には向かない。</li>
+        <li>答案では「立体構造が残る」「電荷がばらばら」の 2 点と、その結果「分子量と移動度の関係がなくなる」まで書くとよい。</li>
+      </ul>
+    </div>
+
+    <h2 id="k92">課題 9.2 12 % ゲルで図のようなバンドが得られた。同じ試料を 15 %、10 % のゲルで泳動したときの、各バンドの相対的な位置の変化を図示し、その理由を述べよ</h2>
+    <div class="box basic">
+      <div class="label">考え方:ゲル濃度と網目の細かさ</div>
+      <p>テキスト 9・3 節②「網目の大きさはアクリルアミドの濃度とビスの架橋頻度によって決まる」。アクリルアミドの濃度が高いほど、高分子の鎖がぎっしり詰まり、<b>網目が細かく</b>なる。網目が細かいほど、タンパク質が受ける抵抗(分子ふるい効果)が大きい。</p>
+      <p><b>直感:</b> 目の細かいふるいほど、粒が通り抜けにくい。しかも、大きい粒ほど引っかかりやすい。</p>
+    </div>
+    <div class="box ex">
+      <div class="label">解答</div>
+      <p><b>図</b>:左から 15 %、12 %、10 % のゲル(同じ時間だけ泳動したとする)。</p>
+      <figure class="fig">
+        <svg viewBox="0 0 420 316" width="420" role="img" aria-label="ゲル濃度を変えたときのバンドの位置の変化"><rect x="40" y="56" width="90" height="210" fill="none" stroke="var(--muted)" stroke-width="1.6"/><text class="tj" x="66" y="46">陰極</text><text class="tj" x="66" y="284">陽極</text><text class="tt" x="66" y="304">15 %</text><line x1="54" y1="84.77743998492289" x2="116" y2="84.77743998492289" stroke="var(--accent)" stroke-width="3.5"/><line x1="54" y1="95.30115415474175" x2="116" y2="95.30115415474175" stroke="var(--accent)" stroke-width="3.5"/><line x1="54" y1="148.91394898165146" x2="116" y2="148.91394898165146" stroke="var(--accent)" stroke-width="3.5"/><line x1="54" y1="165.81713613841563" x2="116" y2="165.81713613841563" stroke="var(--accent)" stroke-width="3.5"/><line x1="54" y1="178.50768687699846" x2="116" y2="178.50768687699846" stroke="var(--accent)" stroke-width="3.5"/><rect x="170" y="56" width="90" height="210" fill="none" stroke="var(--muted)" stroke-width="1.6"/><text class="tj" x="196" y="46">陰極</text><text class="tj" x="196" y="284">陽極</text><text class="tt" x="196" y="304">12 %</text><line x1="184" y1="105.82647245259685" x2="246" y2="105.82647245259685" stroke="var(--accent)" stroke-width="3.5"/><line x1="184" y1="119.46142830589156" x2="246" y2="119.46142830589156" stroke="var(--accent)" stroke-width="3.5"/><line x1="184" y1="176.54497284149772" x2="246" y2="176.54497284149772" stroke="var(--accent)" stroke-width="3.5"/><line x1="184" y1="192.34870983222302" x2="246" y2="192.34870983222302" stroke="var(--accent)" stroke-width="3.5"/><line x1="184" y1="203.789010179068" x2="246" y2="203.789010179068" stroke="var(--accent)" stroke-width="3.5"/><rect x="300" y="56" width="90" height="210" fill="none" stroke="var(--muted)" stroke-width="1.6"/><text class="tj" x="326" y="46">陰極</text><text class="tj" x="326" y="284">陽極</text><text class="tt" x="326" y="304">10 %</text><line x1="314" y1="128.87731156531356" x2="376" y2="128.87731156531356" stroke="var(--accent)" stroke-width="3.5"/><line x1="314" y1="143.8337585008666" x2="376" y2="143.8337585008666" stroke="var(--accent)" stroke-width="3.5"/><line x1="314" y1="198.8963441506122" x2="376" y2="198.8963441506122" stroke="var(--accent)" stroke-width="3.5"/><line x1="314" y1="212.83671963497787" x2="376" y2="212.83671963497787" stroke="var(--accent)" stroke-width="3.5"/><line x1="314" y1="222.68527248603735" x2="376" y2="222.68527248603735" stroke="var(--accent)" stroke-width="3.5"/><line class="dash" x1="130" y1="84.77743998492289" x2="170" y2="105.82647245259685"/><line class="dash" x1="260" y1="105.82647245259685" x2="300" y2="128.87731156531356"/><line class="dash" x1="130" y1="95.30115415474175" x2="170" y2="119.46142830589156"/><line class="dash" x1="260" y1="119.46142830589156" x2="300" y2="143.8337585008666"/><line class="dash" x1="130" y1="148.91394898165146" x2="170" y2="176.54497284149772"/><line class="dash" x1="260" y1="176.54497284149772" x2="300" y2="198.8963441506122"/><line class="dash" x1="130" y1="165.81713613841563" x2="170" y2="192.34870983222302"/><line class="dash" x1="260" y1="192.34870983222302" x2="300" y2="212.83671963497787"/><line class="dash" x1="130" y1="178.50768687699846" x2="170" y2="203.789010179068"/><line class="dash" x1="260" y1="203.789010179068" x2="300" y2="222.68527248603735"/><text class="tm" x="30" y="18">網目が細かい(遅い)</text><text class="tm" x="286" y="18">網目が粗い(速い)</text></svg>
+        <figcaption>ゲル濃度とバンドの位置(模式図)。破線は同じタンパク質のバンドどうしを結んだもの。15 % では全体に上(陰極側)に寄り、10 % では全体に下(陽極側)に寄る。</figcaption>
+      </figure>
+      <ul>
+        <li><b>15 % ゲル</b>:すべてのバンドが 12 % より<b>上(陰極側)</b>に来る(移動距離が小さい)。分子量の大きいバンドほど強く引き止められて上に詰まる一方、分子量の小さいバンドどうしの間隔は広がる。</li>
+        <li><b>10 % ゲル</b>:すべてのバンドが 12 % より<b>下(陽極側)</b>に来る(移動距離が大きい)。分子量の大きいバンドどうしの間隔が広がり、分子量の小さいバンドどうしは下の方で詰まる(小さいものは網目の抵抗をほとんど受けず、色素の先端の近くまで進む)。</li>
+      </ul>
+      <p><b>理由</b>:アクリルアミドの濃度が高いほどゲルの網目が細かくなり、SDS-タンパク質複合体が受ける抵抗が大きくなるので、同じ時間・同じ電圧での移動距離は小さくなる。逆に濃度が低いと網目が粗く、抵抗が小さいので、移動距離は大きくなる。網目の影響は大きい分子ほど強く受けるので、濃いゲルは小さいタンパク質どうしの分離に、薄いゲルは大きいタンパク質どうしの分離に向いている。</p>
+    </div>
+    <div class="box warn">
+      <div class="label">つまずきやすい点</div>
+      <ul>
+        <li>バンドの<b>順番</b>(上から分子量の大きい順)は、どの濃度でも変わらない。変わるのは位置と間隔だけ。</li>
+        <li>「全体が平行に上下する」だけでも基本は正解だが、「分子量の大きいバンドほど影響が大きく、間隔が変わる」まで書くと、分子ふるい効果の理解が伝わる。</li>
+        <li>濃度を変えた比較は、泳動時間と電圧を同じにした場合の話。色素の先端まで泳動する(終わりの目安をそろえる)場合でも、相対的な位置(色素の先端に対する比)は同じ傾向になる(補足)。</li>
+      </ul>
+    </div>
+
+    <h2 id="cite">式・内容の出典</h2>
+    <div class="tscroll"><table class="cmp">
+      <tr><th>内容</th><th>出典</th></tr>
+      <tr><td>SDS による変性と負の帯電、タンパク質 1 g に SDS 約 1.4 g、分子ふるい効果</td><td>テキスト 9・3 節②(p.112〜113)</td></tr>
+      <tr><td>網目の大きさはアクリルアミドの濃度とビスの架橋頻度で決まる</td><td>テキスト 9・3 節②(p.112)</td></tr>
+      <tr><td>移動距離と分子量の対数の直線関係、その例外</td><td>テキスト 9・3 節③(p.114)</td></tr>
+      <tr><td>アミノ酸の側鎖(酸性・塩基性)、泳動用緩衝液の pH 8.3</td><td>テキスト表 9・1、表 9・2</td></tr>
+      <tr><td>$d=a-b\log_{10}M$ の形の式</td><td>導出(テキストの「対数と直線関係」を式にしたもの)</td></tr>
+      <tr><td>等電点と電荷の向き、シトクロム c の等電点(約 10)、ネイティブ PAGE</td><td>補足(一般的な生化学の知識。テキストにはない)</td></tr>
+      <tr><td>図(検量線、ゲル濃度とバンドの位置)の数値</td><td>補足(模式図の仮の値)</td></tr>
+    </table></div>
+
+    <nav class="pager">
+      <a href="index.html">← 第五週(第九回)</a>
+      <a href="prep.html">予習ノート</a>
+      <a href="video.html">解説動画 →</a>
+    </nav>
+  </main>
+
+  <footer>© Aセメまとめノート</footer>
+</body>
+</html>

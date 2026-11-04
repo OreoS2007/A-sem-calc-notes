@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>第五週(第九回) 実験予習ノート | 基礎化学実験 | Aセメまとめノート</title>
+  <link rel="stylesheet" href="../../assets/style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]})"></script>
+  <style>
+    .flow { list-style: none; margin: 14px 0 22px; padding: 0; }
+    .flow > li { position: relative; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 8px 12px; margin: 0 0 22px; }
+    .flow > li:not(:last-child)::after { content: "↓"; position: absolute; left: 50%; bottom: -21px; transform: translateX(-50%); color: var(--accent); font-weight: 700; font-size: 1.1rem; line-height: 1; }
+    .flow .sub { display: block; color: var(--muted); font-size: .88em; margin-top: 2px; }
+    .flow .key { color: var(--thm); font-weight: 700; }
+    .cap { display: inline-block; background: var(--accent); color: #fff; border-radius: 6px; padding: 1px 10px; font-weight: 700; font-size: .9rem; margin: 6px 0; }
+    .goal { border: 2px solid var(--accent); border-radius: 10px; padding: 10px 14px; margin: 14px 0; }
+    .goal ol { margin: 4px 0 0; padding-left: 1.4em; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="inner">
+      <a class="site-title" href="../../index.html">Aセメまとめノート</a>
+      <span class="links"><a href="../index.html">基礎化学実験</a><a href="index.html">第五週</a><a href="prep.html">予習ノート</a><a href="explanation.html">課題の解説</a><a href="video.html">解説動画</a></span>
+    </div>
+  </header>
+
+  <main class="note">
+    <h1>第五週(第九回)実験予習ノート:電気泳動法によるタンパク質の分析</h1>
+    <div class="meta">基礎化学実験 実験9(テキスト p.109〜120)／目的と手順のフローチャート。手順は <a href="video.html">3D の解説動画</a> でも見られます</div>
+
+    <h2>目的</h2>
+    <div class="goal">
+      <p>SDS で変性させたタンパク質を、ポリアクリルアミドゲルの中で電気泳動させ(<b>SDS-PAGE</b>)、<b>分子量ごとに分離</b>して、未知のタンパク質の分子量を求める。</p>
+      <ol>
+        <li>分離ゲルの上に<b>濃縮ゲル</b>を積層し、コームで試料を入れるくぼみ(ウェル)をつくる。</li>
+        <li>試料 1〜5 と分子量マーカーを泳動し、CBB で<b>染色・脱染</b>してバンドを見る。</li>
+        <li>マーカー(85、55、40、35、30、20、15 kDa)の<b>移動度と log(分子量) の直線(検量線)</b>から、各試料の分子量を求め、どのタンパク質か推定する(ウシ血清アルブミン 66、卵白アルブミン 45、炭酸脱水酵素 31、トリプシンインヒビター 21.5、シトクロム c 14.4 kDa)。</li>
+      </ol>
+    </div>
+
+    <h2>原理の要点</h2>
+    <ul>
+      <li><b>タンパク質</b>:20 種のアミノ酸がペプチド結合でつながった高分子。一次〜四次構造をもち、立体構造・電荷(等電点)はタンパク質ごとに違う(テキスト 9・3 節①)。</li>
+      <li><b>SDS</b>(ドデシル硫酸ナトリウム)の役割(テキスト 9・3 節②):
+        <ol>
+          <li>疎水性部分がタンパク質の疎水的領域に結合 → 会合体がばらばらになり、立体構造が壊れて<b>伸びた状態(変性)</b>になる。</li>
+          <li>硫酸基の負電荷で、複合体全体が<b>強く負に帯電</b>する。結合する SDS の量はタンパク質の量に比例(タンパク質 1 g に SDS 約 1.4 g)するので、<b>電荷はほぼ質量に比例</b>し、もとの電荷の正負・大小はほとんど効かない。</li>
+        </ol>
+      </li>
+      <li><b>分子ふるい効果</b>:負に帯電した複合体は陽極へ向かい、ゲルの網目の抵抗を受ける。<b>分子量が大きいほど遅く、小さいほど遠くまで</b>進む。</li>
+      <li><b>ゲル</b>:アクリルアミドを、少量の N,N′-メチレンビスアクリルアミド(ビス)と重合させてつくる。ビスが架橋して網目ができ、網目の大きさはアクリルアミドの濃度とビスの割合で決まる(テキスト図 9・3)。APS と TEMED で重合が始まる。</li>
+      <li><b>濃縮ゲルと分離ゲル</b>:濃縮ゲルは試料を細いバンドに<b>濃縮</b>し、分離ゲルは分子量ごとに<b>分離</b>する(テキスト 9・4 節②)。</li>
+      <li><b>検出</b>:CBB(クーマシーブリリアントブルー)がタンパク質の疎水性部分に結合して青く染める。青の強さはタンパク質の量を反映する(テキスト 9・3 節③)。</li>
+    </ul>
+
+    <h2>使う関係</h2>
+    <ul>
+      <li>移動距離は<b>分子量の対数と直線関係</b>にあることが経験的に知られている(テキスト p.114):$d=a-b\log_{10}M$($d$:移動度、$M$:分子量。$a,b$ は定数で、マーカーから決める)。</li>
+      <li>マーカーの分子量を片対数グラフの縦軸(対数目盛)、移動度を横軸にとって各点を結ぶ(テキスト ⑫)。</li>
+      <li>例外:アミノ酸組成が平均から大きくずれるタンパク質、糖やリン酸で修飾されたタンパク質は直線から外れることがある(テキスト p.114)。</li>
+    </ul>
+    <figure class="fig">
+      <svg viewBox="0 0 430 296" width="430" role="img" aria-label="片対数グラフでの検量線"><line class="ax" x1="70" y1="250" x2="410" y2="250"/><line class="ax" x1="70" y1="250" x2="70" y2="24"/><line class="thin" x1="65" y1="250" x2="70" y2="250"/><text class="tj" x="42" y="254">10</text><line class="thin" x1="65" y1="183.77340095392412" x2="70" y2="183.77340095392412"/><text class="tj" x="42" y="187.77340095392412">20</text><line class="thin" x1="65" y1="145.03332396167428" x2="70" y2="145.03332396167428"/><text class="tj" x="42" y="149.03332396167428">30</text><line class="thin" x1="65" y1="96.22659904607588" x2="70" y2="96.22659904607588"/><text class="tj" x="42" y="100.22659904607588">50</text><line class="thin" x1="65" y1="30" x2="70" y2="30"/><text class="tj" x="34" y="34">100</text><line class="thin" x1="70" y1="250" x2="70" y2="255"/><text class="tj" x="66" y="270">0</text><line class="thin" x1="125" y1="250" x2="125" y2="255"/><text class="tj" x="121" y="270">1</text><line class="thin" x1="180" y1="250" x2="180" y2="255"/><text class="tj" x="176" y="270">2</text><line class="thin" x1="235" y1="250" x2="235" y2="255"/><text class="tj" x="231" y="270">3</text><line class="thin" x1="290" y1="250" x2="290" y2="255"/><text class="tj" x="286" y="270">4</text><line class="thin" x1="345" y1="250" x2="345" y2="255"/><text class="tj" x="341" y="270">5</text><line class="thin" x1="400" y1="250" x2="400" y2="255"/><text class="tj" x="396" y="270">6</text><line class="cv" x1="98.60517798122208" y1="34.900806836453484" x2="376.0513952390441" y2="224.93246249249592"/><circle class="dot" cx="114.1206410605692" cy="45.52783634285558" r="4.5"/><text class="tm" x="121.1206410605692" y="39.52783634285558">85</text><circle class="dot" cx="174.8455041344489" cy="87.12020831126634" r="4.5"/><text class="tm" x="181.8455041344489" y="81.12020831126634">55</text><circle class="dot" cx="219.2683307854585" cy="117.54680190784825" r="4.5"/><text class="tm" x="226.2683307854585" y="111.54680190784825">40</text><circle class="dot" cx="237.8953441546915" cy="130.30503024293935" r="4.5"/><text class="tm" x="244.8953441546915" y="124.30503024293935">35</text><circle class="dot" cx="259.3986529840445" cy="145.03332396167428" r="4.5"/><text class="tm" x="266.3986529840445" y="139.03332396167428">30</text><circle class="dot" cx="315.95916539272923" cy="183.77340095392412" r="4.5"/><text class="tm" x="322.95916539272923" y="177.77340095392412">20</text><circle class="dot" cx="356.0894875913152" cy="211.2599230077501" r="4.5"/><text class="tm" x="363.0894875913152" y="205.2599230077501">15</text><line class="dash" x1="254.82462394043168" y1="250" x2="254.82462394043168" y2="141.90042735646"/><line class="dash" x1="70" y1="141.90042735646" x2="254.82462394043168" y2="141.90042735646"/><circle class="dotb" cx="254.82462394043168" cy="141.90042735646" r="5"/><text class="ta" x="264.8246239404317" y="159.90042735646">試料の移動度 → 分子量</text><text class="tm" x="6" y="16">分子量 [kDa](対数目盛)</text><text class="tm" x="290" y="288">移動度 [cm]</text></svg>
+      <figcaption>検量線のイメージ(マーカーの位置は仮の値)。縦軸が対数目盛なので、点はほぼ直線に並ぶ。試料のバンドの移動度から、線を通って分子量を読む。</figcaption>
+    </figure>
+
+    <h2>実験手順(フローチャート)</h2>
+    <p class="meta">手順は 3D の <a href="video.html">解説動画</a> でも見られます。ゲルは 1 人 1 枚。未重合のアクリルアミドには神経毒性があるので、<b>手袋を着用</b>する。</p>
+
+    <span class="cap">準備</span>
+    <ol class="flow">
+      <li>表 9・2 で器具・薬品を確認 → 巻末の点検表に記入<span class="sub">分離ゲルは教員・TA が作成済み。指示があるまでゲル作成装置に触れない。チップは使い捨てにせず洗って再利用</span></li>
+    </ol>
+
+    <span class="cap">A. 濃縮ゲルの作成と分離ゲルへの積層</span>
+    <ol class="flow">
+      <li>ゲル作成装置を傾けて、分離ゲルの上の水を廃液タンクに捨てる(できるだけ残さない)</li>
+      <li>濃縮ゲル用トリス緩衝液 1.5 mL + 濃縮ゲル用アクリルアミド水溶液 1.5 mL(メスピペット、安全ピペッター)→ 50 mL ビーカーで混ぜる</li>
+      <li>10 % APS 20 µL + TEMED 20 µL(マイクロピペット)→ 揺すって混ぜる → 分離ゲルの上にすべて注ぐ<span class="sub"><span class="key">泡立てない</span>(不均一だと固まらない)。加えるとすぐ重合が始まるので<span class="key">手早く</span></span></li>
+      <li>すぐにコームを差し込む<span class="sub">突起をオレンジ色のスポンジの反対側へ。斜めに傾けて気泡を入れない。ピンセットでしっかり</span></li>
+      <li>10〜15 分静置 → 傾けて液面が動かなければ固まった</li>
+      <li>クリップを外してカバーを取る → コームを付けたままガラス板セットを外す(2 枚を分けない)→ はみ出したゲルを取り除く</li>
+      <li>コームに洗瓶で水をかけ、両端を押さえてゆっくり上へ抜く → <b>ウェル</b>ができる</li>
+    </ol>
+
+    <span class="cap">B. 電気泳動</span>
+    <ol class="flow">
+      <li>陽極槽に泳動用緩衝液を底から約 9 mm(目安の線)まで</li>
+      <li>ガラス板セットを、<b>ガラス板 A を陰極槽側</b>にして立て、ストッパーで押さえる → 底の泡を除く</li>
+      <li>泳動用緩衝液を、ゲルが完全に浸る高さまで加える<span class="sub">陽極と陰極がゲルを通して電気的につながる</span></li>
+      <li>試料を 5 µL ずつ、マーカーを 10 µL、ウェルにゆっくり入れる<span class="sub">左から 1 つおきに:ウェル 1=試料1、3=試料2、5=マーカー、7=試料3、9=試料4、11=試料5。試料ごとにチップの内側を緩衝液で洗う</span></li>
+      <li>電源部を泳動槽につなぎ、コネクターバーを押し込む → リード線は<b>赤は赤、黒は黒</b> → メインスイッチを入れる</li>
+      <li>V ボタン → <b>240 V</b> に設定、A が 200 mA を確認 → Run<span class="sub">電極で気泡が出る。通電直後は 50〜60 mA</span></li>
+      <li>青い色素(ブロモフェノールブルー)の先端がゲルの底から約 1 cm で止める(約 20 分)</li>
+    </ol>
+
+    <span class="cap">C. 染色と分子量の推定</span>
+    <ol class="flow">
+      <li>電源部を外す → スチロールケースに染色液をゲルが浸るくらい入れる</li>
+      <li>ガラス板セットを取り出し、ガラス板 A の切り込みにミクロスパーテルを差し込んで板を分ける<span class="sub">スペーサーの境界をなぞって切れ目を入れる</span></li>
+      <li>ゲルを下に向けて染色液の上にかざし、ミクロスパーテルではがして落とす → ケースを揺すって全体を浸す</li>
+      <li>ふたをして、80 ℃ のホットプレートで<b>6 分以上</b>染色</li>
+      <li>染色液を廃液タンクへ → 水洗い → 脱染液で 3 分以上 → もう一度 3 分以上<span class="sub">背景の青が抜け、バンドがはっきりする</span></li>
+      <li>ゲルをポリラップに挟む(乾燥を防ぐ)→ ライトボックスで観察</li>
+      <li>濃縮ゲルと分離ゲルの境界から<b>バンドの上部まで</b>の距離(移動度)を定規で測る</li>
+      <li>片対数グラフにマーカーをプロットして線を引き、試料の分子量を求め、どのタンパク質か推定 → ゲルは回収(L 分類)</li>
+    </ol>
+
+    <h2>予想・注意のポイント</h2>
+    <ul>
+      <li>分子量の小さいシトクロム c(14.4 kDa)が一番下(陽極側)、ウシ血清アルブミン(66 kDa)が一番上に来るはず。</li>
+      <li>マーカーのうち 1 本だけ濃いバンドがあることがある(含まれる量の違い:CBB の青さは量を反映する)。</li>
+      <li>求めた分子量には誤差が出るが、5 種のどれかを判別できれば十分。</li>
+      <li>青い色素は低分子なのでタンパク質よりずっと速く進み、泳動の最先端の目安になる。</li>
+      <li>染色液は手や服に付くと落ちない。手袋を着用。</li>
+    </ul>
+    <p>課題 9.1・9.2 の解答は <a href="explanation.html">課題の解答と解説</a> にあります。</p>
+
+    <nav class="pager">
+      <a href="index.html">← 第五週(第九回)</a>
+      <a href="explanation.html">課題の解説 →</a>
+    </nav>
+  </main>
+
+  <footer>© Aセメまとめノート</footer>
+</body>
+</html>
