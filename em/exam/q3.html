@@ -22,24 +22,26 @@
 
   <main class="note">
     <h1>過去問対策3:クーロンの法則の積分(円板が軸上に作る電場)</h1>
-    <div class="meta">過去問 [3] の型。講義ノートの問 [3-1](円環)を、円環の集まり(円板)に広げた問題。対称性で成分を減らしてから、1変数の積分にするのが要点です。</div>
+    <div class="meta">2025年度 [3](4点)と 2023年度 [4](4点)。講義ノートの問 [3-1](円環)を、円環の集まり(円板)に広げた問題。対称性で成分を減らしてから、1変数の積分にするのが要点です。</div>
 
     <nav class="toc">
       <div class="toc-title">目次</div>
       <ol>
-        <li><a href="#prob">過去問 [3](答案から再現した問題)</a></li>
+        <li><a href="#prob">2025年度 第1回中間 [3](4点)</a></li>
         <li><a href="#point">何が問われているか</a></li>
         <li><a href="#answer">答案の型</a></li>
         <li><a href="#miss">よくあるミス</a></li>
+        <li><a href="#y2023">2023年度 第1回中間 [4](4点):有限の長さの線電荷</a></li>
         <li><a href="#rui">類題</a></li>
       </ol>
     </nav>
 
-    <h2 id="prob">1. 過去問 [3](答案から再現した問題)</h2>
+    <h2 id="prob">1. 2025年度 第1回中間 [3](4点)</h2>
     <div class="box ex">
-      <div class="label">問題</div>
-      <p>$z=0$ の $xy$ 平面上に、原点を中心とする半径 $l$ の円板がある。この円板に、面密度 $\rho$ で電荷が一様に分布している。点 $(0,0,z)$($z\gt0$)の電場を求めよ。</p>
+      <div class="label">問題(要旨)</div>
+      <p>原点を中心とする $xy$ 面内の半径 $l$ の円盤全体に、一様面密度 $\rho$ で電荷を分布させる。この電荷が点 $(0,0,z)$($0\lt z$)に作る電場を求めよ。</p>
     </div>
+    <p>2023年度 [4](4点)も同じ型(有限の長さの線電荷、<a href="#y2023">5.</a>)。<b>2年続けて「クーロンの法則を積分して軸上・垂直二等分面上の電場」</b>が出ています。</p>
 
     <h2 id="point">2. 何が問われているか</h2>
     <p>対称性が「軸のまわり」しかないので、積分型ガウスの法則は使えません(電場が一定になる閉曲面が作れない)。だから<b>クーロンの法則を積分する</b>。その積分を楽にする手順が、答案の型です。</p>
@@ -87,18 +89,29 @@
       <li>$z\lt0$ の場合:電場は下向きで、$E_z=-\frac{\rho}{2\varepsilon_0}\Bigl(1-\frac{|z|}{\sqrt{l^2+z^2}}\Bigr)$。問題が $z\gt0$ と言っていなければ、場合分けを書く。</li>
     </ul>
 
-    <h2 id="rui">5. 類題</h2>
+    <h2 id="y2023">5. 2023年度 第1回中間 [4](4点):有限の長さの線電荷</h2>
+    <div class="box ex"><div class="label">問題(要旨)</div>
+      <p>$z$ 軸の $-l\le z\le l$ の上に、一様線密度 $\rho$ の電荷が分布している。この電荷が点 $(a,0,0)$ に作る電場を求めよ。</p></div>
+    <div class="box proof"><div class="label">答案</div>
+      <p><b>(i) 対称性</b>:電荷分布は $z\to-z$ の鏡映で不変で、点 $(a,0,0)$ はその鏡映の面($z=0$)の上にあるので、$E_z=0$。また $z$ 軸まわりの回転対称性から、電場は軸から遠ざかる向き($x$ 方向)。</p>
+      <p><b>(ii) 微小部分</b>:位置 $z$ の長さ $dz$ の電荷 $\rho\,dz$ は、点からの距離 $\sqrt{a^2+z^2}$。<b>クーロンの法則</b>で、その電場の $x$ 成分は $\dfrac{\rho\,dz}{4\pi\varepsilon_0}\dfrac{a}{(a^2+z^2)^{3/2}}$。</p>
+      <p><b>(iii) 積分</b>:
+      $$E_x=\frac{\rho a}{4\pi\varepsilon_0}\int_{-l}^{l}\frac{dz}{(a^2+z^2)^{3/2}}=\frac{\rho a}{4\pi\varepsilon_0}\Bigl[\frac{z}{a^2\sqrt{a^2+z^2}}\Bigr]_{-l}^{l}=\frac{\rho a}{4\pi\varepsilon_0}\cdot\frac{2l}{a^2\sqrt{a^2+l^2}}.$$
+      よって $\boldsymbol{\bm{E}=\Bigl(\dfrac{\rho\,l}{2\pi\varepsilon_0\,a\sqrt{a^2+l^2}},\ 0,\ 0\Bigr)}$($a\gt0$ のとき。$a\lt0$ なら $-x$ 向きで、$a$ を $|a|$ に)。</p>
+      <p><b>(iv) 確かめ</b>:$l\to\infty$ で $\frac{\rho}{2\pi\varepsilon_0a}$(無限に長い線電荷、例 3.2)。$a\gg l$ で $\frac{2l\rho}{4\pi\varepsilon_0a^2}$(点電荷 $2l\rho$)。数値積分でも確認済み。</p></div>
+    <div class="box note-box"><div class="label">積分 $\int\frac{dz}{(a^2+z^2)^{3/2}}$ の求め方(試験中に思い出す)</div>
+      <p>$z=a\tan\theta$ とおくと $dz=\frac{a\,d\theta}{\cos^2\theta}$、$(a^2+z^2)^{3/2}=\frac{a^3}{\cos^3\theta}$ なので、$\int\frac{\cos\theta}{a^2}d\theta=\frac{\sin\theta}{a^2}=\frac{z}{a^2\sqrt{a^2+z^2}}$。<b>答えを微分して確かめる</b>のが確実。</p></div>
+
+    <h2 id="rui">6. 類題</h2>
     <div class="box ex"><div class="label">類題 3-1(講義ノート 問 [3-1]:円環)</div>
       <p>$xy$ 平面の、原点中心・半径 $l$ の円周上に線密度 $\lambda$ で電荷が一様に分布している。点 $(0,0,z)$ の電場を求めよ。</p></div>
     <details><summary>解答</summary><div class="box proof"><div class="label">解答</div>
       <p>全電荷 $2\pi l\lambda$ が、すべて P から距離 $\sqrt{l^2+z^2}$。$z$ 成分の割合 $\frac{z}{\sqrt{l^2+z^2}}$ を掛けて $E_z=\dfrac{2\pi l\lambda}{4\pi\varepsilon_0}\dfrac{z}{(l^2+z^2)^{3/2}}=\boldsymbol{\dfrac{\lambda lz}{2\varepsilon_0(l^2+z^2)^{3/2}}}$、$E_x=E_y=0$。($z\to0$ で 0、$z\gg l$ で点電荷。)</p></div></details>
 
-    <div class="box ex"><div class="label">類題 3-2(オリジナル:有限の長さの線電荷)</div>
-      <p>$z$ 軸上の $-L\le z\le L$ に線密度 $\lambda$ で電荷が一様に分布している。$xy$ 平面上で $z$ 軸から距離 $a$ の点の電場を求めよ。$L\to\infty$ でどうなるか。</p></div>
+    <div class="box ex"><div class="label">類題 3-2(オリジナル:線電荷の端の延長線上)</div>
+      <p>$z$ 軸上の $0\le z\le L$ に線密度 $\lambda$ で電荷が一様に分布している。点 $(0,0,-d)$($d\gt0$)の電場を求めよ。</p></div>
     <details><summary>解答</summary><div class="box proof"><div class="label">解答</div>
-      <p>上下対称なので $z$ 成分は打ち消し、軸から遠ざかる向きの成分だけ。位置 $z$ の微小部分 $\lambda\,dz$ は距離 $\sqrt{a^2+z^2}$、外向き成分の割合 $\frac{a}{\sqrt{a^2+z^2}}$。
-      $$E=\frac{\lambda}{4\pi\varepsilon_0}\int_{-L}^{L}\frac{a\,dz}{(a^2+z^2)^{3/2}}=\frac{\lambda}{4\pi\varepsilon_0}\Bigl[\frac{z}{a\sqrt{a^2+z^2}}\Bigr]_{-L}^{L}=\boldsymbol{\frac{\lambda L}{2\pi\varepsilon_0a\sqrt{a^2+L^2}}}.$$
-      $L\to\infty$ で $\frac{\lambda}{2\pi\varepsilon_0a}$(無限に長い線電荷、講義ノート 例 3.2)。積分は $z=a\tan\theta$ と置換するとできる。</p></div></details>
+      <p>すべての電荷が真上にあるので、電場は $-z$ 向きだけ。距離は $z+d$。$E_z=-\dfrac{\lambda}{4\pi\varepsilon_0}\displaystyle\int_0^L\frac{dz}{(z+d)^2}=\boldsymbol{-\frac{\lambda}{4\pi\varepsilon_0}\Bigl(\frac1d-\frac1{L+d}\Bigr)}$。$d\gg L$ で点電荷 $\lambda L$ の $-\frac{\lambda L}{4\pi\varepsilon_0d^2}$。</p></div></details>
 
     <div class="box ex"><div class="label">類題 3-3(オリジナル:穴のあいた円板)</div>
       <p>過去問 [3] の円板の中央から、半径 $b$($b\lt l$)の円板を取り除いた(面密度 $\rho$ の円環状の板)。点 $(0,0,z)$($z\gt0$)の電場を求めよ。</p></div>

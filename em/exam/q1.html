@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex">
-  <title>過去問対策1 証明問題(調和関数とエネルギー) | Aセメまとめノート</title>
+  <title>過去問対策1 証明問題とベクトル恒等式 | Aセメまとめノート</title>
   <link rel="stylesheet" href="../../assets/style.css">
   <script defer src="../../assets/nav.js"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
@@ -21,27 +21,27 @@
   </header>
 
   <main class="note">
-    <h1>過去問対策1:証明問題(調和関数とエネルギー最小化)</h1>
-    <div class="meta">過去問 [1] の型。講義ノート §2.4〜§2.6 の証明は、そのまま出る。答案の型を丸ごと覚えるのが最短です。</div>
+    <h1>過去問対策1:証明問題とベクトル恒等式</h1>
+    <div class="meta">2025年度 [1](5点)と 2023年度 [1](2点)。講義ノート §2.4〜§2.6 の証明と、ベクトル解析の恒等式は、そのまま出る。答案の型を丸ごと覚えるのが最短です。</div>
 
     <nav class="toc">
       <div class="toc-title">目次</div>
       <ol>
-        <li><a href="#prob">過去問 [1](答案から再現した問題)</a></li>
+        <li><a href="#prob">2025年度 第1回中間 [1](5点)</a></li>
         <li><a href="#point">何が問われているか</a></li>
         <li><a href="#answer">答案の型(このまま書けば満点)</a></li>
         <li><a href="#miss">よくあるミス</a></li>
+        <li><a href="#ident">2023年度 第1回中間 [1](2点):$\nabla\times(\bm{A}\times\bm{B})$</a></li>
         <li><a href="#same">同じ型の証明(講義ノートの証明。どれが出ても取る)</a></li>
       </ol>
     </nav>
 
-    <h2 id="prob">1. 過去問 [1](答案から再現した問題)</h2>
+    <h2 id="prob">1. 2025年度 第1回中間 [1](5点)</h2>
     <div class="box ex">
-      <div class="label">問題</div>
-      <p>3次元の有界な閉領域 $V$ と、その境界 $\partial V$ 上の関数 $F$ が与えられている。$V$ で $\Delta\phi=0$ を満たし、$\partial V$ 上で $\phi=F$ となる関数 $\phi$ について、$\partial V$ 上で $g=F$ となる<b>任意の</b>関数 $g$ に対して
-      $$\int_V|\nabla g|^2\,d\bm{x}\ \ge\ \int_V|\nabla\phi|^2\,d\bm{x}$$
-      が成り立つことを示せ。</p>
+      <div class="label">問題(要旨)</div>
+      <p>3次元空間の単連結な(穴のない)領域 $V$ をとる。$V$ の表面 $\partial V$ では与えられた関数 $F(\bm{x})$ と同じ値をとる、という拘束条件を満たすスカラー場 $f(\bm{x})$ のうち、$\int_V|\nabla f|^2\,d\bm{x}$ を最小にするもの $f^*(\bm{x})$ を求めたい。同じ拘束条件を満たす $V$ 上の調和関数 $\phi$($\Delta\phi=0$)が存在するならば、$f^*=\phi$ であることを証明せよ。<b>(注:式変形では、どの定理や議論を用いたのか分かるように書くこと)</b></p>
     </div>
+    <p>問題文の「注」が、採点の基準そのものです。<b>ガウスの定理、$\Delta\phi=0$、境界で $e=0$ を、使った場所ごとに書く</b>。</p>
     <p>講義ノートの (2.43)〜(2.45)(<a href="../weeks/week-03.html#s3-4">第3回 3.4</a>)そのものです。手書きの授業ノートでも、証明が丸ごと書かれています。</p>
 
     <h2 id="point">2. 何が問われているか</h2>
@@ -80,10 +80,28 @@
       <li>$\Delta\phi=0$ を使わずに (2) を書く。使わないと $e\,\Delta\phi$ の項が残ってしまい、証明にならない。<b>調和関数であることは、ここでしか使わない</b>。</li>
     </ul>
 
-    <h2 id="same">5. 同じ型の証明(講義ノートの証明。どれが出ても取る)</h2>
+    <h2 id="ident">5. 2023年度 第1回中間 [1](2点):$\nabla\times(\bm{A}\times\bm{B})$</h2>
+    <div class="box ex">
+      <div class="label">問題(要旨)</div>
+      <p>$\nabla\times(\bm{A}\times\bm{B})$ を、$P:=\nabla(\bm{A}\cdot\bm{B})$、$Q:=\bm{A}(\nabla\cdot\bm{B})$、$R:=\bm{B}(\nabla\cdot\bm{A})$、$S:=(\bm{A}\cdot\nabla)\bm{B}$、$T:=(\bm{B}\cdot\nabla)\bm{A}$ を用いた式で書け(例:$1+S+T$、$2P+R-3S$ のような形で)。</p>
+    </div>
+    <div class="box proof">
+      <div class="label">答案</div>
+      <p>$\varepsilon\varepsilon$ の公式 $\sum_k\varepsilon_{ijk}\varepsilon_{klm}=\delta_{il}\delta_{jm}-\delta_{im}\delta_{jl}$ を使う。
+      $$[\nabla\times(\bm{A}\times\bm{B})]_i=\sum_{j,k}\varepsilon_{ijk}\partial_j\sum_{l,m}\varepsilon_{klm}A_lB_m=\sum_{j,l,m}(\delta_{il}\delta_{jm}-\delta_{im}\delta_{jl})\partial_j(A_lB_m)=\sum_j\partial_j(A_iB_j)-\sum_j\partial_j(A_jB_i).$$
+      積の微分で展開すると
+      $$=\underbrace{\sum_jB_j\partial_jA_i}_{T}+\underbrace{A_i\sum_j\partial_jB_j}_{Q}-\underbrace{\sum_jA_j\partial_jB_i}_{S}-\underbrace{B_i\sum_j\partial_jA_j}_{R}.$$
+      よって $\boldsymbol{\nabla\times(\bm{A}\times\bm{B})=Q-R-S+T}$。($P$ は出てこない。)</p>
+    </div>
+    <div class="box note-box">
+      <div class="label">速く解くコツ</div>
+      <p>2点の問題なので、答えだけ書ければよい。覚え方:<b>「$\varepsilon\varepsilon$ の公式で2項 → それぞれ積の微分で2項 → 合計4項」</b>。符号は、$\bm{A}\times(\bm{B}\times\bm{C})=\bm{B}(\bm{A}\cdot\bm{C})-\bm{C}(\bm{A}\cdot\bm{B})$(BAC−CAB)と同じ並びで、$\nabla$ を $\bm{A}$ の位置に置き、微分が $\bm{A}$ と $\bm{B}$ の両方にかかる、と考える。成分で $\bm{A}=(y,0,0)$、$\bm{B}=(0,x,0)$ などを入れて確かめるのも有効。</p>
+    </div>
+
+    <h2 id="same">6. 同じ型の証明(講義ノートの証明。どれが出ても取る)</h2>
     <p>過去問 [1] は「講義ノートの証明をそのまま書かせる」問題でした。範囲内の証明で、同じように出せるものを、答案の形でまとめます。<b>どれも5〜8行</b>で書けます。</p>
 
-    <h3 id="same-a">5.1 最大値原理 ⇒ ディリクレ問題の解の一意性(§2.4)</h3>
+    <h3 id="same-a">6.1 最大値原理 ⇒ ディリクレ問題の解の一意性(§2.4)</h3>
     <div class="box ex"><div class="label">問題</div>
       <p>$V$ で $\Delta\psi=0$、$\partial V$ で $\psi=f$ を満たす $\psi$ は、あったとしてもただ一つであることを示せ(調和関数の最大値・最小値は境界でとる、という事実は使ってよい)。</p></div>
     <details><summary>答案を見る</summary>
@@ -92,13 +110,13 @@
     </details>
     <div class="box intuit"><div class="label">直感</div><p>最大値原理は「熱源のない部屋で、いちばん熱いのは壁」。差 $\kappa$ は壁で 0 なので、中も 0 しかありえない。</p></div>
 
-    <h3 id="same-b">5.2 最大値原理の「直感的な理由」(§2.4)</h3>
+    <h3 id="same-b">6.2 最大値原理の「直感的な理由」(§2.4)</h3>
     <details><summary>答案を見る</summary>
     <div class="box proof"><div class="label">答案(講義ノートの直感的説明 + 厳密化の筋)</div>
       <p>内部の点で最大値をとると、その点ではどの方向の2階微分も $\le0$ なので $\Delta\psi\le0$。最小値なら $\Delta\psi\ge0$。厳密には、$f:=\psi+\varepsilon\,\frac1d|\bm{x}|^2$($\Delta f=2\varepsilon\gt0$)を考えると、$f$ は内部で最大値をとれない(とると $\Delta f\le0$ と矛盾)。$\varepsilon\to0$ として、$\psi$ の最大値も境界でとる。</p></div>
     </details>
 
-    <h3 id="same-c">5.3 回転がゼロならポテンシャルが存在する(§2.5)</h3>
+    <h3 id="same-c">6.3 回転がゼロならポテンシャルが存在する(§2.5)</h3>
     <div class="box ex"><div class="label">問題</div>
       <p>3次元のベクトル場 $\bm{A}$ がすべての場所で $\nabla\times\bm{A}=\bm{0}$ を満たすとき、$\bm{A}=\nabla\phi$ となるスカラー場 $\phi$ が存在することを示せ。</p></div>
     <details><summary>答案を見る</summary>
@@ -109,7 +127,7 @@
     </details>
     <div class="box intuit"><div class="label">直感</div><p>回転ゼロ =「一周すると高くなるらせん階段がない」。だから各地点に矛盾なく「標高」$\phi$ を書き込める。</p></div>
 
-    <h3 id="same-d">5.4 ヘルムホルツの定理(1):解の一意性(§2.6)</h3>
+    <h3 id="same-d">6.4 ヘルムホルツの定理(1):解の一意性(§2.6)</h3>
     <div class="box ex"><div class="label">問題</div>
       <p>無限遠で十分速く 0 に減衰するベクトル場 $\bm{X}$ について、$\nabla\cdot\bm{X}=\rho$、$\nabla\times\bm{X}=\bm{J}$ の解は、あったとしてもただ一つであることを示せ。</p></div>
     <details><summary>答案を見る</summary>
@@ -122,13 +140,13 @@
     </details>
     <div class="box note-box"><div class="label">覚え方</div><p>「差をとる → 回転ゼロだからポテンシャル → 発散ゼロだから調和 → 境界(無限遠)で一定だから定数 → 差は 0」。5.1 と同じく、<b>差をとって 0 を示す</b>のが一意性の証明の定番です。</p></div>
 
-    <h3 id="same-e">5.5 恒等式 $\nabla\cdot(\nabla\times\bm{A})=0$、$\nabla\times(\nabla\phi)=\bm{0}$(§2.1、問 [2-1])</h3>
+    <h3 id="same-e">6.5 恒等式 $\nabla\cdot(\nabla\times\bm{A})=0$、$\nabla\times(\nabla\phi)=\bm{0}$(§2.1、問 [2-1])</h3>
     <details><summary>答案を見る</summary>
     <div class="box proof"><div class="label">答案</div>
       <p>$\nabla\cdot(\nabla\times\bm{A})=\partial_1(\partial_2A_3-\partial_3A_2)+\partial_2(\partial_3A_1-\partial_1A_3)+\partial_3(\partial_1A_2-\partial_2A_1)=0$(偏微分の順序交換で、2項ずつ打ち消す)。$\nabla\times(\nabla\phi)$ の第1成分は $\partial_2\partial_3\phi-\partial_3\partial_2\phi=0$、他の成分も同様。$\blacksquare$</p></div>
     </details>
 
-    <h3 id="same-f">5.6 静電場で $\nabla\times\bm{E}=\bm{0}$、$\nabla\cdot\bm{E}=\rho/\varepsilon_0$ を導く(§3.1)</h3>
+    <h3 id="same-f">6.6 静電場で $\nabla\times\bm{E}=\bm{0}$、$\nabla\cdot\bm{E}=\rho/\varepsilon_0$ を導く(§3.1)</h3>
     <details><summary>答案を見る</summary>
     <div class="box proof"><div class="label">答案(点電荷 $q$ が原点)</div>
       <p><b>発散</b>:半径 $l$ の球 $B_l$ に<b>ガウスの定理</b>を使うと $\int_{B_l}\nabla\cdot\bm{E}\,d\bm{r}=\int_{\partial B_l}\bm{E}\cdot d\bm{S}=4\pi l^2\cdot\dfrac{q}{4\pi\varepsilon_0l^2}=\dfrac{q}{\varepsilon_0}$ で、$l$ によらない。よって原点以外では $\nabla\cdot\bm{E}=0$、原点でデルタ関数:$\nabla\cdot\bm{E}=\dfrac{q}{\varepsilon_0}\delta(\bm{r})$。重ね合わせで連続分布なら $\nabla\cdot\bm{E}=\rho/\varepsilon_0$。<br>

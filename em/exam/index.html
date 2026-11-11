@@ -22,14 +22,14 @@
 
   <main class="note">
     <h1>電磁気学 過去問対策特化ページ</h1>
-    <div class="meta">11/13 の試験に向けて、過去問(2025年度 第1回)で出た内容を最優先に、最短で点を取るためのページです。各回のまとめノート(第1〜7回)とは別に、試験に出る形に絞って解説します。</div>
+    <div class="meta">11/13 の試験に向けて、過去問(2023年度・2025年度の中間試験)で出た内容を最優先に、最短で点を取るためのページです。各回のまとめノート(第1〜7回)とは別に、試験に出る形に絞って解説します。</div>
 
     <nav class="toc">
       <div class="toc-title">目次</div>
       <ol>
         <li><a href="#use">このページの使い方</a></li>
         <li><a href="#range">試験範囲</a></li>
-        <li><a href="#analysis">過去問の分析(2025年度 第1回)</a></li>
+        <li><a href="#analysis">過去問の分析</a></li>
         <li><a href="#rank">優先順位</a></li>
         <li><a href="#formula">覚える公式(試験前日に見る)</a></li>
         <li><a href="#check">答案の最終チェック(部分点を落とさない)</a></li>
@@ -39,12 +39,11 @@
     <h2 id="use">0. このページの使い方</h2>
     <div class="box thm">
       <div class="label">結論:この順で勉強する</div>
-      <p>① 下の「<a href="#rank">優先順位</a>」の ★★★ の4ページ(過去問の4問の型)を、<b>答案の型</b>ごと覚える。<br>
+      <p>① 下の「<a href="#rank">優先順位</a>」の ★★★ から、各ページの<b>過去問</b>を、答案の型ごと覚える。<br>
       ② 各ページの「類題」を、何も見ずに解く(解答は折りたたんである)。<br>
-      ③ 時間が余ったら、<a href="yosou.html">予想問題</a>(過去問には出ていないが試験範囲の、導体・鏡像法・コンデンサー)。<br>
-      ④ 試験の直前に、<a href="#formula">覚える公式</a>と<a href="#check">答案の最終チェック</a>を見直す。</p>
+      ③ 試験の直前に、<a href="#formula">覚える公式</a>と<a href="#check">答案の最終チェック</a>を見直す。</p>
     </div>
-    <p>このページの根拠は3つです:講義ノート(活字、p.1〜p.30)、授業の手書きノート、2025年度 第1回の過去問(答案)。過去問は<b>答案だけ</b>で問題文がないので、各ページの問題文は、答案から再現したものです(数値は確かめてあります)。</p>
+    <p>このページの根拠は、講義ノート(活字、p.1〜p.30)、授業の手書きノート、過去問(2023年度・2025年度の第1回〜第3回中間試験の問題用紙、2025年度 第1回の答案)です。問題文は要旨を書き直したものです。答えはすべて数値計算で確かめてあります。</p>
 
     <h2 id="range">1. 試験範囲</h2>
     <p>授業の手書きノートに「<b>11/13 の試験範囲はここまで</b>」と書かれていて、その位置は §4.3 の (4.12)(電池につないだコンデンサーの極板を引き離すときのエネルギー変化)の直後です。</p>
@@ -52,45 +51,50 @@
       <tr><th>講義ノート</th><th>内容</th><th>試験範囲</th><th>まとめノート</th></tr>
       <tr><td>§1</td><td>はじめに(読み物)</td><td>範囲内(計算は出にくい)</td><td><a href="../weeks/week-01.html">第1回</a></td></tr>
       <tr><td>§2.1〜2.2</td><td>発散・回転・ラプラシアン、線積分・面積分</td><td><b>範囲内</b></td><td><a href="../weeks/week-02.html">第2回</a></td></tr>
-      <tr><td>§2.3〜2.6</td><td>ガウス・ストークスの定理、調和関数、ポテンシャル、ヘルムホルツ</td><td><b>範囲内(過去問 [1][2])</b></td><td><a href="../weeks/week-03.html">第3回</a></td></tr>
-      <tr><td>§3.1〜3.2</td><td>クーロンの法則、ガウスの法則、電場の計算</td><td><b>範囲内(過去問 [3][4])</b></td><td><a href="../weeks/week-04.html">第4回</a></td></tr>
-      <tr><td>§3.3〜3.5</td><td>電位、エネルギー、多重極展開</td><td><b>範囲内(過去問 [4])</b>。多重極展開は授業ノートに書かれていない</td><td><a href="../weeks/week-05.html">第5回</a></td></tr>
-      <tr><td>§4.1〜4.2</td><td>導体、鏡像法</td><td>範囲内(過去問には未出)</td><td><a href="../weeks/week-06.html">第6回</a></td></tr>
+      <tr><td>§2.3〜2.6</td><td>ガウス・ストークスの定理、調和関数、ポテンシャル、ヘルムホルツ</td><td><b>範囲内</b></td><td><a href="../weeks/week-03.html">第3回</a></td></tr>
+      <tr><td>§3.1〜3.2</td><td>クーロンの法則、ガウスの法則、電場の計算</td><td><b>範囲内</b></td><td><a href="../weeks/week-04.html">第4回</a></td></tr>
+      <tr><td>§3.3〜3.5</td><td>電位、エネルギー、多重極展開</td><td><b>範囲内</b>(多重極展開は過去問になし)</td><td><a href="../weeks/week-05.html">第5回</a></td></tr>
+      <tr><td>§4.1〜4.2</td><td>導体、鏡像法</td><td><b>範囲内</b>(過去は第2回中間で出題)</td><td><a href="../weeks/week-06.html">第6回</a></td></tr>
       <tr><td>§4.3</td><td>導体にはたらく力 $E/2$、コンデンサー</td><td>範囲内((4.12) まで)</td><td><a href="../weeks/week-07.html">第7回 2.</a></td></tr>
-      <tr><td>§4.4</td><td>容量係数・グリーンの相反定理</td><td><b>範囲外</b>(範囲の印より後)</td><td><a href="../weeks/week-07.html#s3">第7回 3.</a></td></tr>
-      <tr><td>§5</td><td>静磁場(ビオ・サバール、アンペール)</td><td><b>範囲外</b></td><td>—</td></tr>
+      <tr><td>§4.4</td><td>容量係数・グリーンの相反定理</td><td><b>範囲外</b></td><td><a href="../weeks/week-07.html#s3">第7回 3.</a></td></tr>
+      <tr><td>§5〜</td><td>静磁場、電磁誘導、電磁波</td><td><b>範囲外</b>(過去の第2回・第3回中間の磁場の問題は除外)</td><td>—</td></tr>
     </table>
+    <div class="box note-box">
+      <div class="label">今年は、過去の「第2回中間」の一部まで範囲に入る</div>
+      <p>過去問の試験は、毎年3回(第1回〜第3回中間、各20点)です。2023・2025年度とも、第1回中間はベクトル解析と静電場(§2〜§3)、<b>導体と鏡像法は第2回中間</b>で出ていました。今年の 11/13 の範囲は §4.3 まで進んでいるので、過去の第2回中間の導体の問題(4問、計18点分)も対策に入れます。</p>
+    </div>
 
-    <h2 id="analysis">2. 過去問の分析(2025年度 第1回)</h2>
-    <p>4問すべてが、<b>講義ノートの証明・例題・問をほぼそのままの形</b>で出しています。講義ノートの [2-6]、[3-1]、例 3.1、(2.44) を自力で再現できれば、ほぼ満点が取れる構成です。</p>
+    <h2 id="analysis">2. 過去問の分析</h2>
     <table class="cmp">
-      <tr><th>問</th><th>内容</th><th>講義ノートの元ネタ</th><th>型</th><th>解説</th></tr>
-      <tr><td>[1]</td><td>調和関数がエネルギー $\int|\nabla g|^2$ を最小にすることの証明</td><td>§2.4 (2.43)〜(2.45)</td><td>証明(暗記で取れる)</td><td><a href="q1.html">証明問題</a></td></tr>
-      <tr><td>[2]</td><td>回転の面積分を、ストークスの定理で縁の線積分にして計算</td><td>問 [2-6] とほぼ同じ</td><td>計算</td><td><a href="q2.html">積分定理の計算</a></td></tr>
-      <tr><td>[3]</td><td>一様に帯電した円板が軸上に作る電場</td><td>問 [3-1](円環)の発展</td><td>クーロンの法則の積分</td><td><a href="q3.html">クーロンの積分</a></td></tr>
-      <tr><td>[4]</td><td>厚い球殻に一様に分布した電荷の電場と、系のエネルギー</td><td>例 3.1 + (3.33)</td><td>ガウスの法則 + 場のエネルギー</td><td><a href="q4.html">ガウスとエネルギー</a></td></tr>
+      <tr><th>型</th><th>2023年度</th><th>2025年度</th><th>講義ノートの元ネタ</th><th>解説</th></tr>
+      <tr><td>ストークスの定理で面積分</td><td>第1回 [2](5点)</td><td>第1回 [2](6点)</td><td><b>問 [2-6] と同じ</b>(2023)/曲面を変えた形(2025)</td><td><a href="q2.html">積分定理</a></td></tr>
+      <tr><td>クーロンの法則の積分</td><td>第1回 [4] 有限の線電荷(4点)</td><td>第1回 [3] 円板(4点)</td><td>問 [3-1](円環)の発展</td><td><a href="q3.html">クーロンの積分</a></td></tr>
+      <tr><td>ガウスの法則で電場</td><td>第1回 [3] 一様な球の内部(4点)</td><td>(第1回 [4] の途中)</td><td>例 3.1</td><td><a href="q4.html">ガウスとエネルギー</a></td></tr>
+      <tr><td>系のエネルギー</td><td>第1回 [5] 2つの球殻(5点)</td><td>第1回 [4] 厚い球殻(5点)</td><td><b>問 [3-3] と同じ</b>(2023)/(3.33)</td><td><a href="q4.html">ガウスとエネルギー</a></td></tr>
+      <tr><td>証明</td><td>—</td><td>第1回 [1] エネルギー最小化(5点)</td><td>(2.43)〜(2.45)</td><td><a href="q1.html">証明・恒等式</a></td></tr>
+      <tr><td>ベクトル恒等式</td><td>第1回 [1] $\nabla\times(\bm{A}\times\bm{B})$(2点)</td><td>—</td><td>$\varepsilon\varepsilon$ の公式</td><td><a href="q1.html#ident">証明・恒等式</a></td></tr>
+      <tr><td>線積分(定義どおり)</td><td>第2回 [1](2点)</td><td>—</td><td>例 2.2</td><td><a href="q2.html#line">積分定理</a></td></tr>
+      <tr><td>鏡像法(平面)</td><td>第2回 [2] 直角の角(3点)</td><td>第2回 [1] 電場(3点)</td><td>例 4.1</td><td><a href="yosou.html">導体と鏡像法</a></td></tr>
+      <tr><td>鏡像法(球)・誘導電荷</td><td>第2回 [3](5点)</td><td>第2回 [2](7点)</td><td>例 4.2、問 [4-2][4-3]</td><td><a href="yosou.html#p2">導体と鏡像法</a></td></tr>
     </table>
     <div class="box note-box">
       <div class="label">分析から分かること</div>
-      <p>・<b>証明1問 + 計算3問</b>。証明は講義ノートの証明そのものなので、<b>暗記した者勝ち</b>。<br>
-      ・計算3問は「定理を使って楽に計算する」型。定理の名前(ストークス、ガウス、クーロン)と、<b>なぜそれを使えるか</b>を一言書くと、部分点が確実になる。<br>
-      ・§3.5(多重極展開)と §4.4(容量係数)は出ていない。授業の手書きノートにも §3.5 は書かれていないので、優先度は低い。<br>
-      ・導体と鏡像法(§4.1〜4.2)、$E/2$(§4.3)は、2025年度の第1回の時点では授業が進んでいなかった可能性があり、今年は範囲内。<a href="yosou.html">予想問題</a>で押さえる。</p>
-    </div>
-    <div class="box warn">
-      <div class="label">過去問の答案の誤り(注意)</div>
-      <p>手元の過去問の答案の [3] は、答えが $\dfrac{\rho}{2\varepsilon_0}\Bigl(1-\dfrac{1}{\sqrt{l^2+z^2}}\Bigr)$ になっていますが、これは<b>誤り</b>です。正しくは $\dfrac{\rho}{2\varepsilon_0}\Bigl(1-\dfrac{z}{\sqrt{l^2+z^2}}\Bigr)$(積分の結果に $z$ を掛け忘れている)。$1$ と $\frac{1}{\sqrt{l^2+z^2}}$(長さの逆数)を引き算している時点で<b>単位が合わない</b>ので、見直しで気づけます。詳しくは<a href="q3.html">クーロンの積分</a>のページ。</p>
+      <p>・<b>講義ノートの問が、一字一句そのまま出る</b>(2023年度の [2] = 問 [2-6]、[5] = 問 [3-3])。2025年度も、[1] は講義ノートの証明そのもの、[2] は [2-6] の数値違い。<b>講義ノートの問・例・証明を全部自力で再現できる</b>ことが、最も効率のよい対策です。<br>
+      ・<b>毎年出ている型</b>:ストークス(5〜6点)、クーロンの積分(4点)、ガウス+エネルギー(5〜9点)。この3つで第1回中間の約7割。<br>
+      ・<b>導体と鏡像法</b>:2年とも、平面の鏡像(3点)と、接地されていない球の誘導電荷密度(5〜7点)。<br>
+      ・§3.5(多重極展開)と §4.4(容量係数)は一度も出ていない。$E/2$ とコンデンサー((4.7)〜(4.12))も過去問にはないが、今年の範囲の最後なので<a href="yosou.html#y5">予想問題</a>で押さえる。</p>
     </div>
 
     <h2 id="rank">3. 優先順位</h2>
     <table class="cmp">
       <tr><th>優先度</th><th>内容</th><th>ページ</th></tr>
-      <tr><td>★★★</td><td>エネルギー最小化の証明(過去問 [1])と、同じ型の証明(一意性、ポテンシャルの存在、ヘルムホルツ)</td><td><a href="q1.html">証明問題</a></td></tr>
-      <tr><td>★★★</td><td>ストークス・ガウスの定理で積分を楽にする(過去問 [2])</td><td><a href="q2.html">積分定理の計算</a></td></tr>
-      <tr><td>★★★</td><td>クーロンの法則を積分して、軸上の電場を出す(過去問 [3])</td><td><a href="q3.html">クーロンの積分</a></td></tr>
-      <tr><td>★★★</td><td>対称性 + 積分型ガウスの法則で電場、$\frac{\varepsilon_0}{2}\int|\bm{E}|^2$ でエネルギー(過去問 [4])</td><td><a href="q4.html">ガウスとエネルギー</a></td></tr>
-      <tr><td>★★</td><td>導体の性質、鏡像法(平面・球)、$E/2$、コンデンサー(電荷一定・電位差一定)</td><td><a href="yosou.html">予想問題</a></td></tr>
-      <tr><td>★</td><td>発散・回転の計算、$\varepsilon\varepsilon$ の公式、線積分・面積分の定義どおりの計算</td><td><a href="../weeks/week-02.html">第2回</a>、<a href="q2.html#rui">類題</a></td></tr>
+      <tr><td>★★★</td><td>ストークスの定理で面積分を縁の線積分に(問 [2-6] と 2025年度)</td><td><a href="q2.html">積分定理の計算</a></td></tr>
+      <tr><td>★★★</td><td>対称性 + ガウスの法則で電場、$\frac{\varepsilon_0}{2}\int|\bm{E}|^2$ でエネルギー、2つの球殻(問 [3-3])</td><td><a href="q4.html">ガウスとエネルギー</a></td></tr>
+      <tr><td>★★★</td><td>クーロンの法則の積分(円板、有限の線電荷)</td><td><a href="q3.html">クーロンの積分</a></td></tr>
+      <tr><td>★★★</td><td>鏡像法(平面、直角の角、接地されていない球の誘導電荷密度)</td><td><a href="yosou.html">導体と鏡像法</a></td></tr>
+      <tr><td>★★</td><td>エネルギー最小化などの証明、$\varepsilon\varepsilon$ の公式で恒等式</td><td><a href="q1.html">証明・恒等式</a></td></tr>
+      <tr><td>★★</td><td>$E/2$、コンデンサー(電荷一定・電位差一定)</td><td><a href="yosou.html#y4">予想問題</a></td></tr>
+      <tr><td>★</td><td>線積分の定義どおりの計算、発散・回転の計算</td><td><a href="q2.html#line">積分定理</a>、<a href="../weeks/week-02.html">第2回</a></td></tr>
       <tr><td>—</td><td>多重極展開(§3.5)、容量係数(§4.4、範囲外)</td><td>後回し</td></tr>
     </table>
 
@@ -99,28 +103,30 @@
       <div class="label">ベクトル解析</div>
       <p>・<b>ガウスの定理</b> $\displaystyle\int_V\nabla\cdot\bm{A}\,d\bm{x}=\int_{\partial V}\bm{A}\cdot d\bm{S}$(法線は外向き)。<b>ストークスの定理</b> $\displaystyle\int_S(\nabla\times\bm{A})\cdot d\bm{S}=\oint_{\partial S}\bm{A}\cdot d\bm{x}$(縁は、法線の先から見て反時計回り)。<br>
       ・$\nabla\cdot(\nabla\times\bm{A})=0$、$\nabla\times(\nabla\phi)=\bm{0}$、$\nabla\cdot(e\nabla\psi)=\nabla e\cdot\nabla\psi+e\,\Delta\psi$。<br>
-      ・$\displaystyle\sum_k\varepsilon_{ijk}\varepsilon_{klm}=\delta_{il}\delta_{jm}-\delta_{im}\delta_{jl}$、$\nabla\times(\nabla\times\bm{A})=\nabla(\nabla\cdot\bm{A})-\Delta\bm{A}$。</p>
+      ・$\displaystyle\sum_k\varepsilon_{ijk}\varepsilon_{klm}=\delta_{il}\delta_{jm}-\delta_{im}\delta_{jl}$、$\nabla\times(\nabla\times\bm{A})=\nabla(\nabla\cdot\bm{A})-\Delta\bm{A}$、$\nabla\times(\bm{A}\times\bm{B})=\bm{A}(\nabla\cdot\bm{B})-\bm{B}(\nabla\cdot\bm{A})+(\bm{B}\cdot\nabla)\bm{A}-(\bm{A}\cdot\nabla)\bm{B}$。</p>
     </div>
     <div class="box basic">
       <div class="label">静電場</div>
       <p>・<b>クーロン</b> $\bm{E}(\bm{r})=\displaystyle\int\frac{\rho(\bm{r}')}{4\pi\varepsilon_0}\frac{\bm{r}-\bm{r}'}{|\bm{r}-\bm{r}'|^3}d\bm{r}'$、電位 $\phi(\bm{r})=\displaystyle\int\frac{\rho(\bm{r}')}{4\pi\varepsilon_0|\bm{r}-\bm{r}'|}d\bm{r}'$、$\bm{E}=-\nabla\phi$。<br>
       ・<b>ガウス</b> $\nabla\cdot\bm{E}=\rho/\varepsilon_0$、積分型 $\displaystyle\int_{\partial V}\bm{E}\cdot d\bm{S}=Q_V/\varepsilon_0$。静電場では $\nabla\times\bm{E}=\bm{0}$。<br>
       ・<b>対称な電場</b>:球対称 $E=\dfrac{Q_{\text{内}}}{4\pi\varepsilon_0r^2}$、無限に長い線電荷 $E=\dfrac{\lambda}{2\pi\varepsilon_0a}$、無限に広い面電荷 $E=\dfrac{\sigma}{2\varepsilon_0}$。<br>
-      ・<b>エネルギー</b> $U=\dfrac12\displaystyle\sum_{i\ne j}\frac{q_iq_j}{4\pi\varepsilon_0r_{ij}}=\frac12\int\rho\phi\,d\bm{r}=\frac{\varepsilon_0}{2}\int|\bm{E}|^2d\bm{r}$。球対称なら $d\bm{r}\to4\pi r^2dr$。<br>
-      ・<b>導体</b>:中は $\bm{E}=\bm{0}$、電位一定、電荷は表面だけ、表面のすぐ外 $E=\sigma/\varepsilon_0$、表面の電荷にはたらく力は $E/2$(単位面積あたり $\frac12\varepsilon_0E^2$)。<br>
+      ・<b>エネルギー</b> $U=\dfrac12\displaystyle\sum_{i\ne j}\frac{q_iq_j}{4\pi\varepsilon_0r_{ij}}=\frac12\int\rho\phi\,d\bm{r}=\frac{\varepsilon_0}{2}\int|\bm{E}|^2d\bm{r}$。球対称なら $d\bm{r}\to4\pi r^2dr$。半径 $l$ の球殻の自己エネルギー $\frac{Q^2}{8\pi\varepsilon_0l}$。<br>
+      ・<b>導体</b>:中は $\bm{E}=\bm{0}$、電位一定、電荷は表面だけ、表面のすぐ外 $E_n=\sigma/\varepsilon_0$、表面の電荷にはたらく力は $E/2$(単位面積あたり $\frac12\varepsilon_0E^2$)。<br>
+      ・<b>鏡像</b>:平面は対称な点に $-q$。接地された球(半径 $l$、電荷は中心から $a$)は中心から $\frac{l^2}{a}$ に $-\frac laq$、接地されていない(総電荷 0)ならさらに中心に $+\frac laq$。<br>
       ・<b>平行板コンデンサー</b> $E=\dfrac{Q}{\varepsilon_0S}$、$C=\dfrac{\varepsilon_0S}{l}$、$U=\dfrac{Q^2l}{2\varepsilon_0S}$。</p>
     </div>
     <div class="box basic">
       <div class="label">よく使う積分</div>
-      <p>$\displaystyle\int\frac{r\,dr}{(r^2+z^2)^{3/2}}=-\frac{1}{\sqrt{r^2+z^2}}$、$\displaystyle\int\frac{dr}{r^2}=-\frac1r$、$\displaystyle\int_0^{\pi/2}\cos^2\theta\sin\theta\,d\theta=\frac13$、球面の面素 $dS=R^2\sin\theta\,d\theta\,d\varphi$、球殻の体積 $4\pi r^2dr$。</p>
+      <p>$\displaystyle\int\frac{r\,dr}{(r^2+z^2)^{3/2}}=-\frac{1}{\sqrt{r^2+z^2}}$、$\displaystyle\int\frac{dz}{(a^2+z^2)^{3/2}}=\frac{z}{a^2\sqrt{a^2+z^2}}$、$\displaystyle\int\frac{dr}{r^2}=-\frac1r$、$\displaystyle\int_0^{\pi/2}\cos^2\theta\sin\theta\,d\theta=\frac13$、球面の面素 $dS=R^2\sin\theta\,d\theta\,d\varphi$、球殻の体積 $4\pi r^2dr$。</p>
     </div>
 
     <h2 id="check">5. 答案の最終チェック(部分点を落とさない)</h2>
     <ul>
-      <li><b>使った定理の名前</b>と、<b>使える理由</b>(「$\partial S$ 上で $z=0$ だから」「球対称だから電場は動径方向で大きさは $r$ だけで決まる」)を書いたか。</li>
-      <li><b>向き</b>:ストークスの縁の向き(法線の先から見て反時計回り)、ガウスの法線(外向き)を図で示したか。</li>
-      <li><b>単位(次元)</b>:答えの単位は正しいか。電場は $\dfrac{\text{電荷}}{\varepsilon_0\times\text{長さ}^2}$、エネルギーは $\dfrac{Q^2}{\varepsilon_0\times\text{長さ}}$ の形。</li>
-      <li><b>極限</b>:半径を 0 にする、遠くに行く、などの極限で、知っている答え(点電荷、無限平面)に戻るか。</li>
+      <li><b>使った定理の名前</b>と、<b>使える理由</b>(「$\partial S$ 上で $z=0$ だから」「球対称だから電場は動径方向で大きさは $r$ だけで決まる」「鏡像で境界条件を満たすので一意性定理より」)を書いたか。2025年度 [1] の問題文にも「どの定理や議論を用いたのか分かるように記述すること」とある。</li>
+      <li><b>向き</b>:ストークスの縁の向き(法線の先から見て反時計回り)、ガウスの法線(外向き)、線積分の向き($x=0\to-1$ など)を守ったか。</li>
+      <li><b>単位(次元)</b>:答えの単位は正しいか。電場は $\dfrac{\text{電荷}}{\varepsilon_0\times\text{長さ}^2}$、エネルギーは $\dfrac{Q^2}{\varepsilon_0\times\text{長さ}}$ の形。括弧の中の各項の単位がそろっているか(手元の 2025年度 [3] の答案は、ここで間違えている)。</li>
+      <li><b>極限</b>:半径を 0 にする、遠くに行く、などの極限で、知っている答え(点電荷、無限平面、無限に長い線)に戻るか。</li>
+      <li><b>文字の役割</b>:問題文の $r$ が「球の半径」(2023年度 [3])、$\rho$ が「面密度」「線密度」(2023年度 [4]、2025年度 [3])など、いつもと違う使い方をしていないか。</li>
       <li><b>場合分け</b>:球殻なら $r\lt a$、$a\lt r\lt b$、$r\gt b$ のすべてを書いたか。境界で値がつながるか。</li>
     </ul>
 
