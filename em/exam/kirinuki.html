@@ -42,7 +42,7 @@
 
     <h2 id="about">0. このページの使い方</h2>
     <p>このページには<b>新しい解説はありません</b>。2023・2025年度の中間試験のうち、今年の第1回中間の範囲(§4.3 の (4.12) まで)に入る問題を解くのに<b>必要な節だけ</b>を、各回のまとめノート(第2〜6回)から<b>そのまま切り抜いて</b>、出題の型ごとに並べました。過去問に出ていない節(多重極展開、ヘルムホルツの定理、遮蔽、$E/2$ など)は省いています。</p>
-    <p>各節の見出しの下の「切り抜き元」から、元のノートのその位置に飛べます。過去問そのものの解答は、各型の最初にある「過去問の解説」のページにあります。</p>
+    <p>各節の見出しの下の「切り抜き元」から、元のノートのその位置に飛べます。過去問そのものの解答は、各型の最初にある「過去問の解説」のページにあります。見出しや枠のラベル(<span class="need need-a">必須</span><span class="need need-b">必要</span><span class="need need-c">参考</span><span class="need need-x">不要</span>)は、各回のノートに付けた「過去問を解くのにどれくらい必要か」の目安です(切り抜いた節の中の証明でも、公式を導くだけのものは「不要」になっています)。</p>
     <table class="cmp">
       <tr><th>出題の型</th><th>出題された過去問</th><th>切り抜いた節</th></tr>
       <tr><td><a href="#stokes">1. ストークスの定理で面積分</a></td><td>2023年度 第1回中間 [2](5点、問 [2-6] と同じ)/2025年度 第1回中間 [2](6点)</td><td>第2回 3.2、第3回 2.1、第3回 2.6</td></tr>
@@ -62,7 +62,7 @@
       <p>面積分の定義(何を足しているか、法線の向き)→ ストークスの定理の主張 → 講義ノートの問 [2-6] の解き方、の順に読みます。 過去問の解答:<a href="q2.html">過去問対策2 積分定理の計算</a></p>
     </div>
 
-    <h3 id="w2-s3-2">第2回 3.2 面積分(surface integral) </h3>
+    <h3 id="w2-s3-2">第2回 3.2 面積分(surface integral) <span class="need need-b">必要</span> </h3>
     <p style="font-size:.9em;color:var(--muted);margin-top:-4px">切り抜き元:<a href="../weeks/week-02.html#s3-2">第2回のノート 3.2 面積分(surface integral)</a></p>
     <p>次に、別のベクトル場の積分として<b>面積分</b>を導入します。これは(特にここで述べたような形では)<b>3次元空間において</b>定義される積分です。考え方は、与えられた曲面 $S$ について「<b>その曲面 $S$ を貫くベクトルはどれだけあるか</b>」を積分するというものです。</p>
     <p>たとえば、水が流れている状況で、ある面をどれだけ水が横切ったかを考えます。横切った水の量は水の流れの速度ベクトルによって決まりますが、これは速さだけでなく、<b>面に対する流れの向き</b>も重要です。図の (a) のように面に垂直に水が流れてきている場合に、一定時間内に面を通過した水の量が $V$ だとすると、(b) のように、同じ速さの流れでも斜めから水が入り込んでくる場合には、通過した水の量は $V\cos\theta$ になり、面が傾いているほど小さくなります。</p>
@@ -89,7 +89,7 @@
     </div>
 
     <div class="box ex">
-      <div class="label">問 [2-4]</div>
+      <div class="label">問 [2-4] <span class="need need-c">参考</span></div>
       <p>3次元空間で考える。ベクトル場 $\bm{A}:=\begin{pmatrix}0\\0\\z\end{pmatrix}$ の、半径1の球面の $z\ge0$ 領域のみの半球 $S$ での面積分を求めよ。</p>
     </div>
     <div class="box supp">
@@ -106,7 +106,7 @@
 
     <!-- ===================== 4 ===================== -->
 
-    <h3 id="w3-s2-1">第3回 2.1 結果:2つの定理 </h3>
+    <h3 id="w3-s2-1">第3回 2.1 結果:2つの定理 <span class="need need-a">必須</span> </h3>
     <p style="font-size:.9em;color:var(--muted);margin-top:-4px">切り抜き元:<a href="../weeks/week-03.html#s2-1">第3回のノート 2.1 結果:2つの定理</a></p>
     <p>ある領域の<b>境界</b>を記号 $\partial$ で表します。$V$ が3次元の領域であれば、$\partial V$ はその(2次元の)表面であり、$S$ が2次元曲面であれば、$\partial S$ はその曲面の端の1次元の曲線です。</p>
     <div class="box thm">
@@ -144,10 +144,10 @@
       <p>どちらかの向きを逆にとると、両辺の符号がずれます。</p>
     </div>
 
-    <h3 id="w3-s2-6">第3回 2.6 問 [2-5] と [2-6] </h3>
+    <h3 id="w3-s2-6">第3回 2.6 問 [2-5] と [2-6] <span class="need need-a">必須</span> </h3>
     <p style="font-size:.9em;color:var(--muted);margin-top:-4px">切り抜き元:<a href="../weeks/week-03.html#s2-6">第3回のノート 2.6 問 [2-5] と [2-6]</a></p>
     <div class="box ex">
-      <div class="label">問 [2-5]</div>
+      <div class="label">問 [2-5] <span class="need need-b">必要</span></div>
       <p>曲面 $S$ として、原点を中心とする半径1の球の表面全体をとる。法線ベクトルは球の外側に向かう向きを正とする。このとき、以下の面積分
       $$\int_S\begin{pmatrix}xy^2\\yz^2\\zx^2\end{pmatrix}\cdot\bm{n}\,dS\tag{2.37}$$
       を求めよ。</p>
@@ -162,7 +162,7 @@
     </div>
 
     <div class="box ex">
-      <div class="label">問 [2-6]</div>
+      <div class="label">問 [2-6] <span class="need need-a">必須</span></div>
       <p>曲面 $S$ として $z=(1-y)(y-x^2)$($x^2\le y\le1$)を考える。この領域における面積分
       $$\int_S\begin{pmatrix}2x^2y\\3y^2z^2+\sin x-2xy^2\\2xye^{x^2-y}-x^2-2yz^3\end{pmatrix}\cdot d\bm{S}\tag{2.38}$$
       を求めよ。ただし面積分の符号は $z$ 軸正の向きを正にとる。また、以下の関係式
@@ -194,7 +194,7 @@
       <p>曲線をパラメータで表して、$d\bm{x}=\dfrac{d\bm{x}}{dt}dt$ に置き換えるだけの問題です。 過去問の解答:<a href="q2.html#line">過去問対策2 積分定理の計算</a></p>
     </div>
 
-    <h3 id="w2-s3-1">第2回 3.1 線積分(line integral) </h3>
+    <h3 id="w2-s3-1">第2回 3.1 線積分(line integral) <span class="need need-a">必須</span> </h3>
     <p style="font-size:.9em;color:var(--muted);margin-top:-4px">切り抜き元:<a href="../weeks/week-02.html#s3-1">第2回のノート 3.1 線積分(line integral)</a></p>
     <p>一つ目は<b>線積分</b>で、一般の次元の空間で定義できます。線積分の考え方は、力学における<b>仕事</b>の発想と同じです。力学における仕事は、「<b>動かした長さ</b>と、<b>動かした向きに加わっていた力</b>の積」で与えられました。動かした向きと垂直に力が加わっていたとしても、それは仕事に一切寄与しなかったことに注意しましょう。</p>
     <p>これと同様の発想で、与えられた滑らかな曲線 $C$ 上での線積分を、「<b>ベクトル場のうち、その曲線に沿った向きの大きさ</b>を積分したもの」として定義します。</p>
@@ -221,13 +221,13 @@
     </div>
 
     <div class="box ex">
-      <div class="label">例 2.2</div>
+      <div class="label">例 2.2 <span class="need need-a">必須</span></div>
       <p>2次元空間中のベクトル場 $\bm{A}(\bm{x})=\begin{pmatrix}x\\xy\end{pmatrix}$ の、単位円上で $(1,0)$ から $(0,1)$ までの線積分を計算しよう。</p>
       <p>この曲線は $\begin{pmatrix}\cos\theta\\\sin\theta\end{pmatrix}$($0\le\theta\le\frac\pi2$)とパラメトライズできるので、$\dfrac{d\bm{x}}{d\theta}=\begin{pmatrix}-\sin\theta\\\cos\theta\end{pmatrix}$。これを用いると
       $$\int_C\bm{A}\cdot d\bm{x}=\int_0^{\pi/2}\begin{pmatrix}\cos\theta\\\sin\theta\cos\theta\end{pmatrix}\cdot\begin{pmatrix}-\sin\theta\\\cos\theta\end{pmatrix}d\theta=\int_0^{\pi/2}\bigl[-\cos\theta\sin\theta+\cos^2\theta\sin\theta\bigr]d\theta=-\frac12+\frac13=-\frac16.\tag{2.26}$$</p>
     </div>
     <div class="box ex">
-      <div class="label">問 [2-3]</div>
+      <div class="label">問 [2-3] <span class="need need-b">必要</span></div>
       <p>3次元空間中のベクトル場 $\bm{A}(\bm{x})=\begin{pmatrix}x\\0\\y\end{pmatrix}$ の、螺旋 $\bm{x}(s)=\begin{pmatrix}\cos s\\\sin s\\\frac{s}{2\pi}\end{pmatrix}$($0\le s\le\pi$)上での線積分を求めよ。</p>
     </div>
     <div class="box supp">
@@ -244,20 +244,20 @@
       <p>「対称性で電場の向きと大きさの形を決める → 球面でガウスの法則」という型を、例 3.1(球殻)で身につけます。 過去問の解答:<a href="q4.html">過去問対策4 ガウスとエネルギー</a></p>
     </div>
 
-    <h3 id="w4-w-symm">第4回 1.2 対称性を使う </h3>
+    <h3 id="w4-w-symm">第4回 1.2 対称性を使う <span class="need need-a">必須</span> </h3>
     <p style="font-size:.9em;color:var(--muted);margin-top:-4px">切り抜き元:<a href="../weeks/week-04.html#w-symm">第4回のノート 1.2 対称性を使う</a></p>
     <div class="box basic">
       <div class="label">基礎:対称性と電場の向き・大きさ <a class="xref-link" href="../basics.html#symm" data-xref>→ 詳しい解説</a></div>
       <p>電荷分布が<b>ある操作(回転・平行移動・鏡映など)で不変</b>なら、電場も同じ操作で不変です。たとえば、原点まわりの<b>回転に対して不変</b>な電荷分布(原点の点電荷や、球殻・球に一様な電荷)の電場は、<b>向きは原点から外(または内)へ向かう動径方向</b>で、<b>大きさは原点からの距離 $r$ だけ</b>で決まります。同様に、$z$ 軸まわりの回転に対して不変な分布(無限に長い直線電荷など)では、大きさは軸からの距離だけで決まり、向きは軸に垂直です。</p>
     </div>
 
-    <h3 id="w4-s2-5">第4回 2.5 積分型ガウスの法則と、電気力線 </h3>
+    <h3 id="w4-s2-5">第4回 2.5 積分型ガウスの法則と、電気力線 <span class="need need-a">必須</span> </h3>
     <p style="font-size:.9em;color:var(--muted);margin-top:-4px">切り抜き元:<a href="../weeks/week-04.html#s2-5">第4回のノート 2.5 積分型ガウスの法則と、電気力線</a></p>
     <p>ちなみにガウスの定理を用いると、(球とは限らない)任意の領域 $V$ について、領域 $V$ 内の電荷の総量を $Q_V$ として、
     $$\int_{\partial V}\bm{E}\cdot d\bm{S}=\frac{1}{\varepsilon_0}Q_V\tag{3.12}$$
     が成り立つことが直ちにわかります。これは「<b>積分型ガウスの法則</b>」と呼ばれます。(3.12)と対比させる際には、(3.11)は「微分型ガウスの法則」と呼ばれます。</p>
     <details><summary>(3.12) の導出(講義ノートにない補足)</summary>
-      <div class="box proof"><div class="label">導出</div>
+      <div class="box proof"><div class="label">導出 <span class="need need-x">不要</span></div>
       <p>(3.11) の両辺を $V$ で体積積分し、左辺にガウスの定理を使う:$\displaystyle\int_{\partial V}\bm{E}\cdot d\bm{S}=\int_V\nabla\cdot\bm{E}\,d\bm{r}=\frac{1}{\varepsilon_0}\int_V\rho\,d\bm{r}=\frac{Q_V}{\varepsilon_0}$。</p></div>
     </details>
     <p>積分型ガウスの法則は、「<b>電気力線</b>(electrical force line)」あるいは「<b>電束</b>(electrical flux)」を用いた理解と相性が良い。電気力線に基づく電場の考え方は以下のとおりです。</p>
@@ -271,12 +271,12 @@
     </figure>
     <p>積分型ガウスの法則は、「<b>ある閉曲面を横切った電気力線の本数(=左辺)は、その閉曲面内にある電気力線の湧き出し(電荷)の総数(=右辺)に等しい</b>」という、極めて自然なことを述べています(閉曲面の中に電荷がなければ、入ってきた電気力線はすべて出ていくので、差し引き 0 本)。(脚注:「flux」と名前はついているが、特に何かが流れているわけではない。この英語名称は流体力学の流れ場の「流束」からのアナロジーであり、それ以上の意味はない。)</p>
 
-    <h3 id="w4-s3-2">第4回 3.2 対称性が高いときは、積分型ガウスの法則 </h3>
+    <h3 id="w4-s3-2">第4回 3.2 対称性が高いときは、積分型ガウスの法則 <span class="need need-a">必須</span> </h3>
     <p style="font-size:.9em;color:var(--muted);margin-top:-4px">切り抜き元:<a href="../weeks/week-04.html#s3-2">第4回のノート 3.2 対称性が高いときは、積分型ガウスの法則</a></p>
     <p>対称性が高い場合には、<b>積分型ガウスの法則 (3.12)</b> が非常に便利です。使い方は、(i)対称性から、電場の向きと「何に依存するか」を決める、(ii)その電場の大きさが一定とみなせる面で囲まれた領域 $V$ をとる、(iii)(3.12) の左辺を「$E$ × 面積」と書く、という手順です。</p>
 
     <div class="box ex">
-      <div class="label">例 3.1:球殻</div>
+      <div class="label">例 3.1:球殻 <span class="need need-a">必須</span></div>
       <p>原点を中心とする半径 $a$ の球殻上に総電荷 $Q$ が一様に分布している。この電荷が作る電場を求めよ。</p>
     </div>
     <p>まず原点からの距離が $l$($\gt a$)の点の電場を求めます。積分型ガウスの定理 (3.12) の領域 $V$ として、半径 $l$($\gt a$)の球を選びます。原点周りの回転に対する対称性により、$V$ の表面における電場の向きは表面に垂直な向きであり、その大きさはすべての表面上の点で同じです。この値を $E$ とすると、積分型ガウスの定理 (3.12) により
@@ -293,7 +293,7 @@
     </div>
 
     <div class="box ex">
-      <div class="label">例 3.2:無限に長い線電荷</div>
+      <div class="label">例 3.2:無限に長い線電荷 <span class="need need-b">必要</span></div>
       <p>$z$ 軸上に電荷が、$z=-\infty$ から $\infty$ まで線密度 $\rho$ で一様に分布している。この $z$ 軸上の電荷が作る電場を求めよ。</p>
     </div>
     <p>$z$ 方向の並進対称性、$z$ 軸の上下反転対称性、$z$ 軸を含む面の反転対称性より、作られる電場の向きは<b>その点から $z$ 軸への垂線の向き</b>に等しく、その大きさは $z$ 軸周りの回転対称性より<b>$z$ 軸からの距離にのみ依存</b>します。積分型ガウスの定理 (3.12) の領域 $V$ として、$z$ 軸を中心とする半径 $a$、高さ $b$ の円筒を選びます(図12)。電場の向きは $z$ 軸に垂直な向き(脚注47:クーロンの法則と $z$ 方向の反転対称性から確認できる)なので、円筒の上下の円盤の面積分はゼロとなり、側面の電場はすべて面に垂直だと分かります。よって電場の大きさを $E$ とすると、積分型ガウスの定理 (3.12) により
@@ -304,7 +304,7 @@
       <figcaption>$z$ 軸上に一様な電荷が作る電場を、ガウスの法則を用いて計算する際に設定する領域(講義ノートの図12)。上下の円板は電場と平行なので寄与0、側面だけで計算する。</figcaption>
     </figure>
     <div class="box ex">
-      <div class="label">問 [3-2]</div>
+      <div class="label">問 [3-2] <span class="need need-c">参考</span></div>
       <p>$z=0$ の $xy$ 面に、面密度 $\rho$ で電荷が一様に分布している。このとき作られる電場を求めよ。</p>
     </div>
     <div class="box supp">
@@ -326,7 +326,7 @@
       <p>$U=\frac12\int\rho\phi$ と $U=\frac{\varepsilon_0}{2}\int|\bm{E}|^2$ の2つの式と、問 [3-3] の解答です。 過去問の解答:<a href="q4.html">過去問対策4 ガウスとエネルギー</a></p>
     </div>
 
-    <h3 id="w5-s3-2">第5回 3.2 連続分布のエネルギー </h3>
+    <h3 id="w5-s3-2">第5回 3.2 連続分布のエネルギー <span class="need need-a">必須</span> </h3>
     <p style="font-size:.9em;color:var(--muted);margin-top:-4px">切り抜き元:<a href="../weeks/week-05.html#s3-2">第5回のノート 3.2 連続分布のエネルギー</a></p>
     <p>電荷が電荷密度 $\rho(\bm{r})$ に従って連続的に分布している場合の系のエネルギーは、右辺の和を積分に置き換えて
     $$U=\frac12\int\frac{\rho(\bm{r})\rho(\bm{r}')}{4\pi\varepsilon_0}\frac{1}{|\bm{r}-\bm{r}'|}\,d\bm{r}\,d\bm{r}'\tag{3.27}$$
@@ -334,7 +334,7 @@
     $$U=\frac12\int\rho(\bm{r})\phi(\bm{r})\,d\bm{r}\tag{3.28}$$
     と書き直すと、その意味はより分かりやすくなります。すなわち「<b>各場所において、各電荷が感じるスカラーポテンシャルを積算せよ</b>」ということです((3.22)を(3.27)に使った)。</p>
 
-    <h3 id="w5-s3-4">第5回 3.4 場が持つエネルギー </h3>
+    <h3 id="w5-s3-4">第5回 3.4 場が持つエネルギー <span class="need need-a">必須</span> </h3>
     <p style="font-size:.9em;color:var(--muted);margin-top:-4px">切り抜き元:<a href="../weeks/week-05.html#s3-4">第5回のノート 3.4 場が持つエネルギー</a></p>
     <p>連続的な電荷分布の場合の式 (3.27) は、さらに興味深い書き換えをすることが出来ます。ガウスの法則 (3.11) とスカラーポテンシャルの表式 (3.22) を適用すると($\rho=\varepsilon_0\nabla\cdot\bm{E}$ を (3.28) に代入して)、
     $$U=\frac12\int_V\frac{\rho(\bm{r})\rho(\bm{r}')}{4\pi\varepsilon_0}\frac{1}{|\bm{r}-\bm{r}'|}d\bm{r}\,d\bm{r}'=\frac{\varepsilon_0}{2}\int_V(\nabla\cdot\bm{E}(\bm{r}))\,\phi(\bm{r})\,d\bm{r}$$
@@ -348,7 +348,7 @@
     </div>
 
     <div class="box ex">
-      <div class="label">問 [3-3]</div>
+      <div class="label">問 [3-3] <span class="need need-a">必須</span></div>
       <p>点 $(-b,0,0)$ と $(b,0,0)$ を中心とする、半径 $l$($l\lt b$)の二つの球殻がある。それぞれの球殻には、一様面密度 $\sigma$ の電荷が分布している。この二つの球殻からなる系のエネルギーを求めよ。</p>
     </div>
     <div class="box supp">
@@ -374,7 +374,7 @@
       <p>クーロンの法則を「小さな電荷の足し合わせ」として積分にする方法を、問 [3-1](円環)で確認します。 過去問の解答:<a href="q3.html">過去問対策3 クーロンの積分</a></p>
     </div>
 
-    <h3 id="w4-s2-1">第4回 2.1 クーロンの法則 </h3>
+    <h3 id="w4-s2-1">第4回 2.1 クーロンの法則 <span class="need need-a">必須</span> </h3>
     <p style="font-size:.9em;color:var(--muted);margin-top:-4px">切り抜き元:<a href="../weeks/week-04.html#s2-1">第4回のノート 2.1 クーロンの法則</a></p>
     <p>荷電粒子(以下、荷電粒子のことも「電荷(electric charge)」と呼ぶ)は「電場(electric field)」を作ります。高校では、作られる電場はクーロンの法則で与えられると習ったと思います。</p>
     <div class="box thm">
@@ -395,11 +395,11 @@
       <p>電磁気学の基礎法則としては、ベクトル場の<b>発散と回転</b>による特徴づけを行いたい。そこで、まず静電場の基礎法則を見出すために、クーロンの法則を満たす電場の発散と回転を計算します。(やや歯切れの悪い言い方なのは、クーロンの法則は静電場に限定された関係式なのに対し、「導かれた」関係式はより一般に成り立つ関係式であるため、「クーロンの法則から導いた」というと語弊があるためです。)</p>
     </div>
 
-    <h3 id="w4-s3-1">第4回 3.1 クーロンの法則で計算する:[3-1] </h3>
+    <h3 id="w4-s3-1">第4回 3.1 クーロンの法則で計算する:[3-1] <span class="need need-a">必須</span> </h3>
     <p style="font-size:.9em;color:var(--muted);margin-top:-4px">切り抜き元:<a href="../weeks/week-04.html#s3-1">第4回のノート 3.1 クーロンの法則で計算する:[3-1]</a></p>
     <p>まず一般の場合には、積分さえきちんと実行できれば<b>クーロンの法則が正しい答えを常に与える</b>。なので、困った場合にはクーロンの法則を使えば、計算の負荷さえ気にしなければ、答えにたどり着くことは可能です。ただし、相当シンプルな設定であっても、必要な積分は結構面倒なものになることに注意を促しておく、と講義ノートは書いています。クーロンの法則に基づく計算は高校で既に習っているはずなので、ここでは深入りせず、練習問題を1つ挙げるにとどめます。</p>
     <div class="box ex">
-      <div class="label">問 [3-1]</div>
+      <div class="label">問 [3-1] <span class="need need-a">必須</span></div>
       <p>$z=0$ の $xy$ 面に、原点を中心とする半径 $l$ の円がある。この円周上に、線密度 $\rho$ で電荷が一様に分布している。この電荷が点 $(0,0,z)$ に作る電場を求めよ。</p>
     </div>
     <div class="box supp">
@@ -422,7 +422,7 @@
       <p>導体の性質(内部の電場0、表面は等電位)→ 一意性で鏡像法が正しい理由 → 平面(例 4.1)→ 鏡像を何個も置く場合(問 [4-1])の順です。 過去問の解答:<a href="yosou.html#p1">過去問対策5 導体と鏡像法</a></p>
     </div>
 
-    <h3 id="w6-s2-2">第6回 2.2 ここから導かれる3つの性質 </h3>
+    <h3 id="w6-s2-2">第6回 2.2 ここから導かれる3つの性質 <span class="need need-b">必要</span> </h3>
     <p style="font-size:.9em;color:var(--muted);margin-top:-4px">切り抜き元:<a href="../weeks/week-06.html#s2-2">第6回のノート 2.2 ここから導かれる3つの性質</a></p>
     <p>この性質から、以下の導体の性質を導くことが出来ます。</p>
     <ul>
@@ -443,7 +443,7 @@
     </div>
     <p>最初の性質について、<b>表面というのは3次元的な意味である</b>点には注意しておく、と講義ノートは言います。例えば有限の長さで太さが無視できる導体棒が電場中に置かれていた場合、電荷は棒の2か所の端点だけでなく、棒の中心部分にも存在しうる、ということです(棒の「太さ」を考えれば、その3次元の表面に電荷がある)。</p>
 
-    <h3 id="w6-s3-1">第6回 3.1 ポテンシャル問題と、一意性の利用 </h3>
+    <h3 id="w6-s3-1">第6回 3.1 ポテンシャル問題と、一意性の利用 <span class="need need-b">必要</span> </h3>
     <p style="font-size:.9em;color:var(--muted);margin-top:-4px">切り抜き元:<a href="../weeks/week-06.html#s3-1">第6回のノート 3.1 ポテンシャル問題と、一意性の利用</a></p>
     <p>ラプラス方程式 (2.40) に対する境界値問題を「<b>ポテンシャル問題</b>」といいます。電磁気学では、ある場所に導体が置かれている(電位が指定されている)、あるいはある場所に電荷が置かれている、という設定の下で、空間全体ではどのような電場や誘導電荷が作られるのか、を求めるという問題をしばしば解く必要があります。こうした問題は、</p>
     <div class="box ex">
@@ -457,10 +457,10 @@
       <p>導体の外の領域 $V$ では電荷がない所(電荷 $q$ の点以外)で $\Delta\phi=0$。境界は「導体の表面(電位が決まっている)」と「無限遠($\phi\to0$)」。この境界条件のもとで、$\Delta\phi=0$ の解は高々1つ。だから、<b>同じ境界条件を満たす解を1つでも見つければ、それが答え</b>です。見つけ方は自由(うまい電荷配置を考えてもよい)。</p>
     </div>
 
-    <h3 id="w6-s3-2">第6回 3.2 例 4.1:接地された平面導体と点電荷 </h3>
+    <h3 id="w6-s3-2">第6回 3.2 例 4.1:接地された平面導体と点電荷 <span class="need need-a">必須</span> </h3>
     <p style="font-size:.9em;color:var(--muted);margin-top:-4px">切り抜き元:<a href="../weeks/week-06.html#s3-2">第6回のノート 3.2 例 4.1:接地された平面導体と点電荷</a></p>
     <div class="box ex">
-      <div class="label">例 4.1</div>
+      <div class="label">例 4.1 <span class="need need-a">必須</span></div>
       <p>$x\lt0$ の領域に接地された導体がある。点 $(a,0,0)$($a\gt0$)に点電荷 $q$ を置く(図19(a))。どのような電位 $\phi$ が実現するか。</p>
     </div>
     <p>我々は、$x=0$ の面で電位 $\phi=0$ が実現するようなラプラス方程式の解を求めたい。さてここで、今考えている導体と点電荷の設定の代わりに「点 $(a,0,0)$ に点電荷 $q$ を、点 $(-a,0,0)$ に点電荷 $-q$ を置いた」という設定で、電位がどうなるか考えてみましょう(図19(b))。すると、対称性により $x=0$ の面上の点はすべて電位が $\phi=0$ となっています(2つの電荷から等距離にあるので、$q/r-q/r=0$)。よって一意性定理により、「点 $(a,0,0)$ に点電荷 $q$ を、$x\lt0$ に接地された導体を置いた設定」と「点 $(a,0,0)$ に点電荷 $q$ を、点 $(-a,0,0)$ に点電荷 $-q$ を置いた設定」とでは、ラプラス方程式を解くと $x\ge0$ の領域において<b>全く同一の電位の解</b>を与えることが分かります。</p>
@@ -485,10 +485,10 @@
       <p>電荷 $q$ は、鏡像電荷 $-q$($2a$ だけ離れている)から引力を受けるとみなせるので、大きさ $\dfrac{q^2}{4\pi\varepsilon_0(2a)^2}=\dfrac{q^2}{16\pi\varepsilon_0a^2}$、向きは導体に向かう方向。(導体の誘導電荷から実際に受ける力は、これと一致します。)</p>
     </div>
 
-    <h3 id="w6-s3-3">第6回 3.3 問 [4-1]:2枚の平行な導体板 </h3>
+    <h3 id="w6-s3-3">第6回 3.3 問 [4-1]:2枚の平行な導体板 <span class="need need-b">必要</span> </h3>
     <p style="font-size:.9em;color:var(--muted);margin-top:-4px">切り抜き元:<a href="../weeks/week-06.html#s3-3">第6回のノート 3.3 問 [4-1]:2枚の平行な導体板</a></p>
     <div class="box ex">
-      <div class="label">問 [4-1]</div>
+      <div class="label">問 [4-1] <span class="need need-b">必要</span></div>
       <p>原点に点電荷 $q$ がある。$x\lt-l$ および $x\gt l$ の領域にそれぞれ導体が置かれている。このポテンシャル問題を解く鏡像電荷の配置を求めよ。(注:この問題では無限個の鏡像電荷が必要になる)</p>
     </div>
     <div class="box supp">
@@ -510,11 +510,11 @@
       <p>接地された球(例 4.2)→ 接地されていない球(問 [4-2])→ 誘導電荷密度 $\sigma=-\varepsilon_0\,\partial\phi/\partial n$ の順です。 過去問の解答:<a href="yosou.html#p2">過去問対策5 導体と鏡像法</a></p>
     </div>
 
-    <h3 id="w6-s3-4">第6回 3.4 例 4.2:接地された導体球 </h3>
+    <h3 id="w6-s3-4">第6回 3.4 例 4.2:接地された導体球 <span class="need need-a">必須</span> </h3>
     <p style="font-size:.9em;color:var(--muted);margin-top:-4px">切り抜き元:<a href="../weeks/week-06.html#s3-4">第6回のノート 3.4 例 4.2:接地された導体球</a></p>
     <p>鏡像法がうまくいくもう一つの設定に、<b>導体球</b>の場合があります(脚注62:本当はもう少し一般化できて、楕円体球の場合でもうまくいく)。</p>
     <div class="box ex">
-      <div class="label">例 4.2</div>
+      <div class="label">例 4.2 <span class="need need-a">必須</span></div>
       <p>原点を中心とする半径 $l$ の接地された導体球がある。点 $(a,0,0)$($a\gt l$)に点電荷 $q$ を置く。このとき実現する電位を求めよ。</p>
     </div>
     <p>導体球の場合には、以下の「<b>アポロニウスの円定理</b>」が役に立ちます(脚注63、64)。</p>
@@ -539,10 +539,10 @@
       <p><b>電荷 $q$ にはたらく力</b>:鏡像電荷との距離は $a-\dfrac{l^2}{a}=\dfrac{a^2-l^2}{a}$ なので、引力の大きさ $\dfrac{q\cdot(l/a)q}{4\pi\varepsilon_0}\cdot\dfrac{a^2}{(a^2-l^2)^2}=\dfrac{q^2\,la}{4\pi\varepsilon_0(a^2-l^2)^2}$。</p>
     </div>
 
-    <h3 id="w6-s3-5">第6回 3.5 問 [4-2]:接地されていない導体球 </h3>
+    <h3 id="w6-s3-5">第6回 3.5 問 [4-2]:接地されていない導体球 <span class="need need-a">必須</span> </h3>
     <p style="font-size:.9em;color:var(--muted);margin-top:-4px">切り抜き元:<a href="../weeks/week-06.html#s3-5">第6回のノート 3.5 問 [4-2]:接地されていない導体球</a></p>
     <div class="box ex">
-      <div class="label">問 [4-2]</div>
+      <div class="label">問 [4-2] <span class="need need-a">必須</span></div>
       <p>例 4.2 の設定で、導体球が接地されておらず、総電荷はゼロである状況を考える。この場合にはどこに鏡像電荷を置けばよいか。(ヒント:鏡像電荷は二つ置く)</p>
     </div>
     <div class="box supp">
@@ -554,7 +554,7 @@
       <p>図16(a)の電気力線はこの配置から計算したもので、球の面には、近い側に負電荷、遠い側に正電荷(総和は 0)が誘導されます。</p>
     </div>
 
-    <h3 id="w6-s3-6">第6回 3.6 誘導電荷密度 </h3>
+    <h3 id="w6-s3-6">第6回 3.6 誘導電荷密度 <span class="need need-a">必須</span> </h3>
     <p style="font-size:.9em;color:var(--muted);margin-top:-4px">切り抜き元:<a href="../weeks/week-06.html#s3-6">第6回のノート 3.6 誘導電荷密度</a></p>
     <p>鏡像法で電場が求まれば、あとはガウスの法則を用いることで導体表面に誘起された<b>誘導電荷密度</b> $\sigma$ も求められます。ガウスの法則は、誘導電荷密度とその場所の電場の法線成分 $E$ との間に
     $$\sigma=-\varepsilon_0E\tag{4.3}$$
@@ -574,7 +574,7 @@
     </div>
 
     <div class="box ex">
-      <div class="label">問 [4-3]</div>
+      <div class="label">問 [4-3] <span class="need need-a">必須</span></div>
       <p>例 4.2 の設定で、点 $(l,0,0)$ の誘導電荷密度を求めよ。</p>
     </div>
     <div class="box supp">
@@ -594,7 +594,7 @@
       <p>一意性の証明と、(2.43)〜(2.45) のエネルギー最小化の証明そのものが出ています。 過去問の解答:<a href="q1.html">過去問対策1 証明・恒等式</a></p>
     </div>
 
-    <h3 id="w3-s3-3">第3回 3.3 ディリクレ問題と、解の一意性 </h3>
+    <h3 id="w3-s3-3">第3回 3.3 ディリクレ問題と、解の一意性 <span class="need need-b">必要</span> </h3>
     <p style="font-size:.9em;color:var(--muted);margin-top:-4px">切り抜き元:<a href="../weeks/week-03.html#s3-3">第3回のノート 3.3 ディリクレ問題と、解の一意性</a></p>
     <p>これは「<b>ディリクレ問題</b>(ラプラス方程式の境界値問題)の解の一意性」という、重要な帰結をもたらします。ディリクレ問題とは、次のような問題です。</p>
     <div class="box ex">
@@ -606,16 +606,16 @@
       <svg viewBox="0 0 540 258" width="540" role="img" aria-label="ディリクレ問題の解の一意性"><circle cx="130" cy="130" r="88" style="fill:var(--accent);opacity:.1;stroke:var(--accent);stroke-width:5"/><text class="tj" x="130" y="126" style="text-anchor:middle;font-weight:700">Δψ = 0 (Δη = 0)</text><text class="tm" x="130" y="148" style="text-anchor:middle">内部で調和</text><text class="ta" x="130" y="24" style="text-anchor:middle">解 ψ と η(別々に作った2つの解)</text><text class="tt" x="130" y="244" style="text-anchor:middle">∂V 上で ψ = η = f</text><line x1="236" y1="130" x2="295.6" y2="130" style="stroke:var(--muted);stroke-width:2.6;fill:none"/><polygon points="304,130 295,134.4 295,125.6" style="fill:var(--muted)"/><text class="tm" x="270" y="118" style="text-anchor:middle">差をとる</text><circle cx="410" cy="130" r="88" style="fill:var(--accent);opacity:.1;stroke:var(--muted);stroke-width:5"/><text class="tj" x="410" y="126" style="text-anchor:middle;font-weight:700">Δκ = 0</text><text class="tm" x="410" y="148" style="text-anchor:middle">内部で調和</text><text class="ta" x="410" y="24" style="text-anchor:middle">差 κ = ψ − η</text><text class="tt" x="410" y="244" style="text-anchor:middle">∂V 上で κ = 0</text><text class="tm" x="410" y="194" style="text-anchor:middle">最大・最小は境界 → どちらも 0</text></svg>
       <figcaption>2つの解 $\psi,\eta$ があったとして、差 $\kappa=\psi-\eta$ を調べる。$\kappa$ は境界で 0 の調和関数なので、最大値原理から、$V$ 全体で $\kappa=0$ になる。</figcaption>
     </figure>
-    <div class="box proof"><div class="label">証明</div>
+    <div class="box proof"><div class="label">証明 <span class="need need-b">必要</span></div>
       <p>二つの関数 $\psi,\eta$ がラプラス方程式 (2.40) を満たし、かつ境界 $\partial V$ 上の任意の点において $\psi(\bm{x})=\eta(\bm{x})$ が成り立つとする。すると、$\kappa(\bm{x})=\psi(\bm{x})-\eta(\bm{x})$ は、$\Delta\kappa=\Delta\psi-\Delta\eta=0$(調和関数)で、境界 $\partial V$ 上で常に値ゼロをとる。<a href="../weeks/week-03.html#s3-2">3.2</a> の結果(最大値原理)により、$\kappa(\bm{x})$ は定数関数ゼロである。これはすなわち、$\psi=\eta$ が全域で成り立つということ。</p></div>
 
-    <h3 id="w3-s3-4">第3回 3.4 エネルギーを最小にする関数としての調和関数 </h3>
+    <h3 id="w3-s3-4">第3回 3.4 エネルギーを最小にする関数としての調和関数 <span class="need need-a">必須</span> </h3>
     <p style="font-size:.9em;color:var(--muted);margin-top:-4px">切り抜き元:<a href="../weeks/week-03.html#s3-4">第3回のノート 3.4 エネルギーを最小にする関数としての調和関数</a></p>
     <p>次に、これまでとは毛色の違う調和関数の性質、「<b>エネルギー最小化としての調和関数</b>」という性質を見ます。領域 $V$ に対する、関数 $g(\bm{x})$ の<b>エネルギー汎関数</b>を
     $$\mathcal{E}(g):=\int_V|\nabla g|^2\,d\bm{x}\tag{2.43}$$
     で定義します。ただし $g(\bm{x})$ の境界条件として、境界 $\partial V$ 上では $g(\bm{x})$ は与えられた関数 $f(\bm{x})$ に一致しないといけないとします。この拘束の下でエネルギー汎関数を最小化する問題を考えます。</p>
     <div class="box thm">
-      <div class="label">主張</div>
+      <div class="label">主張 <span class="need need-a">必須</span></div>
       <p>この最小化問題の解は、この境界条件の下での<b>ラプラス方程式の解と一致する</b>。すなわち、境界で与えられた境界条件をもつ調和関数を $\psi$、同じ境界条件を満たす任意の関数を $g$ とすると
       $$\int_V|\nabla\psi|^2\,d\bm{x}\le\int_V|\nabla g|^2\,d\bm{x}\tag{2.44}$$</p>
     </div>
@@ -623,7 +623,7 @@
       <svg viewBox="0 0 520 256" width="520" role="img" aria-label="エネルギー最小化(1次元の例)"><line x1="40" y1="224" x2="480" y2="224" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><polygon points="60,190 64.9,185.6 69.8,181.2 74.6,176.8 79.5,172.6 84.4,168.4 89.3,164.4 94.1,160.5 99,156.7 103.9,153.2 108.8,149.9 113.6,146.7 118.5,143.8 123.4,141.2 128.3,138.7 133.1,136.5 138,134.6 142.9,132.8 147.8,131.3 152.6,130 157.5,128.9 162.4,128 167.3,127.3 172.1,126.7 177,126.2 181.9,125.9 186.8,125.6 191.6,125.4 196.5,125.3 201.4,125.1 206.3,125 211.1,124.8 216,124.6 220.9,124.3 225.8,123.9 230.6,123.4 235.5,122.8 240.4,122.1 245.3,121.2 250.1,120.2 255,119 259.9,117.7 264.8,116.2 269.6,114.6 274.5,112.8 279.4,110.9 284.3,108.9 289.1,106.8 294,104.6 298.9,102.3 303.8,100 308.6,97.6 313.5,95.3 318.4,92.9 323.3,90.6 328.1,88.4 333,86.2 337.9,84.2 342.8,82.3 347.6,80.5 352.5,78.9 357.4,77.5 362.3,76.3 367.1,75.3 372,74.6 376.9,74 381.8,73.7 386.6,73.7 391.5,73.8 396.4,74.2 401.3,74.9 406.1,75.7 411,76.7 415.9,78 420.8,79.4 425.6,80.9 430.5,82.6 435.4,84.3 440.3,86.2 445.1,88.1 450,90 450,90 445.1,91.3 440.3,92.5 435.4,93.8 430.5,95 425.6,96.3 420.8,97.5 415.9,98.8 411,100 406.1,101.3 401.3,102.5 396.4,103.8 391.5,105 386.6,106.3 381.8,107.5 376.9,108.8 372,110 367.1,111.3 362.3,112.5 357.4,113.8 352.5,115 347.6,116.3 342.8,117.5 337.9,118.8 333,120 328.1,121.3 323.3,122.5 318.4,123.8 313.5,125 308.6,126.3 303.8,127.5 298.9,128.8 294,130 289.1,131.3 284.3,132.5 279.4,133.8 274.5,135 269.6,136.3 264.8,137.5 259.9,138.8 255,140 250.1,141.3 245.3,142.5 240.4,143.8 235.5,145 230.6,146.3 225.8,147.5 220.9,148.8 216,150 211.1,151.3 206.3,152.5 201.4,153.8 196.5,155 191.6,156.3 186.8,157.5 181.9,158.8 177,160 172.1,161.3 167.3,162.5 162.4,163.8 157.5,165 152.6,166.3 147.8,167.5 142.9,168.8 138,170 133.1,171.3 128.3,172.5 123.4,173.8 118.5,175 113.6,176.3 108.8,177.5 103.9,178.8 99,180 94.1,181.3 89.3,182.5 84.4,183.8 79.5,185 74.6,186.3 69.8,187.5 64.9,188.8 60,190" style="fill:var(--accent);opacity:.14;stroke:none"/><polyline points="60,190 64.9,185.6 69.8,181.2 74.6,176.8 79.5,172.6 84.4,168.4 89.3,164.4 94.1,160.5 99,156.7 103.9,153.2 108.8,149.9 113.6,146.7 118.5,143.8 123.4,141.2 128.3,138.7 133.1,136.5 138,134.6 142.9,132.8 147.8,131.3 152.6,130 157.5,128.9 162.4,128 167.3,127.3 172.1,126.7 177,126.2 181.9,125.9 186.8,125.6 191.6,125.4 196.5,125.3 201.4,125.1 206.3,125 211.1,124.8 216,124.6 220.9,124.3 225.8,123.9 230.6,123.4 235.5,122.8 240.4,122.1 245.3,121.2 250.1,120.2 255,119 259.9,117.7 264.8,116.2 269.6,114.6 274.5,112.8 279.4,110.9 284.3,108.9 289.1,106.8 294,104.6 298.9,102.3 303.8,100 308.6,97.6 313.5,95.3 318.4,92.9 323.3,90.6 328.1,88.4 333,86.2 337.9,84.2 342.8,82.3 347.6,80.5 352.5,78.9 357.4,77.5 362.3,76.3 367.1,75.3 372,74.6 376.9,74 381.8,73.7 386.6,73.7 391.5,73.8 396.4,74.2 401.3,74.9 406.1,75.7 411,76.7 415.9,78 420.8,79.4 425.6,80.9 430.5,82.6 435.4,84.3 440.3,86.2 445.1,88.1 450,90" style="fill:none;stroke:var(--accent);stroke-width:2.4"/><polyline points="60,190 64.9,188.8 69.8,187.5 74.6,186.3 79.5,185 84.4,183.8 89.3,182.5 94.1,181.3 99,180 103.9,178.8 108.8,177.5 113.6,176.3 118.5,175 123.4,173.8 128.3,172.5 133.1,171.3 138,170 142.9,168.8 147.8,167.5 152.6,166.3 157.5,165 162.4,163.8 167.3,162.5 172.1,161.3 177,160 181.9,158.8 186.8,157.5 191.6,156.3 196.5,155 201.4,153.8 206.3,152.5 211.1,151.3 216,150 220.9,148.8 225.8,147.5 230.6,146.3 235.5,145 240.4,143.8 245.3,142.5 250.1,141.3 255,140 259.9,138.8 264.8,137.5 269.6,136.3 274.5,135 279.4,133.8 284.3,132.5 289.1,131.3 294,130 298.9,128.8 303.8,127.5 308.6,126.3 313.5,125 318.4,123.8 323.3,122.5 328.1,121.3 333,120 337.9,118.8 342.8,117.5 347.6,116.3 352.5,115 357.4,113.8 362.3,112.5 367.1,111.3 372,110 376.9,108.8 381.8,107.5 386.6,106.3 391.5,105 396.4,103.8 401.3,102.5 406.1,101.3 411,100 415.9,98.8 420.8,97.5 425.6,96.3 430.5,95 435.4,93.8 440.3,92.5 445.1,91.3 450,90" style="fill:none;stroke:var(--thm);stroke-width:3.4"/><circle cx="60" cy="190" r="5" style="fill:var(--text)"/><circle cx="450" cy="90" r="5" style="fill:var(--text)"/><text class="tm" x="60" y="212" style="text-anchor:middle">境界条件</text><text class="tm" x="450" y="78" style="text-anchor:middle">境界条件</text><text class="tt" x="250" y="52" style="text-anchor:middle">直線 ψ(Δψ = 0):エネルギー ∫|∇ψ|² が最小</text><text class="ta" x="250" y="72" style="text-anchor:middle">他の g(青)はエネルギーが大きい</text><text class="tm" x="250" y="244" style="text-anchor:middle">青 − 橙 = e(両端で 0)</text></svg>
       <figcaption>1次元で見ると、「両端の値を決めたとき、$\int|g'|^2$ を最小にする関数」は直線です(これは $g''=0$ の解でもある)。直線から外れるほど「傾きの2乗の積分」は大きくなります。</figcaption>
     </figure>
-    <div class="box proof"><div class="label">証明</div>
+    <div class="box proof"><div class="label">証明 <span class="need need-a">必須</span></div>
       <p>$g(\bm{x})=\psi(\bm{x})+e(\bm{x})$ と書くことにすると、$e(\bm{x})$ は境界 $\partial V$ 上で 0 となる関数である($\psi$ も $g$ も境界で同じ値 $f$ をとるから)。これを用いると
       $$\int_V|\nabla\psi+\nabla e|^2d\bm{x}-\int_V|\nabla\psi|^2d\bm{x}=\int_V\bigl(2\nabla\psi\cdot\nabla e+|\nabla e|^2\bigr)d\bm{x}=\int_V\bigl(2\nabla\cdot(e\nabla\psi)+|\nabla e|^2\bigr)d\bm{x}$$
       $$=2\int_{\partial V}e\,\nabla\psi\cdot d\bm{S}+\int_V|\nabla e|^2\,d\bm{x}=\int_V|\nabla e|^2\,d\bm{x}\ge0\tag{2.45}$$
@@ -649,7 +649,7 @@
       <p>添字の書き方 → 外積と $\varepsilon_{ijk}$ → $\varepsilon\varepsilon$ の公式で三重積を示す例、の順です。 過去問の解答:<a href="q1.html#ident">過去問対策1 証明・恒等式</a></p>
     </div>
 
-    <h3 id="w2-w-sigma">第2回 1.3 総和記号と添字、クロネッカーのデルタ </h3>
+    <h3 id="w2-w-sigma">第2回 1.3 総和記号と添字、クロネッカーのデルタ <span class="need need-b">必要</span> </h3>
     <p style="font-size:.9em;color:var(--muted);margin-top:-4px">切り抜き元:<a href="../weeks/week-02.html#w-sigma">第2回のノート 1.3 総和記号と添字、クロネッカーのデルタ</a></p>
     <div class="box basic">
       <div class="label">基礎:$\Sigma$ と添字の計算 <a class="xref-link" href="../basics.html#sigma" data-xref>→ 詳しい解説</a></div>
@@ -657,7 +657,7 @@
       <p><b>クロネッカーのデルタ</b>:$\delta_{ij}=1\ (i=j)$、$\delta_{ij}=0\ (i\ne j)$。重要な性質は、$\displaystyle\sum_j\delta_{ij}a_j=a_i$(「$\delta$ をかけて足すと、添字を付け替える」)。偏微分の略記:$\partial_i=\dfrac{\partial}{\partial x_i}$。</p>
     </div>
 
-    <h3 id="w2-s2-2">第2回 2.2 外積と、レヴィ=チヴィタ記号 $\varepsilon_{ijk}$ </h3>
+    <h3 id="w2-s2-2">第2回 2.2 外積と、レヴィ=チヴィタ記号 $\varepsilon_{ijk}$ <span class="need need-a">必須</span> </h3>
     <p style="font-size:.9em;color:var(--muted);margin-top:-4px">切り抜き元:<a href="../weeks/week-02.html#s2-2">第2回のノート 2.2 外積と、レヴィ=チヴィタ記号 $\varepsilon_{ijk}$</a></p>
     <p>外積は「レヴィ=チヴィタ記号(Levi-Civita symbol)」あるいは「エディントンのイプシロン」と呼ばれる記号を使うと、見通しよく書けます(英語では前者の呼び方が一般的)。人名で、一人の人(トゥーリオ・レヴィ=チヴィタ)の名前です。</p>
     <div class="box def">
@@ -673,23 +673,23 @@
     $$[\bm{A}\times\bm{B}]_i=\sum_{j,k}\varepsilon_{ijk}A_jB_k\tag{2.6}$$
     と書けます($[\bm{A}\times\bm{B}]_i$ は $\bm{A}\times\bm{B}$ の第 $i$ 成分)。</p>
     <div class="box ex">
-      <div class="label">確かめ:$i=1$ のとき</div>
+      <div class="label">確かめ:$i=1$ のとき <span class="need need-c">参考</span></div>
       <p>$\varepsilon_{1jk}$ が0でないのは $(j,k)=(2,3)$ のとき $+1$ と、$(3,2)$ のとき $-1$ だけ。よって $[\bm{A}\times\bm{B}]_1=\varepsilon_{123}A_2B_3+\varepsilon_{132}A_3B_2=A_2B_3-A_3B_2$。外積の定義の第1成分と一致します。</p>
     </div>
     <p><b>回転も同様に</b> $\nabla$ の第 $j$ 成分 $\partial_j$ を $A_j$ の位置に入れて書けます:
     $$[\nabla\times\bm{A}]_i=\sum_{j,k}\varepsilon_{ijk}\,\partial_jA_k.$$
     </p>
 
-    <h3 id="w2-s2-5">第2回 2.5 $\varepsilon\varepsilon$ の公式と、ベクトル三重積 <span class="page-tag">p.6</span></h3>
+    <h3 id="w2-s2-5">第2回 2.5 $\varepsilon\varepsilon$ の公式と、ベクトル三重積 <span class="need need-a">必須</span> <span class="page-tag">p.6</span></h3>
     <p style="font-size:.9em;color:var(--muted);margin-top:-4px">切り抜き元:<a href="../weeks/week-02.html#s2-5">第2回のノート 2.5 $\varepsilon\varepsilon$ の公式と、ベクトル三重積</a></p>
     <p>わざわざ新しい記号を導入して複雑にしただけに見えるかもしれませんが、繰り返しの掛け算や総和をとる際には、レヴィ=チヴィタ記号は計算を楽にし、見通しをよくします。そのご利益を感じられる公式が、これです。</p>
     <div class="box thm">
-      <div class="label">公式 (2.14)</div>
+      <div class="label">公式 (2.14) <span class="need need-a">必須</span></div>
       <p>$$\sum_{k=1}^{3}\varepsilon_{ijk}\varepsilon_{klm}=\delta_{il}\delta_{jm}-\delta_{im}\delta_{jl}$$
       ($\delta_{ij}$ はクロネッカーのデルタ。)</p>
     </div>
     <details><summary>(2.14) の確認(講義ノートの脚注13)</summary>
-      <div class="box proof"><div class="label">確認</div>
+      <div class="box proof"><div class="label">確認 <span class="need need-x">不要</span></div>
       <p>左辺は、$i\ne j$ かつ $\{i,j\}=\{l,m\}$(集合として一致)の場合に限って、0でない値になりえます($k$ は残りの1つの数字に決まる)。そして、$i\ne j$ かつ $(i,j)=(l,m)$ のときは左辺も右辺も $1$、$i\ne j$ かつ $(i,j)=(m,l)$ のときは左辺も右辺も $-1$ になることは簡単に確認できます。</p>
       <p>左辺がこのようになっていない場合も簡単です。$\{i,j\}\ne\{l,m\}$ のとき、右辺は明らかにゼロなので、左辺と右辺は一致。$i=j$ かつ $\{i,j\}=\{l,m\}$(つまり $i=j=l=m$)のとき、右辺は $1-1=0$ で、やはり左辺(0)と一致します。以上により、あらゆる場合に成り立つ。</p></div>
     </details>
@@ -701,7 +701,7 @@
     となり、直ちに導けます。(2行目の変形では、$\delta$ によって添字が付け替わります:たとえば $\sum_l\delta_{il}B_l=B_i$。)</p>
 
     <div class="box ex">
-      <div class="label">問 [2-2]</div>
+      <div class="label">問 [2-2] <span class="need need-b">必要</span></div>
       <p>ベクトル場 $\bm{A}$ について、関係式
       $$\bm{A}\times(\nabla\times\bm{A})=\nabla\Bigl(\frac12\bm{A}\cdot\bm{A}\Bigr)-(\bm{A}\cdot\nabla)\bm{A}\tag{2.17}$$
       を導け。ただし

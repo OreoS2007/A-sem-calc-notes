@@ -199,3 +199,13 @@ main h2[id], main h3[id], main section[id], main div[id] { scroll-margin-top: 68
 /* ---- 直感で理解する(厳密な証明より先に、感覚的な理解の足がかりを示す枠) ---- */
 .box.intuit { border-left-color: var(--ex); background: color-mix(in srgb, var(--surface) 92%, var(--ex) 8%); }
 .box.intuit .label { color: var(--ex); }
+
+/* ---- 過去問に対する必要度のラベル(em の各回のノート) ---- */
+.need { display: inline-block; font-size: .7rem; font-weight: 700; padding: 1px 8px; border-radius: 99px; margin-left: 8px; vertical-align: middle; border: 1px solid currentColor; white-space: nowrap; letter-spacing: 0; }
+.need-a { color: #c62828; background: color-mix(in srgb, var(--surface) 90%, #c62828 10%); }
+.need-b { color: var(--thm); background: color-mix(in srgb, var(--surface) 90%, var(--thm) 10%); }
+.need-c { color: var(--accent); background: var(--accent-soft); }
+.need-x { color: var(--muted); }
+.need-y { color: #7b3fb0; background: color-mix(in srgb, var(--surface) 92%, #7b3fb0 8%); }
+@media (prefers-color-scheme: dark) { .need-a { color: #ff8a80; } .need-y { color: #c3a0f0; } }
+.need-legend p { margin: .3em 0; }

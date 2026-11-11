@@ -24,24 +24,30 @@
     <h1>第3回:ベクトル解析2(積分定理・調和関数・ポテンシャル)</h1>
     <div class="meta">電磁気学(東京大学 教養学部 秋学期)／講義ノート §2「(数学):ベクトル解析」§2.3〜§2.6(1)(p.9〜p.15)／前の回の「微分」と「積分」を結ぶ定理と、その応用です</div>
 
+    <div class="box note-box need-legend" id="need-legend">
+      <div class="label">見出しのラベル:過去問を解くのに、どれくらい必要か</div>
+      <p>今年の第1回中間(11/13、範囲は §4.3 の (4.12) まで)の対策として、2023・2025年度の中間試験のうち範囲内の問題を解くのに、それぞれの節がどれくらい要るかを付けました(<a href="../exam/index.html">過去問対策特化ページ</a>の分析にもとづく)。</p>
+      <p><span class="need need-a">必須</span> 過去問にそのまま出た型 <span class="need need-b">必要</span> 過去問を解くときに使う道具 <span class="need need-c">参考</span> 理解の助け(答案には直接使わない) <span class="need need-x">不要</span> 過去問を解くのに使わない <span class="need need-y">範囲内・過去問なし</span> 今年は範囲内だが、過去問には出ていない</p>
+      <p>過去問で出た証明は「エネルギー最小化(第3回 3.4)」だけです。ガウス・ストークスの定理やデルタ関数の導出など、<b>公式を導く証明は「不要」</b>(公式を覚えて使えばよい)にしました。§2.4〜2.6 のほかの証明は、同じ型で出る可能性があるので「参考」です。</p>
+    </div>
     <nav class="toc">
       <div class="toc-title">目次</div>
       <ol start="0">
-        <li><a href="#s0">この回の全体像</a>(p.9)</li>
-        <li><a href="#s1">準備:基礎の確認</a>
+        <li><a href="#s0">この回の全体像</a> <span class="need need-c">参考</span>(p.9)</li>
+        <li><a href="#s1">準備:基礎の確認</a> <span class="need need-b">必要</span>
           <div class="sub">微分積分学の基本定理／重積分と累次積分／極大・極小と2階微分／第2回の道具(発散・回転・線積分・面積分)</div></li>
-        <li><a href="#s2">ガウスの定理とストークスの定理</a></li>
-        <li><a href="#s3">ラプラス方程式と調和関数</a></li>
-        <li><a href="#s4">ポテンシャルの存在</a></li>
-        <li><a href="#s5">ヘルムホルツの定理(1)</a></li>
-        <li><a href="#s6">具体例で練習</a></li>
-        <li><a href="#s7">まとめ(この回で覚えること)</a></li>
-        <li><a href="#s8">この回のノートについてのメモ</a></li>
+        <li><a href="#s2">ガウスの定理とストークスの定理</a> <span class="need need-a">必須</span></li>
+        <li><a href="#s3">ラプラス方程式と調和関数</a> <span class="need need-a">必須</span></li>
+        <li><a href="#s4">ポテンシャルの存在</a> <span class="need need-c">参考</span></li>
+        <li><a href="#s5">ヘルムホルツの定理(1)</a> <span class="need need-c">参考</span></li>
+        <li><a href="#s6">具体例で練習</a> <span class="need need-b">必要</span></li>
+        <li><a href="#s7">まとめ(この回で覚えること)</a> <span class="need need-b">必要</span></li>
+        <li><a href="#s8">この回のノートについてのメモ</a> <span class="need need-x">不要</span></li>
       </ol>
     </nav>
 
     <!-- ===================== 0 ===================== -->
-    <h2 id="s0">0. この回の全体像 <span class="page-tag">講義ノート p.9</span></h2>
+    <h2 id="s0">0. この回の全体像 <span class="need need-c">参考</span> <span class="page-tag">講義ノート p.9</span></h2>
     <p>前の回(第2回)で、場を微分する演算子(勾配・発散・回転・ラプラシアン)と、場を積分する方法(線積分・面積分)を作りました。この回は、それらを<b>結びつける</b>2つの定理と、その応用です。講義ノートの §2(ベクトル解析)の後半にあたります。</p>
 
     <div class="box thm">
@@ -66,10 +72,10 @@
     <p>以下では、先に必要な基礎を丁寧に復習してから、講義ノートの順に進みます。紫色の枠は「基礎の復習」、黄色の枠は「講義ノートにないが、理解を助けるために私が補った部分」、緑の枠は「直感で理解するための説明」です。講義ノートの <b>[2-5]〜[2-6]</b> の問題の解答も、黄色の枠で補いました。</p>
 
     <!-- ===================== 1 ===================== -->
-    <h2 id="s1">1. 準備:基礎の確認</h2>
+    <h2 id="s1">1. 準備:基礎の確認 <span class="need need-b">必要</span></h2>
     <p>この回で使う道具を並べます。前の回(第2回)の発散・回転・線積分・面積分は、最後の枠にまとめました(リンクから第2回のノートに飛べます)。</p>
 
-    <h3 id="w-ftc">1.1 微分積分学の基本定理</h3>
+    <h3 id="w-ftc">1.1 微分積分学の基本定理 <span class="need need-c">参考</span></h3>
     <div class="box basic">
       <div class="label">基礎:基本定理、置換積分 <a class="xref-link" href="../basics.html#ftc" data-xref>→ 詳しい解説</a></div>
       <p><b>微分積分学の基本定理</b>:$f$ が連続微分可能なとき
@@ -78,21 +84,21 @@
       <p>積分は線形($\int(af+bg)=a\int f+b\int g$)で、区間を分けて足せます。<b>置換積分</b>:$x=x(s)$ のとき $\displaystyle\int g(x)\,dx=\int g(x(s))\,\frac{dx}{ds}\,ds$。よく使う積分:$\displaystyle\int_0^{\pi/2}\sin\theta\cos\theta\,d\theta=\frac12,\ \ \int_0^{\pi/2}\cos^2\theta\sin\theta\,d\theta=\frac13$($u=\cos\theta$ と置換)。</p>
     </div>
 
-    <h3 id="w-multint">1.2 重積分と累次積分</h3>
+    <h3 id="w-multint">1.2 重積分と累次積分 <span class="need need-b">必要</span></h3>
     <div class="box basic">
       <div class="label">基礎:重積分(体積積分) <a class="xref-link" href="../basics.html#multint" data-xref>→ 詳しい解説</a></div>
       <p>2変数関数の<b>重積分</b> $\displaystyle\iint f\,dx\,dy$ は、領域を細かい長方形に分けて「$f\times$面積」を足した極限(グラフの下の体積)。計算は<b>累次積分</b>(1変数の積分を2回)で行い、$\displaystyle\int_c^d\!\!\Bigl(\int_a^bf\,dx\Bigr)dy$ のように、内側から順に積分します(積分の順序は、領域が長方形のときは入れ替えてよい)。3次元の<b>体積積分</b> $\displaystyle\int_Vf\,d\bm{x}$ も同様です。</p>
       <p>よく使う量:半径 $R$ の球の体積 $\dfrac43\pi R^3$、球面の面積 $4\pi R^2$。球対称な関数 $g(r)$ の積分は、球殻(厚さ $dr$、面積 $4\pi r^2$)に分けて $\displaystyle\int_Vg\,d\bm{x}=\int_0^Rg(r)\,4\pi r^2\,dr$。</p>
     </div>
 
-    <h3 id="w-extrema">1.3 極大・極小と2階微分</h3>
+    <h3 id="w-extrema">1.3 極大・極小と2階微分 <span class="need need-x">不要</span></h3>
     <div class="box basic">
       <div class="label">基礎:極値と2階微分 <a class="xref-link" href="../basics.html#extrema" data-xref>→ 詳しい解説</a></div>
       <p>1変数関数 $f$ が $x_0$ で<b>極大</b>(山の頂上)なら $f'(x_0)=0$ かつ $f''(x_0)\le0$(上に凸)。<b>極小</b>(谷の底)なら $f'(x_0)=0$ かつ $f''(x_0)\ge0$(下に凸)。多変数でも、最大の点では「<b>どの方向の断面を見ても上に凸</b>」で、$\partial_i^2f\le0$($i=1,\dots,n$)です。</p>
       <p>また、<b>閉じた有界な領域で連続な関数は、最大値と最小値をとる</b>(最大値の定理)。これは、この回の<a href="#s3-2">3.2「最大値原理」</a>(講義ノート §2.4)で使います。</p>
     </div>
 
-    <h3 id="w-prev">1.4 第2回の道具(発散・回転・線積分・面積分)</h3>
+    <h3 id="w-prev">1.4 第2回の道具(発散・回転・線積分・面積分) <span class="need need-b">必要</span></h3>
     <div class="box basic">
       <div class="label">基礎:発散、回転、ラプラシアン、線積分、面積分 <a class="xref-link" href="week-02.html#s2-1" data-xref>→ 第2回 2.1(発散・勾配・回転)</a><a class="xref-link" href="week-02.html#s3" data-xref>→ 第2回 3.(線積分と面積分)</a></div>
       <p>・<b>勾配</b> $\nabla\phi=(\partial_1\phi,\partial_2\phi,\partial_3\phi)$:$\phi$ が最も急に増える向き。<b>発散</b> $\nabla\cdot\bm{A}=\sum_i\partial_iA_i$:その点からの湧き出し。<b>回転</b>(その点のまわりの渦)
@@ -104,10 +110,10 @@
     </div>
 
     <!-- ===================== 2 ===================== -->
-    <h2 id="s2">2. ガウスの定理とストークスの定理 <span class="page-tag">講義ノート p.9–12(§2.3)</span></h2>
+    <h2 id="s2">2. ガウスの定理とストークスの定理 <span class="need need-a">必須</span> <span class="page-tag">講義ノート p.9–12(§2.3)</span></h2>
     <p>ベクトル場の積分を二つ導入したので、いよいよベクトル解析のハイライトの一つである、<b>ガウスの定理</b>と<b>ストークスの定理</b>を見ることにします。これらの定理は、「ある領域<b>全体</b>での積分」と「その領域の<b>表面(境界)</b>での積分」の結びつきを示すものです。全体(バルク:bulk)と表面・端が結びつく、というのは、幾何学において繰り返し出てくる見方であり、最近の物理学で流行しているトポロジカル物性や AdS/CFT 対応などの議論も、まさに「全体の性質」と「表面での性質」との関係性がカギになっています。</p>
 
-    <h3 id="s2-1">2.1 結果:2つの定理</h3>
+    <h3 id="s2-1">2.1 結果:2つの定理 <span class="need need-a">必須</span></h3>
     <p>ある領域の<b>境界</b>を記号 $\partial$ で表します。$V$ が3次元の領域であれば、$\partial V$ はその(2次元の)表面であり、$S$ が2次元曲面であれば、$\partial S$ はその曲面の端の1次元の曲線です。</p>
     <div class="box thm">
       <div class="label">定理(ガウスの定理、発散定理) (2.28)</div>
@@ -144,7 +150,7 @@
       <p>どちらかの向きを逆にとると、両辺の符号がずれます。</p>
     </div>
 
-    <h3 id="s2-2">2.2 微積分学の基本定理との関係</h3>
+    <h3 id="s2-2">2.2 微積分学の基本定理との関係 <span class="need need-c">参考</span></h3>
     <p>きちんとした証明のためには、細かいところにいろいろと気を使わないといけませんが、<b>本質は微分積分学の基本定理(微分を積分すると両端の差になる)と同じ</b>です。そこで、厳密な証明は他(大体のベクトル解析の教科書には、証明が出ています)に譲り、ここではポイントだけを見ます。次のように並べると、同じ形をしていることが分かります。</p>
     <table class="cmp">
       <tr><th>領域</th><th>境界</th><th>定理</th></tr>
@@ -160,7 +166,7 @@
       <li>$x,y,z$ 軸に平行な面や線で囲まれた図形に対し、ガウスの定理/ストークスの定理を示す。</li>
     </ol>
 
-    <h3 id="s2-3">2.3 ステップ1:斜めの線や面を、軸に平行な線や面に置き換える</h3>
+    <h3 id="s2-3">2.3 ステップ1:斜めの線や面を、軸に平行な線や面に置き換える <span class="need need-x">不要</span></h3>
     <figure class="fig">
       <svg viewBox="0 0 580 246" width="580" role="img" aria-label="斜めの線を階段で近似"><text class="ta" x="10" y="22">斜めの線を、x軸・y軸に平行な線で近似する</text><line x1="30" y1="214" x2="250" y2="66" style="stroke:var(--accent);stroke-width:2.6"/><path d="M30 214 H66.7 V189.3 H103.3 V164.7 H140 V140 H176.7 V115.3 H213.3 V90.7 H250 V66" style="fill:none;stroke:var(--thm);stroke-width:2.2"/><text class="ta" x="150" y="104">斜めの線</text><text class="tt" x="54" y="126">階段(軸に平行)</text><line x1="300" y1="22" x2="300" y2="236" style="stroke:var(--muted);stroke-width:1.1;stroke-dasharray:5 4;fill:none"/><text class="ta" x="316" y="22">内積の足し算:A·(Δx, Δy) = A_xΔx + A_yΔy</text><line x1="350" y1="196" x2="510" y2="98" style="stroke:var(--accent);stroke-width:2.6"/><line x1="350" y1="196" x2="510" y2="196" style="stroke:var(--thm);stroke-width:2.6"/><line x1="510" y1="196" x2="510" y2="98" style="stroke:var(--thm);stroke-width:2.6"/><text class="t" x="430" y="214" style="text-anchor:middle">Δx</text><text class="t" x="522" y="150">Δy</text><line x1="360" y1="76" x2="416" y2="58.5" style="stroke:var(--ex);stroke-width:2.6;fill:none"/><polygon points="424,56 416.7,62.9 414.1,54.5" style="fill:var(--ex)"/><text class="t" x="430" y="56" style="font-size:17px;fill:var(--ex)">A</text><text class="tm" x="316" y="236">線積分は一致 / ただし「長さ」は一致しない</text></svg>
       <figcaption>斜めの曲線を $x,y$ 軸に平行な階段で近似する(講義ノートの図4・図5(a) の考え方)。右は、1つの斜めの線分での、内積の足し算。</figcaption>
@@ -184,7 +190,7 @@
       $\bm{A}$ との内積をとって (2.32) の右辺になる。これは「面積ベクトルの各成分 = 面を各座標面に射影したときの面積(符号つき)」ということで、斜めの面を軸に平行な面に分解した場合の面積と一致しているわけです。</p>
     </div>
 
-    <h3 id="s2-4">2.4 ステップ2:ガウスの定理(直方体の集まりのとき)</h3>
+    <h3 id="s2-4">2.4 ステップ2:ガウスの定理(直方体の集まりのとき) <span class="need need-x">不要</span></h3>
     <p>領域が直線、直方体の場合に、ガウスの定理とストークスの定理がどのように導かれるのかを見ます。ガウスの定理では、直方体の集合で書かれる領域 $V$ の体積積分として
     $$\int_V\Bigl(\frac{\partial}{\partial x}A_x+\frac{\partial}{\partial y}A_y+\frac{\partial}{\partial z}A_z\Bigr)d\bm{r}\tag{2.33}$$
     という積分を行います。これら3つの項それぞれについて、体積積分の<b>積分の順番を工夫</b>します。第一項の $\frac{\partial}{\partial x}A_x$ は、「(各 $(y,z)$ の値ごとに)$x$ 方向に端から端まで積分を行い、その後 $yz$ 方向に積分を行う」という順番で積分することにします。</p>
@@ -197,7 +203,7 @@
     </figure>
     <p>この右辺の $\Delta y\Delta zA_x(x_+)$ と $-\Delta y\Delta zA_x(x_-)$ は、それぞれ<b>端の両方の面で $\bm{A}$ を面積分した場合に得られる項と全く同じ</b>です($x_+$ の面の外向き法線は $+\bm{e}_x$ なので $A_x$ が正の寄与、$x_-$ の面の外向き法線は $-\bm{e}_x$ なので $-A_x$)。なので、これを $yz$ 方向にすべて積分することにより、表面 $\partial V$ の面積分のうち、<b>$yz$ 面に平行な面の面積分がすべてカウントされる</b>ことになります。あとは同様に、$y$ 微分はまず $y$ 方向に積分、$z$ 微分はまず $z$ 方向に積分することで、それぞれ $xz$ 面、$xy$ 面に平行な面の面積分がすべてカウントでき、結局面積分 $\int_{\partial V}\bm{A}\cdot d\bm{S}$ になることが分かります。</p>
 
-    <h3 id="s2-5">2.5 ステップ2:ストークスの定理(平らな面のとき)</h3>
+    <h3 id="s2-5">2.5 ステップ2:ストークスの定理(平らな面のとき) <span class="need need-x">不要</span></h3>
     <p>では次にストークスの定理です。$z$ 成分を考える際には、面 $S$ の $z$ 方向の膨らみは<b>押しつぶした積分で考える</b>ことができる(各微小な段差の前後で $\bm{A}$ の値に変化はないとみなせるため)ので、ここでは曲面 $S$ が $z=0$ の $xy$ 平面中で広がっている状況を考えればよい。この設定で $\nabla\times\bm{A}$ の $z$ 成分の積分
     $$\int_S[\nabla\times\bm{A}]_z\,dx\,dy=\int_S\Bigl(\frac{\partial A_y}{\partial x}-\frac{\partial A_x}{\partial y}\Bigr)dx\,dy\tag{2.35}$$
     を積分します。ガウスの定理の場合と同様に、2つの項の積分の順序を工夫します。前者($\frac{\partial A_y}{\partial x}$)の積分は、まず $x$ 方向に端から端まで積分を行い、次いで $y$ 方向に積分を行います。この曲面を適当な $y=y_0$(定数)の直線で切った際に、曲面が占めている部分を $x_-\le x\le x_+$ とします。領域 $x_-\le x\le x_+,\ y_0\le y\le y_0+\Delta y$ という細長い長方形上では、$y$ 方向の幅は微小なので、$y$ 方向には値は一定として積分すると
@@ -217,9 +223,9 @@
       <p>ガウスの定理やストークスの定理は、<b>どの量のどの領域での積分を、どの量のどの領域での積分と結びつけるのか</b>をきちんと理解しておくことが重要です。そのためには、これらの本質が<b>微分積分学の基本定理</b>であることを認識しておくのが一番です。そうすれば、両定理とも結び付けているのが「広がった部分での微分量(ナブラのついた量)の積分 = 境界部分での微分前の量の積分」であることは納得しやすいはずです。</p>
     </div>
 
-    <h3 id="s2-6">2.6 問 [2-5] と [2-6]</h3>
+    <h3 id="s2-6">2.6 問 [2-5] と [2-6] <span class="need need-a">必須</span></h3>
     <div class="box ex">
-      <div class="label">問 [2-5]</div>
+      <div class="label">問 [2-5] <span class="need need-b">必要</span></div>
       <p>曲面 $S$ として、原点を中心とする半径1の球の表面全体をとる。法線ベクトルは球の外側に向かう向きを正とする。このとき、以下の面積分
       $$\int_S\begin{pmatrix}xy^2\\yz^2\\zx^2\end{pmatrix}\cdot\bm{n}\,dS\tag{2.37}$$
       を求めよ。</p>
@@ -234,7 +240,7 @@
     </div>
 
     <div class="box ex">
-      <div class="label">問 [2-6]</div>
+      <div class="label">問 [2-6] <span class="need need-a">必須</span></div>
       <p>曲面 $S$ として $z=(1-y)(y-x^2)$($x^2\le y\le1$)を考える。この領域における面積分
       $$\int_S\begin{pmatrix}2x^2y\\3y^2z^2+\sin x-2xy^2\\2xye^{x^2-y}-x^2-2yz^3\end{pmatrix}\cdot d\bm{S}\tag{2.38}$$
       を求めよ。ただし面積分の符号は $z$ 軸正の向きを正にとる。また、以下の関係式
@@ -259,9 +265,9 @@
 
 
     <!-- ===================== 3 ===================== -->
-    <h2 id="s3">3. ラプラス方程式と調和関数 <span class="page-tag">講義ノート p.12–14(§2.4)</span></h2>
+    <h2 id="s3">3. ラプラス方程式と調和関数 <span class="need need-a">必須</span> <span class="page-tag">講義ノート p.12–14(§2.4)</span></h2>
 
-    <h3 id="s3-1">3.1 ラプラス方程式と調和関数</h3>
+    <h3 id="s3-1">3.1 ラプラス方程式と調和関数 <span class="need need-b">必要</span></h3>
     <div class="box def">
       <div class="label">定義(ラプラス方程式・調和関数) (2.40)</div>
       <p>ラプラシアンを用いて書かれる偏微分方程式
@@ -281,7 +287,7 @@
     </div>
     <p>調和関数は様々なきれいな性質をもっています。そのいくつかを見ておきましょう。</p>
 
-    <h3 id="s3-2">3.2 最大値原理</h3>
+    <h3 id="s3-2">3.2 最大値原理 <span class="need need-c">参考</span></h3>
     <div class="box thm">
       <div class="label">最大値原理(最大値・最小値は境界でとる)</div>
       <p>閉領域 $V$ 内の任意の調和関数 $\psi$ について、$V$ 中で $\psi$ が最大値・最小値をとる点は、ともに $V$ の<b>境界 $\partial V$</b> である。つまり、$V$ <b>内部</b>で(境界の値を超える)最大値や最小値をとることはない。</p>
@@ -298,7 +304,7 @@
     </figure>
     <p>(ただし、この説明では、2階微分がゼロ(退化した状況)で4階微分がすべて正/負のような状況が排除できないので、証明とは言えません。こうした場合も含めて取り扱うには、もう少し工夫が必要です。それが下の折りたたみの証明です。)</p>
     <details><summary>最大値原理の証明(講義ノートの脚注29)</summary>
-      <div class="box proof"><div class="label">証明</div>
+      <div class="box proof"><div class="label">証明 <span class="need need-c">参考</span></div>
       <p><b>補題</b>:$V$ 全体で $\Delta f\gt0$(等号はない)ならば、$f$ の最大値は境界 $\partial V$ 上でしかとらない。<br>
       (理由:もし内部の点で最大なら、その点では各方向の2階微分が $\le0$ なので $\Delta f\le0$。これは $\Delta f\gt0$ に反する。)</p>
       <p><b>本題</b>:調和関数 $\psi$ の最大値を与える点が $V$ の内部にのみ存在するとする。つまり、$\psi$ の $V$ 全体での最大値を $m_V$、境界 $\partial V$ 上での最大値を $m_{\partial V}$ とすると、$m_V-m_{\partial V}\gt0$。ラプラシアンが全域で正の関数 $a(\bm{x}):=\frac1d(x_1^2+x_2^2+\cdots+x_d^2)$($d$ は次元。$\Delta a=2\gt0$)を用いて、$f(\bm{x}):=\psi(\bm{x})+\varepsilon a(\bm{x})$($\varepsilon\gt0$)と定義すると、$V$ 中全域で $\Delta f=2\varepsilon\gt0$。補題より、$f$ の最大値は境界 $\partial V$ 上でとらないといけない。</p>
@@ -306,7 +312,7 @@
     </details>
     <p>調和関数の最大・最小値が境界であることから、<b>境界 $\partial V$ で一定値をとる調和関数は、定数関数のみ</b>であることが分かります(境界上に、$V$ 中の値の最大値も最小値も存在しないといけないので、その値がともにある一定値しかありえないということは、調和関数は全域でその一定値をとるしかない)。</p>
 
-    <h3 id="s3-3">3.3 ディリクレ問題と、解の一意性</h3>
+    <h3 id="s3-3">3.3 ディリクレ問題と、解の一意性 <span class="need need-b">必要</span></h3>
     <p>これは「<b>ディリクレ問題</b>(ラプラス方程式の境界値問題)の解の一意性」という、重要な帰結をもたらします。ディリクレ問題とは、次のような問題です。</p>
     <div class="box ex">
       <div class="label">ディリクレ問題(Dirichlet problem)</div>
@@ -317,15 +323,15 @@
       <svg viewBox="0 0 540 258" width="540" role="img" aria-label="ディリクレ問題の解の一意性"><circle cx="130" cy="130" r="88" style="fill:var(--accent);opacity:.1;stroke:var(--accent);stroke-width:5"/><text class="tj" x="130" y="126" style="text-anchor:middle;font-weight:700">Δψ = 0 (Δη = 0)</text><text class="tm" x="130" y="148" style="text-anchor:middle">内部で調和</text><text class="ta" x="130" y="24" style="text-anchor:middle">解 ψ と η(別々に作った2つの解)</text><text class="tt" x="130" y="244" style="text-anchor:middle">∂V 上で ψ = η = f</text><line x1="236" y1="130" x2="295.6" y2="130" style="stroke:var(--muted);stroke-width:2.6;fill:none"/><polygon points="304,130 295,134.4 295,125.6" style="fill:var(--muted)"/><text class="tm" x="270" y="118" style="text-anchor:middle">差をとる</text><circle cx="410" cy="130" r="88" style="fill:var(--accent);opacity:.1;stroke:var(--muted);stroke-width:5"/><text class="tj" x="410" y="126" style="text-anchor:middle;font-weight:700">Δκ = 0</text><text class="tm" x="410" y="148" style="text-anchor:middle">内部で調和</text><text class="ta" x="410" y="24" style="text-anchor:middle">差 κ = ψ − η</text><text class="tt" x="410" y="244" style="text-anchor:middle">∂V 上で κ = 0</text><text class="tm" x="410" y="194" style="text-anchor:middle">最大・最小は境界 → どちらも 0</text></svg>
       <figcaption>2つの解 $\psi,\eta$ があったとして、差 $\kappa=\psi-\eta$ を調べる。$\kappa$ は境界で 0 の調和関数なので、最大値原理から、$V$ 全体で $\kappa=0$ になる。</figcaption>
     </figure>
-    <div class="box proof"><div class="label">証明</div>
+    <div class="box proof"><div class="label">証明 <span class="need need-b">必要</span></div>
       <p>二つの関数 $\psi,\eta$ がラプラス方程式 (2.40) を満たし、かつ境界 $\partial V$ 上の任意の点において $\psi(\bm{x})=\eta(\bm{x})$ が成り立つとする。すると、$\kappa(\bm{x})=\psi(\bm{x})-\eta(\bm{x})$ は、$\Delta\kappa=\Delta\psi-\Delta\eta=0$(調和関数)で、境界 $\partial V$ 上で常に値ゼロをとる。<a href="#s3-2">3.2</a> の結果(最大値原理)により、$\kappa(\bm{x})$ は定数関数ゼロである。これはすなわち、$\psi=\eta$ が全域で成り立つということ。</p></div>
 
-    <h3 id="s3-4">3.4 エネルギーを最小にする関数としての調和関数</h3>
+    <h3 id="s3-4">3.4 エネルギーを最小にする関数としての調和関数 <span class="need need-a">必須</span></h3>
     <p>次に、これまでとは毛色の違う調和関数の性質、「<b>エネルギー最小化としての調和関数</b>」という性質を見ます。領域 $V$ に対する、関数 $g(\bm{x})$ の<b>エネルギー汎関数</b>を
     $$\mathcal{E}(g):=\int_V|\nabla g|^2\,d\bm{x}\tag{2.43}$$
     で定義します。ただし $g(\bm{x})$ の境界条件として、境界 $\partial V$ 上では $g(\bm{x})$ は与えられた関数 $f(\bm{x})$ に一致しないといけないとします。この拘束の下でエネルギー汎関数を最小化する問題を考えます。</p>
     <div class="box thm">
-      <div class="label">主張</div>
+      <div class="label">主張 <span class="need need-a">必須</span></div>
       <p>この最小化問題の解は、この境界条件の下での<b>ラプラス方程式の解と一致する</b>。すなわち、境界で与えられた境界条件をもつ調和関数を $\psi$、同じ境界条件を満たす任意の関数を $g$ とすると
       $$\int_V|\nabla\psi|^2\,d\bm{x}\le\int_V|\nabla g|^2\,d\bm{x}\tag{2.44}$$</p>
     </div>
@@ -333,7 +339,7 @@
       <svg viewBox="0 0 520 256" width="520" role="img" aria-label="エネルギー最小化(1次元の例)"><line x1="40" y1="224" x2="480" y2="224" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><polygon points="60,190 64.9,185.6 69.8,181.2 74.6,176.8 79.5,172.6 84.4,168.4 89.3,164.4 94.1,160.5 99,156.7 103.9,153.2 108.8,149.9 113.6,146.7 118.5,143.8 123.4,141.2 128.3,138.7 133.1,136.5 138,134.6 142.9,132.8 147.8,131.3 152.6,130 157.5,128.9 162.4,128 167.3,127.3 172.1,126.7 177,126.2 181.9,125.9 186.8,125.6 191.6,125.4 196.5,125.3 201.4,125.1 206.3,125 211.1,124.8 216,124.6 220.9,124.3 225.8,123.9 230.6,123.4 235.5,122.8 240.4,122.1 245.3,121.2 250.1,120.2 255,119 259.9,117.7 264.8,116.2 269.6,114.6 274.5,112.8 279.4,110.9 284.3,108.9 289.1,106.8 294,104.6 298.9,102.3 303.8,100 308.6,97.6 313.5,95.3 318.4,92.9 323.3,90.6 328.1,88.4 333,86.2 337.9,84.2 342.8,82.3 347.6,80.5 352.5,78.9 357.4,77.5 362.3,76.3 367.1,75.3 372,74.6 376.9,74 381.8,73.7 386.6,73.7 391.5,73.8 396.4,74.2 401.3,74.9 406.1,75.7 411,76.7 415.9,78 420.8,79.4 425.6,80.9 430.5,82.6 435.4,84.3 440.3,86.2 445.1,88.1 450,90 450,90 445.1,91.3 440.3,92.5 435.4,93.8 430.5,95 425.6,96.3 420.8,97.5 415.9,98.8 411,100 406.1,101.3 401.3,102.5 396.4,103.8 391.5,105 386.6,106.3 381.8,107.5 376.9,108.8 372,110 367.1,111.3 362.3,112.5 357.4,113.8 352.5,115 347.6,116.3 342.8,117.5 337.9,118.8 333,120 328.1,121.3 323.3,122.5 318.4,123.8 313.5,125 308.6,126.3 303.8,127.5 298.9,128.8 294,130 289.1,131.3 284.3,132.5 279.4,133.8 274.5,135 269.6,136.3 264.8,137.5 259.9,138.8 255,140 250.1,141.3 245.3,142.5 240.4,143.8 235.5,145 230.6,146.3 225.8,147.5 220.9,148.8 216,150 211.1,151.3 206.3,152.5 201.4,153.8 196.5,155 191.6,156.3 186.8,157.5 181.9,158.8 177,160 172.1,161.3 167.3,162.5 162.4,163.8 157.5,165 152.6,166.3 147.8,167.5 142.9,168.8 138,170 133.1,171.3 128.3,172.5 123.4,173.8 118.5,175 113.6,176.3 108.8,177.5 103.9,178.8 99,180 94.1,181.3 89.3,182.5 84.4,183.8 79.5,185 74.6,186.3 69.8,187.5 64.9,188.8 60,190" style="fill:var(--accent);opacity:.14;stroke:none"/><polyline points="60,190 64.9,185.6 69.8,181.2 74.6,176.8 79.5,172.6 84.4,168.4 89.3,164.4 94.1,160.5 99,156.7 103.9,153.2 108.8,149.9 113.6,146.7 118.5,143.8 123.4,141.2 128.3,138.7 133.1,136.5 138,134.6 142.9,132.8 147.8,131.3 152.6,130 157.5,128.9 162.4,128 167.3,127.3 172.1,126.7 177,126.2 181.9,125.9 186.8,125.6 191.6,125.4 196.5,125.3 201.4,125.1 206.3,125 211.1,124.8 216,124.6 220.9,124.3 225.8,123.9 230.6,123.4 235.5,122.8 240.4,122.1 245.3,121.2 250.1,120.2 255,119 259.9,117.7 264.8,116.2 269.6,114.6 274.5,112.8 279.4,110.9 284.3,108.9 289.1,106.8 294,104.6 298.9,102.3 303.8,100 308.6,97.6 313.5,95.3 318.4,92.9 323.3,90.6 328.1,88.4 333,86.2 337.9,84.2 342.8,82.3 347.6,80.5 352.5,78.9 357.4,77.5 362.3,76.3 367.1,75.3 372,74.6 376.9,74 381.8,73.7 386.6,73.7 391.5,73.8 396.4,74.2 401.3,74.9 406.1,75.7 411,76.7 415.9,78 420.8,79.4 425.6,80.9 430.5,82.6 435.4,84.3 440.3,86.2 445.1,88.1 450,90" style="fill:none;stroke:var(--accent);stroke-width:2.4"/><polyline points="60,190 64.9,188.8 69.8,187.5 74.6,186.3 79.5,185 84.4,183.8 89.3,182.5 94.1,181.3 99,180 103.9,178.8 108.8,177.5 113.6,176.3 118.5,175 123.4,173.8 128.3,172.5 133.1,171.3 138,170 142.9,168.8 147.8,167.5 152.6,166.3 157.5,165 162.4,163.8 167.3,162.5 172.1,161.3 177,160 181.9,158.8 186.8,157.5 191.6,156.3 196.5,155 201.4,153.8 206.3,152.5 211.1,151.3 216,150 220.9,148.8 225.8,147.5 230.6,146.3 235.5,145 240.4,143.8 245.3,142.5 250.1,141.3 255,140 259.9,138.8 264.8,137.5 269.6,136.3 274.5,135 279.4,133.8 284.3,132.5 289.1,131.3 294,130 298.9,128.8 303.8,127.5 308.6,126.3 313.5,125 318.4,123.8 323.3,122.5 328.1,121.3 333,120 337.9,118.8 342.8,117.5 347.6,116.3 352.5,115 357.4,113.8 362.3,112.5 367.1,111.3 372,110 376.9,108.8 381.8,107.5 386.6,106.3 391.5,105 396.4,103.8 401.3,102.5 406.1,101.3 411,100 415.9,98.8 420.8,97.5 425.6,96.3 430.5,95 435.4,93.8 440.3,92.5 445.1,91.3 450,90" style="fill:none;stroke:var(--thm);stroke-width:3.4"/><circle cx="60" cy="190" r="5" style="fill:var(--text)"/><circle cx="450" cy="90" r="5" style="fill:var(--text)"/><text class="tm" x="60" y="212" style="text-anchor:middle">境界条件</text><text class="tm" x="450" y="78" style="text-anchor:middle">境界条件</text><text class="tt" x="250" y="52" style="text-anchor:middle">直線 ψ(Δψ = 0):エネルギー ∫|∇ψ|² が最小</text><text class="ta" x="250" y="72" style="text-anchor:middle">他の g(青)はエネルギーが大きい</text><text class="tm" x="250" y="244" style="text-anchor:middle">青 − 橙 = e(両端で 0)</text></svg>
       <figcaption>1次元で見ると、「両端の値を決めたとき、$\int|g'|^2$ を最小にする関数」は直線です(これは $g''=0$ の解でもある)。直線から外れるほど「傾きの2乗の積分」は大きくなります。</figcaption>
     </figure>
-    <div class="box proof"><div class="label">証明</div>
+    <div class="box proof"><div class="label">証明 <span class="need need-a">必須</span></div>
       <p>$g(\bm{x})=\psi(\bm{x})+e(\bm{x})$ と書くことにすると、$e(\bm{x})$ は境界 $\partial V$ 上で 0 となる関数である($\psi$ も $g$ も境界で同じ値 $f$ をとるから)。これを用いると
       $$\int_V|\nabla\psi+\nabla e|^2d\bm{x}-\int_V|\nabla\psi|^2d\bm{x}=\int_V\bigl(2\nabla\psi\cdot\nabla e+|\nabla e|^2\bigr)d\bm{x}=\int_V\bigl(2\nabla\cdot(e\nabla\psi)+|\nabla e|^2\bigr)d\bm{x}$$
       $$=2\int_{\partial V}e\,\nabla\psi\cdot d\bm{S}+\int_V|\nabla e|^2\,d\bm{x}=\int_V|\nabla e|^2\,d\bm{x}\ge0\tag{2.45}$$
@@ -352,10 +358,10 @@
     </div>
 
     <!-- ===================== 4 ===================== -->
-    <h2 id="s4">4. ポテンシャルの存在 <span class="page-tag">講義ノート p.14(§2.5)</span></h2>
+    <h2 id="s4">4. ポテンシャルの存在 <span class="need need-c">参考</span> <span class="page-tag">講義ノート p.14(§2.5)</span></h2>
     <p>以下、静電場への応用を念頭に、3次元ベクトル場における<b>スカラーポテンシャルの存在</b>を導出します。具体的には、3次元ベクトル場 $\bm{A}$ ですべての場所で回転ゼロ $\nabla\times\bm{A}=\bm{0}$ であるものは、スカラーポテンシャルをもつことを示します。</p>
 
-    <h3 id="s4-1">4.1 線積分は経路によらない</h3>
+    <h3 id="s4-1">4.1 線積分は経路によらない <span class="need need-c">参考</span></h3>
     <p>始点が $\bm{r}$、終点が $\bm{r}'$ である、二つの経路 $C$ と $C'$ を考えます。このとき、この二つの経路に沿った $\bm{A}$ の線積分の値は一致する、すなわち
     $$\int_C\bm{A}\cdot d\bm{x}=\int_{C'}\bm{A}\cdot d\bm{x}\tag{2.46}$$
     が成り立ちます。</p>
@@ -363,13 +369,13 @@
       <svg viewBox="0 0 480 270" width="480" role="img" aria-label="2つの経路とループ"><path d="M70 220 C200 266 340 226 410 56 C250 36 70 96 70 220 Z" style="fill:var(--accent);opacity:.12;stroke:none"/><path d="M70 220 C200 266 340 226 410 56" style="fill:none;stroke:var(--thm);stroke-width:2.8"/><path d="M70 220 C70 96 250 36 410 56" style="fill:none;stroke:var(--ex);stroke-width:2.8"/><line x1="262.5" y1="219" x2="274.4" y2="213.2" style="stroke:var(--thm);stroke-width:3;fill:none"/><polygon points="283.8,208.6 276.1,218 271.7,209" style="fill:var(--thm)"/><line x1="180" y1="84" x2="194.5" y2="78.4" style="stroke:var(--ex);stroke-width:3;fill:none"/><polygon points="204.2,74.7 195.7,83.3 192.2,74" style="fill:var(--ex)"/><circle cx="70" cy="220" r="5" style="fill:var(--text)"/><circle cx="410" cy="56" r="5" style="fill:var(--text)"/><text class="t" x="52" y="244" style="font-size:17px">r</text><text class="t" x="420" y="54" style="font-size:17px">r′</text><text class="t" x="300" y="242" style="font-size:18px;fill:var(--thm)">C</text><text class="t" x="120" y="84" style="font-size:18px;fill:var(--ex)">C′</text><text class="t" x="230" y="150" style="text-anchor:middle;font-size:22px">S</text><text class="tm" x="230" y="172" style="text-anchor:middle">(ループ L = C − C′ を縁にもつ面)</text></svg>
       <figcaption>始点 $\bm{r}$ から終点 $\bm{r}'$ への2つの経路 $C$、$C'$。$C$ の終点に $C'$ を逆向きにつないだ経路 $L=C-C'$ は閉じたループで、$L$ を縁にもつ曲面 $S$ がある(講義ノートの図9)。</figcaption>
     </figure>
-    <div class="box proof"><div class="label">証明</div>
+    <div class="box proof"><div class="label">証明 <span class="need need-c">参考</span></div>
       <p>$C$ の終点に $C'$ を<b>逆向きにしてつないだ</b>経路 $L=C-C'$ は、始点と終点が同一のループです。この閉じたループ $L$ を境界にもつ曲面の一つを $S$ とすると、$L$ の線積分は<b>ストークスの定理</b>により
       $$\int_C\bm{A}\cdot d\bm{x}-\int_{C'}\bm{A}\cdot d\bm{x}=\int_L\bm{A}\cdot d\bm{x}=\pm\int_S(\nabla\times\bm{A})\cdot d\bm{S}=0\tag{2.47}$$
       が成り立つ。ただし最後の等号では $\nabla\times\bm{A}=\bm{0}$ を用いた。(符号は $S$ の向きのとり方によるが、値は0なので結論には影響しない。)</p></div>
     <p>これにより、ある地点 $\bm{r}$ から別の地点 $\bm{r}'$ までの線積分は、<b>経路には依存しない</b>ことが分かります。</p>
 
-    <h3 id="s4-2">4.2 スカラーポテンシャルの定義</h3>
+    <h3 id="s4-2">4.2 スカラーポテンシャルの定義 <span class="need need-c">参考</span></h3>
     <p>線積分が経路に依存しないので、与えられたベクトル場 $\bm{A}$ に対し、あるスカラー関数 $\phi(\bm{r})$ が存在し、
     $$\int_C\bm{A}\cdot d\bm{x}=\phi(\bm{r}')-\phi(\bm{r})\tag{2.48}$$
     と書くことができます(原点の値 $\phi(\bm{0})$ を適当に定めれば、あとは原点から $\bm{r}$ への線積分の値 $\delta_{\bm{0}\to\bm{r}}$ を用いて $\phi(\bm{r})=\delta_{\bm{0}\to\bm{r}}+\phi(\bm{0})$ と定義すればよい)。この両辺の $\bm{r}$ についての<b>勾配</b>をとることにより
@@ -401,7 +407,7 @@
     </div>
 
     <!-- ===================== 5 ===================== -->
-    <h2 id="s5">5. ヘルムホルツの定理(1) <span class="page-tag">講義ノート p.15(§2.6)</span></h2>
+    <h2 id="s5">5. ヘルムホルツの定理(1) <span class="need need-c">参考</span> <span class="page-tag">講義ノート p.15(§2.6)</span></h2>
     <p>3次元のベクトル場 $\bm{X}$ やその微分は、無限遠方で十分素早くゼロに減衰しているという拘束条件を満たすとします。このとき、無限遠方で素早く減衰する、<b>発散ゼロ条件</b>($\nabla\cdot\bm{J}=0$)を満たすベクトル場 $\bm{J}$ とスカラー場 $\rho$ を用いたベクトル場の方程式
     $$\nabla\cdot\bm{X}=\rho\tag{2.50}$$
     $$\nabla\times\bm{X}=\bm{J}\tag{2.51}$$
@@ -415,7 +421,7 @@
       <p>(2.51) の両辺の発散をとると、(2.12) より $\nabla\cdot(\nabla\times\bm{X})=0$ なので、右辺も $\nabla\cdot\bm{J}=0$ でないといけません。つまり、「回転として与えられる $\bm{J}$ は、発散ゼロでなければならない」のです。条件に $\nabla\cdot\bm{J}=0$ が入っているのは、そのためです。</p>
     </div>
 
-    <h3 id="s5-1">5.1 解が一意であることの証明</h3>
+    <h3 id="s5-1">5.1 解が一意であることの証明 <span class="need need-c">参考</span></h3>
     <div class="box intuit">
       <div class="label">直感で理解する:蛇口と渦を全部教えれば、流れは決まる</div>
       <p>ベクトル場 $\bm{X}$ を水の流れだと思うと、発散 $\rho$ は「どこに蛇口(湧き出し)や排水口があるか」、回転 $\bm{J}$ は「どこにどんな渦があるか」です。それを全部教えてもらい、さらに「遠くでは水は静かに止まっている」と決めれば、流れ方は一通りしかない、というのがこの定理です。電磁気学では、電場の発散(電荷)と回転を与えれば電場が決まる、という形で使います。</p>
@@ -425,7 +431,7 @@
       <svg viewBox="0 0 660 108" width="660" role="img" aria-label="ヘルムホルツの定理(1)の一意性の流れ"><rect x="8" y="30" width="114" height="62" rx="8" style="fill:var(--surface);stroke:var(--accent);stroke-width:1.8"/><text class="tj" x="65" y="56" style="text-anchor:middle;font-weight:700">Z = X₁ − X₂</text><text class="tm" x="65" y="78" style="text-anchor:middle">∇·Z = 0, ∇×Z = 0</text><line x1="123" y1="61" x2="128.6" y2="61" style="stroke:var(--muted);stroke-width:2;fill:none"/><polygon points="135,61 128,65 128,57" style="fill:var(--muted)"/><rect x="136" y="30" width="114" height="62" rx="8" style="fill:var(--surface);stroke:var(--accent);stroke-width:1.8"/><text class="tj" x="193" y="56" style="text-anchor:middle;font-weight:700">回転ゼロ</text><text class="tm" x="193" y="78" style="text-anchor:middle">⇒ Z = ∇φ (§2.5)</text><line x1="251" y1="61" x2="256.6" y2="61" style="stroke:var(--muted);stroke-width:2;fill:none"/><polygon points="263,61 256,65 256,57" style="fill:var(--muted)"/><rect x="264" y="30" width="114" height="62" rx="8" style="fill:var(--surface);stroke:var(--accent);stroke-width:1.8"/><text class="tj" x="321" y="56" style="text-anchor:middle;font-weight:700">発散ゼロ</text><text class="tm" x="321" y="78" style="text-anchor:middle">⇒ Δφ = 0 (調和)</text><line x1="379" y1="61" x2="384.6" y2="61" style="stroke:var(--muted);stroke-width:2;fill:none"/><polygon points="391,61 384,65 384,57" style="fill:var(--muted)"/><rect x="392" y="30" width="114" height="62" rx="8" style="fill:var(--surface);stroke:var(--accent);stroke-width:1.8"/><text class="tj" x="449" y="56" style="text-anchor:middle;font-weight:700">無限遠で一定</text><text class="tm" x="449" y="78" style="text-anchor:middle">⇒ φ = 定数 (§2.4)</text><line x1="507" y1="61" x2="512.6" y2="61" style="stroke:var(--muted);stroke-width:2;fill:none"/><polygon points="519,61 512,65 512,57" style="fill:var(--muted)"/><rect x="520" y="30" width="114" height="62" rx="8" style="fill:var(--surface);stroke:var(--thm);stroke-width:2.6"/><text class="tj" x="577" y="56" style="text-anchor:middle;font-weight:700">Z = ∇φ = 0</text><text class="tm" x="577" y="78" style="text-anchor:middle">∴ X₁ = X₂</text><text class="ta" x="8" y="18">2つの解があったとして、その差 Z を調べる</text></svg>
       <figcaption>証明の流れ。2つの解があったとしても、その差 $\bm{Z}$ は、回転も発散もゼロの場で、無限遠で減衰する。それが 0 に決まってしまう。</figcaption>
     </figure>
-    <div class="box proof"><div class="label">証明</div>
+    <div class="box proof"><div class="label">証明 <span class="need need-c">参考</span></div>
       <p>式 (2.50), (2.51) を共に満たす二つのベクトル場 $\bm{X}_1,\bm{X}_2$ が存在したとする。すると、$\bm{Z}=\bm{X}_1-\bm{X}_2$ とすると
       $$\nabla\cdot\bm{Z}=0\tag{2.52}$$
       $$\nabla\times\bm{Z}=\bm{0}\tag{2.53}$$
@@ -442,11 +448,11 @@
     </div>
 
     <!-- ===================== 6 ===================== -->
-    <h2 id="s6">6. 具体例で練習(講義ノートにない補足) <span class="page-tag">補足</span></h2>
+    <h2 id="s6">6. 具体例で練習(講義ノートにない補足) <span class="need need-b">必要</span> <span class="page-tag">補足</span></h2>
     <p>この節は、講義ノートの問題 [2-5]〜[2-6] とは別に、私が作った練習問題と解答です。計算が合っているかを確認するための検算も付けました。</p>
 
     <div class="box ex">
-      <div class="label">問題 G:勾配の線積分は経路によらない</div>
+      <div class="label">問題 G:勾配の線積分は経路によらない <span class="need need-c">参考</span></div>
       <p>$\bm{A}=(2xy,\ x^2,\ 0)$ について、$\nabla\times\bm{A}=\bm{0}$ を確かめ、$(0,0,0)$ から $(1,1,0)$ までの線積分を、(a) 直線 $x=y=t$、(b) まず $x$ 軸に沿って $(1,0,0)$ まで、次に $y$ 方向に $(1,1,0)$ まで、の2つの経路で計算して比べよ。</p>
     </div>
     <div class="box proof"><div class="label">解答</div>
@@ -456,7 +462,7 @@
       <p>どちらも $1=\phi(1,1,0)-\phi(0,0,0)$(2.48)と一致します。</p></div>
 
     <div class="box ex">
-      <div class="label">問題 H:ガウスの定理とストークスの定理の検算</div>
+      <div class="label">問題 H:ガウスの定理とストークスの定理の検算 <span class="need need-b">必要</span></div>
       <p>(1) $\bm{A}=\bm{x}=(x,y,z)$、半径 $R$ の球 $V$ で、(2.28) の両辺を計算せよ。(2) $\bm{A}=(-y,x,0)$、$xy$ 平面上の半径 $R$ の円板 $S$(法線 $+\bm{e}_z$)で、(2.29) の両辺を計算せよ。</p>
     </div>
     <div class="box proof"><div class="label">解答</div>
@@ -464,7 +470,7 @@
       <p>(2) 左辺:$\nabla\times\bm{A}=(0,0,2)$、$(\nabla\times\bm{A})\cdot\bm{e}_z=2$ なので $2\cdot\pi R^2=2\pi R^2$。右辺:縁は $\bm{x}(\theta)=(R\cos\theta,R\sin\theta,0)$(反時計回り)、$\bm{A}=(-R\sin\theta,R\cos\theta,0)$、$d\bm{x}/d\theta=(-R\sin\theta,R\cos\theta,0)$ で内積は $R^2$。$\int_0^{2\pi}R^2\,d\theta=2\pi R^2$。一致。</p></div>
 
     <div class="box ex">
-      <div class="label">問題 H2:調和関数の最大値は境界で</div>
+      <div class="label">問題 H2:調和関数の最大値は境界で <span class="need need-c">参考</span></div>
       <p>2次元の正方形 $V=[-1,1]\times[-1,1]$ で、$\psi=x^2-y^2$ を考える。(1) $\psi$ が調和関数であることを確かめよ。(2) $V$ での最大値・最小値と、それをとる点を求め、最大値原理と合っているか確かめよ。(3) 原点は $\psi$ の極大でも極小でもないことを、断面で説明せよ。</p>
     </div>
     <div class="box proof"><div class="label">解答</div>
@@ -473,7 +479,7 @@
       <p>(3) $x$ 方向の断面 $\psi=x^2$(下に凸:谷)と、$y$ 方向の断面 $\psi=-y^2$(上に凸:山)が、原点で組み合わさった<b>馬の鞍</b>の形です。ある方向には上がり、別の方向には下がるので、原点は頂上でも谷底でもありません。2階微分の和がちょうど 0 なので、「すべての方向に上に凸」(頂上)にはなれない、というのが最大値原理の直感です。</p></div>
 
     <!-- ===================== 7 ===================== -->
-    <h2 id="s7">7. まとめ(この回で覚えること)</h2>
+    <h2 id="s7">7. まとめ(この回で覚えること) <span class="need need-b">必要</span></h2>
     <ul>
       <li><b>ガウスの定理</b> $\int_V\nabla\cdot\bm{A}\,d\bm{x}=\int_{\partial V}\bm{A}\cdot d\bm{S}$(中の湧き出しの合計 = 境界から出ていく量)、<b>ストークスの定理</b> $\int_S(\nabla\times\bm{A})\cdot d\bm{S}=\int_{\partial S}\bm{A}\cdot d\bm{x}$(面を貫く渦の合計 = 縁を一周する線積分)。本質は微積分学の基本定理:「広がった部分での微分量の積分 = 境界での微分前の量の積分」。内側の境目では、隣どうしの寄与が打ち消し合う。</li>
       <li>向きの約束:ガウスの定理では境界の法線は<b>外向き</b>。ストークスの定理では、面の法線と縁を回る向きは<b>右ねじ</b>の関係。</li>
@@ -483,7 +489,7 @@
     </ul>
 
     <!-- ===================== 8 ===================== -->
-    <h2 id="s8">8. この回のノートについてのメモ</h2>
+    <h2 id="s8">8. この回のノートについてのメモ <span class="need need-x">不要</span></h2>
     <p>板書の写真ではなく、<b>文章で書かれた講義ノート(PDF)</b>の p.9〜p.15(§2.3〜§2.6(1)の終わりまで)をもとにまとめました。ページ番号は、講義ノートの各ページ下に印刷されている番号です。補足として足した部分(黄色の枠)、直感の説明(緑の枠)、基礎ページの内容、問 [2-5]〜[2-6] の解答、「具体例で練習」の問題は、Claude が書き足したもので、講義ノートにはありません。講義ノートの次の節以降(p.16〜、静電場)は、第4回にまとめました。</p>
     <p><b>回の分け方</b>:講義ノートの §2 は長いので、§2.1〜§2.2 を第2回、§2.3〜§2.6 をこの回に分けました(内容と分量から判断したものです)。</p>
     <p>講義ノートの記述で、誤り(または誤記)と判断して直した箇所、読み替えた箇所は次のとおりです。</p>
