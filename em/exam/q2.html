@@ -22,7 +22,7 @@
 
   <main class="note">
     <h1>過去問対策2:積分定理の計算(ストークス・ガウス)</h1>
-    <div class="meta">2025年度 [2](6点)、2023年度 [2](5点)。講義ノートの問 [2-6] とその変形が2年続けて出た。「直接は計算できない積分を、定理で楽な積分に変える」型です。</div>
+    <div class="meta">2025年度 [2](6点)、2023年度 [2](5点)、2023年度 第2回 [1](2点、範囲内)。講義ノートの問 [2-6] とその変形が2年続けて出た。「直接は計算できない積分を、定理で楽な積分に変える」型です。</div>
 
     <nav class="toc">
       <div class="toc-title">目次</div>
@@ -32,6 +32,7 @@
         <li><a href="#answer">答案の型</a></li>
         <li><a href="#miss">よくあるミス</a></li>
         <li><a href="#y2023">2023年度 第1回中間 [2](5点)= 講義ノート 問 [2-6]</a></li>
+        <li><a href="#line">2023年度 第2回中間 [1](2点):線積分を定義どおりに</a></li>
         <li><a href="#rui">類題(何も見ずに解く)</a></li>
       </ol>
     </nav>
@@ -107,7 +108,16 @@
       <p>合計 $\boldsymbol{-\dfrac{4}{15}}$。(<a href="../weeks/week-03.html#s2-6">第3回 2.6</a> に、ガウスの定理による検算つきの解説)</p></div>
     <div class="box note-box"><div class="label">2025年度との違い</div><p>[2-6] は縁の一部が $y=x^2$ の上で、$dy=2x\,dx$ が効く(2025年度は $A_y$ が 0 で効かなかった)。また、$x$ の範囲が $-1\le x\le1$ と対称なので、<b>奇関数の積分が 0</b> になることを使うと速い。</p></div>
 
-    <h2 id="rui">6. 類題(何も見ずに解く)</h2>
+    <h2 id="line">6. 2023年度 第2回中間 [1](2点):線積分を定義どおりに</h2>
+    <div class="box note-box"><div class="label">今年の範囲に入る</div><p>例年は第2回中間で出た問題ですが、内容は §2.2(線積分)なので、今年の第1回中間の範囲に入ります。</p></div>
+    <div class="box ex"><div class="label">問題(要旨)</div>
+      <p>曲線 $C$:$y=x^3-x$($-1\le x\le0$)に沿って、$x=0$ から $x=-1$ の向きに、ベクトル $(yx,\ x^2)$ を線積分せよ。</p></div>
+    <div class="box proof"><div class="label">答案</div>
+      <p>$x$ をパラメータにすると、$y=x^3-x$、$dy=(3x^2-1)dx$。
+      $$\int_C\bm{A}\cdot d\bm{x}=\int_0^{-1}\Bigl(x(x^3-x)+x^2(3x^2-1)\Bigr)dx=\int_0^{-1}(4x^4-2x^2)\,dx=-\Bigl(\frac45-\frac23\Bigr)=\boldsymbol{-\frac{2}{15}}.$$</p></div>
+    <div class="box note-box"><div class="label">ポイント</div><p>回転の形のヒントがなければ<b>定義どおり</b>:$\int\bm{A}\cdot d\bm{x}=\int(A_x\,dx+A_y\,dy)$ に、曲線の式を入れて1変数にする。<b>積分の向き</b>($0\to-1$)をそのまま上端・下端にすれば、符号は自動的に合う。</p></div>
+
+    <h2 id="rui">7. 類題(何も見ずに解く)</h2>
 
     <div class="box ex"><div class="label">類題 2-2(講義ノート 問 [2-5]、ガウスの定理)</div>
       <p>単位球面(外向き)で $\displaystyle\int_S(xy^2,\ yz^2,\ zx^2)\cdot\bm{n}\,dS$ を求めよ。</p></div>
