@@ -209,3 +209,28 @@ main h2[id], main h3[id], main section[id], main div[id] { scroll-margin-top: 68
 .need-y { color: #7b3fb0; background: color-mix(in srgb, var(--surface) 92%, #7b3fb0 8%); }
 @media (prefers-color-scheme: dark) { .need-a { color: #ff8a80; } .need-y { color: #c3a0f0; } }
 .need-legend p { margin: .3em 0; }
+/* 説明の塊(段落・図・箇条書き)の先頭に付けるラベル。枠は見出しの中に span で付ける */
+[data-need="A"] { --nc: #c62828; --nt: "必須"; }
+[data-need="B"] { --nc: var(--thm); --nt: "必要"; }
+[data-need="C"] { --nc: var(--accent); --nt: "参考"; }
+[data-need="X"] { --nc: var(--muted); --nt: "不要"; }
+[data-need="Y"] { --nc: #7b3fb0; --nt: "範囲内・過去問なし"; }
+[data-need="Z"] { --nc: var(--muted); --nt: "不要(範囲外)"; }
+@media (prefers-color-scheme: dark) { [data-need="A"] { --nc: #ff8a80; } [data-need="Y"] { --nc: #c3a0f0; } }
+p[data-need]::before, ul[data-need]::before, ol[data-need]::before, figure[data-need]::before, .need-wrap[data-need]::before, [data-need-pre]::before {
+  content: var(--nt); display: inline-block; font-size: .68rem; font-weight: 700; line-height: 1.5; padding: 0 7px; margin-right: 6px; border-radius: 99px;
+  border: 1px solid var(--nc); color: var(--nc); background: color-mix(in srgb, var(--surface) 90%, var(--nc) 10%); vertical-align: .12em; white-space: nowrap; text-indent: 0;
+}
+ul[data-need]::before, ol[data-need]::before { margin-left: -1.2em; margin-bottom: 2px; }
+figure[data-need]::before, .need-wrap[data-need]::before { margin-bottom: 4px; }
+.need-wrap { overflow-x: auto; }
+/* 不要・範囲外は薄く */
+main [data-need="X"]:not(h2):not(h3), main [data-need="Z"]:not(h2):not(h3) { opacity: .55; }
+main [data-need="X"]:not(h2):not(h3):hover, main [data-need="Z"]:not(h2):not(h3):hover { opacity: 1; }
+/* 表示の切り替え */
+.need-filter { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.need-filter button { font: inherit; font-size: .85rem; padding: 3px 12px; border-radius: 99px; border: 1px solid var(--border); background: var(--surface); color: var(--text); cursor: pointer; }
+.need-filter button.on { border-color: var(--accent); background: var(--accent-soft); color: var(--accent); font-weight: 700; }
+html[data-need-filter="nox"] main [data-need="X"], html[data-need-filter="nox"] main [data-need="Z"],
+html[data-need-filter="ab"] main [data-need="X"], html[data-need-filter="ab"] main [data-need="Z"],
+html[data-need-filter="ab"] main [data-need="C"], html[data-need-filter="ab"] main [data-need="Y"] { display: none; }

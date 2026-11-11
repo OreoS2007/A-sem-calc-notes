@@ -24,11 +24,13 @@
     <h1>第5回:静電場1の続き(電位・エネルギー・多重極展開)</h1>
     <div class="meta">電磁気学(東京大学 教養学部 秋学期)／講義ノート §3「静電場1:基本法則」§3.3〜§3.5(p.20〜p.24)／静電場の「高さ」(電位)と、電荷や電場が持つエネルギーです</div>
 
-    <div class="box note-box need-legend" id="need-legend">
-      <div class="label">見出しのラベル:過去問を解くのに、どれくらい必要か</div>
-      <p>今年の第1回中間(11/13、範囲は §4.3 の (4.12) まで)の対策として、2023・2025年度の中間試験のうち範囲内の問題を解くのに、それぞれの節がどれくらい要るかを付けました(<a href="../exam/index.html">過去問対策特化ページ</a>の分析にもとづく)。</p>
-      <p><span class="need need-a">必須</span> 過去問にそのまま出た型 <span class="need need-b">必要</span> 過去問を解くときに使う道具 <span class="need need-c">参考</span> 理解の助け(答案には直接使わない) <span class="need need-x">不要</span> 過去問を解くのに使わない <span class="need need-y">範囲内・過去問なし</span> 今年は範囲内だが、過去問には出ていない</p>
-      <p>過去問で出た証明は「エネルギー最小化(第3回 3.4)」だけです。ガウス・ストークスの定理やデルタ関数の導出など、<b>公式を導く証明は「不要」</b>(公式を覚えて使えばよい)にしました。§2.4〜2.6 のほかの証明は、同じ型で出る可能性があるので「参考」です。</p>
+    <div class="box note-box need-legend">
+      <div class="label">ラベルの見方:第1回中間の過去問を解くのに、どれくらい必要か</div>
+      <p>今年の第1回中間(11/13、範囲は §4.3 の (4.12) まで)の対策として、2023・2025年度の中間試験のうち範囲内の問題を解くのに、<b>説明の塊(段落・枠・図)ごと</b>に、どれくらい要るかを付けました(<a href="../exam/index.html">過去問対策特化ページ</a>の分析にもとづく)。見出しのラベルは、その節の中でいちばん高いものです。</p>
+      <p><span class="need need-a">必須</span> 過去問にそのまま出た型、答案に書く式 <span class="need need-b">必要</span> 過去問を解くときに使う道具 <span class="need need-c">参考</span> 理解の助け(答案には直接使わない) <span class="need need-x">不要</span> 中間を乗り切るだけなら読まなくてよい <span class="need need-y">範囲内・過去問なし</span> 今年は範囲内だが、過去問には出ていない</p>
+      <p>過去問で出た証明は「エネルギー最小化(第3回 3.4)」だけです。ガウス・ストークスの定理やデルタ関数の導出のように、<b>公式を導くための説明や証明は「不要」</b>(公式を覚えて使えばよい)にしました。§2.4〜2.6 のほかの証明は、同じ型で出る可能性があるので「参考」です。</p>
+      <div class="need-filter"><button type="button" data-f="all">すべて表示</button><button type="button" data-f="nox">「不要」を隠す</button><button type="button" data-f="ab">「必須」「必要」だけ</button></div>
+      <script>(function(){var r=document.documentElement,k='em-need-filter';function set(f){r.setAttribute('data-need-filter',f);document.querySelectorAll('.need-filter button').forEach(function(b){b.classList.toggle('on',b.getAttribute('data-f')===f)});try{localStorage.setItem(k,f)}catch(e){}}var f='all';try{f=localStorage.getItem(k)||'all'}catch(e){}set(f);document.querySelectorAll('.need-filter button').forEach(function(b){b.addEventListener('click',function(){set(b.getAttribute('data-f'))})})})();</script>
     </div>
     <nav class="toc">
       <div class="toc-title">目次</div>
@@ -46,47 +48,47 @@
     </nav>
 
     <!-- ===================== 0 ===================== -->
-    <h2 id="s0">0. この回の全体像 <span class="need need-c">参考</span> <span class="page-tag">講義ノート p.20</span></h2>
-    <p>前の回(第4回)で、静電場の基本法則として、<b>ガウスの法則</b> $\nabla\cdot\bm{E}=\rho/\varepsilon_0$ と、<b>回転ゼロ</b> $\nabla\times\bm{E}=\bm{0}$(静電場だけ)を導きました。この回は、その続きです。回転がゼロなので、静電場には「高さ」にあたる<b>電位</b>が定義でき、そこから<b>エネルギー</b>の話につながります。最後に、遠くから見たときの近似(<b>多重極展開</b>)を見ます。</p>
-    <figure class="fig">
+    <h2 id="s0" data-need="C">0. この回の全体像 <span class="need need-c">参考</span> <span class="page-tag">講義ノート p.20</span></h2>
+    <p data-need="X">前の回(第4回)で、静電場の基本法則として、<b>ガウスの法則</b> $\nabla\cdot\bm{E}=\rho/\varepsilon_0$ と、<b>回転ゼロ</b> $\nabla\times\bm{E}=\bm{0}$(静電場だけ)を導きました。この回は、その続きです。回転がゼロなので、静電場には「高さ」にあたる<b>電位</b>が定義でき、そこから<b>エネルギー</b>の話につながります。最後に、遠くから見たときの近似(<b>多重極展開</b>)を見ます。</p>
+    <figure data-need="X" class="fig">
       <svg viewBox="0 0 640 176" width="640" role="img" aria-label="第3回の見取り図"><rect x="10" y="12" width="140" height="62" rx="9" style="fill:var(--surface);stroke:var(--thm);stroke-width:1.9"/><text class="tj" x="80" y="38" style="text-anchor:middle;font-weight:700">クーロンの法則</text><text class="tm" x="80" y="58" style="text-anchor:middle">(静電場だけ)</text><line x1="152" y1="43" x2="157.6" y2="43" style="stroke:var(--muted);stroke-width:2;fill:none"/><polygon points="164,43 157,47 157,39" style="fill:var(--muted)"/><rect x="166" y="12" width="140" height="62" rx="9" style="fill:var(--surface);stroke:var(--accent);stroke-width:1.9"/><text class="tj" x="236" y="38" style="text-anchor:middle;font-weight:700">発散と回転</text><text class="tm" x="236" y="58" style="text-anchor:middle">∇·E, ∇×E を計算</text><line x1="308" y1="43" x2="313.6" y2="43" style="stroke:var(--muted);stroke-width:2;fill:none"/><polygon points="320,43 313,47 313,39" style="fill:var(--muted)"/><rect x="322" y="12" width="140" height="62" rx="9" style="fill:var(--surface);stroke:var(--accent);stroke-width:1.9"/><text class="tj" x="392" y="38" style="text-anchor:middle;font-weight:700">ガウスの法則</text><text class="tm" x="392" y="58" style="text-anchor:middle">微分型・積分型</text><line x1="464" y1="43" x2="469.6" y2="43" style="stroke:var(--muted);stroke-width:2;fill:none"/><polygon points="476,43 469,47 469,39" style="fill:var(--muted)"/><rect x="478" y="12" width="140" height="62" rx="9" style="fill:var(--surface);stroke:var(--accent);stroke-width:1.9"/><text class="tj" x="548" y="38" style="text-anchor:middle;font-weight:700">電場の計算</text><text class="tm" x="548" y="58" style="text-anchor:middle">対称性 + ガウス</text><line x1="580" y1="74" x2="580" y2="91.6" style="stroke:var(--muted);stroke-width:2;fill:none"/><polygon points="580,98 576,91 584,91" style="fill:var(--muted)"/><rect x="166" y="100" width="140" height="62" rx="9" style="fill:var(--surface);stroke:var(--accent);stroke-width:1.9"/><text class="tj" x="236" y="126" style="text-anchor:middle;font-weight:700">スカラーポテンシャル</text><text class="tm" x="236" y="146" style="text-anchor:middle">E = −∇φ(電位)</text><line x1="308" y1="131" x2="313.6" y2="131" style="stroke:var(--muted);stroke-width:2;fill:none"/><polygon points="320,131 313,135 313,127" style="fill:var(--muted)"/><rect x="322" y="100" width="140" height="62" rx="9" style="fill:var(--surface);stroke:var(--accent);stroke-width:1.9"/><text class="tj" x="392" y="126" style="text-anchor:middle;font-weight:700">エネルギー</text><text class="tm" x="392" y="146" style="text-anchor:middle">電荷間 / 場が持つ</text><line x1="464" y1="131" x2="469.6" y2="131" style="stroke:var(--muted);stroke-width:2;fill:none"/><polygon points="476,131 469,135 469,127" style="fill:var(--muted)"/><rect x="478" y="100" width="140" height="62" rx="9" style="fill:var(--surface);stroke:var(--accent);stroke-width:1.9"/><text class="tj" x="548" y="126" style="text-anchor:middle;font-weight:700">多重極展開</text><text class="tm" x="548" y="146" style="text-anchor:middle">遠くから見た近似</text></svg>
       <figcaption>講義ノート §3 全体の流れ。上の段は前の回(第4回)、<b>下の段がこの回(第5回)</b>です。</figcaption>
     </figure>
 
-    <div class="box thm">
-      <div class="label">この回のゴール</div>
+    <div data-need="C" class="box thm">
+      <div class="label">この回のゴール <span class="need need-c">参考</span></div>
       <p>① 回転がゼロなので、<b>スカラーポテンシャル</b>(電位)$\phi$ が存在する($\bm{E}=-\nabla\phi$)。仕事との関係と、重ね合わせでの計算。<br>
       ② 電荷分布が持つ<b>エネルギー</b>の2つの表現(電荷同士の相互作用エネルギーと、電場が持つエネルギー $\frac{\varepsilon_0}{2}|\bm{E}|^2$)と、その関係。<br>
       ③ 遠くから見たときの近似、<b>多重極展開</b>(全電荷と電気双極子モーメント)。</p>
     </div>
-    <div class="box warn">
-      <div class="label">この回も「静電場でだけ」に注意</div>
+    <div data-need="C" class="box warn">
+      <div class="label">この回も「静電場でだけ」に注意 <span class="need need-c">参考</span></div>
       <p>電位 $\phi$ と $\bm{E}=-\nabla\phi$ の関係は、$\nabla\times\bm{E}=\bm{0}$ を使って導くので、<b>静電場でだけ</b>成り立ちます。エネルギーの2つの表現も、静電場では一致しますが、時間変化する場合には「電場が持つエネルギー」の方だけが正しい、と講義ノートは注意しています。</p>
     </div>
-    <p>以下では、先に必要な基礎を丁寧に復習してから、講義ノートの順に進みます。紫色の枠は「基礎の復習」、黄色の枠は「講義ノートにないが、理解を助けるために私が補った部分」、緑の枠は「直感で理解するための説明」です。講義ノートの <b>[3-3]</b> の問題の解答も、黄色の枠で補いました。</p>
+    <p data-need="X">以下では、先に必要な基礎を丁寧に復習してから、講義ノートの順に進みます。紫色の枠は「基礎の復習」、黄色の枠は「講義ノートにないが、理解を助けるために私が補った部分」、緑の枠は「直感で理解するための説明」です。講義ノートの <b>[3-3]</b> の問題の解答も、黄色の枠で補いました。</p>
 
     <!-- ===================== 1 ===================== -->
-    <h2 id="s1">1. 準備:基礎の確認 <span class="need need-b">必要</span></h2>
-    <p>今回新しく使う道具と、前の回までの結果を並べます。各枠の「詳しい解説」から、基礎のまとめのページや、前の回のノートに飛べます。</p>
+    <h2 id="s1" data-need="B">1. 準備:基礎の確認 <span class="need need-b">必要</span></h2>
+    <p data-need="X">今回新しく使う道具と、前の回までの結果を並べます。各枠の「詳しい解説」から、基礎のまとめのページや、前の回のノートに飛べます。</p>
 
-    <h3 id="w-work">1.1 仕事とポテンシャルエネルギー <span class="need need-c">参考</span></h3>
-    <div class="box basic">
-      <div class="label">基礎:仕事とポテンシャル <a class="xref-link" href="../basics.html#work" data-xref>→ 詳しい解説</a></div>
+    <h3 id="w-work" data-need="C">1.1 仕事とポテンシャルエネルギー <span class="need need-c">参考</span></h3>
+    <div data-need="C" class="box basic">
+      <div class="label">基礎:仕事とポテンシャル <span class="need need-c">参考</span> <a class="xref-link" href="../basics.html#work" data-xref>→ 詳しい解説</a></div>
       <p>物体に力 $\bm{F}$ が働いていて、経路 $C$ に沿って動かすとき、<b>力がする仕事</b>は線積分 $\displaystyle\int_C\bm{F}\cdot d\bm{x}$。<b>外から加える力がする仕事</b>は、力と釣り合う力 $-\bm{F}$ の線積分 $-\displaystyle\int_C\bm{F}\cdot d\bm{x}$ です。</p>
       <p>仕事が<b>始点と終点だけで決まる</b>(経路によらない)力は、<b>保存力</b>といい、$\bm{F}=-\nabla U$ となるポテンシャルエネルギー $U$ が定義できます。仕事=ポテンシャルエネルギーの増加分です。</p>
     </div>
 
-    <h3 id="w-taylor">1.2 テイラー展開(小さい量での近似) <span class="need need-x">不要</span></h3>
-    <div class="box basic">
-      <div class="label">基礎:テイラー展開と $1/\sqrt{1+x}$ の近似 <a class="xref-link" href="../basics.html#taylor" data-xref>→ 詳しい解説</a></div>
+    <h3 id="w-taylor" data-need="X">1.2 テイラー展開(小さい量での近似) <span class="need need-x">不要</span></h3>
+    <div data-need="X" class="box basic">
+      <div class="label">基礎:テイラー展開と $1/\sqrt{1+x}$ の近似 <span class="need need-x">不要</span> <a class="xref-link" href="../basics.html#taylor" data-xref>→ 詳しい解説</a></div>
       <p>$x$ が<b>小さい</b>とき、関数は直線(1次式)や放物線(2次式)でよく近似できます。
       $$f(x)=f(0)+f'(0)\,x+\frac{f''(0)}{2}x^2+\cdots$$
       この回で使うのは $\dfrac{1}{\sqrt{1+x}}=1-\dfrac12x+\dfrac38x^2-\cdots$。「$\cdots$」は、$x$ について3次以上の項で、$x$ が小さいほど急速に小さくなります。「$O(x^3)$」は「$x^3$ 程度以下の大きさ」という記号です。</p>
     </div>
 
-    <h3 id="w-prev">1.3 第3・4回の結果(ガウスの法則、回転ゼロ、ポテンシャルの存在) <span class="need need-b">必要</span></h3>
-    <div class="box basic">
-      <div class="label">基礎:クーロンの法則、ガウスの法則、$\nabla\times\bm{E}=\bm{0}$、ポテンシャルの存在 <a class="xref-link" href="week-04.html#s2-4" data-xref>→ 第4回 2.4(ガウスの法則)</a><a class="xref-link" href="week-04.html#s2-6" data-xref>→ 第4回 2.6(電場の回転)</a><a class="xref-link" href="week-03.html#s4" data-xref>→ 第3回 4.(ポテンシャルの存在)</a></div>
+    <h3 id="w-prev" data-need="B">1.3 第3・4回の結果(ガウスの法則、回転ゼロ、ポテンシャルの存在) <span class="need need-b">必要</span></h3>
+    <div data-need="B" class="box basic">
+      <div class="label">基礎:クーロンの法則、ガウスの法則、$\nabla\times\bm{E}=\bm{0}$、ポテンシャルの存在 <span class="need need-b">必要</span> <a class="xref-link" href="week-04.html#s2-4" data-xref>→ 第4回 2.4(ガウスの法則)</a><a class="xref-link" href="week-04.html#s2-6" data-xref>→ 第4回 2.6(電場の回転)</a><a class="xref-link" href="week-03.html#s4" data-xref>→ 第3回 4.(ポテンシャルの存在)</a></div>
       <p>・<b>クーロンの法則</b>(静電場だけ):$\bm{E}(\bm{r})=\displaystyle\int\frac{\rho(\bm{r}')}{4\pi\varepsilon_0}\frac{\bm{r}-\bm{r}'}{|\bm{r}-\bm{r}'|^3}\,d\bm{r}'$ (3.3)。点電荷なら $\bm{E}=\dfrac{q}{4\pi\varepsilon_0}\dfrac{\bm{r}}{r^3}$ (3.1)。<br>
       ・<b>ガウスの法則</b>(いつでも):$\nabla\cdot\bm{E}=\rho/\varepsilon_0$ (3.11)。積分型 $\displaystyle\int_{\partial V}\bm{E}\cdot d\bm{S}=\frac{Q_V}{\varepsilon_0}$ (3.12)。<br>
       ・<b>回転ゼロ</b>(静電場だけ):$\nabla\times\bm{E}=\bm{0}$ (3.14)。<br>
@@ -97,43 +99,43 @@
     </div>
 
     <!-- ===================== 2 ===================== -->
-    <h2 id="s2">2. スカラーポテンシャル(電位) <span class="need need-b">必要</span> <span class="page-tag">講義ノート p.20–21(§3.3)</span></h2>
+    <h2 id="s2" data-need="B">2. スカラーポテンシャル(電位) <span class="need need-b">必要</span> <span class="page-tag">講義ノート p.20–21(§3.3)</span></h2>
 
-    <h3 id="s2-1">2.1 仕事と、ポテンシャルの存在 <span class="need need-b">必要</span></h3>
-    <p>電場が存在する環境下で、経路 $C$ に沿って電荷 $q$ を動かすには、仕事
+    <h3 id="s2-1" data-need="B">2.1 仕事と、ポテンシャルの存在 <span class="need need-b">必要</span></h3>
+    <p data-need="B">電場が存在する環境下で、経路 $C$ に沿って電荷 $q$ を動かすには、仕事
     $$W_C=-\int_Cq\bm{E}\cdot d\bm{x}\tag{3.18}$$
     が必要です(外から電場と釣り合う力 $-q\bm{E}$ を加えて動かすので、マイナスが付く)。講義ノート §2.5(<a href="week-03.html#s4">第3回の「ポテンシャルの存在」</a>)の議論により、この仕事の量は<b>始点と終点にのみ依存し、経路に依存しない</b>こと、そのためポテンシャルが定義可能であることが分かります(静電場では $\nabla\times\bm{E}=\bm{0}$ だから)。特に、与えられた電場に対し、あるスカラー関数 $\phi(\bm{r})$ が存在し、
     $$W_{\bm{r}\to\bm{r}'}=q\bigl(\phi(\bm{r}')-\phi(\bm{r})\bigr)\tag{3.19}$$
     と書くことができます。両辺の勾配をとることにより
     $$-\nabla\phi(\bm{r})=\bm{E}\tag{3.20}$$
     が得られます。この $\phi$ を静電場の「<b>スカラーポテンシャル</b>(scalar potential)」といいます。仕事を用いた定義を意識している場合には、これを「<b>電位</b>(electric potential)」と呼ぶ場合も多い。</p>
-    <div class="box warn">
-      <div class="label">注意:符号と、静電場だけという条件</div>
+    <div data-need="B" class="box warn">
+      <div class="label">注意:符号と、静電場だけという条件 <span class="need need-b">必要</span></div>
       <p>・<b>符号</b>:第3回のポテンシャル $\bm{A}=\nabla\phi$ に対し、ここでは $\bm{E}=-\nabla\phi$ と<b>マイナスが付く</b>。(講義ノート §2.5 に「スカラーポテンシャルの符号はマイナスを付ける場合もある」とあったのは、このことです。)電位は「仕事」($W=q\,\Delta\phi$)と結びつく向きの約束です。<br>
       ・<b>静電場だけ</b>:ポテンシャルの導出には条件 $\nabla\times\bm{E}=\bm{0}$ を用いましたが、これは静電場の設定の下でのみ成り立つ関係式なので、仕事と結びついた電位という量も、<b>静電場でのみ正しく定義された量</b>である点は注意する必要があります(脚注49:スカラーポテンシャル $\phi$ そのものは、時間変化する状況でも一般に定義される量だが、この場合には電場と単純な関係では結ばれなくなり、エネルギー・仕事とも直接的には結び付かなくなる。後で見るように、変動電磁場においてはスカラーポテンシャルの定義は修正される)。</p>
     </div>
 
-    <div class="box intuit">
-      <div class="label">直感で理解する:電位は「高さ」、電場は「下り坂」</div>
+    <div data-need="C" class="box intuit">
+      <div class="label">直感で理解する:電位は「高さ」、電場は「下り坂」 <span class="need need-c">参考</span></div>
       <p>電位 $\phi$ を地形の<b>高さ</b>だと思うと、$\bm{E}=-\nabla\phi$ は「<b>最も急な下り坂の向き</b>」を指します(勾配 $\nabla\phi$ は上り坂の向きなので、マイナスを付けて下り坂)。正の電荷は、ボールが坂を転がるように、電位の高い所から低い所へ押されます。電荷 $q$ を電位の高い所へ運ぶには仕事 $q\,\Delta\phi$ が要り、これは重力の下で物体を持ち上げるのに $mg\,\Delta h$ が要るのと同じ形です。等電位面は<b>等高線</b>にあたり、電場(下り坂の向き)は等高線に垂直です。</p>
     </div>
 
-    <h3 id="s2-2">2.2 重ね合わせで計算する <span class="need need-b">必要</span></h3>
-    <p>電場と同様にスカラーポテンシャルも重ね合わせが成り立ちます。そのため、クーロンの法則を元にスカラーポテンシャルを計算するのは容易です。電荷 $q_i$ が位置 $\bm{r}_i$ に置かれている状況における、位置 $\bm{r}$ のスカラーポテンシャルは
+    <h3 id="s2-2" data-need="B">2.2 重ね合わせで計算する <span class="need need-b">必要</span></h3>
+    <p data-need="B">電場と同様にスカラーポテンシャルも重ね合わせが成り立ちます。そのため、クーロンの法則を元にスカラーポテンシャルを計算するのは容易です。電荷 $q_i$ が位置 $\bm{r}_i$ に置かれている状況における、位置 $\bm{r}$ のスカラーポテンシャルは
     $$\phi(\bm{r})=\sum_i\frac{q_i}{4\pi\varepsilon_0}\frac{1}{|\bm{r}-\bm{r}_i|}\tag{3.21}$$
     で与えられます(ただし $\phi$ は<b>無限遠方でゼロ</b>となるように基準点を選んでいる)。電荷が電荷密度 $\rho(\bm{r})$ に従って連続的に分布している場合は、和を積分に置き換えて
     $$\phi(\bm{r})=\int\frac{\rho(\bm{r}')}{4\pi\varepsilon_0}\frac{1}{|\bm{r}-\bm{r}'|}\,d\bm{r}'\tag{3.22}$$
     となります。</p>
-    <figure class="fig">
+    <figure data-need="C" class="fig">
       <svg viewBox="0 0 560 262" width="560" role="img" aria-label="点電荷の等電位面"><circle cx="150" cy="130" r="30" style="fill:none;stroke:var(--ex);stroke-width:1.6;opacity:1.00"/><circle cx="150" cy="130" r="55" style="fill:none;stroke:var(--ex);stroke-width:1.6;opacity:0.86"/><circle cx="150" cy="130" r="85" style="fill:none;stroke:var(--ex);stroke-width:1.6;opacity:0.72"/><circle cx="150" cy="130" r="118" style="fill:none;stroke:var(--ex);stroke-width:1.6;opacity:0.58"/><line x1="164" y1="130" x2="269.6" y2="130" style="stroke:var(--thm);stroke-width:1.5;fill:none;opacity:0.9"/><polygon points="276,130 269,133.2 269,126.8" style="fill:var(--thm);opacity:0.9"/><line x1="162.1" y1="123" x2="253.6" y2="70.2" style="stroke:var(--thm);stroke-width:1.5;fill:none;opacity:0.9"/><polygon points="259.1,67 254.7,73.3 251.5,67.7" style="fill:var(--thm);opacity:0.9"/><line x1="157" y1="117.9" x2="209.8" y2="26.4" style="stroke:var(--thm);stroke-width:1.5;fill:none;opacity:0.9"/><polygon points="213,20.9 212.3,28.5 206.7,25.3" style="fill:var(--thm);opacity:0.9"/><line x1="150" y1="116" x2="150" y2="10.4" style="stroke:var(--thm);stroke-width:1.5;fill:none;opacity:0.9"/><polygon points="150,4 153.2,11 146.8,11" style="fill:var(--thm);opacity:0.9"/><line x1="143" y1="117.9" x2="90.2" y2="26.4" style="stroke:var(--thm);stroke-width:1.5;fill:none;opacity:0.9"/><polygon points="87,20.9 93.3,25.3 87.7,28.5" style="fill:var(--thm);opacity:0.9"/><line x1="137.9" y1="123" x2="46.4" y2="70.2" style="stroke:var(--thm);stroke-width:1.5;fill:none;opacity:0.9"/><polygon points="40.9,67 48.5,67.7 45.3,73.3" style="fill:var(--thm);opacity:0.9"/><line x1="136" y1="130" x2="30.4" y2="130" style="stroke:var(--thm);stroke-width:1.5;fill:none;opacity:0.9"/><polygon points="24,130 31,126.8 31,133.2" style="fill:var(--thm);opacity:0.9"/><line x1="137.9" y1="137" x2="46.4" y2="189.8" style="stroke:var(--thm);stroke-width:1.5;fill:none;opacity:0.9"/><polygon points="40.9,193 45.3,186.7 48.5,192.3" style="fill:var(--thm);opacity:0.9"/><line x1="143" y1="142.1" x2="90.2" y2="233.6" style="stroke:var(--thm);stroke-width:1.5;fill:none;opacity:0.9"/><polygon points="87,239.1 87.7,231.5 93.3,234.7" style="fill:var(--thm);opacity:0.9"/><line x1="150" y1="144" x2="150" y2="249.6" style="stroke:var(--thm);stroke-width:1.5;fill:none;opacity:0.9"/><polygon points="150,256 146.8,249 153.2,249" style="fill:var(--thm);opacity:0.9"/><line x1="157" y1="142.1" x2="209.8" y2="233.6" style="stroke:var(--thm);stroke-width:1.5;fill:none;opacity:0.9"/><polygon points="213,239.1 206.7,234.7 212.3,231.5" style="fill:var(--thm);opacity:0.9"/><line x1="162.1" y1="137" x2="253.6" y2="189.8" style="stroke:var(--thm);stroke-width:1.5;fill:none;opacity:0.9"/><polygon points="259.1,193 251.5,192.3 254.7,186.7" style="fill:var(--thm);opacity:0.9"/><circle cx="150" cy="130" r="11" style="fill:var(--thm)"/><text class="tj" x="150" y="135" style="text-anchor:middle;fill:#fff;font-weight:700;font-size:16px">+</text><text class="tt" x="300" y="56" style="fill:var(--ex)">緑の円:等電位面(φ = 一定)</text><text class="tt" x="300" y="80">橙の矢印:電場 E = −∇φ</text><text class="tm" x="300" y="116">E は等電位面に垂直で、</text><text class="tm" x="300" y="134">φ が大きい方から小さい方へ向かう</text><text class="ta" x="300" y="170">φ(r) = q / (4πε₀ r)</text><text class="tm" x="300" y="190">(無限遠で φ = 0 に選ぶ)</text></svg>
       <figcaption>点電荷のポテンシャル $\phi=q/(4\pi\varepsilon_0r)$ の等電位面(緑の円・球面)と、電場(橙の矢印)。電場は等電位面に垂直で、電位が高い方から低い方へ向かう。</figcaption>
     </figure>
-    <details><summary>(3.21) の確かめ:点電荷の場合(講義ノートにない補足)</summary>
-      <div class="box proof"><div class="label">確かめ <span class="need need-x">不要</span></div>
+    <details data-need="X"><summary>(3.21) の確かめ:点電荷の場合(講義ノートにない補足) <span class="need need-x">不要</span></summary>
+      <div class="box proof" data-need="X"><div class="label">確かめ <span class="need need-x">不要</span></div>
       <p>原点の点電荷 $q$ について $\phi=\dfrac{q}{4\pi\varepsilon_0r}$ とすると、第2回の問題 F より $\nabla\dfrac1r=-\dfrac{\bm{r}}{r^3}$ なので $-\nabla\phi=\dfrac{q}{4\pi\varepsilon_0}\dfrac{\bm{r}}{r^3}$。クーロンの法則 (3.1) の電場と一致します。無限遠($r\to\infty$)で $\phi\to0$ に選んでいる。重ね合わせは $\nabla$ が線形なので成り立つ。</p></div>
     </details>
-    <div class="box supp">
-      <div class="label">講義ノートにない補足:球殻の電場と電位</div>
+    <div data-need="B" class="box supp">
+      <div class="label">講義ノートにない補足:球殻の電場と電位 <span class="need need-b">必要</span></div>
       <p>例 3.1 の球殻(半径 $a$、全電荷 $Q$)の電位を、$E$ から求めます。外側 $l\gt a$:$\displaystyle\phi(l)=-\int_\infty^lE\,dl'=\int_l^\infty\frac{Q}{4\pi\varepsilon_0l'^2}dl'=\frac{Q}{4\pi\varepsilon_0l}$(点電荷と同じ)。内側 $l\lt a$:$E=0$ なので $\phi$ は一定で、球殻の表面($l=a$)での値 $\dfrac{Q}{4\pi\varepsilon_0a}$ に等しい。</p>
       <figure class="fig">
         <svg viewBox="0 0 600 244" width="600" role="img" aria-label="一様な球殻の電場と電位"><line x1="40" y1="200" x2="280" y2="200" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><line x1="40" y1="200" x2="40" y2="60" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><text class="t" x="284" y="204">l</text><text class="t" x="46" y="62">E</text><text class="ta" x="140" y="40" style="text-anchor:middle">電場の大きさ E</text><line x1="128" y1="200" x2="128" y2="80" style="stroke:var(--muted);stroke-width:1.1;stroke-dasharray:5 4;fill:none"/><text class="t" x="128" y="216" style="text-anchor:middle">a</text><line x1="40" y1="200" x2="128" y2="200" style="stroke:var(--accent);stroke-width:3"/><line x1="128" y1="200" x2="128" y2="86" style="stroke:var(--accent);stroke-width:1.6;stroke-dasharray:3 3"/><polyline points="128,86 131,93.4 134,100.1 137,106.2 140,111.7 143,116.8 146,121.4 149,125.7 152,129.6 155,133.2 158,136.6 161,139.7 164,142.6 167,145.3 170,147.8 173,150.1 176,152.3 179,154.3 182,156.2 185,158 188,159.7 191,161.3 194,162.8 197,164.2 200,165.5 203,166.8 206,168 209,169.1 212,170.2 215,171.2 218,172.1 221,173.1 224,173.9 227,174.8 230,175.5 233,176.3 236,177 239,177.7 242,178.4 245,179 248,179.6 251,180.2 254,180.7 257,181.3 260,181.8 263,182.2 266,182.7 269,183.2 272,183.6 275,184" style="fill:none;stroke:var(--accent);stroke-width:3"/><text class="tm" x="60" y="188">内側:E = 0</text><text class="tt" x="146" y="125.6">Q/(4πε₀l²)</text><line x1="330" y1="200" x2="570" y2="200" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><line x1="330" y1="200" x2="330" y2="60" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><text class="t" x="574" y="204">l</text><text class="t" x="336" y="62">φ</text><text class="ta" x="430" y="40" style="text-anchor:middle">電位 φ</text><line x1="418" y1="200" x2="418" y2="80" style="stroke:var(--muted);stroke-width:1.1;stroke-dasharray:5 4;fill:none"/><text class="t" x="418" y="216" style="text-anchor:middle">a</text><line x1="330" y1="86" x2="418" y2="86" style="stroke:var(--ex);stroke-width:3"/><polyline points="418,86 421,89.8 424,93.3 427,96.6 430,99.7 433,102.6 436,105.4 439,108 442,110.4 445,112.8 448,115 451,117.1 454,119.1 457,121 460,122.8 463,124.6 466,126.2 469,127.8 472,129.4 475,130.8 478,132.2 481,133.6 484,134.9 487,136.1 490,137.3 493,138.5 496,139.6 499,140.6 502,141.7 505,142.7 508,143.6 511,144.6 514,145.5 517,146.4 520,147.2 523,148 526,148.8 529,149.6 532,150.3 535,151.1 538,151.8 541,152.5 544,153.1 547,153.8 550,154.4 553,155 556,155.6 559,156.2 562,156.8 565,157.3" style="fill:none;stroke:var(--ex);stroke-width:3"/><text class="tm" x="344" y="78">内側:一定</text><text class="tt" x="436" y="134" style="fill:var(--ex)">Q/(4πε₀l)</text></svg>
@@ -142,68 +144,68 @@
     </div>
 
     <!-- ===================== 3 ===================== -->
-    <h2 id="s3">3. 系と電場のエネルギー <span class="need need-a">必須</span> <span class="page-tag">講義ノート p.21–23(§3.4)</span></h2>
-    <p>スカラーポテンシャル(電位)は、電荷分布が与えられている下で、新たに<b>試験電荷</b>(test charge)を連れてくるために必要なエネルギー(仕事)を与えるものでした。この節では、<b>電荷分布自体が有しているエネルギー</b>、あるいはその電荷分布を(ゼロから)作る際に必要なエネルギー、を考えます。ただし電荷分布をゼロから作る際には、無限遠方に電荷が必要なだけ存在しており、そこから運んでくるという仮想的な状況を考えて値を計算することにします。</p>
+    <h2 id="s3" data-need="A">3. 系と電場のエネルギー <span class="need need-a">必須</span> <span class="page-tag">講義ノート p.21–23(§3.4)</span></h2>
+    <p data-need="C">スカラーポテンシャル(電位)は、電荷分布が与えられている下で、新たに<b>試験電荷</b>(test charge)を連れてくるために必要なエネルギー(仕事)を与えるものでした。この節では、<b>電荷分布自体が有しているエネルギー</b>、あるいはその電荷分布を(ゼロから)作る際に必要なエネルギー、を考えます。ただし電荷分布をゼロから作る際には、無限遠方に電荷が必要なだけ存在しており、そこから運んでくるという仮想的な状況を考えて値を計算することにします。</p>
 
-    <h3 id="s3-1">3.1 点電荷の集まりを作るのに必要な仕事 <span class="need need-b">必要</span></h3>
-    <p>まず点電荷の集まりの場合を考えます。例えば電荷が(1,2,3,4 の)4つあった場合、電荷1は電荷2,3,4が作る電場を受けます。電荷2,3,4が既に存在しているとみなした場合に、電荷1を無限遠方からこの位置まで運ぶのに必要な仕事は
+    <h3 id="s3-1" data-need="B">3.1 点電荷の集まりを作るのに必要な仕事 <span class="need need-b">必要</span></h3>
+    <p data-need="C">まず点電荷の集まりの場合を考えます。例えば電荷が(1,2,3,4 の)4つあった場合、電荷1は電荷2,3,4が作る電場を受けます。電荷2,3,4が既に存在しているとみなした場合に、電荷1を無限遠方からこの位置まで運ぶのに必要な仕事は
     $$W_1=q_1\sum_{i=2,3,4}\frac{q_i}{4\pi\varepsilon_0}\frac{1}{|\bm{r}_1-\bm{r}_i|}\tag{3.23}$$
     で与えられます((3.19)で $\phi(\infty)=0$)。次に、電荷2,3,4が存在する状況において、電荷3,4が既に存在しており、電荷2を無限遠方からこの位置まで運んでくるという操作を考えます。このとき必要な仕事は
     $$W_2=q_2\sum_{i=3,4}\frac{q_i}{4\pi\varepsilon_0}\frac{1}{|\bm{r}_2-\bm{r}_i|}\tag{3.24}$$
     で与えられます。最後に、電荷4が既に存在するとして、電荷3を無限遠方からこの位置まで運んでくる操作に必要な仕事は
     $$W_3=q_3\frac{q_4}{4\pi\varepsilon_0}\frac{1}{|\bm{r}_3-\bm{r}_4|}\tag{3.25}$$
     です。何もない状況下で点電荷を運搬するのに仕事は必要ないので、単一の電荷4は仕事ゼロで運搬できます。</p>
-    <figure class="fig">
+    <figure data-need="C" class="fig">
       <svg viewBox="0 0 640 228" width="640" role="img" aria-label="電荷を無限遠から運んで系を作る"><line x1="110" y1="60" x2="300" y2="50" style="stroke:var(--muted);stroke-width:1.2;stroke-dasharray:5 4"/><line x1="110" y1="60" x2="330" y2="170" style="stroke:var(--muted);stroke-width:1.2;stroke-dasharray:5 4"/><line x1="110" y1="60" x2="140" y2="190" style="stroke:var(--muted);stroke-width:1.2;stroke-dasharray:5 4"/><line x1="300" y1="50" x2="330" y2="170" style="stroke:var(--muted);stroke-width:1.2;stroke-dasharray:5 4"/><line x1="300" y1="50" x2="140" y2="190" style="stroke:var(--muted);stroke-width:1.2;stroke-dasharray:5 4"/><line x1="330" y1="170" x2="140" y2="190" style="stroke:var(--muted);stroke-width:1.2;stroke-dasharray:5 4"/><circle cx="110" cy="60" r="14" style="fill:var(--thm)"/><text class="tj" x="110" y="65" style="text-anchor:middle;fill:#fff;font-weight:700">1</text><circle cx="300" cy="50" r="14" style="fill:var(--thm)"/><text class="tj" x="300" y="55" style="text-anchor:middle;fill:#fff;font-weight:700">2</text><circle cx="330" cy="170" r="14" style="fill:var(--thm)"/><text class="tj" x="330" y="175" style="text-anchor:middle;fill:#fff;font-weight:700">3</text><circle cx="140" cy="190" r="14" style="fill:var(--thm)"/><text class="tj" x="140" y="195" style="text-anchor:middle;fill:#fff;font-weight:700">4</text><line x1="30" y1="26" x2="84.2" y2="47" style="stroke:var(--accent);stroke-width:2.2;fill:none"/><polygon points="92,50 82.2,50.5 85.1,43" style="fill:var(--accent)"/><text class="tm" x="14" y="18">無限遠から 1 を運ぶ(2,3,4 が既にある)</text><text class="tj" x="380" y="90">4つの電荷から作れる組(ペア)は 6 通り</text><text class="tt" x="380" y="114">U = 全ペアの q_i q_j/(4πε₀ 距離) の和</text><text class="tm" x="380" y="144">= ½ Σ_{i≠j} …(各ペアを2回数えるので ½)</text></svg>
       <figcaption>順番に運んでくる。1 を運ぶときは 2,3,4 の電場を受け、2 を運ぶときは 3,4 の電場を受け、…。この足し算は、すべての「ペア」を一度ずつ数えたものになる。</figcaption>
     </figure>
-    <p>以上をすべて足し上げると、この4つの電荷の集まりを作るのに必要な仕事は
+    <p data-need="B">以上をすべて足し上げると、この4つの電荷の集まりを作るのに必要な仕事は
     $$U=W_1+W_2+W_3=\frac12\sum_{i\ne j}\frac{q_iq_j}{4\pi\varepsilon_0}\frac{1}{|\bm{r}_j-\bm{r}_i|}\tag{3.26}$$
     だと分かります。この最右辺の表示は<b>一般的なもの</b>です(総和は、$i\ne j$ のすべての組についてとる。各ペアを $(i,j)$ と $(j,i)$ で2回数えるので、$\tfrac12$ が付く)。</p>
-    <div class="box supp">
-      <div class="label">講義ノートにない補足:2つの電荷で確かめる</div>
+    <div data-need="C" class="box supp">
+      <div class="label">講義ノートにない補足:2つの電荷で確かめる <span class="need need-c">参考</span></div>
       <p>電荷が2つ($q_1,q_2$、距離 $d$)のとき、$W_1=\dfrac{q_1q_2}{4\pi\varepsilon_0d}$、$W_2=0$ なので $U=\dfrac{q_1q_2}{4\pi\varepsilon_0d}$。(3.26) では $(i,j)=(1,2),(2,1)$ の2項で $\tfrac12\cdot2\cdot\dfrac{q_1q_2}{4\pi\varepsilon_0d}$ となり、一致します。同符号の電荷なら $U\gt0$(押し込む仕事が必要)、異符号なら $U\lt0$(引き合うので、仕事が取り出せる)。</p>
     </div>
 
-    <h3 id="s3-2">3.2 連続分布のエネルギー <span class="need need-a">必須</span></h3>
-    <p>電荷が電荷密度 $\rho(\bm{r})$ に従って連続的に分布している場合の系のエネルギーは、右辺の和を積分に置き換えて
+    <h3 id="s3-2" data-need="A">3.2 連続分布のエネルギー <span class="need need-a">必須</span></h3>
+    <p data-need="A">電荷が電荷密度 $\rho(\bm{r})$ に従って連続的に分布している場合の系のエネルギーは、右辺の和を積分に置き換えて
     $$U=\frac12\int\frac{\rho(\bm{r})\rho(\bm{r}')}{4\pi\varepsilon_0}\frac{1}{|\bm{r}-\bm{r}'|}\,d\bm{r}\,d\bm{r}'\tag{3.27}$$
     と書けます。この表示は、無限遠方から微小電荷を少しずつ運んできたと考えても導けます。この式は、スカラーポテンシャルを用いて
     $$U=\frac12\int\rho(\bm{r})\phi(\bm{r})\,d\bm{r}\tag{3.28}$$
     と書き直すと、その意味はより分かりやすくなります。すなわち「<b>各場所において、各電荷が感じるスカラーポテンシャルを積算せよ</b>」ということです((3.22)を(3.27)に使った)。</p>
 
-    <h3 id="s3-3">3.3 一部を動かす仕事との関係 <span class="need need-x">不要</span></h3>
-    <p>ここで得られた系のエネルギーの表式は、系(電荷分布)の一部を動かす際の仕事とも直接結びつきます。例として、電荷分布が2個 $\rho=\rho_1+\rho_2$ に分かれており、このうち $\rho_1$ を微小距離 $\Delta\bm{r}$ だけ動かす際に必要な仕事を考えることにしましょう。$\rho_i$ が作るスカラーポテンシャルを $\phi_i$ と書くことにすると、この系のエネルギーは
+    <h3 id="s3-3" data-need="X">3.3 一部を動かす仕事との関係 <span class="need need-x">不要</span></h3>
+    <p data-need="X">ここで得られた系のエネルギーの表式は、系(電荷分布)の一部を動かす際の仕事とも直接結びつきます。例として、電荷分布が2個 $\rho=\rho_1+\rho_2$ に分かれており、このうち $\rho_1$ を微小距離 $\Delta\bm{r}$ だけ動かす際に必要な仕事を考えることにしましょう。$\rho_i$ が作るスカラーポテンシャルを $\phi_i$ と書くことにすると、この系のエネルギーは
     $$U=\frac12\int\bigl(\rho_1\phi_1+\rho_1\phi_2+\rho_2\phi_1+\rho_2\phi_2\bigr)\,d\bm{r}\tag{3.29}$$
     と書けます。ただし、今考えている操作で $\rho_1$ 内及び $\rho_2$ 内の相対的位置関係は変化しないので、第一項と第四項は今考えている仕事に寄与を持ちません。また、式 (3.27) の式からも明らかなように、第二項と第三項は同じ値
     $$\int\rho_1(\bm{r})\phi_2(\bm{r})\,d\bm{r}=\int\frac{\rho_1(\bm{r})\rho_2(\bm{r}')}{4\pi\varepsilon_0}\frac{1}{|\bm{r}-\bm{r}'|}\,d\bm{r}\,d\bm{r}'=\int\rho_2(\bm{r})\phi_1(\bm{r})\,d\bm{r}\tag{3.30}$$
     です。位置 $\bm{r}$ に働く $\rho_2$ 由来の電場が $\bm{E}_2(\bm{r})$ だとすると、この変化に必要な仕事は
     $$W=-\int\rho_1(\bm{r}')\bm{E}_2(\bm{r}')\cdot\Delta\bm{r}\,d\bm{r}'=\int\rho_1(\bm{r}')\,\nabla\phi_2(\bm{r}')\cdot\Delta\bm{r}\,d\bm{r}'\simeq\int\rho_1(\bm{r}')\bigl(\phi_2(\bm{r}'+\Delta\bm{r})-\phi_2(\bm{r}')\bigr)d\bm{r}'\tag{3.31}$$
     で与えられます。これは、電場 $\bm{E}_2$ が固定されている状況での、電場 $\bm{E}_2$ 及び電荷分布 $\rho_1$ のエネルギーが $U=\int\rho_1(\bm{r}')\phi_2(\bm{r}')\,d\bm{r}'$ で与えられており、$\Delta\bm{r}$ の移動によって位置の差分だけの仕事が必要になったことを意味しています。</p>
-    <p>なお、式 (3.28) で係数 $\tfrac12$ が付いたのは、この操作で「電荷分布 $\rho_2$ が感じる、$\rho_1$ が作るスカラーポテンシャル $\phi_1$」もまた変化しており、それは対称性 (3.30) により今得られた量 $\int\rho_1(\bm{r}')\phi_2(\bm{r}')\,d\bm{r}'$ と全く同一の値だからです。以上の議論は、既に得られていた式 (3.28) の再導出と解釈することも出来ます(脚注50:$\rho_1$ が自身に対して作る自己エネルギーの形が今の議論では求まっていないと思うかもしれない。しかし、$\rho_1$ をさらに二つに分けて、そしてそれらをさらに二つに分けて…という議論を繰り返していくことを考えれば、自己エネルギーも含めたエネルギーの形は式 (3.28) となるしかないことが分かる)。</p>
-    <div class="box supp">
-      <div class="label">講義ノートにない補足:この節の議論を、ひとことで</div>
+    <p data-need="X">なお、式 (3.28) で係数 $\tfrac12$ が付いたのは、この操作で「電荷分布 $\rho_2$ が感じる、$\rho_1$ が作るスカラーポテンシャル $\phi_1$」もまた変化しており、それは対称性 (3.30) により今得られた量 $\int\rho_1(\bm{r}')\phi_2(\bm{r}')\,d\bm{r}'$ と全く同一の値だからです。以上の議論は、既に得られていた式 (3.28) の再導出と解釈することも出来ます(脚注50:$\rho_1$ が自身に対して作る自己エネルギーの形が今の議論では求まっていないと思うかもしれない。しかし、$\rho_1$ をさらに二つに分けて、そしてそれらをさらに二つに分けて…という議論を繰り返していくことを考えれば、自己エネルギーも含めたエネルギーの形は式 (3.28) となるしかないことが分かる)。</p>
+    <div data-need="X" class="box supp">
+      <div class="label">講義ノートにない補足:この節の議論を、ひとことで <span class="need need-x">不要</span></div>
       <p>$\rho_1$ を少し動かしたとき、変わるのは「$\rho_1$ と $\rho_2$ の<b>お互いの</b>エネルギー」だけです($\rho_1$ の中、$\rho_2$ の中の配置は変わらない)。お互いのエネルギーは、「$\rho_2$ の電位の中に $\rho_1$ を置くエネルギー」$\int\rho_1\phi_2\,d\bm{r}$ で、(3.29) では第2項と第3項として<b>同じ量が2回</b>現れます。$\frac12\times2=1$ なので、(3.28) の $\frac12$ は、この「2回数え」をちょうど打ち消すために付いている、というわけです。点電荷の (3.26) の $\frac12$(各ペアを $(i,j)$ と $(j,i)$ で2回数える)と同じ理由です。</p>
     </div>
 
-    <h3 id="s3-4">3.4 場が持つエネルギー <span class="need need-a">必須</span></h3>
-    <p>連続的な電荷分布の場合の式 (3.27) は、さらに興味深い書き換えをすることが出来ます。ガウスの法則 (3.11) とスカラーポテンシャルの表式 (3.22) を適用すると($\rho=\varepsilon_0\nabla\cdot\bm{E}$ を (3.28) に代入して)、
+    <h3 id="s3-4" data-need="A">3.4 場が持つエネルギー <span class="need need-a">必須</span></h3>
+    <p data-need="A">連続的な電荷分布の場合の式 (3.27) は、さらに興味深い書き換えをすることが出来ます。ガウスの法則 (3.11) とスカラーポテンシャルの表式 (3.22) を適用すると($\rho=\varepsilon_0\nabla\cdot\bm{E}$ を (3.28) に代入して)、
     $$U=\frac12\int_V\frac{\rho(\bm{r})\rho(\bm{r}')}{4\pi\varepsilon_0}\frac{1}{|\bm{r}-\bm{r}'|}d\bm{r}\,d\bm{r}'=\frac{\varepsilon_0}{2}\int_V(\nabla\cdot\bm{E}(\bm{r}))\,\phi(\bm{r})\,d\bm{r}$$
     $$=\frac{\varepsilon_0}{2}\Bigl[\int_V\nabla\cdot\bigl(\phi(\bm{r})\bm{E}(\bm{r})\bigr)d\bm{r}-\int_V\bm{E}(\bm{r})\cdot\bigl(\nabla\phi(\bm{r})\bigr)d\bm{r}\Bigr]=\frac{\varepsilon_0}{2}\Bigl[\int_{\partial V}\phi(\bm{r})\bm{E}(\bm{r})\cdot d\bm{S}-\int_V\bm{E}(\bm{r})\cdot\bigl(\nabla\phi(\bm{r})\bigr)d\bm{r}\Bigr]\tag{3.32}$$
     が得られます。ただし $V$ は<b>全電荷を含むようなある領域</b>であり、3つ目の等式では微分の分配公式(脚注51:$\nabla$ に対する分配である点に注意:$\nabla\cdot(\phi\bm{E})=(\nabla\phi)\cdot\bm{E}+\phi\,\nabla\cdot\bm{E}$)を、4つ目の等式ではガウスの定理を用いました。右辺第一項の表面積分は、$V$ を十分大きな半径 $r$ の球にとると、$\phi\propto\dfrac1r$、$\bm{E}\propto\dfrac1{r^2}$ であり、$\partial V$ の表面積 $\propto r^2$ なので、この寄与は $V$ を大きくする極限で消えます($\propto\frac1r\cdot\frac1{r^2}\cdot r^2=\frac1r\to0$)。よって第二項のみが残り、$\nabla\phi=-\bm{E}$ より
     $$U=\frac{\varepsilon_0}{2}\int|\bm{E}(\bm{r})|^2\,d\bm{r}\tag{3.33}$$
     が<b>エネルギー</b>だと分かります。ただし右辺の積分は<b>全空間</b>にまたがって積分します。</p>
-    <div class="box warn">
-      <div class="label">注意:(3.33) は、電荷が連続分布のときだけ</div>
+    <div data-need="B" class="box warn">
+      <div class="label">注意:(3.33) は、電荷が連続分布のときだけ <span class="need need-b">必要</span></div>
       <p>なお、この表示は<b>電荷が連続的に分布している場合に限られ、点電荷の場合には成り立たない</b>ことには注意が必要です。この表示は「無限小電荷を集めて電荷分布を作る状況」でのものなので、点電荷がある場合には「無限小電荷を集めて点電荷を作る」必要があります。しかし、無限小電荷から点電荷を作ろうと思うと、その時点で無限大のエネルギーが発生してしまうので、計算がうまくいきません(脚注52:この問題は量子電磁気学においても発生する。「くりこみ」の手法は、この発散の問題を解決するための一つの方法である)。先程得られた点電荷の場合のエネルギーの表式 (3.26) は、「無限遠方にあらかじめ点電荷が用意されている」という状況設定のものであり、無限小電荷のみから電荷分布を作る今の設定とは微妙に異なっているのです。</p>
     </div>
 
-    <div class="box ex">
+    <div data-need="A" class="box ex">
       <div class="label">問 [3-3] <span class="need need-a">必須</span></div>
       <p>点 $(-b,0,0)$ と $(b,0,0)$ を中心とする、半径 $l$($l\lt b$)の二つの球殻がある。それぞれの球殻には、一様面密度 $\sigma$ の電荷が分布している。この二つの球殻からなる系のエネルギーを求めよ。</p>
     </div>
-    <div class="box supp">
-      <div class="label">講義ノートにない補足:[3-3] の解答</div>
+    <div data-need="A" class="box supp">
+      <div class="label">講義ノートにない補足:[3-3] の解答 <span class="need need-a">必須</span></div>
       <figure class="fig">
         <svg viewBox="0 0 520 236" width="520" role="img" aria-label="2つの球殻"><line x1="30" y1="120" x2="370" y2="120" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><text class="t" x="374" y="124">x</text><circle cx="80" cy="120" r="56" style="fill:var(--accent);opacity:.12;stroke:var(--accent);stroke-width:2.4"/><circle cx="80" cy="120" r="3.5" style="fill:var(--text)"/><text class="tm" x="80" y="198" style="text-anchor:middle">(−b,0,0)</text><text class="tm" x="80" y="110" style="text-anchor:middle">面密度 σ</text><line x1="80" y1="120" x2="119.2" y2="80.8" style="stroke:var(--ex);stroke-width:2"/><text class="t" x="102.4" y="78" style="fill:var(--ex)">l</text><circle cx="320" cy="120" r="56" style="fill:var(--accent);opacity:.12;stroke:var(--accent);stroke-width:2.4"/><circle cx="320" cy="120" r="3.5" style="fill:var(--text)"/><text class="tm" x="320" y="198" style="text-anchor:middle">(b,0,0)</text><text class="tm" x="320" y="110" style="text-anchor:middle">面密度 σ</text><line x1="320" y1="120" x2="359.2" y2="80.8" style="stroke:var(--ex);stroke-width:2"/><text class="t" x="342.4" y="78" style="fill:var(--ex)">l</text><line x1="80" y1="138" x2="320" y2="138" style="stroke:var(--thm);stroke-width:1.6"/><text class="t" x="200" y="156" style="text-anchor:middle;fill:var(--thm)">2b</text><text class="ta" x="20" y="20">半径 l の2つの球殻(l &lt; b なので重ならない)</text></svg>
         <figcaption>中心間距離 $2b$、半径 $l\lt b$ の2つの球殻(重ならない)。</figcaption>
@@ -219,68 +221,68 @@
       (<b>検算</b>:$b\to\infty$ で相互作用は消え、各球殻の自己エネルギーだけが残る。同符号なので相互作用エネルギーは正で、近づけるほど増える。)</p>
     </div>
 
-    <h3 id="s3-5">3.5 「相互作用エネルギー」と「場が持つエネルギー」 <span class="need need-b">必要</span></h3>
-    <p>さて、式 (3.33) を見ると、いかにも「空間中の各点の電場がエネルギー $\varepsilon_0|\bm{E}|^2/2$ を持っている」ように見えます。一方、元々のエネルギーの特徴づけ (3.27) は「電荷分布が電荷分布自身に対して作っている(ポテンシャル)エネルギー」でした。この二つは大きく異なる見方のようにも見えますが、実はそこまで異なるわけでもありません。例として、一方が壁に固定され、もう一方の先には質点がついているバネを考えましょう(図13)。質点を引っ張るには仕事が必要であり、引っ張った際にはエネルギーが蓄えられます。このエネルギーについて、以下の二通りの見方が可能です。</p>
-    <ol>
+    <h3 id="s3-5" data-need="C">3.5 「相互作用エネルギー」と「場が持つエネルギー」 <span class="need need-c">参考</span></h3>
+    <p data-need="C">さて、式 (3.33) を見ると、いかにも「空間中の各点の電場がエネルギー $\varepsilon_0|\bm{E}|^2/2$ を持っている」ように見えます。一方、元々のエネルギーの特徴づけ (3.27) は「電荷分布が電荷分布自身に対して作っている(ポテンシャル)エネルギー」でした。この二つは大きく異なる見方のようにも見えますが、実はそこまで異なるわけでもありません。例として、一方が壁に固定され、もう一方の先には質点がついているバネを考えましょう(図13)。質点を引っ張るには仕事が必要であり、引っ張った際にはエネルギーが蓄えられます。このエネルギーについて、以下の二通りの見方が可能です。</p>
+    <ol data-need="X">
       <li>質点には一定のポテンシャル力が働いている。それに逆らって質点を動かした場合には、質点がポテンシャルエネルギーを獲得する。</li>
       <li>質点と壁の間のバネの各点は、それぞれエネルギーを蓄えることが出来る。質点を引っ張ってバネが伸びた際には、バネの各点各点も伸びており、その伸びに従って各点各点にエネルギーが蓄えられる。全体のエネルギーは、各点が持つエネルギーの積分で与えられる。</li>
     </ol>
-    <figure class="fig">
+    <figure data-need="X" class="fig">
       <svg viewBox="0 0 560 262" width="560" role="img" aria-label="ばねの2つの見方"><text class="ta" x="14" y="16">見方1:質点が受けるポテンシャル力に逆らって引っ張る</text><rect x="20" y="30" width="14" height="56" rx="0" style="fill:var(--muted);opacity:.6;stroke:none"/><polyline points="34,58 45.1,47 67.3,69 89.4,47 111.6,69 133.8,47 155.9,69 178.1,47 200.3,69 222.4,47 244.6,69 266.8,47 288.9,69 300,58" style="fill:none;stroke:var(--muted);stroke-width:2"/><circle cx="318" cy="58" r="18" style="fill:var(--surface);stroke:var(--muted);stroke-width:2"/><text class="tm" x="34" y="112">エネルギーは質点(相互作用する端)にたくわわる</text><text class="ta" x="14" y="138">見方2:ばねの各部分が伸びて、エネルギーをたくわえる</text><rect x="20" y="152" width="14" height="56" rx="0" style="fill:var(--muted);opacity:.6;stroke:none"/><polyline points="34,180 45.1,169 67.3,191 89.4,169 111.6,191 133.8,169 155.9,191 178.1,169 200.3,191 222.4,169 244.6,191 266.8,169 288.9,191 300,180" style="fill:none;stroke:var(--muted);stroke-width:2"/><circle cx="318" cy="180" r="18" style="fill:var(--surface);stroke:var(--muted);stroke-width:2"/><circle cx="40" cy="214" r="3.2" style="fill:var(--thm)"/><circle cx="62" cy="214" r="3.2" style="fill:var(--thm)"/><circle cx="84" cy="214" r="3.2" style="fill:var(--thm)"/><circle cx="106" cy="214" r="3.2" style="fill:var(--thm)"/><circle cx="128" cy="214" r="3.2" style="fill:var(--thm)"/><circle cx="150" cy="214" r="3.2" style="fill:var(--thm)"/><circle cx="172" cy="214" r="3.2" style="fill:var(--thm)"/><circle cx="194" cy="214" r="3.2" style="fill:var(--thm)"/><circle cx="216" cy="214" r="3.2" style="fill:var(--thm)"/><circle cx="238" cy="214" r="3.2" style="fill:var(--thm)"/><circle cx="260" cy="214" r="3.2" style="fill:var(--thm)"/><circle cx="282" cy="214" r="3.2" style="fill:var(--thm)"/><text class="tm" x="34" y="234">エネルギーは空間全体(ばね全体)にたくわわる</text><text class="tt" x="14" y="250">見方1 = 遠隔作用(式 3.27)、見方2 = 近接作用(式 3.33)に対応</text></svg>
       <figcaption>図13(バネ)を、2つの見方で描き分けた。見方1は遠隔作用、見方2は近接作用の描像に対応する。</figcaption>
     </figure>
-    <p>1の見方は「質点と壁が直接相互作用する」という遠隔作用の描像と整合的です。エネルギーは、相互作用する最末端の点に蓄積されます。一方、2の見方は「壁は接するバネの一番近い部分に影響を及ぼし、その影響が順次及んでいくことによって質点まで影響が到達する」という近接作用の描像です。エネルギーは、相互作用を順次伝えていく空間全体に蓄積されます。</p>
-    <p>電荷と電場の場合も同じです。「電荷同士の相互作用エネルギー」という見方をとる式 (3.27) は、遠隔作用に基づくエネルギーの記述で、1に近い。「電場がエネルギーを持つ」という見方をとる式 (3.33) は、近接作用に基づくエネルギーの記述で、2に近い。両者が結びついていることは、先程のバネの例のように、そこまで不自然なことではありません。ただし、バネの例はいつでもどちらの描像を用いてもよかったが(脚注53:ただしこれはバネの力が瞬時に伝わる仮想的なバネの場合で、現実のバネは影響の伝達は有限速度であり、その効果まで考える場合には2の記述を用いないといけない)、電荷と電場の場合には注意が必要です。</p>
-    <table class="cmp">
+    <p data-need="X">1の見方は「質点と壁が直接相互作用する」という遠隔作用の描像と整合的です。エネルギーは、相互作用する最末端の点に蓄積されます。一方、2の見方は「壁は接するバネの一番近い部分に影響を及ぼし、その影響が順次及んでいくことによって質点まで影響が到達する」という近接作用の描像です。エネルギーは、相互作用を順次伝えていく空間全体に蓄積されます。</p>
+    <p data-need="X">電荷と電場の場合も同じです。「電荷同士の相互作用エネルギー」という見方をとる式 (3.27) は、遠隔作用に基づくエネルギーの記述で、1に近い。「電場がエネルギーを持つ」という見方をとる式 (3.33) は、近接作用に基づくエネルギーの記述で、2に近い。両者が結びついていることは、先程のバネの例のように、そこまで不自然なことではありません。ただし、バネの例はいつでもどちらの描像を用いてもよかったが(脚注53:ただしこれはバネの力が瞬時に伝わる仮想的なバネの場合で、現実のバネは影響の伝達は有限速度であり、その効果まで考える場合には2の記述を用いないといけない)、電荷と電場の場合には注意が必要です。</p>
+    <div class="need-wrap" data-need="C"><table class="cmp">
       <tr><th>状況</th><th>(3.27) 電荷同士の相互作用エネルギー</th><th>(3.33) 電場が持つエネルギー</th></tr>
       <tr><td><b>静電場</b></td><td colspan="2">同じ結果を与える</td></tr>
       <tr><td><b>電荷・電磁場が時間変化する一般の場合</b></td><td>そのままではうまくいかない</td><td><b>正しいエネルギーの量を与える</b></td></tr>
-    </table>
-    <p>その一方、静電場の問題では、空間全体の積分をするよりは<b>電荷が存在する場所でだけ積分をする方が楽な場合も多く</b>、実用上は式 (3.27) を使いたい場合も少なくありません。再び、適用できる状況に制限があることに注意しながら、便利な計算道具として使っていくのがよい、という方針です。</p>
+    </table></div><!--need-wrap-->
+    <p data-need="C">その一方、静電場の問題では、空間全体の積分をするよりは<b>電荷が存在する場所でだけ積分をする方が楽な場合も多く</b>、実用上は式 (3.27) を使いたい場合も少なくありません。再び、適用できる状況に制限があることに注意しながら、便利な計算道具として使っていくのがよい、という方針です。</p>
 
     <!-- ===================== 4 ===================== -->
-    <h2 id="s4">4. 補論:多重極展開 <span class="need need-x">不要</span> <span class="page-tag">講義ノート p.23–24(§3.5)</span></h2>
-    <p>原点近傍に正負の電荷密度が集まっている状況(図14(a))で、この電荷密度が原点から離れた場所に作る電場及びスカラーポテンシャルを<b>近似的に与える簡便な式</b>を求めましょう。スカラーポテンシャルが分かれば電場は求まるので、以下ではスカラーポテンシャルを求めます。</p>
-    <figure class="fig">
+    <h2 id="s4" data-need="X">4. 補論:多重極展開 <span class="need need-x">不要</span> <span class="page-tag">講義ノート p.23–24(§3.5)</span></h2>
+    <p data-need="X">原点近傍に正負の電荷密度が集まっている状況(図14(a))で、この電荷密度が原点から離れた場所に作る電場及びスカラーポテンシャルを<b>近似的に与える簡便な式</b>を求めましょう。スカラーポテンシャルが分かれば電場は求まるので、以下ではスカラーポテンシャルを求めます。</p>
+    <figure data-need="X" class="fig">
       <svg viewBox="0 0 560 246" width="560" role="img" aria-label="多重極展開の幾何"><polygon points="192,170 192.4,163.4 191.2,157 188.4,151 184.4,145.8 179.5,141.4 174.2,137.9 168.7,135.1 163.4,132.9 158.3,131 153.6,129.1 149.1,127.1 144.7,124.9 140.1,122.5 135.2,120.1 130,118 124.4,116.5 118.5,115.8 112.5,116.2 106.8,117.9 101.6,120.8 97.2,124.9 93.8,129.8 91.4,135.3 90,141 89.5,146.6 89.4,151.9 89.5,156.8 89.4,161.4 89,165.7 88,170 86.5,174.6 84.7,179.6 82.8,185.3 81.2,191.7 80.5,198.6 80.8,205.7 82.6,212.7 85.8,219.1 90.5,224.4 96.4,228.2 103.2,230.3 110.3,230.5 117.5,229 124.1,226 130,222 135,217.4 139.1,212.7 142.5,208.4 145.5,204.7 148.4,201.9 151.6,199.8 155.4,198.2 159.8,196.9 165,195.4 170.5,193.4 176.3,190.6 181.7,186.8 186.4,182 189.9,176.3 192,170" style="fill:var(--accent);opacity:.12;stroke:var(--accent);stroke-width:2"/><line x1="130" y1="170" x2="431.9" y2="92.1" style="stroke:var(--accent);stroke-width:2.2;fill:none"/><polygon points="440,90 432.4,96.5 430.2,88" style="fill:var(--accent)"/><line x1="130" y1="170" x2="153.7" y2="149.5" style="stroke:var(--ex);stroke-width:2.2;fill:none"/><polygon points="160,144 156.1,153.2 150.3,146.6" style="fill:var(--ex)"/><line x1="160" y1="144" x2="431.8" y2="91.6" style="stroke:var(--thm);stroke-width:2;fill:none;stroke-dasharray:5 4"/><polygon points="440,90 432,96 430.3,87.4" style="fill:var(--thm)"/><circle cx="130" cy="170" r="4" style="fill:var(--text)"/><circle cx="440" cy="90" r="5" style="fill:var(--text)"/><circle cx="160" cy="144" r="4" style="fill:var(--ex)"/><text class="tm" x="120" y="192">原点 O</text><text class="ta" x="434" y="78" style="text-anchor:middle">観測点 r</text><text class="tm" x="166" y="130" style="fill:var(--ex);paint-order:stroke;stroke:var(--surface);stroke-width:4px;stroke-linejoin:round">r′(電荷のある点)</text><text class="tt" x="300" y="124" style="fill:var(--thm);paint-order:stroke;stroke:var(--surface);stroke-width:4px;stroke-linejoin:round">|r − r′|</text><path d="M193.9 153.5 A66 66 0 0 0 179.9 126.8" style="fill:none;stroke:var(--muted);stroke-width:1.4"/><text class="t" x="204" y="148">θ</text><text class="ta" x="60" y="40">原点のまわりに集まった電荷分布</text><text class="tm" x="250" y="230" style="text-anchor:middle">遠方 |r| ≫ |r′| なので、1/|r − r′| を 1/r で展開する</text></svg>
       <figcaption>原点のまわりに集まった電荷分布が、遠く離れた観測点 $\bm{r}$ に作るポテンシャル。$\theta$ は $\bm{r}$ と $\bm{r}'$ のなす角。</figcaption>
     </figure>
-    <div class="box intuit">
-      <div class="label">直感で理解する:遠くから見た電荷の集まり</div>
+    <div data-need="X" class="box intuit">
+      <div class="label">直感で理解する:遠くから見た電荷の集まり <span class="need need-x">不要</span></div>
       <p>遠くの街の夜景を見ると、一軒一軒の明かりは区別できず、街全体が<b>一つの光の点</b>に見えます。同じように、原点のまわりに集まった電荷も、十分遠くからは<b>全電荷 $Q$ の点電荷</b>に見えます。これが下の (3.35) の第1項 $\dfrac{Q}{4\pi\varepsilon_0r}$ です。</p>
       <p>では、$+$ と $-$ が同じ量だけあって $Q=0$ のときは? 遠くからは「何もない」に近く見えますが、$+$ と $-$ の位置が少し<b>ずれている</b>と、$+$ に近い側では少し正、$-$ に近い側では少し負の電位が残ります。そのずれ具合を表すのが双極子モーメント $\bm{p}$ で、第2項は $1/r^2$ と、点電荷($1/r$)より速く弱まります。遠くなるほど、$+$ と $-$ のずれが見分けにくくなるからです。</p>
     </div>
-    <p>位置 $\bm{r}$ に作られるスカラーポテンシャルは、式 (3.22) で求めたように
+    <p data-need="X">位置 $\bm{r}$ に作られるスカラーポテンシャルは、式 (3.22) で求めたように
     $$\phi(\bm{r})=\int\frac{\rho(\bm{r}')}{4\pi\varepsilon_0}\frac{1}{|\bm{r}-\bm{r}'|}d\bm{r}'=\int\frac{\rho(\bm{r}')}{4\pi\varepsilon_0}\frac{1}{\sqrt{|\bm{r}|^2+|\bm{r}'|^2-2\bm{r}\cdot\bm{r}'}}d\bm{r}'\tag{3.34}$$
     です(余弦定理 $|\bm{r}-\bm{r}'|^2=r^2+r'^2-2rr'\cos\theta$)。今、電荷は原点近傍に集まり、観測点 $\bm{r}$ はそれより遠く離れている状況を考えているので、$|\bm{r}|\gg|\bm{r}'|$ という関係が成り立っています。これを用いて、$\bm{r}$ と $\bm{r}'$ のなす角を $\theta$、$r=|\bm{r}|$、$r'=|\bm{r}'|$ として、右辺を $1/r$ でテイラー展開すると(脚注54)</p>
-    <p>$$\int\frac{\rho(\bm{r}')}{4\pi\varepsilon_0}\frac{d\bm{r}'}{\sqrt{r^2+r'^2-2rr'\cos\theta}}=\int\frac{\rho(\bm{r}')}{4\pi\varepsilon_0r}\Bigl[1-\frac12\Bigl(\frac{r'^2}{r^2}-2\frac{r'}{r}\cos\theta\Bigr)+\frac38\Bigl(\frac{r'^2}{r^2}-2\frac{r'}{r}\cos\theta\Bigr)^2+\cdots\Bigr]d\bm{r}'$$
+    <p data-need="X">$$\int\frac{\rho(\bm{r}')}{4\pi\varepsilon_0}\frac{d\bm{r}'}{\sqrt{r^2+r'^2-2rr'\cos\theta}}=\int\frac{\rho(\bm{r}')}{4\pi\varepsilon_0r}\Bigl[1-\frac12\Bigl(\frac{r'^2}{r^2}-2\frac{r'}{r}\cos\theta\Bigr)+\frac38\Bigl(\frac{r'^2}{r^2}-2\frac{r'}{r}\cos\theta\Bigr)^2+\cdots\Bigr]d\bm{r}'$$
     $$=\frac{Q}{4\pi\varepsilon_0r}+\frac{\bm{p}\cdot\bm{e}_r}{4\pi\varepsilon_0r^2}+O\Bigl(\frac1{r^3}\Bigr)\tag{3.35}$$
     というシンプルな表示が得られます(脚注55)。ただし
     $$Q=\int\rho(\bm{r}')\,d\bm{r}'\tag{3.36}$$
     $$\bm{p}=\int\rho(\bm{r}')\,\bm{r}'\,d\bm{r}'\tag{3.37}$$
     と置きました。また $\bm{e}_r$ は、向き $\bm{r}$ の単位ベクトルです。</p>
-    <div class="box supp">
-      <div class="label">講義ノートにない補足:展開の計算</div>
+    <div data-need="X" class="box supp">
+      <div class="label">講義ノートにない補足:展開の計算 <span class="need need-x">不要</span></div>
       <p>$\dfrac1{\sqrt{r^2+r'^2-2rr'\cos\theta}}=\dfrac1r\Bigl(1+x\Bigr)^{-1/2}$、$x=\dfrac{r'^2}{r^2}-2\dfrac{r'}{r}\cos\theta$(小さい量)。基礎 1.2 の展開 $(1+x)^{-1/2}=1-\frac12x+\frac38x^2-\cdots$ を使います。$x$ のうち $\dfrac{r'}{r}$ の1次の部分は $-2\dfrac{r'}{r}\cos\theta$ だけなので、
       $$\dfrac1r\Bigl[1+\frac{r'}{r}\cos\theta+O\Bigl(\frac{r'^2}{r^2}\Bigr)\Bigr].$$
       $\rho$ を掛けて $\bm{r}'$ で積分すると、第1項は $\dfrac{1}{4\pi\varepsilon_0r}\int\rho\,d\bm{r}'=\dfrac{Q}{4\pi\varepsilon_0r}$、第2項は $\dfrac{1}{4\pi\varepsilon_0r^2}\int\rho\,r'\cos\theta\,d\bm{r}'$。ここで $r'\cos\theta=\bm{r}'\cdot\bm{e}_r$(脚注55)なので $\bm{e}_r$ は積分の外に出て、$\bm{e}_r\cdot\int\rho\bm{r}'d\bm{r}'=\bm{p}\cdot\bm{e}_r$。</p>
     </div>
-    <p>$Q$ は全電荷です。$\bm{p}$ は、この電荷分布の「<b>電気双極子モーメント</b>(electric dipole moment)」と呼ばれる量です。多くの場合には $Q$ が有限の値で第一項が主要項だが、電荷中性の物体の場合には $Q=0$ となります。$Q=0$ の場合には、電気双極子モーメントを含む第二項が主要項となります。すなわち
+    <p data-need="X">$Q$ は全電荷です。$\bm{p}$ は、この電荷分布の「<b>電気双極子モーメント</b>(electric dipole moment)」と呼ばれる量です。多くの場合には $Q$ が有限の値で第一項が主要項だが、電荷中性の物体の場合には $Q=0$ となります。$Q=0$ の場合には、電気双極子モーメントを含む第二項が主要項となります。すなわち
     $$\phi(\bm{r})=\frac{\bm{p}\cdot\bm{e}_r}{4\pi\varepsilon_0r^2}=\frac{\bm{p}\cdot\bm{r}}{4\pi\varepsilon_0r^3}\tag{3.38}$$
     で電気双極子モーメントによって作られるスカラーポテンシャルがよく近似できます。</p>
-    <div class="box note-box">
-      <div class="label">脚注54:高次項</div>
+    <div data-need="X" class="box note-box">
+      <div class="label">脚注54:高次項 <span class="need need-x">不要</span></div>
       <p>高次項は四重極モーメント、八重極モーメントなどと呼ばれる。実は任意次数のモーメントは、ルジャンドル多項式を用いて簡潔に書くことができる。ただし本講義では高次モーメントは扱わないので、ここでは省略する(知りたい人は、グリフィス『電磁気学 I』3.4節などを参照)。</p>
     </div>
 
-    <h3 id="s4-1">4.1 電気双極子のイメージ <span class="need need-x">不要</span></h3>
-    <p>電気双極子モーメントのイメージをつかむために、電気双極子モーメントのみが残る極限的・理想的な状況を考えましょう。電荷 $q$ が位置 $\bm{r}'$ に、電荷 $-q$ が位置 $-\bm{r}'$ に置かれているとしましょう(図14(b))。ここで、$q\,r'=a$ を一定に保ったまま、$q\to\infty$、$r'\to0$ の極限をとると、この電荷たちが作るスカラーポテンシャルは、向き $\bm{r}'$ の電気双極子モーメントそのものになっています。この極限で与えられる系が電気双極子モーメントの雛形と見ることができます。もちろん、現実世界に存在する物体においては、$q$ も $r'$ も一定です。</p>
-    <figure class="fig">
+    <h3 id="s4-1" data-need="X">4.1 電気双極子のイメージ <span class="need need-x">不要</span></h3>
+    <p data-need="X">電気双極子モーメントのイメージをつかむために、電気双極子モーメントのみが残る極限的・理想的な状況を考えましょう。電荷 $q$ が位置 $\bm{r}'$ に、電荷 $-q$ が位置 $-\bm{r}'$ に置かれているとしましょう(図14(b))。ここで、$q\,r'=a$ を一定に保ったまま、$q\to\infty$、$r'\to0$ の極限をとると、この電荷たちが作るスカラーポテンシャルは、向き $\bm{r}'$ の電気双極子モーメントそのものになっています。この極限で与えられる系が電気双極子モーメントの雛形と見ることができます。もちろん、現実世界に存在する物体においては、$q$ も $r'$ も一定です。</p>
+    <figure data-need="X" class="fig">
       <svg viewBox="0 0 560 280" width="560" role="img" aria-label="電気双極子の電気力線"><polyline points="265.7,142.4 267.9,142.9 270,143.3 272.2,143.7 274.4,144 276.6,144.2 278.8,144.4 281,144.4 283.2,144.4 285.4,144.2 287.6,144 289.7,143.7 291.9,143.3 294,142.8 296.2,142.3" style="fill:none;stroke:var(--thm);stroke-width:1.5;opacity:.9"/><line x1="276.6" y1="144.2" x2="278.9" y2="144.4" style="stroke:var(--thm);stroke-width:1.5;fill:none"/><polygon points="285.4,144.8 278.1,147.5 278.5,141.2" style="fill:var(--thm)"/><polyline points="263.6,146.9 265.4,148.1 267.2,149.4 269.1,150.5 271,151.5 273.1,152.4 275.1,153.1 277.3,153.7 279.4,154 281.6,154 283.8,153.8 286,153.4 288.1,152.8 290.1,151.9 292.1,150.9 293.9,149.7 295.7,148.5 297.5,147.1" style="fill:none;stroke:var(--thm);stroke-width:1.5;opacity:.9"/><line x1="275.1" y1="153.1" x2="277.4" y2="153.7" style="stroke:var(--thm);stroke-width:1.5;fill:none"/><polygon points="283.7,155.2 276.1,156.6 277.6,150.5" style="fill:var(--thm)"/><polyline points="259.8,149.9 260.8,151.8 262,153.7 263.2,155.6 264.5,157.3 265.9,159 267.4,160.6 269,162.1 270.8,163.4 272.7,164.5 274.7,165.5 276.8,166.1 278.9,166.6 281.1,166.7 283.3,166.6 285.5,166.1 287.6,165.4 289.6,164.5 291.4,163.3 293.1,161.9 294.7,160.4 296.2,158.8 297.5,157 298.7,155.2 299.8,153.2 300.8,151.3 301.7,149.3" style="fill:none;stroke:var(--thm);stroke-width:1.5;opacity:.9"/><line x1="272.7" y1="164.5" x2="274.8" y2="165.5" style="stroke:var(--thm);stroke-width:1.5;fill:none"/><polygon points="280.7,168.2 273,168.1 275.6,162.4" style="fill:var(--thm)"/><polyline points="255,151 255.1,153.2 255.3,155.4 255.5,157.6 255.8,159.8 256.2,161.9 256.6,164.1 257.2,166.2 257.9,168.3 258.7,170.3 259.6,172.3 260.6,174.3 261.8,176.2 263.1,177.9 264.5,179.6 266.1,181.2 267.7,182.6 269.5,183.9 271.4,185 273.4,185.9 275.5,186.6 277.7,187.1 279.8,187.4 282,187.4 284.2,187.2 286.4,186.7 288.5,186 290.5,185.1 292.4,184 294.2,182.8 295.9,181.3 297.4,179.8 298.8,178.1 300.1,176.3 301.2,174.4 302.2,172.4 303.1,170.4 303.8,168.3 304.5,166.2 305,164.1 305.4,161.9 305.7,159.7 305.9,157.6 306,155.4 306,153.2 306,151 305.9,148.8" style="fill:none;stroke:var(--thm);stroke-width:1.5;opacity:.9"/><line x1="267.7" y1="182.6" x2="269.7" y2="184" style="stroke:var(--thm);stroke-width:1.5;fill:none"/><polygon points="274.9,187.7 267.3,186.2 271,181.1" style="fill:var(--thm)"/><polyline points="250.2,149.9 249.3,151.9 248.5,153.9 247.7,156 246.9,158.1 246.2,160.1 245.5,162.2 244.9,164.3 244.3,166.5 243.8,168.6 243.3,170.7 242.9,172.9 242.6,175.1 242.3,177.3 242.1,179.5 242,181.7 242,183.9 242,186.1 242.1,188.3 242.2,190.4 242.5,192.6 242.8,194.8 243.2,197 243.7,199.1 244.3,201.2 244.9,203.3 245.7,205.4 246.5,207.4 247.4,209.4 248.5,211.4 249.5,213.3 250.7,215.2 252,217 253.4,218.7 254.8,220.3 256.4,221.9 258,223.4 259.7,224.8 261.4,226.1 263.3,227.3 265.2,228.4 267.2,229.4 269.2,230.2 271.3,230.9 273.4,231.5 275.6,231.9 277.7,232.2 279.9,232.4 282.1,232.4 284.3,232.2 286.5,231.9 288.7,231.5 290.8,230.9 292.9,230.2 294.9,229.4 296.9,228.4 298.8,227.4 300.7,226.2 302.4,224.8 304.1,223.4 305.7,221.9 307.3,220.4 308.7,218.7 310,217 311.3,215.2 312.5,213.3 313.6,211.4 314.6,209.4 315.5,207.4 316.3,205.4 317,203.3 317.6,201.2 318.2,199.1 318.7,196.9 319.1,194.8 319.4,192.6 319.6,190.4 319.7,188.2 319.8,186 319.8,183.8 319.7,181.6 319.5,179.4 319.3,177.2 319,175 318.6,172.9 318.2,170.7 317.7,168.6 317.1,166.4 316.5,164.3 315.8,162.2 315.1,160.2 314.3,158.1 313.5,156.1 312.6,154.1 311.6,152.1 310.7,150.1 309.7,148.1" style="fill:none;stroke:var(--thm);stroke-width:1.5;opacity:.9"/><line x1="253.4" y1="218.7" x2="254.9" y2="220.5" style="stroke:var(--thm);stroke-width:1.5;fill:none"/><polygon points="259.2,225.3 252.1,222.1 256.9,217.9" style="fill:var(--thm)"/><polyline points="246.4,146.9 244.7,148.3 243,149.7 241.4,151.1 239.7,152.6 238.1,154 236.5,155.5 234.9,157.1 233.3,158.6 231.7,160.1 230.2,161.7 228.7,163.3 227.2,164.9 225.7,166.5 224.2,168.2 222.8,169.9 221.4,171.6 220,173.3 218.6,175 217.3,176.7 216,178.5 214.7,180.3 213.4,182.1 212.2,183.9 211,185.7 209.8,187.6 208.6,189.4 207.4,191.3 206.3,193.2 205.2,195.1 204.1,197 203.1,199 202.1,200.9 201.1,202.9 200.1,204.8 199.2,206.8 198.3,208.8 197.4,210.9 196.5,212.9 195.7,214.9 194.9,217 194.1,219 193.4,221.1 192.7,223.2 192,225.3 191.3,227.4 190.7,229.5 190.1,231.6 189.5,233.7 189,235.8 188.5,238 188,240.1 187.5,242.3 187.1,244.4 186.7,246.6 186.3,248.8 186,250.9 185.7,253.1 185.4,255.3 185.2,257.5 185,259.7 184.8,261.9 184.7,264.1 184.6,266.3 184.5,268.5 184.5,270.7 184.4,272.9 184.5,275.1 184.5,277.3" style="fill:none;stroke:var(--thm);stroke-width:1.5;opacity:.9"/><line x1="211" y1="185.7" x2="209.7" y2="187.7" style="stroke:var(--thm);stroke-width:1.5;fill:none"/><polygon points="206.2,193.1 207.3,185.5 212.7,188.9" style="fill:var(--thm)"/><polyline points="244.3,142.4 242.1,143 240,143.5 237.9,144 235.7,144.5 233.6,145 231.5,145.6 229.3,146.1 227.2,146.7 225.1,147.2 222.9,147.8 220.8,148.4 218.7,149 216.6,149.6 214.5,150.2 212.3,150.8 210.2,151.4 208.1,152 206,152.7 203.9,153.3 201.8,153.9 199.7,154.6 197.6,155.3 195.5,155.9 193.4,156.6 191.3,157.3 189.3,158 187.2,158.7 185.1,159.4 183,160.1 180.9,160.8 178.9,161.6 176.8,162.3 174.7,163.1 172.6,163.8 170.6,164.6 168.5,165.3 166.5,166.1 164.4,166.9 162.3,167.7 160.3,168.5 158.2,169.3 156.2,170.1 154.1,170.9 152.1,171.7 150.1,172.5 148,173.3 146,174.2 144,175 141.9,175.9 139.9,176.7 137.9,177.6 135.9,178.5 133.8,179.3 131.8,180.2 129.8,181.1 127.8,182 125.8,182.9 123.8,183.8 121.8,184.7 119.8,185.6 117.8,186.5 115.8,187.4 113.8,188.4 111.8,189.3 109.8,190.2 107.8,191.2 105.8,192.1 103.8,193.1 101.9,194.1 99.9,195 97.9,196 96,197 94,198 92,199 90.1,199.9 88.1,200.9 86.1,202 84.2,203 82.2,204 80.3,205 78.3,206 76.4,207.1 74.4,208.1 72.5,209.1 70.6,210.2 68.6,211.2 66.7,212.3 64.8,213.3 62.9,214.4 60.9,215.5 59,216.5 57.1,217.6 55.2,218.7 53.3,219.8 51.4,220.9 49.5,222 47.5,223.1 45.6,224.2 43.7,225.3 41.8,226.4 40,227.5 38.1,228.7 36.2,229.8 34.3,230.9 32.4,232.1 30.5,233.2 28.6,234.3 26.8,235.5 24.9,236.6 23,237.8 21.2,239 19.3,240.1 17.4,241.3 15.6,242.5 13.7,243.7 11.9,244.9 10,246 8.2,247.2 6.3,248.4 4.5,249.6 2.6,250.8" style="fill:none;stroke:var(--thm);stroke-width:1.5;opacity:.9"/><line x1="156.2" y1="170.1" x2="154" y2="170.9" style="stroke:var(--thm);stroke-width:1.5;fill:none"/><polygon points="148,173.3 153.4,167.8 155.7,173.7" style="fill:var(--thm)"/><polyline points="244.3,137.6 242.1,137 240,136.5 237.9,136 235.7,135.5 233.6,135 231.5,134.4 229.3,133.9 227.2,133.3 225.1,132.8 222.9,132.2 220.8,131.6 218.7,131 216.6,130.4 214.5,129.8 212.3,129.2 210.2,128.6 208.1,128 206,127.3 203.9,126.7 201.8,126.1 199.7,125.4 197.6,124.7 195.5,124.1 193.4,123.4 191.3,122.7 189.3,122 187.2,121.3 185.1,120.6 183,119.9 180.9,119.2 178.9,118.4 176.8,117.7 174.7,116.9 172.6,116.2 170.6,115.4 168.5,114.7 166.5,113.9 164.4,113.1 162.3,112.3 160.3,111.5 158.2,110.7 156.2,109.9 154.1,109.1 152.1,108.3 150.1,107.5 148,106.7 146,105.8 144,105 141.9,104.1 139.9,103.3 137.9,102.4 135.9,101.5 133.8,100.7 131.8,99.8 129.8,98.9 127.8,98 125.8,97.1 123.8,96.2 121.8,95.3 119.8,94.4 117.8,93.5 115.8,92.6 113.8,91.6 111.8,90.7 109.8,89.8 107.8,88.8 105.8,87.9 103.8,86.9 101.9,85.9 99.9,85 97.9,84 96,83 94,82 92,81 90.1,80.1 88.1,79.1 86.1,78 84.2,77 82.2,76 80.3,75 78.3,74 76.4,72.9 74.4,71.9 72.5,70.9 70.6,69.8 68.6,68.8 66.7,67.7 64.8,66.7 62.9,65.6 60.9,64.5 59,63.5 57.1,62.4 55.2,61.3 53.3,60.2 51.4,59.1 49.5,58 47.5,56.9 45.6,55.8 43.7,54.7 41.8,53.6 40,52.5 38.1,51.3 36.2,50.2 34.3,49.1 32.4,47.9 30.5,46.8 28.6,45.7 26.8,44.5 24.9,43.4 23,42.2 21.2,41 19.3,39.9 17.4,38.7 15.6,37.5 13.7,36.3 11.9,35.1 10,34 8.2,32.8 6.3,31.6 4.5,30.4 2.6,29.2" style="fill:none;stroke:var(--thm);stroke-width:1.5;opacity:.9"/><line x1="156.2" y1="109.9" x2="154" y2="109.1" style="stroke:var(--thm);stroke-width:1.5;fill:none"/><polygon points="148,106.7 155.7,106.3 153.4,112.2" style="fill:var(--thm)"/><polyline points="246.4,133.1 244.7,131.7 243,130.3 241.4,128.9 239.7,127.4 238.1,126 236.5,124.5 234.9,122.9 233.3,121.4 231.7,119.9 230.2,118.3 228.7,116.7 227.2,115.1 225.7,113.5 224.2,111.8 222.8,110.1 221.4,108.4 220,106.7 218.6,105 217.3,103.3 216,101.5 214.7,99.7 213.4,97.9 212.2,96.1 211,94.3 209.8,92.4 208.6,90.6 207.4,88.7 206.3,86.8 205.2,84.9 204.1,83 203.1,81 202.1,79.1 201.1,77.1 200.1,75.2 199.2,73.2 198.3,71.2 197.4,69.1 196.5,67.1 195.7,65.1 194.9,63 194.1,61 193.4,58.9 192.7,56.8 192,54.7 191.3,52.6 190.7,50.5 190.1,48.4 189.5,46.3 189,44.2 188.5,42 188,39.9 187.5,37.7 187.1,35.6 186.7,33.4 186.3,31.2 186,29.1 185.7,26.9 185.4,24.7 185.2,22.5 185,20.3 184.8,18.1 184.7,15.9 184.6,13.7 184.5,11.5 184.5,9.3 184.4,7.1 184.5,4.9 184.5,2.7" style="fill:none;stroke:var(--thm);stroke-width:1.5;opacity:.9"/><line x1="211" y1="94.3" x2="209.7" y2="92.3" style="stroke:var(--thm);stroke-width:1.5;fill:none"/><polygon points="206.2,86.9 212.7,91.1 207.3,94.5" style="fill:var(--thm)"/><polyline points="250.2,130.1 249.3,128.1 248.5,126.1 247.7,124 246.9,121.9 246.2,119.9 245.5,117.8 244.9,115.7 244.3,113.5 243.8,111.4 243.3,109.3 242.9,107.1 242.6,104.9 242.3,102.7 242.1,100.5 242,98.3 242,96.1 242,93.9 242.1,91.7 242.2,89.6 242.5,87.4 242.8,85.2 243.2,83 243.7,80.9 244.3,78.8 244.9,76.7 245.7,74.6 246.5,72.6 247.4,70.6 248.5,68.6 249.5,66.7 250.7,64.8 252,63 253.4,61.3 254.8,59.7 256.4,58.1 258,56.6 259.7,55.2 261.4,53.9 263.3,52.7 265.2,51.6 267.2,50.6 269.2,49.8 271.3,49.1 273.4,48.5 275.6,48.1 277.7,47.8 279.9,47.6 282.1,47.6 284.3,47.8 286.5,48.1 288.7,48.5 290.8,49.1 292.9,49.8 294.9,50.6 296.9,51.6 298.8,52.6 300.7,53.8 302.4,55.2 304.1,56.6 305.7,58.1 307.3,59.6 308.7,61.3 310,63 311.3,64.8 312.5,66.7 313.6,68.6 314.6,70.6 315.5,72.6 316.3,74.6 317,76.7 317.6,78.8 318.2,80.9 318.7,83.1 319.1,85.2 319.4,87.4 319.6,89.6 319.7,91.8 319.8,94 319.8,96.2 319.7,98.4 319.5,100.6 319.3,102.8 319,105 318.6,107.1 318.2,109.3 317.7,111.4 317.1,113.6 316.5,115.7 315.8,117.8 315.1,119.8 314.3,121.9 313.5,123.9 312.6,125.9 311.6,127.9 310.7,129.9 309.7,131.9" style="fill:none;stroke:var(--thm);stroke-width:1.5;opacity:.9"/><line x1="253.4" y1="61.3" x2="254.9" y2="59.5" style="stroke:var(--thm);stroke-width:1.5;fill:none"/><polygon points="259.2,54.7 256.9,62.1 252.1,57.9" style="fill:var(--thm)"/><polyline points="255,129 255.1,126.8 255.3,124.6 255.5,122.4 255.8,120.2 256.2,118.1 256.6,115.9 257.2,113.8 257.9,111.7 258.7,109.7 259.6,107.7 260.6,105.7 261.8,103.8 263.1,102.1 264.5,100.4 266.1,98.8 267.7,97.4 269.5,96.1 271.4,95 273.4,94.1 275.5,93.4 277.7,92.9 279.8,92.6 282,92.6 284.2,92.8 286.4,93.3 288.5,94 290.5,94.9 292.4,96 294.2,97.2 295.9,98.7 297.4,100.2 298.8,101.9 300.1,103.7 301.2,105.6 302.2,107.6 303.1,109.6 303.8,111.7 304.5,113.8 305,115.9 305.4,118.1 305.7,120.3 305.9,122.4 306,124.6 306,126.8 306,129 305.9,131.2" style="fill:none;stroke:var(--thm);stroke-width:1.5;opacity:.9"/><line x1="267.7" y1="97.4" x2="269.7" y2="96" style="stroke:var(--thm);stroke-width:1.5;fill:none"/><polygon points="274.9,92.3 271,98.9 267.3,93.8" style="fill:var(--thm)"/><polyline points="259.8,130.1 260.8,128.2 262,126.3 263.2,124.4 264.5,122.7 265.9,121 267.4,119.4 269,117.9 270.8,116.6 272.7,115.5 274.7,114.5 276.8,113.9 278.9,113.4 281.1,113.3 283.3,113.4 285.5,113.9 287.6,114.6 289.6,115.5 291.4,116.7 293.1,118.1 294.7,119.6 296.2,121.2 297.5,123 298.7,124.8 299.8,126.8 300.8,128.7 301.7,130.7" style="fill:none;stroke:var(--thm);stroke-width:1.5;opacity:.9"/><line x1="272.7" y1="115.5" x2="274.8" y2="114.5" style="stroke:var(--thm);stroke-width:1.5;fill:none"/><polygon points="280.7,111.8 275.6,117.6 273,111.9" style="fill:var(--thm)"/><polyline points="263.6,133.1 265.4,131.9 267.2,130.6 269.1,129.5 271,128.5 273.1,127.6 275.1,126.9 277.3,126.3 279.4,126 281.6,126 283.8,126.2 286,126.6 288.1,127.2 290.1,128.1 292.1,129.1 293.9,130.3 295.7,131.5 297.5,132.9" style="fill:none;stroke:var(--thm);stroke-width:1.5;opacity:.9"/><line x1="275.1" y1="126.9" x2="277.4" y2="126.3" style="stroke:var(--thm);stroke-width:1.5;fill:none"/><polygon points="283.7,124.8 277.6,129.5 276.1,123.4" style="fill:var(--thm)"/><polyline points="265.7,137.6 267.9,137.1 270,136.7 272.2,136.3 274.4,136 276.6,135.8 278.8,135.6 281,135.6 283.2,135.6 285.4,135.8 287.6,136 289.7,136.3 291.9,136.7 294,137.2 296.2,137.7" style="fill:none;stroke:var(--thm);stroke-width:1.5;opacity:.9"/><line x1="276.6" y1="135.8" x2="278.9" y2="135.6" style="stroke:var(--thm);stroke-width:1.5;fill:none"/><polygon points="285.4,135.2 278.5,138.8 278.1,132.5" style="fill:var(--thm)"/><circle cx="255" cy="140" r="9" style="fill:var(--thm)"/><text class="tj" x="255" y="145" style="text-anchor:middle;fill:#fff;font-weight:700;font-size:16px">+</text><circle cx="305" cy="140" r="9" style="fill:var(--accent)"/><text class="tj" x="305" y="145" style="text-anchor:middle;fill:#fff;font-weight:700;font-size:16px">−</text><line x1="250" y1="176" x2="301.6" y2="176" style="stroke:var(--ex);stroke-width:3;fill:none"/><polygon points="312,176 301,181 301,171" style="fill:var(--ex)"/><text class="t" x="281" y="196" style="text-anchor:middle;fill:var(--ex);font-size:18px">p</text><text class="ta" x="14" y="22">電気双極子:+q と −q が近くにある</text><text class="tm" x="14" y="42">向き:−から+へ(p = 2qr′)</text></svg>
       <figcaption>電気双極子:$+q$ と $-q$ が近くにあるときの電気力線。$\bm{p}$ は「$-$ から $+$ へ」向かうベクトル。</figcaption>
     </figure>
-    <div class="box supp">
-      <div class="label">講義ノートにない補足:2点電荷で確かめる(係数に注意)</div>
+    <div data-need="X" class="box supp">
+      <div class="label">講義ノートにない補足:2点電荷で確かめる(係数に注意) <span class="need need-x">不要</span></div>
       <p>(3.37) で定義すると、$+q$($\bm{r}'$)と $-q$($-\bm{r}'$)の系は $\bm{p}=q\bm{r}'+(-q)(-\bm{r}')=2q\bm{r}'$、大きさは<b>$2qr'$</b>(2つの電荷の距離 $2r'$ に電荷 $q$ を掛けたもの)。実際、$r'\ll r$ で2つの電荷のポテンシャルを足すと
       $$\phi=\frac{q}{4\pi\varepsilon_0}\Bigl(\frac1{|\bm{r}-\bm{r}'|}-\frac1{|\bm{r}+\bm{r}'|}\Bigr)\approx\frac{q}{4\pi\varepsilon_0}\frac{2\,\bm{r}\cdot\bm{r}'}{r^3}=\frac{(2q\bm{r}')\cdot\bm{r}}{4\pi\varepsilon_0r^3}=\frac{\bm{p}\cdot\bm{r}}{4\pi\varepsilon_0r^3}$$
       となり、(3.38) と一致します。($\dfrac1{|\bm{r}\mp\bm{r}'|}\approx\dfrac1r\bigl(1\pm\dfrac{\bm{r}\cdot\bm{r}'}{r^2}\bigr)$ を使った。)</p>
@@ -291,14 +293,14 @@
 
 
     <!-- ===================== 5 ===================== -->
-    <h2 id="s5">5. 具体例で練習(講義ノートにない補足) <span class="need need-b">必要</span> <span class="page-tag">補足</span></h2>
-    <p>この節は、講義ノートの問題 [3-3] とは別に、私が作った練習問題と解答です。</p>
+    <h2 id="s5" data-need="B">5. 具体例で練習(講義ノートにない補足) <span class="need need-b">必要</span> <span class="page-tag">補足</span></h2>
+    <p data-need="X">この節は、講義ノートの問題 [3-3] とは別に、私が作った練習問題と解答です。</p>
 
-    <div class="box ex">
+    <div data-need="B" class="box ex">
       <div class="label">問題 J:一様に帯電した球の電場とエネルギー <span class="need need-b">必要</span></div>
       <p>半径 $a$ の球の内部に、全電荷 $Q$ が一様な密度で分布している。(1) 内側と外側の電場の大きさを求めよ。(2) (3.33) を使って、エネルギー $U$ を求めよ。</p>
     </div>
-    <div class="box proof"><div class="label">解答</div>
+    <div data-need="B" class="box proof"><div class="label">解答 <span class="need need-b">必要</span></div>
       <figure class="fig">
         <svg viewBox="0 0 560 234" width="560" role="img" aria-label="一様に帯電した球の電場"><line x1="40" y1="186" x2="370" y2="186" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><line x1="40" y1="186" x2="40" y2="50" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><text class="t" x="376" y="190">r</text><text class="t" x="48" y="56">E</text><polyline points="40,186 43,182.7 46,179.4 49,176.1 52,172.8 55,169.5 58,166.2 61,162.9 64,159.6 67,156.3 70,153 73,149.7 76,146.4 79,143.1 82,139.8 85,136.5 88,133.2 91,129.9 94,126.6 97,123.3 100,120 103,116.7 106,113.4 109,110.1 112,106.8 115,103.5 118,100.2 121,96.9 124,93.6 127,90.3 130,87 133,83.7 136,80.4 139,77.1 142,80.3 145,86.2 148,91.7 151,96.7 154,101.4 157,105.6 160,109.6 163,113.3 166,116.7 169,119.9 172,122.9 175,125.6 178,128.2 181,130.7 184,133 187,135.1 190,137.1 193,139 196,140.8 199,142.5 202,144.1 205,145.6 208,147 211,148.4 214,149.7 217,150.9 220,152 223,153.2 226,154.2 229,155.2 232,156.2 235,157.1 238,157.9 241,158.8 244,159.6 247,160.3 250,161.1 253,161.8 256,162.4 259,163.1 262,163.7 265,164.3 268,164.8 271,165.4 274,165.9 277,166.4 280,166.9 283,167.4 286,167.8 289,168.3 292,168.7 295,169.1 298,169.5 301,169.9 304,170.2 307,170.6 310,170.9 313,171.2 316,171.6 319,171.9 322,172.2 325,172.5 328,172.7 331,173 334,173.3 337,173.5 340,173.8 343,174 346,174.3 349,174.5 352,174.7 355,174.9 358,175.1" style="fill:none;stroke:var(--accent);stroke-width:3"/><line x1="140" y1="186" x2="140" y2="76" style="stroke:var(--muted);stroke-width:1.1;stroke-dasharray:5 4;fill:none"/><text class="t" x="140" y="202" style="text-anchor:middle">a</text><text class="tt" x="54" y="131">内側:E ∝ r</text><text class="tt" x="180" y="125.5">外側:E ∝ 1/r²</text><text class="tm" x="48" y="224">中心から遠ざかるほど(内側では)強くなり、表面で最大、その外では弱くなる</text></svg>
         <figcaption>一様に帯電した球の電場の大きさ。内側では距離に比例して強くなり、表面で最大、外側では $1/r^2$ で弱まる。</figcaption>
@@ -308,35 +310,35 @@
       $$U=\frac{Q^2}{8\pi\varepsilon_0a}\Bigl(1+\frac15\Bigr)=\frac{3Q^2}{20\pi\varepsilon_0a}.$$
       (球殻の $\dfrac{Q^2}{8\pi\varepsilon_0a}$ よりやや大きい。電荷が内側にも詰まっている分、エネルギーが高い。)</p></div>
 
-    <div class="box ex">
+    <div data-need="X" class="box ex">
       <div class="label">問題 K:電気双極子の近似の精度 <span class="need need-x">不要</span></div>
       <p>電荷 $+q$ を $(0,0,d)$、$-q$ を $(0,0,-d)$ に置く。点 $(0,0,z)$($z\gt d$)でのスカラーポテンシャルを、(a)厳密に、(b)双極子近似 (3.38) で求め、$z=10d$ で比べよ。</p>
     </div>
-    <div class="box proof"><div class="label">解答</div>
+    <div data-need="X" class="box proof"><div class="label">解答 <span class="need need-x">不要</span></div>
       <p>(a) $\phi=\dfrac{q}{4\pi\varepsilon_0}\Bigl(\dfrac1{z-d}-\dfrac1{z+d}\Bigr)=\dfrac{q}{4\pi\varepsilon_0}\dfrac{2d}{z^2-d^2}$。$z=10d$ で $\dfrac{q}{4\pi\varepsilon_0}\dfrac{2}{99d}\approx0.020202\cdot\dfrac{q}{4\pi\varepsilon_0d}$。</p>
       <p>(b) $\bm{p}=2qd\,\bm{e}_z$、$\bm{p}\cdot\bm{r}/r^3=2qd\,z/z^3$ なので $\phi\approx\dfrac{2qd}{4\pi\varepsilon_0z^2}=\dfrac{q}{4\pi\varepsilon_0}\dfrac{2}{100d}=0.02\cdot\dfrac{q}{4\pi\varepsilon_0d}$。</p>
       <p>相対誤差は約 1%($=d^2/z^2$ 程度)。距離が $d$ の10倍離れれば、双極子近似はかなり良く、$z$ が大きいほどよくなります。</p></div>
 
-    <div class="box ex">
+    <div data-need="C" class="box ex">
       <div class="label">問題 L:3つの電荷を作るエネルギー <span class="need need-c">参考</span></div>
       <p>同じ電荷 $q$ の点電荷3つを、1辺 $d$ の正三角形の頂点に置く。この系のエネルギー $U$ を (3.26) で求めよ。</p>
     </div>
-    <div class="box proof"><div class="label">解答</div>
+    <div data-need="C" class="box proof"><div class="label">解答 <span class="need need-c">参考</span></div>
       <p>電荷は3つで、ペアは3通り($(1,2),(2,3),(1,3)$)。どのペアも距離 $d$ で、$\dfrac{q^2}{4\pi\varepsilon_0d}$。(3.26) では $\dfrac12\sum_{i\ne j}$ なので、$(i,j)$ と $(j,i)$ で各ペアを2回数えて $\tfrac12$ を掛け、結局「各ペアを1回ずつ足す」ことになり
       $$U=3\cdot\frac{q^2}{4\pi\varepsilon_0d}=\frac{3q^2}{4\pi\varepsilon_0d}.$$
       実際に運ぶと:電荷1は仕事ゼロ、電荷2は $\dfrac{q^2}{4\pi\varepsilon_0d}$、電荷3は2つの電荷の電位 $2\cdot\dfrac{q}{4\pi\varepsilon_0d}$ を受けて $\dfrac{2q^2}{4\pi\varepsilon_0d}$。合計は同じ $3\cdot\dfrac{q^2}{4\pi\varepsilon_0d}$ です。</p></div>
 
-    <div class="box ex">
+    <div data-need="C" class="box ex">
       <div class="label">問題 M:どれが静電場でだけ成り立つか <span class="need need-c">参考</span></div>
       <p>次のうち、<b>静電場以外(電荷や電磁場が時間変化する場合)でも成り立つ</b>と講義ノートが述べているものはどれか。(a) クーロンの法則 (3.3) (b) ガウスの法則 (3.11) (c) 回転ゼロ $\nabla\times\bm{E}=\bm{0}$ (3.14) (d) $\bm{E}=-\nabla\phi$ (e) エネルギーの「電場が持つ」表式 (3.33)</p>
     </div>
-    <div class="box proof"><div class="label">解答</div>
+    <div data-need="C" class="box proof"><div class="label">解答 <span class="need need-c">参考</span></div>
       <p>(b) ガウスの法則(「常に正しい関係式」)と、(e) (3.33)(「電場がエネルギーを持つ」という見方は、時間変化する一般の場合にも正しいエネルギーの量を与える)。(a) クーロンの法則は静電場のみ、(c) 回転ゼロは静電場のみ(脚注44の複雑な式を参照)、(d) $\bm{E}=-\nabla\phi$ は(c)から導いたので静電場のみ(変動電磁場ではスカラーポテンシャルの定義が修正される)。</p>
       <p>(e) は、あくまで「電場の部分」のエネルギーの話です。時間変化がある場合の全エネルギー(磁場のエネルギーなど)は、この講義の後の章で扱われると思われます。</p></div>
 
     <!-- ===================== 6 ===================== -->
-    <h2 id="s6">6. まとめ(この回で覚えること) <span class="need need-b">必要</span></h2>
-    <ul>
+    <h2 id="s6" data-need="B">6. まとめ(この回で覚えること) <span class="need need-b">必要</span></h2>
+    <ul data-need="B">
       <li><b>スカラーポテンシャル(電位)</b>:$\bm{E}=-\nabla\phi$、仕事 $W_{\bm{r}\to\bm{r}'}=q(\phi(\bm{r}')-\phi(\bm{r}))$。点電荷 $\phi=\dfrac{q}{4\pi\varepsilon_0|\bm{r}-\bm{r}_i|}$(重ね合わせ、無限遠で 0)。電位は「高さ」、電場は「下り坂の向き」。静電場だけ。</li>
       <li><b>エネルギー</b>:点電荷 $U=\dfrac12\sum_{i\ne j}\dfrac{q_iq_j}{4\pi\varepsilon_0|\bm{r}_i-\bm{r}_j|}$(各ペアを1回ずつ数える)。連続分布 $U=\dfrac12\int\rho\phi\,d\bm{r}=\dfrac{\varepsilon_0}{2}\int|\bm{E}|^2d\bm{r}$(電場が持つエネルギー。<b>点電荷には使えない</b>:自己エネルギーが無限大)。$\frac12$ は、相互作用を2回数えるのを直すため。</li>
       <li>静電場では「電荷同士の相互作用エネルギー」(遠隔作用の見方)と「電場が持つエネルギー」(近接作用の見方)は一致する。時間変化する場合は「電場が持つ」方が正しい。</li>
@@ -344,11 +346,11 @@
     </ul>
 
     <!-- ===================== 7 ===================== -->
-    <h2 id="s7">7. この回のノートについてのメモ <span class="need need-x">不要</span></h2>
-    <p>板書の写真ではなく、<b>文章で書かれた講義ノート(PDF)</b>の p.20〜p.24(§3.3〜§3.5)をもとにまとめました。ページ番号は、講義ノートの各ページ下に印刷されている番号です。補足として足した部分(黄色の枠)、直感の説明(緑の枠)、基礎ページの内容、問 [3-3] の解答、「具体例で練習」の問題は、Claude が書き足したもので、講義ノートにはありません。講義ノートの次の節以降(p.25〜 §4「静電場2:導体とポテンシャル問題」)は、第6回にまとめました。</p>
-    <p><b>回の分け方</b>:講義ノートの §3 は長いので、§3.1〜§3.2 を第4回、§3.3〜§3.5 をこの回に分けました(内容と分量から判断したものです)。</p>
-    <p>講義ノートの記述で、誤り(または誤記)と判断して直した箇所、読み替えた箇所は次のとおりです。</p>
-    <ol>
+    <h2 id="s7" data-need="X">7. この回のノートについてのメモ <span class="need need-x">不要</span></h2>
+    <p data-need="X">板書の写真ではなく、<b>文章で書かれた講義ノート(PDF)</b>の p.20〜p.24(§3.3〜§3.5)をもとにまとめました。ページ番号は、講義ノートの各ページ下に印刷されている番号です。補足として足した部分(黄色の枠)、直感の説明(緑の枠)、基礎ページの内容、問 [3-3] の解答、「具体例で練習」の問題は、Claude が書き足したもので、講義ノートにはありません。講義ノートの次の節以降(p.25〜 §4「静電場2:導体とポテンシャル問題」)は、第6回にまとめました。</p>
+    <p data-need="X"><b>回の分け方</b>:講義ノートの §3 は長いので、§3.1〜§3.2 を第4回、§3.3〜§3.5 をこの回に分けました(内容と分量から判断したものです)。</p>
+    <p data-need="X">講義ノートの記述で、誤り(または誤記)と判断して直した箇所、読み替えた箇所は次のとおりです。</p>
+    <ol data-need="X">
       <li><b>(3.31) の「$\nabla\cdot\phi_2$」(p.22)</b>:$-\bm{E}_2=\nabla\phi_2$(勾配)なので、「$(\nabla\cdot\phi_2)$」は「$\nabla\phi_2$」(発散ではなく勾配)の書き誤りと判断し、本文では $\nabla\phi_2(\bm{r}')\cdot\Delta\bm{r}$ と書きました。</li>
       <li><b>(3.20) の導出(p.20)</b>:「式 (3.18) 両辺の勾配をとることにより」とありますが、勾配をとるのは、ポテンシャルを含む (3.19) の方です。(3.19) のことと読みました(符号も (3.19)、(3.20) と整合します)。</li>
       <li><b>電気双極子モーメントの長さ(p.24)</b>:「$qr'=a$ を一定に保ち…向き $\bm{r}'$、長さ $a$ の電気双極子モーメント」とありますが、(3.37) の定義で計算すると、$+q$($\bm{r}'$)と $-q$($-\bm{r}'$)の系の $\bm{p}$ は $2q\bm{r}'$(大きさ $2a$)になります。係数 2 は、極限を取ったときの「雛形」という説明の大筋には影響しないので、そのまま本文に載せたうえで、補足の枠で実際の計算結果($2q\bm{r}'$)を示しました。</li>
