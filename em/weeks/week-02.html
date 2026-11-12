@@ -359,6 +359,75 @@
       $$\bm{A}\cdot\frac{d\bm{x}}{ds}=-\cos s\sin s+0\cdot\cos s+\sin s\cdot\frac{1}{2\pi}.$$
       したがって
       $$\int_0^{\pi}\Bigl(-\cos s\sin s+\frac{\sin s}{2\pi}\Bigr)ds=\Bigl[-\frac{\sin^2s}{2}\Bigr]_0^{\pi}+\frac{1}{2\pi}\Bigl[-\cos s\Bigr]_0^{\pi}=0+\frac{1}{2\pi}\cdot2=\frac1\pi.$$</p>
+      <figure class="fig helix-viz">
+        <div class="hv-box" style="position:relative;width:100%;max-width:640px;height:360px;margin:0 auto;border:1px solid var(--border);border-radius:10px;background:var(--surface);touch-action:none">
+          <canvas class="hv-3d" role="img" aria-label="らせんとベクトル場の3D図(ドラッグで回転)" style="display:block;width:100%;height:100%;cursor:grab"></canvas>
+          <span style="position:absolute;right:10px;bottom:6px;font-size:.75rem;color:var(--muted)">ドラッグで回転</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;max-width:640px;margin:10px auto 4px;flex-wrap:wrap">
+          <span style="font-size:.9rem;color:var(--muted)">s</span>
+          <input class="hv-sl" type="range" min="0" max="1000" step="1" value="350" style="flex:1;min-width:160px" aria-label="パラメータ s">
+          <button class="hv-pl" type="button" style="font:inherit;font-size:.85rem;padding:3px 12px;border-radius:99px;border:1px solid var(--border);background:var(--surface);color:var(--text);cursor:pointer">▶ 再生</button>
+        </div>
+        <div class="hv-read" style="max-width:640px;margin:0 auto 6px;font-size:.9rem;font-variant-numeric:tabular-nums"></div>
+        <div style="position:relative;width:100%;max-width:640px;height:160px;margin:0 auto">
+          <canvas class="hv-2d" role="img" aria-label="被積分関数のグラフ。0 から π までの面積は 1/π" style="display:block;width:100%;height:100%"></canvas>
+        </div>
+        <figcaption>問 [2-3] の3D図。<span style="color:#9a9a92">灰色</span>:らせん $C$($s=0$ の $(1,0,0)$ から $s=\pi$ の $(-1,0,\tfrac12)$ まで。点線はその先)、<span style="color:#eb6834">橙</span>:$\bm{A}=(x,0,y)$、<span style="color:#1baf7a">緑</span>:接線 $d\bm{x}/ds$、<span style="color:#2a78d6">青</span>:$\bm{A}$ のうち道に沿った成分(線積分で足すのはこれだけ)。下のグラフの塗った面積が $0$ から $s$ までの積分で、$s=\pi$ で $1/\pi$。高さ($z$)は見やすいように 2.2 倍に伸ばしています。</figcaption>
+        <script>
+(function(){
+var PI=Math.PI,K=1/(2*PI),ZS=2.2,COL={h:'#9a9a92',A:'#eb6834',T:'#1baf7a',P:'#2a78d6'};
+function cv(n,d){var v=getComputedStyle(document.documentElement).getPropertyValue(n).trim();return v||d}
+function Pt(s){return [Math.cos(s),Math.sin(s),s*K]}
+function Av(s){return [Math.cos(s),0,Math.sin(s)]}
+function Tv(s){return [-Math.sin(s),Math.cos(s),K]}
+function f(s){return -Math.sin(s)*Math.cos(s)+Math.sin(s)*K}
+function F(s){return -Math.pow(Math.sin(s),2)/2+(1-Math.cos(s))*K}
+function add(a,b,k){return [a[0]+b[0]*k,a[1]+b[1]*k,a[2]+b[2]*k]}
+function prep(c){var r=c.getBoundingClientRect(),d=window.devicePixelRatio||1,w=Math.max(r.width,10),h=Math.max(r.height,10);c.width=Math.round(w*d);c.height=Math.round(h*d);var x=c.getContext('2d');x.setTransform(d,0,0,d,0,0);x.clearRect(0,0,w,h);return [x,w,h]}
+function init(fig){
+  if(fig.getAttribute('data-ready'))return;fig.setAttribute('data-ready','1');
+  var c3=fig.querySelector('.hv-3d'),c2=fig.querySelector('.hv-2d'),sl=fig.querySelector('.hv-sl'),pl=fig.querySelector('.hv-pl'),rd=fig.querySelector('.hv-read');
+  var yaw=-0.9,pitch=0.55,S=PI*0.35,drag=null,play=false;
+  function proj(p,w,h){var x=p[0],y=p[1],z=p[2]*ZS,cy=Math.cos(yaw),sy=Math.sin(yaw),X=x*cy-y*sy,Y=x*sy+y*cy,cp=Math.cos(pitch),sp=Math.sin(pitch),sc=Math.min(w,h)*0.32;return [w/2+X*sc,h*0.56-(z*cp-Y*sp)*sc]}
+  function arrow(x,a,b,col,lw,w,h){var p=proj(a,w,h),q=proj(b,w,h);x.strokeStyle=col;x.fillStyle=col;x.lineWidth=lw;x.lineCap='round';x.beginPath();x.moveTo(p[0],p[1]);x.lineTo(q[0],q[1]);x.stroke();var L=Math.hypot(q[0]-p[0],q[1]-p[1]);if(L<3)return;var g=Math.atan2(q[1]-p[1],q[0]-p[0]),hs=Math.min(9,L*0.4);x.beginPath();x.moveTo(q[0],q[1]);x.lineTo(q[0]-hs*Math.cos(g-0.4),q[1]-hs*Math.sin(g-0.4));x.lineTo(q[0]-hs*Math.cos(g+0.4),q[1]-hs*Math.sin(g+0.4));x.closePath();x.fill()}
+  function curve(x,a,b,n,w,h){x.beginPath();for(var i=0;i<=n;i++){var q=proj(Pt(a+(b-a)*i/n),w,h);if(i)x.lineTo(q[0],q[1]);else x.moveTo(q[0],q[1])}x.stroke()}
+  function draw3(){var r=prep(c3),x=r[0],w=r[1],h=r[2],mu=cv('--muted','#6b7280'),bd=cv('--border','#e3e3dc'),tx=cv('--text','#22252a');
+    x.lineWidth=1;x.strokeStyle=bd;for(var i=-1;i<=1.001;i+=0.5){var a=proj([i,-1.2,0],w,h),b=proj([i,1.2,0],w,h);x.beginPath();x.moveTo(a[0],a[1]);x.lineTo(b[0],b[1]);x.stroke();a=proj([-1.2,i,0],w,h);b=proj([1.2,i,0],w,h);x.beginPath();x.moveTo(a[0],a[1]);x.lineTo(b[0],b[1]);x.stroke()}
+    [[[1.5,0,0],'x'],[[0,1.5,0],'y'],[[0,0,0.75],'z']].forEach(function(e){arrow(x,[0,0,0],e[0],mu,1.2,w,h);var q=proj(e[0],w,h);x.fillStyle=mu;x.font='13px sans-serif';x.fillText(e[1],q[0]+5,q[1]-4)});
+    x.setLineDash([4,4]);x.strokeStyle=COL.h;x.lineWidth=1.2;curve(x,PI,2*PI,150,w,h);x.setLineDash([]);
+    x.lineWidth=3;x.strokeStyle=COL.h;curve(x,0,PI,200,w,h);
+    x.lineWidth=4.5;x.strokeStyle=COL.P;if(S>0)curve(x,0,S,120,w,h);
+    for(var k=0;k<=8;k++){var s=k/8*PI;arrow(x,Pt(s),add(Pt(s),Av(s),0.45),'rgba(235,104,52,.55)',1.5,w,h)}
+    var p=Pt(S),A=Av(S),T=Tv(S),tt=T[0]*T[0]+T[1]*T[1]+T[2]*T[2],pr=(A[0]*T[0]+A[1]*T[1]+A[2]*T[2])/tt;
+    arrow(x,p,add(p,A,0.75),COL.A,3,w,h);arrow(x,p,add(p,T,0.75),COL.T,3,w,h);arrow(x,p,add(p,T,0.75*pr),COL.P,4,w,h);
+    var e1=proj(add(p,A,0.75),w,h),e2=proj(add(p,T,0.75*pr),w,h);x.setLineDash([3,3]);x.strokeStyle=mu;x.lineWidth=1;x.beginPath();x.moveTo(e1[0],e1[1]);x.lineTo(e2[0],e2[1]);x.stroke();x.setLineDash([]);
+    var q=proj(p,w,h);x.fillStyle=tx;x.beginPath();x.arc(q[0],q[1],4.5,0,7);x.fill();
+    [[0,'s=0'],[PI,'s=π']].forEach(function(e){var r2=proj(Pt(e[0]),w,h);x.fillStyle=mu;x.font='12px sans-serif';x.fillText(e[1],r2[0]+8,r2[1]+14)})}
+  function draw2(){var r=prep(c2),x=r[0],w=r[1],h=r[2],mu=cv('--muted','#6b7280'),bd=cv('--border','#e3e3dc'),L=40,R=w-12,T=14,B=h-24,y0=-0.45,y1=0.6;
+    function X(s){return L+(R-L)*s/PI}function Y(v){return T+(B-T)*(y1-v)/(y1-y0)}
+    x.font='12px sans-serif';x.lineWidth=1;[-0.4,0,0.4].forEach(function(v){x.strokeStyle=v===0?mu:bd;x.beginPath();x.moveTo(L,Y(v));x.lineTo(R,Y(v));x.stroke();x.fillStyle=mu;x.fillText(v.toFixed(1),4,Y(v)+4)});
+    [[0,'0'],[PI/2,'π/2'],[PI,'π']].forEach(function(e){x.fillStyle=mu;x.fillText(e[1],X(e[0])-6,h-6)});
+    x.beginPath();x.moveTo(X(0),Y(0));for(var i=0;i<=150;i++){var s=i/150*S;x.lineTo(X(s),Y(f(s)))}x.lineTo(X(S),Y(0));x.closePath();x.fillStyle='rgba(42,120,214,.2)';x.fill();
+    x.strokeStyle=COL.P;x.lineWidth=2;x.beginPath();for(i=0;i<=200;i++){s=i/200*PI;if(i)x.lineTo(X(s),Y(f(s)));else x.moveTo(X(s),Y(f(s)))}x.stroke();
+    x.strokeStyle=mu;x.setLineDash([3,3]);x.beginPath();x.moveTo(X(S),T);x.lineTo(X(S),B);x.stroke();x.setLineDash([]);x.fillStyle=COL.P;x.beginPath();x.arc(X(S),Y(f(S)),4.5,0,7);x.fill();
+    x.fillStyle=mu;x.fillText('A·dx/ds = −sin s cos s + sin s/2π',L+8,T+10)}
+  function upd(){rd.textContent='s = '+(S/PI).toFixed(2)+'π   A·dx/ds = '+f(S).toFixed(3)+'   0〜s の積分 = '+F(S).toFixed(3)+(S>=PI-1e-6?'(= 1/π)':'');draw3();draw2()}
+  sl.addEventListener('input',function(){S=sl.value/1000*PI;upd()});
+  c3.addEventListener('pointerdown',function(e){drag=[e.clientX,e.clientY,yaw,pitch];c3.setPointerCapture(e.pointerId);c3.style.cursor='grabbing'});
+  c3.addEventListener('pointermove',function(e){if(!drag)return;yaw=drag[2]+(e.clientX-drag[0])*0.01;pitch=Math.max(-0.2,Math.min(1.45,drag[3]+(e.clientY-drag[1])*0.01));draw3()});
+  c3.addEventListener('pointerup',function(){drag=null;c3.style.cursor='grab'});
+  function tick(){if(!play)return;S=Math.min(PI,S+PI/240);sl.value=Math.round(S/PI*1000);upd();if(S>=PI){play=false;pl.textContent='▶ 再生';return}requestAnimationFrame(tick)}
+  pl.addEventListener('click',function(){play=!play;pl.textContent=play?'❚❚ 停止':'▶ 再生';if(play){if(S>=PI-1e-6)S=0;tick()}});
+  if(window.ResizeObserver)new ResizeObserver(upd).observe(c3);else window.addEventListener('resize',upd);
+  if(window.matchMedia)matchMedia('(prefers-color-scheme: dark)').addEventListener('change',upd);
+  S=sl.value/1000*PI;upd();
+}
+function all(){document.querySelectorAll('.helix-viz').forEach(init)}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',all);else all();
+})();
+        </script>
+      </figure>
     </div>
 
     <h3 id="s3-2" data-need="B">3.2 面積分(surface integral) <span class="need need-b">必要</span></h3>
