@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>第14回 補論:電磁場の相対性と、相対論と整合する表示(電磁場テンソル) | Aセメまとめノート</title>
+  <link rel="stylesheet" href="../../assets/style.css">
+  <script defer src="../../assets/nav.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],macros:{'\\R':'\\mathbb{R}','\\bm':'\\boldsymbol{#1}','\\rot':'\\operatorname{rot}','\\grad':'\\operatorname{grad}','\\dvg':'\\operatorname{div}','\\pd':'\\frac{\\partial #1}{\\partial #2}'}});window.__navReady&&window.__navReady()"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="inner">
+      <a class="site-title" href="../../index.html">Aセメまとめノート</a>
+      <span class="links"><a href="../index.html">電磁気学</a><a href="../basics.html">基礎のまとめ</a><a href="../../calc/index.html">微積</a><a href="../../linalg/index.html">線形代数</a><a href="../../structchem/index.html">構造化学</a><a href="../../mech/index.html">力学A</a><a href="../../thermo/index.html">熱力学</a></span>
+    </div>
+  </header>
+
+  <main class="note">
+    <h1>第14回:補論:電磁場の相対性と、相対論と整合する表示(電磁場テンソル)</h1>
+    <div class="meta">電磁気学(東京大学 教養学部 秋学期)／授業日は未定(講義ノートの分量から分けた予定)／講義ノート §13.2〜§13.4(p.95〜p.100)</div>
+
+    <nav class="toc">
+      <div class="toc-title">目次</div>
+      <ol start="0">
+        <li><a href="#s0">この回の全体像</a></li>
+        <li><a href="#s1">準備:基礎の確認</a>
+          <div class="sub">特殊相対論の基礎(第13回)／線電荷の電場と、直線電流の磁場／4元ポテンシャルとダランベール演算子(第13回)／連鎖律(変数の取り替え)</div></li>
+        <li><a href="#s2">電磁場の相対性(§13.2)</a></li>
+        <li><a href="#s3">電磁場の変換則(§13.2 の続き)</a></li>
+        <li><a href="#s4">相対論形式と整合する表示(§13.3)</a></li>
+        <li><a href="#s5">補論:ローレンツ変換の別の導き方(§13.4)</a></li>
+        <li><a href="#s6">具体例で練習(講義ノートにない補足)</a></li>
+        <li><a href="#s7">まとめ(この回で覚えること)</a></li>
+        <li><a href="#s8">この回のノートについてのメモ</a></li>
+      </ol>
+    </nav>
+
+    <h2 id="s0">0. この回の全体像 <span class="page-tag">講義ノート p.95</span></h2>
+    <p>講義ノートの最後の回です。第9回で「電場と磁場は同じものの2つの表れ」と述べ、第8回の動く導体棒では「磁場の変化(ファラデー)と導体の運動(ローレンツ力)が同じ起電力を生むのは、特殊相対論の着想の一つ」と述べました。この回で、それを具体的に確かめます。<b>慣性系を変えると、磁場だったものが電場に、電場だったものが磁場に変わる</b>。そして、電磁場を一つの<b>電磁場テンソル</b>にまとめると、ローレンツ変換ときれいに整合します。</p>
+    <div class="box thm"><div class="label">この回のゴール</div>
+      <p>① 電流の流れる導線のそばの止まった電荷:別の慣性系から見ると、ローレンツ収縮で導線が帯電し、電気の力と磁気の力が打ち消し合う。<br>
+      ② 電磁場の変換則:進む向きの成分は変わらず、垂直な成分は $\tilde{\bm{E}}_\perp=\gamma(\bm{E}+\bm{v}\times\bm{B})_\perp$、$\tilde{\bm{B}}_\perp=\gamma(\bm{B}-\bm{v}\times\bm{E}/c^2)_\perp$。<br>
+      ③ 電磁場テンソル $F$ は $\tilde F=\Lambda F\Lambda^{\top}$ と変換され、4元ポテンシャル・4元電流もローレンツ変換に従う。だから $\Box^2A^\mu=-\mu_0J^\mu$ は、どの慣性系でも同じ形。<br>
+      ④ (補論)ダランベール演算子が変わらないことから、ローレンツ変換を導く。</p>
+    </div>
+    <div class="box note-box"><div class="label">この回の日程について</div>
+      <p>講義ノートの分量と内容から分けた予定です。§13 は補論なので、実際の授業では扱われないかもしれません。日程が分かったら合わせます。</p>
+    </div>
+    <p>以下では、先に必要な基礎を復習してから、講義ノートの順に進みます。紫色の枠は「基礎の復習」、黄色の枠は「講義ノートにないが、理解を助けるために私が補った部分」、緑の枠は「直感で理解するための説明」です。</p>
+
+    <h2 id="s1">1. 準備:基礎の確認</h2>
+    <p>この回で使う道具と、前の回までの結果を並べます。</p>
+
+    <h3 id="w-sr">1.1 特殊相対論の基礎(第13回)</h3>
+    <div class="box basic">
+      <div class="label">基礎:時間の遅れ、ローレンツ収縮、ローレンツ変換、速度の合成 <a class="xref-link" href="week-13.html#s4" data-xref>→ 第13回 4.</a></div>
+      <p>$\gamma=1/\sqrt{1-v^2/c^2}$。動く時計は $\gamma$ 倍ゆっくり、動く物体は運動の向きに $1/\gamma$ 倍に縮む。ローレンツ変換 $\tilde x=\gamma(x-vt)$、$\tilde t=\gamma(t-vx/c^2)$、行列 $\Lambda$。速度の合成 $\frac{u+v}{1+uv/c^2}$。「同時」は慣性系で違う。</p>
+      <p><b>直感:</b> 光の速さを全員に同じに見せるために、時間と長さが調整される。</p>
+    </div>
+
+    <h3 id="w-line">1.2 線電荷の電場と、直線電流の磁場</h3>
+    <div class="box basic">
+      <div class="label">基礎:$E=\frac{\lambda}{2\pi\varepsilon_0r}$、$B=\frac{\mu_0I}{2\pi r}$ <a class="xref-link" href="week-03.html#s5-2" data-xref>→ 第3回 5.2</a></div>
+      <p>線密度 $\lambda$ の無限に長い直線電荷は、距離 $r$ に、線から遠ざかる向きの電場 $\frac{\lambda}{2\pi\varepsilon_0r}$ を作る(積分型ガウス、第3回)。電流 $I$ の直線電流は、右ねじの向きに $\frac{\mu_0I}{2\pi r}$ の磁場を作る(第5回 例 5.2)。$\varepsilon_0\mu_0=1/c^2$。</p>
+      <p><b>直感:</b> どちらも「線のまわりに一様に広がる」ので、距離に反比例する。</p>
+    </div>
+
+    <h3 id="w-4vec">1.3 4元ポテンシャルとダランベール演算子(第13回)</h3>
+    <div class="box basic">
+      <div class="label">基礎:$A^\mu=(\phi/c,\bm{A})$、$J^\mu=(c\rho,\bm{J})$、$\Box^2A^\mu=-\mu_0J^\mu$ <a class="xref-link" href="week-13.html#s3-1" data-xref>→ 第13回 3.1</a></div>
+      <p>ローレンツゲージで、マクスウェル方程式は1本の式 $\Box^2A^\mu=-\mu_0J^\mu$ にまとまる。$\Box^2=\Delta-\frac{1}{c^2}\partial_t^2$ は、時間に $-1$ の重みを付けた「長さ」の形。$\bm{E}=-\nabla\phi-\partial_t\bm{A}$、$\bm{B}=\nabla\times\bm{A}$。</p>
+      <p><b>直感:</b> 時間と空間を対等に並べた4成分のベクトル。</p>
+    </div>
+
+    <h3 id="w-chain">1.4 連鎖律(変数の取り替え)</h3>
+    <div class="box basic">
+      <div class="label">基礎:$\frac{\partial}{\partial t}=\frac{\partial\tilde t}{\partial t}\frac{\partial}{\partial\tilde t}+\frac{\partial\tilde x}{\partial t}\frac{\partial}{\partial\tilde x}$ <a class="xref-link" href="../basics.html#partial" data-xref>→ 詳しい解説</a></div>
+      <p>変数を $(x,t)$ から $(\tilde x,\tilde t)$ に取り替えるとき、偏微分は連鎖律で書き換えられる。変換が線形 $\tilde x=Ax+Bt$、$\tilde t=Cx+Dt$ なら、$\partial_t=D\partial_{\tilde t}+B\partial_{\tilde x}$、$\partial_x=C\partial_{\tilde t}+A\partial_{\tilde x}$(補論 5. で使う)。</p>
+      <p><b>直感:</b> 「$t$ を少し動かすと、$\tilde x$ と $\tilde t$ がそれぞれどれだけ動くか」を足し合わせる。</p>
+    </div>
+
+    <h2 id="s2">2. 電磁場の相対性(§13.2) <span class="page-tag">講義ノート p.95–96</span></h2>
+    <p>止まっている電荷には、磁場は力を及ぼしません。ところが、その電荷に対して動いている慣性系 S′ から見ると、電荷は動いているので、ローレンツ力がはたらくはずです。これでは、S′ では電荷が動き出すことになり、S の記述と食い違ってしまう。どう整合するのでしょうか。</p>
+    <h3 id="s2-1">2.1 設定</h3>
+    <p>慣性系 S で、$x$ 軸に沿って正の向きに電流 $I$ が流れる無限に長い導線があり、点 $(0,0,-a)$ に止まった電荷 $q$ があります。電流は、線密度 $\rho$ の正電荷が速さ $u$ で $+x$ へ、線密度 $-\rho$ の負電荷が速さ $u$ で $-x$ へ動いて作られているとします($I=2\rho u$)。S では導線は中性なので、電荷 $q$ に力ははたらきません。</p>
+    <figure class="fig">
+      <svg viewBox="0 0 640 250" width="640" role="img" aria-label="電流の流れる導線と、その下の電荷を、2つの慣性系から見る"><text class="tj" x="160" y="22" style="text-anchor:middle">S(導線が止まっている)</text><line x1="30" y1="70" x2="290" y2="70" style="stroke:var(--muted);stroke-width:3"/><text class="tt" x="40" y="62">+</text><text class="ta" x="55" y="88">−</text><text class="tt" x="82" y="62">+</text><text class="ta" x="97" y="88">−</text><text class="tt" x="124" y="62">+</text><text class="ta" x="139" y="88">−</text><text class="tt" x="166" y="62">+</text><text class="ta" x="181" y="88">−</text><text class="tt" x="208" y="62">+</text><text class="ta" x="223" y="88">−</text><text class="tt" x="250" y="62">+</text><text class="ta" x="265" y="88">−</text><line x1="60" y1="105" x2="91" y2="105" style="stroke:var(--thm);stroke-width:2"/><polygon points="100,105 91,109.1 91,101" style="fill:var(--thm)"/><text class="tm" x="105" y="110">+ は右へ u</text><line x1="240" y1="105" x2="209" y2="105" style="stroke:var(--accent);stroke-width:2"/><polygon points="200,105 209,101 209,109.1" style="fill:var(--accent)"/><text class="tm" x="170" y="125">− は左へ u</text><circle cx="160" cy="180" r="7" style="fill:var(--ex)"/><text class="tj" x="172" y="185">電荷 q(止まっている)</text><text class="tm" x="160" y="225" style="text-anchor:middle">正味の電荷 0 → 電場 0、力 0</text><text class="tj" x="480" y="22" style="text-anchor:middle">S′(右へ速さ v で動く)</text><line x1="350" y1="70" x2="610" y2="70" style="stroke:var(--muted);stroke-width:3"/><text class="tt" x="355" y="62">+</text><text class="tt" x="400" y="62">+</text><text class="tt" x="445" y="62">+</text><text class="tt" x="490" y="62">+</text><text class="tt" x="535" y="62">+</text><text class="tt" x="580" y="62">+</text><text class="ta" x="355" y="88">−</text><text class="ta" x="393" y="88">−</text><text class="ta" x="431" y="88">−</text><text class="ta" x="469" y="88">−</text><text class="ta" x="507" y="88">−</text><text class="ta" x="545" y="88">−</text><text class="ta" x="583" y="88">−</text><circle cx="480" cy="180" r="7" style="fill:var(--ex)"/><line x1="480" y1="180" x2="439" y2="180" style="stroke:var(--ex);stroke-width:2.2"/><polygon points="430,180 439,176 439,184.1" style="fill:var(--ex)"/><text class="tm" x="440" y="205">q は左へ v</text><text class="tm" x="480" y="225" style="text-anchor:middle">− の方が密 → 電場が生じる</text><text class="tt" x="480" y="245" style="text-anchor:middle">電気の力と磁気の力が打ち消す</text></svg>
+      <figcaption>図1 講義ノートの図65の状況。S では導線は電気的に中性で、止まった電荷 $q$ には力がはたらかない。S′ から見ると、ローレンツ収縮の程度が正負の電荷で違うので導線が帯電して見え、その電気の力が、動く $q$ にはたらく磁気の力(ローレンツ力)とちょうど打ち消し合います。</figcaption>
+    </figure>
+    <h3 id="s2-2">2.2 S′ から見る</h3>
+    <p>S に対して $+x$ 方向に速さ $v$ で動く慣性系 S′ から見ます。</p>
+    <ol>
+      <li><b>電荷の密度</b>:正電荷が止まって見える系での線密度は $\rho/\gamma_u$(S では動いているので縮んで $\rho$ に見えていた)。S′ での正電荷の速さは $\frac{u-v}{1-uv/c^2}$ で、その $\gamma$ を計算すると $\gamma_u\gamma_v(1-\frac{uv}{c^2})$。よって S′ での正電荷の線密度は $\rho\gamma_v(1-\frac{uv}{c^2})$、負電荷は同様に $-\rho\gamma_v(1+\frac{uv}{c^2})$。</li>
+      <li><b>正味の電荷</b>:足すと $\tilde\lambda=-\frac{2\rho uv}{c^2}\gamma_v=-\frac{\gamma_vIv}{c^2}$ (13.20)。<b>S′ では導線が負に帯電して見える</b>。</li>
+      <li><b>電気の力</b>:この線電荷が点 $(0,0,-a)$ に作る電場は、導線へ向かう向き($+z$)で大きさ $\frac{\gamma_vIv}{2\pi\varepsilon_0c^2a}$。電荷 $q$ は $+z$ 向きに $\frac{\gamma_vIvq}{2\pi\varepsilon_0c^2a}$ の力を受ける (13.22)。</li>
+      <li><b>磁気の力</b>:S′ での電流は $\tilde I=\gamma_vI$ (13.23)(大きさ)、それが点 $(0,0,-a)$ に作る磁場は $+y$ 向きで $\frac{\mu_0\gamma_vI}{2\pi a}$。電荷 $q$ は S′ では速度 $-v\bm{e}_x$ で動いているので、ローレンツ力 $q(-v\bm{e}_x)\times B\bm{e}_y$ は $-z$ 向きで大きさ $\frac{\mu_0\gamma_vIvq}{2\pi a}$ (13.24)。</li>
+    </ol>
+    <div class="box thm"><div class="label">結論</div>
+      <p>$\varepsilon_0c^2=1/\mu_0$ なので、電気の力と磁気の力は大きさが等しく向きが逆で、<b>打ち消し合う</b>。S′ でも、電荷に正味の力ははたらかない。慣性系を変えると、磁場(の一部)が電場に変わり、電磁気学は整合的に保たれる。</p>
+    </div>
+    <div class="box supp"><div class="label">講義ノートにない補足:$\gamma$ の積の公式</div>
+      <p>$w=\frac{u-v}{1-uv/c^2}$ のとき $1-\frac{w^2}{c^2}=\frac{(1-u^2/c^2)(1-v^2/c^2)}{(1-uv/c^2)^2}$(展開して確かめられる)。だから $\gamma_w=\gamma_u\gamma_v(1-\frac{uv}{c^2})$。講義ノートの (13.19) $\tilde\rho_\pm=\frac{1\mp uv/c^2}{\sqrt{1-v^2/c^2}}\rho$ は、これを使った結果です。</p>
+    </div>
+    <div class="box intuit"><div class="label">直感で理解する:磁気の力は、電気の力の相対論的な「おまけ」</div>
+      <p>正電荷と負電荷は、S′ から見ると違う速さで動くので、縮み方が違い、密度に差が出ます。電荷の速さ $u$ は電子ならとても遅いので差は $\frac{uv}{c^2}$ 程度のわずかなものですが、導線の中の電荷はとても多いので、無視できない電場になる。磁気の力は、こうした「電気の力が慣性系によって見え方を変えたもの」と理解できます。導線が有限の長さでも、電荷が飛び出したりはしません。「同時」が慣性系ごとに違うので、同じ導線の上に違う密度が見えてよいのです(講義ノートの図66)。</p>
+    </div>
+
+    <h2 id="s3">3. 電磁場の変換則(§13.2 の続き) <span class="page-tag">講義ノート p.96–97</span></h2>
+    <p>電場と磁場が移り変わることが分かったので、変換の公式を求めます。S′ は S に対して $+x$ 方向に速さ $v$ で動くとします($\gamma=1/\sqrt{1-v^2/c^2}$)。</p>
+    <ul>
+      <li><b>$E_z$ と $B_y$</b>:$xy$ 面に平行な2枚の極板の電荷が $x$ 方向に動いている設定(図2)。電荷は面電流でもあるので、極板の間に $E_z$ と $B_y$ ができる。2.2 と同じように、S′ での面電荷密度と面電流密度を計算して $\tilde E_z$、$\tilde B_y$ を求める。</li>
+      <li><b>$E_y$ と $B_z$</b>:極板を $xz$ 面に平行にして、同じ議論。</li>
+      <li><b>$E_x$</b>:$yz$ 面に平行な極板を $x$ 方向に動かす設定。ローレンツ収縮は極板の間隔を縮めるが、平行板の電場は間隔によらないので、変わらない。</li>
+      <li><b>$B_x$</b>:$x$ 軸を中心とするコイル($B_x=\mu_0NI$)を S′ から見ると、ローレンツ収縮で単位長さあたりの巻き数は $\gamma N$ に増え、時間の遅れで電流は $I/\gamma$ に減る。打ち消し合って変わらない (13.31)。</li>
+    </ul>
+    <figure class="fig">
+      <svg viewBox="0 0 640 200" width="640" role="img" aria-label="動く面電荷:電場と磁場の両方を作る"><line x1="80" y1="60" x2="560" y2="60" style="stroke:var(--thm);stroke-width:3"/><line x1="80" y1="150" x2="560" y2="150" style="stroke:var(--accent);stroke-width:3"/><text class="tt" x="565" y="64">+ρ</text><text class="ta" x="565" y="154">−ρ</text><line x1="300" y1="40" x2="249" y2="40" style="stroke:var(--thm);stroke-width:2"/><polygon points="240,40 249,36 249,44.1" style="fill:var(--thm)"/><line x1="300" y1="170" x2="249" y2="170" style="stroke:var(--accent);stroke-width:2"/><polygon points="240,170 249,166 249,174.1" style="fill:var(--accent)"/><text class="tm" x="310" y="45">速さ v で −x へ</text><line x1="160" y1="65" x2="160" y2="138" style="stroke:var(--ex);stroke-width:1.8"/><polygon points="160,145 156.9,138 163.2,138" style="fill:var(--ex)"/><line x1="280" y1="65" x2="280" y2="138" style="stroke:var(--ex);stroke-width:1.8"/><polygon points="280,145 276.9,138 283.2,138" style="fill:var(--ex)"/><line x1="400" y1="65" x2="400" y2="138" style="stroke:var(--ex);stroke-width:1.8"/><polygon points="400,145 396.9,138 403.2,138" style="fill:var(--ex)"/><text class="t" x="170" y="110">E_z</text><circle cx="460" cy="105" r="8" style="fill:none;stroke:var(--muted);stroke-width:1.8"/><circle cx="460" cy="105" r="2.6" style="fill:var(--muted)"/><text class="t" x="475" y="110">B_y</text></svg>
+      <figcaption>図2 講義ノートの図67(a)。$xy$ 面に平行な2枚の極板の電荷が $-x$ 方向に動くと、面電流にもなるので、極板の間には電場 $E_z$ と磁場 $B_y$ の両方ができる。これを別の速さの慣性系から見ると、電場と磁場が混ざり合って変換されます。</figcaption>
+    </figure>
+    <div class="box thm"><div class="label">電磁場の変換則 (13.26)〜(13.31)</div>
+      <p>$$\tilde E_x=E_x,\qquad\tilde E_y=\gamma(E_y-vB_z),\qquad\tilde E_z=\gamma(E_z+vB_y)$$
+      $$\tilde B_x=B_x,\qquad\tilde B_y=\gamma\Bigl(B_y+\frac{v}{c^2}E_z\Bigr),\qquad\tilde B_z=\gamma\Bigl(B_z-\frac{v}{c^2}E_y\Bigr)$$
+      ベクトルで書くと、運動の向きの成分は変わらず、垂直な成分は $\tilde{\bm{E}}_\perp=\gamma(\bm{E}+\bm{v}\times\bm{B})_\perp$、$\tilde{\bm{B}}_\perp=\gamma\bigl(\bm{B}-\frac{\bm{v}\times\bm{E}}{c^2}\bigr)_\perp$。</p>
+    </div>
+    <div class="box supp"><div class="label">講義ノートにない補足:$\tilde E_z$ の計算と、記号の注意</div>
+      <p>講義ノートの図67(a)の設定では、電荷の速さを $v$、慣性系の速さを $u$ と、2.2 とは文字を入れ替えています。ここでは慣性系の速さを $v$ に統一して書きました。電荷(面密度 $\rho$)が S で速さ $w$ で $-x$ へ動くと、$E_z=-\rho/\varepsilon_0$、$B_y=-\mu_0\rho w$。S′ での面密度は 2.2 と同じ計算で $\rho\gamma(1+\frac{vw}{c^2})$ なので
+      $$\tilde E_z=-\frac{\rho\gamma(1+vw/c^2)}{\varepsilon_0}=\gamma\Bigl(-\frac{\rho}{\varepsilon_0}-\mu_0\rho wv\Bigr)=\gamma(E_z+vB_y).$$
+      (2つ目の等号で $\frac{1}{\varepsilon_0c^2}=\mu_0$。)</p>
+    </div>
+    <div class="box intuit"><div class="label">直感で理解する:$\bm{E}+\bm{v}\times\bm{B}$ はローレンツ力そのもの</div>
+      <p>速度 $\bm{v}$ で動く電荷が受ける力は $q(\bm{E}+\bm{v}\times\bm{B})$ でした。その電荷と一緒に動く慣性系から見ると、電荷は止まっているので、力は電場だけで $q\tilde{\bm{E}}$ のはず。変換則の $\tilde{\bm{E}}_\perp=\gamma(\bm{E}+\bm{v}\times\bm{B})_\perp$ は、まさに「ローレンツ力が、動く系では電気の力に見える」ことを表しています($v\ll c$ では $\gamma\approx1$)。</p>
+    </div>
+
+    <h2 id="s4">4. 相対論形式と整合する表示(§13.3) <span class="page-tag">講義ノート p.97–99</span></h2>
+    <p>3. の変換則は、電場と磁場が混ざり合っていて見通しがよくありません。ローレンツ変換の行列 $\Lambda$ (13.32)(第13回)と整合するように、電磁場を<b>反対称な $4\times4$ 行列</b>にまとめます:</p>
+    <div class="box thm"><div class="label">電磁場テンソル (13.33) と、その変換 (13.34)</div>
+      <p>$$F=\begin{pmatrix}0&E_x/c&E_y/c&E_z/c\\-E_x/c&0&B_z&-B_y\\-E_y/c&-B_z&0&B_x\\-E_z/c&B_y&-B_x&0\end{pmatrix},\qquad\tilde F=\Lambda F\Lambda^{\top}$$
+      ($\Lambda$ は対称行列なので $\Lambda F\Lambda$ と書いても同じ。)</p>
+    </div>
+    <div class="box supp"><div class="label">講義ノートにない補足:$\tilde E_x$ と $\tilde E_y$ を確かめる</div>
+      <p>$\Lambda$ の第0行は $(\gamma,-\gamma\beta,0,0)$、第1行は $(-\gamma\beta,\gamma,0,0)$。$\tilde F^{01}=\sum_{a,b}\Lambda_{0a}F^{ab}\Lambda_{1b}=\gamma\cdot\frac{E_x}{c}\cdot\gamma+(-\gamma\beta)\cdot\Bigl(-\frac{E_x}{c}\Bigr)\cdot(-\gamma\beta)=\gamma^2(1-\beta^2)\frac{E_x}{c}=\frac{E_x}{c}$:$E_x$ は変わらない。$\tilde F^{02}=\gamma F^{02}-\gamma\beta F^{12}=\gamma\frac{E_y}{c}-\gamma\beta B_z$ なので $\tilde E_y=\gamma(E_y-vB_z)$。3. の変換則と一致します。</p>
+    </div>
+    <h3 id="s4-1">4.1 上付き・下付きの添字</h3>
+    <p>座標を、上付きの添字で $x^\mu=(ct,x,y,z)$、下付きの添字で $x_\mu=(-ct,x,y,z)$ と書くことにします (13.35)。上付きのベクトルは $\Lambda$ で、下付きのベクトルは $\Lambda^{-1}$ で変換されます。上付きと下付きの「内積」$\sum_\mu a^\mu a_\mu=-(a^0)^2+(a^1)^2+(a^2)^2+(a^3)^2$ は、ローレンツ変換で変わりません(第13回の $-(ct)^2+x^2$ の一般化)。</p>
+    <p>4元ポテンシャル $A^\mu=(\phi/c,A_x,A_y,A_z)$ (13.36) を使うと、電磁場テンソルは
+    $$F^{ij}=\frac{\partial A^j}{\partial x_i}-\frac{\partial A^i}{\partial x_j}\qquad(13.37)$$
+    と書けます。</p>
+    <div class="box supp"><div class="label">講義ノートにない補足:(13.37) を2つの成分で確かめる</div>
+      <p>$F^{01}=\frac{\partial A^1}{\partial x_0}-\frac{\partial A^0}{\partial x_1}$。$x_0=-ct$ なので $\frac{\partial}{\partial x_0}=-\frac1c\frac{\partial}{\partial t}$。よって $F^{01}=-\frac1c\frac{\partial A_x}{\partial t}-\frac1c\frac{\partial\phi}{\partial x}=\frac{E_x}{c}$($\bm{E}=-\nabla\phi-\partial_t\bm{A}$)。$F^{12}=\frac{\partial A_y}{\partial x}-\frac{\partial A_x}{\partial y}=B_z$($\bm{B}=\nabla\times\bm{A}$)。どちらも (13.33) と一致します。</p>
+    </div>
+    <h3 id="s4-2">4.2 基礎方程式は、どの慣性系でも同じ形</h3>
+    <ul>
+      <li>$F$ は $\Lambda$ で変換され、$\frac{\partial}{\partial x_i}$ も $\Lambda$ で変換されるので、<b>4元ポテンシャル</b>も $\tilde A=\Lambda A$ と変換される。</li>
+      <li><b>ダランベール演算子</b> $\Box^2=\sum_\mu\frac{\partial}{\partial x^\mu}\frac{\partial}{\partial x_\mu}$ (13.38) は、上付きと下付きの内積なので変わらない。</li>
+      <li><b>4元電流</b>:2. の計算から、電流 $J_x$ は電荷密度 $\tilde\rho=-\gamma\beta J_x/c$ と電流 $\tilde J_x=\gamma J_x$ を生み (13.39)(13.40)、電荷密度 $\rho$ は $\tilde\rho=\gamma\rho$ と電流 $\tilde J_x=-\gamma\beta(c\rho)$ を生む (13.41)(13.42)(向きは S′ の速度に対して逆)。まとめると $\tilde J=\Lambda J$。</li>
+    </ul>
+    <div class="box thm"><div class="label">結論</div>
+      <p>$\Box^2A^\mu=-\mu_0J^\mu$ (12.19) に出てくるものは、すべてローレンツ変換に従う。だからこの式は、<b>どの慣性系でも同じ形</b>で成り立つ。これが「相対論と整合した電磁気学の基礎方程式」です。</p>
+    </div>
+    <div class="box intuit"><div class="label">直感で理解する:電場と磁場は、一つのテンソルの「見る角度」</div>
+      <p>3次元の回転で、ベクトルの $x$ 成分と $y$ 成分が混ざり合うように、ローレンツ変換(時空の「回転」)で、電磁場テンソルの成分が混ざり合います。電場と磁場は、一つのものを、ある慣性系の時間と空間に分けて見たときの2つの顔。第9回の「白い板と黒い板」の立方体が、まさにこの電磁場テンソルです。</p>
+    </div>
+
+    <h2 id="s5">5. 補論:ローレンツ変換の別の導き方(§13.4) <span class="page-tag">講義ノート p.99–100</span></h2>
+    <p>ローレンツ変換は、ダランベール演算子が変わらない(光の速さが変わらない)ことから、自然に導けます。S に対して $x$ 方向に速さ $v$ で動く S′ への変換が、線形
+    $$\tilde x=Ax+Bt,\qquad\tilde t=Cx+Dt\qquad(13.43)(13.44)$$
+    だとします(原点で時刻をそろえる)。</p>
+    <ol>
+      <li>S′ の原点は $x=vt$ を動くので、そこで $\tilde x=0$:$B=-Av$。</li>
+      <li>連鎖律(1.4 の枠)で $\partial_t=D\partial_{\tilde t}+B\partial_{\tilde x}$、$\partial_x=C\partial_{\tilde t}+A\partial_{\tilde x}$ (13.46)(13.47)。</li>
+      <li>光速度不変:$\partial_x^2-\frac{1}{c^2}\partial_t^2=\partial_{\tilde x}^2-\frac{1}{c^2}\partial_{\tilde t}^2$ (13.45)。左辺に代入して係数を比べると
+      $$A^2-\frac{B^2}{c^2}=1,\qquad AC-\frac{DB}{c^2}=0,\qquad C^2-\frac{D^2}{c^2}=-\frac{1}{c^2}.$$</li>
+      <li>$B=-Av$ を入れると $A^2(1-\frac{v^2}{c^2})=1$、$C=-\frac{v}{c^2}D$、$D^2(1-\frac{v^2}{c^2})=1$。$v=0$ で恒等変換になる符号を選んで $A=D=\gamma$、$C=-\frac{v}{c^2}\gamma$ (13.52)〜(13.54)。</li>
+    </ol>
+    <div class="box thm"><div class="label">ローレンツ変換 (13.55)</div>
+      <p>$$\begin{pmatrix}\tilde x\\\tilde t\end{pmatrix}=\begin{pmatrix}\gamma&-v\gamma\\-\frac{v}{c^2}\gamma&\gamma\end{pmatrix}\begin{pmatrix}x\\t\end{pmatrix}=\begin{pmatrix}\gamma(x-vt)\\\gamma(t-\frac{v}{c^2}x)\end{pmatrix}$$ 第13回の、時間の遅れとローレンツ収縮から求めた結果と一致する。</p>
+    </div>
+    <div class="box intuit"><div class="label">直感で理解する:「光の波の方程式を変えない変換」がローレンツ変換</div>
+      <p>電磁波の方程式(ダランベール演算子)が、どの慣性系でも同じ形であること、つまり光の速さがどの慣性系でも同じであること。それだけを要請すると、座標の変換はローレンツ変換しかありえません。電磁気学の中に、はじめから特殊相対論が埋め込まれていたのです。</p>
+    </div>
+
+    <h2 id="s6">6. 具体例で練習(講義ノートにない補足) <span class="page-tag">補足</span></h2>
+    <p>この節は、講義ノートとは別に、私が作った練習問題と解答です。</p>
+    <div class="box ex"><div class="label">問題 AN:電場だけの場を、動く系から見る</div>
+      <p>慣性系 S に一様な電場 $\bm{E}=(0,0,E)$ だけがある(磁場は 0)。S に対して $+x$ 方向に速さ $v$ で動く S′ では、電場と磁場はどう見えるか。</p>
+    </div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>変換則に $E_z=E$、ほかは 0 を入れて、$\tilde E_z=\gamma E$、$\tilde B_y=\gamma\frac{v}{c^2}E$、ほかは 0。S′ では電場が $\gamma$ 倍に強くなり、さらに磁場も現れます。S′ から見ると、電場を作っている電荷が $-x$ 方向に動いていて、電流になっているからです。</p>
+    </div>
+    <div class="box ex"><div class="label">問題 AO:変換で変わらない量</div>
+      <p>$|\bm{E}|^2-c^2|\bm{B}|^2$ が、3. の変換で変わらないことを確かめよ。</p>
+    </div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>$x$ 成分は変わらないので、$y,z$ 成分だけ見ればよい。$\tilde E_y^2+\tilde E_z^2-c^2(\tilde B_y^2+\tilde B_z^2)=\gamma^2[(E_y-vB_z)^2+(E_z+vB_y)^2-c^2(B_y+\frac{v}{c^2}E_z)^2-c^2(B_z-\frac{v}{c^2}E_y)^2]$。展開すると、交差項 $\mp2vE_yB_z$、$\pm2vE_zB_y$ はすべて打ち消し合い、残りは $\gamma^2(1-\frac{v^2}{c^2})(E_y^2+E_z^2-c^2B_y^2-c^2B_z^2)=E_y^2+E_z^2-c^2(B_y^2+B_z^2)$。不変です(同じように $\bm{E}\cdot\bm{B}$ も不変)。だから、ある系で電場だけの場($|\bm{E}|\gt c|\bm{B}|$)を、別の系で磁場だけの場にすることはできません。</p>
+    </div>
+    <div class="box ex"><div class="label">問題 AP:電場を消す慣性系</div>
+      <p>S に、直交する一様な電場 $\bm{E}=(0,0,E)$ と磁場 $\bm{B}=(0,B,0)$ がある($E\lt cB$)。$x$ 方向に動くどんな慣性系から見ると、電場が消えるか。</p>
+    </div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>$\tilde E_z=\gamma(E+vB)=0$ から $v=-E/B$(S に対して $-x$ 方向に速さ $E/B$)。$E\lt cB$ なので $|v|\lt c$ で、そんな慣性系は存在します。そこでは磁場 $\tilde B_y=\gamma(B-\frac{E^2}{c^2B})=\frac{B}{\gamma}$ だけ。この系では荷電粒子は磁場の中で円運動するだけなので、S から見ると、円運動しながら速さ $E/B$ で横にずれていく運動(E×B ドリフト)になります。</p>
+    </div>
+
+    <h2 id="s7">7. まとめ(この回で覚えること)</h2>
+    <ul>
+      <li><b>電磁場の相対性</b>:導線のそばの止まった電荷は、別の慣性系から見ると、ローレンツ収縮で帯電した導線からの電気の力と、ローレンツ力が打ち消し合う。磁場と電場は慣性系で入れ替わる。</li>
+      <li><b>変換則</b>:$\tilde{\bm{E}}_\parallel=\bm{E}_\parallel$、$\tilde{\bm{B}}_\parallel=\bm{B}_\parallel$、$\tilde{\bm{E}}_\perp=\gamma(\bm{E}+\bm{v}\times\bm{B})_\perp$、$\tilde{\bm{B}}_\perp=\gamma(\bm{B}-\bm{v}\times\bm{E}/c^2)_\perp$。$|\bm{E}|^2-c^2|\bm{B}|^2$ と $\bm{E}\cdot\bm{B}$ は不変。</li>
+      <li><b>電磁場テンソル</b> $F$($F^{0i}=E_i/c$、$F^{ij}=\varepsilon_{ijk}B_k$)は $\tilde F=\Lambda F\Lambda^{\top}$。$F^{ij}=\partial A^j/\partial x_i-\partial A^i/\partial x_j$。$A^\mu$、$J^\mu$ は $\Lambda$ で変換、$\Box^2$ は不変。だから $\Box^2A^\mu=-\mu_0J^\mu$ はどの慣性系でも同じ形。</li>
+      <li><b>(補論)</b>ダランベール演算子が変わらない線形変換を求めると、ローレンツ変換が出てくる。</li>
+    </ul>
+
+    <h2 id="s8">8. この回のノートについてのメモ</h2>
+    <p>板書の写真ではなく、<b>文章で書かれた講義ノート(フル版)</b>の p.95〜p.100(§13.2〜§13.4)をもとにまとめました。これで講義ノートの最後のページまでです。図は描き直しました。</p>
+    <p>講義ノートの記述で、誤り(または誤記)と判断して直した箇所、読み替えた箇所は次のとおりです。</p>
+    <ol>
+      <li><b>(13.25)〜(13.27) の記号(p.96〜97)</b>:極板の設定では、電荷の速さを $v$、慣性系の速さを $u$ と、それまでと文字を入れ替えていて、(13.26)(13.27) の $\gamma$ や係数の中で2つが混ざって見えます。慣性系の速さを $v$ に統一して、標準の形 $\tilde E_z=\gamma(E_z+vB_y)$、$\tilde B_y=\gamma(B_y+\frac{v}{c^2}E_z)$ で書きました(3. の黄色の枠に、$\tilde E_z$ の計算)。</li>
+      <li><b>(13.23) の電流の符号(p.96)</b>:講義ノートは $\tilde I=-\gamma I$ としていますが、これは電荷の速度の向きの約束によるもので、S′ でも電流は $+x$ 向きに大きさ $\gamma I$ です(2.2 の計算)。力が打ち消し合う結論は同じです。</li>
+      <li><b>(13.34) の変換(p.98)</b>:$\tilde F=\Lambda F\Lambda$ とありますが、一般の形は $\Lambda F\Lambda^{\top}$ です(この $\Lambda$ は対称なので同じ)。</li>
+      <li><b>回の分け方</b>:講義ノートの分量と内容から分けた予定です。日程が分かったら合わせます。</li>
+    </ol>
+
+    <nav class="pager" data-fixed>
+      <a href="week-13.html">← 第13回</a>
+      <a href="../index.html">一覧へ</a>
+      <span class="disabled">次の回 →</span>
+    </nav>
+
+  </main>
+
+  <footer>© Aセメまとめノート</footer>
+</body>
+</html>
