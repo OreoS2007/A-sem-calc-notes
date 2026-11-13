@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex">
-  <title>第1回 はじめに(場という考え方) | Aセメまとめノート</title>
+  <title>第1回 はじめに/ベクトル解析1(発散・勾配・回転) | Aセメまとめノート</title>
   <link rel="stylesheet" href="../../assets/style.css">
   <script defer src="../../assets/nav.js"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
@@ -21,34 +21,35 @@
   </header>
 
   <main class="note">
-    <h1>第1回:はじめに(場という考え方)</h1>
-    <div class="meta">電磁気学(東京大学 教養学部 秋学期)／講義ノート §1(p.1〜p.3)／この回は式の計算がほとんどない「読み物」の回です</div>
+    <h1>第1回:はじめに/ベクトル解析1(発散・勾配・回転)</h1>
+    <div class="meta">電磁気学(東京大学 教養学部 秋学期)／2026年10月2日(金)・オンライン講義／講義ノート §1「はじめに」、§2.1「ベクトル場の微分」(p.1〜p.7)</div>
 
     <div class="box note-box need-legend">
       <div class="label">ラベルの見方:第1回中間の過去問を解くのに、どれくらい必要か</div>
       <p>今年の第1回中間(11/13、範囲は §4.3 の (4.12) まで)の対策として、2023・2025年度の中間試験のうち範囲内の問題を解くのに、<b>説明の塊(段落・枠・図)ごと</b>に、どれくらい要るかを付けました(過去問の分析にもとづく)。見出しのラベルは、その節の中でいちばん高いものです。</p>
       <p><span class="need need-a">必須</span> 過去問にそのまま出た型、答案に書く式 <span class="need need-b">必要</span> 過去問を解くときに使う道具 <span class="need need-c">参考</span> 理解の助け(答案には直接使わない) <span class="need need-x">不要</span> 中間を乗り切るだけなら読まなくてよい <span class="need need-y">範囲内・過去問なし</span> 今年は範囲内だが、過去問には出ていない</p>
-      <p>過去問で出た証明は「エネルギー最小化(第3回 3.4)」だけです。ガウス・ストークスの定理やデルタ関数の導出のように、<b>公式を導くための説明や証明は「不要」</b>(公式を覚えて使えばよい)にしました。§2.4〜2.6 のほかの証明は、同じ型で出る可能性があるので「参考」です。</p>
+      <p>過去問で出た証明は「エネルギー最小化(第2回 4.4)」だけです。ガウス・ストークスの定理やデルタ関数の導出のように、<b>公式を導くための説明や証明は「不要」</b>(公式を覚えて使えばよい)にしました。§2.4〜2.6 のほかの証明は、同じ型で出る可能性があるので「参考」です。</p>
       <div class="need-filter"><button type="button" data-f="all">すべて表示</button><button type="button" data-f="nox">「不要」を隠す</button><button type="button" data-f="ab">「必須」「必要」だけ</button></div>
       <script>(function(){var r=document.documentElement,k='em-need-filter';function set(f){r.setAttribute('data-need-filter',f);document.querySelectorAll('.need-filter button').forEach(function(b){b.classList.toggle('on',b.getAttribute('data-f')===f)});try{localStorage.setItem(k,f)}catch(e){}}var f='all';try{f=localStorage.getItem(k)||'all'}catch(e){}set(f);document.querySelectorAll('.need-filter button').forEach(function(b){b.addEventListener('click',function(){set(b.getAttribute('data-f'))})})})();</script>
     </div>
     <nav class="toc">
       <div class="toc-title">目次</div>
       <ol start="0">
-        <li><a href="#s0">この回の全体像(講義全体の流れ)</a> <span class="need need-c">参考</span></li>
-        <li><a href="#s1">準備:高校の復習(基礎の確認)</a> <span class="need need-b">必要</span>
-          <div class="sub">電荷・電場・クーロンの法則／多変数関数とベクトル</div></li>
+        <li><a href="#s0">この回の全体像</a> <span class="need need-c">参考</span></li>
+        <li><a href="#s1">準備:基礎の確認</a> <span class="need need-b">必要</span>
+          <div class="sub">電荷・電場・クーロンの法則／多変数関数とベクトル／ベクトルと座標、場の記号／内積と外積／総和記号と添字、クロネッカーのデルタ／偏微分、勾配、連鎖律</div></li>
         <li><a href="#s2">場という考え方</a> <span class="need need-c">参考</span></li>
         <li><a href="#s3">電磁気学の基本構造</a> <span class="need need-x">不要</span></li>
         <li><a href="#s4">補論:電磁気学の難しさと注意点</a> <span class="need need-x">不要</span></li>
-        <li><a href="#s5">具体例で練習</a> <span class="need need-b">必要</span></li>
-        <li><a href="#s6">まとめ(この回で覚えること)</a> <span class="need need-c">参考</span></li>
-        <li><a href="#s7">この回のノートについてのメモ</a> <span class="need need-x">不要</span></li>
+        <li><a href="#s5">ベクトル場と発散、回転、ラプラシアン</a> <span class="need need-a">必須</span></li>
+        <li><a href="#s6">具体例で練習(講義ノートにない補足)</a> <span class="need need-b">必要</span></li>
+        <li><a href="#s7">まとめ(この回で覚えること)</a> <span class="need need-b">必要</span></li>
+        <li><a href="#s8">この回のノートについてのメモ</a> <span class="need need-x">不要</span></li>
       </ol>
     </nav>
 
-    <!-- ===================== 0 ===================== -->
-    <h2 id="s0" data-need="C">0. この回の全体像(講義全体の流れ) <span class="need need-c">参考</span> <span class="page-tag">講義ノート p.1(§1.1)</span></h2>
+    <h2 id="s0" data-need="C">0. この回の全体像 <span class="need need-c">参考</span> <span class="page-tag">講義ノート p.1</span></h2>
+    <p data-need="C"><b>2026年10月2日(金)・オンライン講義</b>の授業。この回は、講義全体の見取り図(§1)と、ベクトル解析の最初の部分(§2.1:場の微分)です。§1 で「場」という考え方と電磁気学の基本構造をつかみ、§2.1 で、場を微分する演算子(勾配・発散・回転・ラプラシアン)を作ります。</p>
     <p data-need="C">最初の回は、「電磁気学という科目を、どんな順序で、どんな見方で学ぶのか」の見取り図です。講義ノートの §1.1 には、次の流れが書かれています。</p>
     <ol data-need="C">
       <li>まず、電磁気学を書き表すために必須の数学の道具である<b>ベクトル解析</b>を、詳しく学ぶ。</li>
@@ -56,23 +57,35 @@
       <li>マクスウェル方程式から<b>電磁波</b>を導く。これが講義の<b>ハイライト</b>。</li>
       <li>余裕があれば、マクスウェル方程式の自然な帰結である<b>特殊相対論</b>との関係や、それを踏まえた電磁気学の記述も議論する。</li>
     </ol>
-
     <figure data-need="C" class="fig">
       <svg viewBox="0 0 640 120" width="640" role="img" aria-label="講義全体の流れ"><rect x="10" y="40" width="112" height="58" rx="8" style="fill:var(--surface);stroke:var(--accent);stroke-width:1.8"/><text class="tj" x="66" y="65" style="text-anchor:middle;font-weight:700">ベクトル解析</text><text class="tm" x="66" y="85" style="text-anchor:middle">(数学の道具)</text><text class="tm" x="66" y="28" style="text-anchor:middle">STEP 1</text><line x1="123" y1="69" x2="129.6" y2="69" style="stroke:var(--muted);stroke-width:2;fill:none"/><polygon points="136,69 129,73 129,65" style="fill:var(--muted)"/><rect x="137" y="40" width="112" height="58" rx="8" style="fill:var(--surface);stroke:var(--accent);stroke-width:1.8"/><text class="tj" x="193" y="65" style="text-anchor:middle;font-weight:700">電磁気学の</text><text class="tm" x="193" y="85" style="text-anchor:middle">諸法則を導入</text><text class="tm" x="193" y="28" style="text-anchor:middle">STEP 2</text><line x1="250" y1="69" x2="256.6" y2="69" style="stroke:var(--muted);stroke-width:2;fill:none"/><polygon points="263,69 256,73 256,65" style="fill:var(--muted)"/><rect x="264" y="40" width="112" height="58" rx="8" style="fill:var(--surface);stroke:var(--accent);stroke-width:1.8"/><text class="tj" x="320" y="65" style="text-anchor:middle;font-weight:700">マクスウェル</text><text class="tm" x="320" y="85" style="text-anchor:middle">方程式</text><text class="tm" x="320" y="28" style="text-anchor:middle">STEP 3</text><line x1="377" y1="69" x2="383.6" y2="69" style="stroke:var(--muted);stroke-width:2;fill:none"/><polygon points="390,69 383,73 383,65" style="fill:var(--muted)"/><rect x="391" y="40" width="112" height="58" rx="8" style="fill:var(--surface);stroke:var(--thm);stroke-width:2.8"/><text class="tj" x="447" y="65" style="text-anchor:middle;font-weight:700">電磁波の導出</text><text class="tm" x="447" y="85" style="text-anchor:middle">(ハイライト)</text><text class="tm" x="447" y="28" style="text-anchor:middle">STEP 4</text><line x1="504" y1="69" x2="510.6" y2="69" style="stroke:var(--muted);stroke-width:2;fill:none"/><polygon points="517,69 510,73 510,65" style="fill:var(--muted)"/><rect x="518" y="40" width="112" height="58" rx="8" style="fill:var(--surface);stroke:var(--accent);stroke-width:1.8;stroke-dasharray:6 4"/><text class="tj" x="574" y="65" style="text-anchor:middle;font-weight:700">特殊相対論など</text><text class="tm" x="574" y="85" style="text-anchor:middle">(余裕があれば)</text><text class="tm" x="574" y="28" style="text-anchor:middle">STEP 5</text></svg>
-      <figcaption>講義全体の見取り図。このノートでは、第2回・第3回が STEP 1 の「ベクトル解析」、第4回からが STEP 2 の「諸法則」(まず、電荷が動かない静電場)にあたります。</figcaption>
+      <figcaption>講義全体の見取り図。このノートでは、第1回の後半〜第3回の前半が STEP 1 の「ベクトル解析」、第3回の後半からが STEP 2 の「諸法則」(まず、電荷が動かない静電場)にあたります。</figcaption>
     </figure>
-
     <div data-need="C" class="box thm">
-      <div class="label">この回のゴール <span class="need need-c">参考</span></div>
+      <div class="label">§1 のゴール <span class="need need-c">参考</span></div>
       <p>式の計算に入る前に、次の3つをつかむ。</p>
       <p>① <b>場</b>(field)とは何か:空間の各点に、数やベクトルが割り当てられているもの。<br>
       ② 電磁気学の<b>基本構造</b>:電荷・電流が電磁場を作り、電磁場が電荷・電流に力を及ぼす。「遠くから直接力が働く」のではなく、「間にある場を波が伝わる」という見方をする。<br>
       ③ 電磁気学が<b>つまずきやすい</b>理由と注意点:一般的な法則と、特別な状況でしか成り立たない法則が混ざっていること、名前に引きずられないこと、など。</p>
     </div>
+
+    <p data-need="C">講義ノートの §2 は、冒頭で「いったん物理を離れて、<b>数学の一分野としてのベクトル解析</b>を学ぶ」と宣言します。電磁気学の法則は、ほぼすべてが「場」の<b>微分</b>と<b>積分</b>の言葉で書かれるので、その言葉を先に整えておく、という方針です。</p>
+    <div data-need="C" class="box thm">
+      <div class="label">§2.1 のゴール <span class="need need-c">参考</span></div>
+      <p>① 場を微分する3つの演算子:<b>勾配</b> $\grad\phi=\nabla\phi$(スカラー場 → ベクトル場)、<b>発散</b> $\dvg\bm{A}=\nabla\cdot\bm{A}$(ベクトル場 → スカラー場)、<b>回転</b> $\rot\bm{A}=\nabla\times\bm{A}$(ベクトル場 → ベクトル場)と、<b>ラプラシアン</b> $\Delta$ を計算できるようになる。それぞれが何を測っているか(湧き出し、渦、周りとのずれ)を、言葉で言えるようになる。<br>
+      ② 計算の道具<b>レヴィ=チヴィタ記号</b> $\varepsilon_{ijk}$ と、$\varepsilon\varepsilon$ の公式を使って、ベクトルの恒等式を楽に示す。<br>
+      ③(次の回)場を積分する2つの方法:<b>線積分</b>(曲線に沿う成分を足す)と<b>面積分</b>(面を貫く成分を足す)。</p>
+    </div>
+    <figure data-need="C" class="fig">
+      <svg viewBox="0 0 600 228" width="600" role="img" aria-label="勾配・発散・回転・ラプラシアンの入出力"><rect x="40" y="108" width="150" height="56" rx="10" style="fill:var(--surface);stroke:var(--accent);stroke-width:2"/><text class="tj" x="115" y="132" style="text-anchor:middle;font-weight:700">スカラー場</text><text class="tm" x="115" y="152" style="text-anchor:middle">φ(x)(数)</text><rect x="410" y="108" width="150" height="56" rx="10" style="fill:var(--surface);stroke:var(--thm);stroke-width:2"/><text class="tj" x="485" y="132" style="text-anchor:middle;font-weight:700">ベクトル場</text><text class="tm" x="485" y="152" style="text-anchor:middle">A(x)(矢印)</text><line x1="192" y1="122" x2="399.6" y2="122" style="stroke:var(--thm);stroke-width:2.4;fill:none"/><polygon points="408,122 399,126.4 399,117.6" style="fill:var(--thm)"/><text class="tt" x="300" y="114" style="text-anchor:middle">grad φ = ∇φ</text><line x1="408" y1="152" x2="200.4" y2="152" style="stroke:var(--accent);stroke-width:2.4;fill:none"/><polygon points="192,152 201,147.6 201,156.4" style="fill:var(--accent)"/><text class="ta" x="300" y="172" style="text-anchor:middle">div A = ∇·A</text><path d="M446 106 C446 56 524 56 524 100" style="fill:none;stroke:var(--ex);stroke-width:2.4"/><line x1="524" y1="88" x2="524" y2="97.6" style="stroke:var(--ex);stroke-width:2.4;fill:none"/><polygon points="524,106 519.6,97 528.4,97" style="fill:var(--ex)"/><text class="tt" x="485" y="42" style="text-anchor:middle;fill:var(--ex)">rot A = ∇×A</text><text class="tm" x="485" y="60" style="text-anchor:middle">(3次元だけ)</text><path d="M76 106 C76 56 154 56 154 100" style="fill:none;stroke:var(--muted);stroke-width:2.4"/><line x1="154" y1="88" x2="154" y2="97.6" style="stroke:var(--muted);stroke-width:2.4;fill:none"/><polygon points="154,106 149.6,97 158.4,97" style="fill:var(--muted)"/><text class="tj" x="115" y="42" style="text-anchor:middle;font-weight:700">Δφ = ∇·(∇φ)</text><text class="tm" x="115" y="60" style="text-anchor:middle">(ラプラシアン)</text><text class="tm" x="300" y="214" style="text-anchor:middle">(入力 → 出力) をたどると、どの操作が何を何に変えるかが一目で分かる</text></svg>
+      <figcaption>4つの微分演算の「型」。何を入れると何が出てくるかを、まず押さえておきます。</figcaption>
+    </figure>
+
     <p data-need="X">以下では、先に基礎(高校の内容と、多変数関数の見方)を丁寧に復習してから、講義ノートの順に進みます。紫色の枠は「基礎の復習」、黄色の枠は「講義ノートにないが、理解を助けるために私が補った部分」です。</p>
 
     <!-- ===================== 1 ===================== -->
-    <h2 id="s1" data-need="B">1. 準備:高校の復習(基礎の確認) <span class="need need-b">必要</span></h2>
+
+    <h2 id="s1" data-need="B">1. 準備:基礎の確認 <span class="need need-b">必要</span></h2>
     <p data-need="C">この回の話は、「電荷が電場を作る」「場は空間の関数」という2つの考え方に支えられています。それぞれ確認しておきます。</p>
 
     <h3 id="w-coulomb" data-need="B">1.1 電荷・電場・クーロンの法則 <span class="need need-b">必要</span></h3>
@@ -93,6 +106,39 @@
     </div>
 
     <!-- ===================== 2 ===================== -->
+
+    <h3 id="w-vecfield" data-need="C">1.3 ベクトルと座標、場の記号 <span class="need need-c">参考</span></h3>
+    <div data-need="C" class="box basic">
+      <div class="label">基礎:$\R^n$ の点・成分・単位ベクトル <span class="need need-c">参考</span> <a class="xref-link" href="../basics.html#mvfunc" data-xref>→ 詳しい解説</a></div>
+      <p>$n$ 次元空間 $\R^n$ の点(位置ベクトル)を $\bm{x}=(x_1,\dots,x_n)$ と書きます。3次元では $(x,y,z)=(x_1,x_2,x_3)$、つまり $x,y,z$ 方向が成分 1, 2, 3 に対応します。<b>基本単位ベクトル</b> $\bm{e}_i$ は、第 $i$ 成分だけが1で他が0のベクトルです。ベクトルの<b>長さ</b>(ノルム)は $|\bm{x}|=\sqrt{x_1^2+\cdots+x_n^2}$。</p>
+      <p>スカラー場は多変数関数 $\phi(\bm{x})$、ベクトル場は成分ごとの関数を束ねた $\bm{A}(\bm{x})=(A_1(\bm{x}),\dots,A_n(\bm{x}))$ です。以下、ベクトルは太字で書きます。原点からの距離を $r=|\bm{x}|$ と書くことが多い。</p>
+    </div>
+
+    <h3 id="w-vec3" data-need="B">1.4 内積と外積 <span class="need need-b">必要</span></h3>
+    <div data-need="B" class="box basic">
+      <div class="label">基礎:内積と外積 <span class="need need-b">必要</span> <a class="xref-link" href="../basics.html#vec3" data-xref>→ 詳しい解説</a></div>
+      <p><b>内積</b>:$\bm{A}\cdot\bm{B}=A_1B_1+\cdots+A_nB_n=|\bm{A}||\bm{B}|\cos\theta$($\theta$ は2つのベクトルのなす角)。$\bm{A}\cdot\bm{B}=0$ なら直交。単位ベクトル $\bm{n}$ との内積 $\bm{A}\cdot\bm{n}$ は、「$\bm{A}$ の $\bm{n}$ 方向の成分(符号つきの長さ)」を与えます。</p>
+      <p><b>外積</b>(3次元だけ):
+      $$\bm{A}\times\bm{B}=(A_2B_3-A_3B_2,\ A_3B_1-A_1B_3,\ A_1B_2-A_2B_1).$$
+      向きは $\bm{A}$ にも $\bm{B}$ にも垂直(右手の指を $\bm{A}$ から $\bm{B}$ に曲げたとき、親指の向き)、大きさ $|\bm{A}\times\bm{B}|=|\bm{A}||\bm{B}|\sin\theta$ は $\bm{A},\bm{B}$ が作る<b>平行四辺形の面積</b>。$\bm{B}\times\bm{A}=-\bm{A}\times\bm{B}$、$\bm{A}\times\bm{A}=\bm{0}$。平面に垂直な<b>法線ベクトル</b>と面積を、1つのベクトルで表せるのが外積の効用です。</p>
+    </div>
+
+    <h3 id="w-sigma" data-need="B">1.5 総和記号と添字、クロネッカーのデルタ <span class="need need-b">必要</span></h3>
+    <div data-need="B" class="box basic">
+      <div class="label">基礎:$\Sigma$ と添字の計算 <span class="need need-b">必要</span> <a class="xref-link" href="../basics.html#sigma" data-xref>→ 詳しい解説</a></div>
+      <p><b>総和記号</b> $\displaystyle\sum_{i=1}^{n}a_i=a_1+a_2+\cdots+a_n$。内積は $\displaystyle\bm{A}\cdot\bm{B}=\sum_iA_iB_i$。和を取る文字 $i$ は何でもよい(<b>ダミー添字</b>)。2つの添字で足すときは $\displaystyle\sum_{i,j}$(すべての組 $(i,j)$ について足す)。ベクトル $\bm{A}$ の第 $i$ 成分を $[\bm{A}]_i$ とも書きます。</p>
+      <p><b>クロネッカーのデルタ</b>:$\delta_{ij}=1\ (i=j)$、$\delta_{ij}=0\ (i\ne j)$。重要な性質は、$\displaystyle\sum_j\delta_{ij}a_j=a_i$(「$\delta$ をかけて足すと、添字を付け替える」)。偏微分の略記:$\partial_i=\dfrac{\partial}{\partial x_i}$。</p>
+    </div>
+
+    <h3 id="w-partial" data-need="B">1.6 偏微分、勾配、連鎖律 <span class="need need-b">必要</span></h3>
+    <div data-need="B" class="box basic">
+      <div class="label">基礎:偏微分と連鎖律 <span class="need need-b">必要</span> <a class="xref-link" href="../basics.html#partial" data-xref>→ 詳しい解説</a><a class="xref-link" href="../../calc/basics.html#partial" data-xref>→ 微積の基礎(偏微分)</a></div>
+      <p>多変数関数 $f(x_1,\dots,x_n)$ の<b>偏微分</b> $\partial_if=\dfrac{\partial f}{\partial x_i}$ は、「$x_i$ 以外の文字をすべて定数とみなして、$x_i$ で微分したもの」。たとえば $f=xy^2z^3$ なら $\partial_xf=y^2z^3$、$\partial_yf=2xyz^3$、$\partial_zf=3xy^2z^2$。</p>
+      <p>・<b>積の微分</b>:$\partial_i(fg)=(\partial_if)g+f(\partial_ig)$。<br>
+      ・<b>偏微分の順序交換</b>:2階までの偏導関数が連続($C^2$ 級)なら $\partial_i\partial_jf=\partial_j\partial_if$。<br>
+      ・<b>連鎖律</b>:$\bm{x}(t)$ が $t$ の関数のとき $\dfrac{d}{dt}f(\bm{x}(t))=\sum_i\partial_if\cdot\dfrac{dx_i}{dt}$。</p>
+    </div>
+
     <h2 id="s2" data-need="C">2. 場という考え方 <span class="need need-c">参考</span> <span class="page-tag">講義ノート p.1(§1.2)</span></h2>
     <p data-need="X">講義ノートは、ベクトル解析の議論のために「場(field)」という概念を導入します。一見難しい概念に見えるかもしれませんが、<b>場とは、単に「空間上の各点ごとに、数やベクトルが割り当てられているもの」のこと</b>です。</p>
 
@@ -129,6 +175,7 @@
     </div>
 
     <!-- ===================== 3 ===================== -->
+
     <h2 id="s3" data-need="X">3. 電磁気学の基本構造 <span class="need need-x">不要</span> <span class="page-tag">講義ノート p.1–2(§1.3)</span></h2>
 
     <h3>3.1 電荷・電流と電磁場は、お互いを決め合う</h3>
@@ -178,6 +225,7 @@
     </div>
 
     <!-- ===================== 4 ===================== -->
+
     <h2 id="s4" data-need="X">4. 補論:電磁気学の難しさと注意点 <span class="need need-x">不要</span> <span class="page-tag">講義ノート p.2–3(§1.4)</span></h2>
     <div data-need="X" class="box note-box">
       <div class="label">この節の読み方(講義ノートの断り書き) <span class="need need-x">不要</span></div>
@@ -191,7 +239,7 @@
     $$E=\frac{1}{4\pi\varepsilon_0}\frac{q}{r^2}\tag{1.1}$$
     ・<b>ガウスの法則</b>(これから学ぶ関係式)
     $$\nabla\cdot\bm{E}=\frac{1}{\varepsilon_0}\rho\tag{1.2}$$
-    ($\nabla\cdot\bm{E}$ の意味は第2回で学びます。今は意味が分からなくてよい。$\rho$ は電荷の密度です。)</p>
+    ($\nabla\cdot\bm{E}$ の意味は、この回の後半(5.)で学びます。今は意味が分からなくてよい。$\rho$ は電荷の密度です。)</p>
     <p data-need="X">この2つは、次のような関係にあります。</p>
 
     <figure data-need="X" class="fig">
@@ -221,7 +269,7 @@
     </table></div><!--need-wrap-->
 
     <h3>4.3 特異性(無限大・デルタ関数)が生じやすい</h3>
-    <p data-need="X">三つ目は、<b>特異性</b>が頻繁に生じて、それが悪さをすることです。たとえば、<b>点電荷はデルタ関数</b>であり(1点に有限の電荷が集まっている ⇒ 電荷の<b>密度</b>はその点で無限大。デルタ関数は第4回で扱います)、<b>導体</b>は無限に電気が流れやすく、<b>表面にのみ電荷が集まる</b>(これも特異性)。</p>
+    <p data-need="X">三つ目は、<b>特異性</b>が頻繁に生じて、それが悪さをすることです。たとえば、<b>点電荷はデルタ関数</b>であり(1点に有限の電荷が集まっている ⇒ 電荷の<b>密度</b>はその点で無限大。デルタ関数は第3回で扱います)、<b>導体</b>は無限に電気が流れやすく、<b>表面にのみ電荷が集まる</b>(これも特異性)。</p>
     <p data-need="X">力学にも特異性はありました(質点や剛体の拘束など)が、計算をするうえではほとんど困難を生じさせませんでした。これに対し電磁気学では、自然と思われる考え方に基づく計算を進めていくと、特異性が出てきてしまう場合が少なくありません。特異性の存在は、さまざまな場所で<b>計算ミスや直観的な議論の誤り</b>を生じさせます。</p>
 
     <h3>4.4 物質中の電磁気学はさらに難しい</h3>
@@ -237,9 +285,234 @@
     <p data-need="X">講義ノートは、こうした躓きやすい点についてはなるべく明確な注意をしながら議論を進めたい、としています。それでも分からないと感じたり、あるいは教科書で自習していてよく分からないと思ったら、「こうした点に躓きやすい部分がある」ということを思い出してほしい、という言葉で §1 は終わっています。</p>
 
     <!-- ===================== 5 ===================== -->
-    <h2 id="s5" data-need="B">5. 具体例で練習(講義ノートにない補足) <span class="need need-b">必要</span> <span class="page-tag">補足</span></h2>
-    <p data-need="C">この回の話を、手を動かして確かめます。ここは講義ノートにはなく、私が作った練習問題と解答です。</p>
 
+    <h2 id="s5" data-need="A">5. ベクトル場と発散、回転、ラプラシアン <span class="need need-a">必須</span> <span class="page-tag">講義ノート p.4–7(§2.1)</span></h2>
+
+    <h3 id="s5-1" data-need="B">5.1 ナブラ $\nabla$ と、発散・勾配・回転 <span class="need need-b">必要</span></h3>
+    <p data-need="C">ベクトル解析に必須となる記号「<b>ナブラ</b>(nabla)」$\nabla$ を導入します(名前は、エジプトの竪琴にちなむ。$\nabla$ の形が竪琴に似ているため)。一般の $n$ 次元空間で、$i$ 方向の座標を $x_i$ と書きます(3次元なら $x,y,z$ 方向が1,2,3方向に対応)。</p>
+    <div data-need="B" class="box def">
+      <div class="label">定義(ナブラ) (2.1) <span class="need need-b">必要</span></div>
+      <p>$$\nabla:=\begin{pmatrix}\dfrac{\partial}{\partial x_1}\\[4pt]\dfrac{\partial}{\partial x_2}\\\vdots\\\dfrac{\partial}{\partial x_n}\end{pmatrix}$$
+      すなわち、ナブラは<b>各方向の偏微分を縦に並べたもの</b>です。</p>
+    </div>
+    <p data-need="C">$\nabla$ 自体は、「微分する」という操作を並べた記号で、<b>単独では意味をもちません</b>。何かの関数に作用して(掛けるように書いて)初めて意味をもちます。これをベクトルのように扱い、内積や外積の「気分」で場に作用させるのが、以下の3つの演算です。</p>
+
+    <div data-need="B" class="box def">
+      <div class="label">定義(発散) (2.2) <span class="need need-b">必要</span></div>
+      <p>ベクトル場 $\bm{A}(\bm{x})$ の<b>発散</b>(divergence):
+      $$\dvg\bm{A}(\bm{x})=\nabla\cdot\bm{A}(\bm{x}):=\sum_{i=1}^{n}\frac{\partial}{\partial x_i}A_i(\bm{x}).$$
+      $\dvg\bm{A}$ も $\nabla\cdot\bm{A}$ もよく使われる表記です。</p>
+    </div>
+    <div data-need="B" class="box def">
+      <div class="label">定義(勾配) (2.3) <span class="need need-b">必要</span></div>
+      <p>スカラー場 $\phi(\bm{x})$ の<b>勾配</b>(gradient):
+      $$\grad\phi(\bm{x})=\nabla\phi(\bm{x}):=\begin{pmatrix}\dfrac{\partial}{\partial x_1}\phi\\\vdots\\\dfrac{\partial}{\partial x_n}\phi\end{pmatrix}.$$</p>
+    </div>
+    <ul data-need="C">
+      <li><b>発散</b>は、「ベクトル場を入力して<b>スカラー場</b>を出力する」。<b>勾配</b>は、「スカラー場を入力して<b>ベクトル場</b>を出力する」。どちらも<b>任意の次元</b>で定義されます。</li>
+      <li>$\nabla\cdot\bm{A}$ という書き方は「$\nabla$ と $\bm{A}$ の内積をとっている」気分で書かれていますが、講義ノートが注意するとおり<b>本当は記号の濫用</b>です。内積では2つのベクトルの同じ成分どうしの積の和をとるのに対し、ここでは「同じ成分で演算子(微分)の作用が起きる」わけではないからです($\partial_i$ は $A_i$ にかかる)。</li>
+    </ul>
+
+    <div data-need="B" class="box def">
+      <div class="label">定義(回転) (2.4) <span class="need need-b">必要</span></div>
+      <p><b>3次元</b>ベクトル場 $\bm{A}(\bm{x})$ の<b>回転</b>(rotation、$\operatorname{curl}\bm{A}$ とも書く):
+      $$\rot\bm{A}(\bm{x})=\nabla\times\bm{A}(\bm{x}):=\begin{pmatrix}\dfrac{\partial A_3}{\partial x_2}-\dfrac{\partial A_2}{\partial x_3}\\[6pt]\dfrac{\partial A_1}{\partial x_3}-\dfrac{\partial A_3}{\partial x_1}\\[6pt]\dfrac{\partial A_2}{\partial x_1}-\dfrac{\partial A_1}{\partial x_2}\end{pmatrix}.$$
+      ここで $\times$ は外積(ベクトル積)です。</p>
+    </div>
+    <p data-need="X">回転は<b>3次元のベクトル場</b>に対してだけ定義される(外積が3次元のものだから)点が、発散・勾配との違いです。</p>
+    <div data-need="B" class="box supp">
+      <div class="label">講義ノートにない補足:回転の覚え方 <span class="need need-b">必要</span></div>
+      <p>形式的な行列式で $\nabla\times\bm{A}=\begin{vmatrix}\bm{e}_1&\bm{e}_2&\bm{e}_3\\\partial_1&\partial_2&\partial_3\\A_1&A_2&A_3\end{vmatrix}$ と書けます。第1成分は「$\partial_2A_3-\partial_3A_2$」で、<b>添字が $1\to2\to3\to1$ の順(巡回)に進む</b>と考えると覚えやすい:第2成分は $\partial_3A_1-\partial_1A_3$、第3成分は $\partial_1A_2-\partial_2A_1$。</p>
+    </div>
+    <div data-need="C" class="box supp">
+      <div class="label">講義ノートにない補足:すぐ計算できる例(感覚をつかむ) <span class="need need-c">参考</span></div>
+      <p>・$\bm{A}=(x,y,z)$(原点から放射状に広がる場):$\nabla\cdot\bm{A}=1+1+1=3$。$\nabla\times\bm{A}=(0-0,\ 0-0,\ 0-0)=\bm{0}$。<b>発散が正、回転はゼロ</b>。<br>
+      ・$\bm{A}=(-y,x,0)$(原点まわりの渦):$\nabla\cdot\bm{A}=0+0+0=0$。$\nabla\times\bm{A}=(0-0,\ 0-0,\ \partial_x x-\partial_y(-y))=(0,0,2)$。<b>発散はゼロ、回転は $z$ 軸方向</b>。<br>
+      ・$\phi=x^2+y^2$:$\nabla\phi=(2x,2y,0)$(「原点から離れるほど増える向き」を指す)。</p>
+    </div>
+
+    <h3 id="s5-2" data-need="A">5.2 外積と、レヴィ=チヴィタ記号 $\varepsilon_{ijk}$ <span class="need need-a">必須</span></h3>
+    <p data-need="X">外積は「レヴィ=チヴィタ記号(Levi-Civita symbol)」あるいは「エディントンのイプシロン」と呼ばれる記号を使うと、見通しよく書けます(英語では前者の呼び方が一般的)。人名で、一人の人(トゥーリオ・レヴィ=チヴィタ)の名前です。</p>
+    <div data-need="A" class="box def">
+      <div class="label">定義(レヴィ=チヴィタ記号) (2.5) <span class="need need-a">必須</span></div>
+      <p>$$\varepsilon_{ijk}:=\begin{cases}1&(ijk)=(123),(231),(312)\\-1&(ijk)=(132),(213),(321)\\0&\text{otherwise}\end{cases}$$
+      すなわち、$(ijk)$ が $(123)$ の<b>偶置換</b>(巡回的な並べ替え)なら $+1$、<b>奇置換</b>(1回の入れ替え)なら $-1$、同じ数字が2つ以上あれば $0$。(添字が4個以上のときも、「$ijk\cdots$ が $123\cdots$ の偶置換なら1、奇置換なら $-1$、同じ数が複数あれば0」と定義される。)</p>
+    </div>
+    <figure data-need="C" class="fig">
+      <svg viewBox="0 0 400 270" width="400" role="img" aria-label="レヴィ=チヴィタ記号"><line x1="216.6" y1="64" x2="304" y2="169.5" style="stroke:var(--thm);stroke-width:2.8;fill:none"/><polygon points="309.4,176 300.3,171.9 307.1,166.2" style="fill:var(--thm)"/><line x1="300" y1="196" x2="108.4" y2="196" style="stroke:var(--thm);stroke-width:2.8;fill:none"/><polygon points="100,196 109,191.6 109,200.4" style="fill:var(--thm)"/><line x1="90.6" y1="176" x2="178" y2="70.5" style="stroke:var(--thm);stroke-width:2.8;fill:none"/><polygon points="183.4,64 181.1,73.8 174.3,68.1" style="fill:var(--thm)"/><line x1="318.6" y1="168.3" x2="230.6" y2="62.1" style="stroke:var(--accent);stroke-width:1.8;fill:none;stroke-dasharray:5 4"/><polygon points="225.8,56.4 233.7,60.2 228.2,64.8" style="fill:var(--accent)"/><line x1="100" y1="208" x2="292.6" y2="208" style="stroke:var(--accent);stroke-width:1.8;fill:none;stroke-dasharray:5 4"/><polygon points="300,208 292,211.6 292,204.4" style="fill:var(--accent)"/><line x1="174.2" y1="56.4" x2="86.1" y2="162.6" style="stroke:var(--accent);stroke-width:1.8;fill:none;stroke-dasharray:5 4"/><polygon points="81.4,168.3 83.7,159.9 89.2,164.5" style="fill:var(--accent)"/><circle cx="200" cy="44" r="20" style="fill:var(--surface);stroke:var(--muted);stroke-width:1.6"/><text class="tj" x="200" y="50" style="text-anchor:middle;font-weight:700;font-size:17px">1</text><circle cx="326" cy="196" r="20" style="fill:var(--surface);stroke:var(--muted);stroke-width:1.6"/><text class="tj" x="326" y="202" style="text-anchor:middle;font-weight:700;font-size:17px">2</text><circle cx="74" cy="196" r="20" style="fill:var(--surface);stroke:var(--muted);stroke-width:1.6"/><text class="tj" x="74" y="202" style="text-anchor:middle;font-weight:700;font-size:17px">3</text><text class="tm" x="200" y="118" style="text-anchor:middle">ε = 0</text><text class="tm" x="200" y="136" style="text-anchor:middle">(同じ数字が2つ以上)</text><text class="tt" x="14" y="238">橙:1→2→3→1 の向き  ε = +1:(123), (231), (312)</text><text class="ta" x="14" y="258">青の点線:逆向き  ε = −1:(132), (213), (321)</text></svg>
+      <figcaption>$1\to2\to3\to1$ の向き(橙)にたどれる並びが $+1$、逆向き(青の点線)が $-1$。3つのうち同じ数字が2つ以上あれば0なので、27通りのうち、0でないのは6通りだけです。</figcaption>
+    </figure>
+    <p data-need="A">これを使うと、外積の第 $i$ 成分は
+    $$[\bm{A}\times\bm{B}]_i=\sum_{j,k}\varepsilon_{ijk}A_jB_k\tag{2.6}$$
+    と書けます($[\bm{A}\times\bm{B}]_i$ は $\bm{A}\times\bm{B}$ の第 $i$ 成分)。</p>
+    <div data-need="C" class="box ex">
+      <div class="label">確かめ:$i=1$ のとき <span class="need need-c">参考</span></div>
+      <p>$\varepsilon_{1jk}$ が0でないのは $(j,k)=(2,3)$ のとき $+1$ と、$(3,2)$ のとき $-1$ だけ。よって $[\bm{A}\times\bm{B}]_1=\varepsilon_{123}A_2B_3+\varepsilon_{132}A_3B_2=A_2B_3-A_3B_2$。外積の定義の第1成分と一致します。</p>
+    </div>
+    <p data-need="A"><b>回転も同様に</b> $\nabla$ の第 $j$ 成分 $\partial_j$ を $A_j$ の位置に入れて書けます:
+    $$[\nabla\times\bm{A}]_i=\sum_{j,k}\varepsilon_{ijk}\,\partial_jA_k.$$
+    </p>
+
+    <h3 id="s5-3" data-need="C">5.3 発散と回転の意味 <span class="need need-c">参考</span> <span class="page-tag">図1</span></h3>
+    <p data-need="X">発散と回転の意味を明らかにします。点 $\bm{x}_0$ の近くのベクトル場 $\bm{A}$ を、「点 $\bm{x}_0$ 近傍での<b>平均値</b>」と「<b>それ以外</b>」に分けて考えてみます。</p>
+    <figure data-need="X" class="fig">
+      <svg viewBox="0 0 600 500" width="600" role="img" aria-label="発散と回転の意味"><text class="ta" x="10" y="20">発散が有限のケース</text><text class="ta" x="10" y="270">回転が有限のケース</text><line x1="64" y1="68" x2="256" y2="68" style="stroke:var(--muted);stroke-width:1;fill:none"/><line x1="98" y1="44" x2="98" y2="216" style="stroke:var(--muted);stroke-width:1;fill:none"/><line x1="64" y1="130" x2="256" y2="130" style="stroke:var(--muted);stroke-width:1;fill:none"/><line x1="160" y1="44" x2="160" y2="216" style="stroke:var(--muted);stroke-width:1;fill:none"/><line x1="64" y1="192" x2="256" y2="192" style="stroke:var(--muted);stroke-width:1;fill:none"/><line x1="222" y1="44" x2="222" y2="216" style="stroke:var(--muted);stroke-width:1;fill:none"/><line x1="98" y1="68" x2="101.5" y2="50.6" style="stroke:var(--thm);stroke-width:3;fill:none"/><polygon points="103.4,41.4 106.3,52.2 96.5,50.2" style="fill:var(--thm)"/><line x1="160" y1="68" x2="177.7" y2="48.4" style="stroke:var(--thm);stroke-width:3;fill:none"/><polygon points="184,41.4 181,52.2 173.6,45.5" style="fill:var(--thm)"/><line x1="222" y1="68" x2="256.6" y2="46.4" style="stroke:var(--thm);stroke-width:3;fill:none"/><polygon points="264.6,41.4 258.8,50.9 253.5,42.5" style="fill:var(--thm)"/><line x1="98" y1="130" x2="99.4" y2="127.9" style="stroke:var(--thm);stroke-width:3;fill:none"/><polygon points="103.4,122 102.3,130.6 95.9,126.2" style="fill:var(--thm)"/><line x1="160" y1="130" x2="175.1" y2="125" style="stroke:var(--thm);stroke-width:3;fill:none"/><polygon points="184,122 176.1,129.9 172.9,120.4" style="fill:var(--thm)"/><line x1="222" y1="130" x2="255.4" y2="123.7" style="stroke:var(--thm);stroke-width:3;fill:none"/><polygon points="264.6,122 255.7,128.8 253.8,118.9" style="fill:var(--thm)"/><line x1="98" y1="192" x2="99.4" y2="194.7" style="stroke:var(--thm);stroke-width:3;fill:none"/><polygon points="103.4,202.6 94.8,196.3 103.3,192" style="fill:var(--thm)"/><line x1="160" y1="192" x2="175.4" y2="198.8" style="stroke:var(--thm);stroke-width:3;fill:none"/><polygon points="184,202.6 172.8,203.1 176.9,194" style="fill:var(--thm)"/><line x1="222" y1="192" x2="255.5" y2="200.3" style="stroke:var(--thm);stroke-width:3;fill:none"/><polygon points="264.6,202.6 253.7,205 256.1,195.3" style="fill:var(--thm)"/><text class="t" x="166" y="148" style="font-size:13px;paint-order:stroke;stroke:var(--surface);stroke-width:4px;stroke-linejoin:round">x₀</text><line x1="354" y1="68" x2="546" y2="68" style="stroke:var(--muted);stroke-width:1;fill:none"/><line x1="388" y1="44" x2="388" y2="216" style="stroke:var(--muted);stroke-width:1;fill:none"/><line x1="354" y1="130" x2="546" y2="130" style="stroke:var(--muted);stroke-width:1;fill:none"/><line x1="450" y1="44" x2="450" y2="216" style="stroke:var(--muted);stroke-width:1;fill:none"/><line x1="354" y1="192" x2="546" y2="192" style="stroke:var(--muted);stroke-width:1;fill:none"/><line x1="512" y1="44" x2="512" y2="216" style="stroke:var(--muted);stroke-width:1;fill:none"/><line x1="388" y1="68" x2="373.6" y2="53.6" style="stroke:var(--ex);stroke-width:3;fill:none"/><polygon points="366.9,46.9 377.5,50.5 370.5,57.5" style="fill:var(--ex)"/><line x1="450" y1="68" x2="450" y2="56.3" style="stroke:var(--ex);stroke-width:3;fill:none"/><polygon points="450,46.9 455,56.9 445,56.9" style="fill:var(--ex)"/><line x1="512" y1="68" x2="526.4" y2="53.6" style="stroke:var(--ex);stroke-width:3;fill:none"/><polygon points="533.1,46.9 529.5,57.5 522.5,50.5" style="fill:var(--ex)"/><line x1="388" y1="130" x2="376.3" y2="130" style="stroke:var(--ex);stroke-width:3;fill:none"/><polygon points="366.9,130 376.9,125 376.9,135" style="fill:var(--ex)"/><line x1="512" y1="130" x2="523.7" y2="130" style="stroke:var(--ex);stroke-width:3;fill:none"/><polygon points="533.1,130 523.1,135 523.1,125" style="fill:var(--ex)"/><line x1="388" y1="192" x2="373.6" y2="206.4" style="stroke:var(--ex);stroke-width:3;fill:none"/><polygon points="366.9,213.1 370.5,202.5 377.5,209.5" style="fill:var(--ex)"/><line x1="450" y1="192" x2="450" y2="203.7" style="stroke:var(--ex);stroke-width:3;fill:none"/><polygon points="450,213.1 445,203.1 455,203.1" style="fill:var(--ex)"/><line x1="512" y1="192" x2="526.4" y2="206.4" style="stroke:var(--ex);stroke-width:3;fill:none"/><polygon points="533.1,213.1 522.5,209.5 529.5,202.5" style="fill:var(--ex)"/><text class="t" x="456" y="148" style="font-size:13px;paint-order:stroke;stroke:var(--surface);stroke-width:4px;stroke-linejoin:round">x₀</text><line x1="64" y1="318" x2="256" y2="318" style="stroke:var(--muted);stroke-width:1;fill:none"/><line x1="98" y1="294" x2="98" y2="466" style="stroke:var(--muted);stroke-width:1;fill:none"/><line x1="64" y1="380" x2="256" y2="380" style="stroke:var(--muted);stroke-width:1;fill:none"/><line x1="160" y1="294" x2="160" y2="466" style="stroke:var(--muted);stroke-width:1;fill:none"/><line x1="64" y1="442" x2="256" y2="442" style="stroke:var(--muted);stroke-width:1;fill:none"/><line x1="222" y1="294" x2="222" y2="466" style="stroke:var(--muted);stroke-width:1;fill:none"/><line x1="98" y1="318" x2="99.4" y2="320.7" style="stroke:var(--thm);stroke-width:3;fill:none"/><polygon points="103.4,328.6 94.8,322.3 103.3,318" style="fill:var(--thm)"/><line x1="160" y1="318" x2="161.4" y2="315.9" style="stroke:var(--thm);stroke-width:3;fill:none"/><polygon points="165.4,310 164.3,318.6 157.9,314.2" style="fill:var(--thm)"/><line x1="222" y1="318" x2="225.5" y2="300.6" style="stroke:var(--thm);stroke-width:3;fill:none"/><polygon points="227.4,291.4 230.3,302.2 220.5,300.2" style="fill:var(--thm)"/><line x1="98" y1="380" x2="113.4" y2="386.8" style="stroke:var(--thm);stroke-width:3;fill:none"/><polygon points="122,390.6 110.8,391.1 114.9,382" style="fill:var(--thm)"/><line x1="160" y1="380" x2="175.1" y2="375" style="stroke:var(--thm);stroke-width:3;fill:none"/><polygon points="184,372 176.1,379.9 172.9,370.4" style="fill:var(--thm)"/><line x1="222" y1="380" x2="239.7" y2="360.4" style="stroke:var(--thm);stroke-width:3;fill:none"/><polygon points="246,353.4 243,364.2 235.6,357.5" style="fill:var(--thm)"/><line x1="98" y1="442" x2="131.5" y2="450.3" style="stroke:var(--thm);stroke-width:3;fill:none"/><polygon points="140.6,452.6 129.7,455 132.1,445.3" style="fill:var(--thm)"/><line x1="160" y1="442" x2="193.4" y2="435.7" style="stroke:var(--thm);stroke-width:3;fill:none"/><polygon points="202.6,434 193.7,440.8 191.8,430.9" style="fill:var(--thm)"/><line x1="222" y1="442" x2="256.6" y2="420.4" style="stroke:var(--thm);stroke-width:3;fill:none"/><polygon points="264.6,415.4 258.8,424.9 253.5,416.5" style="fill:var(--thm)"/><text class="t" x="166" y="398" style="font-size:13px;paint-order:stroke;stroke:var(--surface);stroke-width:4px;stroke-linejoin:round">x₀</text><line x1="354" y1="318" x2="546" y2="318" style="stroke:var(--muted);stroke-width:1;fill:none"/><line x1="388" y1="294" x2="388" y2="466" style="stroke:var(--muted);stroke-width:1;fill:none"/><line x1="354" y1="380" x2="546" y2="380" style="stroke:var(--muted);stroke-width:1;fill:none"/><line x1="450" y1="294" x2="450" y2="466" style="stroke:var(--muted);stroke-width:1;fill:none"/><line x1="354" y1="442" x2="546" y2="442" style="stroke:var(--muted);stroke-width:1;fill:none"/><line x1="512" y1="294" x2="512" y2="466" style="stroke:var(--muted);stroke-width:1;fill:none"/><line x1="388" y1="318" x2="373.6" y2="332.4" style="stroke:var(--ex);stroke-width:3;fill:none"/><polygon points="366.9,339.1 370.5,328.5 377.5,335.5" style="fill:var(--ex)"/><line x1="450" y1="318" x2="438.3" y2="318" style="stroke:var(--ex);stroke-width:3;fill:none"/><polygon points="428.9,318 438.9,313 438.9,323" style="fill:var(--ex)"/><line x1="512" y1="318" x2="497.6" y2="303.6" style="stroke:var(--ex);stroke-width:3;fill:none"/><polygon points="490.9,296.9 501.5,300.5 494.5,307.5" style="fill:var(--ex)"/><line x1="388" y1="380" x2="388" y2="391.7" style="stroke:var(--ex);stroke-width:3;fill:none"/><polygon points="388,401.1 383,391.1 393,391.1" style="fill:var(--ex)"/><line x1="512" y1="380" x2="512" y2="368.3" style="stroke:var(--ex);stroke-width:3;fill:none"/><polygon points="512,358.9 517,368.9 507,368.9" style="fill:var(--ex)"/><line x1="388" y1="442" x2="402.4" y2="456.4" style="stroke:var(--ex);stroke-width:3;fill:none"/><polygon points="409.1,463.1 398.5,459.5 405.5,452.5" style="fill:var(--ex)"/><line x1="450" y1="442" x2="461.7" y2="442" style="stroke:var(--ex);stroke-width:3;fill:none"/><polygon points="471.1,442 461.1,447 461.1,437" style="fill:var(--ex)"/><line x1="512" y1="442" x2="526.4" y2="427.6" style="stroke:var(--ex);stroke-width:3;fill:none"/><polygon points="533.1,420.9 529.5,431.5 522.5,424.5" style="fill:var(--ex)"/><text class="t" x="456" y="398" style="font-size:13px;paint-order:stroke;stroke:var(--surface);stroke-width:4px;stroke-linejoin:round">x₀</text><line x1="266" y1="130" x2="337.6" y2="130" style="stroke:var(--muted);stroke-width:2.6;fill:none"/><polygon points="346,130 337,134.4 337,125.6" style="fill:var(--muted)"/><text class="tm" x="306" y="120" style="text-anchor:middle">平均を</text><text class="tm" x="306" y="152" style="text-anchor:middle">差し引く</text><line x1="266" y1="380" x2="337.6" y2="380" style="stroke:var(--muted);stroke-width:2.6;fill:none"/><polygon points="346,380 337,384.4 337,375.6" style="fill:var(--muted)"/><text class="tm" x="306" y="370" style="text-anchor:middle">平均を</text><text class="tm" x="306" y="402" style="text-anchor:middle">差し引く</text><text class="tm" x="450" y="236" style="text-anchor:middle">→ x₀ に出入りするベクトル</text><text class="tm" x="450" y="486" style="text-anchor:middle">→ x₀ のまわりを渦巻くベクトル</text><text class="tm" x="160" y="236" style="text-anchor:middle">(x₀ の近くのベクトル場)</text><text class="tm" x="160" y="486" style="text-anchor:middle">(x₀ の近くのベクトル場)</text></svg>
+      <figcaption>上:発散が有限のケース。ベクトル場から平均(点 $\bm{x}_0$ での値)を差し引くと、$\bm{x}_0$ から外へ出ていく(あるいは内へ入ってくる)ベクトルが残る。下:回転が有限のケース。同じく平均を差し引くと、$\bm{x}_0$ のまわりを渦巻くベクトルが残る。(講義ノートの図1を、描き直しました。)</figcaption>
+    </figure>
+    <ul data-need="C">
+      <li><b>発散</b>:平均を差し引いてみると、<b>「点 $\bm{x}_0$ に向かって入ってくる、あるいは出ていくベクトルがどのくらいあるか」を定量化する量</b>であることが分かります(一様なベクトル場の発散はゼロ)。ベクトル場が「物質の流れ」を与えているなら、発散は「その流れによって、各点でその物質の密度が単位時間あたりにどのくらい増加/減少するか」を与えます(<b>流れ出す方が多い点、つまり密度が減っていく点で、発散が正</b>になることに注意)。ベクトル場が空間の微小変形を与えているなら、「微小変形による体積の増加/減少の度合い」を与えます。</li>
+      <li><b>回転</b>:同じく平均を差し引くと、点 $\bm{x}_0$ の周りに<b>渦巻いているベクトルの大きさ</b>を与えています(一様なベクトル場の回転はゼロ)。つまり、「ベクトル場がどのくらい渦巻いているか」を定量化しています。</li>
+    </ul>
+    <div data-need="C" class="box intuit">
+      <div class="label">直感で理解する:小さな箱と、小さな水車 <span class="need need-c">参考</span></div>
+      <p><b>発散</b>:ベクトル場を水の流れだと思い、点 $\bm{x}_0$ のまわりに<b>小さな箱</b>を置きます。箱から出ていく水の量と、入ってくる水の量の差(単位体積・単位時間あたり)が発散です。箱の中に<b>蛇口</b>(湧き出し)があれば出ていく方が多く $\nabla\cdot\bm{A}\gt0$、<b>排水口</b>(吸い込み)があれば $\nabla\cdot\bm{A}\lt0$。一様な流れは、入った分だけ出ていくので 0 です。箱の中に蛇口がない普通の流れで、出ていく方が多ければ、その分だけ箱の中の水が減っていきます。これが「発散が正の点では密度が減る」の意味です。</p>
+      <p><b>回転</b>:同じ点に、軸が自由に回る<b>小さな水車</b>を置きます。水車が回り出すなら、そこには渦があります。回転 $\nabla\times\bm{A}$ の<b>向き</b>は、水車が最もよく回るときの軸の向き(回る向きに右ねじを回したとき、ねじが進む向き)で、<b>大きさ</b>は回る勢い(水車の角速度のちょうど2倍)です。一様な流れでは、水車の両側を同じ速さの水が押すので、水車は回りません。</p>
+    </div>
+    <div data-need="X" class="box thm">
+      <div class="label">座標系によらない <span class="need need-x">不要</span></div>
+      <p>発散と回転は、<b>用いる座標系には依存しない</b>量です。直交行列 $T$($T^{\top}T=I$)で座標軸を回転させて新しい座標で書き直しても、
+      $$\nabla\cdot\bm{A}=\sum_i\frac{\partial}{\partial x_i}A_i(\bm{x})=\sum_i\frac{\partial}{\partial x'_i}A'_i(\bm{x}')\tag{2.7}$$
+      が成り立つ(回転 (2.8) も同様)。これらは直接計算で容易に確認できます。こうした事実は、<b>発散や回転が(3次元)ベクトル場を普遍的な形で特徴づける量</b>になっていることを示しています。</p>
+    </div>
+    <details data-need="X"><summary>(2.7) の確認(講義ノートの脚注11に対応する計算) <span class="need need-x">不要</span></summary>
+      <div class="box proof" data-need="X"><div class="label">確認 <span class="need need-x">不要</span></div>
+      <p>新しい基底 $\bm{e}'_i=T\bm{e}_i$ を使うと、位置は $\bm{x}=T\bm{x}'$(つまり $\bm{x}'=T^{\top}\bm{x}$)、ベクトルの成分は $\bm{A}'=T^{\top}\bm{A}$ と変わります。連鎖律より $\dfrac{\partial}{\partial x'_i}=\sum_j\dfrac{\partial x_j}{\partial x'_i}\dfrac{\partial}{\partial x_j}=\sum_jT_{ji}\partial_j$。したがって
+      $$\sum_i\partial'_iA'_i=\sum_i\sum_jT_{ji}\partial_j\sum_kT_{ki}A_k=\sum_{j,k}\Bigl(\sum_iT_{ji}T_{ki}\Bigr)\partial_jA_k=\sum_{j,k}(TT^{\top})_{jk}\,\partial_jA_k=\sum_j\partial_jA_j.$$
+      最後は $TT^{\top}=I$ を使いました。</p></div>
+    </details>
+
+    <h3 id="s5-4" data-need="B">5.4 例 2.1 と、問 [2-1] <span class="need need-b">必要</span> <span class="page-tag">p.6</span></h3>
+    <div data-need="B" class="box ex">
+      <div class="label">例 2.1 <span class="need need-b">必要</span></div>
+      <p>ベクトル場 $\bm{A}(\bm{x}):=\begin{pmatrix}ye^x\\xe^z\\ze^y\end{pmatrix}$、スカラー場 $\phi(\bm{x})=xy^2z^3$ について計算する。</p>
+      <p>$$\nabla\cdot\bm{A}=\frac{\partial}{\partial x}(ye^x)+\frac{\partial}{\partial y}(xe^z)+\frac{\partial}{\partial z}(ze^y)=ye^x+0+e^y=ye^x+e^y\tag{2.9}$$
+      $$\nabla\times\bm{A}=\begin{pmatrix}\partial_y(ze^y)-\partial_z(xe^z)\\\partial_z(ye^x)-\partial_x(ze^y)\\\partial_x(xe^z)-\partial_y(ye^x)\end{pmatrix}=\begin{pmatrix}ze^y-xe^z\\0\\e^z-e^x\end{pmatrix}\tag{2.10}$$
+      $$\nabla\phi=\begin{pmatrix}\partial_x(xy^2z^3)\\\partial_y(xy^2z^3)\\\partial_z(xy^2z^3)\end{pmatrix}=\begin{pmatrix}y^2z^3\\2xyz^3\\3xy^2z^2\end{pmatrix}\tag{2.11}$$</p>
+    </div>
+    <div data-need="C" class="box ex">
+      <div class="label">問 [2-1] <span class="need need-c">参考</span></div>
+      <p>任意の3次元ベクトル場 $\bm{A}$、任意のスカラー場 $\phi$ について、
+      $$\nabla\cdot(\nabla\times\bm{A})=0\tag{2.12}$$
+      $$\nabla\times(\nabla\phi)=\bm{0}\tag{2.13}$$
+      が成り立つことを確認せよ。</p>
+    </div>
+    <div data-need="C" class="box supp">
+      <div class="label">講義ノートにない補足:[2-1] の解答 <span class="need need-c">参考</span></div>
+      <p>必要なのは、2階までの偏導関数が連続($C^2$ 級)なので、<b>偏微分の順序を交換できる</b>:$\partial_i\partial_jA_k=\partial_j\partial_iA_k$ ということだけです。</p>
+      <p><b>(2.12)</b> 3つの項をそのまま書き出す:
+      $$\nabla\cdot(\nabla\times\bm{A})=\partial_1(\partial_2A_3-\partial_3A_2)+\partial_2(\partial_3A_1-\partial_1A_3)+\partial_3(\partial_1A_2-\partial_2A_1)$$
+      $$=(\partial_1\partial_2A_3-\partial_2\partial_1A_3)+(\partial_2\partial_3A_1-\partial_3\partial_2A_1)+(\partial_3\partial_1A_2-\partial_1\partial_3A_2)=0.$$
+      (カッコの中が、順序交換でそれぞれ0になる。)</p>
+      <p><b>(2.13)</b> $\nabla\phi=(\partial_1\phi,\partial_2\phi,\partial_3\phi)$ の回転の第1成分は $\partial_2(\partial_3\phi)-\partial_3(\partial_2\phi)=0$。第2、第3成分も同様に0。</p>
+      <p><b>ε 記号による別解:</b>$\nabla\cdot(\nabla\times\bm{A})=\sum_{i,j,k}\varepsilon_{ijk}\,\partial_i\partial_jA_k$。$\varepsilon_{ijk}$ は $i,j$ の入れ替えで符号が変わる(反対称)のに、$\partial_i\partial_j$ は入れ替えても同じ(対称)なので、$i\leftrightarrow j$ の項どうしが打ち消し合って総和は0になります。</p>
+      <p><b>意味:</b>「回転の発散は0」「勾配の回転は0」は、ベクトル解析の二大恒等式です。逆向きの主張(回転がゼロならポテンシャルが存在する、など)が、講義ノートの §2.5(ポテンシャルの存在)・§2.6(ヘルムホルツの定理)で重要になります(<a href="week-03.html#s2">第3回</a>)。</p>
+    </div>
+
+    <h3 id="s5-5" data-need="A">5.5 $\varepsilon\varepsilon$ の公式と、ベクトル三重積 <span class="need need-a">必須</span> <span class="page-tag">p.6</span></h3>
+    <p data-need="C">わざわざ新しい記号を導入して複雑にしただけに見えるかもしれませんが、繰り返しの掛け算や総和をとる際には、レヴィ=チヴィタ記号は計算を楽にし、見通しをよくします。そのご利益を感じられる公式が、これです。</p>
+    <div data-need="A" class="box thm">
+      <div class="label">公式 (2.14) <span class="need need-a">必須</span></div>
+      <p>$$\sum_{k=1}^{3}\varepsilon_{ijk}\varepsilon_{klm}=\delta_{il}\delta_{jm}-\delta_{im}\delta_{jl}$$
+      ($\delta_{ij}$ はクロネッカーのデルタ。)</p>
+    </div>
+    <details data-need="X"><summary>(2.14) の確認(講義ノートの脚注13) <span class="need need-x">不要</span></summary>
+      <div class="box proof" data-need="X"><div class="label">確認 <span class="need need-x">不要</span></div>
+      <p>左辺は、$i\ne j$ かつ $\{i,j\}=\{l,m\}$(集合として一致)の場合に限って、0でない値になりえます($k$ は残りの1つの数字に決まる)。そして、$i\ne j$ かつ $(i,j)=(l,m)$ のときは左辺も右辺も $1$、$i\ne j$ かつ $(i,j)=(m,l)$ のときは左辺も右辺も $-1$ になることは簡単に確認できます。</p>
+      <p>左辺がこのようになっていない場合も簡単です。$\{i,j\}\ne\{l,m\}$ のとき、右辺は明らかにゼロなので、左辺と右辺は一致。$i=j$ かつ $\{i,j\}=\{l,m\}$(つまり $i=j=l=m$)のとき、右辺は $1-1=0$ で、やはり左辺(0)と一致します。以上により、あらゆる場合に成り立つ。</p></div>
+    </details>
+    <p data-need="A">この公式は、<b>外積を連続してかける場合</b>に特に役に立ちます。たとえば、ベクトル三重積の公式
+    $$\bm{A}\times(\bm{B}\times\bm{C})=\bm{B}(\bm{A}\cdot\bm{C})-\bm{C}(\bm{A}\cdot\bm{B})\tag{2.15}$$
+    は、成分計算で直接示そうとすると面倒くさい。ところが公式 (2.14) を使うと、$\bm{A}\times(\bm{B}\times\bm{C})$ の $i$ 成分は
+    $$[\bm{A}\times(\bm{B}\times\bm{C})]_i=\sum_{j,k,l,m}\varepsilon_{ijk}A_j(\varepsilon_{klm}B_lC_m)=\sum_{j,l,m}(\delta_{il}\delta_{jm}-\delta_{im}\delta_{jl})A_jB_lC_m=B_i\sum_jA_jC_j-C_i\sum_jA_jB_j$$
+    $$=[\bm{B}(\bm{A}\cdot\bm{C})-\bm{C}(\bm{A}\cdot\bm{B})]_i\tag{2.16}$$
+    となり、直ちに導けます。(2行目の変形では、$\delta$ によって添字が付け替わります:たとえば $\sum_l\delta_{il}B_l=B_i$。)</p>
+
+    <div data-need="B" class="box ex">
+      <div class="label">問 [2-2] <span class="need need-b">必要</span></div>
+      <p>ベクトル場 $\bm{A}$ について、関係式
+      $$\bm{A}\times(\nabla\times\bm{A})=\nabla\Bigl(\frac12\bm{A}\cdot\bm{A}\Bigr)-(\bm{A}\cdot\nabla)\bm{A}\tag{2.17}$$
+      を導け。ただし
+      $$(\bm{A}\cdot\nabla)\bm{A}:=\Bigl(\sum_iA_i\frac{\partial}{\partial x_i}\Bigr)\bm{A}=\begin{pmatrix}\sum_iA_i\frac{\partial}{\partial x_i}A_1\\\sum_iA_i\frac{\partial}{\partial x_i}A_2\\\sum_iA_i\frac{\partial}{\partial x_i}A_3\end{pmatrix}\tag{2.18}$$
+      という略記を用いた。</p>
+    </div>
+    <div data-need="B" class="box supp">
+      <div class="label">講義ノートにない補足:[2-2] の解答 <span class="need need-b">必要</span></div>
+      <p>(2.16) と同じ流れで計算します($\bm{B}\times\bm{C}$ の代わりに $\nabla\times\bm{A}$ を使う)。$[\nabla\times\bm{A}]_k=\sum_{l,m}\varepsilon_{klm}\partial_lA_m$ なので、
+      $$[\bm{A}\times(\nabla\times\bm{A})]_i=\sum_{j,k}\varepsilon_{ijk}A_j\sum_{l,m}\varepsilon_{klm}\partial_lA_m=\sum_{j,l,m}(\delta_{il}\delta_{jm}-\delta_{im}\delta_{jl})A_j\,\partial_lA_m$$
+      $$=\sum_jA_j\,\partial_iA_j-\sum_jA_j\,\partial_jA_i.$$
+      第1項は、積の微分から $\sum_jA_j\partial_iA_j=\partial_i\Bigl(\frac12\sum_jA_j^2\Bigr)=\Bigl[\nabla\Bigl(\frac12\bm{A}\cdot\bm{A}\Bigr)\Bigr]_i$。第2項は $\sum_jA_j\partial_jA_i=[(\bm{A}\cdot\nabla)\bm{A}]_i$。よって (2.17) が成り立つ。<b>(この式は、流体力学の運動方程式などで現れる、有名な恒等式です。)</b></p>
+    </div>
+    <div data-need="A" class="box kakomon"><div class="label">過去問:2023年度 第1回中間 [1](2点) <span class="need need-a">必須</span></div>
+      <p class="kk-tools"><b>道具がそろったので、過去問を解いてみます。</b>使うもの:公式 (2.14)($\varepsilon\varepsilon$ の公式)と、上の [2-2] と同じ「成分で書く → (2.14) → 積の微分で展開」の流れ。</p>
+      <p><b>問題(要旨)</b> $\nabla\times(\bm{A}\times\bm{B})$ を、$P:=\nabla(\bm{A}\cdot\bm{B})$、$Q:=\bm{A}(\nabla\cdot\bm{B})$、$R:=\bm{B}(\nabla\cdot\bm{A})$、$S:=(\bm{A}\cdot\nabla)\bm{B}$、$T:=(\bm{B}\cdot\nabla)\bm{A}$ を用いた式で書け(例:$1+S+T$、$2P+R-3S$ のような形で)。ここで $(\bm{A}\cdot\nabla)\bm{B}$ は、第 $i$ 成分が $\sum_jA_j\partial_jB_i$ のベクトルです。</p>
+      <details class="kk-ans"><summary>解答を見る</summary>
+      <p>$\varepsilon\varepsilon$ の公式 $\sum_k\varepsilon_{ijk}\varepsilon_{klm}=\delta_{il}\delta_{jm}-\delta_{im}\delta_{jl}$ を使う。
+      $$\begin{aligned}[\nabla\times(\bm{A}\times\bm{B})]_i&=\sum_{j,k}\varepsilon_{ijk}\partial_j\sum_{l,m}\varepsilon_{klm}A_lB_m\\&=\sum_{j,l,m}(\delta_{il}\delta_{jm}-\delta_{im}\delta_{jl})\partial_j(A_lB_m)\\&=\sum_j\partial_j(A_iB_j)-\sum_j\partial_j(A_jB_i).\end{aligned}$$
+      積の微分で展開すると
+      $$=\underbrace{\sum_jB_j\partial_jA_i}_{T}+\underbrace{A_i\sum_j\partial_jB_j}_{Q}-\underbrace{\sum_jA_j\partial_jB_i}_{S}-\underbrace{B_i\sum_j\partial_jA_j}_{R}.$$
+      よって $\boldsymbol{\nabla\times(\bm{A}\times\bm{B})=Q-R-S+T}$($P$ は出てこない)。</p>
+      <p>覚え方:「$\varepsilon\varepsilon$ の公式で2項 → それぞれ積の微分で2項 → 合計4項」。</p>
+      </details>
+    </div><!--kakomon-->
+    <div data-need="A" class="box kakomon renshu"><div class="label">練習 1-1(2023年度 第1回中間 [1] と同じ型(ε で恒等式)) <span class="need need-a">必須</span></div>
+      <p><b>問題</b> $\nabla\cdot(\bm{A}\times\bm{B})=\bm{B}\cdot(\nabla\times\bm{A})-\bm{A}\cdot(\nabla\times\bm{B})$ を、$\varepsilon_{ijk}$ を使って示せ。</p>
+      <details class="kk-ans"><summary>解答を見る</summary>
+      <p>成分で書くと $\nabla\cdot(\bm{A}\times\bm{B})=\sum_i\partial_i\sum_{j,k}\varepsilon_{ijk}A_jB_k$。積の微分で2つに分ける:
+      $$=\sum_{i,j,k}\varepsilon_{ijk}(\partial_iA_j)B_k+\sum_{i,j,k}\varepsilon_{ijk}A_j(\partial_iB_k).$$</p>
+      <p><b>1項目</b>:添字を巡回させても $\varepsilon$ は変わらない($\varepsilon_{ijk}=\varepsilon_{kij}$)ので、$\sum_kB_k\sum_{i,j}\varepsilon_{kij}\partial_iA_j=\sum_kB_k(\nabla\times\bm{A})_k=\bm{B}\cdot(\nabla\times\bm{A})$。</p>
+      <p><b>2項目</b>:2つの添字を入れ替えると符号が変わる($\varepsilon_{ijk}=-\varepsilon_{jik}$)ので、$-\sum_jA_j\sum_{i,k}\varepsilon_{jik}\partial_iB_k=-\bm{A}\cdot(\nabla\times\bm{B})$。$\blacksquare$</p>
+      <p>ポイント:$(\nabla\times\bm{A})_k=\sum_{i,j}\varepsilon_{kij}\partial_iA_j$ の形(<b>回転の成分の添字が先頭</b>)に並べ替えるだけです。</p>
+      </details>
+    </div><!--kakomon-->
+    <div data-need="A" class="box kakomon renshu"><div class="label">練習 1-2(2023年度 第1回中間 [1] と同じ型(ε で恒等式)) <span class="need need-a">必須</span></div>
+      <p><b>問題</b> スカラー場 $\phi$ とベクトル場 $\bm{A}$ について、$\nabla\times(\phi\bm{A})$ を $\phi$、$\nabla\phi$、$\bm{A}$、$\nabla\times\bm{A}$ で表せ。</p>
+      <details class="kk-ans"><summary>解答を見る</summary>
+      <p>$[\nabla\times(\phi\bm{A})]_i=\sum_{j,k}\varepsilon_{ijk}\partial_j(\phi A_k)=\phi\sum_{j,k}\varepsilon_{ijk}\partial_jA_k+\sum_{j,k}\varepsilon_{ijk}(\partial_j\phi)A_k$。</p>
+      <p>1項目は $\phi(\nabla\times\bm{A})_i$、2項目は外積の定義そのもので $(\nabla\phi\times\bm{A})_i$。よって
+      $$\boldsymbol{\nabla\times(\phi\bm{A})=\phi\,\nabla\times\bm{A}+\nabla\phi\times\bm{A}}.$$</p>
+      <p>確かめ:$\bm{A}$ が定ベクトルなら $\nabla\times\bm{A}=\bm{0}$ で、答えは $\nabla\phi\times\bm{A}$ だけ。順番を $\bm{A}\times\nabla\phi$ にすると符号が逆なので注意。</p>
+      </details>
+    </div><!--kakomon-->
+
+    <h3 id="s5-6" data-need="C">5.6 ラプラシアン <span class="need need-c">参考</span> <span class="page-tag">p.7</span></h3>
+    <p data-need="X">最後に、一般次元の場に対する<b>ラプラシアン</b>(Laplacian)を導入します(数学者ピエール・シモン・ラプラスにちなむ)。</p>
+    <div data-need="C" class="box def">
+      <div class="label">定義(ラプラシアン) (2.19) <span class="need need-c">参考</span></div>
+      <p>$$\Delta=\sum_i\frac{\partial^2}{\partial x_i^2}\qquad(\text{例:}\ \Delta\phi=\partial_1^2\phi+\partial_2^2\phi+\partial_3^2\phi)$$</p>
+    </div>
+    <ul data-need="C">
+      <li>ラプラシアンが<b>ベクトル場</b>に作用する場合には、<b>ベクトル場の各成分にラプラシアンを作用させる</b>慣例になっている(2.21):$\Delta\bm{A}:=(\Delta A_1,\Delta A_2,\Delta A_3)^{\top}$。</li>
+      <li>スカラー場の場合は $\Delta\phi=\nabla\cdot(\nabla\phi)$(勾配の発散)。しかし、<b>ベクトル場の場合は $\Delta\bm{A}\ne\nabla(\nabla\cdot\bm{A})$</b> である点に注意。むしろ、両者の違いは次のきれいな式で表されます:
+      $$\nabla\times(\nabla\times\bm{A})=\nabla(\nabla\cdot\bm{A})-\Delta\bm{A}\tag{2.22}$$</li>
+    </ul>
+    <div data-need="X" class="box proof"><div class="label">(2.22) の証明(講義ノート (2.23)) <span class="need need-x">不要</span></div>
+      <p>公式 (2.14) を使うと
+      $$[\nabla\times(\nabla\times\bm{A})]_i=\sum_{j,k,l,m}\varepsilon_{ijk}\varepsilon_{klm}\partial_j\partial_lA_m=\sum_{j,l,m}(\delta_{il}\delta_{jm}-\delta_{im}\delta_{jl})\partial_j\partial_lA_m=\partial_i\Bigl(\sum_j\partial_jA_j\Bigr)-\sum_j\partial_j^2A_i$$
+      $$=[\nabla(\nabla\cdot\bm{A})-\Delta\bm{A}]_i.$$
+      (ただし、$\partial_i:=\dfrac{\partial}{\partial x_i}$ (2.24) という略記を用いた。)</p></div>
+
+    <h3 id="s5-7" data-need="X">5.7 ラプラシアンの本当の意味 <span class="need need-x">不要</span> <span class="page-tag">脚注15</span></h3>
+    <p data-need="X">ラプラシアンは、式としては「各方向の2階微分(勾配の変化の度合い)を足し上げたもの」ですが、<b>その本当の意味は「ある点の周囲での平均と、その点(中心)での値とのずれ」</b>です(講義ノートの脚注15)。$n$ 次元空間中のスカラー場 $\phi$ が点 $\bm{x}$ で滑らかなとき、点 $\bm{x}$ を中心とする半径 $r$ の超球面を $S_r$、その面積を $|S_r|$ として
+    $$\Delta\phi(\bm{x})=\lim_{r\to0}\frac{2n}{r^2}\left(\frac{1}{|S_r|}\int_{S_r}\bigl(\phi(\bm{x}')-\phi(\bm{x})\bigr)d\bm{x}'\right)\tag{2.20}$$
+    が成り立ちます(これは $\phi(\bm{x}')$ を $\bm{x}$ を中心にテイラー展開すると示せる)。括弧の中が、「周囲の球面上での平均 − 中心の値」です。</p>
+    <figure data-need="X" class="fig">
+      <svg viewBox="0 0 520 232" width="520" role="img" aria-label="ラプラシアンと周りの平均"><line x1="20" y1="200" x2="240" y2="200" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><polyline points="30,85.1 35,94 40,102.4 45,110.3 50,117.8 55,124.9 60,131.5 65,137.6 70,143.3 75,148.5 80,153.3 85,157.6 90,161.5 95,164.9 100,167.8 105,170.3 110,172.4 115,174 120,175.1 125,175.8 130,176 135,175.8 140,175.1 145,174 150,172.4 155,170.3 160,167.8 165,164.9 170,161.5 175,157.6 180,153.3 185,148.5 190,143.3 195,137.6 200,131.5 205,124.9 210,117.8 215,110.3 220,102.4 225,94 230,85.1" style="fill:none;stroke:var(--accent);stroke-width:2.6"/><line x1="70" y1="143.3" x2="190" y2="143.3" style="stroke:var(--muted);stroke-width:1.1;stroke-dasharray:5 4;fill:none"/><circle cx="130" cy="176" r="5.5" style="fill:var(--accent)"/><circle cx="70" cy="143.3" r="4" style="fill:var(--muted)"/><circle cx="190" cy="143.3" r="4" style="fill:var(--muted)"/><circle cx="130" cy="143.3" r="5.5" style="fill:var(--thm)"/><text class="t" x="142" y="196" style="paint-order:stroke;stroke:var(--surface);stroke-width:4px;stroke-linejoin:round">φ(x)</text><text class="tt" x="200" y="135.3" style="paint-order:stroke;stroke:var(--surface);stroke-width:4px;stroke-linejoin:round">周りの平均</text><text class="t" x="70" y="216" style="text-anchor:middle">x − h</text><text class="t" x="130" y="216" style="text-anchor:middle">x</text><text class="t" x="190" y="216" style="text-anchor:middle">x + h</text><line x1="280" y1="200" x2="500" y2="200" style="stroke:var(--muted);stroke-width:1.4;fill:none"/><polyline points="290,160.9 295,152 300,143.6 305,135.7 310,128.2 315,121.1 320,114.5 325,108.4 330,102.7 335,97.5 340,92.7 345,88.4 350,84.5 355,81.1 360,78.2 365,75.7 370,73.6 375,72 380,70.9 385,70.2 390,70 395,70.2 400,70.9 405,72 410,73.6 415,75.7 420,78.2 425,81.1 430,84.5 435,88.4 440,92.7 445,97.5 450,102.7 455,108.4 460,114.5 465,121.1 470,128.2 475,135.7 480,143.6 485,152 490,160.9" style="fill:none;stroke:var(--accent);stroke-width:2.6"/><line x1="330" y1="102.7" x2="450" y2="102.7" style="stroke:var(--muted);stroke-width:1.1;stroke-dasharray:5 4;fill:none"/><circle cx="390" cy="70" r="5.5" style="fill:var(--accent)"/><circle cx="330" cy="102.7" r="4" style="fill:var(--muted)"/><circle cx="450" cy="102.7" r="4" style="fill:var(--muted)"/><circle cx="390" cy="102.7" r="5.5" style="fill:var(--thm)"/><text class="t" x="402" y="60" style="paint-order:stroke;stroke:var(--surface);stroke-width:4px;stroke-linejoin:round">φ(x)</text><text class="tt" x="460" y="124.7" style="paint-order:stroke;stroke:var(--surface);stroke-width:4px;stroke-linejoin:round">周りの平均</text><text class="t" x="330" y="216" style="text-anchor:middle">x − h</text><text class="t" x="390" y="216" style="text-anchor:middle">x</text><text class="t" x="450" y="216" style="text-anchor:middle">x + h</text><text class="ta" x="130" y="24" style="text-anchor:middle">周りの平均 &gt; φ(x)</text><text class="tm" x="130" y="42" style="text-anchor:middle">→ Δφ(x) &gt; 0(谷底)</text><text class="ta" x="390" y="24" style="text-anchor:middle">周りの平均 &lt; φ(x)</text><text class="tm" x="390" y="42" style="text-anchor:middle">→ Δφ(x) &lt; 0(山頂)</text></svg>
+      <figcaption>1次元で見ると、左は谷底($\Delta\phi\gt0$:周りの平均の方が $\phi(x)$ より高い)、右は山頂($\Delta\phi\lt0$:周りの平均の方が低い)。$\Delta\phi=0$ は、「周りの平均と中心の値がちょうど等しい」状態です。</figcaption>
+    </figure>
+    <div data-need="X" class="box supp">
+      <div class="label">講義ノートにない補足:1次元で確かめる <span class="need need-x">不要</span></div>
+      <p>1次元($n=1$)で、「周囲の球面」は両側の2点 $x\pm r$ です。テイラー展開 $\phi(x\pm r)=\phi(x)\pm r\phi'(x)+\tfrac12r^2\phi''(x)+\cdots$ を足すと、$\dfrac{\phi(x+r)+\phi(x-r)}{2}-\phi(x)=\tfrac12r^2\phi''(x)+\cdots$。これに $\dfrac{2n}{r^2}=\dfrac{2}{r^2}$ を掛けて $r\to0$ とすると $\phi''(x)=\Delta\phi(x)$ が得られ、(2.20) と確かに一致します。</p>
+    </div>
+    <div data-need="X" class="box intuit">
+      <div class="label">直感で理解する:熱は「周りの平均」に近づこうとする <span class="need need-x">不要</span></div>
+      <p>金属の板の温度 $T$ を考えます。周りより冷たい点(谷底、$\Delta T\gt0$)には周りから熱が流れ込んで温まり、周りより熱い点(山頂、$\Delta T\lt0$)からは熱が逃げて冷えます。熱の伝わり方を表す方程式(熱伝導の方程式)$\dfrac{\partial T}{\partial t}=\kappa\,\Delta T$($\kappa\gt0$ は定数)は、まさに「各点の温度は、<b>周りの平均とのずれ</b> $\Delta T$ に比例する速さで、周りの平均に近づく」と言っています。ラプラシアンは、このように「周りとの差」を測る量として、物理のあちこちに現れます。</p>
+    </div>
+
+
+    <!-- ===================== 3 ===================== -->
+
+    <h2 id="s6" data-need="B">6. 具体例で練習(講義ノートにない補足) <span class="need need-b">必要</span> <span class="page-tag">補足</span></h2>
+    <p data-need="C">この回の話を、手を動かして確かめます。ここは講義ノートにはなく、私が作った練習問題と解答です。</p>
     <div data-need="X" class="box ex">
       <div class="label">問題 A:スカラー場かベクトル場か <span class="need need-x">不要</span></div>
       <p>次の量は、スカラー場とベクトル場のどちらか。(1) 教室の各点の気温 (2) 川の各点の水の流速 (3) 地球のまわりの各点で、質量 $m$ の物体が受ける重力 (4) 池の各点の水深。</p>
@@ -247,7 +520,6 @@
     <div data-need="X" class="box proof"><div class="label">解答 <span class="need need-x">不要</span></div>
       <p>(1) スカラー場(数が1つ)。(2) ベクトル場(速さだけでなく向きがある)。(3) ベクトル場(力は向きをもつ)。(4) スカラー場。</p>
       <p>判定のしかたは、「各点で、何個の数が決まるか」です。1個ならスカラー場、(3次元なら)3個の成分が決まるならベクトル場。</p></div>
-
     <div data-need="C" class="box ex">
       <div class="label">問題 B:クーロンの法則と距離 <span class="need need-c">参考</span></div>
       <p>$q=1\ \mathrm{nC}=10^{-9}\ \mathrm{C}$ の点電荷から、距離 $1\ \mathrm{m}$、$2\ \mathrm{m}$ の点での電場の大きさを求めよ。$\dfrac{1}{4\pi\varepsilon_0}\approx 9.0\times10^{9}\ \mathrm{N\cdot m^2/C^2}$ とする。</p>
@@ -255,7 +527,6 @@
     <div data-need="C" class="box proof"><div class="label">解答 <span class="need need-c">参考</span></div>
       <p>$E=\dfrac{1}{4\pi\varepsilon_0}\dfrac{q}{r^2}$ に代入して、$r=1\ \mathrm{m}$ のとき $E=9.0\times10^{9}\times\dfrac{10^{-9}}{1^2}=9.0\ \mathrm{N/C}$。$r=2\ \mathrm{m}$ のとき $E=9.0\times10^{9}\times\dfrac{10^{-9}}{2^2}=2.25\ \mathrm{N/C}$。</p>
       <p>距離が2倍になると、電場の大きさは $1/2^2=1/4$ になります(距離の2乗に反比例)。</p></div>
-
     <div data-need="B" class="box ex">
       <div class="label">問題 C:電場の重ね合わせ <span class="need need-b">必要</span></div>
       <p>同じ正の電荷 $q$ を $(-a,0)$ と $(a,0)$ に置く(2次元の断面で考える)。$y$ 軸上の点 $(0,y)$($y\gt0$)での電場を求めよ。</p>
@@ -265,10 +536,9 @@
       <p>$x$ 成分は左右の電荷が作る分が<b>打ち消し合って</b>0になります(対称性)。$y$ 成分は、それぞれ「大きさ × $\dfrac{y}{\sqrt{a^2+y^2}}$」(電荷から点への向きの $y$ 成分の比)で、2つ分を足して
       $$E_y=2\cdot\frac{1}{4\pi\varepsilon_0}\frac{q}{a^2+y^2}\cdot\frac{y}{\sqrt{a^2+y^2}}=\frac{q}{2\pi\varepsilon_0}\frac{y}{(a^2+y^2)^{3/2}}.$$
       $y\gg a$(遠く)では $E_y\approx\dfrac{2q}{4\pi\varepsilon_0\,y^2}$ となり、「電荷 $2q$ の点電荷が原点にある」ときの電場に近づきます。</p></div>
-
     <div data-need="C" class="box ex">
       <div class="label">問題 D(先取り):ガウスの法則の意味を、点電荷で確かめる <span class="need need-c">参考</span></div>
-      <p>原点の点電荷 $q$ を中心とする、半径 $l$ の球面を考える。球面の上で、電場の大きさ $E$ に球面の面積 $4\pi l^2$ を掛けた量を求めよ。(これは、第4回(講義ノート §3.1)でガウスの法則 $\nabla\cdot\bm{E}=\rho/\varepsilon_0$ を導くときに使う計算です。)</p>
+      <p>原点の点電荷 $q$ を中心とする、半径 $l$ の球面を考える。球面の上で、電場の大きさ $E$ に球面の面積 $4\pi l^2$ を掛けた量を求めよ。(これは、第3回(講義ノート §3.1)でガウスの法則 $\nabla\cdot\bm{E}=\rho/\varepsilon_0$ を導くときに使う計算です。)</p>
     </div>
     <div data-need="C" class="box proof"><div class="label">解答 <span class="need need-c">参考</span></div>
       <p>球面上では電場は動径方向を向き、大きさは $E=\dfrac{q}{4\pi\varepsilon_0l^2}$。したがって
@@ -281,7 +551,27 @@
     </div>
 
     <!-- ===================== 6 ===================== -->
-    <h2 id="s6" data-need="C">6. まとめ(この回で覚えること) <span class="need need-c">参考</span></h2>
+
+    <div data-need="B" class="box ex">
+      <div class="label">問題 E:勾配・発散・回転の計算 <span class="need need-b">必要</span></div>
+      <p>$\bm{A}=(x^2y,\ yz,\ zx)$ の $\nabla\cdot\bm{A}$ と $\nabla\times\bm{A}$ を求め、$\nabla\cdot(\nabla\times\bm{A})=0$ を確かめよ。</p>
+    </div>
+    <div data-need="B" class="box proof"><div class="label">解答 <span class="need need-b">必要</span></div>
+      <p>$A_1=x^2y,\ A_2=yz,\ A_3=zx$。
+      $$\nabla\cdot\bm{A}=\partial_x(x^2y)+\partial_y(yz)+\partial_z(zx)=2xy+z+x.$$
+      $$\nabla\times\bm{A}=\bigl(\partial_yA_3-\partial_zA_2,\ \partial_zA_1-\partial_xA_3,\ \partial_xA_2-\partial_yA_1\bigr)=(0-y,\ 0-z,\ 0-x^2)=(-y,\ -z,\ -x^2).$$
+      回転の発散は $\partial_x(-y)+\partial_y(-z)+\partial_z(-x^2)=0$。確かに (2.12) が成り立っています。</p></div>
+    <div data-need="C" class="box ex">
+      <div class="label">問題 F:$r=|\bm{x}|$ の関数の微分(点電荷の電場の形) <span class="need need-c">参考</span></div>
+      <p>$r=\sqrt{x^2+y^2+z^2}$ とする。(1) $\nabla r$ と $\nabla(1/r)$。(2) $r\ne0$ で $\nabla\cdot\dfrac{\bm{x}}{r^3}=0$ を示せ。(3) $r\ne0$ で $\Delta\dfrac1r=0$ を示せ。</p>
+    </div>
+    <div data-need="C" class="box proof"><div class="label">解答 <span class="need need-c">参考</span></div>
+      <p>(1) $\partial_ir=\dfrac{x_i}{r}$ なので $\nabla r=\dfrac{\bm{x}}{r}$(動径方向の単位ベクトル)。連鎖律より $\partial_i\dfrac1r=-\dfrac{1}{r^2}\partial_ir=-\dfrac{x_i}{r^3}$ なので $\nabla\dfrac1r=-\dfrac{\bm{x}}{r^3}$。</p>
+      <p>(2) $\partial_i\dfrac{x_i}{r^3}=\dfrac{1}{r^3}+x_i\cdot\Bigl(-\dfrac{3}{r^4}\Bigr)\dfrac{x_i}{r}=\dfrac{1}{r^3}-\dfrac{3x_i^2}{r^5}$。$i=1,2,3$ で足すと $\dfrac{3}{r^3}-\dfrac{3(x_1^2+x_2^2+x_3^2)}{r^5}=\dfrac3{r^3}-\dfrac{3r^2}{r^5}=0$。</p>
+      <p>(3) (1) より $\Delta\dfrac1r=\nabla\cdot\Bigl(\nabla\dfrac1r\Bigr)=-\nabla\cdot\dfrac{\bm{x}}{r^3}=0$((2) より)。</p>
+      <p><b>意味:</b>点電荷の電場 $\bm{E}\propto\bm{x}/r^3$(クーロンの法則)は、原点以外では<b>発散がゼロ</b>で、$\bm{E}=-\nabla\bigl(\tfrac{q}{4\pi\varepsilon_0r}\bigr)$ とポテンシャル $1/r$ を使って書け、そのポテンシャルは調和関数です。原点($r=0$)では特異で、そこに点電荷(デルタ関数)がある、という話は第3回(講義ノート §3.1)で出てきます。</p></div>
+
+    <h2 id="s7" data-need="B">7. まとめ(この回で覚えること) <span class="need need-b">必要</span></h2>
     <ul data-need="C">
       <li><b>講義の流れ</b>:ベクトル解析 → 電磁気学の諸法則(マクスウェル方程式を一つずつ導入) → 電磁波(ハイライト) → 余裕があれば特殊相対論。</li>
       <li><b>場</b>とは、空間の各点に数やベクトルが割り当てられたもの。数なら<b>スカラー場</b>(実質は多変数関数)、ベクトルなら<b>ベクトル場</b>(多変数関数を束ねたもの)。電磁気学は<b>電磁場の理論</b>。</li>
@@ -291,13 +581,28 @@
     </ul>
 
     <!-- ===================== 7 ===================== -->
-    <h2 id="s7" data-need="X">7. この回のノートについてのメモ <span class="need need-x">不要</span></h2>
-    <p data-need="X">板書の写真ではなく、<b>文章で書かれた講義ノート(PDF)</b>をもとにまとめました。ページ番号は、講義ノートの各ページ下に印刷されている番号を使っています。補足として足した部分(黄色の枠)、基礎ページの内容、問題と解答は、Claude が書き足したもので、講義ノートにはありません。</p>
+
+    <ul data-need="B">
+      <li><b>ナブラ</b> $\nabla=(\partial_1,\dots,\partial_n)$。<b>勾配</b> $\nabla\phi$(スカラー → ベクトル)、<b>発散</b> $\nabla\cdot\bm{A}=\sum\partial_iA_i$(ベクトル → スカラー)、<b>回転</b> $\nabla\times\bm{A}$(3次元のベクトル → ベクトル)、<b>ラプラシアン</b> $\Delta=\sum\partial_i^2$(ベクトル場には成分ごとに作用)。</li>
+      <li><b>意味</b>:発散は「湧き出し・吸い込み」(小さな箱からの出入りの差)、回転は「渦」(小さな水車を回す勢い)、ラプラシアンは「周りの平均と中心の値のずれ」。発散・回転は座標系によらない。</li>
+      <li><b>恒等式</b>:$\nabla\cdot(\nabla\times\bm{A})=0$、$\nabla\times(\nabla\phi)=\bm{0}$、$\nabla\times(\nabla\times\bm{A})=\nabla(\nabla\cdot\bm{A})-\Delta\bm{A}$。計算には<b>レヴィ=チヴィタ記号</b>と $\sum_k\varepsilon_{ijk}\varepsilon_{klm}=\delta_{il}\delta_{jm}-\delta_{im}\delta_{jl}$ が便利。</li>
+    </ul>
+
+    <h2 id="s8" data-need="X">8. この回のノートについてのメモ <span class="need need-x">不要</span></h2>
+    <p data-need="X">板書の写真ではなく、<b>文章で書かれた講義ノート(PDF)</b>の p.1〜p.7(§1、§2.1)をもとにまとめました。ページ番号は、講義ノートの各ページ下に印刷されている番号です。<b>回の分け方</b>:実際の授業の日程(10/2 §1・§2.1、10/9 §2.2〜§2.4、10/16 §2.5〜§2.6・§3.1〜§3.2、10/23 休講、10/30 §3.3〜§3.4・§4.1〜§4.2、11/6 §4.3・§5.1〜§5.2)に合わせて分けています(2026-11-13 に、それまでの7回の分け方から組み直しました)。</p>
+
     <ol data-need="X">
       <li><b>「電磁力学」と「電磁気学」</b>:講義ノートのタイトルは「電磁気学:講義ノート」なので、このサイトでも科目名は「電磁気学」としました。</li>
       <li><b>クーロンの法則の式の書き方</b>:講義ノートには、大きさだけの式 (1.1) と、ベクトルで書いた式 (3.1)(p.16、次の章)があります。この回の基礎の枠では、後者の形も使って説明しました。</li>
       <li><b>§1.4 の内容</b>:この節は、講義ノート自身が「現時点で分からなくてよい」と断っています。ここでは、4つの混乱要因を整理して並べ直し、表にまとめました。意味が分からない式(ガウスの法則など)は、第2回以降で扱われます。</li>
       <li>この回には、講義ノートの誤りと思われる箇所はありませんでした。</li>
+    </ol>
+
+    <p data-need="X">講義ノートの記述で、誤り(または誤記)と判断して直した箇所、読み替えた箇所は次のとおりです。</p>
+
+    <ol data-need="X">
+      <li><b>脚注11(p.5)の変換</b>:基底を $\bm{e}'_i=T\bm{e}_i$ に取り替えるとき、位置の成分は $\bm{x}'=T^{\top}\bm{x}$ となるのに、ベクトル場については $\bm{A}'=T\bm{A}$ と書かれています。成分の変換としては $\bm{A}'=T^{\top}\bm{A}$($=T^{-1}\bm{A}$)が整合的だと思われるので、確認の計算ではそちらを使いました。結論(発散・回転が座標系によらない)は同じです。</li>
+      <li><b>発散の意味(p.5)</b>:「各点の密度が減少する場合に発散が正」という説明は、蛇口(湧き出し)のない普通の流れについての話なので、そのことを直感の枠で補いました。</li>
     </ol>
 
     <nav class="pager">
