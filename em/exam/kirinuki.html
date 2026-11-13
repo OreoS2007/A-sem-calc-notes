@@ -508,7 +508,26 @@
         <figcaption>中心間距離 $2b$、半径 $l\lt b$ の2つの球殻(重ならない)。</figcaption>
       </figure>
       <p>各球殻の全電荷は $Q=4\pi l^2\sigma$。(3.28) $U=\frac12\int\rho\phi\,d\bm{r}$ を使い、$\phi=\phi_1+\phi_2$(各球殻が作る電位)と分けると、<b>自己エネルギー2つ + 相互作用エネルギー</b>になります。</p>
-      <p><b>(1) 自己エネルギー</b>:球殻1の電荷がその球殻上に作る電位は、<a href="../weeks/week-05.html#s2-2">2.2</a> の補足(球殻の電場と電位)より表面で $\dfrac{Q}{4\pi\varepsilon_0l}$(一定)。よって $\dfrac12\cdot Q\cdot\dfrac{Q}{4\pi\varepsilon_0l}=\dfrac{Q^2}{8\pi\varepsilon_0l}$。(2つの球殻で同じ。確認:(3.33) で、外側だけに $E=\frac{Q}{4\pi\varepsilon_0r^2}$ があるので $\frac{\varepsilon_0}{2}\int_l^\infty\frac{Q^2}{16\pi^2\varepsilon_0^2r^4}4\pi r^2dr=\frac{Q^2}{8\pi\varepsilon_0}\int_l^\infty\frac{dr}{r^2}=\frac{Q^2}{8\pi\varepsilon_0l}$ で一致。)</p>
+      <p><b>(1) 自己エネルギー</b>:<b>球殻1つ</b>(半径 $l$、電荷 $Q$ が表面に一様)を、何もない状態から組み立てるのに必要なエネルギーです。2つの球殻で同じ値なので、1つ分を求めます。</p>
+      <p><b>準備:球殻の電場と電位</b>(<a href="../weeks/week-05.html#s2-2">2.2</a> の補足、例 3.1)。球対称なので、半径 $r$ の球面にガウスの法則を使うと、内側($r\lt l$)は中に電荷がないので $E=0$、外側($r\gt l$)は $4\pi r^2E=\frac{Q}{\varepsilon_0}$ より $E=\dfrac{Q}{4\pi\varepsilon_0r^2}$(中心の点電荷 $Q$ と同じ)。電位(無限遠を 0)は $\phi(r)=\int_r^\infty E\,dr'$ なので、$r\ge l$ で $\phi=\dfrac{Q}{4\pi\varepsilon_0r}$。球殻の上($r=l$)では $\phi=\dfrac{Q}{4\pi\varepsilon_0l}$ で、<b>球殻のどの点でも同じ値</b>です(内側も電場が 0 なので、この値のまま)。</p>
+      <p><b>方法1:(3.28) $U=\frac12\int\rho\phi\,d\bm{r}$ を使う。</b></p>
+      <ul>
+        <li>電荷は表面にしかないので、体積積分を面積分に直す:$\rho\,d\bm{r}\to\sigma\,dS$。$U=\frac12\int_{\text{球殻}}\sigma\,\phi\,dS$。</li>
+        <li>球殻の上で $\phi$ は定数 $\frac{Q}{4\pi\varepsilon_0l}$ なので、積分の外に出せる:$U=\frac12\cdot\frac{Q}{4\pi\varepsilon_0l}\int\sigma\,dS$。</li>
+        <li>残った積分は全電荷 $\int\sigma\,dS=Q$。</li>
+      </ul>
+      <p>$$U_{\text{自己}}=\frac12\cdot Q\cdot\frac{Q}{4\pi\varepsilon_0l}=\frac{Q^2}{8\pi\varepsilon_0l}.$$
+      $\frac12$ は、電荷を少しずつ運ぶあいだ、電位も 0 から少しずつ育つので、平均すると最終の電位の半分になるためです(<a href="#w5-s3-2">3.2</a>)。高校の公式で言えば、孤立した導体球の電気容量 $C=4\pi\varepsilon_0l$ を使った $U=\frac12QV=\frac{Q^2}{2C}$ そのものです。</p>
+      <p><b>方法2(確認):(3.33) $U=\frac{\varepsilon_0}{2}\int|\bm{E}|^2d\bm{r}$ を使う。</b></p>
+      <ul>
+        <li>電場があるのは外側($r\gt l$)だけなので、そこだけ積分する。</li>
+        <li>$E$ は $r$ だけで決まるので、体積を半径 $r$・厚さ $dr$ の薄い球殻(体積 = 表面積 × 厚さ $=4\pi r^2\,dr$)に分ける:$U=\frac{\varepsilon_0}{2}\int_l^\infty E^2\cdot4\pi r^2\,dr$。</li>
+        <li>$E^2=\frac{Q^2}{16\pi^2\varepsilon_0^2r^4}$ を入れて約分すると、被積分関数は $\frac{\varepsilon_0}{2}\cdot\frac{Q^2}{16\pi^2\varepsilon_0^2r^4}\cdot4\pi r^2=\frac{Q^2}{8\pi\varepsilon_0}\cdot\frac{1}{r^2}$。</li>
+      </ul>
+      <p>$$U_{\text{自己}}=\frac{Q^2}{8\pi\varepsilon_0}\int_l^\infty\frac{dr}{r^2}=\frac{Q^2}{8\pi\varepsilon_0}\Bigl[-\frac1r\Bigr]_l^\infty=\frac{Q^2}{8\pi\varepsilon_0l}.$$
+      方法1と一致します。方法1は「電荷の側から数える」、方法2は「電荷の外の空間にたまった電場のエネルギーを数える」計算です。</p>
+      <p><b>結果の読み方</b>:半径 $l$ が小さいほどエネルギーは大きい(同じ電荷を小さな球に押し込めるほど、反発に逆らう仕事が増える)。$l\to0$(点電荷)では無限大になり、これが (3.33) を点電荷に使えない理由です(上の「注意」の枠)。$\sigma$ で書くと $\frac{Q^2}{8\pi\varepsilon_0l}=\frac{2\pi l^3\sigma^2}{\varepsilon_0}$ で、最後の答えの括弧の中の「2」は、この自己エネルギーが球殻2つ分あることを表します。</p>
+      <p><b>答案の書き方</b>:途中式の短い方法2がおすすめです。「1つの球殻の電場は外側だけ $E=\frac{Q}{4\pi\varepsilon_0r^2}$(ガウスの法則)。自己エネルギーは $\frac{\varepsilon_0}{2}\int_l^\infty E^2\,4\pi r^2dr=\frac{Q^2}{8\pi\varepsilon_0l}$」。</p>
       <p><b>(2) 相互作用エネルギー</b>:(3.28) を $\phi=\phi_1+\phi_2$ で分けたときの、残りの2項 $\frac12\int(\rho_1\phi_2+\rho_2\phi_1)\,d\bm{r}$ です。(3.30) よりこの2つの積分は等しいので、相互作用エネルギーは $\int\rho_2\phi_1\,d\bm{r}$(球殻1の電位の中に、球殻2の電荷を置くエネルギー)。</p>
       <p>球殻2の電荷は、すべて球殻1の<b>外側</b>にあります($l\lt b$ なので、球殻2のどの点も、球殻1の中心から $2b-l\gt l$ 以上離れている)。外側では、球殻1の電位は、中心 $(-b,0,0)$ に点電荷 $Q$ があるときと同じです(例 3.1)。つまり $\int\rho_2\phi_1\,d\bm{r}$ は、「中心 $(-b,0,0)$ の点電荷 $Q$ の電位の中に、球殻2を置くエネルギー」です。(3.30) の対称性で見方を入れ替えると、これは「球殻2が作る電位を、点電荷 $Q$ の位置 $(-b,0,0)$ で読んで $Q$ を掛けたもの」に等しく、その点は球殻2の外側なので、球殻2の電位も中心 $(b,0,0)$ の点電荷 $Q$ と同じです。結局、<b>2つの中心に点電荷 $Q$ が1つずつ</b>(距離 $2b$)あるのと同じになり、$\dfrac{Q\cdot Q}{4\pi\varepsilon_0\cdot2b}=\dfrac{Q^2}{8\pi\varepsilon_0b}$。</p>
       <p><b>(3) 合計</b>
