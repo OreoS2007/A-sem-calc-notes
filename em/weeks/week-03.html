@@ -240,6 +240,9 @@
       $$\int_Vr^2\,d\bm{x}=\int_0^1r^2\cdot4\pi r^2\,dr=4\pi\Bigl[\frac{r^5}{5}\Bigr]_0^1=\frac{4\pi}{5}.$$
       <b>検算</b>:球面上では $\bm{n}=(x,y,z)$ なので、$\bm{A}\cdot\bm{n}=x^2y^2+y^2z^2+z^2x^2$。対称性から $\int_Sx^2y^2\,dS=\int_Sy^2z^2\,dS=\int_Sz^2x^2\,dS$ で、この値は $\dfrac{4\pi}{15}$ です。したがって $3\times\dfrac{4\pi}{15}=\dfrac{4\pi}{5}$ となり、一致します。</p>
     </div>
+    <div data-need="A" class="box kakomon"><div class="label">過去問:2023年度 第1回中間 [2](5点) <span class="need need-a">必須</span> <a class="xref-link" href="../exam/q2.html#y2023">→ 過去問対策の解説</a></div>
+      <p>すぐ下の<b>問 [2-6] は、2023年度 第1回中間 [2](5点)に、一字一句同じ形で出ました</b>。下の解答が、そのまま過去問の解答です(答え $-\frac{4}{15}$)。答案を見ずに解けるようにしておきます。</p>
+    </div><!--kakomon-->
 
     <div data-need="A" class="box ex">
       <div class="label">問 [2-6] <span class="need need-a">必須</span></div>
@@ -267,6 +270,21 @@
 
 
     <!-- ===================== 3 ===================== -->
+    <div data-need="A" class="box kakomon"><div class="label">過去問:2025年度 第1回中間 [2](6点) <span class="need need-a">必須</span> <a class="xref-link" href="../exam/q2.html#prob">→ 過去問対策の解説</a></div>
+      <p class="kk-tools"><b>道具がそろったので、過去問を解いてみます。</b>使うもの:ストークスの定理と、線積分の定義。上の [2-6] とまったく同じ手順(曲面と $\bm{A}$ を変えただけの、同じ型の問題です)。</p>
+      <p><b>問題(要旨)</b> 曲面 $S$ を $z=(x-y)^2(y-x^2)$($x^2\le y\le x$)とする。次の面積分を求めよ。ただし面積分の符号は $z$ 軸正の向きを正にとる。
+      $$\int_S\begin{pmatrix}-x^2e^{x^2-y}-2ze^y\\ xye^z-2x(1+x^2)e^{x^2-y}\\ (x^2-y+2x)e^{x-y}-xe^z\end{pmatrix}\cdot d\bm{S}$$
+      被積分関数が $\nabla\times\bm{A}$、$\bm{A}=\bigl(xye^z,\ z^2e^y+(x^2-y)e^{x-y},\ x^2e^{x^2-y}\bigr)$ と書けることは、証明なしに用いてよい。</p>
+      <details class="kk-ans"><summary>解答を見る</summary>
+      <p><b>(i) ストークスの定理</b>:求める面積分を $I$ とすると $I=\int_S(\nabla\times\bm{A})\cdot d\bm{S}=\oint_{\partial S}\bm{A}\cdot d\bm{x}$。</p>
+      <p><b>(ii) 縁</b>:$x^2\le y\le x$ より $0\le x\le1$ で、縁は $y=x^2$ と $y=x$。そこでは $z=0$、$dz=0$。面の向きは $z$ 軸正なので、縁は上から見て<b>反時計回り</b>。</p>
+      <p><b>(iii)</b> $z=0$、$dz=0$ を入れると $\bm{A}\cdot d\bm{x}=xy\,dx+(x^2-y)e^{x-y}\,dy$。</p>
+      <p><b>(iv) 下の曲線</b> $y=x^2$($x:0\to1$):$x^2-y=0$ なので第2項は 0。$\int_0^1x\cdot x^2\,dx=\frac14$。</p>
+      <p><b>(v) 上の直線</b> $y=x$($x:1\to0$、$dy=dx$、$e^{x-y}=1$):$\int_1^0\bigl(x^2+(x^2-x)\bigr)dx=-\bigl(\frac23-\frac12\bigr)=-\frac16$。</p>
+      <p><b>(vi) 合計</b>:$I=\frac14-\frac16=\boldsymbol{\frac1{12}}$。</p>
+      <p>採点で見られるのは、① ストークスの定理を使うと書く、② 縁で $z=0$ の確認、③ 回る<b>向き</b>、④ 2本に分けた計算。向きを逆にすると符号が逆になります。</p>
+      </details>
+    </div><!--kakomon-->
     <h2 id="s3" data-need="A">3. ラプラス方程式と調和関数 <span class="need need-a">必須</span> <span class="page-tag">講義ノート p.12–14(§2.4)</span></h2>
 
     <h3 id="s3-1" data-need="B">3.1 ラプラス方程式と調和関数 <span class="need need-b">必要</span></h3>
@@ -347,6 +365,20 @@
       $$=2\int_{\partial V}e\,\nabla\psi\cdot d\bm{S}+\int_V|\nabla e|^2\,d\bm{x}=\int_V|\nabla e|^2\,d\bm{x}\ge0\tag{2.45}$$
       となり、求めたかった不等式が得られる。</p>
       <p>各等号の理由:2つ目の等号は $\nabla\cdot(e\nabla\psi)=\nabla e\cdot\nabla\psi+e\Delta\psi=\nabla e\cdot\nabla\psi$(積の微分と、$\Delta\psi=0$ に注意)を使っている。3つ目の等号では<b>ガウスの定理</b>を、4つ目の等号では $e$ が境界上で常にゼロであること(面積分が消える)を使っている。</p></div>
+    <div data-need="A" class="box kakomon"><div class="label">過去問:2025年度 第1回中間 [1](5点) <span class="need need-a">必須</span> <a class="xref-link" href="../exam/q1.html#prob">→ 過去問対策の解説</a></div>
+      <p class="kk-tools"><b>道具がそろったので、過去問を解いてみます。</b>使うもの:すぐ上の証明そのものです(使うのは、積の微分、$\Delta\phi=0$、ガウスの定理、境界で $e=0$)。</p>
+      <p><b>問題(要旨)</b> 3次元空間の単連結な領域 $V$ をとる。$V$ の表面 $\partial V$ では与えられた関数 $F(\bm{x})$ と同じ値をとる、という拘束条件を満たすスカラー場 $f(\bm{x})$ のうち、$\int_V|\nabla f|^2\,d\bm{x}$ を最小にするもの $f^*$ を求めたい。同じ拘束条件を満たす $V$ 上の調和関数 $\phi$($\Delta\phi=0$)が存在するならば、$f^*=\phi$ であることを証明せよ。<b>(注:式変形では、どの定理や議論を用いたのか分かるように書くこと)</b></p>
+      <details class="kk-ans"><summary>解答を見る</summary>
+      <p>拘束条件を満たす任意の $f$ について、$e:=f-\phi$ とおく。$\partial V$ 上では $f=\phi=F$ なので、<b>$\partial V$ 上で $e=0$</b>。$\nabla f=\nabla\phi+\nabla e$ より
+      $$\int_V|\nabla f|^2d\bm{x}-\int_V|\nabla\phi|^2d\bm{x}=\int_V\bigl(2\nabla e\cdot\nabla\phi+|\nabla e|^2\bigr)d\bm{x}.\qquad\cdots(1)$$
+      積の微分と <b>$\Delta\phi=0$</b> より $\nabla\cdot(e\nabla\phi)=\nabla e\cdot\nabla\phi+e\,\Delta\phi=\nabla e\cdot\nabla\phi$。よって<b>ガウスの定理</b>から
+      $$\int_V\nabla e\cdot\nabla\phi\,d\bm{x}=\int_{\partial V}e\,\nabla\phi\cdot d\bm{S}=0\qquad(\partial V\text{ 上で }e=0).\qquad\cdots(2)$$
+      (1) に (2) を代入して
+      $$\int_V|\nabla f|^2d\bm{x}-\int_V|\nabla\phi|^2d\bm{x}=\int_V|\nabla e|^2d\bm{x}\ \ge\ 0.$$
+      よって $\phi$ が最小を与え、$f^*=\phi$。(等号は $\nabla e=\bm{0}$ のとき。境界で $e=0$ なので $e\equiv0$、つまり最小にするのは $\phi$ だけ。)$\blacksquare$</p>
+      <p>問題文の「注」が採点基準です。<b>境界で $e=0$、$\Delta\phi=0$、ガウスの定理</b>を、使った場所ごとに書きます。</p>
+      </details>
+    </div><!--kakomon-->
     <div data-need="C" class="box intuit">
       <div class="label">直感で理解する:ぴんと張ったゴム膜 <span class="need need-c">参考</span></div>
       <p>針金の枠(境界の値 $f$)にゴム膜を張ると、膜はできるだけ<b>伸びが少ない</b>形に落ち着きます。膜の傾きが小さいとき、伸びの量は「傾き $|\nabla g|$ の2乗の合計」(エネルギー $\mathcal{E}$)で測れるので、膜の形は $\mathcal{E}$ を最小にする関数、つまり調和関数です。1次元なら、両端を固定したゴムひもは<b>まっすぐ</b>になる(図の直線)、ということです。枠のどこよりも高く、膜の真ん中だけが盛り上がることがないのも、最大値原理と合っています。</p>

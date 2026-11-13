@@ -204,8 +204,21 @@
       <div class="label">講義ノートにない補足:電荷 $q$ にはたらく力 <span class="need need-b">必要</span></div>
       <p>電荷 $q$ は、鏡像電荷 $-q$($2a$ だけ離れている)から引力を受けるとみなせるので、大きさ $\dfrac{q^2}{4\pi\varepsilon_0(2a)^2}=\dfrac{q^2}{16\pi\varepsilon_0a^2}$、向きは導体に向かう方向。(導体の誘導電荷から実際に受ける力は、これと一致します。)</p>
     </div>
+    <div data-need="A" class="box kakomon"><div class="label">過去問:2025年度 第2回中間 [1](3点) <span class="need need-a">必須</span> <a class="xref-link" href="../exam/yosou.html#p1">→ 過去問対策の解説</a></div>
+      <p class="kk-tools"><b>道具がそろったので、過去問を解いてみます。</b>使うもの:例 4.1(平面導体の鏡像法)と、点電荷の電場(クーロンの法則)。</p>
+      <p class="kk-tools">例年は第2回中間に出た問題ですが、内容は今年の第1回中間の範囲(§4.3 の (4.12) まで)に入ります。</p>
+      <p><b>問題(要旨)</b> $y\le0$ の領域に接地された導体がある。点 $(a,b,0)$($a,b\gt0$)に点電荷 $q$ を置いたとき、点 $(-a,b,0)$ に作られる電場を求めよ。</p>
+      <details class="kk-ans"><summary>解答を見る</summary>
+      <p>導体の代わりに、面 $y=0$ について対称な点 $(a,-b,0)$ に鏡像電荷 $-q$ を置く。面 $y=0$ 上はどこも2つの電荷から等距離なので電位 0(接地の条件)。<b>一意性定理</b>より、$y\gt0$ ではこの配置の電場が答え。点 P$=(-a,b,0)$ は $y\gt0$ にある。</p>
+      <p>・$q$ から P へ:$(-2a,0,0)$、距離 $2a$。電場 $\dfrac{q}{16\pi\varepsilon_0}\Bigl(-\dfrac1{a^2},0,0\Bigr)$。<br>
+      ・$-q$ から P へ:$(-2a,2b,0)$、距離 $2\sqrt{a^2+b^2}$。電場 $\dfrac{q}{16\pi\varepsilon_0}\dfrac{(a,-b,0)}{(a^2+b^2)^{3/2}}$。</p>
+      <p>合計:
+      $$\bm{E}=\frac{q}{16\pi\varepsilon_0}\Bigl(-\frac1{a^2}+\frac{a}{(a^2+b^2)^{3/2}},\ \ -\frac{b}{(a^2+b^2)^{3/2}},\ \ 0\Bigr).$$</p>
+      <p>つまずきポイント:P を「鏡像の位置」と勘違いしない。鏡像は面 $y=0$ についての対称点 $(a,-b,0)$ で、P は真空中の別の点です。</p>
+      </details>
+    </div><!--kakomon-->
 
-    <h3 id="s3-3" data-need="B">3.3 問 [4-1]:2枚の平行な導体板 <span class="need need-b">必要</span></h3>
+    <h3 id="s3-3" data-need="A">3.3 問 [4-1]:2枚の平行な導体板 <span class="need need-a">必須</span></h3>
     <div data-need="B" class="box ex">
       <div class="label">問 [4-1] <span class="need need-b">必要</span></div>
       <p>原点に点電荷 $q$ がある。$x\lt-l$ および $x\gt l$ の領域にそれぞれ導体が置かれている。このポテンシャル問題を解く鏡像電荷の配置を求めよ。(注:この問題では無限個の鏡像電荷が必要になる)</p>
@@ -222,6 +235,16 @@
       $$x_n=2nl,\qquad q_n=(-1)^nq\qquad(n=0,\pm1,\pm2,\dots)$$
       つまり、$x=0$ の本物の電荷 $q$ のほかに、$x=\pm2l$ に $-q$、$x=\pm4l$ に $+q$、$x=\pm6l$ に $-q$、……と無限個の鏡像電荷を並べる。</p>
       <p><b>確かめ</b>:面 $x=l$ について、位置 $2nl$ の電荷 $(-1)^nq$ と、面について対称な位置 $2l-2nl=2(1-n)l$ の電荷 $(-1)^{1-n}q=-(-1)^nq$ は、符号が反対で、面から等距離。つまり対になって、面上の電位は打ち消し合って 0。面 $x=-l$ についても同様です。</p></div>
+    <div data-need="A" class="box kakomon"><div class="label">過去問:2023年度 第2回中間 [2](3点) <span class="need need-a">必須</span> <a class="xref-link" href="../exam/yosou.html#p4">→ 過去問対策の解説</a></div>
+      <p class="kk-tools"><b>道具がそろったので、過去問を解いてみます。</b>使うもの:鏡像を何個も置く考え方(上の [4-1])。今度は2枚の導体面が直角に交わります。</p>
+      <p class="kk-tools">例年は第2回中間に出た問題ですが、内容は今年の第1回中間の範囲(§4.3 の (4.12) まで)に入ります。</p>
+      <p><b>問題(要旨)</b> $x,y\gt0$ の空間が真空で、残りの $x\le0$ または $y\le0$ の領域がすべて接地された導体で埋められている。点 $(a,b,0)$ に点電荷 $q$ を置いた。必要な鏡像電荷の位置と電荷の値を、座標で明示して図示せよ。</p>
+      <details class="kk-ans"><summary>解答を見る</summary>
+      <p>$(-a,b,0)$ に $-q$、$(a,-b,0)$ に $-q$、$(-a,-b,0)$ に $+q$ の<b>3つ</b>。4つの電荷が長方形の頂点に並び、<b>対角の位置どうしは同じ符号</b>。</p>
+      <p>確かめ:面 $x=0$ について、$q$ と $(-a,b,0)$ の $-q$、$(a,-b,0)$ の $-q$ と $(-a,-b,0)$ の $+q$ が、それぞれ符号反対の対になるので、$x=0$ 上の電位は 0。面 $y=0$ についても同様。</p>
+      <p>直感:2枚の鏡を直角に置くと、像は3つ見える(合わせ鏡)。1回反射した像は $-q$、2回反射した像は $+q$。</p>
+      </details>
+    </div><!--kakomon-->
 
     <h3 id="s3-4" data-need="A">3.4 例 4.2:接地された導体球 <span class="need need-a">必須</span></h3>
     <p data-need="X">鏡像法がうまくいくもう一つの設定に、<b>導体球</b>の場合があります(脚注62:本当はもう少し一般化できて、楕円体球の場合でもうまくいく)。</p>
@@ -297,6 +320,31 @@
       $$\sigma=\varepsilon_0E_n=-\frac{q}{4\pi}\frac{a+l}{l\,(a-l)^2}.$$
       負で、電荷 $q$ に最も近い点なので大きい。($q\gt0$。)<b>参考</b>:球面上の一般の点($x$ 軸となす角 $\theta$)では、同様の計算で $\sigma(\theta)=-\dfrac{q}{4\pi l}\dfrac{a^2-l^2}{(a^2+l^2-2al\cos\theta)^{3/2}}$ となり、$\theta=0$ で上の値に一致します。これを球面全体で積分すると $-\dfrac laq$、鏡像電荷に等しくなります。</p>
     </div>
+    <div data-need="A" class="box kakomon"><div class="label">過去問:2023年度 第2回中間 [3](5点) <span class="need need-a">必須</span> <a class="xref-link" href="../exam/yosou.html#p2">→ 過去問対策の解説</a></div>
+      <p class="kk-tools"><b>道具がそろったので、過去問を解いてみます。</b>使うもの:接地されていない球の鏡像(3.5 節、問 [4-2]:中心にも $+\frac laq$)と、誘導電荷密度 $\sigma=\varepsilon_0E_n$(この節、問 [4-3])。</p>
+      <p class="kk-tools">例年は第2回中間に出た問題ですが、内容は今年の第1回中間の範囲(§4.3 の (4.12) まで)に入ります。</p>
+      <p><b>問題(要旨)</b> 原点中心・半径 $l$ の導体球(接地されておらず、総電荷 0)がある。$(a,0,0)$($a\gt l$)に点電荷 $q$ を置いた。導体球面の点 $(-l,0,0)$ に誘起される誘導電荷密度を求めよ。</p>
+      <details class="kk-ans"><summary>解答を見る</summary>
+      <p><b>使う式</b>:接地された球なら、鏡像 $-\frac laq$ が中心から $\frac{l^2}{a}$。球面上で、電荷の方向から角 $\theta$ の点の誘導電荷密度は(問 [4-3] の計算を一般の点で行うと)
+      $$\sigma_{\text{接地}}(\theta)=-\frac{q}{4\pi l}\,\frac{a^2-l^2}{(a^2+l^2-2al\cos\theta)^{3/2}}.$$
+      接地されていない(総電荷 0)ときは、中心に $+\frac laq$ を加える。中心の電荷は球面に一様な電場を作るので、密度は一様に $\frac{(l/a)q}{4\pi l^2}=\frac{q}{4\pi al}$ 増える。</p>
+      <p><b>答案</b>:鏡像は $\bigl(\frac{l^2}{a},0,0\bigr)$ に $-\frac laq$、原点に $+\frac laq$(球面が等電位で、総電荷 0。<b>一意性</b>により、これが答え)。点 $(-l,0,0)$ は電荷から見て $\theta=\pi$($\cos\theta=-1$)なので
+      $$\sigma=-\frac{q}{4\pi l}\frac{a^2-l^2}{(a+l)^3}+\frac{q}{4\pi al}=\boldsymbol{\frac{q}{4\pi l}\Bigl(\frac1a-\frac{a-l}{(a+l)^2}\Bigr)}.$$
+      (正の値:電荷 $q\gt0$ から遠い側には、正の電荷がたまる。)</p>
+      <p>最大のミスは、<b>中心の $+\frac laq$ を忘れる</b>こと(接地されていない球なのに、接地の答えを書いてしまう)。</p>
+      </details>
+    </div><!--kakomon-->
+    <div data-need="A" class="box kakomon"><div class="label">過去問:2025年度 第2回中間 [2](7点) <span class="need need-a">必須</span> <a class="xref-link" href="../exam/yosou.html#p2">→ 過去問対策の解説</a></div>
+      <p class="kk-tools"><b>道具がそろったので、過去問を解いてみます。</b>使うもの:ひとつ上の過去問と同じ2つの式を、電荷2つ分、重ね合わせます。</p>
+      <p class="kk-tools">例年は第2回中間に出た問題ですが、内容は今年の第1回中間の範囲(§4.3 の (4.12) まで)に入ります。</p>
+      <p><b>問題(要旨)</b> 原点中心・半径 $l$ の接地されていない導体球(帯電しておらず、総電荷は常に 0)がある。$(a,0,0)$ と $(-a,0,0)$($a\gt l$)にそれぞれ点電荷 $q$ を置いた。導体球表面の点 $(0,l,0)$ に誘導される電荷密度を求めよ。</p>
+      <details class="kk-ans"><summary>解答を見る</summary>
+      <p>各電荷 $q$(位置 $(\pm a,0,0)$)に、鏡像 $-\frac laq$ を $(\pm\frac{l^2}{a},0,0)$ に、さらに原点に $+\frac laq$ ずつ(合計 $+\frac{2l}{a}q$)置く。球面は等電位で総電荷 0 なので、<b>一意性</b>によりこれが答え。</p>
+      <p>点 $(0,l,0)$ は、どちらの電荷から見ても $\theta=\frac\pi2$($\cos\theta=0$)。2つの電荷の分を足して
+      $$\sigma=2\Bigl(-\frac{q}{4\pi l}\frac{a^2-l^2}{(a^2+l^2)^{3/2}}+\frac{q}{4\pi al}\Bigr)=\boldsymbol{\frac{q}{2\pi}\Bigl(\frac{1}{al}-\frac{a^2-l^2}{l\,(a^2+l^2)^{3/2}}\Bigr)}.$$</p>
+      <p>部分点は、鏡像電荷の配置(中心の電荷も)、それが条件を満たす理由(一意性)、$\sigma=\varepsilon_0E_n$、計算、にあるはずです。</p>
+      </details>
+    </div><!--kakomon-->
 
     <h3 id="s3-7" data-need="C">3.7 鏡像電荷の設定と元の設定で「違うもの」:エネルギー <span class="need need-c">参考</span></h3>
     <p data-need="C">元々の導体の設定と鏡像電荷の設定とでは、電場や電位など多くの物理量が同一になります。しかし、<b>任意の物理量が同じになるわけではない</b>点には注意が必要です。</p>

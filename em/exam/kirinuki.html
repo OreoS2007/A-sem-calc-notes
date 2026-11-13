@@ -160,6 +160,9 @@
       $$\int_Vr^2\,d\bm{x}=\int_0^1r^2\cdot4\pi r^2\,dr=4\pi\Bigl[\frac{r^5}{5}\Bigr]_0^1=\frac{4\pi}{5}.$$
       <b>検算</b>:球面上では $\bm{n}=(x,y,z)$ なので、$\bm{A}\cdot\bm{n}=x^2y^2+y^2z^2+z^2x^2$。対称性から $\int_Sx^2y^2\,dS=\int_Sy^2z^2\,dS=\int_Sz^2x^2\,dS$ で、この値は $\dfrac{4\pi}{15}$ です。したがって $3\times\dfrac{4\pi}{15}=\dfrac{4\pi}{5}$ となり、一致します。</p>
     </div>
+    <div data-need="A" class="box kakomon"><div class="label">過去問:2023年度 第1回中間 [2](5点) <span class="need need-a">必須</span> <a class="xref-link" href="../exam/q2.html#y2023">→ 過去問対策の解説</a></div>
+      <p>すぐ下の<b>問 [2-6] は、2023年度 第1回中間 [2](5点)に、一字一句同じ形で出ました</b>。下の解答が、そのまま過去問の解答です(答え $-\frac{4}{15}$)。答案を見ずに解けるようにしておきます。</p>
+    </div><!--kakomon-->
 
     <div data-need="A" class="box ex">
       <div class="label">問 [2-6] <span class="need need-a">必須</span></div>
@@ -187,6 +190,21 @@
 
 
     <!-- ===================== 3 ===================== -->
+    <div data-need="A" class="box kakomon"><div class="label">過去問:2025年度 第1回中間 [2](6点) <span class="need need-a">必須</span> <a class="xref-link" href="../exam/q2.html#prob">→ 過去問対策の解説</a></div>
+      <p class="kk-tools"><b>道具がそろったので、過去問を解いてみます。</b>使うもの:ストークスの定理と、線積分の定義。上の [2-6] とまったく同じ手順(曲面と $\bm{A}$ を変えただけの、同じ型の問題です)。</p>
+      <p><b>問題(要旨)</b> 曲面 $S$ を $z=(x-y)^2(y-x^2)$($x^2\le y\le x$)とする。次の面積分を求めよ。ただし面積分の符号は $z$ 軸正の向きを正にとる。
+      $$\int_S\begin{pmatrix}-x^2e^{x^2-y}-2ze^y\\ xye^z-2x(1+x^2)e^{x^2-y}\\ (x^2-y+2x)e^{x-y}-xe^z\end{pmatrix}\cdot d\bm{S}$$
+      被積分関数が $\nabla\times\bm{A}$、$\bm{A}=\bigl(xye^z,\ z^2e^y+(x^2-y)e^{x-y},\ x^2e^{x^2-y}\bigr)$ と書けることは、証明なしに用いてよい。</p>
+      <details class="kk-ans"><summary>解答を見る</summary>
+      <p><b>(i) ストークスの定理</b>:求める面積分を $I$ とすると $I=\int_S(\nabla\times\bm{A})\cdot d\bm{S}=\oint_{\partial S}\bm{A}\cdot d\bm{x}$。</p>
+      <p><b>(ii) 縁</b>:$x^2\le y\le x$ より $0\le x\le1$ で、縁は $y=x^2$ と $y=x$。そこでは $z=0$、$dz=0$。面の向きは $z$ 軸正なので、縁は上から見て<b>反時計回り</b>。</p>
+      <p><b>(iii)</b> $z=0$、$dz=0$ を入れると $\bm{A}\cdot d\bm{x}=xy\,dx+(x^2-y)e^{x-y}\,dy$。</p>
+      <p><b>(iv) 下の曲線</b> $y=x^2$($x:0\to1$):$x^2-y=0$ なので第2項は 0。$\int_0^1x\cdot x^2\,dx=\frac14$。</p>
+      <p><b>(v) 上の直線</b> $y=x$($x:1\to0$、$dy=dx$、$e^{x-y}=1$):$\int_1^0\bigl(x^2+(x^2-x)\bigr)dx=-\bigl(\frac23-\frac12\bigr)=-\frac16$。</p>
+      <p><b>(vi) 合計</b>:$I=\frac14-\frac16=\boldsymbol{\frac1{12}}$。</p>
+      <p>採点で見られるのは、① ストークスの定理を使うと書く、② 縁で $z=0$ の確認、③ 回る<b>向き</b>、④ 2本に分けた計算。向きを逆にすると符号が逆になります。</p>
+      </details>
+    </div><!--kakomon-->
 
     <h2 id="line">2. 線積分(定義どおりの計算)</h2>
     <div class="box note-box"><div class="label">出題された過去問</div>
@@ -237,6 +255,16 @@
       したがって
       $$\int_0^{\pi}\Bigl(-\cos s\sin s+\frac{\sin s}{2\pi}\Bigr)ds=\Bigl[-\frac{\sin^2s}{2}\Bigr]_0^{\pi}+\frac{1}{2\pi}\Bigl[-\cos s\Bigr]_0^{\pi}=0+\frac{1}{2\pi}\cdot2=\frac1\pi.$$</p>
     </div>
+    <div data-need="A" class="box kakomon"><div class="label">過去問:2023年度 第2回中間 [1](2点) <span class="need need-a">必須</span> <a class="xref-link" href="../exam/q2.html#line">→ 過去問対策の解説</a></div>
+      <p class="kk-tools"><b>道具がそろったので、過去問を解いてみます。</b>使うもの:線積分の定義 (2.25)。例 2.2 と同じく、曲線を $x$ で表して1変数の積分にします。</p>
+      <p class="kk-tools">例年は第2回中間に出た問題ですが、内容は今年の第1回中間の範囲(§4.3 の (4.12) まで)に入ります。</p>
+      <p><b>問題(要旨)</b> 曲線 $C$:$y=x^3-x$($-1\le x\le0$)に沿って、$x=0$ から $x=-1$ の向きに、ベクトル $(yx,\ x^2)$ を線積分せよ。</p>
+      <details class="kk-ans"><summary>解答を見る</summary>
+      <p>$x$ をパラメータにすると、$y=x^3-x$、$dy=(3x^2-1)\,dx$。$\int_C\bm{A}\cdot d\bm{x}=\int(A_x\,dx+A_y\,dy)$ に入れて
+      $$\int_C\bm{A}\cdot d\bm{x}=\int_0^{-1}\Bigl(x(x^3-x)+x^2(3x^2-1)\Bigr)dx=\int_0^{-1}(4x^4-2x^2)\,dx=-\Bigl(\frac45-\frac23\Bigr)=\boldsymbol{-\frac{2}{15}}.$$</p>
+      <p>積分の向き($0\to-1$)を、そのまま下端・上端にすれば、符号は自動的に合います。</p>
+      </details>
+    </div><!--kakomon-->
 
     <h2 id="gauss">3. 対称性 + ガウスの法則で電場</h2>
     <div class="box note-box"><div class="label">出題された過去問</div>
@@ -291,6 +319,16 @@
       <div class="label">直感で理解する:近くの少しと、遠くのたくさんが釣り合う <span class="need need-c">参考</span></div>
       <p>球殻の内側の点 P から、ある方向とその反対方向に、細い円すいを伸ばしてみます。円すいが球殻を切り取る面は、P に<b>近い側では小さく</b>(電荷が少ない)、<b>遠い側では大きく</b>(電荷が多い)なります。切り取る面積は距離の2乗に比例して増え、1つ1つの電荷が作る電場は距離の2乗に反比例して弱まるので、近い側と遠い側の電場は<b>ちょうど同じ大きさで逆向き</b>になって打ち消し合います。どの方向の組でも同じことが起こるので、内側の電場は 0 です。距離の2乗に反比例する力だからこそ起こる、絶妙な釣り合いです。</p>
     </div>
+    <div data-need="A" class="box kakomon"><div class="label">過去問:2023年度 第1回中間 [3](4点) <span class="need need-a">必須</span> <a class="xref-link" href="../exam/q4.html#y2023-3">→ 過去問対策の解説</a></div>
+      <p class="kk-tools"><b>道具がそろったので、過去問を解いてみます。</b>使うもの:対称性 + 積分型ガウスの法則 (3.12)。上の例 3.1(球殻)の内側の計算と同じ型です。</p>
+      <p><b>問題(要旨)</b> 原点を中心とする半径 $r$ の球全体に、一様電荷密度で総電荷 $Q$ を分布させる。この電荷が点 $(a,0,0)$($0\lt a\lt r$)に作る電場を求めよ。</p>
+      <details class="kk-ans"><summary>解答を見る</summary>
+      <p>球対称なので、電場は動径方向で、大きさは原点からの距離だけで決まる。半径 $a$ の球面に<b>積分型ガウスの法則</b>を使う。中の電荷は体積の比で $Q\dfrac{a^3}{r^3}$ なので
+      $$4\pi a^2E=\frac{Qa^3}{\varepsilon_0r^3},\qquad E=\frac{Qa}{4\pi\varepsilon_0r^3}.$$
+      点 $(a,0,0)$ での動径方向は $+x$ なので $\boldsymbol{\bm{E}=\Bigl(\dfrac{Qa}{4\pi\varepsilon_0r^3},\ 0,\ 0\Bigr)}$。</p>
+      <p>注意:問題文の $r$ は<b>球の半径</b>(定数)で、観測点までの距離は $a$。文字がいつもと入れ替わっています。$a\to r$(表面)で $\frac{Q}{4\pi\varepsilon_0r^2}$ になるかで確かめる。</p>
+      </details>
+    </div><!--kakomon-->
 
     <div data-need="B" class="box ex">
       <div class="label">例 3.2:無限に長い線電荷 <span class="need need-b">必要</span></div>
@@ -346,6 +384,9 @@
       <div class="label">注意:(3.33) は、電荷が連続分布のときだけ <span class="need need-b">必要</span></div>
       <p>なお、この表示は<b>電荷が連続的に分布している場合に限られ、点電荷の場合には成り立たない</b>ことには注意が必要です。この表示は「無限小電荷を集めて電荷分布を作る状況」でのものなので、点電荷がある場合には「無限小電荷を集めて点電荷を作る」必要があります。しかし、無限小電荷から点電荷を作ろうと思うと、その時点で無限大のエネルギーが発生してしまうので、計算がうまくいきません(脚注52:この問題は量子電磁気学においても発生する。「くりこみ」の手法は、この発散の問題を解決するための一つの方法である)。先程得られた点電荷の場合のエネルギーの表式 (3.26) は、「無限遠方にあらかじめ点電荷が用意されている」という状況設定のものであり、無限小電荷のみから電荷分布を作る今の設定とは微妙に異なっているのです。</p>
     </div>
+    <div data-need="A" class="box kakomon"><div class="label">過去問:2023年度 第1回中間 [5](5点) <span class="need need-a">必須</span> <a class="xref-link" href="../exam/q4.html#y2023-5">→ 過去問対策の解説</a></div>
+      <p>すぐ下の<b>問 [3-3] は、2023年度 第1回中間 [5](5点)に、そのまま出ました</b>。下の解答が、そのまま過去問の解答です(答え $\frac{2\pi l^3\sigma^2}{\varepsilon_0}\bigl(2+\frac lb\bigr)$)。採点では「自己エネルギー × 2」と「相互作用(中心の点電荷どうしと同じ)」に分ける考え方を書くことが大事です。</p>
+    </div><!--kakomon-->
 
     <div data-need="A" class="box ex">
       <div class="label">問 [3-3] <span class="need need-a">必須</span></div>
@@ -367,6 +408,19 @@
       $$U=\frac{4\pi l^3\sigma^2}{\varepsilon_0}+\frac{2\pi l^4\sigma^2}{\varepsilon_0b}=\frac{2\pi l^3\sigma^2}{\varepsilon_0}\Bigl(2+\frac lb\Bigr).$$
       (<b>検算</b>:$b\to\infty$ で相互作用は消え、各球殻の自己エネルギーだけが残る。同符号なので相互作用エネルギーは正で、近づけるほど増える。)</p>
     </div>
+    <div data-need="A" class="box kakomon"><div class="label">過去問:2025年度 第1回中間 [4](5点) <span class="need need-a">必須</span> <a class="xref-link" href="../exam/q4.html#prob">→ 過去問対策の解説</a></div>
+      <p class="kk-tools"><b>道具がそろったので、過去問を解いてみます。</b>使うもの:第4回のガウスの法則(例 3.1 と同じ型)で電場を出し、(3.33) $U=\frac{\varepsilon_0}{2}\int|\bm{E}|^2d\bm{r}$ で積分します。</p>
+      <p><b>問題(要旨)</b> $0\lt a\lt b$ とする。原点からの距離が $a\lt r\lt b$ の領域(中心部分が空洞の球)に、一様な電荷密度で電荷 $Q$ を帯電させた。この系のエネルギーを求めよ。</p>
+      <details class="kk-ans"><summary>解答を見る</summary>
+      <p><b>(1) 電場</b>:球対称性から、電場は動径方向で、大きさは $r$ だけで決まる。半径 $r$ の球面に<b>積分型ガウスの法則</b>を使うと $4\pi r^2E(r)=Q_{\text{内}}/\varepsilon_0$。
+      $$E(r)=\begin{cases}0&(r\lt a)\\[4pt]\dfrac{Q}{4\pi\varepsilon_0r^2}\dfrac{r^3-a^3}{b^3-a^3}&(a\lt r\lt b)\\[8pt]\dfrac{Q}{4\pi\varepsilon_0r^2}&(r\gt b)\end{cases}$$</p>
+      <p><b>(2) エネルギー</b>:
+      $$U=\frac{\varepsilon_0}{2}\int_0^\infty E^2\,4\pi r^2dr=\frac{Q^2}{8\pi\varepsilon_0}\Bigl[\frac{1}{(b^3-a^3)^2}\int_a^b\frac{(r^3-a^3)^2}{r^2}dr+\int_b^\infty\frac{dr}{r^2}\Bigr].$$
+      $\int_a^b\frac{(r^3-a^3)^2}{r^2}dr=\frac{b^5-a^5}{5}-a^3(b^2-a^2)+a^6\bigl(\frac1a-\frac1b\bigr)$、$\int_b^\infty\frac{dr}{r^2}=\frac1b$。分母をそろえて整理すると
+      $$U=\boldsymbol{\frac{3Q^2(3a^5-5a^3b^2+2b^5)}{40\pi\varepsilon_0(b^3-a^3)^2}}.$$</p>
+      <p><b>確かめ</b>:$a\to0$(一様な球)で $\frac{3Q^2}{20\pi\varepsilon_0b}$。整理に時間を使いすぎない(積分の結果を代入した形まで書けば、大部分の点は取れるはず)。</p>
+      </details>
+    </div><!--kakomon-->
 
     <h2 id="coulomb">5. クーロンの法則の積分</h2>
     <div class="box note-box"><div class="label">出題された過去問</div>
@@ -415,6 +469,30 @@
       $\rho\gt0$ なら、$z\gt0$ では上向き($+z$)、$z\lt0$ では下向きで、<b>円環から遠ざかる向き</b>です。</p>
       <p><b>検算</b>:$z\to0$(円の中心)で $E\to0$(対称性から当然)。$z\gg l$ では、全電荷 $Q=2\pi l\rho$ を使って $E\approx\dfrac{\rho\,l\,z}{2\varepsilon_0z^3}=\dfrac{2\pi l\rho}{4\pi\varepsilon_0z^2}=\dfrac{Q}{4\pi\varepsilon_0z^2}$。遠くから見ると、点電荷 $Q$ と同じ電場になります。</p>
     </div>
+    <div data-need="A" class="box kakomon"><div class="label">過去問:2025年度 第1回中間 [3](4点) <span class="need need-a">必須</span> <a class="xref-link" href="../exam/q3.html#prob">→ 過去問対策の解説</a></div>
+      <p class="kk-tools"><b>道具がそろったので、過去問を解いてみます。</b>使うもの:クーロンの法則の積分。円板は、上の [3-1] の円環を、半径を変えて足し合わせたものです。</p>
+      <p><b>問題(要旨)</b> 原点を中心とする $xy$ 面内の半径 $l$ の円盤全体に、一様面密度 $\rho$ で電荷を分布させる。この電荷が点 $(0,0,z)$($z\gt0$)に作る電場を求めよ。</p>
+      <details class="kk-ans"><summary>解答を見る</summary>
+      <p><b>(i) 対称性</b>:電荷分布は $z$ 軸まわりの回転で不変なので、$z$ 軸上の電場は $z$ 方向。$E_x=E_y=0$。</p>
+      <p><b>(ii) 円環の電場</b>:半径 $r$、幅 $dr$ の円環の電荷は $dq=\rho\cdot2\pi r\,dr$。円環のどの点も P からの距離は $\sqrt{r^2+z^2}$ なので、[3-1] と同じく、<b>クーロンの法則</b>より
+      $$dE_z=\frac{dq}{4\pi\varepsilon_0}\frac{z}{(r^2+z^2)^{3/2}}.$$</p>
+      <p><b>(iii) 足し合わせる</b>:
+      $$E_z=\frac{\rho z}{2\varepsilon_0}\int_0^l\frac{r\,dr}{(r^2+z^2)^{3/2}}=\frac{\rho z}{2\varepsilon_0}\Bigl[-\frac{1}{\sqrt{r^2+z^2}}\Bigr]_0^l=\boldsymbol{\frac{\rho}{2\varepsilon_0}\Bigl(1-\frac{z}{\sqrt{l^2+z^2}}\Bigr)}.$$</p>
+      <p><b>(iv) 確かめ</b>:$l\to\infty$ で $\frac{\rho}{2\varepsilon_0}$(無限平面、問 [3-2])。括弧の中の各項の単位(どちらも単位なし)がそろっているかも見る(後ろの項の $z$ を掛け忘れる誤りが多い)。</p>
+      </details>
+    </div><!--kakomon-->
+    <div data-need="A" class="box kakomon"><div class="label">過去問:2023年度 第1回中間 [4](4点) <span class="need need-a">必須</span> <a class="xref-link" href="../exam/q3.html#y2023">→ 過去問対策の解説</a></div>
+      <p class="kk-tools"><b>道具がそろったので、過去問を解いてみます。</b>使うもの:クーロンの法則の積分。[3-1] と同じく「対称性で向きを決める → 小さな部分の寄与 → 積分」。</p>
+      <p><b>問題(要旨)</b> $z$ 軸の $-l\le z\le l$ の上に、一様線密度 $\rho$ の電荷が分布している。この電荷が点 $(a,0,0)$($a\gt0$)に作る電場を求めよ。</p>
+      <details class="kk-ans"><summary>解答を見る</summary>
+      <p><b>(i) 対称性</b>:電荷分布は $z\to-z$ の鏡映で不変で、点 $(a,0,0)$ は $z=0$ の面上にあるので $E_z=0$。$z$ 軸まわりの回転対称性から、電場は $x$ 方向。</p>
+      <p><b>(ii) 微小部分</b>:位置 $z$ の長さ $dz$ の電荷 $\rho\,dz$ は、点からの距離 $\sqrt{a^2+z^2}$。<b>クーロンの法則</b>で、その電場の $x$ 成分は $\dfrac{\rho\,dz}{4\pi\varepsilon_0}\dfrac{a}{(a^2+z^2)^{3/2}}$。</p>
+      <p><b>(iii) 積分</b>:
+      $$E_x=\frac{\rho a}{4\pi\varepsilon_0}\int_{-l}^{l}\frac{dz}{(a^2+z^2)^{3/2}}=\frac{\rho a}{4\pi\varepsilon_0}\Bigl[\frac{z}{a^2\sqrt{a^2+z^2}}\Bigr]_{-l}^{l}=\boldsymbol{\frac{\rho\,l}{2\pi\varepsilon_0\,a\sqrt{a^2+l^2}}}.$$
+      ($\int\frac{dz}{(a^2+z^2)^{3/2}}$ は $z=a\tan\theta$ で求まる。答えを微分して確かめるのが確実。)</p>
+      <p><b>(iv) 確かめ</b>:$l\to\infty$ で $\frac{\rho}{2\pi\varepsilon_0a}$(無限に長い線電荷、下の例 3.2)。</p>
+      </details>
+    </div><!--kakomon-->
 
     <h2 id="image-plane">6. 鏡像法(平面・直角の角)</h2>
     <div class="box note-box"><div class="label">出題された過去問</div>
@@ -484,8 +562,21 @@
       <div class="label">講義ノートにない補足:電荷 $q$ にはたらく力 <span class="need need-b">必要</span></div>
       <p>電荷 $q$ は、鏡像電荷 $-q$($2a$ だけ離れている)から引力を受けるとみなせるので、大きさ $\dfrac{q^2}{4\pi\varepsilon_0(2a)^2}=\dfrac{q^2}{16\pi\varepsilon_0a^2}$、向きは導体に向かう方向。(導体の誘導電荷から実際に受ける力は、これと一致します。)</p>
     </div>
+    <div data-need="A" class="box kakomon"><div class="label">過去問:2025年度 第2回中間 [1](3点) <span class="need need-a">必須</span> <a class="xref-link" href="../exam/yosou.html#p1">→ 過去問対策の解説</a></div>
+      <p class="kk-tools"><b>道具がそろったので、過去問を解いてみます。</b>使うもの:例 4.1(平面導体の鏡像法)と、点電荷の電場(クーロンの法則)。</p>
+      <p class="kk-tools">例年は第2回中間に出た問題ですが、内容は今年の第1回中間の範囲(§4.3 の (4.12) まで)に入ります。</p>
+      <p><b>問題(要旨)</b> $y\le0$ の領域に接地された導体がある。点 $(a,b,0)$($a,b\gt0$)に点電荷 $q$ を置いたとき、点 $(-a,b,0)$ に作られる電場を求めよ。</p>
+      <details class="kk-ans"><summary>解答を見る</summary>
+      <p>導体の代わりに、面 $y=0$ について対称な点 $(a,-b,0)$ に鏡像電荷 $-q$ を置く。面 $y=0$ 上はどこも2つの電荷から等距離なので電位 0(接地の条件)。<b>一意性定理</b>より、$y\gt0$ ではこの配置の電場が答え。点 P$=(-a,b,0)$ は $y\gt0$ にある。</p>
+      <p>・$q$ から P へ:$(-2a,0,0)$、距離 $2a$。電場 $\dfrac{q}{16\pi\varepsilon_0}\Bigl(-\dfrac1{a^2},0,0\Bigr)$。<br>
+      ・$-q$ から P へ:$(-2a,2b,0)$、距離 $2\sqrt{a^2+b^2}$。電場 $\dfrac{q}{16\pi\varepsilon_0}\dfrac{(a,-b,0)}{(a^2+b^2)^{3/2}}$。</p>
+      <p>合計:
+      $$\bm{E}=\frac{q}{16\pi\varepsilon_0}\Bigl(-\frac1{a^2}+\frac{a}{(a^2+b^2)^{3/2}},\ \ -\frac{b}{(a^2+b^2)^{3/2}},\ \ 0\Bigr).$$</p>
+      <p>つまずきポイント:P を「鏡像の位置」と勘違いしない。鏡像は面 $y=0$ についての対称点 $(a,-b,0)$ で、P は真空中の別の点です。</p>
+      </details>
+    </div><!--kakomon-->
 
-    <h3 id="w6-s3-3">第6回 3.3 問 [4-1]:2枚の平行な導体板 <span class="need need-b">必要</span> </h3>
+    <h3 id="w6-s3-3">第6回 3.3 問 [4-1]:2枚の平行な導体板 <span class="need need-a">必須</span> </h3>
     <p style="font-size:.9em;color:var(--muted);margin-top:-4px">切り抜き元:<a href="../weeks/week-06.html#s3-3">第6回のノート 3.3 問 [4-1]:2枚の平行な導体板</a></p>
     <div data-need="B" class="box ex">
       <div class="label">問 [4-1] <span class="need need-b">必要</span></div>
@@ -503,6 +594,16 @@
       $$x_n=2nl,\qquad q_n=(-1)^nq\qquad(n=0,\pm1,\pm2,\dots)$$
       つまり、$x=0$ の本物の電荷 $q$ のほかに、$x=\pm2l$ に $-q$、$x=\pm4l$ に $+q$、$x=\pm6l$ に $-q$、……と無限個の鏡像電荷を並べる。</p>
       <p><b>確かめ</b>:面 $x=l$ について、位置 $2nl$ の電荷 $(-1)^nq$ と、面について対称な位置 $2l-2nl=2(1-n)l$ の電荷 $(-1)^{1-n}q=-(-1)^nq$ は、符号が反対で、面から等距離。つまり対になって、面上の電位は打ち消し合って 0。面 $x=-l$ についても同様です。</p></div>
+    <div data-need="A" class="box kakomon"><div class="label">過去問:2023年度 第2回中間 [2](3点) <span class="need need-a">必須</span> <a class="xref-link" href="../exam/yosou.html#p4">→ 過去問対策の解説</a></div>
+      <p class="kk-tools"><b>道具がそろったので、過去問を解いてみます。</b>使うもの:鏡像を何個も置く考え方(上の [4-1])。今度は2枚の導体面が直角に交わります。</p>
+      <p class="kk-tools">例年は第2回中間に出た問題ですが、内容は今年の第1回中間の範囲(§4.3 の (4.12) まで)に入ります。</p>
+      <p><b>問題(要旨)</b> $x,y\gt0$ の空間が真空で、残りの $x\le0$ または $y\le0$ の領域がすべて接地された導体で埋められている。点 $(a,b,0)$ に点電荷 $q$ を置いた。必要な鏡像電荷の位置と電荷の値を、座標で明示して図示せよ。</p>
+      <details class="kk-ans"><summary>解答を見る</summary>
+      <p>$(-a,b,0)$ に $-q$、$(a,-b,0)$ に $-q$、$(-a,-b,0)$ に $+q$ の<b>3つ</b>。4つの電荷が長方形の頂点に並び、<b>対角の位置どうしは同じ符号</b>。</p>
+      <p>確かめ:面 $x=0$ について、$q$ と $(-a,b,0)$ の $-q$、$(a,-b,0)$ の $-q$ と $(-a,-b,0)$ の $+q$ が、それぞれ符号反対の対になるので、$x=0$ 上の電位は 0。面 $y=0$ についても同様。</p>
+      <p>直感:2枚の鏡を直角に置くと、像は3つ見える(合わせ鏡)。1回反射した像は $-q$、2回反射した像は $+q$。</p>
+      </details>
+    </div><!--kakomon-->
 
     <h2 id="image-sphere">7. 鏡像法(球)と誘導電荷</h2>
     <div class="box note-box"><div class="label">出題された過去問</div>
@@ -587,6 +688,31 @@
       $$\sigma=\varepsilon_0E_n=-\frac{q}{4\pi}\frac{a+l}{l\,(a-l)^2}.$$
       負で、電荷 $q$ に最も近い点なので大きい。($q\gt0$。)<b>参考</b>:球面上の一般の点($x$ 軸となす角 $\theta$)では、同様の計算で $\sigma(\theta)=-\dfrac{q}{4\pi l}\dfrac{a^2-l^2}{(a^2+l^2-2al\cos\theta)^{3/2}}$ となり、$\theta=0$ で上の値に一致します。これを球面全体で積分すると $-\dfrac laq$、鏡像電荷に等しくなります。</p>
     </div>
+    <div data-need="A" class="box kakomon"><div class="label">過去問:2023年度 第2回中間 [3](5点) <span class="need need-a">必須</span> <a class="xref-link" href="../exam/yosou.html#p2">→ 過去問対策の解説</a></div>
+      <p class="kk-tools"><b>道具がそろったので、過去問を解いてみます。</b>使うもの:接地されていない球の鏡像(3.5 節、問 [4-2]:中心にも $+\frac laq$)と、誘導電荷密度 $\sigma=\varepsilon_0E_n$(この節、問 [4-3])。</p>
+      <p class="kk-tools">例年は第2回中間に出た問題ですが、内容は今年の第1回中間の範囲(§4.3 の (4.12) まで)に入ります。</p>
+      <p><b>問題(要旨)</b> 原点中心・半径 $l$ の導体球(接地されておらず、総電荷 0)がある。$(a,0,0)$($a\gt l$)に点電荷 $q$ を置いた。導体球面の点 $(-l,0,0)$ に誘起される誘導電荷密度を求めよ。</p>
+      <details class="kk-ans"><summary>解答を見る</summary>
+      <p><b>使う式</b>:接地された球なら、鏡像 $-\frac laq$ が中心から $\frac{l^2}{a}$。球面上で、電荷の方向から角 $\theta$ の点の誘導電荷密度は(問 [4-3] の計算を一般の点で行うと)
+      $$\sigma_{\text{接地}}(\theta)=-\frac{q}{4\pi l}\,\frac{a^2-l^2}{(a^2+l^2-2al\cos\theta)^{3/2}}.$$
+      接地されていない(総電荷 0)ときは、中心に $+\frac laq$ を加える。中心の電荷は球面に一様な電場を作るので、密度は一様に $\frac{(l/a)q}{4\pi l^2}=\frac{q}{4\pi al}$ 増える。</p>
+      <p><b>答案</b>:鏡像は $\bigl(\frac{l^2}{a},0,0\bigr)$ に $-\frac laq$、原点に $+\frac laq$(球面が等電位で、総電荷 0。<b>一意性</b>により、これが答え)。点 $(-l,0,0)$ は電荷から見て $\theta=\pi$($\cos\theta=-1$)なので
+      $$\sigma=-\frac{q}{4\pi l}\frac{a^2-l^2}{(a+l)^3}+\frac{q}{4\pi al}=\boldsymbol{\frac{q}{4\pi l}\Bigl(\frac1a-\frac{a-l}{(a+l)^2}\Bigr)}.$$
+      (正の値:電荷 $q\gt0$ から遠い側には、正の電荷がたまる。)</p>
+      <p>最大のミスは、<b>中心の $+\frac laq$ を忘れる</b>こと(接地されていない球なのに、接地の答えを書いてしまう)。</p>
+      </details>
+    </div><!--kakomon-->
+    <div data-need="A" class="box kakomon"><div class="label">過去問:2025年度 第2回中間 [2](7点) <span class="need need-a">必須</span> <a class="xref-link" href="../exam/yosou.html#p2">→ 過去問対策の解説</a></div>
+      <p class="kk-tools"><b>道具がそろったので、過去問を解いてみます。</b>使うもの:ひとつ上の過去問と同じ2つの式を、電荷2つ分、重ね合わせます。</p>
+      <p class="kk-tools">例年は第2回中間に出た問題ですが、内容は今年の第1回中間の範囲(§4.3 の (4.12) まで)に入ります。</p>
+      <p><b>問題(要旨)</b> 原点中心・半径 $l$ の接地されていない導体球(帯電しておらず、総電荷は常に 0)がある。$(a,0,0)$ と $(-a,0,0)$($a\gt l$)にそれぞれ点電荷 $q$ を置いた。導体球表面の点 $(0,l,0)$ に誘導される電荷密度を求めよ。</p>
+      <details class="kk-ans"><summary>解答を見る</summary>
+      <p>各電荷 $q$(位置 $(\pm a,0,0)$)に、鏡像 $-\frac laq$ を $(\pm\frac{l^2}{a},0,0)$ に、さらに原点に $+\frac laq$ ずつ(合計 $+\frac{2l}{a}q$)置く。球面は等電位で総電荷 0 なので、<b>一意性</b>によりこれが答え。</p>
+      <p>点 $(0,l,0)$ は、どちらの電荷から見ても $\theta=\frac\pi2$($\cos\theta=0$)。2つの電荷の分を足して
+      $$\sigma=2\Bigl(-\frac{q}{4\pi l}\frac{a^2-l^2}{(a^2+l^2)^{3/2}}+\frac{q}{4\pi al}\Bigr)=\boldsymbol{\frac{q}{2\pi}\Bigl(\frac{1}{al}-\frac{a^2-l^2}{l\,(a^2+l^2)^{3/2}}\Bigr)}.$$</p>
+      <p>部分点は、鏡像電荷の配置(中心の電荷も)、それが条件を満たす理由(一意性)、$\sigma=\varepsilon_0E_n$、計算、にあるはずです。</p>
+      </details>
+    </div><!--kakomon-->
 
     <h2 id="proof">8. 証明:調和関数とエネルギー最小化</h2>
     <div class="box note-box"><div class="label">出題された過去問</div>
@@ -629,6 +755,20 @@
       $$=2\int_{\partial V}e\,\nabla\psi\cdot d\bm{S}+\int_V|\nabla e|^2\,d\bm{x}=\int_V|\nabla e|^2\,d\bm{x}\ge0\tag{2.45}$$
       となり、求めたかった不等式が得られる。</p>
       <p>各等号の理由:2つ目の等号は $\nabla\cdot(e\nabla\psi)=\nabla e\cdot\nabla\psi+e\Delta\psi=\nabla e\cdot\nabla\psi$(積の微分と、$\Delta\psi=0$ に注意)を使っている。3つ目の等号では<b>ガウスの定理</b>を、4つ目の等号では $e$ が境界上で常にゼロであること(面積分が消える)を使っている。</p></div>
+    <div data-need="A" class="box kakomon"><div class="label">過去問:2025年度 第1回中間 [1](5点) <span class="need need-a">必須</span> <a class="xref-link" href="../exam/q1.html#prob">→ 過去問対策の解説</a></div>
+      <p class="kk-tools"><b>道具がそろったので、過去問を解いてみます。</b>使うもの:すぐ上の証明そのものです(使うのは、積の微分、$\Delta\phi=0$、ガウスの定理、境界で $e=0$)。</p>
+      <p><b>問題(要旨)</b> 3次元空間の単連結な領域 $V$ をとる。$V$ の表面 $\partial V$ では与えられた関数 $F(\bm{x})$ と同じ値をとる、という拘束条件を満たすスカラー場 $f(\bm{x})$ のうち、$\int_V|\nabla f|^2\,d\bm{x}$ を最小にするもの $f^*$ を求めたい。同じ拘束条件を満たす $V$ 上の調和関数 $\phi$($\Delta\phi=0$)が存在するならば、$f^*=\phi$ であることを証明せよ。<b>(注:式変形では、どの定理や議論を用いたのか分かるように書くこと)</b></p>
+      <details class="kk-ans"><summary>解答を見る</summary>
+      <p>拘束条件を満たす任意の $f$ について、$e:=f-\phi$ とおく。$\partial V$ 上では $f=\phi=F$ なので、<b>$\partial V$ 上で $e=0$</b>。$\nabla f=\nabla\phi+\nabla e$ より
+      $$\int_V|\nabla f|^2d\bm{x}-\int_V|\nabla\phi|^2d\bm{x}=\int_V\bigl(2\nabla e\cdot\nabla\phi+|\nabla e|^2\bigr)d\bm{x}.\qquad\cdots(1)$$
+      積の微分と <b>$\Delta\phi=0$</b> より $\nabla\cdot(e\nabla\phi)=\nabla e\cdot\nabla\phi+e\,\Delta\phi=\nabla e\cdot\nabla\phi$。よって<b>ガウスの定理</b>から
+      $$\int_V\nabla e\cdot\nabla\phi\,d\bm{x}=\int_{\partial V}e\,\nabla\phi\cdot d\bm{S}=0\qquad(\partial V\text{ 上で }e=0).\qquad\cdots(2)$$
+      (1) に (2) を代入して
+      $$\int_V|\nabla f|^2d\bm{x}-\int_V|\nabla\phi|^2d\bm{x}=\int_V|\nabla e|^2d\bm{x}\ \ge\ 0.$$
+      よって $\phi$ が最小を与え、$f^*=\phi$。(等号は $\nabla e=\bm{0}$ のとき。境界で $e=0$ なので $e\equiv0$、つまり最小にするのは $\phi$ だけ。)$\blacksquare$</p>
+      <p>問題文の「注」が採点基準です。<b>境界で $e=0$、$\Delta\phi=0$、ガウスの定理</b>を、使った場所ごとに書きます。</p>
+      </details>
+    </div><!--kakomon-->
     <div data-need="C" class="box intuit">
       <div class="label">直感で理解する:ぴんと張ったゴム膜 <span class="need need-c">参考</span></div>
       <p>針金の枠(境界の値 $f$)にゴム膜を張ると、膜はできるだけ<b>伸びが少ない</b>形に落ち着きます。膜の傾きが小さいとき、伸びの量は「傾き $|\nabla g|$ の2乗の合計」(エネルギー $\mathcal{E}$)で測れるので、膜の形は $\mathcal{E}$ を最小にする関数、つまり調和関数です。1次元なら、両端を固定したゴムひもは<b>まっすぐ</b>になる(図の直線)、ということです。枠のどこよりも高く、膜の真ん中だけが盛り上がることがないのも、最大値原理と合っています。</p>
@@ -715,6 +855,18 @@
       $$=\sum_jA_j\,\partial_iA_j-\sum_jA_j\,\partial_jA_i.$$
       第1項は、積の微分から $\sum_jA_j\partial_iA_j=\partial_i\Bigl(\frac12\sum_jA_j^2\Bigr)=\Bigl[\nabla\Bigl(\frac12\bm{A}\cdot\bm{A}\Bigr)\Bigr]_i$。第2項は $\sum_jA_j\partial_jA_i=[(\bm{A}\cdot\nabla)\bm{A}]_i$。よって (2.17) が成り立つ。<b>(この式は、流体力学の運動方程式などで現れる、有名な恒等式です。)</b></p>
     </div>
+    <div data-need="A" class="box kakomon"><div class="label">過去問:2023年度 第1回中間 [1](2点) <span class="need need-a">必須</span> <a class="xref-link" href="../exam/q1.html#ident">→ 過去問対策の解説</a></div>
+      <p class="kk-tools"><b>道具がそろったので、過去問を解いてみます。</b>使うもの:公式 (2.14)($\varepsilon\varepsilon$ の公式)と、上の [2-2] と同じ「成分で書く → (2.14) → 積の微分で展開」の流れ。</p>
+      <p><b>問題(要旨)</b> $\nabla\times(\bm{A}\times\bm{B})$ を、$P:=\nabla(\bm{A}\cdot\bm{B})$、$Q:=\bm{A}(\nabla\cdot\bm{B})$、$R:=\bm{B}(\nabla\cdot\bm{A})$、$S:=(\bm{A}\cdot\nabla)\bm{B}$、$T:=(\bm{B}\cdot\nabla)\bm{A}$ を用いた式で書け(例:$1+S+T$、$2P+R-3S$ のような形で)。ここで $(\bm{A}\cdot\nabla)\bm{B}$ は、第 $i$ 成分が $\sum_jA_j\partial_jB_i$ のベクトルです。</p>
+      <details class="kk-ans"><summary>解答を見る</summary>
+      <p>$\varepsilon\varepsilon$ の公式 $\sum_k\varepsilon_{ijk}\varepsilon_{klm}=\delta_{il}\delta_{jm}-\delta_{im}\delta_{jl}$ を使う。
+      $$\begin{aligned}[\nabla\times(\bm{A}\times\bm{B})]_i&=\sum_{j,k}\varepsilon_{ijk}\partial_j\sum_{l,m}\varepsilon_{klm}A_lB_m\\&=\sum_{j,l,m}(\delta_{il}\delta_{jm}-\delta_{im}\delta_{jl})\partial_j(A_lB_m)\\&=\sum_j\partial_j(A_iB_j)-\sum_j\partial_j(A_jB_i).\end{aligned}$$
+      積の微分で展開すると
+      $$=\underbrace{\sum_jB_j\partial_jA_i}_{T}+\underbrace{A_i\sum_j\partial_jB_j}_{Q}-\underbrace{\sum_jA_j\partial_jB_i}_{S}-\underbrace{B_i\sum_j\partial_jA_j}_{R}.$$
+      よって $\boldsymbol{\nabla\times(\bm{A}\times\bm{B})=Q-R-S+T}$($P$ は出てこない)。</p>
+      <p>覚え方:「$\varepsilon\varepsilon$ の公式で2項 → それぞれ積の微分で2項 → 合計4項」。</p>
+      </details>
+    </div><!--kakomon-->
 
     <nav class="pager">
       <a href="yosou.html">← 前へ</a>

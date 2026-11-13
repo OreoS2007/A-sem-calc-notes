@@ -260,6 +260,30 @@
       $\rho\gt0$ なら、$z\gt0$ では上向き($+z$)、$z\lt0$ では下向きで、<b>円環から遠ざかる向き</b>です。</p>
       <p><b>検算</b>:$z\to0$(円の中心)で $E\to0$(対称性から当然)。$z\gg l$ では、全電荷 $Q=2\pi l\rho$ を使って $E\approx\dfrac{\rho\,l\,z}{2\varepsilon_0z^3}=\dfrac{2\pi l\rho}{4\pi\varepsilon_0z^2}=\dfrac{Q}{4\pi\varepsilon_0z^2}$。遠くから見ると、点電荷 $Q$ と同じ電場になります。</p>
     </div>
+    <div data-need="A" class="box kakomon"><div class="label">過去問:2025年度 第1回中間 [3](4点) <span class="need need-a">必須</span> <a class="xref-link" href="../exam/q3.html#prob">→ 過去問対策の解説</a></div>
+      <p class="kk-tools"><b>道具がそろったので、過去問を解いてみます。</b>使うもの:クーロンの法則の積分。円板は、上の [3-1] の円環を、半径を変えて足し合わせたものです。</p>
+      <p><b>問題(要旨)</b> 原点を中心とする $xy$ 面内の半径 $l$ の円盤全体に、一様面密度 $\rho$ で電荷を分布させる。この電荷が点 $(0,0,z)$($z\gt0$)に作る電場を求めよ。</p>
+      <details class="kk-ans"><summary>解答を見る</summary>
+      <p><b>(i) 対称性</b>:電荷分布は $z$ 軸まわりの回転で不変なので、$z$ 軸上の電場は $z$ 方向。$E_x=E_y=0$。</p>
+      <p><b>(ii) 円環の電場</b>:半径 $r$、幅 $dr$ の円環の電荷は $dq=\rho\cdot2\pi r\,dr$。円環のどの点も P からの距離は $\sqrt{r^2+z^2}$ なので、[3-1] と同じく、<b>クーロンの法則</b>より
+      $$dE_z=\frac{dq}{4\pi\varepsilon_0}\frac{z}{(r^2+z^2)^{3/2}}.$$</p>
+      <p><b>(iii) 足し合わせる</b>:
+      $$E_z=\frac{\rho z}{2\varepsilon_0}\int_0^l\frac{r\,dr}{(r^2+z^2)^{3/2}}=\frac{\rho z}{2\varepsilon_0}\Bigl[-\frac{1}{\sqrt{r^2+z^2}}\Bigr]_0^l=\boldsymbol{\frac{\rho}{2\varepsilon_0}\Bigl(1-\frac{z}{\sqrt{l^2+z^2}}\Bigr)}.$$</p>
+      <p><b>(iv) 確かめ</b>:$l\to\infty$ で $\frac{\rho}{2\varepsilon_0}$(無限平面、問 [3-2])。括弧の中の各項の単位(どちらも単位なし)がそろっているかも見る(後ろの項の $z$ を掛け忘れる誤りが多い)。</p>
+      </details>
+    </div><!--kakomon-->
+    <div data-need="A" class="box kakomon"><div class="label">過去問:2023年度 第1回中間 [4](4点) <span class="need need-a">必須</span> <a class="xref-link" href="../exam/q3.html#y2023">→ 過去問対策の解説</a></div>
+      <p class="kk-tools"><b>道具がそろったので、過去問を解いてみます。</b>使うもの:クーロンの法則の積分。[3-1] と同じく「対称性で向きを決める → 小さな部分の寄与 → 積分」。</p>
+      <p><b>問題(要旨)</b> $z$ 軸の $-l\le z\le l$ の上に、一様線密度 $\rho$ の電荷が分布している。この電荷が点 $(a,0,0)$($a\gt0$)に作る電場を求めよ。</p>
+      <details class="kk-ans"><summary>解答を見る</summary>
+      <p><b>(i) 対称性</b>:電荷分布は $z\to-z$ の鏡映で不変で、点 $(a,0,0)$ は $z=0$ の面上にあるので $E_z=0$。$z$ 軸まわりの回転対称性から、電場は $x$ 方向。</p>
+      <p><b>(ii) 微小部分</b>:位置 $z$ の長さ $dz$ の電荷 $\rho\,dz$ は、点からの距離 $\sqrt{a^2+z^2}$。<b>クーロンの法則</b>で、その電場の $x$ 成分は $\dfrac{\rho\,dz}{4\pi\varepsilon_0}\dfrac{a}{(a^2+z^2)^{3/2}}$。</p>
+      <p><b>(iii) 積分</b>:
+      $$E_x=\frac{\rho a}{4\pi\varepsilon_0}\int_{-l}^{l}\frac{dz}{(a^2+z^2)^{3/2}}=\frac{\rho a}{4\pi\varepsilon_0}\Bigl[\frac{z}{a^2\sqrt{a^2+z^2}}\Bigr]_{-l}^{l}=\boldsymbol{\frac{\rho\,l}{2\pi\varepsilon_0\,a\sqrt{a^2+l^2}}}.$$
+      ($\int\frac{dz}{(a^2+z^2)^{3/2}}$ は $z=a\tan\theta$ で求まる。答えを微分して確かめるのが確実。)</p>
+      <p><b>(iv) 確かめ</b>:$l\to\infty$ で $\frac{\rho}{2\pi\varepsilon_0a}$(無限に長い線電荷、下の例 3.2)。</p>
+      </details>
+    </div><!--kakomon-->
 
     <h3 id="s3-2" data-need="A">3.2 対称性が高いときは、積分型ガウスの法則 <span class="need need-a">必須</span></h3>
     <p data-need="A">対称性が高い場合には、<b>積分型ガウスの法則 (3.12)</b> が非常に便利です。使い方は、(i)対称性から、電場の向きと「何に依存するか」を決める、(ii)その電場の大きさが一定とみなせる面で囲まれた領域 $V$ をとる、(iii)(3.12) の左辺を「$E$ × 面積」と書く、という手順です。</p>
@@ -280,6 +304,16 @@
       <div class="label">直感で理解する:近くの少しと、遠くのたくさんが釣り合う <span class="need need-c">参考</span></div>
       <p>球殻の内側の点 P から、ある方向とその反対方向に、細い円すいを伸ばしてみます。円すいが球殻を切り取る面は、P に<b>近い側では小さく</b>(電荷が少ない)、<b>遠い側では大きく</b>(電荷が多い)なります。切り取る面積は距離の2乗に比例して増え、1つ1つの電荷が作る電場は距離の2乗に反比例して弱まるので、近い側と遠い側の電場は<b>ちょうど同じ大きさで逆向き</b>になって打ち消し合います。どの方向の組でも同じことが起こるので、内側の電場は 0 です。距離の2乗に反比例する力だからこそ起こる、絶妙な釣り合いです。</p>
     </div>
+    <div data-need="A" class="box kakomon"><div class="label">過去問:2023年度 第1回中間 [3](4点) <span class="need need-a">必須</span> <a class="xref-link" href="../exam/q4.html#y2023-3">→ 過去問対策の解説</a></div>
+      <p class="kk-tools"><b>道具がそろったので、過去問を解いてみます。</b>使うもの:対称性 + 積分型ガウスの法則 (3.12)。上の例 3.1(球殻)の内側の計算と同じ型です。</p>
+      <p><b>問題(要旨)</b> 原点を中心とする半径 $r$ の球全体に、一様電荷密度で総電荷 $Q$ を分布させる。この電荷が点 $(a,0,0)$($0\lt a\lt r$)に作る電場を求めよ。</p>
+      <details class="kk-ans"><summary>解答を見る</summary>
+      <p>球対称なので、電場は動径方向で、大きさは原点からの距離だけで決まる。半径 $a$ の球面に<b>積分型ガウスの法則</b>を使う。中の電荷は体積の比で $Q\dfrac{a^3}{r^3}$ なので
+      $$4\pi a^2E=\frac{Qa^3}{\varepsilon_0r^3},\qquad E=\frac{Qa}{4\pi\varepsilon_0r^3}.$$
+      点 $(a,0,0)$ での動径方向は $+x$ なので $\boldsymbol{\bm{E}=\Bigl(\dfrac{Qa}{4\pi\varepsilon_0r^3},\ 0,\ 0\Bigr)}$。</p>
+      <p>注意:問題文の $r$ は<b>球の半径</b>(定数)で、観測点までの距離は $a$。文字がいつもと入れ替わっています。$a\to r$(表面)で $\frac{Q}{4\pi\varepsilon_0r^2}$ になるかで確かめる。</p>
+      </details>
+    </div><!--kakomon-->
 
     <div data-need="B" class="box ex">
       <div class="label">例 3.2:無限に長い線電荷 <span class="need need-b">必要</span></div>

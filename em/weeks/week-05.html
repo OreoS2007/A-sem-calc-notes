@@ -199,6 +199,9 @@
       <div class="label">注意:(3.33) は、電荷が連続分布のときだけ <span class="need need-b">必要</span></div>
       <p>なお、この表示は<b>電荷が連続的に分布している場合に限られ、点電荷の場合には成り立たない</b>ことには注意が必要です。この表示は「無限小電荷を集めて電荷分布を作る状況」でのものなので、点電荷がある場合には「無限小電荷を集めて点電荷を作る」必要があります。しかし、無限小電荷から点電荷を作ろうと思うと、その時点で無限大のエネルギーが発生してしまうので、計算がうまくいきません(脚注52:この問題は量子電磁気学においても発生する。「くりこみ」の手法は、この発散の問題を解決するための一つの方法である)。先程得られた点電荷の場合のエネルギーの表式 (3.26) は、「無限遠方にあらかじめ点電荷が用意されている」という状況設定のものであり、無限小電荷のみから電荷分布を作る今の設定とは微妙に異なっているのです。</p>
     </div>
+    <div data-need="A" class="box kakomon"><div class="label">過去問:2023年度 第1回中間 [5](5点) <span class="need need-a">必須</span> <a class="xref-link" href="../exam/q4.html#y2023-5">→ 過去問対策の解説</a></div>
+      <p>すぐ下の<b>問 [3-3] は、2023年度 第1回中間 [5](5点)に、そのまま出ました</b>。下の解答が、そのまま過去問の解答です(答え $\frac{2\pi l^3\sigma^2}{\varepsilon_0}\bigl(2+\frac lb\bigr)$)。採点では「自己エネルギー × 2」と「相互作用(中心の点電荷どうしと同じ)」に分ける考え方を書くことが大事です。</p>
+    </div><!--kakomon-->
 
     <div data-need="A" class="box ex">
       <div class="label">問 [3-3] <span class="need need-a">必須</span></div>
@@ -220,6 +223,19 @@
       $$U=\frac{4\pi l^3\sigma^2}{\varepsilon_0}+\frac{2\pi l^4\sigma^2}{\varepsilon_0b}=\frac{2\pi l^3\sigma^2}{\varepsilon_0}\Bigl(2+\frac lb\Bigr).$$
       (<b>検算</b>:$b\to\infty$ で相互作用は消え、各球殻の自己エネルギーだけが残る。同符号なので相互作用エネルギーは正で、近づけるほど増える。)</p>
     </div>
+    <div data-need="A" class="box kakomon"><div class="label">過去問:2025年度 第1回中間 [4](5点) <span class="need need-a">必須</span> <a class="xref-link" href="../exam/q4.html#prob">→ 過去問対策の解説</a></div>
+      <p class="kk-tools"><b>道具がそろったので、過去問を解いてみます。</b>使うもの:第4回のガウスの法則(例 3.1 と同じ型)で電場を出し、(3.33) $U=\frac{\varepsilon_0}{2}\int|\bm{E}|^2d\bm{r}$ で積分します。</p>
+      <p><b>問題(要旨)</b> $0\lt a\lt b$ とする。原点からの距離が $a\lt r\lt b$ の領域(中心部分が空洞の球)に、一様な電荷密度で電荷 $Q$ を帯電させた。この系のエネルギーを求めよ。</p>
+      <details class="kk-ans"><summary>解答を見る</summary>
+      <p><b>(1) 電場</b>:球対称性から、電場は動径方向で、大きさは $r$ だけで決まる。半径 $r$ の球面に<b>積分型ガウスの法則</b>を使うと $4\pi r^2E(r)=Q_{\text{内}}/\varepsilon_0$。
+      $$E(r)=\begin{cases}0&(r\lt a)\\[4pt]\dfrac{Q}{4\pi\varepsilon_0r^2}\dfrac{r^3-a^3}{b^3-a^3}&(a\lt r\lt b)\\[8pt]\dfrac{Q}{4\pi\varepsilon_0r^2}&(r\gt b)\end{cases}$$</p>
+      <p><b>(2) エネルギー</b>:
+      $$U=\frac{\varepsilon_0}{2}\int_0^\infty E^2\,4\pi r^2dr=\frac{Q^2}{8\pi\varepsilon_0}\Bigl[\frac{1}{(b^3-a^3)^2}\int_a^b\frac{(r^3-a^3)^2}{r^2}dr+\int_b^\infty\frac{dr}{r^2}\Bigr].$$
+      $\int_a^b\frac{(r^3-a^3)^2}{r^2}dr=\frac{b^5-a^5}{5}-a^3(b^2-a^2)+a^6\bigl(\frac1a-\frac1b\bigr)$、$\int_b^\infty\frac{dr}{r^2}=\frac1b$。分母をそろえて整理すると
+      $$U=\boldsymbol{\frac{3Q^2(3a^5-5a^3b^2+2b^5)}{40\pi\varepsilon_0(b^3-a^3)^2}}.$$</p>
+      <p><b>確かめ</b>:$a\to0$(一様な球)で $\frac{3Q^2}{20\pi\varepsilon_0b}$。整理に時間を使いすぎない(積分の結果を代入した形まで書けば、大部分の点は取れるはず)。</p>
+      </details>
+    </div><!--kakomon-->
 
     <h3 id="s3-5" data-need="C">3.5 「相互作用エネルギー」と「場が持つエネルギー」 <span class="need need-c">参考</span></h3>
     <p data-need="C">さて、式 (3.33) を見ると、いかにも「空間中の各点の電場がエネルギー $\varepsilon_0|\bm{E}|^2/2$ を持っている」ように見えます。一方、元々のエネルギーの特徴づけ (3.27) は「電荷分布が電荷分布自身に対して作っている(ポテンシャル)エネルギー」でした。この二つは大きく異なる見方のようにも見えますが、実はそこまで異なるわけでもありません。例として、一方が壁に固定され、もう一方の先には質点がついているバネを考えましょう(図13)。質点を引っ張るには仕事が必要であり、引っ張った際にはエネルギーが蓄えられます。このエネルギーについて、以下の二通りの見方が可能です。</p>

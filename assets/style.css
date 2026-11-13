@@ -200,6 +200,14 @@ main h2[id], main h3[id], main section[id], main div[id] { scroll-margin-top: 68
 .box.intuit { border-left-color: var(--ex); background: color-mix(in srgb, var(--surface) 92%, var(--ex) 8%); }
 .box.intuit .label { color: var(--ex); }
 
+/* ---- 過去問の具体例(em の各回のノート:道具がそろった位置に入れる) ---- */
+.box.kakomon { border: 2px solid #c62828; border-left-width: 6px; background: color-mix(in srgb, var(--surface) 94%, #c62828 6%); }
+.box.kakomon > .label { color: #c62828; font-size: .95rem; }
+.box.kakomon .kk-tools { font-size: .9em; color: var(--muted); }
+.box.kakomon details.kk-ans { margin-top: 8px; border-top: 1px dashed var(--border); padding-top: 6px; }
+.box.kakomon details.kk-ans > summary { cursor: pointer; font-weight: 700; color: #c62828; }
+@media (prefers-color-scheme: dark) { .box.kakomon > .label, .box.kakomon details.kk-ans > summary { color: #ff8a80; } }
+
 /* ---- 過去問に対する必要度のラベル(em の各回のノート) ---- */
 .need { display: inline-block; font-size: .7rem; font-weight: 700; padding: 1px 8px; border-radius: 99px; margin-left: 8px; vertical-align: middle; border: 1px solid currentColor; white-space: nowrap; letter-spacing: 0; }
 .need-a { color: #c62828; background: color-mix(in srgb, var(--surface) 90%, #c62828 10%); }

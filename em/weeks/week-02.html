@@ -278,6 +278,18 @@
       $$=\sum_jA_j\,\partial_iA_j-\sum_jA_j\,\partial_jA_i.$$
       第1項は、積の微分から $\sum_jA_j\partial_iA_j=\partial_i\Bigl(\frac12\sum_jA_j^2\Bigr)=\Bigl[\nabla\Bigl(\frac12\bm{A}\cdot\bm{A}\Bigr)\Bigr]_i$。第2項は $\sum_jA_j\partial_jA_i=[(\bm{A}\cdot\nabla)\bm{A}]_i$。よって (2.17) が成り立つ。<b>(この式は、流体力学の運動方程式などで現れる、有名な恒等式です。)</b></p>
     </div>
+    <div data-need="A" class="box kakomon"><div class="label">過去問:2023年度 第1回中間 [1](2点) <span class="need need-a">必須</span> <a class="xref-link" href="../exam/q1.html#ident">→ 過去問対策の解説</a></div>
+      <p class="kk-tools"><b>道具がそろったので、過去問を解いてみます。</b>使うもの:公式 (2.14)($\varepsilon\varepsilon$ の公式)と、上の [2-2] と同じ「成分で書く → (2.14) → 積の微分で展開」の流れ。</p>
+      <p><b>問題(要旨)</b> $\nabla\times(\bm{A}\times\bm{B})$ を、$P:=\nabla(\bm{A}\cdot\bm{B})$、$Q:=\bm{A}(\nabla\cdot\bm{B})$、$R:=\bm{B}(\nabla\cdot\bm{A})$、$S:=(\bm{A}\cdot\nabla)\bm{B}$、$T:=(\bm{B}\cdot\nabla)\bm{A}$ を用いた式で書け(例:$1+S+T$、$2P+R-3S$ のような形で)。ここで $(\bm{A}\cdot\nabla)\bm{B}$ は、第 $i$ 成分が $\sum_jA_j\partial_jB_i$ のベクトルです。</p>
+      <details class="kk-ans"><summary>解答を見る</summary>
+      <p>$\varepsilon\varepsilon$ の公式 $\sum_k\varepsilon_{ijk}\varepsilon_{klm}=\delta_{il}\delta_{jm}-\delta_{im}\delta_{jl}$ を使う。
+      $$\begin{aligned}[\nabla\times(\bm{A}\times\bm{B})]_i&=\sum_{j,k}\varepsilon_{ijk}\partial_j\sum_{l,m}\varepsilon_{klm}A_lB_m\\&=\sum_{j,l,m}(\delta_{il}\delta_{jm}-\delta_{im}\delta_{jl})\partial_j(A_lB_m)\\&=\sum_j\partial_j(A_iB_j)-\sum_j\partial_j(A_jB_i).\end{aligned}$$
+      積の微分で展開すると
+      $$=\underbrace{\sum_jB_j\partial_jA_i}_{T}+\underbrace{A_i\sum_j\partial_jB_j}_{Q}-\underbrace{\sum_jA_j\partial_jB_i}_{S}-\underbrace{B_i\sum_j\partial_jA_j}_{R}.$$
+      よって $\boldsymbol{\nabla\times(\bm{A}\times\bm{B})=Q-R-S+T}$($P$ は出てこない)。</p>
+      <p>覚え方:「$\varepsilon\varepsilon$ の公式で2項 → それぞれ積の微分で2項 → 合計4項」。</p>
+      </details>
+    </div><!--kakomon-->
 
     <h3 id="s2-6" data-need="C">2.6 ラプラシアン <span class="need need-c">参考</span> <span class="page-tag">p.7</span></h3>
     <p data-need="X">最後に、一般次元の場に対する<b>ラプラシアン</b>(Laplacian)を導入します(数学者ピエール・シモン・ラプラスにちなむ)。</p>
@@ -360,6 +372,16 @@
       したがって
       $$\int_0^{\pi}\Bigl(-\cos s\sin s+\frac{\sin s}{2\pi}\Bigr)ds=\Bigl[-\frac{\sin^2s}{2}\Bigr]_0^{\pi}+\frac{1}{2\pi}\Bigl[-\cos s\Bigr]_0^{\pi}=0+\frac{1}{2\pi}\cdot2=\frac1\pi.$$</p>
     </div>
+    <div data-need="A" class="box kakomon"><div class="label">過去問:2023年度 第2回中間 [1](2点) <span class="need need-a">必須</span> <a class="xref-link" href="../exam/q2.html#line">→ 過去問対策の解説</a></div>
+      <p class="kk-tools"><b>道具がそろったので、過去問を解いてみます。</b>使うもの:線積分の定義 (2.25)。例 2.2 と同じく、曲線を $x$ で表して1変数の積分にします。</p>
+      <p class="kk-tools">例年は第2回中間に出た問題ですが、内容は今年の第1回中間の範囲(§4.3 の (4.12) まで)に入ります。</p>
+      <p><b>問題(要旨)</b> 曲線 $C$:$y=x^3-x$($-1\le x\le0$)に沿って、$x=0$ から $x=-1$ の向きに、ベクトル $(yx,\ x^2)$ を線積分せよ。</p>
+      <details class="kk-ans"><summary>解答を見る</summary>
+      <p>$x$ をパラメータにすると、$y=x^3-x$、$dy=(3x^2-1)\,dx$。$\int_C\bm{A}\cdot d\bm{x}=\int(A_x\,dx+A_y\,dy)$ に入れて
+      $$\int_C\bm{A}\cdot d\bm{x}=\int_0^{-1}\Bigl(x(x^3-x)+x^2(3x^2-1)\Bigr)dx=\int_0^{-1}(4x^4-2x^2)\,dx=-\Bigl(\frac45-\frac23\Bigr)=\boldsymbol{-\frac{2}{15}}.$$</p>
+      <p>積分の向き($0\to-1$)を、そのまま下端・上端にすれば、符号は自動的に合います。</p>
+      </details>
+    </div><!--kakomon-->
 
     <h3 id="s3-2" data-need="B">3.2 面積分(surface integral) <span class="need need-b">必要</span></h3>
     <p data-need="C">次に、別のベクトル場の積分として<b>面積分</b>を導入します。これは(特にここで述べたような形では)<b>3次元空間において</b>定義される積分です。考え方は、与えられた曲面 $S$ について「<b>その曲面 $S$ を貫くベクトルはどれだけあるか</b>」を積分するというものです。</p>
