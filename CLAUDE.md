@@ -15,7 +15,7 @@ index.html                 教科の選択ページ
 assets/style.css, nav.js   全ページ共通のスタイルと、スクロール位置を記憶するスクリプト
 calc/   index.html(回の一覧)  basics.html(春学期のまとめ)  weeks/week-NN.html  images/week-NN/
 linalg/ (同じ構成)
-em/     (同じ構成。春学期がないので basics.html は「基礎のまとめ」。講義ノートは文章なので `講義ノート p.N` と書く。`em/exam/` は「過去問対策特化ページ」(別カテゴリ):過去問の出題内容を最優先に、試験で点を取るための解説。生成ツールは `reference/em/exam-build/`、資料は `reference/em/kakomon/`・`handnote/`(ユーザーの Google ドライブ「試験対策 / 電磁気」から取得))
+em/     (同じ構成。春学期がないので basics.html は「基礎のまとめ」。講義ノートは文章なので `講義ノート p.N` と書く。過去問対策特化ページ `em/exam/` と切り抜きページは、2026-11-13 にユーザーの指示で削除した(各回のノートの中の過去問・練習問題の枠と必要度ラベルは残す。生成ツールは `reference/em/exam-build/` の kakomon.js・renshu.js・need.js)。資料は `reference/em/kakomon/`・`handnote/`(ユーザーの Google ドライブ「試験対策 / 電磁気」から取得))
 mech/   (同じ構成。講義ノートは手書き24ページ(PDF)で、ページ番号がないので PDF の順に `p.N` と数える。13回への分け方はこちらで決めたもの(`reference/mech/README.md` に対応表))
 structchem/ (同じ構成。講義資料はパワーポイントの PDF(スライド)で、各PDFの表紙と「授業予定」のスライド(第2回 p.5)に、第何回かが書いてある。13回(第1回 10/6 概要と量子論の必要性、第2回 10/13 電子の回折、第3回 Schrödinger 方程式、…)。スライドの番号は PDF の順で、`スライド p.N` と書く。`reference/structchem/lecture/` に PDF・ページ画像(`png01/`、`png02/`)・読み取りメモ(`notes01.md`、`notes02.md`)と、生成ツール(`reference/structchem/build/`)がある。スライドの写真(肖像・紙幣など)は公開しない。第4回(10/27)は、ユーザーの指定で、第3回より先に作った(第3回は未作成:作るときは、week-02 と week-04 の pager、`weeks.json` を直す))
 thermo/ (同じ構成。講義ノートは板書の画像12枚(ページ番号なし)で、画像の内容の順に `p.N` と数える。12回への分け方はこちらで決めたもの。2.1・2.2 のページは画像になく、第3回で補足した。`reference/thermo/` に画像と、生成ツール(`build/`)がある)
