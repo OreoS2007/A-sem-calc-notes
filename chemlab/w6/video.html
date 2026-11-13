@@ -1,0 +1,628 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>第六週 手順の解説動画 | 基礎化学実験 | Aセメまとめノート</title>
+  <link rel="stylesheet" href="../../assets/style.css">
+  <style>
+    .player { max-width: 960px; margin: 0 auto; }
+    #out { width: 100%; height: auto; display: block; border-radius: 10px; background: #dfe6ee; }
+    .ctrl { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 10px 0; }
+    .ctrl button { font: inherit; padding: 6px 12px; border-radius: 8px; border: 1px solid var(--border); background: var(--surface); color: var(--text); cursor: pointer; }
+    .ctrl button:hover { border-color: var(--accent); }
+    #bar { flex: 1 1 200px; accent-color: var(--accent); }
+    #time { font-variant-numeric: tabular-nums; color: var(--muted); font-size: .9rem; min-width: 90px; }
+    .chap { display: flex; flex-wrap: wrap; gap: 6px; margin: 6px 0 16px; }
+    .chap button { font-size: .82rem; padding: 3px 9px; }
+    .chap button.on { background: var(--accent); color: #fff; border-color: var(--accent); }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="inner">
+      <a class="site-title" href="../../index.html">Aセメまとめノート</a>
+      <span class="links"><a href="../index.html">基礎化学実験</a><a href="index.html">第六週</a><a href="prep.html">予習ノート</a><a href="explanation.html">課題の解説</a></span>
+    </div>
+  </header>
+
+  <main class="note">
+    <h1>第六週(第七回)手順の解説動画:酸解離定数の決定</h1>
+    <div class="meta">基礎化学実験 実験7(テキスト p.90〜93 の手順)を、3D のアニメーションで順に見せます。器具の形・液の色・量は目安です(実際の操作は、テキストと指導教員の指示に従うこと)。</div>
+
+    <div class="player">
+      <canvas id="out" width="1280" height="720"></canvas>
+      <div class="ctrl">
+        <button id="play">▶ 再生</button>
+        <button id="prev">⏮ 前の場面</button>
+        <button id="next">次の場面 ⏭</button>
+        <input id="bar" type="range" min="0" max="1000" value="0">
+        <span id="time">0:00 / 0:00</span>
+        <button id="rec" title="この動画を webm 形式で保存します(再生しながら記録するので、全体の長さだけ時間がかかります)">⏺ 動画ファイルとして保存</button>
+      </div>
+      <div class="chap" id="chap"></div>
+    </div>
+
+    <nav class="pager">
+      <a href="index.html">← 第六週(第七回)</a>
+      <a href="prep.html">予習ノート</a>
+      <a href="explanation.html">課題の解説 →</a>
+    </nav>
+  </main>
+
+  <footer>© Aセメまとめノート</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(() => {
+const W = 1280, H = 720;
+const out = document.getElementById('out');
+const ctx = out.getContext('2d');
+const renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
+renderer.setSize(W, H, false);
+renderer.setPixelRatio(1);
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0xe7edf3);
+const camera = new THREE.PerspectiveCamera(38, W / H, 0.1, 100);
+scene.add(new THREE.HemisphereLight(0xffffff, 0xb9c3cf, 0.75));
+const sun = new THREE.DirectionalLight(0xffffff, 0.75); sun.position.set(4, 9, 6); scene.add(sun);
+const back = new THREE.DirectionalLight(0xffffff, 0.35); back.position.set(-6, 4, -5); scene.add(back);
+// 実験台
+const bench = new THREE.Mesh(new THREE.BoxGeometry(30, 0.4, 14), new THREE.MeshLambertMaterial({ color: 0x3f4a56 }));
+bench.position.y = -0.2; scene.add(bench);
+const wall = new THREE.Mesh(new THREE.PlaneGeometry(40, 20), new THREE.MeshLambertMaterial({ color: 0xdfe6ee }));
+wall.position.set(0, 8, -6); scene.add(wall);
+
+// ---------- 補助
+const ease = (x) => (x <= 0 ? 0 : x >= 1 ? 1 : x * x * (3 - 2 * x));
+const seg = (t, a, b) => ease((t - a) / (b - a));
+function kf(t, keys) {
+  if (t <= keys[0][0]) return keys[0][1];
+  for (let i = 1; i < keys.length; i++) {
+    if (t <= keys[i][0]) {
+      const [t0, v0] = keys[i - 1], [t1, v1] = keys[i];
+      const u = ease((t - t0) / (t1 - t0));
+      return Array.isArray(v0) ? v0.map((x, j) => x + (v1[j] - x) * u) : v0 + (v1 - v0) * u;
+    }
+  }
+  return keys[keys.length - 1][1];
+}
+const C = {
+  alum: new THREE.Color(0xd9b34a), water: new THREE.Color(0xbfe3f5), clear: new THREE.Color(0xf3f0e2),
+  red: new THREE.Color(0xd8361c), purple: new THREE.Color(0x6a2c9c), pale: new THREE.Color(0xf0e08a),
+  onsen: new THREE.Color(0xc9c58a), edta: new THREE.Color(0xd6ecf6)
+};
+const mix = (a, b, u) => new THREE.Color().lerpColors(a, b, Math.max(0, Math.min(1, u)));
+const glassMat = () => new THREE.MeshPhongMaterial({ color: 0xffffff, transparent: true, opacity: 0.22, shininess: 120, specular: 0xffffff, side: THREE.DoubleSide, depthWrite: false });
+const liqMat = (c) => new THREE.MeshPhongMaterial({ color: c, transparent: true, opacity: 0.82, shininess: 60 });
+
+// 文字のスプライト
+function label(text, o = {}) {
+  const fs = o.fs || 56, pad = 18;
+  const cv = document.createElement('canvas'); const g = cv.getContext('2d');
+  g.font = `bold ${fs}px "Yu Gothic","Hiragino Sans","Meiryo",sans-serif`;
+  const w = Math.ceil(g.measureText(text).width) + pad * 2, h = fs + pad * 1.4;
+  cv.width = w; cv.height = h;
+  g.font = `bold ${fs}px "Yu Gothic","Hiragino Sans","Meiryo",sans-serif`;
+  g.fillStyle = o.bg || 'rgba(255,255,255,0.92)';
+  const r = 18; g.beginPath(); g.moveTo(r, 0); g.arcTo(w, 0, w, h, r); g.arcTo(w, h, 0, h, r); g.arcTo(0, h, 0, 0, r); g.arcTo(0, 0, w, 0, r); g.fill();
+  g.fillStyle = o.color || '#1d2a3a'; g.textBaseline = 'middle'; g.fillText(text, pad, h / 2 + 2);
+  const tex = new THREE.CanvasTexture(cv); tex.minFilter = THREE.LinearFilter;
+  const sp = new THREE.Sprite(new THREE.SpriteMaterial({ map: tex, depthTest: false, transparent: true }));
+  const s = o.size || 0.36; sp.scale.set(s * w / h, s, 1); sp.renderOrder = 10;
+  return sp;
+}
+
+const at = (o, x, y, z) => { o.position.set(x, y, z); return o; };
+// 回転体の容器(ガラス + 液)
+function vessel(profile, o = {}) {
+  const g = new THREE.Group();
+  const pts = profile.map(([r, y]) => new THREE.Vector2(r, y));
+  const glass = new THREE.Mesh(new THREE.LatheGeometry(pts, 48), glassMat()); glass.renderOrder = 2; g.add(glass);
+  const inner = profile.map(([r, y]) => [r * 0.9, y]);
+  const liq = new THREE.Mesh(new THREE.BufferGeometry(), liqMat(C.water)); liq.renderOrder = 1; g.add(liq);
+  let key = '';
+  g.setLevel = (lv, color, op = 0.82) => {
+    const k = lv.toFixed(3);
+    if (k !== key) {
+      key = k; liq.geometry.dispose();
+      const p = [new THREE.Vector2(0, inner[0][1] + 0.005)];
+      for (let i = 0; i < inner.length; i++) {
+        const [r, y] = inner[i];
+        if (y < lv) p.push(new THREE.Vector2(r, Math.max(y, inner[0][1] + 0.005)));
+        else { const [r0, y0] = inner[i - 1] || inner[0]; const u = (lv - y0) / (y - y0 || 1); p.push(new THREE.Vector2(r0 + (r - r0) * u, lv)); break; }
+      }
+      p.push(new THREE.Vector2(0, lv));
+      liq.geometry = lv > inner[0][1] + 0.01 ? new THREE.LatheGeometry(p, 40) : new THREE.BufferGeometry();
+    }
+    if (color) liq.material.color.copy(color);
+    liq.material.opacity = op;
+  };
+  if (o.mark) {
+    const m = new THREE.Mesh(new THREE.TorusGeometry(o.mark[0] + 0.004, 0.008, 6, 40), new THREE.MeshBasicMaterial({ color: 0xffffff }));
+    m.rotation.x = Math.PI / 2; m.position.y = o.mark[1]; g.add(m);
+  }
+  return g;
+}
+const flaskProfile = (s) => [[0.0, 0], [0.62, 0], [0.86, 0.14], [0.96, 0.48], [0.9, 0.84], [0.6, 1.18], [0.22, 1.42], [0.16, 1.58], [0.16, 3.1], [0.19, 3.2]].map(([r, y]) => [r * s, y * s]);
+function volFlask(s = 1) {
+  const g = vessel(flaskProfile(s), { mark: [0.16 * s * 0.9, 2.55 * s] });
+  const stopper = new THREE.Mesh(new THREE.CylinderGeometry(0.2 * s, 0.15 * s, 0.25 * s, 20), new THREE.MeshPhongMaterial({ color: 0xf2f2f2, transparent: true, opacity: 0.8 }));
+  stopper.position.y = 3.3 * s; stopper.visible = false; g.add(stopper); g.stopper = stopper;
+  g.markY = 2.55 * s;
+  return g;
+}
+const beakerProfile = (s) => [[0, 0], [0.7, 0], [0.72, 0.05], [0.72, 1.6], [0.78, 1.66]].map(([r, y]) => [r * s, y * s]);
+const conicalProfile = [[0, 0], [0.95, 0], [1.0, 0.1], [0.4, 1.7], [0.34, 1.9], [0.34, 2.3], [0.4, 2.36]];
+
+// ホールピペット(先端が原点)
+function pipette(len = 3.2) {
+  const g = new THREE.Group();
+  const gm = glassMat(); gm.opacity = 0.35;
+  const tip = new THREE.Mesh(new THREE.CylinderGeometry(0.035, 0.012, 0.35, 12), gm); tip.position.y = 0.175; g.add(tip);
+  const low = new THREE.Mesh(new THREE.CylinderGeometry(0.04, 0.035, len * 0.33, 12), gm); low.position.y = 0.35 + len * 0.165; g.add(low);
+  const bulb = new THREE.Mesh(new THREE.SphereGeometry(0.14, 20, 14), gm); bulb.scale.y = 2.2; bulb.position.y = 0.35 + len * 0.33 + 0.28; g.add(bulb);
+  const up = new THREE.Mesh(new THREE.CylinderGeometry(0.04, 0.04, len * 0.45, 12), gm); up.position.y = 0.35 + len * 0.33 + 0.56 + len * 0.225; g.add(up);
+  const mark = new THREE.Mesh(new THREE.TorusGeometry(0.045, 0.006, 6, 20), new THREE.MeshBasicMaterial({ color: 0x333333 }));
+  mark.rotation.x = Math.PI / 2; mark.position.y = 0.35 + len * 0.33 + 0.56 + len * 0.12; g.add(mark);
+  const pip = new THREE.Mesh(new THREE.CylinderGeometry(0.09, 0.07, 0.5, 14), new THREE.MeshPhongMaterial({ color: 0x2e7bd6 }));
+  pip.position.y = 0.35 + len * 0.33 + 0.56 + len * 0.45 + 0.25; g.add(pip);
+  const liq = new THREE.Mesh(new THREE.CylinderGeometry(0.03, 0.03, 1, 10), liqMat(C.alum)); g.add(liq);
+  const lb = new THREE.Mesh(new THREE.SphereGeometry(0.12, 16, 12), liqMat(C.alum)); lb.scale.y = 2.1; lb.position.y = bulb.position.y; g.add(lb);
+  const markY = mark.position.y, topBulb = bulb.position.y;
+  g.setFill = (f, color) => { // f: 0..1(1 で標線)
+    const h = Math.max(0.001, 0.05 + f * (markY - 0.05));
+    liq.scale.y = h; liq.position.y = h / 2; liq.visible = f > 0.002;
+    lb.visible = h > topBulb - 0.2; lb.scale.set(1, 2.1 * Math.min(1, (h - (topBulb - 0.3)) / 0.6 + 0.01), 1);
+    if (color) { liq.material.color.copy(color); lb.material.color.copy(color); }
+  };
+  g.setFill(0, C.alum);
+  return g;
+}
+// 駒込ピペット
+function dropper(color) {
+  const g = new THREE.Group(); const gm = glassMat(); gm.opacity = 0.4;
+  const t = new THREE.Mesh(new THREE.CylinderGeometry(0.06, 0.02, 1.0, 12), gm); t.position.y = 0.5; g.add(t);
+  const l = new THREE.Mesh(new THREE.CylinderGeometry(0.045, 0.015, 0.6, 10), liqMat(color)); l.position.y = 0.3; g.add(l);
+  const b = new THREE.Mesh(new THREE.SphereGeometry(0.13, 16, 12), new THREE.MeshPhongMaterial({ color: 0xb5502c })); b.scale.y = 1.5; b.position.y = 1.12; g.add(b);
+  return g;
+}
+// ビュレット
+function burette() {
+  const g = new THREE.Group(); const gm = glassMat(); gm.opacity = 0.3;
+  const tube = new THREE.Mesh(new THREE.CylinderGeometry(0.11, 0.11, 5, 16), gm); tube.position.y = 3.1; g.add(tube);
+  for (let i = 0; i <= 10; i++) { const r = new THREE.Mesh(new THREE.TorusGeometry(0.112, 0.004, 4, 20), new THREE.MeshBasicMaterial({ color: 0x334455 })); r.rotation.x = Math.PI / 2; r.position.y = 5.4 - i * 0.45; g.add(r); }
+  const neck = new THREE.Mesh(new THREE.CylinderGeometry(0.11, 0.04, 0.3, 16), gm); neck.position.y = 0.45; g.add(neck);
+  const cock = new THREE.Mesh(new THREE.BoxGeometry(0.5, 0.1, 0.1), new THREE.MeshPhongMaterial({ color: 0x2b5fae })); cock.position.y = 0.3; g.add(cock); g.cock = cock;
+  const tip = new THREE.Mesh(new THREE.CylinderGeometry(0.035, 0.012, 0.3, 10), gm); tip.position.y = 0.1; g.add(tip);
+  const liq = new THREE.Mesh(new THREE.CylinderGeometry(0.095, 0.095, 1, 14), liqMat(C.edta)); g.add(liq);
+  g.setLevel = (f) => { const h = 0.3 + f * 5.0; liq.scale.y = h; liq.position.y = 0.6 + h / 2 - 0.3; };
+  const stand = new THREE.Mesh(new THREE.CylinderGeometry(0.05, 0.05, 6.4, 10), new THREE.MeshPhongMaterial({ color: 0x9aa4ae })); stand.position.set(-0.9, 3.0, -0.3); g.add(stand);
+  const base = new THREE.Mesh(new THREE.BoxGeometry(1.6, 0.12, 1.2), new THREE.MeshPhongMaterial({ color: 0x9aa4ae })); base.position.set(-0.6, 0.06 - 0.0, -0.3); base.visible = false; g.add(base);
+  const clamp = new THREE.Mesh(new THREE.BoxGeometry(0.9, 0.12, 0.12), new THREE.MeshPhongMaterial({ color: 0x9aa4ae })); clamp.position.set(-0.45, 4.6, -0.15); g.add(clamp);
+  return g;
+}
+// セル
+function cuvette(color) {
+  const g = new THREE.Group();
+  const gl = new THREE.Mesh(new THREE.BoxGeometry(0.34, 1.2, 0.34), glassMat()); gl.position.y = 0.6; gl.renderOrder = 2; g.add(gl);
+  const lq = new THREE.Mesh(new THREE.BoxGeometry(0.3, 0.9, 0.3), liqMat(color)); lq.position.y = 0.47; g.add(lq); g.liq = lq;
+  return g;
+}
+function drop(color) { const m = new THREE.Mesh(new THREE.SphereGeometry(0.045, 10, 8), liqMat(color)); m.scale.y = 1.4; return m; }
+// グラフの画面(キャンバスの板)
+function screen(w = 2.4, h = 1.5) {
+  const cv = document.createElement('canvas'); cv.width = 640; cv.height = 400;
+  const tex = new THREE.CanvasTexture(cv);
+  const m = new THREE.Mesh(new THREE.PlaneGeometry(w, h), new THREE.MeshBasicMaterial({ map: tex }));
+  m.draw = (fn) => { const g = cv.getContext('2d'); g.fillStyle = '#0f1d2b'; g.fillRect(0, 0, 640, 400); fn(g); tex.needsUpdate = true; };
+  const frame = new THREE.Mesh(new THREE.BoxGeometry(w + 0.12, h + 0.12, 0.06), new THREE.MeshPhongMaterial({ color: 0x2b3440 }));
+  frame.position.z = -0.04; m.add(frame);
+  return m;
+}
+function axes(g, xl, yl) {
+  g.strokeStyle = '#9fb2c6'; g.lineWidth = 3; g.beginPath(); g.moveTo(70, 30); g.lineTo(70, 340); g.lineTo(610, 340); g.stroke();
+  g.fillStyle = '#cfe0f0'; g.font = 'bold 26px "Yu Gothic",sans-serif'; g.fillText(yl, 12, 26); g.textAlign = 'right'; g.fillText(xl, 610, 322); g.textAlign = 'left';
+}
+// 時計
+function clock() {
+  const g = new THREE.Group();
+  const face = new THREE.Mesh(new THREE.CylinderGeometry(0.55, 0.55, 0.08, 40), new THREE.MeshPhongMaterial({ color: 0xffffff })); face.rotation.x = Math.PI / 2; g.add(face);
+  const rim = new THREE.Mesh(new THREE.TorusGeometry(0.56, 0.05, 8, 40), new THREE.MeshPhongMaterial({ color: 0x2e7bd6 })); g.add(rim);
+  const hand = new THREE.Mesh(new THREE.BoxGeometry(0.05, 0.45, 0.02), new THREE.MeshPhongMaterial({ color: 0xd8361c })); hand.geometry.translate(0, 0.2, 0); hand.position.z = 0.06; g.add(hand); g.hand = hand;
+  return g;
+}
+
+// ---------- 実験7 用の部品
+// 液はどれも無色なので、区別のための仮の色を付ける
+const C7 = {
+  h2so4: new THREE.Color(0xf6d5dc), naoh: new THREE.Color(0xe0d6f5), hac: new THREE.Color(0xd8f0d2),
+  naac: new THREE.Color(0xf3ecc8), bufA: new THREE.Color(0xcfe6fa), bufB: new THREE.Color(0xbfe0d8), acid: new THREE.Color(0xf5f2e4)
+};
+// 模式スペクトル(仮の形。p-ニトロ安息香酸のつもりで、等吸収点が約 275 nm に来るようにした)
+const A_HA = (l) => 0.92 * Math.exp(-((l - 258) ** 2) / (2 * 20 * 20)) + 0.05;
+const A_A = (l) => 0.80 * Math.exp(-((l - 290) ** 2) / (2 * 24 * 24)) + 0.05;
+const A_E = (l, a) => (1 - a) * A_HA(l) + a * A_A(l);
+const ALPHA = 0.57; // 緩衝液 A 中で解離している割合(pKa 3.44、pH 3.56 のとき約 0.57)
+const cylProfile = (s) => [[0, 0], [0.42, 0], [0.42, 0.08], [0.2, 0.12], [0.2, 2.5], [0.24, 2.56]].map(([r, y]) => [r * s, y * s]);
+function cylinder(s = 1) { return vessel(cylProfile(s)); }
+function balance() {
+  const g = new THREE.Group();
+  const body = new THREE.Mesh(new THREE.BoxGeometry(2.0, 0.5, 1.8), new THREE.MeshPhongMaterial({ color: 0xe4e8ec })); body.position.y = 0.25; g.add(body);
+  const pan = new THREE.Mesh(new THREE.CylinderGeometry(0.7, 0.7, 0.06, 32), new THREE.MeshPhongMaterial({ color: 0xb8c0c8 })); pan.position.set(0, 0.53, -0.1); g.add(pan);
+  const cv = document.createElement('canvas'); cv.width = 256; cv.height = 80; const tex = new THREE.CanvasTexture(cv);
+  const disp = new THREE.Mesh(new THREE.PlaneGeometry(1.0, 0.3), new THREE.MeshBasicMaterial({ map: tex })); disp.position.set(0, 0.3, 0.91); g.add(disp);
+  g.show = (txt) => { const c = cv.getContext('2d'); c.fillStyle = '#10241a'; c.fillRect(0, 0, 256, 80); c.fillStyle = '#7dff9a'; c.font = 'bold 50px monospace'; c.fillText(txt, 12, 60); tex.needsUpdate = true; };
+  g.show('0.00 g');
+  return g;
+}
+function spectro(g) {
+  const body = new THREE.Mesh(new THREE.BoxGeometry(3.8, 0.7, 2.2), new THREE.MeshPhongMaterial({ color: 0xcfd6de })); body.position.set(0, 0.35, 0); g.add(body);
+  const hole = new THREE.Mesh(new THREE.BoxGeometry(1.4, 0.02, 1.3), new THREE.MeshPhongMaterial({ color: 0x1d242c })); hole.position.set(0, 0.711, 0); g.add(hole);
+  const lid = new THREE.Mesh(new THREE.BoxGeometry(1.5, 0.08, 1.4), new THREE.MeshPhongMaterial({ color: 0x8b96a3 })); lid.geometry.translate(0, 0, 0.7); lid.position.set(0, 0.76, -0.7); g.add(lid); g.lid = lid;
+  const hl = new THREE.Mesh(new THREE.BoxGeometry(0.6, 0.45, 0.5), new THREE.MeshPhongMaterial({ color: 0x8b96a3 })); hl.position.set(-1.5, 0.95, 0); g.add(hl);
+  const hd = hl.clone(); hd.position.x = 1.5; g.add(hd);
+  const scr = screen(2.6, 1.6); scr.position.set(0, 2.35, -0.9); scr.rotation.x = -0.12; g.add(scr); g.scr = scr;
+  g.add(at(label('光源', { size: 0.24 }), -1.5, 1.5, 0.3));
+  g.add(at(label('検出器', { size: 0.24 }), 1.5, 1.5, 0.3));
+  const beam = new THREE.Mesh(new THREE.CylinderGeometry(0.035, 0.035, 2.4, 8), new THREE.MeshBasicMaterial({ color: 0xb98cff, transparent: true, opacity: 0.8 })); beam.rotation.z = Math.PI / 2; g.add(beam); g.beam = beam;
+  const beam2 = beam.clone(); beam2.material = beam.material.clone(); g.add(beam2); g.beam2 = beam2;
+}
+function legend(g2, col, name, k) {
+  g2.font = 'bold 20px "Yu Gothic",sans-serif';
+  g2.fillStyle = 'rgba(15,29,43,0.9)'; g2.fillRect(478, 34 + k * 28, 158, 28);
+  g2.fillStyle = col; g2.fillText(name, 486, 55 + k * 28);
+}
+// スペクトルの画面:list = [[関数, 色, 名前]]、upto = 描く波長の上限
+function drawSpec(g2, list, upto, o = {}) {
+  axes(g2, '波長 [nm]', '吸光度');
+  const X = (l) => 70 + (l - 250) / 90 * 540, Y = (a) => 340 - a / 1.0 * 300;
+  g2.fillStyle = '#9fb2c6'; g2.font = '22px sans-serif';
+  [250, 275, 300, 325].forEach((l) => g2.fillText(l, X(l) - 18, 368));
+  list.forEach(([f, col, name], k) => {
+    g2.strokeStyle = col; g2.lineWidth = 5; g2.beginPath();
+    for (let l = 250; l <= Math.min(340, upto); l += 1) { const x = X(l), y = Y(f(l)); l === 250 ? g2.moveTo(x, y) : g2.lineTo(x, y); }
+    g2.stroke();
+    if (name && upto > 300) legend(g2, col, name, k);
+  });
+  if (o.iso) { const l = 274.6, a = A_HA(l); g2.strokeStyle = '#ffe08a'; g2.lineWidth = 3; g2.beginPath(); g2.arc(X(l), Y(a), 14, 0, 7); g2.stroke(); g2.fillStyle = '#ffe08a'; g2.font = 'bold 24px "Yu Gothic",sans-serif'; g2.fillText('等吸収点(約 275 nm)', X(l) - 60, Y(a) - 24); }
+  if (o.read) o.read.forEach((l) => { g2.setLineDash([8, 6]); g2.strokeStyle = '#7fc8ff'; g2.lineWidth = 2.5; g2.beginPath(); g2.moveTo(X(l), 40); g2.lineTo(X(l), 340); g2.stroke(); g2.setLineDash([]); });
+}
+
+// ---------- 場面
+const S = [];
+function addScene(o) { S.push(o); }
+let G = null;
+
+addScene({
+  name: 'はじめに', dur: 6, title: true,
+  cap: ['実験7 酸解離定数の決定', '3 つの pH で紫外吸収スペクトルを測り、pKa を求める'],
+  build(g) {
+    const cols = [C7.h2so4, C7.bufA, C7.naoh];
+    g.fl = ['硫酸', '緩衝液A', 'NaOH'].map((n, i) => { const f = volFlask(0.62); f.position.set(-1.6 + i * 1.6, 0, 0); f.setLevel(f.markY, cols[i]); g.add(f); g.add(at(label(n, { size: 0.28 }), -1.6 + i * 1.6, 2.5, 0.2)); return f; });
+    const c = cuvette(C7.acid); c.position.set(3.2, 0, 0.6); c.scale.setScalar(1.2); g.add(c);
+    g.add(at(label('石英セル', { size: 0.26 }), 3.2, 1.8, 0.6));
+  },
+  update(t, g) { g.rotation.y = Math.sin(t * 0.5) * 0.25; camera.position.set(0.4, 2.2, 8.0); camera.lookAt(0.4, 1.5, 0); }
+});
+
+addScene({
+  name: '② 0.06 M 硫酸', dur: 9,
+  cap: ['② 3.0 M 硫酸 2 mL をメスシリンダー(10 mL)で量り、100 mL ビーカーに移して、水 98 mL で薄める', '濃度はそれほど正確でなくてよい(強い酸性にして、安息香酸置換体をすべて HA にするための溶媒)。保護眼鏡をかける'],
+  build(g) {
+    const b0 = vessel(beakerProfile(0.6)); b0.position.set(-2.6, 0, 0); b0.setLevel(0.6, C7.h2so4); g.add(b0); g.add(at(label('3.0 M 硫酸', { size: 0.26 }), -2.6, 1.3, 0));
+    const cy = cylinder(0.9); cy.position.set(-0.9, 0, 0.3); g.add(cy); g.cy = cy; g.add(at(label('2 mL', { size: 0.28, bg: 'rgba(214,236,255,0.95)' }), -0.9, 2.75, 0.3));
+    const b = vessel(beakerProfile(0.95)); b.position.set(1.5, 0, 0); g.add(b); g.b = b; g.add(at(label('100 mL ビーカー', { size: 0.26 }), 1.5, 1.9, 0));
+    const cy2 = cylinder(1.25); cy2.position.set(3.3, 0, -0.4); cy2.setLevel(2.4, C.water); g.add(cy2); g.add(at(label('水 98 mL', { size: 0.28, bg: 'rgba(214,236,255,0.95)' }), 3.3, 3.5, -0.4));
+  },
+  update(t, g) {
+    g.cy.setLevel(0.12 + 0.6 * seg(t, 0.5, 2) * (1 - seg(t, 3.2, 4.4)), C7.h2so4);
+    const p = kf(t, [[2.4, 0], [3.2, 1], [4.4, 1], [5, 0]]);
+    g.cy.position.set(-0.9 + 1.9 * p, 1.5 * p, 0.3); g.cy.rotation.z = -1.6 * p;
+    g.b.setLevel(0.03 + 0.08 * seg(t, 3.2, 4.4) + 0.95 * seg(t, 5.5, 8), mix(C7.h2so4, C.water, seg(t, 5.5, 8) * 0.6));
+    camera.position.set(0.4, 2.4, 8.4); camera.lookAt(0.4, 1.2, 0);
+  }
+});
+
+addScene({
+  name: '③ 0.125 M NaOH', dur: 10,
+  cap: ['③ 100 mL ビーカーに純水 約 50 mL → 電子上皿天秤にのせ、水酸化ナトリウム 約 0.5 g をプラスチックの薬さじで量り取る', '水酸化ナトリウムは潮解性があるので手早く(薬包紙では量らない)→ 純水を加えて 100 mL にして溶かす'],
+  build(g) {
+    const bl = balance(); bl.position.set(0, 0, 0); g.add(bl); g.bl = bl;
+    const b = vessel(beakerProfile(0.85)); b.position.set(0, 0.56, -0.1); g.add(b); g.b = b;
+    const sp = new THREE.Group();
+    const handle = new THREE.Mesh(new THREE.BoxGeometry(1.2, 0.05, 0.12), new THREE.MeshPhongMaterial({ color: 0xf4f4f4 })); handle.position.x = 0.6; sp.add(handle);
+    const bowl = new THREE.Mesh(new THREE.SphereGeometry(0.14, 12, 8, 0, Math.PI * 2, 0, Math.PI / 2), new THREE.MeshPhongMaterial({ color: 0xf4f4f4, side: THREE.DoubleSide })); bowl.rotation.x = Math.PI; sp.add(bowl);
+    g.pel = []; for (let i = 0; i < 6; i++) { const p = new THREE.Mesh(new THREE.SphereGeometry(0.05, 8, 6), new THREE.MeshPhongMaterial({ color: 0xffffff })); p.position.set((i % 3 - 1) * 0.06, -0.02, (i > 2 ? 0.05 : -0.05)); sp.add(p); g.pel.push(p); }
+    g.add(sp); g.sp = sp;
+    g.add(at(label('NaOH 約 0.5 g', { size: 0.3, bg: 'rgba(255,236,210,0.95)' }), -2.2, 2.6, 0));
+  },
+  update(t, g) {
+    g.b.setLevel(0.75, C.water);
+    g.sp.position.set(...kf(t, [[0, [-2.4, 1.6, 0]], [2, [-0.3, 1.9, -0.1]], [4, [-0.3, 1.9, -0.1]], [5, [-2.4, 1.8, 0]]]));
+    g.sp.rotation.z = t > 2 && t < 3.6 ? -0.6 * Math.sin(seg(t, 2, 3.6) * Math.PI) : 0;
+    g.pel.forEach((p) => (p.visible = t < 2.6));
+    g.bl.show(t < 2.6 ? '0.00 g' : t < 3.6 ? (0.5 * seg(t, 2.6, 3.4)).toFixed(2) + ' g' : '0.50 g');
+    if (t > 6) g.b.setLevel(0.75 + 0.6 * seg(t, 6, 9), mix(C.water, C7.naoh, seg(t, 6, 9)));
+    camera.position.set(0, 2.8, 6.4); camera.lookAt(0, 1.2, 0);
+  }
+});
+
+addScene({
+  name: '④⑤ 酢酸と酢酸ナトリウム', dur: 12,
+  cap: ['④ 2.50 M 酢酸 10 mL をホールピペット(安全ピペッター)で取り、200 mL メスフラスコで定容 → 0.125 M', '⑤ 1.25 M 酢酸ナトリウム水溶液 5 mL をホールピペットで取り、50 mL メスフラスコで定容 → 0.125 M'],
+  build(g) {
+    const f1 = volFlask(1.0); f1.position.set(-1.6, 0, 0); g.add(f1); g.f1 = f1; g.add(at(label('200 mL', { size: 0.28 }), -1.6, 3.7, 0));
+    const f2 = volFlask(0.72); f2.position.set(1.8, 0, 0); g.add(f2); g.f2 = f2; g.add(at(label('50 mL', { size: 0.28 }), 1.8, 2.75, 0));
+    const p = pipette(2.6); g.add(p); g.p = p;
+    g.l1 = label('2.50 M 酢酸 10 mL', { size: 0.3, bg: 'rgba(214,240,210,0.95)' }); g.add(g.l1);
+    g.l2 = label('1.25 M 酢酸ナトリウム 5 mL', { size: 0.3, bg: 'rgba(250,240,200,0.95)' }); g.add(g.l2);
+  },
+  update(t, g) {
+    g.p.position.set(...kf(t, [[0, [-3.4, 2.2, 0]], [1.2, [-1.6, 3.4, 0]], [2.6, [-1.6, 3.4, 0]], [6.4, [-1.6, 3.4, 0]], [7.2, [1.8, 2.6, 0]], [8.6, [1.8, 2.6, 0]], [9.4, [3.6, 2.6, 0]]]));
+    const f = t < 1.2 ? 1 : t < 2.6 ? 1 - seg(t, 1.2, 2.6) : t < 6.4 ? 0 : t < 7.2 ? 1 : t < 8.6 ? 1 - seg(t, 7.2, 8.6) : 0;
+    g.p.setFill(f, t < 5 ? C7.hac : C7.naac);
+    g.f1.setLevel(0.02 + 0.2 * seg(t, 1.2, 2.6) + (g.f1.markY - 0.22) * seg(t, 3, 5.5), C7.hac); g.f1.stopper.visible = t > 5.5;
+    g.f2.setLevel(0.02 + 0.12 * seg(t, 7.2, 8.6) + (g.f2.markY - 0.14) * seg(t, 9, 11), C7.naac); g.f2.stopper.visible = t > 11;
+    g.l1.position.set(-1.6, 4.4, 0); g.l1.visible = t < 6;
+    g.l2.position.set(1.8, 3.6, 0); g.l2.visible = t > 6.2;
+    camera.position.set(0.1, 2.4, 8.6); camera.lookAt(0.1, 1.6, 0);
+  }
+});
+
+addScene({
+  name: '⑥ 緩衝液 A・B', dur: 11,
+  cap: ['⑥ 0.125 M 酢酸と 0.125 M 酢酸ナトリウムを、メスシリンダーとメスピペットで量り、200 mL ビーカーで混ぜる(表 7・2)', 'A:酢酸 40 mL + 酢酸Na 2.5 mL → pH 3.56/B:酢酸 30 mL + 酢酸Na 15 mL → pH 4.46((7・16) 式で計算)'],
+  build(g) {
+    g.bA = vessel(beakerProfile(1.0)); g.bA.position.set(-1.5, 0, 0); g.add(g.bA);
+    g.bB = vessel(beakerProfile(1.0)); g.bB.position.set(1.5, 0, 0); g.add(g.bB);
+    g.add(at(label('緩衝液 A', { size: 0.3 }), -1.5, 2.0, 0)); g.add(at(label('緩衝液 B', { size: 0.3 }), 1.5, 2.0, 0));
+    g.pA = label('pH 3.56', { size: 0.4, bg: 'rgba(255,240,180,0.95)' }); g.pA.position.set(-1.5, 2.7, 0); g.add(g.pA);
+    g.pB = label('pH 4.46', { size: 0.4, bg: 'rgba(255,240,180,0.95)' }); g.pB.position.set(1.5, 2.7, 0); g.add(g.pB);
+    g.tA = label('酢酸 40 + 酢酸Na 2.5', { size: 0.24 }); g.tA.position.set(-1.5, -0.25 + 0.6, 1.2); g.add(g.tA);
+    g.tB = label('酢酸 30 + 酢酸Na 15', { size: 0.24 }); g.tB.position.set(1.5, 0.35, 1.2); g.add(g.tB);
+  },
+  update(t, g) {
+    g.bA.setLevel(0.05 + 0.85 * seg(t, 0.5, 3) + 0.05 * seg(t, 3.5, 4.5), mix(C7.hac, C7.bufA, seg(t, 3.5, 5)));
+    g.bB.setLevel(0.05 + 0.65 * seg(t, 1, 3.5) + 0.3 * seg(t, 4, 5.5), mix(C7.hac, C7.bufB, seg(t, 4, 6)));
+    g.pA.visible = g.pB.visible = t > 6.5;
+    camera.position.set(0, 2.4, 7.0); camera.lookAt(0, 1.3, 0);
+  }
+});
+
+addScene({
+  name: '⑦ 測定試料をつくる', dur: 12,
+  cap: ['⑦ p-ニトロ安息香酸水溶液(0.40 mM)5 mL ずつを 25 mL メスフラスコ 3 本に → 0.06 M 硫酸/0.125 M NaOH/緩衝液 A で定容', 'p-メトキシ安息香酸(0.25 mM)も同じく 3 本(緩衝液は B)。3 本の酸の濃度が等しいことが大事なので、ピペットは共洗いし、定容も丁寧に'],
+  build(g) {
+    const cols = [C7.h2so4, C7.naoh, C7.bufA];
+    g.fl = ['硫酸で定容', 'NaOH で定容', '緩衝液 A で定容'].map((n, i) => { const f = volFlask(0.66); f.position.set(-2.2 + i * 2.2, 0, 0); g.add(f); g.add(at(label(n, { size: 0.24 }), -2.2 + i * 2.2, 2.55, 0.2)); f.userData.col = cols[i]; return f; });
+    const p = pipette(2.2); g.add(p); g.p = p;
+    g.add(at(label('p-ニトロ安息香酸 5 mL ずつ', { size: 0.3, bg: 'rgba(255,240,180,0.95)' }), 0, 4.3, 0));
+  },
+  update(t, g) {
+    const sched = [1, 2.6, 4.2];
+    const keys = [[0, [-4, 2.4, 0]]]; sched.forEach((t0, i) => keys.push([t0, [-2.2 + i * 2.2, 2.3, 0]], [t0 + 1, [-2.2 + i * 2.2, 2.3, 0]])); keys.push([6.2, [4.2, 2.6, 0]]);
+    g.p.position.set(...kf(t, keys));
+    let fill = 1; sched.forEach((t0) => { if (t > t0 && t < t0 + 1.4) fill = 1 - seg(t, t0, t0 + 1); }); if (t > 5.4) fill = 0;
+    g.p.setFill(fill, C7.acid);
+    g.fl.forEach((f, i) => {
+      const lv = 0.03 + 0.18 * seg(t, sched[i], sched[i] + 1) + (f.markY - 0.21) * seg(t, 6.5 + i * 0.8, 8.5 + i * 0.8);
+      f.setLevel(lv, mix(C7.acid, f.userData.col, seg(t, 6.5, 9)));
+      f.stopper.visible = t > 9 + i * 0.8;
+      const inv = t > 10 + i * 0.3 && t < 11.8 ? Math.sin(seg(t, 10 + i * 0.3, 11.8) * Math.PI * 2) * 2.6 : 0; f.rotation.z = inv;
+    });
+    camera.position.set(0, 2.6, 8.4); camera.lookAt(0, 1.4, 0);
+  }
+});
+
+addScene({
+  name: '③① 分光光度計の準備', dur: 9,
+  cap: ['③① 電源を入れると約 10 分かけて自己点検(その間は試料室のふたを開けない)', '終わったら、測定波長を 340〜250 nm(紫外光)、吸光度の範囲を 0〜1 に設定する'],
+  build(g) { spectro(g); g.ck = clock(); g.ck.position.set(2.8, 2.6, 0.4); g.add(g.ck); g.cl = label('自己点検 約 10 分', { size: 0.28 }); g.cl.position.set(2.8, 1.75, 0.4); g.add(g.cl); },
+  update(t, g) {
+    g.beam.visible = g.beam2.visible = false;
+    g.ck.hand.rotation.z = -seg(t, 0.5, 5) * Math.PI * 2;
+    g.scr.draw((c2) => {
+      c2.fillStyle = '#cfe0f0'; c2.font = 'bold 34px "Yu Gothic",sans-serif';
+      if (t < 5) { c2.fillText('自己点検中…', 60, 120); c2.fillStyle = '#7fc8ff'; c2.fillRect(60, 170, 500 * seg(t, 0.5, 5), 26); }
+      else { c2.fillText('測定波長 340 → 250 nm', 60, 140); c2.fillText('吸光度 0 〜 1', 60, 210); c2.fillStyle = '#ffe08a'; c2.font = '26px "Yu Gothic",sans-serif'; c2.fillText('250 nm 以下は緩衝液が吸収してしまう', 60, 290); }
+    });
+    camera.position.set(0.6, 3.0, 6.6); camera.lookAt(0.3, 1.6, 0);
+  }
+});
+
+addScene({
+  name: '③② セルを入れる', dur: 12,
+  cap: ['③② 石英セル(紫外光を通す。ガラスは吸収してしまう)を純水でよく洗う → 一方に純水を 8 分目入れ、外側をふいて R(参照、奥)側へ', 'もう一方は測定試料で 2〜3 回共洗い → 8 分目入れて外側をふき、S(試料、手前)側へ。透明な面(光の通る面)にさわらない。2 個 1 組の組合わせは変えない'],
+  build(g) {
+    spectro(g);
+    g.ref = cuvette(C.water); g.add(g.ref); g.smp = cuvette(C7.bufA); g.add(g.smp);
+    g.lr = label('R:純水', { size: 0.24 }); g.add(g.lr); g.ls = label('S:測定試料', { size: 0.24, bg: 'rgba(255,240,180,0.95)' }); g.add(g.ls);
+  },
+  update(t, g) {
+    g.lid.rotation.x = -1.3 * (seg(t, 0, 1) - seg(t, 9, 10));
+    g.ref.position.set(0, kf(t, [[0, 2.6], [1.5, 2.6], [3, 0.71]]), -0.3);
+    g.smp.position.set(0, kf(t, [[0, 2.6], [4.5, 2.6], [6, 0.71]]), 0.3);
+    g.smp.liq.scale.y = t < 3.5 ? 0.25 : t < 4.2 ? 0.25 * (1 - seg(t, 3.5, 4.2)) : 0.8 + 0.2 * seg(t, 4.2, 4.5);
+    g.lr.position.set(-0.85, g.ref.position.y + 1.45, -0.3); g.ls.position.set(0.85, g.smp.position.y + 1.45, 0.3);
+    g.lr.visible = g.ls.visible = t < 8.5;
+    g.beam.visible = g.beam2.visible = t > 10.2;
+    g.beam.position.set(0, 1.05, 0.3); g.beam2.position.set(0, 1.05, -0.3);
+    g.scr.draw((c2) => { c2.fillStyle = '#cfe0f0'; c2.font = 'bold 30px "Yu Gothic",sans-serif'; c2.fillText(t > 10.2 ? '測定中…' : 'セルを入れてふたを閉める', 60, 200); });
+    camera.position.set(...kf(t, [[0, [1.6, 3.6, 6.4]], [6, [0.8, 3.2, 5.6]], [12, [0.2, 3.0, 6.6]]])); camera.lookAt(0, 1.4, 0);
+  }
+});
+
+addScene({
+  name: 'スペクトルを重ねる', dur: 13,
+  cap: ['3 種類の溶液(硫酸=HA だけ、NaOH=A⁻ だけ、緩衝液=両方)のスペクトルを、同じ枠に重ねて記録する(図 7・1)', 'p-ニトロ安息香酸では約 275 nm で 3 本が 1 点で交わる(等吸収点)。交わらなければ、原因を考えて測り直す'],
+  build(g) { const scr = screen(5.2, 3.25); scr.position.set(0, 2.2, 0); g.add(scr); g.scr = scr; },
+  update(t, g) {
+    const u1 = 250 + 90 * seg(t, 0.5, 3.5), u2 = 250 + 90 * seg(t, 3.8, 6.8), u3 = 250 + 90 * seg(t, 7.1, 10.1);
+    g.scr.draw((c2) => {
+      const L = [];
+      if (t > 0.5) L.push([A_HA, '#ff7a59', '硫酸(HA)']);
+      if (t > 3.8) L.push([A_A, '#7fc8ff', 'NaOH(A⁻)']);
+      if (t > 7.1) L.push([(l) => A_E(l, ALPHA), '#9be37a', '緩衝液(両方)']);
+      const ups = [u1, u2, u3];
+      axes(c2, '波長 [nm]', '吸光度');
+      L.forEach((x, k) => drawSpec(c2, [x], ups[k]));
+      L.forEach(([, col, name], k) => legend(c2, col, name, k));
+      if (t > 10.5) drawSpec(c2, [], 0, { iso: true });
+    });
+    camera.position.set(0, 2.2, 6.2 - 0.3 * seg(t, 10, 13)); camera.lookAt(0, 2.2, 0);
+  }
+});
+
+addScene({
+  name: '原理:なぜ 1 点で交わるか', dur: 13,
+  cap: ['緩衝液中のスペクトルは、HA と A⁻ のスペクトルを (1−α):α で混ぜたもの(α:解離した割合)。全濃度が同じなら Aₑ は A(HA) と A(A⁻) の間にある', 'ε_HA = ε_A⁻ となる波長では、α がいくつでも吸光度が同じ → どの pH の曲線もそこを通る(等吸収点)'],
+  build(g) { const scr = screen(5.2, 3.25); scr.position.set(0, 2.2, 0); g.add(scr); g.scr = scr; },
+  update(t, g) {
+    const a = 0.5 - 0.5 * Math.cos(seg(t, 1, 12) * Math.PI * 4);
+    g.scr.draw((c2) => {
+      drawSpec(c2, [[A_HA, '#ff7a59', 'α = 0(HA)'], [A_A, '#7fc8ff', 'α = 1(A⁻)'], [(l) => A_E(l, a), '#9be37a', '']], 340, { iso: true });
+      c2.fillStyle = 'rgba(15,29,43,0.9)'; c2.fillRect(478, 120, 158, 34); c2.fillStyle = '#9be37a'; c2.font = 'bold 26px "Yu Gothic",sans-serif'; c2.fillText('α = ' + a.toFixed(2), 490, 146);
+    });
+    camera.position.set(0, 2.2, 6.0); camera.lookAt(0, 2.2, 0);
+  }
+});
+
+addScene({
+  name: '④ pKa を計算する', dur: 13,
+  cap: ['④② A(HA) と A(A⁻) の差が大きく、波長による変化がゆるやかな波長を 3 点以上選び、A(HA)・A(A⁻)・Aₑ を読む', '④③ pKa = pH + log₁₀{(Aₑ − A(A⁻))/(A(HA) − Aₑ)}((7・15) 式)。pH は緩衝液の値(A:3.56、B:4.46)。波長ごとの値を平均する'],
+  build(g) { const scr = screen(5.2, 3.25); scr.position.set(0, 2.2, 0); g.add(scr); g.scr = scr; },
+  update(t, g) {
+    const ls = [258, 262, 295, 305];
+    const n = Math.min(4, Math.floor(seg(t, 1, 8) * 4.99));
+    g.scr.draw((c2) => {
+      drawSpec(c2, [[A_HA, '#ff7a59', 'A(HA)'], [A_A, '#7fc8ff', 'A(A⁻)'], [(l) => A_E(l, ALPHA), '#9be37a', 'Aₑ']], 340, { read: ls.slice(0, n) });
+      if (t > 8.5) {
+        c2.fillStyle = 'rgba(15,29,43,0.92)'; c2.fillRect(76, 150, 396, 100);
+        c2.fillStyle = '#ffe08a'; c2.font = 'bold 21px "Yu Gothic",sans-serif';
+        c2.fillText('pKa = pH + log((Aₑ−A(A⁻))/(A(HA)−Aₑ))', 86, 186);
+        c2.fillStyle = '#cfe0f0'; c2.font = '19px "Yu Gothic",sans-serif'; c2.fillText('pH は緩衝液 A 3.56 / B 4.46。曲線は模式', 86, 228);
+      }
+    });
+    camera.position.set(0, 2.2, 6.0); camera.lookAt(0, 2.2, 0);
+  }
+});
+
+addScene({
+  name: 'まとめ', dur: 7,
+  cap: ['まとめ:硫酸・NaOH・緩衝液の 3 つの pH で同じ濃度の酸のスペクトルを測る → 等吸収点を確かめる → (7・15) 式で pKa', 'p-ニトロ(電子求引性)は安息香酸より強い酸、p-メトキシ(共鳴で電子供与性)は弱い酸になるはず(課題 7.6)'],
+  build(g) {
+    const cols = [C7.h2so4, C7.bufA, C7.naoh];
+    ['硫酸', '緩衝液', 'NaOH'].forEach((n, i) => { const c = cuvette(cols[i]); c.position.set(-1.4 + i * 1.4, 0, 0); c.scale.setScalar(1.3); g.add(c); g.add(at(label(n, { size: 0.28 }), -1.4 + i * 1.4, 2.0, 0)); });
+  },
+  update(t, g) { g.rotation.y = t * 0.15 - 0.4; camera.position.set(0, 1.9, 6.2 - t * 0.1); camera.lookAt(0, 1.0, 0); }
+});
+
+// ---------- 再生
+const starts = []; let total = 0; S.forEach((s) => { starts.push(total); total += s.dur; });
+let cur = -1;
+function setScene(i) {
+  if (i === cur) return;
+  if (G) { scene.remove(G); G.traverse((o) => { if (o.geometry) o.geometry.dispose(); }); }
+  G = new THREE.Group(); scene.add(G); S[i].build(G); cur = i;
+  document.querySelectorAll('#chap button').forEach((b, k) => b.classList.toggle('on', k === i));
+}
+function wrap(g, text, maxW) {
+  const lines = []; let line = '';
+  for (const ch of text) { if (g.measureText(line + ch).width > maxW && line) { lines.push(line); line = ch; } else line += ch; }
+  if (line) lines.push(line); return lines;
+}
+function overlay(i, lt) {
+  const s = S[i];
+  ctx.drawImage(renderer.domElement, 0, 0);
+  if (s.title) {
+    const a = Math.min(1, lt / 0.8);
+    ctx.fillStyle = `rgba(16,29,43,${0.78 * a})`; ctx.fillRect(0, 70, W, 170);
+    ctx.fillStyle = `rgba(255,255,255,${a})`; ctx.font = 'bold 54px "Yu Gothic","Hiragino Sans",sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText(s.cap[0], W / 2, 150); ctx.font = '30px "Yu Gothic","Hiragino Sans",sans-serif'; ctx.fillText(s.cap[1], W / 2, 205); ctx.textAlign = 'left';
+    return;
+  }
+  // 場面名(左上)
+  ctx.font = 'bold 30px "Yu Gothic","Hiragino Sans",sans-serif';
+  const nw = ctx.measureText(s.name).width + 36;
+  ctx.fillStyle = 'rgba(46,123,214,0.92)'; ctx.fillRect(24, 22, nw, 52);
+  ctx.fillStyle = '#fff'; ctx.fillText(s.name, 42, 58);
+  // 字幕(下)
+  ctx.font = 'bold 27px "Yu Gothic","Hiragino Sans",sans-serif';
+  const l1 = wrap(ctx, s.cap[0], W - 120);
+  ctx.font = '23px "Yu Gothic","Hiragino Sans",sans-serif';
+  const l2 = wrap(ctx, s.cap[1], W - 120);
+  const hh = 26 + l1.length * 38 + l2.length * 32;
+  ctx.fillStyle = 'rgba(16,29,43,0.78)'; ctx.fillRect(0, H - hh, W, hh);
+  let y = H - hh + 40;
+  ctx.fillStyle = '#ffffff'; ctx.font = 'bold 27px "Yu Gothic","Hiragino Sans",sans-serif';
+  l1.forEach((l) => { ctx.fillText(l, 60, y); y += 38; });
+  ctx.fillStyle = '#cfe3f7'; ctx.font = '23px "Yu Gothic","Hiragino Sans",sans-serif';
+  l2.forEach((l) => { ctx.fillText(l, 60, y); y += 32; });
+  // 進行バー
+  const T = starts[i] + lt;
+  ctx.fillStyle = 'rgba(255,255,255,0.35)'; ctx.fillRect(0, H - 6, W, 6);
+  ctx.fillStyle = '#2e7bd6'; ctx.fillRect(0, H - 6, W * T / total, 6);
+}
+function renderAt(T) {
+  T = Math.max(0, Math.min(total - 0.001, T));
+  let i = 0; while (i < S.length - 1 && T >= starts[i + 1]) i++;
+  setScene(i);
+  const lt = T - starts[i];
+  S[i].update(lt, G);
+  renderer.render(scene, camera);
+  overlay(i, lt);
+  bar.value = Math.round(T / total * 1000);
+  const f = (x) => Math.floor(x / 60) + ':' + String(Math.floor(x % 60)).padStart(2, '0');
+  timeEl.textContent = f(T) + ' / ' + f(total);
+}
+const bar = document.getElementById('bar'), timeEl = document.getElementById('time'), playB = document.getElementById('play');
+const chap = document.getElementById('chap');
+S.forEach((s, i) => { const b = document.createElement('button'); b.textContent = s.name; b.onclick = () => { T0 = starts[i]; if (!playing) renderAt(T0); }; chap.appendChild(b); });
+let playing = false, T0 = 0, last = 0;
+function loop(now) {
+  if (!playing) return;
+  T0 += (now - last) / 1000; last = now;
+  if (T0 >= total) { T0 = total - 0.001; renderAt(T0); playing = false; playB.textContent = '▶ 再生'; onEnd && onEnd(); return; }
+  renderAt(T0); requestAnimationFrame(loop);
+}
+let onEnd = null;
+function play() { if (T0 >= total - 0.01) T0 = 0; playing = true; last = performance.now(); playB.textContent = '⏸ 一時停止'; requestAnimationFrame(loop); }
+function pause() { playing = false; playB.textContent = '▶ 再生'; }
+playB.onclick = () => (playing ? pause() : play());
+out.onclick = () => (playing ? pause() : play());
+bar.oninput = () => { T0 = bar.value / 1000 * total; renderAt(T0); };
+document.getElementById('prev').onclick = () => { const i = Math.max(0, cur - (T0 - starts[cur] < 1 ? 1 : 0)); T0 = starts[i]; renderAt(T0); };
+document.getElementById('next').onclick = () => { const i = Math.min(S.length - 1, cur + 1); T0 = starts[i]; renderAt(T0); };
+// 動画ファイルとして保存(再生しながら記録)
+document.getElementById('rec').onclick = () => {
+  if (!window.MediaRecorder) { alert('このブラウザでは保存できません'); return; }
+  const stream = out.captureStream(30);
+  const mime = MediaRecorder.isTypeSupported('video/webm;codecs=vp9') ? 'video/webm;codecs=vp9' : 'video/webm';
+  const rec = new MediaRecorder(stream, { mimeType: mime, videoBitsPerSecond: 6e6 });
+  const chunks = []; rec.ondataavailable = (e) => e.data.size && chunks.push(e.data);
+  rec.onstop = () => {
+    const blob = new Blob(chunks, { type: 'video/webm' });
+    window.__lastVideo = blob;
+    const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'jikken7-tejun.webm'; a.click();
+  };
+  T0 = 0; onEnd = () => { onEnd = null; setTimeout(() => rec.stop(), 300); };
+  rec.start(500); play();
+};
+window.__video = { total, renderAt, starts, S };
+window.__autoRec = (url) => {
+  const stream = out.captureStream(30);
+  const mime = MediaRecorder.isTypeSupported('video/webm;codecs=vp9') ? 'video/webm;codecs=vp9' : 'video/webm';
+  const rec = new MediaRecorder(stream, { mimeType: mime, videoBitsPerSecond: 6e6 });
+  const chunks = []; rec.ondataavailable = (e) => e.data.size && chunks.push(e.data);
+  window.__recState = 'recording';
+  rec.onstop = async () => { const blob = new Blob(chunks, { type: 'video/webm' }); window.__recState = 'uploading ' + blob.size; const r = await fetch(url, { method: 'POST', body: blob }); window.__recState = 'done ' + blob.size + ' ' + (await r.text()); };
+  T0 = 0; onEnd = () => { onEnd = null; setTimeout(() => rec.stop(), 300); };
+  rec.start(1000); play();
+};
+renderAt(0);
+})();
+</script>
+</body>
+</html>

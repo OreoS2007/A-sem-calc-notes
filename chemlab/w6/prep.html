@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>第六週(第七回) 実験予習ノート | 基礎化学実験 | Aセメまとめノート</title>
+  <link rel="stylesheet" href="../../assets/style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]})"></script>
+  <style>
+    .flow { list-style: none; margin: 14px 0 22px; padding: 0; }
+    .flow > li { position: relative; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 8px 12px; margin: 0 0 22px; }
+    .flow > li:not(:last-child)::after { content: "↓"; position: absolute; left: 50%; bottom: -21px; transform: translateX(-50%); color: var(--accent); font-weight: 700; font-size: 1.1rem; line-height: 1; }
+    .flow .sub { display: block; color: var(--muted); font-size: .88em; margin-top: 2px; }
+    .flow .key { color: var(--thm); font-weight: 700; }
+    .cap { display: inline-block; background: var(--accent); color: #fff; border-radius: 6px; padding: 1px 10px; font-weight: 700; font-size: .9rem; margin: 6px 0; }
+    .goal { border: 2px solid var(--accent); border-radius: 10px; padding: 10px 14px; margin: 14px 0; }
+    .goal ol { margin: 4px 0 0; padding-left: 1.4em; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="inner">
+      <a class="site-title" href="../../index.html">Aセメまとめノート</a>
+      <span class="links"><a href="../index.html">基礎化学実験</a><a href="index.html">第六週</a><a href="prep.html">予習ノート</a><a href="explanation.html">課題の解説</a><a href="video.html">解説動画</a></span>
+    </div>
+  </header>
+
+  <main class="note">
+    <h1>第六週(第七回)実験予習ノート:酸解離定数の決定</h1>
+    <div class="meta">基礎化学実験 実験7(テキスト p.87〜95)／目的、使う式、緩衝液の pH、手順のフローチャート。手順は <a href="video.html">3D の解説動画</a> でも見られます</div>
+
+    <h2>目的</h2>
+    <div class="goal">
+      <p>p-ニトロ安息香酸と p-メトキシ安息香酸の<b>酸解離定数(pKa)</b>を、紫外吸収スペクトル(分光光度法)で求め、無置換の安息香酸(pKa 4.20)と比べて、<b>ベンゼン環の置換基が酸の強さに与える影響</b>を考える(テキスト 7・1 節、7・2 節)。</p>
+      <ol>
+        <li>強酸性(硫酸)・強塩基性(NaOH)・pKa 付近(緩衝液)の 3 つの pH で、同じ濃度の酸のスペクトルを測る。</li>
+        <li>緩衝液の pH とスペクトルから pKa を計算する。</li>
+        <li>置換基と pKa の関係を考察する。</li>
+      </ol>
+    </div>
+
+    <h2>原理の要点</h2>
+    <ul>
+      <li><b>酸解離平衡</b>:$\mathrm{HA + H_2O \rightleftharpoons A^- + H_3O^+}$(7・1)。濃度で書いた平衡定数が酸解離定数 $K_\mathrm{a}=\dfrac{[\mathrm{A^-}][\mathrm{H_3O^+}]}{[\mathrm{HA}]}$(7・4)、$\mathrm{p}K_\mathrm{a}=-\log_{10}K_\mathrm{a}$(7・5)。<b>pKa が小さいほど強い酸</b>。</li>
+      <li>(7・4)〜(7・6) から $\mathrm{p}K_\mathrm{a}=\mathrm{pH}+\log_{10}\dfrac{[\mathrm{HA}]}{[\mathrm{A^-}]}$(7・7)。<b>pH = pKa のとき [HA] = [A⁻]</b>(ちょうど半分が解離)。</li>
+      <li><b>ランベルト・ベールの法則</b> $A=\varepsilon cl$(7・8)と、吸光度の加成性(7・9)。HA と A⁻ だけが吸収する波長では $A_\mathrm{e}=(\varepsilon_\mathrm{HA}[\mathrm{HA}]+\varepsilon_\mathrm{A^-}[\mathrm{A^-}])\,l$(7・10)。</li>
+      <li>HA と A⁻ はスペクトルが違うので、吸光度から [HA]/[A⁻] がわかる:$\dfrac{[\mathrm{HA}]}{[\mathrm{A^-}]}=\dfrac{\varepsilon_\mathrm{e}-\varepsilon_\mathrm{A^-}}{\varepsilon_\mathrm{HA}-\varepsilon_\mathrm{e}}$(7・13)。</li>
+      <li>0.05 M 硫酸中ではほぼすべて HA、0.1 M NaOH 中ではほぼすべて A⁻ なので、そこで測った吸光度がそれぞれ $A_\mathrm{HA}$、$A_\mathrm{A^-}$ になる(テキスト 7・3 節③)。</li>
+    </ul>
+    <figure class="fig">
+      <svg viewBox="0 0 460 296" width="460" role="img" aria-label="吸収スペクトルの模式図"><line class="ax" x1="60" y1="250" x2="445" y2="250"/><line class="ax" x1="60" y1="250" x2="60" y2="20"/><line class="thin" x1="60" y1="250" x2="60" y2="255"/><text class="tj" x="46" y="270">250</text><line class="thin" x1="165.55555555555554" y1="250" x2="165.55555555555554" y2="255"/><text class="tj" x="151.55555555555554" y="270">275</text><line class="thin" x1="271.1111111111111" y1="250" x2="271.1111111111111" y2="255"/><text class="tj" x="257.1111111111111" y="270">300</text><line class="thin" x1="376.6666666666667" y1="250" x2="376.6666666666667" y2="255"/><text class="tj" x="362.6666666666667" y="270">325</text><text class="tj" x="46" y="254">0</text><text class="tj" x="30" y="144">0.5</text><text class="tj" x="30" y="34">1</text><path d="M60.0 52.2 L64.2 48.6 L68.4 45.5 L72.7 42.8 L76.9 40.6 L81.1 38.9 L85.3 37.6 L89.6 36.9 L93.8 36.6 L98.0 36.9 L102.2 37.6 L106.4 38.9 L110.7 40.6 L114.9 42.8 L119.1 45.5 L123.3 48.6 L127.6 52.2 L131.8 56.1 L136.0 60.4 L140.2 65.0 L144.4 69.9 L148.7 75.1 L152.9 80.6 L157.1 86.2 L161.3 92.0 L165.6 98.0 L169.8 104.0 L174.0 110.1 L178.2 116.2 L182.4 122.4 L186.7 128.5 L190.9 134.5 L195.1 140.5 L199.3 146.3 L203.6 152.1 L207.8 157.6 L212.0 163.0 L216.2 168.3 L220.4 173.3 L224.7 178.1 L228.9 182.7 L233.1 187.1 L237.3 191.3 L241.6 195.2 L245.8 198.9 L250.0 202.4 L254.2 205.7 L258.4 208.8 L262.7 211.6 L266.9 214.2 L271.1 216.7 L275.3 218.9 L279.6 221.0 L283.8 222.9 L288.0 224.6 L292.2 226.2 L296.4 227.6 L300.7 228.9 L304.9 230.1 L309.1 231.2 L313.3 232.1 L317.6 233.0 L321.8 233.7 L326.0 234.4 L330.2 235.0 L334.4 235.5 L338.7 236.0 L342.9 236.4 L347.1 236.8 L351.3 237.1 L355.6 237.3 L359.8 237.6 L364.0 237.8 L368.2 238.0 L372.4 238.1 L376.7 238.3 L380.9 238.4 L385.1 238.5 L389.3 238.6 L393.6 238.6 L397.8 238.7 L402.0 238.7 L406.2 238.8 L410.4 238.8 L414.7 238.9 L418.9 238.9 L423.1 238.9 L427.3 238.9 L431.6 238.9 L435.8 238.9 L440.0 239.0 " fill="none" stroke="#d9534f" stroke-width="2.6"/><path d="M60.0 195.1 L64.2 192.0 L68.4 188.7 L72.7 185.4 L76.9 181.9 L81.1 178.2 L85.3 174.5 L89.6 170.6 L93.8 166.6 L98.0 162.6 L102.2 158.4 L106.4 154.2 L110.7 149.9 L114.9 145.5 L119.1 141.1 L123.3 136.7 L127.6 132.3 L131.8 127.8 L136.0 123.4 L140.2 119.0 L144.4 114.6 L148.7 110.3 L152.9 106.1 L157.1 102.0 L161.3 98.1 L165.6 94.2 L169.8 90.5 L174.0 87.0 L178.2 83.7 L182.4 80.5 L186.7 77.6 L190.9 74.9 L195.1 72.5 L199.3 70.3 L203.6 68.4 L207.8 66.8 L212.0 65.4 L216.2 64.4 L220.4 63.6 L224.7 63.2 L228.9 63.0 L233.1 63.2 L237.3 63.6 L241.6 64.4 L245.8 65.4 L250.0 66.8 L254.2 68.4 L258.4 70.3 L262.7 72.5 L266.9 74.9 L271.1 77.6 L275.3 80.5 L279.6 83.7 L283.8 87.0 L288.0 90.5 L292.2 94.2 L296.4 98.1 L300.7 102.0 L304.9 106.1 L309.1 110.3 L313.3 114.6 L317.6 119.0 L321.8 123.4 L326.0 127.8 L330.2 132.3 L334.4 136.7 L338.7 141.1 L342.9 145.5 L347.1 149.9 L351.3 154.2 L355.6 158.4 L359.8 162.6 L364.0 166.6 L368.2 170.6 L372.4 174.5 L376.7 178.2 L380.9 181.9 L385.1 185.4 L389.3 188.7 L393.6 192.0 L397.8 195.1 L402.0 198.1 L406.2 200.9 L410.4 203.6 L414.7 206.2 L418.9 208.7 L423.1 211.0 L427.3 213.1 L431.6 215.2 L435.8 217.1 L440.0 218.9 " fill="none" stroke="#2f7fd0" stroke-width="2.6"/><path d="M60.0 133.6 L64.2 130.3 L68.4 127.2 L72.7 124.1 L76.9 121.1 L81.1 118.3 L85.3 115.6 L89.6 113.1 L93.8 110.7 L98.0 108.5 L102.2 106.5 L106.4 104.6 L110.7 102.9 L114.9 101.4 L119.1 100.0 L123.3 98.8 L127.6 97.8 L131.8 97.0 L136.0 96.3 L140.2 95.8 L144.4 95.4 L148.7 95.2 L152.9 95.2 L157.1 95.2 L161.3 95.5 L165.6 95.8 L169.8 96.3 L174.0 96.9 L178.2 97.7 L182.4 98.5 L186.7 99.5 L190.9 100.6 L195.1 101.7 L199.3 103.0 L203.6 104.4 L207.8 105.8 L212.0 107.4 L216.2 109.0 L220.4 110.8 L224.7 112.6 L228.9 114.5 L233.1 116.5 L237.3 118.5 L241.6 120.6 L245.8 122.8 L250.0 125.1 L254.2 127.5 L258.4 129.9 L262.7 132.3 L266.9 134.8 L271.1 137.4 L275.3 140.1 L279.6 142.7 L283.8 145.4 L288.0 148.2 L292.2 151.0 L296.4 153.8 L300.7 156.6 L304.9 159.5 L309.1 162.3 L313.3 165.1 L317.6 168.0 L321.8 170.8 L326.0 173.6 L330.2 176.4 L334.4 179.2 L338.7 181.9 L342.9 184.6 L347.1 187.2 L351.3 189.8 L355.6 192.4 L359.8 194.8 L364.0 197.2 L368.2 199.6 L372.4 201.8 L376.7 204.0 L380.9 206.2 L385.1 208.2 L389.3 210.2 L393.6 212.0 L397.8 213.9 L402.0 215.6 L406.2 217.2 L410.4 218.8 L414.7 220.2 L418.9 221.7 L423.1 223.0 L427.3 224.2 L431.6 225.4 L435.8 226.5 L440.0 227.5 " fill="none" stroke="#3a9a52" stroke-width="2" stroke-dasharray="0"/><circle cx="163.86666666666676" cy="95.57733968364434" r="7" fill="none" stroke="var(--accent)" stroke-width="2.2"/><text class="ta" x="173.86666666666676" y="83.57733968364434">等吸収点</text><text class="tm" x="68.44444444444444" y="32.19999999999999" fill="#d9534f">A<tspan baseline-shift="sub" font-size="9">HA</tspan>(硫酸中)</text><text class="tm" x="271.1111111111111" y="56.400000000000006" fill="#2f7fd0">A<tspan baseline-shift="sub" font-size="9">A⁻</tspan>(NaOH 中)</text><text class="tm" x="296.44444444444446" y="129" fill="#3a9a52">A<tspan baseline-shift="sub" font-size="9">e</tspan>(緩衝液中)</text><text class="tm" x="6" y="14">吸光度</text><text class="tm" x="370" y="290">波長 [nm]</text></svg>
+      <figcaption>3 つの溶液のスペクトルの模式図(形は仮のもの)。緩衝液中の曲線 $A_\mathrm{e}$ は、いつも $A_\mathrm{HA}$ と $A_\mathrm{A^-}$ の間にあり、3 本は等吸収点で 1 点に交わる。</figcaption>
+    </figure>
+
+    <h2>使う式</h2>
+    <div class="box basic">
+      <div class="label">pKa を求める式(テキスト (7・15))</div>
+      <p>3 つの溶液で酸の濃度が等しければ、モル吸光係数の代わりに吸光度そのものを使える:</p>
+      $$\mathrm{p}K_\mathrm{a}=\mathrm{pH}+\log_{10}\frac{A_\mathrm{e}-A_\mathrm{A^-}}{A_\mathrm{HA}-A_\mathrm{e}}\qquad(7\cdot15)$$
+      <p>pH は緩衝液の pH((7・16) 式で計算。下の欄)。$A_\mathrm{HA}$:硫酸中、$A_\mathrm{A^-}$:NaOH 中、$A_\mathrm{e}$:緩衝液中の、同じ波長での吸光度。波長を 3 点以上選び、それぞれで計算する(テキスト 4 ②③)。</p>
+      <p><b>直感:</b> $A_\mathrm{e}$ が $A_\mathrm{HA}$ と $A_\mathrm{A^-}$ の「どのあたり」にあるかで、HA と A⁻ の割合がわかる。ちょうど真ん中なら半々で、pKa = pH。</p>
+    </div>
+
+    <h2 id="buffer">緩衝液 A・B の pH(テキスト 4 ①)</h2>
+    <div class="box ex">
+      <div class="label">計算((7・16) 式、酢酸の pKa = 4.76)</div>
+      $$\mathrm{pH}=\mathrm{p}K_\mathrm{a}+\log_{10}\frac{[\mathrm{CH_3COONa}]}{[\mathrm{CH_3COOH}]}\qquad(7\cdot16)$$
+      <p>酢酸と酢酸ナトリウムはどちらも 0.125 M なので、混ぜたあとの濃度の比は、<b>量り取った体積の比</b>に等しい(同じ全体積で割るので、全体積は約分で消える)。</p>
+      <div class="tscroll"><table class="cmp">
+        <tr><th></th><th>0.125 M 酢酸</th><th>0.125 M 酢酸Na</th><th>比 [CH₃COONa]/[CH₃COOH]</th><th>log₁₀(比)</th><th>pH</th></tr>
+        <tr><td>緩衝液 A</td><td>40 mL</td><td>2.5 mL</td><td>2.5/40 = 0.0625</td><td>−1.204</td><td><b>3.56</b></td></tr>
+        <tr><td>緩衝液 B</td><td>30 mL</td><td>15 mL</td><td>15/30 = 0.500</td><td>−0.301</td><td><b>4.46</b></td></tr>
+      </table></div>
+      <p>A:$\mathrm{pH}=4.76+\log_{10}0.0625=4.76-1.204=3.556\approx3.56$<br>B:$\mathrm{pH}=4.76+\log_{10}0.5=4.76-0.301=4.459\approx4.46$</p>
+      <p>A は p-ニトロ安息香酸(pKa 約 3.4)用、B は p-メトキシ安息香酸(pKa 約 4.5)用で、それぞれの pKa に近い pH になっている(<a href="explanation.html#k73">課題 7.3</a>)。</p>
+    </div>
+    <div class="box warn">
+      <div class="label">確かめ・補足</div>
+      <ul>
+        <li><b>測定試料にしても pH は変わらない</b>:酸の水溶液 5 mL に緩衝液を加えて 25 mL にすると、酢酸も酢酸Na も同じ割合(20/25)で薄まるので、比は変わらない。フラスコ中の安息香酸置換体は 0.08 mM 以下で、酢酸Na(A でも約 5.9 mM)よりずっと少ないので、pH はほとんど動かない(補足)。</li>
+        <li><b>(7・16) は近似</b>:酢酸自身の解離を考えに入れて解き直すと、A は 3.58、B は 4.46 になる(補足:A は酢酸Na が少ないので、0.02 だけずれる)。また、濃度の代わりに活量を使えば、もう少しずれる。課題の計算はテキストどおり (7・16) の値(3.56、4.46)を使えばよい。</li>
+      </ul>
+    </div>
+
+    <h2>実験手順(フローチャート)</h2>
+    <p class="meta">4 人で行う。水は純水。試薬の補充は保護眼鏡をかけて慎重に(テキスト 7・4 節 1)。液はすべて無色。</p>
+
+    <span class="cap">A. 溶媒・緩衝液の調製(テキスト 2 ②〜⑥)</span>
+    <ol class="flow">
+      <li>0.06 M 硫酸:3.0 M 硫酸 2 mL(メスシリンダー 10 mL)→ 100 mL ビーカー + 水 98 mL<span class="sub">濃度はあまり正確でなくてよい(強酸性にするための溶媒)</span></li>
+      <li>0.125 M NaOH:100 mL ビーカーに純水約 50 mL → 電子天秤で NaOH 約 0.5 g(プラスチックの薬さじ)→ 水を加えて 100 mL<span class="sub"><span class="key">潮解性があるので手早く。薬包紙で量らない</span>(脚注 *5)</span></li>
+      <li>0.125 M 酢酸:2.50 M 酢酸 10 mL(ホールピペット、安全ピペッター)→ 200 mL メスフラスコで定容</li>
+      <li>0.125 M 酢酸ナトリウム:1.25 M 酢酸Na 5 mL(ホールピペット)→ 50 mL メスフラスコで定容</li>
+      <li>緩衝液(200 mL ビーカーで混合、表 7・2):A = 酢酸 40 mL + 酢酸Na 2.5 mL(pH 3.56)/B = 酢酸 30 mL + 酢酸Na 15 mL(pH 4.46)</li>
+    </ol>
+
+    <span class="cap">B. 測定試料(テキスト 2 ⑦)</span>
+    <ol class="flow">
+      <li>p-ニトロ安息香酸水溶液(0.40 mM)5 mL(ホールピペット)× 3 → 25 mL メスフラスコ 3 本</li>
+      <li>それぞれ 0.06 M 硫酸/0.125 M NaOH/<b>緩衝液 A</b> で定容<span class="sub">フラスコ中の濃度 $0.40\times5/25=0.080$ mM($8.0\times10^{-5}$ M)</span></li>
+      <li>p-メトキシ安息香酸水溶液(0.25 mM)5 mL × 3 → 硫酸/NaOH/<b>緩衝液 B</b> で定容<span class="sub">フラスコ中 $5.0\times10^{-5}$ M。<span class="key">3 本の酸の濃度が等しいことが大事</span>:ピペットは共洗い、定容は丁寧に</span></li>
+    </ol>
+
+    <span class="cap">C. 紫外吸収スペクトルの測定(テキスト 3)</span>
+    <ol class="flow">
+      <li>分光光度計の電源 → 約 10 分の自己点検(ふたを開けない)→ 波長 340〜250 nm、吸光度 0〜1<span class="sub">250 nm 以下は緩衝液の吸収が大きい、350 nm 以上では試料が吸収しない(脚注 *8)</span></li>
+      <li>石英セル 1 組(2 個)を純水で洗う<span class="sub">ガラスのセルは紫外光を吸収するので使えない。<span class="key">透明な面にさわらない。組合わせを変えない</span>(脚注 *9、課題 7.1)</span></li>
+      <li>一方に純水を 8 分目 → 外壁をふいて R(参照、奥)側へ<span class="sub">一連の測定が終わるまで替えない。気泡が出たら純水を取り替える(注 1)</span></li>
+      <li>もう一方を測定試料で 2〜3 回共洗い → 8 分目入れて外壁をふく → S(試料、手前)側へ → ふたを閉めて測定</li>
+      <li>6 試料すべて繰り返す。同じ酸の 3 本のスペクトルを<b>同じ枠に重ねて</b>記録(注 2)<span class="sub">p-ニトロ安息香酸では約 275 nm で 3 本が 1 点で交わる(等吸収点)。交わらなければ原因を考えて測り直す(注 3)</span></li>
+      <li>スペクトルを指導教員に見せる(条件を満たさないと再実験)</li>
+    </ol>
+
+    <span class="cap">D. 酸解離定数の決定(テキスト 4)</span>
+    <ol class="flow">
+      <li>緩衝液の pH を (7・16) で計算(上の欄:A 3.56、B 4.46)</li>
+      <li>$A_\mathrm{HA}$ と $A_\mathrm{A^-}$ の<b>差が大きく</b>、波長による<b>変化がゆるやか</b>な波長を、酸ごとに 3 点以上選び、$A_\mathrm{HA}$、$A_\mathrm{A^-}$、$A_\mathrm{e}$ を読む</li>
+      <li>(7・15) で pKa を計算 → 波長ごとの値を平均 → 文献値、無置換安息香酸(4.20)と比べる</li>
+    </ol>
+
+    <h2>予想・注意のポイント</h2>
+    <ul>
+      <li><b>pKa の予想</b>:p-ニトロ安息香酸 約 3.4、p-メトキシ安息香酸 約 4.5(補足:一般的な文献値 3.44、4.47)。ニトロ基は電子求引性なので安息香酸(4.20)より<b>強い</b>酸、メトキシ基は共鳴で電子供与性なので<b>弱い</b>酸になるはず(テキスト 7・5 節、表 7・3)。</li>
+      <li>緩衝液中で解離している割合の予想:p-ニトロ(pH 3.56、pKa 3.44)は約 57 %、p-メトキシ(pH 4.46、pKa 4.47)は約 49 %(補足:(7・7) から計算)。どちらもほぼ半分なので、$A_\mathrm{e}$ は $A_\mathrm{HA}$ と $A_\mathrm{A^-}$ のほぼ真ん中に来るはず。</li>
+      <li>波長の選び方:等吸収点の近くは $A_\mathrm{HA}-A_\mathrm{A^-}$ が小さく、(7・15) の分母・分子が小さくなって誤差が大きいので避ける。曲線の山の頂上付近(傾きが小さい)がよい。</li>
+      <li>p-メトキシ安息香酸は、測定範囲の中で等吸収点がはっきり見えないこともある(シケプリの体験談。こちらでは未確認)。その場合も (7・15) の計算はできる。</li>
+      <li>課題は <a href="explanation.html">課題の解答と解説</a> へ。</li>
+    </ul>
+
+    <nav class="pager">
+      <a href="index.html">← 第六週(第七回)</a>
+      <a href="video.html">解説動画</a>
+      <a href="explanation.html">課題の解説 →</a>
+    </nav>
+  </main>
+
+  <footer>© Aセメまとめノート</footer>
+</body>
+</html>
