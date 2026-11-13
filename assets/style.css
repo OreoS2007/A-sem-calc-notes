@@ -209,6 +209,12 @@ main h2[id], main h3[id], main section[id], main div[id] { scroll-margin-top: 68
 .box.intuit { border-left-color: var(--ex); background: color-mix(in srgb, var(--surface) 92%, var(--ex) 8%); }
 .box.intuit .label { color: var(--ex); }
 
+/* ---- トリビア(学んだ内容が実生活や身近な自然現象とどうつながるかのコラム) ---- */
+.box.trivia { border: 1px dashed #d9822b; border-left: 6px solid #d9822b; background: color-mix(in srgb, var(--surface) 93%, #d9822b 7%); }
+.box.trivia > .label { color: #c0661a; }
+.box.trivia > .label::before { content: "トリビア ・ "; font-weight: 700; }
+@media (prefers-color-scheme: dark) { .box.trivia > .label { color: #ffb36b; } }
+
 /* ---- 過去問の具体例(em の各回のノート:道具がそろった位置に入れる) ---- */
 .box.kakomon { border: 2px solid #c62828; border-left-width: 6px; background: color-mix(in srgb, var(--surface) 94%, #c62828 6%); }
 .box.kakomon > .label { color: #c62828; font-size: .95rem; }
