@@ -4,13 +4,342 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex">
-  <title>移動しました | Aセメまとめノート</title>
-  <meta http-equiv="refresh" content="0; url=week-04.html">
+  <title>第6回 静磁場の続き(磁気圧、磁場と仕事、ベクトルポテンシャル、磁場のエネルギー) | Aセメまとめノート</title>
   <link rel="stylesheet" href="../../assets/style.css">
+  <script defer src="../../assets/nav.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],macros:{'\\R':'\\mathbb{R}','\\bm':'\\boldsymbol{#1}','\\rot':'\\operatorname{rot}','\\grad':'\\operatorname{grad}','\\dvg':'\\operatorname{div}','\\pd':'\\frac{\\partial #1}{\\partial #2}'}});window.__navReady&&window.__navReady()"></script>
 </head>
 <body>
+  <header class="site-header">
+    <div class="inner">
+      <a class="site-title" href="../../index.html">Aセメまとめノート</a>
+      <span class="links"><a href="../index.html">電磁気学</a><a href="../basics.html">基礎のまとめ</a><a href="../../calc/index.html">微積</a><a href="../../linalg/index.html">線形代数</a><a href="../../structchem/index.html">構造化学</a><a href="../../mech/index.html">力学A</a><a href="../../thermo/index.html">熱力学</a></span>
+    </div>
+  </header>
+
   <main class="note">
-    <p>授業の日程に合わせて回を分け直したため、この内容は<a href="week-04.html">第4回</a>に移りました。</p>
+    <h1>第6回:静磁場の続き(磁気圧、磁場と仕事、ベクトルポテンシャル、磁場のエネルギー)</h1>
+    <div class="meta">電磁気学(東京大学 教養学部 秋学期)／授業日は未定(講義ノートの分量から分けた予定。日程が分かったら合わせます)／講義ノート §5.2 の後半〜§5.6(p.36〜p.42)</div>
+
+    <nav class="toc">
+      <div class="toc-title">目次</div>
+      <ol start="0">
+        <li><a href="#s0">この回の全体像</a></li>
+        <li><a href="#s1">準備:基礎の確認</a>
+          <div class="sub">第5回の結果(静磁場の基本法則、ローレンツ力)／仕事(力と動く向き)／電荷の保存と連続の式／ナブラの公式((2.14)、(2.22))／ポアソン方程式とその解(第4回)</div></li>
+        <li><a href="#s2">磁気圧(§5.2 の後半)</a></li>
+        <li><a href="#s3">磁場は仕事をしない(§5.3)</a></li>
+        <li><a href="#s4">ベクトルポテンシャル(§5.4)</a></li>
+        <li><a href="#s5">磁場のエネルギー(§5.5)</a></li>
+        <li><a href="#s6">ヘルムホルツの定理(2):解の存在(§5.6)</a></li>
+        <li><a href="#s7">具体例で練習(講義ノートにない補足)</a></li>
+        <li><a href="#s8">まとめ(この回で覚えること)</a></li>
+        <li><a href="#s9">この回のノートについてのメモ</a></li>
+      </ol>
+    </nav>
+
+    <h2 id="s0">0. この回の全体像 <span class="page-tag">講義ノート p.36</span></h2>
+    <p>前の回(第5回)で、静磁場の基本法則($\nabla\cdot\bm{B}=0$、$\nabla\times\bm{B}=\mu_0\bm{J}$)とローレンツ力を学びました。この回は §5 の残りです。電場で学んだことを、磁場で順番になぞっていきます。</p>
+    <table class="cmp">
+      <tr><th>電場で学んだこと</th><th>この回の磁場版</th></tr>
+      <tr><td>電場が電荷にする仕事、ポテンシャルエネルギー</td><td>磁場は仕事をしない(§5.3)</td></tr>
+      <tr><td>スカラーポテンシャル $\bm{E}=-\nabla\phi$、$\phi=\int\frac{\rho}{4\pi\varepsilon_0|\bm{r}-\bm{r}'|}$</td><td>ベクトルポテンシャル $\bm{B}=\nabla\times\bm{A}$、$\bm{A}=\int\frac{\mu_0\bm{J}}{4\pi|\bm{r}-\bm{r}'|}$(§5.4)</td></tr>
+      <tr><td>エネルギー $U=\frac12\int\rho\phi=\frac{\varepsilon_0}{2}\int|\bm{E}|^2$</td><td>$U=\frac12\int\bm{J}\cdot\bm{A}=\frac{1}{2\mu_0}\int|\bm{B}|^2$(§5.5)</td></tr>
+      <tr><td>ヘルムホルツの定理(1):解は一つ</td><td>ヘルムホルツの定理(2):解は必ずある(§5.6)</td></tr>
+    </table>
+    <div class="box thm"><div class="label">この回のゴール</div>
+      <p>① 磁気圧:ローレンツ力を磁場だけで書くと、磁場の強いところから弱いところへ押す力が出てくる。<br>
+      ② 磁場は仕事をしない。それなのに「磁石が物を持ち上げる」とき、仕事をしているのは何か。<br>
+      ③ ベクトルポテンシャル $\bm{A}$ の存在、ゲージの自由度、電流から $\bm{A}$ を求める式。<br>
+      ④ 磁場のエネルギー $\frac{1}{2\mu_0}\int|\bm{B}|^2$。<br>
+      ⑤ ヘルムホルツの定理(2):発散と回転を与えれば、ベクトル場は必ず作れる(存在)。</p>
+    </div>
+    <div class="box note-box"><div class="label">この回の日程について</div>
+      <p>第1回中間試験(11/13)のあとの授業の予定は、まだ分かっていません。この回から先は、講義ノートの分量と内容から回を分けています。実際の授業の日程が分かったら、それに合わせて分け直します。</p>
+    </div>
+    <p>以下では、先に必要な基礎を復習してから、講義ノートの順に進みます。紫色の枠は「基礎の復習」、黄色の枠は「講義ノートにないが、理解を助けるために私が補った部分」、緑の枠は「直感で理解するための説明」です。</p>
+
+    <h2 id="s1">1. 準備:基礎の確認</h2>
+    <p>この回で使う道具と、前の回までの結果を並べます。各枠の「詳しい解説」から、基礎のまとめのページや、前の回のノートに飛べます。</p>
+
+    <h3 id="w-prev">1.1 第5回の結果(静磁場の基本法則、ローレンツ力)</h3>
+    <div class="box basic">
+      <div class="label">基礎:静磁場の基本法則とローレンツ力 <a class="xref-link" href="week-05.html#s4-3" data-xref>→ 第5回 4.3</a></div>
+      <p>・ビオ・サバールの法則 $\bm{B}=\frac{\mu_0}{4\pi}\int\frac{\bm{J}\times(\bm{r}-\bm{r}')}{|\bm{r}-\bm{r}'|^3}d\bm{r}'$。<br>
+      ・$\nabla\cdot\bm{B}=0$(磁力線は閉じている)、$\nabla\times\bm{B}=\mu_0\bm{J}$(アンペールの法則)。積分型 $\oint\bm{B}\cdot d\bm{x}=\mu_0\int\bm{J}\cdot d\bm{S}$。<br>
+      ・ソレノイドの中の磁場 $B=\mu_0nI$($n$:単位長さあたりの巻き数)、外は 0。<br>
+      ・ローレンツ力 $\bm{F}=q\bm{v}\times\bm{B}$、電流には $\bm{F}=\bm{J}\times\bm{B}$(単位体積あたり)。</p>
+      <p><b>直感:</b> 磁場は電流のまわりの「渦」。磁場から受ける力は、いつも動く向きの真横。</p>
+    </div>
+
+    <h3 id="w-work">1.2 仕事(力と動く向き)</h3>
+    <div class="box basic">
+      <div class="label">基礎:仕事は「力 × 動いた距離のうち力の向きの成分」 <a class="xref-link" href="../basics.html#work" data-xref>→ 詳しい解説</a></div>
+      <p>力 $\bm{F}$ がはたらいている物体が $\Delta\bm{x}$ だけ動くとき、力がした<b>仕事</b>は $W=\bm{F}\cdot\Delta\bm{x}=|\bm{F}||\Delta\bm{x}|\cos\theta$。力が動く向きと<b>垂直</b>なら仕事は 0(例:等速円運動の向心力、斜面の垂直抗力)。</p>
+      <p>いくつかの物体(質点系)のときは、<b>1つ1つの質点</b>について「その質点にはたらく力」と「その質点の動き」で仕事を計算して、足します。系全体の重心の動きで判断してはいけません(§5.3 の要点)。</p>
+      <p><b>直感:</b> 仕事は「押した向きに、どれだけ進んだか」。横から押しても、進む速さは変わらない。</p>
+    </div>
+
+    <h3 id="w-cont">1.3 電荷の保存と連続の式</h3>
+    <div class="box basic">
+      <div class="label">基礎:連続の式 $\frac{\partial\rho}{\partial t}=-\nabla\cdot\bm{J}$ <a class="xref-link" href="../basics.html#current" data-xref>→ 詳しい解説</a></div>
+      <p>電荷は勝手に生まれたり消えたりしない(<b>電荷の保存</b>)。小さな箱の中の電荷が減る速さは、箱の表面から流れ出ていく電流に等しい。これを、発散を使って書いたのが<b>連続の式</b>
+      $$\frac{\partial\rho}{\partial t}=-\nabla\cdot\bm{J}\qquad(5.28).$$
+      ($\nabla\cdot\bm{J}$ は「その点から湧き出していく電流の量」。第1回の発散の意味そのもの。)</p>
+      <p><b>定常電流</b>(時間変化しない)では $\frac{\partial\rho}{\partial t}=0$ なので $\nabla\cdot\bm{J}=0$:流れ込む量と流れ出る量がつり合っている。電流は途中で消えず、閉じたループを作ります。</p>
+      <p><b>直感:</b> 道路の交差点に入る車の数と出る車の数の差が、交差点にたまる車の増え方。</p>
+    </div>
+
+    <h3 id="w-ident">1.4 ナブラの公式((2.14)、(2.22))</h3>
+    <div class="box basic">
+      <div class="label">基礎:ベクトル三重積とナブラの二重積 <a class="xref-link" href="week-01.html#s5-5" data-xref>→ 第1回 5.5</a></div>
+      <p>$\varepsilon\varepsilon$ の公式 (2.14) $\sum_k\varepsilon_{ijk}\varepsilon_{klm}=\delta_{il}\delta_{jm}-\delta_{im}\delta_{jl}$ から:</p>
+      <ul>
+        <li>$\bm{A}\times(\bm{B}\times\bm{C})=\bm{B}(\bm{A}\cdot\bm{C})-\bm{C}(\bm{A}\cdot\bm{B})$(BAC−CAB)。</li>
+        <li>$\nabla\times(\nabla\times\bm{A})=\nabla(\nabla\cdot\bm{A})-\Delta\bm{A}$ (2.22)。$\Delta\bm{A}$ は各成分にラプラシアンを作用させたベクトル (2.21)。</li>
+        <li>$(\nabla\times\bm{B})\times\bm{B}=(\bm{B}\cdot\nabla)\bm{B}-\nabla\frac{|\bm{B}|^2}{2}$(この回の (5.18))。</li>
+      </ul>
+      <p><b>直感:</b> 「外積を2回」は、真ん中のベクトルの向きから、外側との内積で決まる分を引いたもの。</p>
+    </div>
+
+    <h3 id="w-poisson">1.5 ポアソン方程式とその解(第4回)</h3>
+    <div class="box basic">
+      <div class="label">基礎:$-\Delta\phi=\rho/\varepsilon_0$ の解 <a class="xref-link" href="week-04.html#s2-2" data-xref>→ 第4回 2.2</a></div>
+      <p>静電場では、電位 $\phi$ が<b>ポアソン方程式</b> $-\Delta\phi=\rho/\varepsilon_0$ を満たし、その解(無限遠で 0)は
+      $$\phi(\bm{r})=\int\frac{\rho(\bm{r}')}{4\pi\varepsilon_0|\bm{r}-\bm{r}'|}d\bm{r}'$$
+      (点電荷の電位 $\frac{q}{4\pi\varepsilon_0r}$ の重ね合わせ)でした。「$-\Delta(\text{何か})=\text{源}$」という形の方程式は、源を $\frac{1}{4\pi|\bm{r}-\bm{r}'|}$ で重ねれば解ける、と覚えておきます。この回のベクトルポテンシャルは、この式を3つの成分に並べたものになります。</p>
+      <p><b>直感:</b> 源が1点にあれば、その影響は距離に反比例して弱まる。源が広がっていれば、その影響を全部足す。</p>
+    </div>
+
+    <h2 id="s2">2. 磁気圧(§5.2 の後半) <span class="page-tag">講義ノート p.36–37</span></h2>
+    <p>ローレンツ力 $\bm{F}=\bm{J}\times\bm{B}$ (5.12) に、アンペールの法則 $\bm{J}=\frac{1}{\mu_0}\nabla\times\bm{B}$ を代入して、力を<b>磁場だけ</b>で書いてみます。1.4 の公式を使うと
+    $$\bm{F}=\frac{1}{\mu_0}(\nabla\times\bm{B})\times\bm{B}=\frac{1}{\mu_0}(\bm{B}\cdot\nabla)\bm{B}-\nabla\frac{|\bm{B}|^2}{2\mu_0}\qquad(5.18).$$</p>
+    <ul>
+      <li><b>第2項</b> $-\nabla\frac{|\bm{B}|^2}{2\mu_0}$:<b>磁気圧</b>。$\frac{|\bm{B}|^2}{2\mu_0}$ という「圧力」の勾配で、磁場の強いところから弱いところへ向かって押す力です。</li>
+      <li><b>第1項</b> $\frac{1}{\mu_0}(\bm{B}\cdot\nabla)\bm{B}$:<b>磁気張力</b>。磁力線が曲がっているときに、まっすぐに戻ろうとする力です。磁力線がまっすぐなら 0 で、磁気圧だけが残ります。</li>
+    </ul>
+    <figure class="fig">
+      <svg viewBox="0 0 640 240" width="640" role="img" aria-label="磁場の強いところから弱いところへ押す磁気圧"><line x1="250" y1="30" x2="250" y2="200" style="stroke:var(--accent);stroke-width:1.8"/><line x1="264" y1="30" x2="264" y2="200" style="stroke:var(--accent);stroke-width:1.8"/><line x1="278" y1="30" x2="278" y2="200" style="stroke:var(--accent);stroke-width:1.8"/><line x1="292" y1="30" x2="292" y2="200" style="stroke:var(--accent);stroke-width:1.8"/><line x1="306" y1="30" x2="306" y2="200" style="stroke:var(--accent);stroke-width:1.8"/><line x1="320" y1="30" x2="320" y2="200" style="stroke:var(--accent);stroke-width:1.8"/><line x1="334" y1="30" x2="334" y2="200" style="stroke:var(--accent);stroke-width:1.8"/><line x1="348" y1="30" x2="348" y2="200" style="stroke:var(--accent);stroke-width:1.8"/><line x1="90" y1="30" x2="90" y2="200" style="stroke:var(--accent);stroke-width:1.2"/><line x1="120" y1="30" x2="120" y2="200" style="stroke:var(--accent);stroke-width:1.2"/><line x1="150" y1="30" x2="150" y2="200" style="stroke:var(--accent);stroke-width:1.2"/><line x1="440" y1="30" x2="440" y2="200" style="stroke:var(--accent);stroke-width:1.2"/><line x1="470" y1="30" x2="470" y2="200" style="stroke:var(--accent);stroke-width:1.2"/><line x1="500" y1="30" x2="500" y2="200" style="stroke:var(--accent);stroke-width:1.2"/><line x1="245" y1="115" x2="184" y2="115" style="stroke:var(--thm);stroke-width:3"/><polygon points="175,115 184,111 184,119.1" style="fill:var(--thm)"/><line x1="353" y1="115" x2="414" y2="115" style="stroke:var(--thm);stroke-width:3"/><polygon points="423,115 414,119.1 414,111" style="fill:var(--thm)"/><text class="ta" x="299" y="222" style="text-anchor:middle">磁場が強い(磁力線が密)</text><text class="tm" x="120" y="222" style="text-anchor:middle">弱い</text><text class="tm" x="470" y="222" style="text-anchor:middle">弱い</text><text class="tt" x="130" y="100">磁気圧</text><text class="tt" x="430" y="100">磁気圧</text></svg>
+      <figcaption>図1 磁気圧 $-\nabla\frac{|\bm{B}|^2}{2\mu_0}$ は、磁場の強いところから弱いところへ向かう力(橙)。まっすぐな磁力線の束は、横に広がろうとします。</figcaption>
+    </figure>
+    <div class="box intuit"><div class="label">直感で理解する:磁力線はゴムひものよう</div>
+      <p>磁力線を「横に押し合い、縦には縮もうとするゴムひもの束」と思うと、2つの項の意味がつかめます。束が密(磁場が強い)なところでは、ひもどうしが横に押し合い、まばらなほうへ広がろうとする(磁気圧)。曲がったひもは、まっすぐになろうとする(磁気張力)。$\frac{|\bm{B}|^2}{2\mu_0}$ は、ちょうど磁場のエネルギー密度(§5.5)と同じ形です。</p>
+    </div>
+    <h3 id="s2-1">2.1 太陽の黒点</h3>
+    <p>太陽の黒点は、表面の中で温度が低く(それでも約 4000 度。平均の約 6000 度より低い)、同時に磁場が強い場所です。磁場が強いと温度が下がる理由は、磁気圧で説明できます:周りとの力のつり合いは「磁気圧 + 気体の圧力 = 一定」なので、磁気圧が大きい場所では、気体の圧力が小さくなる。気体の圧力は温度が高いほど大きいので、そこは温度が低くなる。</p>
+    <div class="box supp"><div class="label">講義ノートにない補足:どれくらいの圧力か</div>
+      <p>$B=0.1$ T(強い磁石くらい)なら、磁気圧は $\frac{B^2}{2\mu_0}=\frac{0.01}{2\times4\pi\times10^{-7}}\approx4\times10^{3}$ Pa(大気圧の約 4%)。$B=1$ T なら約 $4\times10^5$ Pa(約4気圧)。強い電磁石のコイルには、この圧力が外向きにかかるので、丈夫に作る必要があります(具体例 V)。</p>
+    </div>
+
+    <h2 id="s3">3. 磁場は仕事をしない(§5.3) <span class="page-tag">講義ノート p.37–38</span></h2>
+    <p>ローレンツ力 $q\bm{v}\times\bm{B}$ は、いつも速度と垂直なので、<b>磁場は仕事をしません</b>。ところが身の回りでは、磁石が別の磁石(や鉄)を引っ張って持ち上げるなど、いかにも「磁場が仕事をした」ように見えることがあります。この節は、それをどう理解すればよいかを説明します。</p>
+    <h3 id="s3-1">3.1 力学で確認しておくこと</h3>
+    <ul>
+      <li>質点系で、ある力が仕事をしたかどうかは、<b>各質点</b>の動きと、その質点にはたらく力の向きで決まる。系全体の重心の動きの向きで判断してはいけない。</li>
+      <li>ある力が仕事をしなくても、その力が「仕事をする別の力の<b>向きを変える</b>」役割を担うことはある。</li>
+    </ul>
+    <p>例として、V字の斜めのレールの上を動く、ばねでつながれた2つの質点を考えます(図2)。ばねを縮めておいて手を離すと、ばねが伸びて、2つの質点はレールに沿って上に押し上げられます。</p>
+    <figure class="fig">
+      <svg viewBox="0 0 640 250" width="640" role="img" aria-label="V字のレールの上で、ばねでつながれた2つの質点が押し上げられる"><line x1="320" y1="230" x2="120" y2="40" style="stroke:var(--muted);stroke-width:2.4"/><line x1="320" y1="230" x2="520" y2="40" style="stroke:var(--muted);stroke-width:2.4"/><circle cx="225" cy="140" r="9" style="fill:var(--thm)"/><circle cx="415" cy="140" r="9" style="fill:var(--thm)"/><text class="tt" x="195" y="145">1</text><text class="tt" x="432" y="145">2</text><path d="M 236 140 l 12 -8 l 12 16 l 12 -16 l 12 16 l 12 -16 l 12 16 l 12 -16 l 12 16 l 12 -16 l 12 16 l 12 -16 l 12 8" style="fill:none;stroke:var(--ex);stroke-width:2"/><line x1="225" y1="140" x2="184" y2="140" style="stroke:var(--ex);stroke-width:2.6"/><polygon points="175,140 184,136 184,144.1" style="fill:var(--ex)"/><text class="tj" x="140" y="168">ばねの力</text><line x1="225" y1="140" x2="255.3" y2="113" style="stroke:var(--accent);stroke-width:2.4"/><polygon points="262,107 258,116 252.6,110" style="fill:var(--accent)"/><text class="ta" x="268" y="100">垂直抗力</text><line x1="225" y1="140" x2="201.6" y2="118.1" style="stroke:var(--thm);stroke-width:2.6"/><polygon points="195,112 204.3,115.2 198.8,121.1" style="fill:var(--thm)"/><text class="tt" x="120" y="100">質点1の動く向き</text><text class="tm" x="320" y="30" style="text-anchor:middle">重心は真上に動くが、仕事をしたのはばね</text></svg>
+      <figcaption>図2 講義ノートの図29を描き直したもの。質点1は左斜め上に動く(橙)。ばねの力(緑、水平)はこの向きに成分をもつので<b>仕事をする</b>。垂直抗力(青)は動く向きと垂直なので仕事をしないが、ばねの力と合わさって<b>動く向きを曲げる</b>役割をしています。</figcaption>
+    </figure>
+    <div class="box warn"><div class="label">よくある間違い(講義ノートの「Aさん」の考え)</div>
+      <p>「ばねの力は水平なのに、系は真上に動いた。だからばねは仕事をしていない。レールの垂直抗力が斜め上向きなので、垂直抗力が仕事をしたのだろう。」</p>
+      <p><b>誤り</b>:重心の動きで判断している。質点1は<b>左斜め上</b>に動くので、水平なばねの力はその向きに成分をもち、ちゃんと仕事をしている。垂直抗力は質点1の動きと垂直なので、仕事をしていない。垂直抗力は、ばねの力と合わさって、質点1の動く向きを(ばねの向きから)曲げているだけです。</p>
+    </div>
+    <h3 id="s3-2">3.2 磁場の中のコイルが持ち上がるとき</h3>
+    <p>上に固定したコイルが磁場を作っていて、その下に、動けるコイルを置きます。下のコイルに電流を流すと、上のコイルに引きつけられて持ち上がります。仕事をしたのは何でしょうか。</p>
+    <figure class="fig">
+      <svg viewBox="0 0 640 260" width="640" role="img" aria-label="磁場の中でコイルが持ち上がるとき、ローレンツ力は電流を弱める向きの成分をもつ"><ellipse cx="320" cy="40" rx="130" ry="22" style="fill:none;stroke:var(--muted);stroke-width:2"/><text class="tm" x="470" y="45">上の固定コイル(磁場を作る)</text><path d="M 260 62 C 250 120, 220 170, 190 245" style="fill:none;stroke:var(--accent);stroke-width:1.8"/><path d="M 380 62 C 390 120, 420 170, 450 245" style="fill:none;stroke:var(--accent);stroke-width:1.8"/><path d="M 320 62 L 320 245" style="fill:none;stroke:var(--accent);stroke-width:1.8"/><line x1="320" y1="220" x2="320" y2="236" style="stroke:var(--accent);stroke-width:1.8"/><polygon points="320,245 316,236 324.1,236" style="fill:var(--accent)"/><ellipse cx="320" cy="190" rx="95" ry="18" style="fill:none;stroke:var(--thm);stroke-width:2.6"/><text class="tt" x="110" y="195">下のコイル(電流 I)</text><line x1="415" y1="190" x2="438.1" y2="170.8" style="stroke:var(--ex);stroke-width:2.4"/><polygon points="445,165 440.7,173.9 435.5,167.7" style="fill:var(--ex)"/><text class="tj" x="450" y="160">電荷の速度(円周 + 少し上)</text><line x1="415" y1="190" x2="399" y2="158" style="stroke:var(--accent);stroke-width:2.4"/><polygon points="395,150 402.6,156.2 395.4,159.9" style="fill:var(--accent)"/><text class="ta" x="330" y="140">B(斜め外下)</text><line x1="250" y1="230" x2="250" y2="214" style="stroke:var(--thm);stroke-width:2.4"/><polygon points="250,205 254.1,214 246,214" style="fill:var(--thm)"/><text class="tm" x="140" y="240">コイルは上へ動く</text></svg>
+      <figcaption>図3 講義ノートの図30を簡単にしたもの。下のコイルの電荷は、円周に沿う向きと「少し上」の向きを合わせた速度をもつ。磁場は斜め外向きの下向きなので、ローレンツ力 $q\bm{v}\times\bm{B}$ は速度と垂直だが、円周方向に射影すると電流を<b>弱める</b>向きの成分をもつ。電池がそれに逆らって仕事をします。</figcaption>
+    </figure>
+    <ol>
+      <li>下のコイルの電荷は、円周に沿って動いている。コイル全体が上に動くと、電荷の速度は「円周の向き + 少し上向き」になる。</li>
+      <li>磁場は(上のコイルから広がるので)斜め外向きの下向き。ローレンツ力は速度と垂直なので、<b>仕事はしない</b>。</li>
+      <li>しかしこのローレンツ力を円周の向きに射影すると、電荷の運動と<b>逆向き</b>の成分がある(電流を弱めようとする)。</li>
+      <li>電流を一定に保つため、<b>電池が仕事をして</b>電荷を加速する。</li>
+      <li>各電荷にはたらく力(電池の力 + ローレンツ力)を全部足すと、上向き。電荷の動く向きを「斜め上」から「真上」に変えているのは、コイルが形を保とうとする抗力(これも動きと垂直で、仕事はしない)。</li>
+    </ol>
+    <div class="box thm"><div class="label">まとめ</div>
+      <p>各電荷にはたらく力 = 電池の力(<b>仕事をする</b>)+ ローレンツ力(しない)+ 抗力(しない)。ローレンツ力と抗力は、電池の力の<b>向きを変える</b>役割。V字レールの垂直抗力と同じ構図です。</p>
+    </div>
+    <div class="box note-box"><div class="label">講義ノートの脚注91:永久磁石の場合</div>
+      <p>永久磁石には電池がないので、磁石どうしが引き合って動くとき、磁石の中の電荷は少し減速し、磁力はわずかに弱まります。逆に引き離すときは電荷が加速されるので、くっつけて引き離せば(この説明の範囲では)元に戻ります。</p>
+    </div>
+
+    <h2 id="s4">4. ベクトルポテンシャル(§5.4) <span class="page-tag">講義ノート p.38–39</span></h2>
+    <p>静電場では、回転がゼロ($\nabla\times\bm{E}=\bm{0}$)なので、スカラーポテンシャル $\phi$ があって $\bm{E}=-\nabla\phi$ と書けました(第3回・第4回)。静磁場では、回転ではなく<b>発散</b>がゼロです。このときの「ポテンシャル」にあたるのが、ベクトルポテンシャルです。</p>
+    <div class="box thm"><div class="label">ベクトルポテンシャルの存在 (5.19)</div>
+      <p>$\nabla\cdot\bm{B}=0$ ならば、ベクトル場 $\bm{A}$ があって $$\bm{B}=\nabla\times\bm{A}.$$</p>
+    </div>
+    <div class="box intuit"><div class="label">直感で理解する:なぜ「発散ゼロ」なら「回転で書ける」のか</div>
+      <p>恒等式 $\nabla\cdot(\nabla\times\bm{A})=0$(第1回、問 [2-1])から、回転で書ける場は必ず発散ゼロです。その逆が成り立つ、というのがこの定理です。「回転ゼロなら勾配で書ける」(ポテンシャルの存在、第3回)と、ちょうど対になっています。</p>
+    </div>
+    <h3 id="s4-1">4.1 存在の証明:具体的に書いてみる</h3>
+    <p>講義ノートは、次のベクトル場が実際に答えになることを示します(天下り)。
+    $$\bm{A}(x,y,z):=\begin{pmatrix}0\\ \displaystyle\int_0^xB_z(x',y,z)\,dx'\\ \displaystyle\int_0^yB_x(0,y',z)\,dy'-\int_0^xB_y(x',y,z)\,dx'\end{pmatrix}\qquad(5.20)$$
+    回転の $x$ 成分を計算すると
+    $$[\nabla\times\bm{A}]_x=\partial_yA_z-\partial_zA_y=B_x(0,y,z)-\int_0^x\Bigl(\partial_yB_y+\partial_zB_z\Bigr)dx'=B_x(0,y,z)+\int_0^x\partial_{x'}B_x\,dx'=B_x(x,y,z)$$
+    (2つ目の等号で $\nabla\cdot\bm{B}=0$、つまり $\partial_yB_y+\partial_zB_z=-\partial_xB_x$ を使い、最後は微分積分学の基本定理)。$y,z$ 成分も同様に $B_y$、$B_z$ になります((5.22)(5.23))。</p>
+    <div class="box supp"><div class="label">講義ノートにない補足:$y$ 成分と $z$ 成分の確かめ</div>
+      <p>$[\nabla\times\bm{A}]_y=\partial_zA_x-\partial_xA_z=0-\bigl(0-B_y(x,y,z)\bigr)=B_y$($A_z$ の第1項は $x$ を含まないので、$x$ で微分すると 0)。$[\nabla\times\bm{A}]_z=\partial_xA_y-\partial_yA_x=B_z(x,y,z)-0=B_z$。</p>
+    </div>
+    <h3 id="s4-2">4.2 ゲージの自由度</h3>
+    <p>$\bm{B}=\nabla\times\bm{A}$ を満たす $\bm{A}$ は1つではありません。2つの解 $\bm{A}$、$\bm{A}'$ があると、差は $\nabla\times(\bm{A}-\bm{A}')=\bm{B}-\bm{B}=\bm{0}$(回転ゼロ)なので、ポテンシャルの存在(第3回)から
+    $$\bm{A}-\bm{A}'=\nabla\chi\qquad(5.24)$$
+    と、あるスカラー場 $\chi$ の勾配で書けます。逆に、$\bm{A}$ に任意の勾配 $\nabla\chi$ を足しても、$\nabla\times\nabla\chi=\bm{0}$ なので磁場は変わりません。この「$\nabla\chi$ を足してよい自由さ」を<b>ゲージ自由度</b>といいます(講義の最後の方で、時間があれば扱う)。</p>
+    <div class="box intuit"><div class="label">直感で理解する:高さの基準と同じ</div>
+      <p>電位 $\phi$ に定数を足しても電場は変わらない(高さの基準をどこに選んでもよい)のと同じです。ベクトルポテンシャルでは、足してよいものが「定数」から「勾配 $\nabla\chi$」に広がっています。</p>
+    </div>
+    <h3 id="s4-3">4.3 電流から $\bm{A}$ を求める</h3>
+    <p>ゲージ自由度を使って、$\nabla\cdot\bm{A}=0$ となる $\bm{A}$ を選びます(クーロンゲージ。講義ノートの脚注92:$\Delta\chi=\nabla\cdot\bm{A}$ を満たす $\chi$ を使って $\bm{A}-\nabla\chi$ に取り替えればよい)。アンペールの法則に $\bm{B}=\nabla\times\bm{A}$ を代入し、1.4 の公式 (2.22) を使うと
+    $$\nabla\times(\nabla\times\bm{A})=\nabla(\nabla\cdot\bm{A})-\Delta\bm{A}=-\Delta\bm{A}=\mu_0\bm{J}\qquad(5.26).$$
+    これは各成分ごとに、静電場のポアソン方程式 $-\Delta\phi=\rho/\varepsilon_0$ と同じ形です($\phi\to A_x$、$\rho/\varepsilon_0\to\mu_0J_x$)。だから解も同じ形で</p>
+    <div class="box thm"><div class="label">電流が作るベクトルポテンシャル (5.27)</div>
+      <p>$$\bm{A}(\bm{r})=\frac{\mu_0}{4\pi}\int\frac{\bm{J}(\bm{r}')}{|\bm{r}-\bm{r}'|}d\bm{r}'$$ ($\phi=\frac{1}{4\pi\varepsilon_0}\int\frac{\rho}{|\bm{r}-\bm{r}'|}$ と見比べる。$\bm{A}$ は電流と<b>同じ向き</b>を向く。)</p>
+    </div>
+    <figure class="fig">
+      <svg viewBox="0 0 640 230" width="640" role="img" aria-label="ベクトルポテンシャルは磁場のまわりを回る"><line x1="230" y1="200" x2="230" y2="49" style="stroke:var(--accent);stroke-width:2"/><polygon points="230,40 234.1,49 226,49" style="fill:var(--accent)"/><line x1="250" y1="200" x2="250" y2="49" style="stroke:var(--accent);stroke-width:2"/><polygon points="250,40 254.1,49 246,49" style="fill:var(--accent)"/><line x1="270" y1="200" x2="270" y2="49" style="stroke:var(--accent);stroke-width:2"/><polygon points="270,40 274.1,49 266,49" style="fill:var(--accent)"/><line x1="290" y1="200" x2="290" y2="49" style="stroke:var(--accent);stroke-width:2"/><polygon points="290,40 294.1,49 286,49" style="fill:var(--accent)"/><line x1="310" y1="200" x2="310" y2="49" style="stroke:var(--accent);stroke-width:2"/><polygon points="310,40 314.1,49 306,49" style="fill:var(--accent)"/><text class="ta" x="250" y="30">一様な B</text><ellipse cx="270" cy="120" rx="110" ry="32" style="fill:none;stroke:var(--thm);stroke-width:2.4"/><line x1="240" y1="151" x2="281" y2="151" style="stroke:var(--thm);stroke-width:2.4"/><polygon points="290,151 281,155.1 281,147" style="fill:var(--thm)"/><text class="tt" x="390" y="125">A(B のまわりを回る)</text><text class="tj" x="400" y="175">∇ × A = B</text><text class="tm" x="400" y="200">(電流 J のまわりを B が回るのと同じ関係)</text></svg>
+      <figcaption>図4 ベクトルポテンシャル $\bm{A}$ と磁場 $\bm{B}=\nabla\times\bm{A}$ の関係は、磁場 $\bm{B}$ と電流 $\bm{J}$ の関係 $\nabla\times\bm{B}=\mu_0\bm{J}$ と同じ形。一様な磁場なら、$\bm{A}$ は磁場を軸に回る向きになります(例:$\bm{A}=\frac12\bm{B}\times\bm{r}$)。</figcaption>
+    </figure>
+    <div class="box ex"><div class="label">問 [5-2]</div>
+      <p>$z=0$ の面内に、$-a\le x\le a$、$-a\le y\le a$ の正方形の境界を走る導線があり、$z$ 軸正方向から見て反時計回りに電流 $I$ が流れている。点 $(x,0,z)$ におけるベクトルポテンシャルを求めよ。</p>
+    </div>
+    <figure class="fig">
+      <svg viewBox="0 0 640 250" width="640" role="img" aria-label="正方形の電流と、点 (x, 0, z)"><path d="M 160 200 L 360 200 L 420 140 L 220 140 Z" style="fill:none;stroke:var(--thm);stroke-width:2.4"/><line x1="250" y1="200" x2="291" y2="200" style="stroke:var(--thm);stroke-width:2.4"/><polygon points="300,200 291,204.1 291,196" style="fill:var(--thm)"/><line x1="392" y1="168" x2="403.6" y2="156.4" style="stroke:var(--thm);stroke-width:2.4"/><polygon points="410,150 406.5,159.2 400.8,153.5" style="fill:var(--thm)"/><line x1="330" y1="140" x2="289" y2="140" style="stroke:var(--thm);stroke-width:2.4"/><polygon points="280,140 289,136 289,144.1" style="fill:var(--thm)"/><line x1="197" y1="163" x2="188.4" y2="171.6" style="stroke:var(--thm);stroke-width:2.4"/><polygon points="182,178 185.5,168.8 191.2,174.5" style="fill:var(--thm)"/><line x1="290" y1="170" x2="290" y2="40" style="stroke:var(--muted);stroke-width:1.1;stroke-dasharray:5 4"/><text class="t" x="296" y="45">z</text><line x1="290" y1="170" x2="470" y2="170" style="stroke:var(--muted);stroke-width:1.1;stroke-dasharray:5 4"/><text class="t" x="474" y="175">x</text><circle cx="330" cy="80" r="5" style="fill:var(--accent)"/><text class="tj" x="340" y="78">(x, 0, z)</text><text class="tm" x="150" y="230">辺の長さ 2a、上から見て反時計回りに電流 I</text></svg>
+      <figcaption>図5 問 [5-2] の設定。$y=\pm a$ の2辺($x$ 方向)の寄与は、観測点から等距離で向きが逆なので打ち消し合い、$x=\pm a$ の2辺($y$ 方向)の寄与だけが残ります。</figcaption>
+    </figure>
+    <div class="box supp"><div class="label">講義ノートにない補足:[5-2] の解答</div>
+      <p>線電流では $\bm{J}\,d\bm{r}'\to I\,d\bm{l}'$ なので $\bm{A}=\frac{\mu_0I}{4\pi}\oint\frac{d\bm{l}'}{|\bm{r}-\bm{r}'|}$。4辺に分けます。</p>
+      <ul>
+        <li><b>$y=-a$ の辺</b>($x'$ が $-a\to a$、$d\bm{l}'=(dx',0,0)$)と <b>$y=+a$ の辺</b>($x'$ が $a\to-a$):観測点 $(x,0,z)$ から見て、$y=\pm a$ の辺は対称な位置にあり距離が等しく、向きが逆。<b>打ち消し合って $A_x=0$</b>。</li>
+        <li><b>$x=a$ の辺</b>($y'$ が $-a\to a$、$d\bm{l}'=(0,dy',0)$):距離は $\sqrt{(x-a)^2+y'^2+z^2}$。</li>
+        <li><b>$x=-a$ の辺</b>($y'$ が $a\to-a$):距離は $\sqrt{(x+a)^2+y'^2+z^2}$、向きは逆。</li>
+      </ul>
+      <p>$\displaystyle\int_{-a}^{a}\frac{dy'}{\sqrt{d^2+y'^2}}=2\sinh^{-1}\frac{a}{d}=2\log\frac{a+\sqrt{a^2+d^2}}{d}$ を使うと
+      $$\bm{A}=\Bigl(0,\ \frac{\mu_0I}{2\pi}\Bigl[\sinh^{-1}\frac{a}{\sqrt{(x-a)^2+z^2}}-\sinh^{-1}\frac{a}{\sqrt{(x+a)^2+z^2}}\Bigr],\ 0\Bigr).$$
+      <b>確かめ</b>:$x=0$ では2つの項が等しく $\bm{A}=\bm{0}$(中央の軸上では、対称性から $\bm{A}$ は 0)。$x\gt0$ では $x=a$ の辺に近いので $A_y\gt0$(その辺の電流の向き $+y$ と同じ)。数値積分でも確かめました。</p>
+    </div>
+    <div class="box note-box"><div class="label">ベクトルポテンシャルは何の役に立つのか(講義ノート p.39)</div>
+      <p>今の段階では、ベクトルポテンシャルのありがたみは感じにくいかもしれません。しかし電磁気学を深く学ぶと、電磁場よりもポテンシャル $\phi$、$\bm{A}$ の方が本質的だと分かってきます。特に量子力学では、「磁場は同じで、ベクトルポテンシャルだけが違う」状況の差が実験で検出されています(アハラノフ・ボーム効果。外村彰の電子線ホログラフィーの実験で確かめられた)。次の節では、$\bm{A}$ が役立つ例を見ます。</p>
+    </div>
+
+    <h2 id="s5">5. 磁場のエネルギー(§5.5) <span class="page-tag">講義ノート p.40–41</span></h2>
+    <p>電場のエネルギーは $U=\frac12\int\rho\phi\,d\bm{r}$ (3.28)、あるいは $U=\frac{\varepsilon_0}{2}\int|\bm{E}|^2d\bm{r}$ (3.33) でした。そしてこれは、「電荷分布の一部 $\rho_1$ を少し動かすのに必要な仕事」から導けました(<a href="week-04.html#s3-3">第4回 3.3</a>)。同じ考え方を磁場に使います。</p>
+    <figure class="fig">
+      <svg viewBox="0 0 640 210" width="640" role="img" aria-label="固定したコイル2の磁場の中で、コイル1を少し動かす"><ellipse cx="180" cy="110" rx="70" ry="30" style="fill:none;stroke:var(--thm);stroke-width:2.4"/><text class="tt" x="150" y="160">コイル1(J₁)</text><line x1="180" y1="110" x2="241" y2="110" style="stroke:var(--ex);stroke-width:2.6"/><polygon points="250,110 241,114.1 241,106" style="fill:var(--ex)"/><text class="t" x="212" y="100">Δr</text><ellipse cx="450" cy="110" rx="70" ry="30" style="fill:none;stroke:var(--accent);stroke-width:2.4"/><text class="ta" x="420" y="160">コイル2(J₂、固定)</text><text class="tm" x="80" y="200">外力の仕事 + 電池1の仕事 + 電池2の仕事 = 磁場のエネルギーの増え</text></svg>
+      <figcaption>図6 磁場のエネルギーを求めるときの設定(講義ノートの図31)。コイル1を $\Delta\bm{r}$ 動かすとき、外力だけでなく、2つのコイルの電池も仕事をします。</figcaption>
+    </figure>
+    <h3 id="s5-1">5.1 コイルを少し動かすときの仕事</h3>
+    <p>電流 $\bm{J}_1$(コイル1)と $\bm{J}_2$(コイル2、固定。作る磁場 $\bm{B}_2=\nabla\times\bm{A}_2$)があり、コイル1を $\Delta\bm{r}$ だけ動かします。</p>
+    <ul>
+      <li><b>外力の仕事</b>:ローレンツ力 $\bm{J}_1\times\bm{B}_2$ に逆らうので、公式 (2.14) と部分積分、定常電流の $\nabla\cdot\bm{J}_1=0$(1.3 の連続の式)を使って
+      $$W_{\text{ext}}=-\int(\bm{J}_1\times\bm{B}_2)\cdot\Delta\bm{r}\,d\bm{r}'=-\int\bm{J}_1(\bm{r}')\cdot\bigl(\bm{A}_2(\bm{r}'+\Delta\bm{r})-\bm{A}_2(\bm{r}')\bigr)d\bm{r}'\qquad(5.29).$$</li>
+      <li><b>電池の仕事</b>:コイルが動くと、ローレンツ力が電流を変えようとする(§5.3 と同じ)。電流を保つために、コイル2の電池は $W_{\text{coil2}}=-W_{\text{ext}}$ (5.30) の仕事をする。コイル1の電池も、同じだけの仕事 $W_{\text{coil1}}=W_{\text{coil2}}$ をする(相対性:どちらが動いたと見ても同じ。講義ノートの脚注96)。</li>
+      <li><b>合計</b>:磁場が受け取った正味のエネルギーは $\Delta U=W_{\text{ext}}+W_{\text{coil1}}+W_{\text{coil2}}=-W_{\text{ext}}$ (5.31)。</li>
+    </ul>
+    <p>電場のときと同じ対称性の議論(1と2を入れ替えても同じ形)をすると、電流 $\bm{J}$ があるときのエネルギーは</p>
+    <div class="box thm"><div class="label">磁場のエネルギー (5.32)(5.33)</div>
+      <p>$$U=\frac12\int\bm{J}(\bm{r})\cdot\bm{A}(\bm{r})\,d\bm{r}=\frac{1}{2\mu_0}\int|\bm{B}(\bm{r})|^2d\bm{r}$$</p>
+    </div>
+    <p>(5.32) は電場の $\frac12\int\rho\phi$ にそっくりで、ベクトルポテンシャル $\bm{A}$ が「電流 $\bm{J}$ にとってのポテンシャル」の役をしていることを示しています(ベクトル「ポテンシャル」という名前の理由)。2つ目の等号は、アンペールの法則 $\bm{J}=\frac{1}{\mu_0}\nabla\times\bm{B}$ を代入して部分積分すると $\int(\nabla\times\bm{B})\cdot\bm{A}=\int(\nabla\times\bm{A})\cdot\bm{B}=\int|\bm{B}|^2$ になることから従います。</p>
+    <div class="box intuit"><div class="label">直感で理解する:電池がエネルギーを2倍払う</div>
+      <p>電場のときは、外から押す仕事がそのまま場のエネルギーになりました。磁場では、電流を一定に保つ電池がさらに仕事をするので、エネルギーの勘定が「外力 $+2\times$ 電池」になり、結果として符号が逆に見えます。それでも最後の答えは電場と同じ形 $\frac{1}{2\mu_0}|\bm{B}|^2$(エネルギー密度)にまとまります。</p>
+    </div>
+    <div class="box supp"><div class="label">講義ノートにない補足:部分積分 $\int(\nabla\times\bm{B})\cdot\bm{A}=\int(\nabla\times\bm{A})\cdot\bm{B}$</div>
+      <p>公式 $\nabla\cdot(\bm{B}\times\bm{A})=\bm{A}\cdot(\nabla\times\bm{B})-\bm{B}\cdot(\nabla\times\bm{A})$(第1回の練習 1-1)を全空間で積分すると、左辺はガウスの定理で「無限遠の表面での積分」になり、場が十分速く減衰すれば 0。よって2つの積分は等しくなります。</p>
+    </div>
+    <div class="box ex"><div class="label">問 [5-3]</div>
+      <p>単位長さあたりの巻き数 $n$、断面積 $S$ の無限に長い円筒形ソレノイドに電流 $I$ が流れているとき、ソレノイドの単位長さあたりのエネルギーを求めよ。</p>
+    </div>
+    <div class="box supp"><div class="label">講義ノートにない補足:[5-3] の解答</div>
+      <p>中の磁場は一様で $B=\mu_0nI$、外は 0(第5回 例 5.1)。エネルギー密度 $\frac{B^2}{2\mu_0}$ に、長さ1の部分の体積 $S$ を掛けて
+      $$\frac{U}{\text{長さ}}=\frac{(\mu_0nI)^2}{2\mu_0}S=\frac{\mu_0n^2I^2S}{2}.$$
+      <b>確かめ</b>:単位長さあたりの自己インダクタンス $L=\mu_0n^2S$ を使った高校の式 $\frac12LI^2$ と一致します。</p>
+    </div>
+
+    <h2 id="s6">6. ヘルムホルツの定理(2):解の存在(§5.6) <span class="page-tag">講義ノート p.41–42</span></h2>
+    <p><a href="week-03.html#s3">第3回 3.</a> で後回しにしていた問題に戻ります。無限遠で十分速く 0 に減衰する3次元ベクトル場 $\bm{X}$ について、
+    $$\nabla\cdot\bm{X}=\rho\quad(2.50),\qquad\nabla\times\bm{X}=\bm{J}\quad(2.51)$$
+    ($\nabla\cdot\bm{J}=0$)を満たす $\bm{X}$ が、<b>必ず存在する</b>ことを示します(一意性は第3回で示した)。</p>
+    <p><b>方針:2つに分ける</b>。方程式は線形なので、解を足し合わせられます。</p>
+    <ul>
+      <li>$\nabla\cdot\bm{X}_1=\rho$、$\nabla\times\bm{X}_1=\bm{0}$ を満たす $\bm{X}_1$:<b>静電場の問題</b>そのもの($\rho/\varepsilon_0\to\rho$)。</li>
+      <li>$\nabla\cdot\bm{X}_2=0$、$\nabla\times\bm{X}_2=\bm{J}$ を満たす $\bm{X}_2$:<b>静磁場の問題</b>そのもの($\mu_0\bm{J}\to\bm{J}$)。</li>
+    </ul>
+    <p>どちらも、もう解き方を知っています。電位の式とベクトルポテンシャルの式 (5.27) から</p>
+    $$\bm{X}_1=-\nabla\int\frac{1}{4\pi}\frac{\rho(\bm{r}')}{|\bm{r}-\bm{r}'|}d\bm{r}',\qquad\bm{X}_2=\nabla\times\int\frac{1}{4\pi}\frac{\bm{J}(\bm{r}')}{|\bm{r}-\bm{r}'|}d\bm{r}'\qquad(5.39)(5.40)$$
+    <p>で、$\bm{X}=\bm{X}_1+\bm{X}_2$ が解です((5.41))。一意性と合わせて、これが唯一の解です。</p>
+    <div class="box thm"><div class="label">ヘルムホルツ分解 (5.42)</div>
+      <p>無限遠で十分速く減衰する、任意の3次元ベクトル場 $\bm{X}$ は
+      $$\bm{X}=-\nabla\int\frac{1}{4\pi}\frac{\nabla'\cdot\bm{X}(\bm{r}')}{|\bm{r}-\bm{r}'|}d\bm{r}'+\nabla\times\int\frac{1}{4\pi}\frac{\nabla'\times\bm{X}(\bm{r}')}{|\bm{r}-\bm{r}'|}d\bm{r}'$$
+      と、<b>回転ゼロ</b>の部分(第1項)と<b>発散ゼロ</b>の部分(第2項)の和に必ず分けられる(ヘルムホルツの定理)。</p>
+    </div>
+    <figure class="fig">
+      <svg viewBox="0 0 640 220" width="640" role="img" aria-label="ベクトル場は、湧き出し(回転ゼロ)と渦(発散ゼロ)の和に分けられる"><circle cx="120" cy="110" r="6" style="fill:var(--thm)"/><line x1="132" y1="110" x2="166" y2="110" style="stroke:var(--thm);stroke-width:2"/><polygon points="175,110 166,114.1 166,106" style="fill:var(--thm)"/><line x1="126" y1="120.4" x2="143" y2="149.8" style="stroke:var(--thm);stroke-width:2"/><polygon points="147.5,157.6 139.5,151.9 146.5,147.8" style="fill:var(--thm)"/><line x1="114" y1="120.4" x2="97" y2="149.8" style="stroke:var(--thm);stroke-width:2"/><polygon points="92.5,157.6 93.5,147.8 100.5,151.9" style="fill:var(--thm)"/><line x1="108" y1="110" x2="74" y2="110" style="stroke:var(--thm);stroke-width:2"/><polygon points="65,110 74,106 74,114.1" style="fill:var(--thm)"/><line x1="114" y1="99.6" x2="97" y2="70.2" style="stroke:var(--thm);stroke-width:2"/><polygon points="92.5,62.4 100.5,68.1 93.5,72.2" style="fill:var(--thm)"/><line x1="126" y1="99.6" x2="143" y2="70.2" style="stroke:var(--thm);stroke-width:2"/><polygon points="147.5,62.4 146.5,72.2 139.5,68.1" style="fill:var(--thm)"/><text class="tt" x="120" y="200" style="text-anchor:middle">X₁:回転ゼロ(源は ρ)</text><text class="tj" x="230" y="115">+</text><circle cx="340" cy="110" r="45" style="fill:none;stroke:var(--accent);stroke-width:2"/><line x1="340" y1="65" x2="341" y2="65" style="stroke:var(--accent);stroke-width:2.4"/><polygon points="330,65.5 340.7,60 341.2,69.9" style="fill:var(--accent)"/><line x1="340" y1="155" x2="339" y2="155" style="stroke:var(--accent);stroke-width:2.4"/><polygon points="350,154.5 339.3,160 338.8,150.1" style="fill:var(--accent)"/><circle cx="340" cy="110" r="8" style="fill:none;stroke:var(--ex);stroke-width:1.8"/><circle cx="340" cy="110" r="2.6" style="fill:var(--ex)"/><text class="ta" x="340" y="200" style="text-anchor:middle">X₂:発散ゼロ(源は J)</text><text class="tj" x="430" y="115">=</text><text class="tj" x="470" y="115">一般の X</text></svg>
+      <figcaption>図7 ヘルムホルツ分解のイメージ。どんなベクトル場 $\bm{X}$ も、湧き出しだけをもつ部分(回転ゼロ、源は $\rho=\nabla\cdot\bm{X}$)と、渦だけをもつ部分(発散ゼロ、源は $\bm{J}=\nabla\times\bm{X}$)の和に分けられます。</figcaption>
+    </figure>
+    <div class="box supp"><div class="label">講義ノートにない補足:第1項の符号と「$\nabla\cdot$」</div>
+      <p>講義ノートの (5.39)(5.41)(5.42) の第1項は「$\nabla\cdot\int\cdots$」(発散)と書かれていますが、積分の中身はスカラーなので発散はとれません。静電場 $\bm{E}=-\nabla\phi$ に合わせると、正しくは<b>勾配にマイナスを付けた</b> $-\nabla\int\cdots$ です。確かめ:$\phi_1=\int\frac{\rho}{4\pi|\bm{r}-\bm{r}'|}$ は $-\Delta\phi_1=\rho$ を満たすので、$\bm{X}_1=-\nabla\phi_1$ なら $\nabla\cdot\bm{X}_1=-\Delta\phi_1=\rho$。このノートでは直して書きました。</p>
+    </div>
+    <div class="box intuit"><div class="label">直感で理解する:流れは「噴き出し」と「渦」でできている</div>
+      <p>川の流れのようなベクトル場は、どんなに複雑でも、「蛇口から噴き出す流れ」(湧き出し、回転ゼロ)と「渦巻き」(発散ゼロ)を重ねたものとして描ける。静電場は前者だけ、静磁場は後者だけの、それぞれ特別な場合です。電磁気学の基本方程式が「発散」と「回転」で書かれている理由が、ここにあります。</p>
+    </div>
+
+    <h2 id="s7">7. 具体例で練習(講義ノートにない補足) <span class="page-tag">補足</span></h2>
+    <p>この節は、講義ノートの問 [5-2]・[5-3] とは別に、私が作った練習問題と解答です。答えは数値でも確かめました。</p>
+    <div class="box ex"><div class="label">問題 T:一様な磁場のベクトルポテンシャル</div>
+      <p>一様な磁場 $\bm{B}=(0,0,B_0)$ について、(1) $\bm{A}=\frac12\bm{B}\times\bm{r}$ が $\nabla\times\bm{A}=\bm{B}$、$\nabla\cdot\bm{A}=0$ を満たすことを確かめよ。(2) $\bm{A}'=(-B_0y,0,0)$ も同じ磁場を与えることを確かめ、$\bm{A}-\bm{A}'=\nabla\chi$ となる $\chi$ を求めよ。</p>
+    </div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>(1) $\bm{B}\times\bm{r}=(0,0,B_0)\times(x,y,z)=(-B_0y,\ B_0x,\ 0)$ なので $\bm{A}=\bigl(-\frac{B_0y}{2},\frac{B_0x}{2},0\bigr)$。$[\nabla\times\bm{A}]_z=\partial_xA_y-\partial_yA_x=\frac{B_0}{2}+\frac{B_0}{2}=B_0$、$x,y$ 成分は 0。$\nabla\cdot\bm{A}=\partial_x(-\frac{B_0y}{2})+\partial_y(\frac{B_0x}{2})=0$。</p>
+      <p>(2) $[\nabla\times\bm{A}']_z=0-\partial_y(-B_0y)=B_0$。差は $\bm{A}-\bm{A}'=\bigl(\frac{B_0y}{2},\frac{B_0x}{2},0\bigr)=\nabla\Bigl(\frac{B_0xy}{2}\Bigr)$、つまり $\chi=\frac{B_0xy}{2}$(+定数)。同じ磁場に、いくつものベクトルポテンシャルがある(ゲージ自由度)ことの具体例です。</p>
+    </div>
+    <div class="box ex"><div class="label">問題 U:同軸ケーブルの磁場のエネルギー</div>
+      <p>半径 $a$ の内側の導体(表面)に電流 $I$、半径 $b$ の外側の円筒に逆向きの電流 $I$ が流れている(同軸ケーブル)。単位長さあたりの磁場のエネルギーと、自己インダクタンスを求めよ。</p>
+    </div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>積分型アンペールの法則(半径 $r$ の円)で、$a\lt r\lt b$ では $B=\frac{\mu_0I}{2\pi r}$、それ以外では囲む電流が 0 なので $B=0$。エネルギーは、長さ1、半径 $r$〜$r+dr$ の薄い円筒(体積 $2\pi r\,dr$)に分けて
+      $$\frac{U}{\text{長さ}}=\int_a^b\frac{1}{2\mu_0}\Bigl(\frac{\mu_0I}{2\pi r}\Bigr)^2 2\pi r\,dr=\frac{\mu_0I^2}{4\pi}\log\frac{b}{a}.$$
+      $U=\frac12LI^2$ と比べて、単位長さあたりの自己インダクタンスは $L=\frac{\mu_0}{2\pi}\log\frac ba$。</p>
+    </div>
+    <div class="box ex"><div class="label">問題 V:ソレノイドにかかる磁気圧</div>
+      <p>単位長さあたり $n=1000$ 回巻きのソレノイドに $I=10$ A を流した。中の磁場と、巻線にかかる磁気圧を求めよ。</p>
+    </div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>$B=\mu_0nI=4\pi\times10^{-7}\times1000\times10\approx1.26\times10^{-2}$ T。中は $B$、外は 0 なので、巻線は内側から $\frac{B^2}{2\mu_0}=\frac{\mu_0n^2I^2}{2}\approx63$ Pa の圧力で外へ押されます(磁場の強い中から、弱い外へ)。小さく見えますが、電流を100倍にすると圧力は1万倍(約 $6\times10^5$ Pa、約6気圧)。強力な電磁石が壊れないように作るのが難しい理由です。</p>
+    </div>
+
+    <h2 id="s8">8. まとめ(この回で覚えること)</h2>
+    <ul>
+      <li><b>磁気圧</b>:$\bm{J}\times\bm{B}=\frac{1}{\mu_0}(\bm{B}\cdot\nabla)\bm{B}-\nabla\frac{|\bm{B}|^2}{2\mu_0}$。第2項は磁場の強いところから弱いところへ押す力(太陽の黒点)。</li>
+      <li><b>磁場は仕事をしない</b>。磁石がコイルを持ち上げるとき、仕事をするのは電池(永久磁石なら中の電荷の運動)。ローレンツ力は、電池の力の<b>向きを変える</b>役割。仕事は、各質点の動きで判断する。</li>
+      <li><b>ベクトルポテンシャル</b>:$\nabla\cdot\bm{B}=0$ なら $\bm{B}=\nabla\times\bm{A}$。$\bm{A}$ は $\nabla\chi$ だけの自由度をもつ(ゲージ)。$\nabla\cdot\bm{A}=0$ に選ぶと $-\Delta\bm{A}=\mu_0\bm{J}$、解は $\bm{A}=\frac{\mu_0}{4\pi}\int\frac{\bm{J}}{|\bm{r}-\bm{r}'|}d\bm{r}'$。</li>
+      <li><b>磁場のエネルギー</b>:$U=\frac12\int\bm{J}\cdot\bm{A}=\frac{1}{2\mu_0}\int|\bm{B}|^2$(ソレノイドなら単位長さあたり $\frac{\mu_0n^2I^2S}{2}=\frac12LI^2$)。</li>
+      <li><b>ヘルムホルツの定理(2)</b>:発散 $\rho$ と回転 $\bm{J}$ を与えれば、ベクトル場は必ず作れる(静電場の解 + 静磁場の解)。どんなベクトル場も、回転ゼロの部分と発散ゼロの部分の和に分けられる。</li>
+    </ul>
+
+    <h2 id="s9">9. この回のノートについてのメモ</h2>
+    <p>板書の写真ではなく、<b>文章で書かれた講義ノート(フル版)</b>の p.36〜p.42(§5.2 の磁気圧〜§5.6)をもとにまとめました。ページ番号は、講義ノートの各ページ下に印刷されている番号です。講義ノートの図のうち、写真や引用画像(黒点、オーロラなど)は載せず、必要なものは描き直しました。</p>
+    <p>講義ノートの記述で、誤り(または誤記)と判断して直した箇所、読み替えた箇所は次のとおりです。</p>
+    <ol>
+      <li><b>(5.39)(5.41)(5.42) の第1項(p.41〜42)</b>:「$\nabla\cdot\int\frac{1}{4\pi}\frac{\rho}{|\bm{r}-\bm{r}'|}$」とありますが、スカラーの発散はとれないので、静電場 $\bm{E}=-\nabla\phi$ に合わせて「$-\nabla\int\cdots$」と直しました(6. の黄色の枠)。</li>
+      <li><b>「その際を検出する実験」(p.39)</b>:「その差を検出する実験」の誤記と読みました。</li>
+      <li><b>(5.18) の公式(p.36)</b>:講義ノートは「式 (2.14) を用いた」としています。$(\nabla\times\bm{B})\times\bm{B}=(\bm{B}\cdot\nabla)\bm{B}-\nabla\frac{|\bm{B}|^2}{2}$ は、(2.14) から成分で計算すると確かめられます(1.4 の枠)。</li>
+      <li><b>回の分け方</b>:第1回中間試験のあとの授業の日程はまだ分からないので、講義ノートの分量と内容から回を分けました。日程が分かったら合わせます。</li>
+    </ol>
+
+    <nav class="pager" data-fixed>
+      <a href="week-05.html">← 第5回</a>
+      <a href="../index.html">一覧へ</a>
+      <span class="disabled">次の回 →</span>
+    </nav>
+
   </main>
+
+  <footer>© Aセメまとめノート</footer>
 </body>
 </html>
