@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>第10回 電磁場のエネルギーと運動量(ポインティングベクトル、マクスウェルの応力テンソル) | Aセメまとめノート</title>
+  <link rel="stylesheet" href="../../assets/style.css">
+  <script defer src="../../assets/nav.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],macros:{'\\R':'\\mathbb{R}','\\bm':'\\boldsymbol{#1}','\\rot':'\\operatorname{rot}','\\grad':'\\operatorname{grad}','\\dvg':'\\operatorname{div}','\\pd':'\\frac{\\partial #1}{\\partial #2}'}});window.__navReady&&window.__navReady()"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="inner">
+      <a class="site-title" href="../../index.html">Aセメまとめノート</a>
+      <span class="links"><a href="../index.html">電磁気学</a><a href="../basics.html">基礎のまとめ</a><a href="../../calc/index.html">微積</a><a href="../../linalg/index.html">線形代数</a><a href="../../structchem/index.html">構造化学</a><a href="../../mech/index.html">力学A</a><a href="../../thermo/index.html">熱力学</a></span>
+    </div>
+  </header>
+
+  <main class="note">
+    <h1>第10回:電磁場のエネルギーと運動量(ポインティングベクトル、マクスウェルの応力テンソル)</h1>
+    <div class="meta">電磁気学(東京大学 教養学部 秋学期)／授業日は未定(講義ノートの分量から分けた予定)／講義ノート §9(p.70〜p.74)</div>
+
+    <nav class="toc">
+      <div class="toc-title">目次</div>
+      <ol start="0">
+        <li><a href="#s0">この回の全体像</a></li>
+        <li><a href="#s1">準備:基礎の確認</a>
+          <div class="sub">電場と磁場のエネルギー(第4回・第6回)／マクスウェル方程式(第9回)／運動量と保存則(力学)／ベクトルの公式／相対論の運動量とエネルギー(予告)</div></li>
+        <li><a href="#s2">エネルギー保存則とポインティングベクトル(§9.1)</a></li>
+        <li><a href="#s3">運動量保存則とマクスウェルの応力テンソル(§9.2)</a></li>
+        <li><a href="#s4">補論:隠れた運動量(§9.3)</a></li>
+        <li><a href="#s5">具体例で練習(講義ノートにない補足)</a></li>
+        <li><a href="#s6">まとめ(この回で覚えること)</a></li>
+        <li><a href="#s7">この回のノートについてのメモ</a></li>
+      </ol>
+    </nav>
+
+    <h2 id="s0">0. この回の全体像 <span class="page-tag">講義ノート p.70</span></h2>
+    <p>力学では、エネルギー・運動量・角運動量の保存則を学びました。この回は、マクスウェル方程式から出発して、これらの保存則が電磁気学でどう現れるかを見ます。結論は、<b>物質だけでは保存則は閉じず、電磁場自身もエネルギーと運動量をもち、それが流れる</b>、ということです。</p>
+    <div class="box thm"><div class="label">この回のゴール</div>
+      <p>① エネルギー密度 $u=\frac{\varepsilon_0}{2}|\bm{E}|^2+\frac{1}{2\mu_0}|\bm{B}|^2$ と、エネルギーの流れ(ポインティングベクトル)$\bm{S}=\frac{1}{\mu_0}\bm{E}\times\bm{B}$。保存則 $\frac{\partial u}{\partial t}=-\nabla\cdot\bm{S}-\bm{E}\cdot\bm{J}$。<br>
+      ② 電磁場の運動量密度 $\varepsilon_0\mu_0\bm{S}=\varepsilon_0\bm{E}\times\bm{B}$ と、運動量の流れ(マクスウェルの応力テンソル $T$)。<br>
+      ③ 粒子だけを見ると作用反作用が破れて見えるが、電磁場の運動量まで入れると保存則が回復する。<br>
+      ④ (補論)止まっている物体が運動量をもつ「隠れた運動量」。</p>
+    </div>
+    <div class="box note-box"><div class="label">この回の日程について</div>
+      <p>講義ノートの分量と内容から分けた予定です。日程が分かったら合わせます。</p>
+    </div>
+    <p>以下では、先に必要な基礎を復習してから、講義ノートの順に進みます。紫色の枠は「基礎の復習」、黄色の枠は「講義ノートにないが、理解を助けるために私が補った部分」、緑の枠は「直感で理解するための説明」です。</p>
+
+    <h2 id="s1">1. 準備:基礎の確認</h2>
+    <p>この回で使う道具と、前の回までの結果を並べます。</p>
+
+    <h3 id="w-energy">1.1 電場と磁場のエネルギー(第4回・第6回)</h3>
+    <div class="box basic">
+      <div class="label">基礎:$U=\frac{\varepsilon_0}{2}\int|\bm{E}|^2$、$U=\frac{1}{2\mu_0}\int|\bm{B}|^2$ <a class="xref-link" href="week-06.html#s5" data-xref>→ 第6回 5.</a></div>
+      <p>電荷の集まりを作るエネルギーは $\frac{\varepsilon_0}{2}\int|\bm{E}|^2d\bm{r}$(第4回 3.4)、電流の集まりを作るエネルギーは $\frac{1}{2\mu_0}\int|\bm{B}|^2d\bm{r}$(第6回 5.)。どちらも「場のある場所に、エネルギーが密度 $\frac{\varepsilon_0}{2}|\bm{E}|^2$、$\frac{1}{2\mu_0}|\bm{B}|^2$ でたまっている」と読める。</p>
+      <p><b>直感:</b> エネルギーは電荷や電流ではなく、まわりの空間(場)にたくわえられている。</p>
+    </div>
+
+    <h3 id="w-maxwell">1.2 マクスウェル方程式(第9回)</h3>
+    <div class="box basic">
+      <div class="label">基礎:4つの式 <a class="xref-link" href="week-09.html#s5" data-xref>→ 第9回 5.</a></div>
+      <p>$\nabla\cdot\bm{E}=\rho/\varepsilon_0$、$\nabla\times\bm{E}=-\frac{\partial\bm{B}}{\partial t}$、$\nabla\cdot\bm{B}=0$、$\nabla\times\bm{B}=\mu_0\bm{J}+\mu_0\varepsilon_0\frac{\partial\bm{E}}{\partial t}$。力は $\bm{f}=\rho\bm{E}+\bm{J}\times\bm{B}$(単位体積あたり)。$\varepsilon_0\mu_0=1/c^2$($c$:光の速さ)。</p>
+      <p><b>直感:</b> この回は、この4つの式を「保存則の形」に書き直すだけ。</p>
+    </div>
+
+    <h3 id="w-mom">1.3 運動量と保存則(力学)</h3>
+    <div class="box basic">
+      <div class="label">基礎:$\frac{d\bm{p}}{dt}=\bm{F}$、作用反作用、局所的な保存則 <a class="xref-link" href="../basics.html#momentum" data-xref>→ 詳しい解説</a></div>
+      <p>運動量の変化は力。作用反作用の法則があれば、内力は打ち消し合い、運動量の合計は保存する。量の密度 $\rho_q$ と流れ $\bm{j}_q$ について、局所的な保存則は $\frac{\partial\rho_q}{\partial t}=-\nabla\cdot\bm{j}_q+(\text{外から加えた量})$(電荷の連続の式の一般形)。積分すれば「領域の中の量の増え方 = 表面から流れ込む量 + 外から加えた量」。</p>
+      <p><b>直感:</b> 保存する量は「お金」。増えたなら、流れ込んだか、外から入れたか。</p>
+    </div>
+
+    <h3 id="w-vecid">1.4 ベクトルの公式</h3>
+    <div class="box basic">
+      <div class="label">基礎:$\nabla\cdot(\bm{E}\times\bm{B})$ と $(\nabla\times\bm{A})\times\bm{A}$ <a class="xref-link" href="week-01.html#s5-5" data-xref>→ 第1回 5.5</a></div>
+      <ul>
+        <li>$\nabla\cdot(\bm{E}\times\bm{B})=\bm{B}\cdot(\nabla\times\bm{E})-\bm{E}\cdot(\nabla\times\bm{B})$(第1回 練習 1-1)。</li>
+        <li>$(\nabla\times\bm{A})\times\bm{A}=(\bm{A}\cdot\nabla)\bm{A}-\frac12\nabla|\bm{A}|^2$(第6回の磁気圧で使った)。</li>
+        <li>積の微分:$\frac{\partial}{\partial t}(\bm{E}\times\bm{B})=\frac{\partial\bm{E}}{\partial t}\times\bm{B}+\bm{E}\times\frac{\partial\bm{B}}{\partial t}$。</li>
+      </ul>
+      <p><b>直感:</b> どれも $\varepsilon\varepsilon$ の公式で成分ごとに確かめられる。</p>
+    </div>
+
+    <h3 id="w-gamma">1.5 相対論の運動量とエネルギー(予告)</h3>
+    <div class="box basic">
+      <div class="label">基礎:$\bm{p}=\gamma m\bm{v}$、$E=\gamma mc^2$、$\gamma=1/\sqrt{1-v^2/c^2}$</div>
+      <p>速さが光の速さ $c$ に近いと、運動量とエネルギーは $\bm{p}=\gamma m\bm{v}$、$E=\gamma mc^2$ になる($\gamma\ge1$。$v\ll c$ では $\gamma\approx1+\frac{v^2}{2c^2}$ で、$E\approx mc^2+\frac12mv^2$)。詳しくは講義の最後の特殊相対論(§13)。この回では、補論の「隠れた運動量」で使うだけ。</p>
+      <p><b>直感:</b> 速い粒子ほど、同じ速さの差でも運動量が大きく増える(加速しにくくなる)。</p>
+    </div>
+
+    <h2 id="s2">2. エネルギー保存則とポインティングベクトル(§9.1) <span class="page-tag">講義ノート p.70–71</span></h2>
+    <p>電場と磁場のエネルギー密度を足したものが、電磁場のエネルギー密度です:
+    $$u=\frac{\varepsilon_0}{2}|\bm{E}|^2+\frac{1}{2\mu_0}|\bm{B}|^2\quad(9.1),\qquad U=\int_Vu\,d\bm{r}\quad(9.2).$$
+    ある場所のエネルギーが変わる原因は、① 外から電荷などを動かして仕事をする、② となりの場所との間でエネルギーが出入りする、の2つが考えられます。$u$ を時間で微分して、マクスウェル方程式を代入すると</p>
+    $$\frac{\partial u}{\partial t}=\varepsilon_0\bm{E}\cdot\frac{\partial\bm{E}}{\partial t}+\frac{1}{\mu_0}\bm{B}\cdot\frac{\partial\bm{B}}{\partial t}=\bm{E}\cdot\Bigl(\frac{1}{\mu_0}\nabla\times\bm{B}-\bm{J}\Bigr)-\frac{1}{\mu_0}\bm{B}\cdot(\nabla\times\bm{E})\qquad(9.3)$$
+    <ul>
+      <li>$-\bm{E}\cdot\bm{J}$:$\bm{J}=\rho\bm{v}$ なので、これは「電荷を電場に逆らって動かすのに、外からする単位時間あたりの仕事」。</li>
+      <li>残りの項は、1.4 の公式で $\frac{1}{\mu_0}[\bm{E}\cdot(\nabla\times\bm{B})-\bm{B}\cdot(\nabla\times\bm{E})]=-\frac{1}{\mu_0}\nabla\cdot(\bm{E}\times\bm{B})$ (9.4)。</li>
+    </ul>
+    <div class="box thm"><div class="label">ポインティングベクトルとエネルギー保存則</div>
+      <p>$$\bm{S}=\frac{1}{\mu_0}\bm{E}\times\bm{B}\quad(9.5),\qquad\frac{\partial u}{\partial t}=-\nabla\cdot\bm{S}-\bm{E}\cdot\bm{J}\quad(9.6)$$
+      領域で積分すると $\frac{dU}{dt}=-\oint_{\partial V}\bm{S}\cdot d\bm{S}-\int_V\bm{E}\cdot\bm{J}\,d\bm{r}$ (9.7)。$\bm{S}$ は「電磁場のエネルギーの流れ(単位時間・単位面積あたり)」。</p>
+    </div>
+    <p>$\bm{E}\cdot\bm{J}$ は物質(電荷)のエネルギーの増え方なので、物質のエネルギー密度を $u_{\text{matter}}$ とすると $\frac{\partial}{\partial t}(u+u_{\text{matter}})=-\nabla\cdot\bm{S}$ (9.8)。エネルギー保存則は、物質だけでは閉じず、電磁場のエネルギーとその流れまで考えて、初めて成り立ちます。</p>
+    <figure class="fig">
+      <svg viewBox="0 0 640 230" width="640" role="img" aria-label="抵抗に流れ込むポインティングベクトル"><rect x="120" y="90" width="320" height="50" rx="6" style="fill:var(--thm);opacity:.15;stroke:var(--thm);stroke-width:1.8"/><line x1="180" y1="115" x2="251" y2="115" style="stroke:var(--thm);stroke-width:2.6"/><polygon points="260,115 251,119.1 251,111" style="fill:var(--thm)"/><text class="tt" x="190" y="108">電流 I</text><line x1="320" y1="160" x2="391" y2="160" style="stroke:var(--ex);stroke-width:2.2"/><polygon points="400,160 391,164.1 391,156" style="fill:var(--ex)"/><text class="tj" x="330" y="180">E(導線に沿う)</text><ellipse cx="280" cy="115" rx="18" ry="40" style="fill:none;stroke:var(--accent);stroke-width:1.8"/><text class="ta" x="305" y="70">B(導線を回る)</text><line x1="160" y1="30" x2="160" y2="73" style="stroke:var(--thm);stroke-width:2.2"/><polygon points="160,82 156,73 164.1,73" style="fill:var(--thm)"/><line x1="160" y1="205" x2="160" y2="157" style="stroke:var(--thm);stroke-width:2.2"/><polygon points="160,148 164.1,157 156,157" style="fill:var(--thm)"/><line x1="240" y1="30" x2="240" y2="73" style="stroke:var(--thm);stroke-width:2.2"/><polygon points="240,82 236,73 244.1,73" style="fill:var(--thm)"/><line x1="240" y1="205" x2="240" y2="157" style="stroke:var(--thm);stroke-width:2.2"/><polygon points="240,148 244.1,157 236,157" style="fill:var(--thm)"/><line x1="360" y1="30" x2="360" y2="73" style="stroke:var(--thm);stroke-width:2.2"/><polygon points="360,82 356,73 364.1,73" style="fill:var(--thm)"/><line x1="360" y1="205" x2="360" y2="157" style="stroke:var(--thm);stroke-width:2.2"/><polygon points="360,148 364.1,157 356,157" style="fill:var(--thm)"/><text class="tt" x="470" y="60">S = E × B / μ₀</text><text class="tj" x="470" y="85">(外から導線へ流れ込む)</text><text class="tj" x="470" y="120">流れ込む合計 = VI</text><text class="tj" x="470" y="145">= ジュール熱</text></svg>
+      <figcaption>図1 電流の流れている抵抗のまわりのポインティングベクトル(問題 AC)。エネルギーは導線の中を流れてくるのではなく、まわりの空間から導線の側面に流れ込んで、熱になります。</figcaption>
+    </figure>
+    <div class="box intuit"><div class="label">直感で理解する:エネルギーは「導線の外」を流れる</div>
+      <p>電池から電球へのエネルギーは、導線の中の電子が運んでいるのではありません(電子はとても遅かった、第8回)。導線のまわりの電場と磁場が作るポインティングベクトルに乗って、空間を流れ、電球の側面から流れ込みます(図1、問題 AC)。</p>
+    </div>
+    <div class="box note-box"><div class="label">ポインティングベクトルの「不定性」(講義ノート p.71)</div>
+      <p>静電磁場でも $\bm{S}\ne\bm{0}$ になることがあります(発散が全域で 0 なら、エネルギーは変化しない)。それなら、発散ゼロの場を足して $\bm{S}$ を「きれいに」してもよさそうですが、次の節で見るように、$\bm{S}$ は電磁場の<b>運動量</b>と直接結びついているので、(9.5) の形から変えてはいけません。名前の Poynting は、発見者ポインティングにちなむもので、「指し示す(pointing)」ではありません。</p>
+    </div>
+
+    <h2 id="s3">3. 運動量保存則とマクスウェルの応力テンソル(§9.2) <span class="page-tag">講義ノート p.71–72</span></h2>
+    <p>電磁場の運動量がどう表されるかは、まだ知りません。物質の運動量の変化から出発して、保存則が成り立つように電磁場の運動量を決めます。物質にはたらく力(単位体積あたり)は
+    $$\frac{d\bm{p}_{\text{mech}}}{dt}=\rho\bm{E}+\bm{J}\times\bm{B}\qquad(9.9).$$
+    右辺の $\rho$ と $\bm{J}$ を、マクスウェル方程式($\rho=\varepsilon_0\nabla\cdot\bm{E}$、$\bm{J}=\frac{1}{\mu_0}\nabla\times\bm{B}-\varepsilon_0\frac{\partial\bm{E}}{\partial t}$)で電磁場だけの式に書き換えます。時間微分の項を $\frac{\partial}{\partial t}(\bm{E}\times\bm{B})$ にまとめ、ファラデーの法則を使い、0 になる項 $\frac{1}{\mu_0}(\nabla\cdot\bm{B})\bm{B}$ を足すと、電場と磁場が対等な形になります (9.10):</p>
+    $$\frac{d\bm{p}_{\text{mech}}}{dt}=\varepsilon_0\Bigl[(\nabla\cdot\bm{E})\bm{E}+(\bm{E}\cdot\nabla)\bm{E}-\tfrac12\nabla|\bm{E}|^2\Bigr]+\frac{1}{\mu_0}\Bigl[(\nabla\cdot\bm{B})\bm{B}+(\bm{B}\cdot\nabla)\bm{B}-\tfrac12\nabla|\bm{B}|^2\Bigr]-\varepsilon_0\mu_0\frac{\partial\bm{S}}{\partial t}\qquad(9.11)$$
+    <h3 id="s3-1">3.1 発散の形にまとめる:応力テンソル</h3>
+    <p>各かっこの中の第 $i$ 成分は、ベクトル場の発散の形に書けます:
+    $$[(\nabla\cdot\bm{X})\bm{X}+(\bm{X}\cdot\nabla)\bm{X}]_i=\sum_j\partial_j(X_jX_i),\qquad-\tfrac12\partial_i|\bm{X}|^2=-\sum_j\partial_j\bigl(\tfrac12\delta_{ij}|\bm{X}|^2\bigr)\qquad(9.12)(9.13).$$
+    $3\times3$ 行列 $T$ の「発散」を $(\nabla\cdot T)_i:=\sum_j\partial_jT_{ji}$ (9.14) と定義し、</p>
+    <div class="box thm"><div class="label">マクスウェルの応力テンソル (9.15) と運動量保存則 (9.16)</div>
+      <p>$$T=\varepsilon_0\Bigl(\bm{E}\bm{E}^{\top}-\tfrac12I|\bm{E}|^2\Bigr)+\frac{1}{\mu_0}\Bigl(\bm{B}\bm{B}^{\top}-\tfrac12I|\bm{B}|^2\Bigr),\qquad T_{ij}=\varepsilon_0\Bigl(E_iE_j-\tfrac12\delta_{ij}|\bm{E}|^2\Bigr)+\frac{1}{\mu_0}\Bigl(B_iB_j-\tfrac12\delta_{ij}|\bm{B}|^2\Bigr)$$
+      $$\frac{d\bm{p}_{\text{mech}}}{dt}=\nabla\cdot T-\varepsilon_0\mu_0\frac{\partial\bm{S}}{\partial t}$$</p>
+    </div>
+    <figure class="fig">
+      <svg viewBox="0 0 640 200" width="640" role="img" aria-label="応力テンソル:面にはたらく力の成分"><rect x="140" y="50" width="140" height="110" style="fill:var(--accent);opacity:.08;stroke:var(--accent);stroke-width:1.8"/><line x1="280" y1="105" x2="331" y2="105" style="stroke:var(--thm);stroke-width:2.6"/><polygon points="340,105 331,109.1 331,101" style="fill:var(--thm)"/><text class="tt" x="345" y="100">垂直に押す(圧力:T_ii)</text><line x1="280" y1="105" x2="280" y2="64" style="stroke:var(--ex);stroke-width:2.6"/><polygon points="280,55 284.1,64 276,64" style="fill:var(--ex)"/><text class="tj" x="290" y="50">面に沿う(ずり応力:T_ij)</text><text class="tm" x="150" y="185">法線が j 方向の面にはたらく、i 方向の力 = T_ij</text></svg>
+      <figcaption>図2 応力テンソル $T_{ij}$ は、法線が $j$ 方向の面に、$i$ 方向にはたらく力(単位面積あたり)。$i=j$ は面を垂直に押す圧力、$i\ne j$ は面に沿う「ずり応力(剪断応力)」です。</figcaption>
+    </figure>
+    <p>領域 $V$ で積分すると、$V$ の中の物質にはたらく全電磁力は
+    $$\bm{F}=\oint_{\partial V}T\cdot d\bm{S}-\varepsilon_0\mu_0\frac{d}{dt}\int_V\bm{S}\,d\bm{r}\qquad(9.17).$$
+    ここから、$\varepsilon_0\mu_0\bm{S}=\varepsilon_0\bm{E}\times\bm{B}$ が<b>電磁場の運動量密度</b>、$T$ が<b>運動量の流れ</b>(表面を通して受け渡される力)だと分かります。</p>
+    <div class="box supp"><div class="label">講義ノートにない補足:応力テンソルで、コンデンサーの極板の力を求める</div>
+      <p>平行板コンデンサーの極板の間に一様な電場 $\bm{E}=(0,0,E)$ があり、外は 0。正の極板を、その表面を囲む面で包んで (9.17) を使います(静的なので第2項は 0)。極板の間側の面(法線 $-z$)では $T_{zz}=\varepsilon_0(E^2-\frac12E^2)=\frac{\varepsilon_0}{2}E^2$ なので、力は $T\cdot d\bm{S}$ の $z$ 成分 $=-\frac{\varepsilon_0}{2}E^2\times$ 面積。極板は単位面積あたり $\frac{\varepsilon_0}{2}E^2$ の力で、もう一方の極板に引かれます。これは第5回の「表面の電荷には $E/2$」から求めた力と同じです。</p>
+    </div>
+    <h3 id="s3-2">3.2 粒子だけでは作用反作用が破れる</h3>
+    <p>2つの電荷 $q$ の粒子1、2が、時刻 $t$ にそれぞれ $(vt,0,0)$、$(0,vt,0)$ にいるように動いているとします。粒子1の磁場は $xy$ 面内では $z$ 方向なので、粒子2が受けるローレンツ力は $x$ 方向。粒子2の磁場による、粒子1が受ける力は $y$ 方向。<b>向かい合っていない</b>ので、作用反作用の法則も、粒子だけの運動量保存も成り立ちません。電磁場の運動量まで考えれば、保存則は回復します。</p>
+    <figure class="fig">
+      <svg viewBox="0 0 640 220" width="640" role="img" aria-label="直交して動く2つの荷電粒子にはたらく力は、作用反作用になっていない"><line x1="60" y1="180" x2="360" y2="180" style="stroke:var(--muted);stroke-width:1.2"/><line x1="100" y1="210" x2="100" y2="20" style="stroke:var(--muted);stroke-width:1.2"/><text class="t" x="365" y="185">x</text><text class="t" x="106" y="25">y</text><circle cx="250" cy="180" r="7" style="fill:var(--thm)"/><line x1="250" y1="180" x2="291" y2="180" style="stroke:var(--thm);stroke-width:2.4"/><polygon points="300,180 291,184.1 291,176" style="fill:var(--thm)"/><text class="tt" x="240" y="205">粒子1(速度 +x)</text><circle cx="100" cy="90" r="7" style="fill:var(--accent)"/><line x1="100" y1="90" x2="100" y2="59" style="stroke:var(--accent);stroke-width:2.4"/><polygon points="100,50 104.1,59 96,59" style="fill:var(--accent)"/><text class="ta" x="110" y="50">粒子2(速度 +y)</text><line x1="100" y1="90" x2="131" y2="90" style="stroke:var(--ex);stroke-width:2.4"/><polygon points="140,90 131,94.1 131,86" style="fill:var(--ex)"/><text class="tj" x="145" y="95">2 が受ける力(x 方向)</text><line x1="250" y1="180" x2="250" y2="149" style="stroke:var(--ex);stroke-width:2.4"/><polygon points="250,140 254.1,149 246,149" style="fill:var(--ex)"/><text class="tj" x="258" y="140">1 が受ける力(y 方向)</text><text class="tj" x="390" y="90">磁気的な力は向かい合っていない</text><text class="tj" x="390" y="115">→ 粒子だけでは運動量が保存しない</text><text class="ta" x="390" y="140">→ 電磁場の運動量が必要</text></svg>
+      <figcaption>図3 講義ノートの例。$x$ 軸上を動く粒子1と、$y$ 軸上を動く粒子2。互いの磁場から受けるローレンツ力は、粒子2には $x$ 方向、粒子1には $y$ 方向で、作用反作用の形になっていません(電気的な力は向かい合っている)。</figcaption>
+    </figure>
+    <div class="box ex"><div class="label">問 [9-1]</div>
+      <p>電荷 $q$ の粒子が、位置 $(a,0,0)$ で速度 $(v,0,0)$ で動いている。準定常近似の範囲で、この粒子が点 $(x,y,0)$ に作るポインティングベクトルを求めよ。</p>
+    </div>
+    <div class="box supp"><div class="label">講義ノートにない補足:[9-1] の解答</div>
+      <p>粒子から観測点へのベクトルを $\bm{d}=(x-a,y,0)$、$D=|\bm{d}|$ とする。準定常近似では、電場はクーロンの法則 $\bm{E}=\frac{q\bm{d}}{4\pi\varepsilon_0D^3}$、磁場はビオ・サバールの法則(電流 $q\bm{v}$)で $\bm{B}=\frac{\mu_0q}{4\pi}\frac{\bm{v}\times\bm{d}}{D^3}=\frac{\mu_0qvy}{4\pi D^3}\bm{e}_z$。$\bm{d}\times\bm{e}_z=(y,\ -(x-a),\ 0)$ なので
+      $$\bm{S}=\frac{1}{\mu_0}\bm{E}\times\bm{B}=\frac{q^2vy}{16\pi^2\varepsilon_0D^6}\bigl(y,\ a-x,\ 0\bigr),\qquad D^2=(x-a)^2+y^2.$$
+      数値計算でも確かめました。エネルギーは、粒子のまわりを回るように流れています(粒子と一緒に、電場のエネルギーが運ばれていく)。</p>
+    </div>
+
+    <h2 id="s4">4. 補論:隠れた運動量(§9.3) <span class="page-tag">講義ノート p.72–74</span></h2>
+    <p>電磁場の運動量保存則からは、「<b>隠れた運動量</b>」という、直感に反する量が出てきます(1960年代に発見)。これは相対論の効果で、<b>止まっている物体が運動量をもつ</b>、というものです。</p>
+    <h3 id="s4-1">4.1 静電磁場の運動量</h3>
+    <p>静電磁場では $\bm{E}=-\nabla\phi$ なので、電磁場の運動量は、部分積分(表面の項は、遠くで $\phi$ や $\bm{B}$ が十分速く 0 になれば消える)とアンペールの法則で
+    $$\bm{P}_{\text{EM}}=\varepsilon_0\int\bm{E}\times\bm{B}\,d\bm{r}=\varepsilon_0\int\phi\,(\nabla\times\bm{B})\,d\bm{r}=\frac{1}{c^2}\int\phi\bm{J}\,d\bm{r}\qquad(9.18)(9.19).$$</p>
+    <h3 id="s4-2">4.2 一様な電場の中の電流ループ</h3>
+    <p>空間全体に $+y$ 方向の一様な電場 $E$ があり(大きなコンデンサーの間)、$xy$ 面内に一辺 $l$ の正方形のコイル(辺は $x$、$y$ 軸に平行、中心は原点)があって、電流 $I$ が上から見て時計回りに流れているとします。$\phi=-Ey$ なので、$\bm{P}_{\text{EM}}=\frac{I}{c^2}\oint\phi\,d\bm{l}$ を辺ごとに計算すると、$y$ 方向の辺の寄与は打ち消し合い、上下の辺から
+    $$\bm{P}_{\text{EM}}=-\frac{l^2EI}{c^2}\bm{e}_x.$$
+    静的な状態なのに、電磁場全体が運動量をもっています。系全体(物質 + 電磁場)の運動量が 0 でないと、重心が動いてしまい、静的という条件に反します。だから<b>物質(コイル)が逆向きの運動量</b> $\bm{P}_{\text{matter}}=+\frac{l^2EI}{c^2}\bm{e}_x$ をもっているはずです。これが隠れた運動量です。</p>
+    <figure class="fig">
+      <svg viewBox="0 0 640 230" width="640" role="img" aria-label="一様な電場の中の電流ループと、隠れた運動量"><line x1="70" y1="215" x2="70" y2="182" style="stroke:var(--accent);stroke-width:1.6"/><polygon points="70,175 73.2,182 66.9,182" style="fill:var(--accent)"/><line x1="190" y1="215" x2="190" y2="182" style="stroke:var(--accent);stroke-width:1.6"/><polygon points="190,175 193.2,182 186.9,182" style="fill:var(--accent)"/><line x1="310" y1="215" x2="310" y2="182" style="stroke:var(--accent);stroke-width:1.6"/><polygon points="310,175 313.2,182 306.9,182" style="fill:var(--accent)"/><line x1="430" y1="215" x2="430" y2="182" style="stroke:var(--accent);stroke-width:1.6"/><polygon points="430,175 433.2,182 426.9,182" style="fill:var(--accent)"/><line x1="550" y1="215" x2="550" y2="182" style="stroke:var(--accent);stroke-width:1.6"/><polygon points="550,175 553.2,182 546.9,182" style="fill:var(--accent)"/><text class="ta" x="560" y="215">E(+y)</text><rect x="200" y="50" width="200" height="120" style="fill:none;stroke:var(--thm);stroke-width:2.6"/><line x1="270" y1="50" x2="321" y2="50" style="stroke:var(--thm);stroke-width:2.6"/><polygon points="330,50 321,54.1 321,46" style="fill:var(--thm)"/><line x1="330" y1="170" x2="279" y2="170" style="stroke:var(--thm);stroke-width:2.6"/><polygon points="270,170 279,166 279,174.1" style="fill:var(--thm)"/><line x1="400" y1="90" x2="400" y2="121" style="stroke:var(--thm);stroke-width:2.6"/><polygon points="400,130 396,121 404.1,121" style="fill:var(--thm)"/><line x1="200" y1="130" x2="200" y2="99" style="stroke:var(--thm);stroke-width:2.6"/><polygon points="200,90 204.1,99 196,99" style="fill:var(--thm)"/><text class="tt" x="250" y="40">上の辺:粒子が速い(γ₊)</text><text class="tt" x="250" y="195">下の辺:粒子が遅い(γ₋)</text><text class="tj" x="420" y="80">左の辺を上るとき加速、</text><text class="tj" x="420" y="100">右の辺を下るとき減速</text><text class="tj" x="420" y="140">→ 物質が +x 向きの運動量</text></svg>
+      <figcaption>図4 隠れた運動量(講義ノート p.73)。上から見て時計回りの電流が、$+y$ 向きの一様な電場の中にある。正電荷は左の辺を上るときに加速されるので、上の辺の粒子のほうが速い。相対論では運動量が $\gamma m\bm{v}$ なので、上下の辺の運動量が打ち消し合わず、物質は $+x$ 向きの運動量をもつ。電磁場の運動量($-x$ 向き)とちょうど打ち消し合います。</figcaption>
+    </figure>
+    <h3 id="s4-3">4.3 なぜ物質が運動量をもつのか</h3>
+    <p>相対論では運動量は $\gamma m\bm{v}$ です(1.5 の枠)。コイルの中の正電荷は、左の辺を上る($+y$)ときに電場で加速され、右の辺を下るときに減速されます。だから上の辺($+x$ 向きに流れる)の粒子は、下の辺($-x$ 向き)の粒子より速い(そのかわり上の辺の粒子はまばらで、電流はどこでも $I$)。非相対論なら、上下の辺の運動量はどちらも大きさ $\frac{mIl}{q}$ で打ち消し合いますが、相対論ではそれぞれ $\gamma_\pm$ 倍になり、差
+    $$\Delta P=\frac{mIl}{q}(\gamma_+-\gamma_-)$$
+    が残ります。上下の辺の粒子のエネルギーの差は、電場がする仕事 $qEl$ なので $(\gamma_+-\gamma_-)mc^2=qEl$ (9.23)。代入すると $\Delta P=\frac{mIl}{q}\cdot\frac{qEl}{mc^2}=\frac{l^2EI}{c^2}$($+x$ 向き)で、電磁場の運動量とちょうど打ち消し合います。</p>
+    <div class="box supp"><div class="label">講義ノートにない補足:符号について</div>
+      <p>講義ノートの (9.20)(9.21)(9.24) とは、符号がすべて逆になっています。上の条件(電場 $+y$、上から見て時計回り)で $\frac{I}{c^2}\oint\phi\,d\bm{l}$ を数値計算すると $-\frac{l^2EI}{c^2}\bm{e}_x$ になり、物質の運動量は図4のとおり $+x$ 向きです。どちらにしても、電磁場の運動量と物質の運動量がちょうど打ち消し合う、という結論は同じです。</p>
+    </div>
+    <div class="box intuit"><div class="label">直感で理解する</div>
+      <p>隠れた運動量は $c\to\infty$(非相対論)で 0 になる、とても小さな量で、ふつうは無視してかまいません。それでも、保存則が精密に成り立つことを確かめたいとき、電磁場の運動量と組になって、全体の運動量を 0 に保つ役目をしています。コイルが実際に動くわけではありません。</p>
+    </div>
+
+    <h2 id="s5">5. 具体例で練習(講義ノートにない補足) <span class="page-tag">補足</span></h2>
+    <p>この節は、講義ノートの問とは別に、私が作った練習問題と解答です。</p>
+    <div class="box ex"><div class="label">問題 AC:抵抗に流れ込むエネルギー</div>
+      <p>半径 $a$、長さ $L$ の円柱形の抵抗に電流 $I$ が流れ、両端の電位差が $V$ である。抵抗の側面でのポインティングベクトルを求め、側面全体から流れ込むエネルギーが、ジュール熱 $VI$ に等しいことを確かめよ。</p>
+    </div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>抵抗の中の電場は軸に沿って $E=V/L$(側面でも、接線成分は連続なので同じ)。側面の磁場は、アンペールの法則で $B=\frac{\mu_0I}{2\pi a}$(軸のまわりを回る向き)。電場(軸方向)と磁場(回る向き)は垂直で、$\bm{E}\times\bm{B}$ は<b>軸に向かう内向き</b>。大きさは
+      $$S=\frac{EB}{\mu_0}=\frac{V}{L}\cdot\frac{I}{2\pi a}.$$
+      側面の面積 $2\pi aL$ を掛けると $S\cdot2\pi aL=VI$。ちょうどジュール熱です。</p>
+    </div>
+    <div class="box ex"><div class="label">問題 AD:ソレノイドの中で電場がする仕事</div>
+      <p>単位長さあたりの巻き数 $n$、半径 $R$ の長いソレノイドの電流を $I(t)$ と増やしていく。ソレノイドの内側の表面($r=R$)でのポインティングベクトルを求め、ソレノイドの中の磁場のエネルギーの増え方と一致することを確かめよ。</p>
+    </div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>中の磁場 $B=\mu_0nI$。ファラデーの法則で、半径 $R$ の円に沿った電場は $2\pi RE=\pi R^2\frac{dB}{dt}$、$E=\frac{R}{2}\mu_0n\frac{dI}{dt}$(回る向き)。$\bm{E}\times\bm{B}$ は内向きで、大きさ $S=\frac{EB}{\mu_0}=\frac{R}{2}\mu_0n^2I\frac{dI}{dt}$。単位長さあたり、側面 $2\pi R$ から流れ込むのは $S\cdot2\pi R=\pi R^2\mu_0n^2I\frac{dI}{dt}$。一方、中の磁場のエネルギー(単位長さあたり)は $\frac{B^2}{2\mu_0}\pi R^2=\frac{\mu_0n^2I^2}{2}\pi R^2$ で、その時間微分は $\pi R^2\mu_0n^2I\frac{dI}{dt}$。一致します。</p>
+    </div>
+
+    <h2 id="s6">6. まとめ(この回で覚えること)</h2>
+    <ul>
+      <li><b>エネルギー</b>:密度 $u=\frac{\varepsilon_0}{2}|\bm{E}|^2+\frac{1}{2\mu_0}|\bm{B}|^2$、流れ $\bm{S}=\frac{1}{\mu_0}\bm{E}\times\bm{B}$(ポインティングベクトル)、保存則 $\partial_tu=-\nabla\cdot\bm{S}-\bm{E}\cdot\bm{J}$。エネルギーは場の中を流れる(抵抗には側面から流れ込む)。</li>
+      <li><b>運動量</b>:電磁場の運動量密度 $\varepsilon_0\bm{E}\times\bm{B}=\bm{S}/c^2$、運動量の流れはマクスウェルの応力テンソル $T_{ij}=\varepsilon_0(E_iE_j-\frac12\delta_{ij}E^2)+\frac{1}{\mu_0}(B_iB_j-\frac12\delta_{ij}B^2)$。$\frac{d\bm{p}_{\text{mech}}}{dt}=\nabla\cdot T-\partial_t(\bm{S}/c^2)$。</li>
+      <li>粒子だけを見ると作用反作用が破れて見える。電磁場の運動量まで入れると保存則が回復する。</li>
+      <li><b>(補論)隠れた運動量</b>:静的な電磁場でも $\frac{1}{c^2}\int\phi\bm{J}$ の運動量があり、物質が逆向きの運動量(相対論の効果)をもって打ち消す。</li>
+    </ul>
+
+    <h2 id="s7">7. この回のノートについてのメモ</h2>
+    <p>板書の写真ではなく、<b>文章で書かれた講義ノート(フル版)</b>の p.70〜p.74(§9)をもとにまとめました。図は描き直しました。</p>
+    <p>講義ノートの記述で、誤り(または誤記)と判断して直した箇所、読み替えた箇所は次のとおりです。</p>
+    <ol>
+      <li><b>(9.18)(9.19) の電磁場の運動量(p.73)</b>:「$\int\bm{S}\,d\bm{r}=\varepsilon_0\int\bm{E}\times\bm{B}$」「$\bm{P}_{\text{EM}}=\int\bm{S}\,d\bm{r}=\int\phi\bm{J}$」とありますが、(9.17) から運動量密度は $\varepsilon_0\mu_0\bm{S}=\varepsilon_0\bm{E}\times\bm{B}$ なので、$\bm{P}_{\text{EM}}=\varepsilon_0\int\bm{E}\times\bm{B}=\frac{1}{c^2}\int\phi\bm{J}$ と直しました((9.20) には $\frac{1}{c^2}$ が付いているので、それと合います)。</li>
+      <li><b>(9.20)(9.21)(9.22)(9.24) の符号(p.73〜74)</b>:電場 $+y$、上から見て時計回りの電流では、$\bm{P}_{\text{EM}}=-\frac{l^2EI}{c^2}\bm{e}_x$、$\bm{P}_{\text{matter}}=+\frac{l^2EI}{c^2}\bm{e}_x$ になります(4.3 の黄色の枠、数値計算で確認)。打ち消し合う、という結論は同じです。</li>
+      <li><b>ベクトル三重積の式 (2.18)(p.71)</b>:$(\nabla\times\bm{A})\times\bm{A}=(\bm{A}\cdot\nabla)\bm{A}-\frac12\nabla|\bm{A}|^2$ は、第6回の (5.18) で使ったのと同じ公式です。</li>
+      <li><b>回の分け方</b>:講義ノートの分量と内容から分けた予定です。日程が分かったら合わせます。</li>
+    </ol>
+
+    <nav class="pager" data-fixed>
+      <a href="week-09.html">← 第9回</a>
+      <a href="../index.html">一覧へ</a>
+      <span class="disabled">次の回 →</span>
+    </nav>
+
+  </main>
+
+  <footer>© Aセメまとめノート</footer>
+</body>
+</html>
