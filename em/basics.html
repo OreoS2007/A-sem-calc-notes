@@ -99,6 +99,10 @@
             <li><a href="#ode">β. 微分方程式の基本</a></li>
             <li><a href="#wave">γ. 波(高校)</a></li>
           </ul></li>
+        <li><b>電磁波のための道具</b><!--b5-->
+          <ul>
+            <li><a href="#refraction">δ. 光の反射と屈折(高校)</a></li>
+          </ul></li>
         <li><b>もっと詳しく(数学の基礎)</b>
           <ul>
             <li><a href="#x-partial">補1. 偏微分(もっと詳しく)</a></li>
@@ -870,6 +874,24 @@
       <figcaption>進む波。形 $f(x)$ が速さ $v$ で右へ動くと、時刻 $t$ の波は $f(x-vt)$ になります。</figcaption>
     </figure>
     <p class="used-in">この回で使う場所:<a href="weeks/week-11.html#w-wave" data-xref>第11回 1.3 波(高校)</a><a href="weeks/week-11.html#s4" data-xref>第11回 4. 縦波・横波と偏光</a></p>
+
+    <!-- ===================== δ: 光の屈折(高校) ===================== -->
+    <h2 id="refraction">δ. 光の反射と屈折(高校)</h2>
+    <ul>
+      <li><b>屈折率</b>:媒質の中の光の速さ $v$ と真空中の速さ $c$ の比 $n=\frac cv$($n\ge1$。水は約 1.33、ガラスは約 1.5)。振動数は変わらず、波長が $\frac1n$ になる。</li>
+      <li><b>反射の法則</b>:入射角 = 反射角。</li>
+      <li><b>屈折の法則(スネルの法則)</b>:$n_1\sin\theta_1=n_2\sin\theta_2$(角度は境界面の法線から測る)。</li>
+      <li><b>全反射</b>:屈折率の大きい媒質から小さい媒質へ進むとき、入射角が臨界角 $\theta_c$($\sin\theta_c=\frac{n_2}{n_1}$)より大きいと、光はすべて反射される(光ファイバー)。</li>
+      <li><b>分散</b>:屈折率が色(波長)によって少し違うので、プリズムや水滴で白い光が色に分かれる(虹)。</li>
+    </ul>
+    <figure class="fig">
+      <svg viewBox="0 0 620 240" width="620" role="img" aria-label="屈折の法則"><rect x="60" y="120" width="380" height="110" style="fill:var(--accent);opacity:.10"/><line x1="60" y1="120" x2="440" y2="120" style="stroke:var(--muted);stroke-width:1.6"/><line x1="250" y1="20" x2="250" y2="230" style="stroke:var(--muted);stroke-width:1;stroke-dasharray:5 4"/><line x1="150" y1="30" x2="241.3" y2="112" style="stroke:var(--thm);stroke-width:2.4"/><polygon points="248,118 238.6,115 244,109" style="fill:var(--thm)"/><line x1="252" y1="122" x2="305.6" y2="217.2" style="stroke:var(--thm);stroke-width:2.4"/><polygon points="310,225 302.1,219.1 309.1,215.2" style="fill:var(--thm)"/><line x1="252" y1="118" x2="344.8" y2="34.7" style="stroke:var(--thm);stroke-width:1.4"/><polygon points="350,30 346.9,37 342.7,32.3" style="fill:var(--thm)"/><text class="t" x="170" y="100">θ₁</text><text class="t" x="265" y="175">θ₂</text><text class="tj" x="70" y="110">媒質1(屈折率 n₁)</text><text class="tj" x="70" y="220">媒質2(屈折率 n₂ > n₁)</text><text class="tt" x="460" y="90">n₁ sin θ₁ = n₂ sin θ₂</text><text class="tj" x="460" y="115">反射:入射角 = 反射角</text></svg>
+      <figcaption>屈折の法則。屈折率の大きい媒質に入ると、光は法線に近づく向きに曲がります(細い矢印は反射光)。</figcaption>
+    </figure>
+    <div class="box intuit"><div class="label">直感で理解する</div>
+      <p>行進する隊列が、ぬかるみ(光が遅い媒質)に斜めに入ると、先に入った端から遅くなるので、隊列の向きが曲がる。これが屈折です。</p>
+    </div>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-12.html#w-refr" data-xref>第12回 1.4 光の反射と屈折(高校)</a><a href="weeks/week-12.html#s5" data-xref>第12回 5. 反射と屈折</a></p>
     <!-- b5:end -->
 
     <!-- import:start -->
