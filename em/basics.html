@@ -30,7 +30,7 @@
       <p>・飛んだ先には、画面の左下に<b>「元の位置にもどる」</b>ボタンが出ます。押すと、元のノートの読んでいた場所にそのまま戻れます(ブラウザの「戻る」でも同じ位置に戻ります)。</p>
       <p>・各トピックの最後に「この回で使う場所」があり、本文の対応箇所に飛べます。</p>
       <p>・説明は、<b>定義・主張 → 意味(直感) → 例 → 証明</b>の順です。証明は折りたたんであります。</p>
-      <p>・偏微分・勾配・連鎖律などの詳しい説明は、<a href="../calc/basics.html#partial" data-xref>微積の「春学期のまとめ」</a>にもあります。内積・基底などは<a href="../linalg/basics.html#rnip" data-xref>線形代数の「春学期のまとめ」</a>も見てください。</p>
+      <p>・偏微分・連鎖律・内積・線形写像を、図と例でもっと詳しく知りたいときは、このページの最後の「もっと詳しく(数学の基礎)」(<a href="#x-partial">s</a>〜<a href="#x-linmap">w</a>)を見てください。</p>
       <p>・このページは、各回のノートを作るたびに、その回で必要になるトピックを足していきます。</p>
     </div>
 
@@ -69,6 +69,14 @@
             <li><a href="#bcond">面電荷での電場の境界条件</a></li>
             <li><a href="#capacitor">コンデンサー</a></li>
             <li><a href="#matrix">行列と逆行列(連立方程式)</a></li>
+          </ol></li>
+        <li><b>もっと詳しく(数学の基礎)</b>
+          <ol type="a" start="19">
+            <li><a href="#x-partial">偏微分(もっと詳しく)</a></li>
+            <li><a href="#x-chain">連鎖律(もっと詳しく)</a></li>
+            <li><a href="#x-grad">内積・勾配ベクトル・方向微分(もっと詳しく)</a></li>
+            <li><a href="#x-rnip">平面・空間のベクトルと内積(もっと詳しく)</a></li>
+            <li><a href="#x-linmap">線形写像(もっと詳しく)</a></li>
           </ol></li>
       </ol>
     </nav>
@@ -161,7 +169,7 @@
       <svg viewBox="0 0 520 224" width="520" role="img" aria-label="内積による法線成分の取り出し"><line x1="30" y1="180" x2="300" y2="180" style="stroke:var(--muted);stroke-width:5;stroke-linecap:round;opacity:.5"/><text class="tm" x="40" y="202">面(の一部)</text><line x1="150" y1="180" x2="150" y2="70" style="stroke:var(--muted);stroke-width:1.1;stroke-dasharray:5 4;fill:none"/><line x1="150" y1="180" x2="150" y2="90.4" style="stroke:var(--ex);stroke-width:2.8;fill:none"/><polygon points="150,82 154.4,91 145.6,91" style="fill:var(--ex)"/><text class="tm" x="140" y="80" style="text-anchor:end">n(面に垂直な単位ベクトル)</text><line x1="150" y1="180" x2="218.7" y2="92.1" style="stroke:var(--accent);stroke-width:2.8;fill:none"/><polygon points="223.9,85.4 221.8,95.2 214.9,89.8" style="fill:var(--accent)"/><text class="t" x="231.9" y="89.4" style="font-size:18px;fill:var(--accent)">A</text><line x1="223.9" y1="85.4" x2="150" y2="85.4" style="stroke:var(--muted);stroke-width:1.1;stroke-dasharray:5 4;fill:none"/><line x1="144" y1="180" x2="144" y2="85.4" style="stroke:var(--thm);stroke-width:5;stroke-linecap:round;opacity:.85"/><text class="tt" x="136" y="136.7" style="text-anchor:end">A·n</text><path d="M150 138 A42 42 0 0 1 175.9 146.9" style="fill:none;stroke:var(--muted);stroke-width:1.4"/><text class="t" x="164" y="134">θ</text><text class="tj" x="330" y="70">A·n = |A| cosθ</text><text class="tm" x="330" y="96">「A のうち、面に垂直な方向の</text><text class="tm" x="330" y="114">  成分(符号つきの長さ)」</text></svg>
       <figcaption>$\bm{A}\cdot\bm{n}$ は、ベクトル $\bm{A}$ の「面に垂直な方向の成分」。</figcaption>
     </figure>
-    <p>(内積・直交・なす角のさらに詳しい説明は、<a href="../linalg/basics.html#rnip" data-xref>線形代数の基礎ページ</a>や、<a href="../calc/basics.html#inner" data-xref>微積の基礎ページ</a>にもあります。)</p>
+    <p>(内積・直交・なす角のさらに詳しい説明は、<a href="#x-rnip">v. 平面・空間のベクトルと内積</a>と、<a href="#x-inner">u. 内積・勾配ベクトル・方向微分</a>にあります。)</p>
 
     <h3>外積(ベクトル積)</h3>
     <div class="box def">
@@ -216,7 +224,7 @@
 
     <!-- ===================== e: 偏微分・勾配・連鎖律 ===================== -->
     <h2 id="partial">e. 偏微分・勾配・連鎖律</h2>
-    <p>(ここでは要点だけを整理します。例や図をもっと見たいときは、<a href="../calc/basics.html#partial" data-xref>微積の基礎ページの「偏微分」</a>と<a href="../calc/basics.html#chain" data-xref>「連鎖律」</a>を見てください。)</p>
+    <p>(ここでは要点だけを整理します。例や図をもっと見たいときは、このページの最後の<a href="#x-partial">s. 偏微分</a>と<a href="#x-chain">t. 連鎖律</a>を見てください。)</p>
 
     <h3>偏微分</h3>
     <div class="box def">
@@ -615,9 +623,292 @@
 
     <h3>対称行列</h3>
     <p>$c_{ij}=c_{ji}$ をみたす行列(対角線について折り返すと同じ)を<b>対称行列</b>といいます。上の例の $c$ も $p$ も対称。<b>対称行列の逆行列は対称</b>(2×2 なら、逆行列の公式を見れば、非対角成分が $-b$ と $-c$ で、$b=c$ なら対称。一般の大きさでも、$cp=I$ の両辺の転置をとると $p^{\top}c^{\top}=I$、$c^{\top}=c$ なので $p^{\top}c=I$。つまり $p^{\top}$ も $c$ の逆行列で、逆行列はただ1つなので $p^{\top}=p$)。</p>
-    <p>(行列と線形写像の詳しい説明は、<a href="../linalg/basics.html#linmap" data-xref>線形代数の基礎ページ</a>を参照。)</p>
+    <p>(行列と線形写像の詳しい説明は、このページの最後の<a href="#x-linmap">w. 線形写像</a>を参照。)</p>
     <p class="used-in">この回で使う場所:<a href="weeks/week-05.html#w-matrix" data-xref>第5回 1.2 行列と逆行列</a><a href="weeks/week-05.html#s3-1" data-xref>第5回 3.1 容量係数と電位係数</a></p>
 
+    <!-- import:start -->
+    <!-- ここから下は、ほかの教科の基礎ページから取り込んだ「もっと詳しく」(reference/em/import-basics.js で作る。直接直さない) -->
+    <!-- ===================== s: 偏微分(もっと詳しく) ===================== -->
+    <h2 id="x-partial">s. 偏微分(もっと詳しく)</h2>
+
+    <div class="box def">
+      <div class="label">定義(偏微分係数)</div>
+      <p>$f(x,y)$ の、点 $(a,b)$ での<b>$x$ に関する偏微分係数</b>と<b>$y$ に関する偏微分係数</b>を
+      $$f_x(a,b)=\frac{\partial f}{\partial x}(a,b)=\lim_{h\to0}\frac{f(a+h,b)-f(a,b)}{h},$$
+      $$f_y(a,b)=\frac{\partial f}{\partial y}(a,b)=\lim_{k\to0}\frac{f(a,b+k)-f(a,b)}{k}$$
+      で定める。これが存在するとき、「$x$($y$)について偏微分可能」という。</p>
+    </div>
+    <p><b>やり方:</b> $x$ で偏微分するときは、$y$ を<b>定数だと思って</b>、$x$ だけの関数として普通に微分します($y$ で偏微分するときは $x$ を定数扱い)。</p>
+
+    <h3>例</h3>
+    <ul>
+      <li>$f=x^2y+3y^2$:$f_x=2xy,\ f_y=x^2+6y$。$(1,2)$ では $f_x=4,\ f_y=13$。</li>
+      <li>$f=e^{xy}$:$f_x=ye^{xy},\ f_y=xe^{xy}$。</li>
+      <li>$f=x^2+y^2$:$f_x=2x,\ f_y=2y$。</li>
+    </ul>
+
+    <h3>意味:断面で見る</h3>
+    <p>$f(x,y)$ を「地図上の点 $(x,y)$ の高さ」と見ます。$y=b$ に固定して $x$ だけ動かすと、高さの変化は、曲面を平面 $y=b$ で切った<b>断面の曲線</b>になります。$f_x(a,b)$ はその断面曲線の、$x=a$ での<b>傾き</b>です。$f_y(a,b)$ も、$x=a$ で切った断面の傾きです。</p>
+    <figure class="fig">
+      <svg viewBox="0 0 460 270" width="460" role="img" aria-label="等高線と偏微分">
+        <line class="ax" x1="30" y1="245" x2="440" y2="245"/><line class="ax" x1="30" y1="245" x2="30" y2="15"/>
+        <text class="t" x="430" y="262">x</text><text class="t" x="14" y="26">y</text>
+        <ellipse class="thin" cx="230" cy="135" rx="40" ry="25"/>
+        <ellipse class="thin" cx="230" cy="135" rx="70" ry="45"/>
+        <ellipse class="thin" cx="230" cy="135" rx="100" ry="65"/>
+        <ellipse class="thin" cx="230" cy="135" rx="130" ry="85"/>
+        <circle class="dot" cx="284" cy="106" r="5"/>
+        <line class="arr" x1="284" y1="106" x2="352" y2="106"/><polygon class="arrh" points="360,106 349,101 349,111"/>
+        <line class="arr" x1="284" y1="106" x2="284" y2="38"/><polygon class="arrh" points="284,30 279,41 289,41"/>
+        <text class="tt" x="320" y="96">x方向だけ → f_x</text>
+        <text class="tt" x="292" y="30">y方向だけ → f_y</text>
+        <text class="t" x="262" y="124">(a,b)</text>
+        <text class="tm" x="40" y="40">細い楕円 = 等高線(同じ高さの点を結んだ線)</text>
+      </svg>
+      <figcaption>点 $(a,b)$ から真横に進んだときの高さの変化率が $f_x$、真上に進んだときの変化率が $f_y$。高さがちょうど $0$ の等高線が $f(x,y)=0$ です。</figcaption>
+    </figure>
+
+    <div class="box intuit">
+      <div class="label">直感で理解する</div>
+      <p><b>坂の傾き:</b> あなたが山の斜面に立っているとします。「東へ1歩進むと標高がどれだけ上がるか(下がるか)」が $f_x$、「北へ1歩進むと」が $f_y$ です。同じ場所でも、向きによって坂のきつさは違います(東は急な上り坂でも、北は平らかもしれません)。偏微分は、<b>向きを東西か南北に決めて、その向きの坂の傾きだけを調べる</b>操作です。</p>
+    </div>
+
+    <h3 id="x-partial3">3変数以上</h3>
+    <p>$f(x,y,z)$ でも同じです。たとえば $f_x(a,b,c)=\displaystyle\lim_{h\to0}\frac{f(a+h,b,c)-f(a,b,c)}{h}$(他の2つは固定)。$f_y,f_z$ も同様です。</p>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-01.html#w-partial" data-xref>第1回 1.6 偏微分、勾配、連鎖律</a><a href="#partial">e. 偏微分・勾配・連鎖律</a></p>
+
+    <!-- ===================== t: 連鎖律(もっと詳しく) ===================== -->
+    <h2 id="x-chain">t. 連鎖律(もっと詳しく)</h2>
+
+    <h3>1変数の復習</h3>
+    <p>$y=g(u)$、$u=u(t)$ のとき、$\dfrac{dy}{dt}=g'(u)\,u'(t)$。「$t$ を動かす → $u$ が動く → $y$ が動く」と変化が<b>連鎖</b>するので、変化率の積になります。</p>
+
+    <h3>2変数の連鎖律</h3>
+    <div class="box thm">
+      <div class="label">定理(連鎖律)</div>
+      <p>$f(x,y)$ が全微分可能(たとえば $C^1$ 級)で、$x=x(t),\ y=y(t)$ が $t$ について微分可能ならば、
+      $$\frac{d}{dt}f\bigl(x(t),y(t)\bigr)=\frac{\partial f}{\partial x}\frac{dx}{dt}+\frac{\partial f}{\partial y}\frac{dy}{dt}.$$
+      (右辺の偏微分は、点 $(x(t),y(t))$ での値。)</p>
+    </div>
+    <figure class="fig">
+      <svg viewBox="0 0 440 190" width="440" role="img" aria-label="連鎖律の木">
+        <text class="t" x="205" y="28" style="font-size:20px">f</text>
+        <line class="thin" x1="203" y1="34" x2="115" y2="92"/><line class="thin" x1="212" y1="34" x2="300" y2="92"/>
+        <text class="t" x="100" y="108" style="font-size:20px">x</text><text class="t" x="296" y="108" style="font-size:20px">y</text>
+        <line class="thin" x1="108" y1="116" x2="196" y2="168"/><line class="thin" x1="304" y1="116" x2="216" y2="168"/>
+        <text class="t" x="204" y="184" style="font-size:20px">t</text>
+        <text class="ta" x="100" y="64">f_x</text><text class="ta" x="300" y="64">f_y</text>
+        <text class="ta" x="104" y="150">dx/dt</text><text class="ta" x="280" y="150">dy/dt</text>
+      </svg>
+      <figcaption>$f$ から $t$ に至る道は2本(x経由・y経由)。道ごとに係数をかけ、足し合わせます。</figcaption>
+    </figure>
+    <p><b>意味:</b> 点 $(x(t),y(t))$ は平面の中を曲線を描いて動きます。その<b>速度ベクトル</b>が $\vec v=(x'(t),y'(t))$ です。$f$ の値の変化率は、「$x$ 方向の動き × $x$ 方向の傾き」+「$y$ 方向の動き × $y$ 方向の傾き」。</p>
+    <div class="box intuit">
+      <div class="label">直感で理解する</div>
+      <p><b>気温と散歩:</b> 地図の各地点に気温 $f(x,y)$ があり、あなたが歩いています。歩きながら感じる気温の変化の速さは、「東向きの気温の坂 $f_x$ × 東向きに進む速さ $x'$」+「北向きの気温の坂 $f_y$ × 北向きに進む速さ $y'$」です。斜めに歩いても、東向きの成分と北向きの成分に分けて足せば、全体の変化の速さになります。これが連鎖律です。</p>
+    </div>
+
+    <details><summary>証明の流れ</summary>
+      <div class="box proof"><div class="label">証明</div>
+      <p>$t$ から $t+s$ に動いたとき、$x,y$ の変化量を $\Delta x,\Delta y$ とします。全微分可能性(h)より
+      $$f(x+\Delta x,y+\Delta y)-f(x,y)=f_x\Delta x+f_y\Delta y+r.$$
+      $s$ で割ると
+      $$\frac{\Delta f}{s}=f_x\frac{\Delta x}{s}+f_y\frac{\Delta y}{s}+\frac rs.$$
+      $s\to0$ のとき $\Delta x/s\to x'(t)$、$\Delta y/s\to y'(t)$。誤差の項は
+      $\dfrac rs=\dfrac{r}{\sqrt{\Delta x^2+\Delta y^2}}\cdot\sqrt{\left(\tfrac{\Delta x}s\right)^2+\left(\tfrac{\Delta y}s\right)^2}$ で、前の因子は $\to0$(全微分可能性)、後ろの因子は $\sqrt{x'^2+y'^2}$ に収束して有界なので、積は $0$ に収束します。</p></div>
+    </details>
+
+    <h3>例</h3>
+    <p>$f(x,y)=x^2y$、$x=\cos t,\ y=\sin t$。連鎖律で $\dfrac{d}{dt}f=2xy\cdot(-\sin t)+x^2\cdot\cos t=-2\cos t\sin^2t+\cos^3t$。代入してから $\cos^2t\sin t$ を直接微分しても、同じ結果になります。</p>
+
+    <h3>よく使う形:恒等式を微分する</h3>
+    <p>$f(x,y)$ と関数 $y=\varphi(x)$ について、$f(x,\varphi(x))=0$ が<b>すべての $x$ で成り立つ</b>(恒等式)ならば、両辺を $x$ で微分できて(右辺は定数 $0$)、
+    $$f_x+f_y\,\varphi'(x)=0.$$
+    陰関数の導関数の公式は、ここから出ます。</p>
+    <div class="box intuit">
+      <div class="label">直感で理解する</div>
+      <p><b>等高線の上を歩く:</b> $f(x,\varphi(x))=0$ が常に成り立つとは、「高さ $0$ の等高線の上を歩いている間、高さはずっと $0$ のまま」ということです。高さが変わらないのだから、「高さの変化の速さ」は $0$。それを連鎖律で書いたものが $f_x+f_y\varphi'=0$ です。</p>
+    </div>
+
+    <h3>2つの変数で表される場合</h3>
+    <p>$z=f(x,y)$ で、$x=x(u,v),\ y=y(u,v)$ のとき、
+    $$z_u=z_x\,x_u+z_y\,y_u,\qquad z_v=z_x\,x_v+z_y\,y_v,$$
+    行列で書くと $(z_u,z_v)=(z_x,z_y)\begin{pmatrix}x_u&x_v\\y_u&y_v\end{pmatrix}$。右の行列を<b>ヤコビ行列</b>といいます(座標変換 $(u,v)\mapsto(x,y)$ を1次式で近似したときの係数の行列)。たとえば極座標 $x=r\cos\theta,\ y=r\sin\theta$ では
+    $\begin{pmatrix}\cos\theta&-r\sin\theta\\\sin\theta&r\cos\theta\end{pmatrix}$ です。</p>
+    <div class="box intuit">
+      <div class="label">直感で理解する</div>
+      <p><b>座標を変える:</b> $(u,v)$ の方眼を、$(x,y)$ の世界に写すと、方眼の小さな正方形は、少しゆがんだ平行四辺形になります(曲がった方眼でも、小さく見ればほぼ平行四辺形)。ヤコビ行列は、「その小さな正方形が、どの向きに、どれだけ伸び縮み・回転するか」を表す行列です。極座標なら、$r$ 方向の辺は長さそのまま($\cos\theta,\sin\theta$ 方向)、$\theta$ 方向の辺は $r$ 倍に伸びた向き($-r\sin\theta,\ r\cos\theta$)になります。</p>
+    </div>
+
+    <h3 id="x-chain3">3変数の場合</h3>
+    <p>$f(x,y,z)$ で $x=x(t),y=y(t),z=z(t)$ のとき、道が3本になるだけで:
+    $$\frac{d}{dt}f(x(t),y(t),z(t))=\frac{\partial f}{\partial x}\frac{dx}{dt}+\frac{\partial f}{\partial y}\frac{dy}{dt}+\frac{\partial f}{\partial z}\frac{dz}{dt}.$$</p>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-01.html#w-partial" data-xref>第1回 1.6 偏微分、勾配、連鎖律</a><a href="#partial">e. 偏微分・勾配・連鎖律</a></p>
+
+    <!-- ===================== u: 内積・勾配ベクトル・方向微分(もっと詳しく) ===================== -->
+    <h2 id="x-grad">u. 内積・勾配ベクトル・方向微分(もっと詳しく)</h2>
+
+    <h3 id="x-inner">内積と直交</h3>
+    <div class="box def">
+      <div class="label">定義(内積)</div>
+      <p>2つのベクトル $\vec u=(u_1,u_2)$、$\vec v=(v_1,v_2)$ の<b>内積</b>は
+      $$\langle\vec u,\vec v\rangle=u_1v_1+u_2v_2\quad(\vec u\cdot\vec v\ \text{とも書く}).$$
+      長さ(大きさ)は $|\vec u|=\sqrt{u_1^2+u_2^2}$。2つのベクトルのなす角を $\varphi$ とすると
+      $$\langle\vec u,\vec v\rangle=|\vec u|\,|\vec v|\cos\varphi.$$</p>
+    </div>
+    <p>したがって、<b>内積が $0$ ⟺ 2つのベクトルが直交する</b>(直角、または一方が零ベクトル)。3次元でも同様に $\langle\vec u,\vec v\rangle=u_1v_1+u_2v_2+u_3v_3$ です。</p>
+
+    <div class="box intuit">
+      <div class="label">直感で理解する</div>
+      <p><b>影の長さ:</b> $\langle\vec u,\vec v\rangle=|\vec u|\,|\vec v|\cos\varphi$ は、「$\vec v$ の向きに垂直に光を当てて、$\vec u$ の影を $\vec v$ の上に落としたときの影の長さ($|\vec u|\cos\varphi$)に、$|\vec v|$ をかけたもの」です。つまり内積は、「2つのベクトルが、どれだけ同じ向きを向いているか」を測ります。同じ向きなら最大、反対向きなら負、<b>直角なら影が $0$ で、内積も $0$</b> です。</p>
+    </div>
+
+    <h3>勾配ベクトル</h3>
+    <div class="box def">
+      <div class="label">定義(勾配ベクトル)</div>
+      <p>$f(x,y)$ の<b>勾配ベクトル</b>(gradient)を、偏微分を並べたベクトル
+      $$\nabla f(a,b)=\operatorname{grad}f(a,b)=\bigl(f_x(a,b),\,f_y(a,b)\bigr)$$
+      で定める($\nabla$ は「ナブラ」)。3変数なら $(f_x,f_y,f_z)$。</p>
+    </div>
+
+    <h3>方向微分</h3>
+    <p>点 $(a,b)$ を通る曲線 $(x(t),y(t))$ を、$(x(0),y(0))=(a,b)$、速度ベクトル $\vec v=(x'(0),y'(0))$ でとります。$F(t)=f(x(t),y(t))$ とおくと、連鎖律より
+    $$F'(0)=f_x(a,b)\,x'(0)+f_y(a,b)\,y'(0)=\langle\nabla f(a,b),\ \vec v\rangle.$$
+    この $F'(0)$ を、この曲線に沿った(速度 $\vec v$ の)<b>方向微分</b>といいます。「$(a,b)$ から $\vec v$ の向きに動いたとき、$f$ がどれだけの速さで変化するか」を表します。</p>
+
+    <h3>勾配は「いちばん急に増える向き」</h3>
+    <p>内積の式 $\langle\nabla f,\vec v\rangle=|\nabla f|\,|\vec v|\cos\varphi$($\varphi$ は $\nabla f$ と $\vec v$ のなす角)より、同じ速さ($|\vec v|$ 一定)で動くなら、$\cos\varphi=1$、つまり<b>$\vec v$ が $\nabla f$ と同じ向き</b>のとき、$f$ の増え方がいちばん大きくなります。逆向きなら最も急に減り、$\varphi=90^\circ$(直角)なら $f$ は<b>変化しません</b>。</p>
+
+    <h3 id="x-gradperp">勾配は等高線に直交する</h3>
+    <div class="box intuit">
+      <div class="label">直感で理解する</div>
+      <p><b>等高線に沿って歩けば、高さは変わらない:</b> いちばん急に登る向き($\nabla f$)は、高さがまったく変わらない向き(等高線に沿う向き)とは、まるで違う向き、つまり<b>直角</b>のはずです。もし $\nabla f$ が等高線に対して斜めを向いていたら、等高線に沿って歩いても、その斜めの分だけ登ってしまい、「等高線に沿えば高さが変わらない」ことと矛盾します。</p>
+    </div>
+    <p>$f$ が一定の値(たとえば $0$)をとる点の集まりが、等高線 $f(x,y)=0$ です。この曲線に沿って動く点 $(x(t),y(t))$ をとると、$f(x(t),y(t))=0$ が常に成り立つので、$F(t)\equiv0$、したがって $F'(0)=0$。方向微分の式から
+    $$\langle\nabla f(a,b),\vec v\rangle=0.$$
+    速度ベクトル $\vec v$ は曲線の<b>接線方向</b>なので、<b>$\nabla f$ は等高線(の接線)と直交</b>します($\nabla f\ne\vec0$ のとき)。</p>
+    <figure class="fig">
+      <svg viewBox="0 0 560 282" width="560" role="img" aria-label="勾配と等高線"><circle cx="150" cy="140" r="46" style="stroke:var(--muted);stroke-width:1;fill:none"/><circle cx="150" cy="140" r="65.1" style="stroke:var(--muted);stroke-width:1;fill:none"/><circle cx="150" cy="140" r="79.7" style="stroke:var(--muted);stroke-width:1;fill:none"/><circle cx="150" cy="140" r="92" style="stroke:var(--muted);stroke-width:1;fill:none"/><circle cx="150" cy="140" r="3.5" style="fill:var(--muted)"/><line x1="193.2" y1="124.3" x2="206" y2="119.6" style="stroke:var(--thm);stroke-width:2.4;fill:none"/><polygon points="213.9,116.7 206.9,124 203.9,115.7" style="fill:var(--thm)"/><circle cx="193.2" cy="124.3" r="3.5" style="fill:var(--thm)"/><line x1="100.2" y1="98.2" x2="82.8" y2="83.6" style="stroke:var(--thm);stroke-width:2.4;fill:none"/><polygon points="76.3,78.2 86.1,80.6 80.4,87.3" style="fill:var(--thm)"/><circle cx="100.2" cy="98.2" r="3.5" style="fill:var(--thm)"/><line x1="122.7" y1="214.9" x2="112.6" y2="242.8" style="stroke:var(--thm);stroke-width:2.4;fill:none"/><polygon points="109.7,250.7 108.7,240.7 116.9,243.7" style="fill:var(--thm)"/><circle cx="122.7" cy="214.9" r="3.5" style="fill:var(--thm)"/><line x1="229.7" y1="186" x2="260.5" y2="203.8" style="stroke:var(--thm);stroke-width:2.4;fill:none"/><polygon points="267.8,208 257.8,207.3 262.2,199.7" style="fill:var(--thm)"/><circle cx="229.7" cy="186" r="3.5" style="fill:var(--thm)"/><line x1="173.8" y1="51.1" x2="183" y2="16.7" style="stroke:var(--thm);stroke-width:2.4;fill:none"/><polygon points="185.2,8.6 187.1,18.5 178.6,16.2" style="fill:var(--thm)"/><circle cx="173.8" cy="51.1" r="3.5" style="fill:var(--thm)"/><text class="tm" x="150" y="180" style="paint-order:stroke;stroke:var(--surface);stroke-width:4px;stroke-linejoin:round;text-anchor:middle">f=1</text><text class="tm" x="150" y="248" style="paint-order:stroke;stroke:var(--surface);stroke-width:4px;stroke-linejoin:round;text-anchor:middle">f=4</text><text class="tj" x="330" y="50">例:f(x, y) = x² + y²</text><text class="tm" x="330" y="76">細い円:等高線 f = 1, 2, 3, 4(内側から)</text><text class="tt" x="330" y="104" style="fill:var(--thm)">橙の矢印:∇f = (2x, 2y)</text><text class="tm" x="330" y="124">  等高線と直角で、外向き</text><text class="tm" x="330" y="156">外ほど、等高線の間隔が狭く</text><text class="tm" x="330" y="174">(坂が急で)、矢印が長い</text><text class="tm" x="330" y="192">(長さ |∇f| = 2 × 半径)</text></svg>
+      <figcaption>$f=x^2+y^2$ では $\nabla f=(2x,2y)$。等高線(円)と直角に、外へ向かう矢印になっています。</figcaption>
+    </figure>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-01.html#w-vec3" data-xref>第1回 1.4 内積と外積</a><a href="#vec3">c. 3次元ベクトルの内積と外積</a></p>
+
+    <!-- ===================== v: 平面・空間のベクトルと内積(もっと詳しく) ===================== -->
+    <h2 id="x-rnip">v. 平面・空間のベクトルと内積(もっと詳しく)</h2>
+
+    <div class="box def">
+      <div class="label">定義(平面・空間のベクトルの内積と長さ)</div>
+      <p>$v=(v_1,v_2,v_3),\ w=(w_1,w_2,w_3)$(平面なら成分は2つ)に対し、
+      $$(v,w)=v_1w_1+v_2w_2+v_3w_3,\qquad \|v\|=\sqrt{(v,v)}=\sqrt{v_1^2+v_2^2+v_3^2}.$$
+      $(v,w)$ を<b>内積</b>、$\|v\|$ を $v$ の<b>長さ</b>という(高校では $\vec v\cdot\vec w$ や $|\vec v|$ と書く)。$n$ 個の成分でも同じ(成分を $n$ 個に増やすだけ)。</p>
+    </div>
+
+    <div class="box thm">
+      <div class="label">事実(内積と角)</div>
+      <p>$v,w\ne0$ のなす角を $\theta$($0\le\theta\le\pi$)とすると
+      $$(v,w)=\|v\|\,\|w\|\cos\theta.$$
+      特に $(v,w)=0\iff v\perp w$(直交)。</p>
+    </div>
+
+    <p><b>意味:</b> $\|w\|\cos\theta$ は、$w$ を $v$ の向きの直線に落とした影(正射影)の長さ(符号つき)です。内積 $(v,w)$ は「<b>$v$ の長さ × $w$ の影の長さ</b>」。向きがそろっていれば大きな正、直角なら0、反対向きなら負になります。</p>
+
+    <figure class="fig">
+      <svg viewBox="0 0 460 250" width="460" role="img" aria-label="余弦定理と内積">
+        <line class="cv" x1="80" y1="200" x2="380" y2="200"/>
+        <polygon class="arrh" points="388,200 376,195 376,205" style="fill:var(--accent)"/>
+        <line class="cv2" x1="80" y1="200" x2="220" y2="60"/>
+        <polygon class="arrh" points="226,54 212,60 220,68"/>
+        <line class="thin" x1="380" y1="200" x2="220" y2="60" style="stroke:var(--muted);stroke-width:1.4"/>
+        <line class="dash" x1="220" y1="60" x2="220" y2="200"/>
+        <line class="rect" x1="80" y1="214" x2="220" y2="214" style="stroke:var(--ex);stroke-width:3"/>
+        <path class="thin" d="M115 200 A35 35 0 0 0 104.7 175.3"/>
+        <text class="t" x="122" y="190">θ</text>
+        <text class="t" x="60" y="218">O</text>
+        <text class="ta" x="372" y="190" style="fill:var(--accent)">v</text>
+        <text class="tt" x="204" y="48">w</text>
+        <text class="tm" x="100" y="238" style="fill:var(--ex)">‖w‖cosθ(影の長さ)</text>
+        <text class="tm" x="296" y="122">v − w</text>
+      </svg>
+      <figcaption>$O,\ v,\ w$ を頂点とする三角形に、余弦定理 $\|v-w\|^2=\|v\|^2+\|w\|^2-2\|v\|\|w\|\cos\theta$ を使います。</figcaption>
+    </figure>
+
+    <details><summary>理由(証明:余弦定理から)</summary>
+      <div class="box proof"><div class="label">証明</div>
+      <p>三角形の余弦定理より $\|v-w\|^2=\|v\|^2+\|w\|^2-2\|v\|\|w\|\cos\theta$。一方、成分で計算すると
+      $\|v-w\|^2=(v-w,v-w)=(v,v)-2(v,w)+(w,w)=\|v\|^2-2(v,w)+\|w\|^2$。右辺どうしを比べて $(v,w)=\|v\|\|w\|\cos\theta$。</p></div>
+    </details>
+
+    <h3>内積の基本的な性質</h3>
+    <ul>
+      <li><b>線形性</b>:$(v_1+v_2,w)=(v_1,w)+(v_2,w)$、$(av,w)=a(v,w)$($w$ 側も同様)。成分ごとの和と積なので当たり前に成り立つ。</li>
+      <li><b>対称性</b>:$(v,w)=(w,v)$。</li>
+      <li><b>正定値性</b>:$(v,v)=\|v\|^2\ge0$、かつ $(v,v)=0\iff v=0$(成分の2乗の和が0になるのは、全部0のときだけ)。</li>
+    </ul>
+    <p>この3つが、あとで一般のベクトル空間の「内積の定義(公理)」の元ネタになります。さらに、$|\cos\theta|\le1$ から
+    $$|(v,w)|\le\|v\|\,\|w\|$$
+    が従います。これがコーシー・シュワルツの不等式の、平面・空間での姿です。</p>
+
+    <h3>例</h3>
+    <p>$v=(1,1,0),\ w=(0,1,1)$:$(v,w)=0+1+0=1$、$\|v\|=\|w\|=\sqrt2$。$\cos\theta=\dfrac{1}{\sqrt2\sqrt2}=\dfrac12$ なので $\theta=60^\circ$。</p>
+    <div class="box intuit">
+      <div class="label">直感で理解する</div>
+      <p>内積 $(v,w)$ は「$w$ の長さ」×「$v$ を $w$ の向きに落とした影の長さ」です。同じ向きなら大きく、直角なら影ができないので 0、逆向きなら影が反対側にのびて負になります。</p>
+    </div>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-01.html#w-vec3" data-xref>第1回 1.4 内積と外積</a><a href="#vec3">c. 3次元ベクトルの内積と外積</a></p>
+
+    <!-- ===================== w: 線形写像(もっと詳しく) ===================== -->
+    <h2 id="x-linmap">w. 線形写像(もっと詳しく)</h2>
+
+    <div class="box def">
+      <div class="label">定義(線形写像)</div>
+      <p>$V,W$ を $K$-ベクトル空間とする。写像 $T:V\to W$ が<b>$K$-線形写像</b>であるとは、次の2つが成り立つこと。</p>
+      <p>(L1) $T(x+y)=T(x)+T(y)$ ($x,y\in V$) ／ (L2) $T(ax)=a\,T(x)$ ($x\in V,\ a\in K$)</p>
+    </div>
+    <p><b>意味:</b> 「足してから $T$ に入れても、$T$ に入れてから足しても同じ」「スカラー倍してから入れても、入れてからスカラー倍しても同じ」。つまり、<b>和とスカラー倍を保つ</b>写像です。</p>
+
+    <figure class="fig">
+      <svg viewBox="0 0 460 180" width="460" role="img" aria-label="線形写像は和を保つ">
+        <text class="t" x="30" y="52">(x, y)</text>
+        <line class="arr" x1="100" y1="46" x2="170" y2="46"/><polygon class="arrh" points="178,46 167,41 167,51"/>
+        <text class="tm" x="104" y="36">T を各々に</text>
+        <text class="t" x="190" y="52">(T(x), T(y))</text>
+        <line class="arr" x1="60" y1="64" x2="60" y2="112"/><polygon class="arrh" points="60,120 55,109 65,109"/>
+        <text class="tm" x="68" y="96">足す</text>
+        <line class="arr" x1="236" y1="64" x2="236" y2="112"/><polygon class="arrh" points="236,120 231,109 241,109"/>
+        <text class="tm" x="244" y="96">足す</text>
+        <text class="t" x="30" y="148">x + y</text>
+        <line class="arr" x1="100" y1="142" x2="170" y2="142"/><polygon class="arrh" points="178,142 167,137 167,147"/>
+        <text class="tm" x="124" y="136">T</text>
+        <text class="t" x="190" y="148">T(x+y) = T(x) + T(y)</text>
+      </svg>
+      <figcaption>(L1) の意味:左上から右下まで、「足してから $T$」と「$T$ してから足す」のどちらの道を通っても同じ結果になります。</figcaption>
+    </figure>
+
+    <h3>例</h3>
+    <ul>
+      <li>行列 $A$ による $T(x)=Ax$($K^n\to K^m$)。行列の積の性質 $A(x+y)=Ax+Ay$、$A(ax)=aAx$ がそのまま (L1),(L2)。</li>
+      <li>積分 $f\mapsto\displaystyle\int_0^1f(x)\,dx$($C_{\R}([0,1])\to\R$):$\int(f+g)=\int f+\int g$、$\int af=a\int f$。</li>
+      <li>微分 $f\mapsto f'$:$(f+g)'=f'+g'$、$(af)'=af'$。</li>
+      <li>線形でない例:$T(x)=x^2$($\R\to\R$)。$T(1+1)=4\ne T(1)+T(1)=2$。</li>
+    </ul>
+
+    <div class="box thm">
+      <div class="label">系</div>
+      <p>$T$ が線形なら、$T(0)=0$、$T(-x)=-T(x)$、$T(a_1x_1+\cdots+a_nx_n)=a_1T(x_1)+\cdots+a_nT(x_n)$。</p>
+    </div>
+    <details><summary>理由(証明)</summary>
+      <div class="box proof"><div class="label">証明</div>
+      <p>$T(0)=T(0\cdot 0)=0\cdot T(0)=0$。$T(-x)=T((-1)x)=(-1)T(x)=-T(x)$。最後の式は (L1),(L2) を繰り返し使えば出る。</p></div>
+    </details>
+
+    <h3>「1つの変数について線形」</h3>
+    <p>2変数の写像 $F:V\times V\to K$ について、<b>片方のベクトルを固定したとき</b>、残りの変数の写像が線形になることを、「その変数について線形」といいます。たとえば $w$ を固定して $v\mapsto F(v,w)$ が線形写像のとき、「第1変数について線形」です。内積の「双線形」とは、<b>2つの変数のそれぞれについて</b>線形、という意味です(次回以降の本文で使います)。</p>
+    <div class="box intuit">
+      <div class="label">直感で理解する</div>
+      <p>線形写像は「比例」の一般化です。入力を2倍すれば出力も2倍、2つの入力を足して入れれば出力も足し算になる。図形で言えば、原点を動かさず、まっすぐな線をまっすぐなまま、平行な線を平行なまま写す変換(回転・拡大・せん断など)です。</p>
+    </div>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-05.html#w-matrix" data-xref>第5回 1.2 行列と逆行列</a><a href="#matrix">r. 行列と逆行列</a></p>
+    <!-- import:end -->
 
   </main>
 

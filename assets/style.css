@@ -170,7 +170,7 @@ table.cmp th { background: var(--accent-soft); }
 .tscroll > table.cmp { margin: 0; }
 
 
-/* ---- 春学期のまとめへのリンク・戻るボタン ---- */
+/* ---- 基礎のまとめへのリンク・戻るボタン ---- */
 html { scroll-behavior: auto; }
 main h2[id], main h3[id], main section[id], main div[id] { scroll-margin-top: 68px; }
 
