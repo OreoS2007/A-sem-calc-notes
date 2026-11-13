@@ -81,6 +81,10 @@
             <li><a href="#dielectric">誘電体とコンデンサー(高校)</a></li>
             <li><a href="#thermo">熱力学の基礎(平衡状態と自由エネルギー)</a></li>
           </ol></li>
+        <li><b>電気回路のための道具</b><!--b5-->
+          <ol type="a" start="24">
+            <li><a href="#circuit">直流回路(高校)</a></li>
+          </ol></li>
         <li><b>もっと詳しく(数学の基礎)</b>
           <ul>
             <li><a href="#x-partial">補1. 偏微分(もっと詳しく)</a></li>
@@ -750,6 +754,27 @@
       <p>自由エネルギーは「温度を一定に保ったまま、系から取り出せる(または系に入れる必要がある)仕事」。エネルギーの一部は熱としてまわりとやり取りされるので、エネルギーそのものとは少し違います。</p>
     </div>
     <p class="used-in">この回で使う場所:<a href="weeks/week-07.html#w-thermo" data-xref>第7回 1.4 熱力学の言葉</a><a href="weeks/week-07.html#s2" data-xref>第7回 2. マクロな電磁気学</a><a href="weeks/week-07.html#s7" data-xref>第7回 7. 誘電体と磁性体のエネルギー</a></p>
+
+    <!-- ===================== x: 直流回路(高校) ===================== -->
+    <h2 id="circuit">x. 直流回路(高校)</h2>
+    <ul>
+      <li><b>電流</b>:導線の断面を1秒間に通る電気量 $I=\dfrac{\Delta Q}{\Delta t}$(単位 A)。電子の数密度 $n$、平均の速さ $v$、断面積 $S$ なら $I=envS$。</li>
+      <li><b>オームの法則</b>:$V=RI$。抵抗 $R=\rho\dfrac{L}{S}$($\rho$:抵抗率、$L$:長さ、$S$:断面積)。</li>
+      <li><b>ジュール熱</b>:抵抗で毎秒発生する熱(消費電力)$P=IV=RI^2=\dfrac{V^2}{R}$。</li>
+      <li><b>起電力と内部抵抗</b>:電池が電荷1 C あたりにする仕事が起電力 $E$(単位 V)。電池の中にも抵抗 $r$ があるので、電流 $I$ が流れると、端子電圧は $V=E-rI$ に下がる。</li>
+      <li><b>キルヒホッフの法則</b>:① 分岐点に流れ込む電流の和 = 流れ出る電流の和(電荷の保存)。② 閉じた回路を一周すると、起電力の和 = 電圧降下($RI$)の和(電位が一周で元に戻る)。</li>
+    </ul>
+    <figure class="fig">
+      <svg viewBox="0 0 620 220" width="620" role="img" aria-label="起電力 E、内部抵抗 r の電池と、外部の抵抗 R の回路"><path d="M 100 50 L 500 50 L 500 180 L 100 180 Z" style="fill:none;stroke:var(--muted);stroke-width:1.8"/><line x1="95" y1="100" x2="105" y2="100" style="stroke:var(--muted);stroke-width:6"/><line x1="85" y1="120" x2="115" y2="120" style="stroke:var(--muted);stroke-width:2"/><text class="tj" x="30" y="115">電池 E</text><rect x="90" y="140" width="20" height="30" style="fill:var(--surface);stroke:var(--thm);stroke-width:2"/><text class="tt" x="30" y="160">内部抵抗 r</text><rect x="270" y="38" width="60" height="24" style="fill:var(--surface);stroke:var(--accent);stroke-width:2"/><text class="t" x="285" y="30">R</text><line x1="400" y1="50" x2="441" y2="50" style="stroke:var(--thm);stroke-width:2.4"/><polygon points="450,50 441,54.1 441,46" style="fill:var(--thm)"/><text class="t" x="410" y="40">I</text><text class="ta" x="200" y="210">端子電圧 V = E − rI = RI</text></svg>
+      <figcaption>起電力 $E$、内部抵抗 $r$ の電池に、抵抗 $R$ をつないだ回路。電流は $I=\frac{E}{R+r}$、電池の両端の電圧(端子電圧)は $V=E-rI$ です。</figcaption>
+    </figure>
+    <div class="box ex"><div class="label">例</div>
+      <p>$E=1.5$ V、$r=0.5\ \Omega$ の電池に $R=2.5\ \Omega$ をつなぐと、$I=\frac{1.5}{3.0}=0.5$ A、端子電圧 $V=1.5-0.25=1.25$ V。$R$ での発熱は $RI^2=0.625$ W、電池の中で $rI^2=0.125$ W が熱になります。</p>
+    </div>
+    <div class="box intuit"><div class="label">直感で理解する</div>
+      <p>電池は「電荷を高いところへ持ち上げるポンプ」、抵抗は「坂を下りながら摩擦で熱を出す道」。電圧は高さの差、電流は流れの量。一周すると高さは元に戻る(キルヒホッフの第2法則)。</p>
+    </div>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-08.html#w-circuit" data-xref>第8回 1.1 直流回路(高校)</a><a href="weeks/week-08.html#s2" data-xref>第8回 2. 電気伝導と電気抵抗</a><a href="weeks/week-08.html#s5" data-xref>第8回 5. 回路と電流</a></p>
     <!-- b5:end -->
 
     <!-- import:start -->

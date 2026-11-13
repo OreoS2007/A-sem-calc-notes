@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>第8回 補論:電気回路(電気抵抗、起電力、電池、回路の中で起きていること) | Aセメまとめノート</title>
+  <link rel="stylesheet" href="../../assets/style.css">
+  <script defer src="../../assets/nav.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],macros:{'\\R':'\\mathbb{R}','\\bm':'\\boldsymbol{#1}','\\rot':'\\operatorname{rot}','\\grad':'\\operatorname{grad}','\\dvg':'\\operatorname{div}','\\pd':'\\frac{\\partial #1}{\\partial #2}'}});window.__navReady&&window.__navReady()"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="inner">
+      <a class="site-title" href="../../index.html">Aセメまとめノート</a>
+      <span class="links"><a href="../index.html">電磁気学</a><a href="../basics.html">基礎のまとめ</a><a href="../../calc/index.html">微積</a><a href="../../linalg/index.html">線形代数</a><a href="../../structchem/index.html">構造化学</a><a href="../../mech/index.html">力学A</a><a href="../../thermo/index.html">熱力学</a></span>
+    </div>
+  </header>
+
+  <main class="note">
+    <h1>第8回:補論:電気回路(電気抵抗、起電力、電池、回路の中で起きていること)</h1>
+    <div class="meta">電磁気学(東京大学 教養学部 秋学期)／授業日は未定(講義ノートの分量から分けた予定)／講義ノート §7(p.56〜p.62)</div>
+
+    <nav class="toc">
+      <div class="toc-title">目次</div>
+      <ol start="0">
+        <li><a href="#s0">この回の全体像</a></li>
+        <li><a href="#s1">準備:基礎の確認</a>
+          <div class="sub">直流回路(高校)／電位が定義できる条件(第3回・第4回)／導体の性質(第4回)／化学ポテンシャル(熱力学)／ローレンツ力と導体棒(第5回・高校)</div></li>
+        <li><a href="#s2">電気伝導と電気抵抗(§7.1)</a></li>
+        <li><a href="#s3">起電力(§7.2)</a></li>
+        <li><a href="#s4">化学電池(§7.3)</a></li>
+        <li><a href="#s5">回路と電流(§7.4)</a></li>
+        <li><a href="#s6">例 7.1:磁場の中を動く導体棒</a></li>
+        <li><a href="#s7">具体例で練習(講義ノートにない補足)</a></li>
+        <li><a href="#s8">まとめ(この回で覚えること)</a></li>
+        <li><a href="#s9">この回のノートについてのメモ</a></li>
+      </ol>
+    </nav>
+
+    <h2 id="s0">0. この回の全体像 <span class="page-tag">講義ノート p.56</span></h2>
+    <p>この回は、電気回路の<b>概念の整理</b>です。高校では「電池をつなげば電流が流れる」「起電力 = 電位差」と習いましたが、それを電磁気学の言葉で見直します。前の回と同じく、物質のミクロな仕組みはブラックボックスにして、マクロな現象論として議論します。具体的な量の計算には、あまり立ち入りません。</p>
+    <div class="box thm"><div class="label">この回のゴール</div>
+      <p>① オームの法則は、線形応答(テイラー展開の1次)として必ず成り立つ関係。電圧は、局所的に $\nabla\times\bm{E}=\bm{0}$ の領域で定義される。<br>
+      ② 起電力は「単位電荷あたりの力の、回路一周の積分」。「電位差」と一致するのは、静電場かつ理想的な起電装置のときだけ。<br>
+      ③ 化学電池の起電力は、化学ポテンシャルの差で決まる。<br>
+      ④ スイッチを入れると電球がすぐつくのはなぜか。定常電流が流れている回路の中で、電荷と電場はどうなっているか。<br>
+      ⑤ 磁場の中を動く導体棒を、起電力の枠組みで理解する。</p>
+    </div>
+    <div class="box note-box"><div class="label">この回の日程について</div>
+      <p>講義ノートの分量と内容から分けた予定です。§7 も「補論」です。日程が分かったら合わせます。</p>
+    </div>
+    <p>以下では、先に必要な基礎を復習してから、講義ノートの順に進みます。紫色の枠は「基礎の復習」、黄色の枠は「講義ノートにないが、理解を助けるために私が補った部分」、緑の枠は「直感で理解するための説明」です。</p>
+
+    <h2 id="s1">1. 準備:基礎の確認</h2>
+    <p>この回で使う道具と、前の回までの結果を並べます。</p>
+
+    <h3 id="w-circuit">1.1 直流回路(高校)</h3>
+    <div class="box basic">
+      <div class="label">基礎:オームの法則、ジュール熱、起電力と内部抵抗、キルヒホッフの法則 <a class="xref-link" href="../basics.html#circuit" data-xref>→ 詳しい解説</a></div>
+      <p>$V=RI$(オームの法則)、$R=\rho L/S$。抵抗での発熱は毎秒 $P=IV=RI^2$。電池が電荷 1 C あたりにする仕事が起電力 $E$、電池の中の抵抗を内部抵抗 $r$ として、端子電圧は $V=E-rI$。キルヒホッフの法則:① 分岐点で電流の出入りはつり合う、② 回路を一周すると、起電力の和 = 電圧降下の和。</p>
+      <p><b>直感:</b> 電池はポンプ、電圧は高さの差、抵抗は摩擦のある坂。</p>
+    </div>
+
+    <h3 id="w-pot">1.2 電位が定義できる条件(第3回・第4回)</h3>
+    <div class="box basic">
+      <div class="label">基礎:$\nabla\times\bm{E}=\bm{0}$ のときだけ、電位がある <a class="xref-link" href="week-03.html#s2" data-xref>→ 第3回 2.</a></div>
+      <p>穴のあいていない領域で $\nabla\times\bm{E}=\bm{0}$ なら、線積分 $\int\bm{E}\cdot d\bm{x}$ は経路によらず、電位 $\phi$ があって $\bm{E}=-\nabla\phi$(ポテンシャルの存在)。逆に、磁場が時間変化して $\nabla\times\bm{E}\ne\bm{0}$ になると(次の回の電磁誘導)、一周の線積分が 0 にならず、全体で電位を定義することはできない。</p>
+      <p><b>直感:</b> 一周して戻ると高さが変わっているらせん階段では、「標高」を決められない。</p>
+    </div>
+
+    <h3 id="w-cond">1.3 導体の性質(第4回)</h3>
+    <div class="box basic">
+      <div class="label">基礎:導体の中では $\bm{E}=\bm{0}$、導体全体が等電位 <a class="xref-link" href="week-04.html#s5-2" data-xref>→ 第4回 5.2</a></div>
+      <p>導体(電気伝導率が無限大の物体)の中では、静的な状態で電場は 0。だから導体全体が同じ電位で、電荷は表面にだけある。導体が曲がっていても同じ。</p>
+      <p><b>直感:</b> 電場が少しでも残っていれば電荷が動くので、動かなくなったときには電場は 0。</p>
+    </div>
+
+    <h3 id="w-chem">1.4 化学ポテンシャル(熱力学)</h3>
+    <div class="box basic">
+      <div class="label">基礎:化学ポテンシャル $\mu$ <a class="xref-link" href="../basics.html#thermo" data-xref>→ 詳しい解説</a></div>
+      <p>粒子を1個加えたときの自由エネルギーの増加を<b>化学ポテンシャル</b> $\mu$ という(粒子数に共役な示強変数)。同じ原子でも、金属の中にいるときと、溶液にイオンとして溶けているときでは $\mu$ が違う。粒子は $\mu$ の高いほうから低いほうへ移ろうとし、その差の分だけ仕事を取り出せる(可逆に行えば、仕事 = 自由エネルギーの差)。</p>
+      <p><b>直感:</b> 化学ポテンシャルは、粒子にとっての「高さ」。電位が電荷にとっての高さなのと同じ。</p>
+    </div>
+
+    <h3 id="w-lorentz">1.5 ローレンツ力と導体棒(第5回・高校)</h3>
+    <div class="box basic">
+      <div class="label">基礎:動く導体棒には起電力 $vBl$ <a class="xref-link" href="week-05.html#s4-7" data-xref>→ 第5回 4.7</a></div>
+      <p>磁場 $B$ の中を、棒に垂直に速さ $v$ で動く長さ $l$ の導体棒の中の電荷 $q$ は、ローレンツ力 $qvB$ を棒に沿った向きに受ける。棒の端から端まで運ぶ仕事は $qvBl$ なので、起電力は $vBl$(高校の電磁誘導)。</p>
+      <p><b>直感:</b> 棒と一緒に動く電荷が、磁場に横から押されて棒の一方の端に寄せられる。</p>
+    </div>
+
+    <h2 id="s2">2. 電気伝導と電気抵抗(§7.1) <span class="page-tag">講義ノート p.56–57</span></h2>
+    <p>物体の一端を電位 0 に接地し、もう一端を電位 $\phi$ にすると、やがて一定の電流 $J(\phi)$ が流れます。$\phi$ が小さい($\Delta\phi$)とき、$J$ をテイラー展開して1次で打ち切ると
+    $$J(\Delta\phi)=\frac{\partial J}{\partial\phi}\Delta\phi=\frac{1}{R}\Delta\phi\qquad(7.1)(7.2)$$
+    ($\frac1R:=\frac{\partial J}{\partial\phi}$)。これが<b>オームの法則</b>です。マクロな現象論の立場では、抵抗 $R$ はこの比例係数として<b>定義</b>され、オームの法則は「線形の範囲では必ず成り立つ関係」にすぎません。温度差に比例して熱が流れる(熱伝導)のと、同じ構図です。</p>
+    <ul>
+      <li><b>導体</b>は $R=0$、<b>絶縁体</b>は $R=\infty$ の理想極限。実際の物体は、とても小さいかとても大きいだけ。</li>
+      <li>電場が小さいのに電荷が加速し続けて電流が無限大になったら、物体は安定でいられない。だから、安定な物体では電荷が一定の速さになる、と自然に考えられる(講義ノートの脚注138)。</li>
+    </ul>
+    <div class="box intuit"><div class="label">直感で理解する:オームの法則は「法則」というより「1次近似」</div>
+      <p>どんな関数も、小さな変化の範囲では直線で近似できる(テイラー展開の1次)。電流と電位差の関係も同じで、電位差が小さければ比例する。その比例係数の逆数に「抵抗」という名前を付けた、というのがマクロな見方です。どこまで直線でよいか(線形の範囲の広さ)は物体次第で、多くの物体で広いことは、経験的に分かっている事実です。</p>
+    </div>
+    <h3 id="s2-1">2.1 電圧:局所的な電位差</h3>
+    <p>電位は、$\nabla\times\bm{E}=\bm{0}$ でないと定義できません(1.2 の枠)。誘導起電力やローレンツ力で電流を流すときは、全体では成り立たないことがあります。そこで、穴のあいていない一部の領域で $\nabla\times\bm{E}=\bm{0}$ が成り立てば、その中では電位を定義でき、2点の電位差が一つに決まります。これを<b>電圧</b>と呼びます(電圧計で測っている量)。</p>
+    <figure class="fig">
+      <svg viewBox="0 0 640 220" width="640" role="img" aria-label="磁場が変動していても、一部の領域では電位を定義できる"><rect x="30" y="30" width="580" height="160" rx="10" style="fill:var(--muted);opacity:.08"/><rect x="70" y="60" width="150" height="100" rx="6" style="fill:none;stroke:var(--thm);stroke-width:1.8"/><text class="tj" x="90" y="115">起電装置(内部は</text><text class="tj" x="90" y="135">∇×E ≠ 0 かもしれない)</text><path d="M 220 80 L 560 80 L 560 140 L 220 140" style="fill:none;stroke:var(--accent);stroke-width:2.2"/><rect x="380" y="70" width="60" height="20" style="fill:var(--surface);stroke:var(--accent);stroke-width:2"/><text class="tm" x="420" y="175" style="text-anchor:middle">外側(灰色):∇×E = 0 → 電位・電圧が定義できる</text></svg>
+      <figcaption>図1 講義ノートの図40を描き直したもの。磁場が時間変化して、全体では $\nabla\times\bm{E}=\bm{0}$ が成り立たなくても、穴のあいていない一部の領域(灰色)で成り立てば、その中では電位を矛盾なく定義でき、2点の電位差(<b>電圧</b>)が決まります。</figcaption>
+    </figure>
+    <h3 id="s2-2">2.2 ジュール熱</h3>
+    <p>抵抗を電流が流れると<b>ジュール熱</b>が出ます。毎秒 $I$ の電荷が、電圧 $V$ の坂を下りてエネルギーを失うので、エネルギー保存から
+    $$\dot Q=IV=RI^2\qquad(7.3).$$</p>
+
+    <h2 id="s3">3. 起電力(§7.2) <span class="page-tag">講義ノート p.57–58</span></h2>
+    <p>回路に電流が流れ続けられるのは、<b>起電力</b>があるからです。起電力は、電荷に仕事をして正負を分ける存在で、ある装置が電荷 $q$ に及ぼす力を $\bm{F}$ とすると、回路一周の経路 $C$ で
+    $$\mathcal{E}=\frac1q\oint_C\bm{F}\cdot d\bm{x}\qquad(7.4)$$
+    と定義されます(<b>単位電荷あたりの力の積分</b>。講義ノートは $\bm{F}$ を単位電荷あたりの力として書いている)。</p>
+    <div class="box warn"><div class="label">名前に引きずられない</div>
+      <p>「起電<b>力</b>」は、力(N)でも電力(W)でもありません。次元は電位と同じ(V)です。分かりやすいのは、ヴァンデグラフ発電機のように、ベルトコンベアで電荷を力学的に低い電位から高い電位へ運ぶ装置。そこでは「電荷を運ぶ力の積分」という定義が自然に感じられます。</p>
+    </div>
+    <h3 id="s3-1">3.1 開いた回路での起電力の役割</h3>
+    <p>回路が閉じていないと、起電力は正極側に正の電荷、負極側に負の電荷をためていきます。たまった電荷は、電荷を一様に戻そうとする向きの電場を作る。両方の力がつり合うところで落ち着きます。起電装置がなければ、偏った電荷分布は維持できず、一様に戻ってしまいます。</p>
+    <figure class="fig">
+      <svg viewBox="0 0 640 200" width="640" role="img" aria-label="開いた回路では、起電装置の力と、たまった電荷の電場がつり合う"><rect x="250" y="60" width="140" height="80" rx="6" style="fill:none;stroke:var(--thm);stroke-width:1.8"/><text class="tt" x="275" y="105">起電装置</text><line x1="250" y1="100" x2="120" y2="100" style="stroke:var(--muted);stroke-width:2"/><line x1="390" y1="100" x2="520" y2="100" style="stroke:var(--muted);stroke-width:2"/><text class="tt" x="130" y="92">+</text><text class="ta" x="420" y="92">−</text><text class="tt" x="155" y="92">+</text><text class="ta" x="445" y="92">−</text><text class="tt" x="180" y="92">+</text><text class="ta" x="470" y="92">−</text><text class="tt" x="205" y="92">+</text><text class="ta" x="495" y="92">−</text><line x1="300" y1="150" x2="331" y2="150" style="stroke:var(--thm);stroke-width:2.6"/><polygon points="340,150 331,154.1 331,146" style="fill:var(--thm)"/><text class="tt" x="255" y="175">装置の力(+ を左へ)</text><line x1="350" y1="40" x2="309" y2="40" style="stroke:var(--accent);stroke-width:2.6"/><polygon points="300,40 309,36 309,44.1" style="fill:var(--accent)"/><text class="ta" x="300" y="30">電荷の偏りの電場の力</text></svg>
+      <figcaption>図2 開いた回路の起電装置(講義ノートの図42)。装置が正電荷を一方に運ぶと、たまった電荷が逆向きの電場を作る。両方の力がつり合うまで電荷が偏り、そこで落ち着きます。</figcaption>
+    </figure>
+    <h3 id="s3-2">3.2 閉じた回路:起電力と電位差</h3>
+    <p>回路一周を、起電装置の中 $C_{\text{in}}$ と外 $C_{\text{out}}$ に分けます。静電場なら $\nabla\times\bm{E}=\bm{0}$ なので、ストークスの定理から $\int_{C_{\text{in}}}\bm{E}\cdot d\bm{x}+\int_{C_{\text{out}}}\bm{E}\cdot d\bm{x}=0$ (7.5)。内部抵抗のない理想的な装置なら、装置の力と電場がつり合って $\bm{F}=-\bm{E}$(単位電荷あたり)なので
+    $$\mathcal{E}=\int_{C_{\text{in}}}\bm{F}\cdot d\bm{x}=-\int_{C_{\text{in}}}\bm{E}\cdot d\bm{x}=\int_{C_{\text{out}}}\bm{E}\cdot d\bm{x}\qquad(7.6).$$
+    つまり、起電力は、外の回路の電位差に等しい。</p>
+    <div class="box warn"><div class="label">「起電力 = 電位差」を定義にしてはいけない</div>
+      <p>(7.6) は「静電場」かつ「理想的な装置」という仮定から導いた関係です。</p>
+      <ul>
+        <li>次の回で学ぶ<b>誘導起電力</b>では、磁場が変化して $\nabla\times\bm{E}\ne\bm{0}$ なので、そもそも電位が定義できない。</li>
+        <li>現実の装置には<b>内部抵抗</b>がある。内部抵抗がする仕事を $W_{\text{res}}$ とすると、端子の電位差に等しいのは、見かけの起電力 $\mathcal{E}_{\text{eff}}=\mathcal{E}-\frac{W_{\text{res}}}{q}$ (7.7)(高校の $V=E-rI$)。</li>
+      </ul>
+    </div>
+
+    <h2 id="s4">4. 化学電池(§7.3) <span class="page-tag">講義ノート p.59</span></h2>
+    <p>化学電池(ダニエル電池、果物電池など)は、電解質の溶液に2種類の金属(電極)を入れて作ります(乾電池は溶液をセパレーターにしみ込ませたもの)。同じ金属原子でも、固体の金属の中にいるとき($m$)と、溶液にイオンとして溶けているとき($l$)とでは、化学ポテンシャル(1.4 の枠)が違います。電池の中の反応は、
+    $$A_m+B_l\leftrightarrow A_l+B_m\qquad(7.8)$$
+    (すべて1価の場合)。金属 $A$、$B$ のこの化学ポテンシャルの差を $\Delta\mu_A$、$\Delta\mu_B$ とし、反応をゆっくり(可逆に)進めるとみなすと、なされた仕事は熱力学関数の変化に等しいので
+    $$q\mathcal{E}=\Delta\mu_B-\Delta\mu_A\qquad(7.9)$$
+    ($q$:原子1個のイオン化で動く電荷)。</p>
+    <div class="box intuit"><div class="label">直感で理解する:電池は「化学ポテンシャルの段差」を電位の段差に変える</div>
+      <p>ここまでの議論は、熱力学の量(化学ポテンシャル)だけで組み立てられています。電磁気学の電位と、熱力学の化学ポテンシャルが結びつくのは、熱力学で「力学的な仕事」と「熱力学関数の差」が結びつくのと同じ理由です。原子が金属から溶液へ移りたがる度合いの差が、電荷を押し上げる力になります。</p>
+    </div>
+
+    <h2 id="s5">5. 回路と電流(§7.4) <span class="page-tag">講義ノート p.59–61</span></h2>
+    <p>電流の問題は、マクスウェル方程式と<b>連続の式</b> $\frac{\partial\rho}{\partial t}+\nabla\cdot\bm{J}=0$ (7.10)(第6回 1.3)で、原理的にはすべて決まります。しかし、電磁気学の記述と、私たちが知っている電気回路の記述がどう結びつくか分かりにくい現象もあります。</p>
+    <h3 id="s5-1">5.1 なぜ電球はすぐにつくのか</h3>
+    <p>スイッチを入れると、豆電球はほぼ光速に近い速さで、すぐにつきます。一方、銅線の中の電子の平均の速さ(負極から正極へ動く速さ)は、とても遅い。</p>
+    <div class="box supp"><div class="label">講義ノートにない補足:電子の平均の速さを見積もる</div>
+      <p>$I=envS$ から $v=\frac{I}{enS}$。銅の自由電子の数密度 $n\approx8.5\times10^{28}\ \mathrm{m^{-3}}$、直径 1 mm の導線($S\approx7.9\times10^{-7}\ \mathrm{m^2}$)に $I=1$ A を流すと、
+      $$v=\frac{1}{1.6\times10^{-19}\times8.5\times10^{28}\times7.9\times10^{-7}}\approx1\times10^{-4}\ \mathrm{m/s}=0.1\ \mathrm{mm/s}.$$
+      1 m 進むのに約3時間。講義ノートは「秒速数ミリ程度」と書いていますが、どちらにしても非常に遅いことに変わりはありません。</p>
+    </div>
+    <p>理由は、<b>音</b>と比べると分かります。音は秒速 340 m で伝わりますが、耳に向かって秒速 340 m の風が吹くわけではありません。となりの空気を少しずつ押していくことで伝わります。電流も、負極の電子が正極まで移動する必要はなく、すべての場所の電子が少しずつ動けば流れます。ただし音と違って、実際には導線のすぐ外側の電磁場が、導線に沿ってほぼ光速で進み、電子を少しずつ動かしていきます(詳しくは電磁波の章)。</p>
+    <div class="box intuit"><div class="label">直感で理解する:満員のホース</div>
+      <p>水がいっぱいに詰まったホースは、蛇口をひねった瞬間に先から水が出ます。蛇口の水が先まで旅したのではなく、中の水が全体として少し押し出されただけです。</p>
+    </div>
+    <h3 id="s5-2">5.2 定常電流が流れている回路の中</h3>
+    <ul>
+      <li><b>理想導体の導線</b>:静電場の導体と同じで、中の電場は 0、導線全体が同じ電位(曲がっていても)。電荷は表面に分布する。</li>
+      <li><b>起電装置と抵抗</b>:装置は正電荷を一方に運び、導線の一方に正、他方に負の電荷がたまる。その電荷が抵抗の両端に電位差を作る。電位差が(見かけの)起電力と違えば電荷が動いてしまうので、定常状態では両者が一致する。これが<b>キルヒホッフの第2法則</b>「起電力 = 電圧降下」です(使うのは見かけの起電力 $\mathcal{E}_{\text{eff}}$)。</li>
+      <li><b>抵抗の中</b>:一様な電流と適切な電位を実現するように、抵抗の表面に電荷が分布する。曲がった抵抗では、内側ほど電荷が多く、電場が強い(図3)。電流は、この電場に導かれて曲がる。</li>
+      <li><b>コンデンサー</b>:電流が流れない場合でも、電荷の偏りは生じる。コンデンサーの電位差が起電力と一致するまで、極板に電荷がたまる。</li>
+    </ul>
+    <figure class="fig">
+      <svg viewBox="0 0 640 220" width="640" role="img" aria-label="曲がった抵抗の中では、内側ほど電荷が多く電場が強い"><path d="M 120 190 L 120 110 A 90 90 0 0 1 300 110 L 300 190" style="fill:none;stroke:var(--thm);stroke-width:26"/><path d="M 120 190 L 120 110 A 90 90 0 0 1 300 110 L 300 190" style="fill:none;stroke:var(--accent);stroke-width:1.4;stroke-dasharray:4 4"/><text class="tj" x="185" y="95">内側:道のりが短い</text><text class="tj" x="330" y="60">外側:道のりが長い</text><text class="tj" x="400" y="140">両端の電位差は同じなので</text><text class="tj" x="400" y="160">外側ほど電場は弱く、内側ほど強い</text><text class="ta" x="400" y="185">→ 電流は電場に沿って曲がる</text></svg>
+      <figcaption>図3 曲がった抵抗の中(講義ノートの図44(b))。両端の電位差はどの道筋でも同じなので、道のりの長い外側ほど電場は弱く、内側ほど強くなるように、表面に電荷が分布します。電流は、この曲がった電場に導かれて流れます。</figcaption>
+    </figure>
+    <div class="box thm"><div class="label">まとめ</div>
+      <p>起電力の役割は、<b>偏った電荷分布を作って保つ</b>こと。電流は、その偏った電荷分布(が作る電場)によって引き起こされる。</p>
+    </div>
+
+    <h2 id="s6">6. 例 7.1:磁場の中を動く導体棒 <span class="page-tag">講義ノート p.61–62</span></h2>
+    <div class="box ex"><div class="label">例 7.1</div>
+      <p>回路の一部の、導電性の長さ $l$ の棒を、磁場 $B$ の中で一定の速さ $v$ で動かす。ローレンツ力で電流が生じることは高校で学んだが、この設定は、これまでの枠組みのどこに位置づけられるか。</p>
+    </div>
+    <figure class="fig">
+      <svg viewBox="0 0 640 240" width="640" role="img" aria-label="磁場の中を動く導体棒と回路"><circle cx="150" cy="70" r="7" style="fill:none;stroke:var(--accent);stroke-width:1.8"/><line x1="145.66" y1="65.66" x2="154.34" y2="74.34" style="stroke:var(--accent);stroke-width:1.8"/><line x1="145.66" y1="74.34" x2="154.34" y2="65.66" style="stroke:var(--accent);stroke-width:1.8"/><circle cx="150" cy="120" r="7" style="fill:none;stroke:var(--accent);stroke-width:1.8"/><line x1="145.66" y1="115.66" x2="154.34" y2="124.34" style="stroke:var(--accent);stroke-width:1.8"/><line x1="145.66" y1="124.34" x2="154.34" y2="115.66" style="stroke:var(--accent);stroke-width:1.8"/><circle cx="150" cy="170" r="7" style="fill:none;stroke:var(--accent);stroke-width:1.8"/><line x1="145.66" y1="165.66" x2="154.34" y2="174.34" style="stroke:var(--accent);stroke-width:1.8"/><line x1="145.66" y1="174.34" x2="154.34" y2="165.66" style="stroke:var(--accent);stroke-width:1.8"/><circle cx="240" cy="70" r="7" style="fill:none;stroke:var(--accent);stroke-width:1.8"/><line x1="235.66" y1="65.66" x2="244.34" y2="74.34" style="stroke:var(--accent);stroke-width:1.8"/><line x1="235.66" y1="74.34" x2="244.34" y2="65.66" style="stroke:var(--accent);stroke-width:1.8"/><circle cx="240" cy="120" r="7" style="fill:none;stroke:var(--accent);stroke-width:1.8"/><line x1="235.66" y1="115.66" x2="244.34" y2="124.34" style="stroke:var(--accent);stroke-width:1.8"/><line x1="235.66" y1="124.34" x2="244.34" y2="115.66" style="stroke:var(--accent);stroke-width:1.8"/><circle cx="240" cy="170" r="7" style="fill:none;stroke:var(--accent);stroke-width:1.8"/><line x1="235.66" y1="165.66" x2="244.34" y2="174.34" style="stroke:var(--accent);stroke-width:1.8"/><line x1="235.66" y1="174.34" x2="244.34" y2="165.66" style="stroke:var(--accent);stroke-width:1.8"/><circle cx="330" cy="70" r="7" style="fill:none;stroke:var(--accent);stroke-width:1.8"/><line x1="325.66" y1="65.66" x2="334.34" y2="74.34" style="stroke:var(--accent);stroke-width:1.8"/><line x1="325.66" y1="74.34" x2="334.34" y2="65.66" style="stroke:var(--accent);stroke-width:1.8"/><circle cx="330" cy="120" r="7" style="fill:none;stroke:var(--accent);stroke-width:1.8"/><line x1="325.66" y1="115.66" x2="334.34" y2="124.34" style="stroke:var(--accent);stroke-width:1.8"/><line x1="325.66" y1="124.34" x2="334.34" y2="115.66" style="stroke:var(--accent);stroke-width:1.8"/><circle cx="330" cy="170" r="7" style="fill:none;stroke:var(--accent);stroke-width:1.8"/><line x1="325.66" y1="165.66" x2="334.34" y2="174.34" style="stroke:var(--accent);stroke-width:1.8"/><line x1="325.66" y1="174.34" x2="334.34" y2="165.66" style="stroke:var(--accent);stroke-width:1.8"/><circle cx="420" cy="70" r="7" style="fill:none;stroke:var(--accent);stroke-width:1.8"/><line x1="415.66" y1="65.66" x2="424.34" y2="74.34" style="stroke:var(--accent);stroke-width:1.8"/><line x1="415.66" y1="74.34" x2="424.34" y2="65.66" style="stroke:var(--accent);stroke-width:1.8"/><circle cx="420" cy="120" r="7" style="fill:none;stroke:var(--accent);stroke-width:1.8"/><line x1="415.66" y1="115.66" x2="424.34" y2="124.34" style="stroke:var(--accent);stroke-width:1.8"/><line x1="415.66" y1="124.34" x2="424.34" y2="115.66" style="stroke:var(--accent);stroke-width:1.8"/><circle cx="420" cy="170" r="7" style="fill:none;stroke:var(--accent);stroke-width:1.8"/><line x1="415.66" y1="165.66" x2="424.34" y2="174.34" style="stroke:var(--accent);stroke-width:1.8"/><line x1="415.66" y1="174.34" x2="424.34" y2="165.66" style="stroke:var(--accent);stroke-width:1.8"/><line x1="100" y1="50" x2="500" y2="50" style="stroke:var(--muted);stroke-width:2.2"/><line x1="100" y1="190" x2="500" y2="190" style="stroke:var(--muted);stroke-width:2.2"/><line x1="100" y1="50" x2="100" y2="190" style="stroke:var(--muted);stroke-width:2.2"/><rect x="92" y="100" width="16" height="40" style="fill:var(--surface);stroke:var(--thm);stroke-width:2"/><text class="tt" x="40" y="125">抵抗</text><line x1="420" y1="40" x2="420" y2="200" style="stroke:var(--ex);stroke-width:5"/><line x1="420" y1="120" x2="471" y2="120" style="stroke:var(--ex);stroke-width:2.6"/><polygon points="480,120 471,124.1 471,116" style="fill:var(--ex)"/><text class="t" x="485" y="125">v</text><text class="tj" x="425" y="225">導体棒(長さ l)</text><line x1="440" y1="160" x2="440" y2="89" style="stroke:var(--thm);stroke-width:2.2"/><polygon points="440,80 444.1,89 436,89" style="fill:var(--thm)"/><text class="tt" x="448" y="92">+ への力 qvB</text><text class="ta" x="520" y="70">B(奥向き)</text></svg>
+      <figcaption>図4 例 7.1(講義ノートの図45(a))。奥向きの磁場の中で、導体棒を右に速さ $v$ で動かすと、棒の中の正電荷はローレンツ力 $q\bm{v}\times\bm{B}$ で棒に沿って上向きに押される。これが起電力 $vBl$ になります。</figcaption>
+    </figure>
+    <ol>
+      <li><b>回路につながないとき</b>:棒の中の電荷は、ローレンツ力で棒に沿って押され、一方の端に正、他方に負の電荷がたまる。その電荷が作る電場がローレンツ力とつり合うと、変化が止まる(3.1 の開いた回路と同じ)。「力を加えているのに変化しない」のは、坂の途中でボールを止めておくのに、上向きの力を加え続ける必要があるのと同じ。</li>
+      <li><b>回路につないだとき</b>:定常状態では、棒の中の電荷にはたらく力はつり合っている。抵抗のない導体棒なら、電荷分布は開いた回路のときと同じ。抵抗の代わりにコンデンサーを置いて、極板の電荷を手で正から負へ運ぶと考えると分かりやすい:運ぶたびに、棒が電荷を補い、分布は元に戻る。抵抗に電流が流れるのも、本質は同じ。</li>
+      <li><b>起電力</b>:棒を引っ張ることで生じるローレンツ力が起電力 $\mathcal{E}=vBl$。棒に抵抗 $R$ があれば、見かけの起電力は
+      $$\mathcal{E}_{\text{eff}}=\mathcal{E}-RI=vBl-RI\qquad(7.11).$$</li>
+    </ol>
+    <div class="box supp"><div class="label">講義ノートにない補足:エネルギーの収支</div>
+      <p>棒の抵抗 $R$、外の抵抗 $R'$ なら、電流は $I=\frac{vBl}{R+R'}$。電流の流れる棒は磁場から $IBl$ の力を(動きと逆向きに)受けるので、一定の速さで動かすには、外から同じ大きさの力で引く必要がある。その仕事率は $IBl\cdot v=\frac{(vBl)^2}{R+R'}=I^2(R+R')$ で、2つの抵抗で出るジュール熱にちょうど等しい。ローレンツ力は仕事をしない(第6回)が、引っ張る人の仕事を電流の向きへ「向けかえて」いるのです。</p>
+    </div>
+
+    <h2 id="s7">7. 具体例で練習(講義ノートにない補足) <span class="page-tag">補足</span></h2>
+    <p>この節は、講義ノートの例とは別に、私が作った練習問題と解答です。</p>
+    <div class="box ex"><div class="label">問題 Z1:内部抵抗のある電池</div>
+      <p>起電力 $\mathcal{E}=1.5$ V、内部抵抗 $r=0.5\ \Omega$ の電池に、抵抗 $R$ をつなぐ。(1) $R=2.5\ \Omega$ のとき、電流と端子電圧を求めよ。(2) $R$ で消費される電力が最大になる $R$ を求めよ。</p>
+    </div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>(1) $I=\frac{\mathcal{E}}{R+r}=0.5$ A、端子電圧 $V=\mathcal{E}-rI=1.25$ V(= $RI$)。</p>
+      <p>(2) $P=RI^2=\frac{R\mathcal{E}^2}{(R+r)^2}$。$R$ で微分して 0 とおくと $(R+r)^2-2R(R+r)=0$、つまり $R=r=0.5\ \Omega$(インピーダンス整合)。そのとき $P=\frac{\mathcal{E}^2}{4r}=1.125$ W。電池の中でも同じだけ熱が出るので、効率は 50%。</p>
+    </div>
+    <div class="box ex"><div class="label">問題 Z2:曲がった抵抗の電場</div>
+      <p>半円の形に曲げた、一様な抵抗の帯(内側の半径 $a$、外側の半径 $b$)の両端に、電位差 $V$ をかけた。帯の中の、中心からの距離 $r$ の場所の電場の大きさを求めよ(電場は円周方向で、大きさは $r$ だけで決まるとする)。</p>
+    </div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>半径 $r$ の半円に沿って電場を線積分すると、どの $r$ でも両端の電位差 $V$ に等しい:$E(r)\cdot\pi r=V$、よって $E(r)=\frac{V}{\pi r}$。内側($r=a$)ほど電場が強く、電流密度 $J=\sigma E$ も大きい(図3の説明そのもの)。この電場を作るのが、抵抗の表面にたまった電荷です。</p>
+    </div>
+
+    <h2 id="s8">8. まとめ(この回で覚えること)</h2>
+    <ul>
+      <li><b>オームの法則</b>は線形応答(1次近似)で、抵抗はその比例係数として定義される。電圧は、局所的に $\nabla\times\bm{E}=\bm{0}$ の領域で定義される電位差。ジュール熱 $\dot Q=IV=RI^2$。</li>
+      <li><b>起電力</b> $\mathcal{E}=\oint\bm{F}\cdot d\bm{x}$(単位電荷あたりの力の積分、単位は V)。「起電力 = 電位差」は、静電場かつ理想的な装置のときだけ。内部抵抗があれば見かけの起電力 $\mathcal{E}_{\text{eff}}=\mathcal{E}-W_{\text{res}}/q$。</li>
+      <li><b>化学電池</b>:$q\mathcal{E}=\Delta\mu_B-\Delta\mu_A$(化学ポテンシャルの差)。</li>
+      <li><b>回路の中</b>:電子はとても遅い(0.1 mm/s 程度)が、電磁場が導線に沿って光速近くで伝わり、全体の電子を少しずつ動かす。起電力は偏った電荷分布を作り、その電場が電流を流す。キルヒホッフの第2法則 = 定常状態で「見かけの起電力 = 電圧降下」。</li>
+      <li><b>動く導体棒</b>:起電力 $vBl$、見かけの起電力 $vBl-RI$。引っ張る仕事 = ジュール熱。</li>
+    </ul>
+
+    <h2 id="s9">9. この回のノートについてのメモ</h2>
+    <p>板書の写真ではなく、<b>文章で書かれた講義ノート(フル版)</b>の p.56〜p.62(§7)をもとにまとめました。写真や引用画像(ヴァンデグラフ発電機、ダニエル電池)は載せず、必要な図は描き直しました。</p>
+    <p>講義ノートの記述で、誤り(または誤記)と判断して直した箇所、読み替えた箇所は次のとおりです。</p>
+    <ol>
+      <li><b>(7.4) の起電力の定義(p.57)</b>:講義ノートは「単位電荷あたりの力の積分」と説明しつつ $\mathcal{E}=\int\bm{F}\cdot d\bm{x}$ と書いているので、$\bm{F}$ を単位電荷あたりの力($\frac1q$ 倍)と読みました。</li>
+      <li><b>電子の平均の速さ(p.59〜60)</b>:「秒速数ミリ程度」とありますが、直径 1 mm の銅線に 1 A なら約 0.1 mm/s と見積もれます(5.1 の黄色の枠)。どちらにしても「とても遅い」という結論は同じです。</li>
+      <li><b>「某内部の抵抗」(p.61)</b>:「棒内部の抵抗」の誤記と読みました。</li>
+      <li><b>回の分け方</b>:§7 は「補論」です。授業の日程が分かったら合わせます。</li>
+    </ol>
+
+    <nav class="pager" data-fixed>
+      <a href="week-07.html">← 第7回</a>
+      <a href="../index.html">一覧へ</a>
+      <span class="disabled">次の回 →</span>
+    </nav>
+
+  </main>
+
+  <footer>© Aセメまとめノート</footer>
+</body>
+</html>
