@@ -103,6 +103,10 @@
           <ul>
             <li><a href="#refraction">δ. 光の反射と屈折(高校)</a></li>
           </ul></li>
+        <li><b>相対論のための道具</b><!--b5-->
+          <ul>
+            <li><a href="#inertial">ε. 慣性系とガリレイ変換(力学)</a></li>
+          </ul></li>
         <li><b>もっと詳しく(数学の基礎)</b>
           <ul>
             <li><a href="#x-partial">補1. 偏微分(もっと詳しく)</a></li>
@@ -892,6 +896,23 @@
       <p>行進する隊列が、ぬかるみ(光が遅い媒質)に斜めに入ると、先に入った端から遅くなるので、隊列の向きが曲がる。これが屈折です。</p>
     </div>
     <p class="used-in">この回で使う場所:<a href="weeks/week-12.html#w-refr" data-xref>第12回 1.4 光の反射と屈折(高校)</a><a href="weeks/week-12.html#s5" data-xref>第12回 5. 反射と屈折</a></p>
+
+    <!-- ===================== ε: 慣性系とガリレイ変換(力学) ===================== -->
+    <h2 id="inertial">ε. 慣性系とガリレイ変換(力学)</h2>
+    <ul>
+      <li><b>慣性系</b>:力がはたらかない物体が等速直線運動をする(慣性の法則が成り立つ)座標系。ある慣性系に対して等速で動く座標系も、また慣性系。</li>
+      <li><b>相対性原理</b>:物理法則は、どの慣性系でも同じ形をしている(等速で走る電車の中でも、止まっているときと同じ実験結果になる)。</li>
+      <li><b>ガリレイ変換</b>:慣性系 S に対して $x$ 方向に速度 $v$ で動く慣性系 S′ の座標は $x'=x-vt$、$t'=t$。速度は $u'=u-v$(引き算・足し算)。時刻は共通。</li>
+      <li>ニュートンの運動方程式 $m\frac{d^2x}{dt^2}=F$ は、ガリレイ変換で形を変えない。しかし、マクスウェル方程式(光の速さ $c$ を含む)は、ガリレイ変換で形が変わってしまう。これが特殊相対論の出発点。</li>
+    </ul>
+    <figure class="fig">
+      <svg viewBox="0 0 620 200" width="620" role="img" aria-label="動く座標系から見ると、速度は引き算になる(ガリレイ変換)"><line x1="40" y1="150" x2="580" y2="150" style="stroke:var(--muted);stroke-width:1.6"/><text class="tj" x="45" y="175">慣性系 S(地面)</text><rect x="200" y="90" width="200" height="50" rx="6" style="fill:var(--accent);opacity:.12;stroke:var(--accent);stroke-width:1.6"/><text class="ta" x="210" y="85">慣性系 S′(電車、速度 v)</text><line x1="400" y1="115" x2="451" y2="115" style="stroke:var(--accent);stroke-width:2.4"/><polygon points="460,115 451,119.1 451,111" style="fill:var(--accent)"/><text class="t" x="465" y="120">v</text><circle cx="280" cy="115" r="7" style="fill:var(--thm)"/><line x1="280" y1="115" x2="321" y2="115" style="stroke:var(--thm);stroke-width:2.4"/><polygon points="330,115 321,119.1 321,111" style="fill:var(--thm)"/><text class="t" x="290" y="108">u′</text><text class="tj" x="60" y="40">地面から見たボールの速さ u = u′ + v、位置 x′ = x − vt、時刻 t′ = t</text></svg>
+      <figcaption>ガリレイ変換。電車の中で投げたボールの速さは、地面から見ると電車の速さが足される。時刻はどちらから見ても同じ、というのが前提です(特殊相対論ではここが変わる)。</figcaption>
+    </figure>
+    <div class="box intuit"><div class="label">直感で理解する</div>
+      <p>新幹線の中でボールを投げても、ふつうにキャッチボールができる(相対性原理)。ただ、地面から見るとボールは新幹線の速さが足されて飛んでいる。光についてもこれが成り立つと、光の速さが見る人によって変わってしまう。ところが実験では、光の速さはどの慣性系から見ても同じ $c$ でした。</p>
+    </div>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-13.html#w-inertial" data-xref>第13回 1.3 慣性系とガリレイ変換</a><a href="weeks/week-13.html#s4" data-xref>第13回 4. 特殊相対論の基礎</a></p>
     <!-- b5:end -->
 
     <!-- import:start -->

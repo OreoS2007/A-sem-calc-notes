@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>第13回 四元ベクトルと特殊相対論の基礎(ゲージ変換、4元ポテンシャル、ローレンツ変換) | Aセメまとめノート</title>
+  <link rel="stylesheet" href="../../assets/style.css">
+  <script defer src="../../assets/nav.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],macros:{'\\R':'\\mathbb{R}','\\bm':'\\boldsymbol{#1}','\\rot':'\\operatorname{rot}','\\grad':'\\operatorname{grad}','\\dvg':'\\operatorname{div}','\\pd':'\\frac{\\partial #1}{\\partial #2}'}});window.__navReady&&window.__navReady()"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="inner">
+      <a class="site-title" href="../../index.html">Aセメまとめノート</a>
+      <span class="links"><a href="../index.html">電磁気学</a><a href="../basics.html">基礎のまとめ</a><a href="../../calc/index.html">微積</a><a href="../../linalg/index.html">線形代数</a><a href="../../structchem/index.html">構造化学</a><a href="../../mech/index.html">力学A</a><a href="../../thermo/index.html">熱力学</a></span>
+    </div>
+  </header>
+
+  <main class="note">
+    <h1>第13回:四元ベクトルと特殊相対論の基礎(ゲージ変換、4元ポテンシャル、ローレンツ変換)</h1>
+    <div class="meta">電磁気学(東京大学 教養学部 秋学期)／授業日は未定(講義ノートの分量から分けた予定)／講義ノート §12、§13.1(p.87〜p.94)</div>
+
+    <nav class="toc">
+      <div class="toc-title">目次</div>
+      <ol start="0">
+        <li><a href="#s0">この回の全体像</a></li>
+        <li><a href="#s1">準備:基礎の確認</a>
+          <div class="sub">ポテンシャルとゲージの自由度(第3回・第6回)／マクスウェル方程式と電磁波(第9回・第12回)／慣性系とガリレイ変換(力学)／行列の積と2次形式</div></li>
+        <li><a href="#s2">スカラーポテンシャルとベクトルポテンシャル(§12.1)</a></li>
+        <li><a href="#s3">ゲージ変換と4元ポテンシャル(§12.2)</a></li>
+        <li><a href="#s4">補論:特殊相対論の基礎(§13.1)</a></li>
+        <li><a href="#s5">具体例で練習(講義ノートにない補足)</a></li>
+        <li><a href="#s6">まとめ(この回で覚えること)</a></li>
+        <li><a href="#s7">この回のノートについてのメモ</a></li>
+      </ol>
+    </nav>
+
+    <h2 id="s0">0. この回の全体像 <span class="page-tag">講義ノート p.87</span></h2>
+    <p>この回は2つの話です。前半(§12)は、スカラーポテンシャルとベクトルポテンシャルを、時間変化する場合に正しく位置づけ直し、ゲージ変換を使って、マクスウェル方程式を<b>たった1本の式</b> $\Box^2A^\mu=-\mu_0J^\mu$ にまとめます。後半(§13.1、補論)は、その式がぴったり合う<b>特殊相対論</b>の基礎です。</p>
+    <div class="box thm"><div class="label">この回のゴール</div>
+      <p>① 一般には $\bm{E}=-\nabla\phi-\frac{\partial\bm{A}}{\partial t}$、$\bm{B}=\nabla\times\bm{A}$。<br>
+      ② ゲージ変換 $\bm{A}\to\bm{A}+\nabla\lambda$、$\phi\to\phi-\frac{\partial\lambda}{\partial t}$ で電磁場は変わらない。ローレンツゲージで、$\phi$ と $\bm{A}$ の方程式が同じ形の波動方程式になる。<br>
+      ③ 4元ポテンシャル $A^\mu=(\phi/c,\bm{A})$、4元電流 $J^\mu=(c\rho,\bm{J})$、ダランベール演算子 $\Box^2$ で $\Box^2A^\mu=-\mu_0J^\mu$。<br>
+      ④ 光速度不変から:「同時」のずれ、時間の遅れ、ローレンツ収縮、ローレンツ変換、速度の合成則。</p>
+    </div>
+    <div class="box note-box"><div class="label">この回の日程について</div>
+      <p>講義ノートの分量と内容から分けた予定です。§13 は講義ノートでも「補論」で、時間があれば扱われる内容です。日程が分かったら合わせます。</p>
+    </div>
+    <p>以下では、先に必要な基礎を復習してから、講義ノートの順に進みます。紫色の枠は「基礎の復習」、黄色の枠は「講義ノートにないが、理解を助けるために私が補った部分」、緑の枠は「直感で理解するための説明」です。</p>
+
+    <h2 id="s1">1. 準備:基礎の確認</h2>
+    <p>この回で使う道具と、前の回までの結果を並べます。</p>
+
+    <h3 id="w-pot">1.1 ポテンシャルとゲージの自由度(第3回・第6回)</h3>
+    <div class="box basic">
+      <div class="label">基礎:回転ゼロなら勾配で書ける、発散ゼロなら回転で書ける <a class="xref-link" href="week-06.html#s4-2" data-xref>→ 第6回 4.2</a></div>
+      <p>穴のない領域で $\nabla\times\bm{X}=\bm{0}$ なら $\bm{X}=\nabla\lambda$(第3回)。$\nabla\cdot\bm{B}=0$ なら $\bm{B}=\nabla\times\bm{A}$ で、$\bm{A}$ に $\nabla\lambda$ を足しても $\bm{B}$ は変わらない(ゲージ自由度、第6回)。静電場では $\bm{E}=-\nabla\phi$、$\phi$ は定数だけの不定性。</p>
+      <p><b>直感:</b> ポテンシャルは「高さの基準」のようなもので、選び方に自由がある。</p>
+    </div>
+
+    <h3 id="w-maxwell">1.2 マクスウェル方程式と電磁波(第9回・第12回)</h3>
+    <div class="box basic">
+      <div class="label">基礎:4つの式と、真空の波動方程式 <a class="xref-link" href="week-12.html#s2" data-xref>→ 第12回 2.</a></div>
+      <p>$\nabla\cdot\bm{E}=\rho/\varepsilon_0$、$\partial_t\bm{B}+\nabla\times\bm{E}=\bm{0}$、$\nabla\cdot\bm{B}=0$、$-\frac{1}{c^2}\partial_t\bm{E}+\nabla\times\bm{B}=\mu_0\bm{J}$($\mu_0\varepsilon_0=1/c^2$)。真空では $\Delta\bm{E}-\frac{1}{c^2}\partial_t^2\bm{E}=\bm{0}$(速さ $c$ の波)。</p>
+      <p><b>直感:</b> 「$\Delta-\frac{1}{c^2}\partial_t^2$」が出てきたら、光速で伝わる波。</p>
+    </div>
+
+    <h3 id="w-inertial">1.3 慣性系とガリレイ変換(力学)</h3>
+    <div class="box basic">
+      <div class="label">基礎:$x'=x-vt$、$t'=t$、速度は足し算 <a class="xref-link" href="../basics.html#inertial" data-xref>→ 詳しい解説</a></div>
+      <p>慣性系に対して等速で動く座標系も慣性系で、物理法則はどの慣性系でも同じ(相対性原理)。ニュートン力学では、慣性系どうしはガリレイ変換 $x'=x-vt$、$t'=t$ で結ばれ、速度は $u'=u-v$。時刻は共通。</p>
+      <p><b>直感:</b> 電車の中のキャッチボールは、地面から見ると電車の速さが足される。</p>
+    </div>
+
+    <h3 id="w-matrix">1.4 行列の積と2次形式</h3>
+    <div class="box basic">
+      <div class="label">基礎:$\bm{a}^{\top}M\bm{b}=\sum_{ij}a_iM_{ij}b_j$ <a class="xref-link" href="../basics.html#matrix" data-xref>→ 詳しい解説</a></div>
+      <p>行ベクトル × 行列 × 列ベクトルは数になる。$M=\mathrm{diag}(-1,1,1,1)$ なら $\bm{a}^{\top}M\bm{a}=-a_0^2+a_1^2+a_2^2+a_3^2$。座標を行列 $\Lambda$ で変換する($\tilde{\bm{x}}=\Lambda\bm{x}$)と、成分は混ざり合う。</p>
+      <p><b>直感:</b> 対角に $-1$ が1つだけ入った「ものさし」で測る長さ。</p>
+    </div>
+
+    <h2 id="s2">2. スカラーポテンシャルとベクトルポテンシャル(§12.1) <span class="page-tag">講義ノート p.87</span></h2>
+    <p>$\nabla\cdot\bm{B}=0$ は、時間変化する場合も常に成り立つので、$\bm{B}=\nabla\times\bm{A}$ (12.1) はいつでも使えます。一方、$\bm{E}=-\nabla\phi$ は静電場だけの関係で、修正が必要です。ファラデーの法則に (12.1) を代入すると
+    $$\nabla\times\Bigl(\frac{\partial\bm{A}}{\partial t}+\bm{E}\Bigr)=\bm{0}\qquad(12.2).$$
+    回転ゼロなのは $\bm{E}$ ではなく $\bm{E}+\frac{\partial\bm{A}}{\partial t}$ で、これを $-\nabla\phi$ と書くと</p>
+    <div class="box thm"><div class="label">一般の場合のポテンシャル表示 (12.1)(12.3)</div>
+      <p>$$\bm{B}=\nabla\times\bm{A},\qquad\bm{E}=-\nabla\phi-\frac{\partial\bm{A}}{\partial t}$$</p>
+    </div>
+    <p>この形なら、マクスウェル方程式のうちファラデーの法則と $\nabla\cdot\bm{B}=0$ は<b>自動的に</b>満たされます。残りの2本に代入すると
+    $$\Delta\phi+\frac{\partial}{\partial t}(\nabla\cdot\bm{A})=-\frac{\rho}{\varepsilon_0}\quad(12.4),\qquad-\Delta\bm{A}+\frac{1}{c^2}\frac{\partial^2\bm{A}}{\partial t^2}+\nabla\Bigl(\nabla\cdot\bm{A}+\frac{1}{c^2}\frac{\partial\phi}{\partial t}\Bigr)=\mu_0\bm{J}\quad(12.5).$$
+    これを解けば電磁場がすべて決まりますが、(12.5) はとても複雑な形です。次のゲージ自由度で、ぐっと簡単にできます。</p>
+    <div class="box intuit"><div class="label">直感で理解する:「回転ゼロの部分」だけが電位で書ける</div>
+      <p>磁場が変化していると、電場には渦(回転)がある(誘導起電力)。その渦の部分は $-\partial_t\bm{A}$ が受け持ち、残りの渦のない部分だけを電位の勾配で表す、という分け方です。ヘルムホルツ分解(第6回)の、時間変化する版と思えます。</p>
+    </div>
+
+    <h2 id="s3">3. ゲージ変換と4元ポテンシャル(§12.2) <span class="page-tag">講義ノート p.87–89</span></h2>
+    <p>$\bm{A}$ に勾配 $\nabla\lambda$ を足しても $\bm{B}$ は変わりません。しかし $\bm{E}=-\nabla\phi-\partial_t\bm{A}$ には $-\nabla\partial_t\lambda$ が加わるので、それを打ち消すように $\phi$ も変えます:</p>
+    <div class="box thm"><div class="label">ゲージ変換 (12.10)(12.11)</div>
+      <p>任意のなめらかな関数 $\lambda(\bm{r},t)$ について $$\bm{A}'=\bm{A}+\nabla\lambda,\qquad\phi'=\phi-\frac{\partial\lambda}{\partial t}$$ としても、電場と磁場は全く同じ。</p>
+    </div>
+    <div class="box supp"><div class="label">講義ノートにない補足:確かめ</div>
+      <p>$\nabla\times\bm{A}'=\nabla\times\bm{A}+\nabla\times\nabla\lambda=\bm{B}$。$-\nabla\phi'-\partial_t\bm{A}'=-\nabla\phi+\nabla\partial_t\lambda-\partial_t\bm{A}-\partial_t\nabla\lambda=\bm{E}$(微分の順序を交換した)。</p>
+    </div>
+    <p>$\lambda$ を決めることを<b>ゲージ固定</b>といいます。静的な場合は $\nabla\cdot\bm{A}=0$(<b>クーロンゲージ</b>)が便利でした。時間変化する場合によく使うのは<b>ローレンツゲージ</b>
+    $$\nabla\cdot\bm{A}+\frac{1}{c^2}\frac{\partial\phi}{\partial t}=0\qquad(12.12)$$
+    で、(12.5) の第3項をちょうど消すように選んだものです。すると (12.4)(12.5) は</p>
+    $$\Delta\bm{A}-\frac{1}{c^2}\frac{\partial^2\bm{A}}{\partial t^2}=-\mu_0\bm{J}\quad(12.13),\qquad\Delta\phi-\frac{1}{c^2}\frac{\partial^2\phi}{\partial t^2}=-\frac{\rho}{\varepsilon_0}\quad(12.14)$$
+    <p>と、$\phi$ と $\bm{A}$ が<b>全く同じ形</b>の方程式になります(源のある波動方程式)。</p>
+    <div class="box note-box"><div class="label">講義ノートの脚注211・212</div>
+      <p>クーロンゲージでは $\phi$ が静電場と同じ式になり、電荷を動かすと宇宙のあらゆる場所の $\phi$ が瞬時に変わります。光より速い通信にならないのは、$\bm{A}$ もちょうどそれを打ち消すように変わり、離れた場所の電磁場は変化しないからです。ローレンツゲージ(Lorenz)のルートヴィヒ・ローレンツは、ローレンツ力・ローレンツ変換のヘンドリック・ローレンツ(Lorentz)とは別人です。</p>
+    </div>
+    <h3 id="s3-1">3.1 4元ベクトルでまとめる</h3>
+    <p><b>ダランベール演算子</b> $\Box^2:=\Delta-\frac{1}{c^2}\frac{\partial^2}{\partial t^2}$ (12.15) は、$\tau=ct$ とおくと
+    $$\Box^2=\begin{pmatrix}\partial_\tau&\partial_x&\partial_y&\partial_z\end{pmatrix}\begin{pmatrix}-1&&&\\&1&&\\&&1&\\&&&1\end{pmatrix}\begin{pmatrix}\partial_\tau\\\partial_x\\\partial_y\\\partial_z\end{pmatrix}\qquad(12.16)$$
+    と、時間と空間を対等に並べ、時間にだけ $-1$ を付けたきれいな形です。<b>4元電流密度</b> $J^\mu=(c\rho,J_x,J_y,J_z)$ (12.17) と<b>4元ポテンシャル</b> $A^\mu=(\phi/c,A_x,A_y,A_z)$ (12.18) を使うと</p>
+    <div class="box thm"><div class="label">電磁気学の基礎方程式の、もっとも簡潔な形 (12.19)</div>
+      <p>$$\Box^2A^\mu=-\mu_0J^\mu\qquad(\mu=0,1,2,3)$$ 第0成分がガウスの法則、第1〜3成分が変位電流つきのアンペールの法則。残りの2本は、ポテンシャルの作り方から自動的に満たされる。</p>
+    </div>
+    <div class="box supp"><div class="label">講義ノートにない補足:第0成分の確かめ</div>
+      <p>$\Box^2(\phi/c)=-\mu_0c\rho$ の両辺に $c$ を掛けると $\Box^2\phi=-\mu_0c^2\rho=-\rho/\varepsilon_0$($\mu_0c^2=1/\varepsilon_0$)。(12.14) そのものです。</p>
+    </div>
+    <div class="box intuit"><div class="label">直感で理解する:電磁気学の「究極の表示」</div>
+      <p>4本のマクスウェル方程式が、1本の式に収まりました。しかもこの式は、時間と空間を対等に扱っていて(時間に $-1$ が付くだけ)、次の節の特殊相対論とぴったり合う形をしています。講義ノートは、これを「電磁気学の究極の表示」と呼んでいます。</p>
+    </div>
+
+    <h2 id="s4">4. 補論:特殊相対論の基礎(§13.1) <span class="page-tag">講義ノート p.90–94</span></h2>
+    <p>力学では、慣性系 S に対して速度 $v$ で動く慣性系 S′ の座標を、ガリレイ変換 $(x',t')=(x-vt,t)$ (13.1) で求めました。特殊相対論は、<b>光の速さはどの慣性系から見ても $c$</b>(<b>光速度不変</b>)を要請します。ガリレイ変換では、動く系から見た光の速さが $c\pm v$ になってしまうので、両立しません。光速度不変を守るには、位置だけでなく<b>時間も</b>変換で変わる必要があります。</p>
+    <h3 id="s4-1">4.1 「同時」は慣性系によって違う</h3>
+    <p>S′ の原点から左右に光を出すと、S′ から見れば左右の壁($x=\pm l$)に同時に届きます。ところが S から見ると、光の速さは $c$ のまま、右の壁は光から逃げ、左の壁は光に近づくので、<b>左の壁に先に</b>届きます。ある慣性系で「同時」の出来事が、別の慣性系では同時ではない。特殊相対論の「パラドックス」の大半は、この事実から来ています。</p>
+    <figure class="fig">
+      <svg viewBox="0 0 640 230" width="640" role="img" aria-label="同時のずれ:部屋の中央から左右に光を出す"><text class="tj" x="160" y="25" style="text-anchor:middle">部屋と一緒に動く人(S′)から見ると</text><rect x="40" y="50" width="240" height="80" rx="4" style="fill:none;stroke:var(--muted);stroke-width:1.8"/><circle cx="160" cy="90" r="6" style="fill:var(--thm)"/><line x1="160" y1="90" x2="59" y2="90" style="stroke:var(--thm);stroke-width:2"/><polygon points="50,90 59,86 59,94.1" style="fill:var(--thm)"/><line x1="160" y1="90" x2="261" y2="90" style="stroke:var(--thm);stroke-width:2"/><polygon points="270,90 261,94.1 261,86" style="fill:var(--thm)"/><text class="tt" x="160" y="155" style="text-anchor:middle">左右の壁に同時に届く</text><text class="tj" x="480" y="25" style="text-anchor:middle">部屋が右へ動いて見える人(S)から見ると</text><rect x="350" y="50" width="240" height="80" rx="4" style="fill:none;stroke:var(--muted);stroke-width:1.8"/><circle cx="470" cy="90" r="6" style="fill:var(--thm)"/><line x1="470" y1="90" x2="371" y2="90" style="stroke:var(--thm);stroke-width:2"/><polygon points="362,90 371,86 371,94.1" style="fill:var(--thm)"/><line x1="470" y1="90" x2="569" y2="90" style="stroke:var(--thm);stroke-width:2"/><polygon points="578,90 569,94.1 569,86" style="fill:var(--thm)"/><line x1="350" y1="145" x2="391" y2="145" style="stroke:var(--accent);stroke-width:2.2"/><polygon points="400,145 391,149.1 391,141" style="fill:var(--accent)"/><text class="ta" x="410" y="150">部屋の速度 v</text><text class="tj" x="480" y="180" style="text-anchor:middle">左の壁は光に近づき、右の壁は逃げる</text><text class="tt" x="480" y="205" style="text-anchor:middle">→ 左の壁に先に届く(同時ではない)</text></svg>
+      <figcaption>図1 「同時」は慣性系によって違う(講義ノートの図59)。光の速さはどの慣性系でも $c$ なので、部屋が動いて見える人には、光は左の壁に先に届きます。</figcaption>
+    </figure>
+    <h3 id="s4-2">4.2 時間の遅れ</h3>
+    <p>光を鏡まで行かせる「光時計」を考えます。時計と一緒に動く人には、距離 $h$ を光がまっすぐ進み、時間は $\tilde\tau=h/c$。時計が速度 $v$ で横に動いて見える人には、光は斜めに進み、道のりは $\sqrt{h^2+(v\tau)^2}$(運動と垂直な長さは変わらない)。光の速さは $c$ なので $c\tau=\sqrt{h^2+(v\tau)^2}$ (13.2)、これを解いて</p>
+    <div class="box thm"><div class="label">時間の遅れ (13.3)</div>
+      <p>$$\tau=\frac{\tilde\tau}{\sqrt{1-v^2/c^2}}=\gamma\tilde\tau,\qquad\gamma=\frac{1}{\sqrt{1-v^2/c^2}}\ge1$$ 動いている時計は、止まっている時計より $\gamma$ 倍ゆっくり進んで見える。</p>
+    </div>
+    <figure class="fig">
+      <svg viewBox="0 0 640 230" width="640" role="img" aria-label="光時計:止まって見えるときと、動いて見えるとき"><line x1="80" y1="50" x2="160" y2="50" style="stroke:var(--muted);stroke-width:3"/><line x1="80" y1="190" x2="160" y2="190" style="stroke:var(--muted);stroke-width:3"/><line x1="120" y1="188" x2="120" y2="61" style="stroke:var(--thm);stroke-width:2.2"/><polygon points="120,52 124.1,61 116,61" style="fill:var(--thm)"/><text class="t" x="125" y="125">h</text><text class="tm" x="60" y="215">止まって見える(時間 τ̃ = h/c)</text><line x1="330" y1="50" x2="600" y2="50" style="stroke:var(--muted);stroke-width:3"/><line x1="330" y1="190" x2="600" y2="190" style="stroke:var(--muted);stroke-width:3"/><line x1="360" y1="188" x2="464.3" y2="59" style="stroke:var(--thm);stroke-width:2.2"/><polygon points="470,52 467.5,61.5 461.2,56.5" style="fill:var(--thm)"/><line x1="470" y1="52" x2="575.6" y2="182.6" style="stroke:var(--thm);stroke-width:2.2"/><polygon points="580,188 573.1,184.5 578,180.6" style="fill:var(--thm)"/><line x1="360" y1="190" x2="470" y2="190" style="stroke:var(--muted);stroke-width:1;stroke-dasharray:4 3"/><text class="t" x="400" y="208">vτ</text><text class="t" x="420" y="120">cτ</text><text class="t" x="480" y="120">h</text><line x1="470" y1="52" x2="470" y2="190" style="stroke:var(--muted);stroke-width:1;stroke-dasharray:4 3"/><line x1="510" y1="30" x2="561" y2="30" style="stroke:var(--accent);stroke-width:2.2"/><polygon points="570,30 561,34.1 561,26" style="fill:var(--accent)"/><text class="ta" x="520" y="22">速度 v</text></svg>
+      <figcaption>図2 光時計(講義ノートの図60)。左:時計と一緒に動く人には、光はまっすぐ上下する。右:時計が動いて見える人には、光は斜めに進み、道のりが長い。光の速さは同じ $c$ なので、時間がかかる($(c\tau)^2=h^2+(v\tau)^2$)。</figcaption>
+    </figure>
+    <p><b>例:ミュー粒子</b>。地上約 10 km の大気上層で生まれるミュー粒子は、半減期 約 $2\times10^{-6}$ s で崩壊します。光の速さで飛んでも、その間に約 600 m しか進めないので、ほとんど地表まで届かないはず。ところが実際には地表で観測されます。ミュー粒子は光速の約 99.4% で飛ぶので、$\gamma=1/\sqrt{1-0.994^2}\approx9$(講義ノートは約10倍)となり、地上から見た寿命が延びて、半減するまでに約 6 km 進めるからです。</p>
+    <figure class="fig">
+      <svg viewBox="0 0 640 180" width="640" role="img" aria-label="ミュー粒子が地表まで届く理由"><line x1="60" y1="60" x2="600" y2="60" style="stroke:var(--muted);stroke-width:2"/><text class="tm" x="60" y="50">大気上層</text><text class="tm" x="560" y="50">地表</text><text class="tj" x="300" y="50">約 10 km</text><line x1="60" y1="100" x2="92.4" y2="100" style="stroke:var(--thm);stroke-width:6"/><text class="tt" x="102.4" y="105">時間の遅れなし:半減するまで約 600 m</text><line x1="60" y1="140" x2="384" y2="140" style="stroke:var(--accent);stroke-width:6"/><text class="ta" x="394" y="145">時間の遅れあり:約 6 km</text></svg>
+      <figcaption>図3 ミュー粒子(半減期 約 $2\times10^{-6}$ s)が、半分に減るまでに進む距離。光の速さで動いても約 600 m のはずが、地上から見ると時間が約10倍に延びるので約 6 km 進み、十分な数が地表まで届きます。</figcaption>
+    </figure>
+    <h3 id="s4-3">4.3 ローレンツ収縮</h3>
+    <p>今度は、光時計を運動の向きに置きます。S′ で測ると、往復の時間 $\tilde\tau$ から長さ $\tilde l=c\tilde\tau/2$。S から見ると、行き($c\tau_1=l+v\tau_1$)と帰り($c\tau_2=l-v\tau_2$)で時間が違い、$\tau_1=\frac{l}{c-v}$、$\tau_2=\frac{l}{c+v}$ (13.6)。これが時間の遅れの関係 $\tau_1+\tau_2=\gamma\tilde\tau$ (13.7) を満たすことから</p>
+    <div class="box thm"><div class="label">ローレンツ収縮 (13.8)</div>
+      <p>$$l=\sqrt{1-\frac{v^2}{c^2}}\,\tilde l=\frac{\tilde l}{\gamma}$$ 運動している物体は、運動の向きに $1/\gamma$ 倍に縮んで見える。運動に垂直な向きの長さは変わらない。</p>
+    </div>
+    <div class="box supp"><div class="label">講義ノートにない補足:(13.8) の計算</div>
+      <p>$\tau_1+\tau_2=\frac{l}{c-v}+\frac{l}{c+v}=\frac{2lc}{c^2-v^2}=\frac{2l}{c}\gamma^2$。これが $\gamma\tilde\tau=\gamma\frac{2\tilde l}{c}$ に等しいので、$l\gamma^2=\gamma\tilde l$、$l=\tilde l/\gamma$。</p>
+    </div>
+    <p><b>列車とトンネル</b>:長さ 100 m のトンネル(S)と、止まっていれば長さ 100 m の列車(S′)。トンネルから見ると列車が縮んでトンネルに収まり、列車から見るとトンネルが縮んで列車は収まらない。これは矛盾しません。「収まる」かどうかは、列車の先頭と最後尾、トンネルの入口と出口を<b>同じ時刻に</b>見て決めることで、その「同時」が2つの系で違うからです。</p>
+    <figure class="fig">
+      <svg viewBox="0 0 640 200" width="640" role="img" aria-label="列車とトンネルのパラドックス"><text class="tj" x="160" y="25" style="text-anchor:middle">トンネル(S)から見ると</text><rect x="40" y="50" width="240" height="40" rx="4" style="fill:none;stroke:var(--muted);stroke-width:1.8"/><text class="tm" x="140" y="45">トンネル</text><rect x="70" y="60" width="170" height="20" rx="4" style="fill:var(--thm);stroke:var(--thm);stroke-width:1.8"/><text class="tt" x="160" y="110" style="text-anchor:middle">列車 < トンネル(縮んだ列車が収まる)</text><text class="tj" x="480" y="25" style="text-anchor:middle">列車(S′)から見ると</text><rect x="400" y="50" width="170" height="40" rx="4" style="fill:none;stroke:var(--muted);stroke-width:1.8"/><text class="tm" x="450" y="45">トンネル</text><rect x="360" y="60" width="240" height="20" rx="4" style="fill:var(--thm);stroke:var(--thm);stroke-width:1.8"/><text class="tt" x="480" y="110" style="text-anchor:middle">トンネル < 列車(縮んだトンネル)</text><text class="ta" x="320" y="160" style="text-anchor:middle">矛盾しない:長さを測る「同じ時刻」が、2つの系で違うから</text></svg>
+      <figcaption>図4 ローレンツ収縮のパラドックス(講義ノートの図62)。どちらの見方も正しく、食い違いは、列車の先頭と最後尾の位置を「同時に」測る、その「同時」が慣性系ごとに違うことから生じます。</figcaption>
+    </figure>
+    <div class="box note-box"><div class="label">運動と垂直な長さが変わらない理由(講義ノート p.93)</div>
+      <p>下半分が黒、上半分が白の、高さ 1 m の境目のある長い壁の横を、高さ 1 m のペンをつけた車両が走って赤い線を引くとします。垂直方向に縮むなら、壁から見ると線は黒い部分に、車両から見ると白い部分に引かれることになり、本当に矛盾します(線が引かれる場所は、同時性と関係なく決まる)。伸びても同じなので、垂直な長さは変わらない。</p>
+    </div>
+    <h3 id="s4-4">4.4 ローレンツ変換と速度の合成</h3>
+    <p>時間の遅れとローレンツ収縮を組み合わせると、座標の変換規則が得られます(講義ノートは時空図を使って導いている。次の回の補論 13.4 に、ダランベール演算子の不変性からの別の導き方もある):</p>
+    <div class="box thm"><div class="label">ローレンツ変換 (13.13)(13.16)</div>
+      <p>$$\tilde x=\gamma(x-vt),\qquad\tilde t=\gamma\Bigl(t-\frac{v}{c^2}x\Bigr),\qquad\tilde y=y,\ \tilde z=z$$
+      $\tau=ct$、$\beta=v/c$ とすると $$\begin{pmatrix}\tilde\tau\\\tilde x\\\tilde y\\\tilde z\end{pmatrix}=\begin{pmatrix}\gamma&-\gamma\beta&0&0\\-\gamma\beta&\gamma&0&0\\0&0&1&0\\0&0&0&1\end{pmatrix}\begin{pmatrix}\tau\\x\\y\\z\end{pmatrix}$$</p>
+    </div>
+    <figure class="fig">
+      <svg viewBox="0 0 640 240" width="640" role="img" aria-label="時空図:ガリレイ変換とローレンツ変換"><line x1="39" y1="200" x2="221" y2="200" style="stroke:var(--muted);stroke-width:1.2"/><line x1="60" y1="207" x2="60" y2="32" style="stroke:var(--muted);stroke-width:1.2"/><text class="t" x="216" y="218">x</text><text class="t" x="42" y="37">ct</text><line x1="60" y1="200" x2="214" y2="46" style="stroke:var(--muted);stroke-width:1;stroke-dasharray:4 4"/><text class="tm" x="193" y="46">光</text><path d="M 60 200 L 137 46" style="fill:none;stroke:var(--thm);stroke-width:2.2"/><text class="t" x="142" y="50">ct′</text><text class="t" x="216" y="192">x′</text><line x1="339" y1="200" x2="521" y2="200" style="stroke:var(--muted);stroke-width:1.2"/><line x1="360" y1="207" x2="360" y2="32" style="stroke:var(--muted);stroke-width:1.2"/><text class="t" x="516" y="218">x</text><text class="t" x="342" y="37">ct</text><line x1="360" y1="200" x2="514" y2="46" style="stroke:var(--muted);stroke-width:1;stroke-dasharray:4 4"/><text class="tm" x="493" y="46">光</text><path d="M 360 200 L 437 46" style="fill:none;stroke:var(--thm);stroke-width:2.2"/><text class="t" x="442" y="50">ct′</text><path d="M 360 200 L 514 123" style="fill:none;stroke:var(--thm);stroke-width:2.2"/><text class="t" x="518" y="123">x′</text><text class="tj" x="140" y="230" style="text-anchor:middle">ガリレイ変換</text><text class="tj" x="440" y="230" style="text-anchor:middle">ローレンツ変換(v = 0.5c)</text></svg>
+      <figcaption>図5 時空図(講義ノートの図64)。橙の線が、動く慣性系 S′ の座標軸。ガリレイ変換では $x′$ 軸は $x$ 軸と同じ(同じ時刻はどの系でも同じ)。ローレンツ変換では $x′$ 軸も傾き、S′ の「同時」(x′ 軸に平行な線)は S の「同時」と違う。2本の軸は、光の線(点線)をはさんで対称に傾きます。</figcaption>
+    </figure>
+    <div class="box supp"><div class="label">講義ノートにない補足:$-(c t)^2+x^2$ は変わらない</div>
+      <p>$-\tilde\tau^2+\tilde x^2=\gamma^2[-(\tau-\beta x)^2+(x-\beta\tau)^2]=\gamma^2(1-\beta^2)(-\tau^2+x^2)=-\tau^2+x^2$。光の進む点($x=\pm c t$)ではこれが 0 なので、どの系から見ても光の速さは $c$。(12.16) の「時間に $-1$ を付けた長さ」が、ローレンツ変換で変わらない量です。</p>
+    </div>
+    <p><b>速度の合成</b>:S′ が S に対して速度 $v$ で動き、S′ から見て速度 $u$ の物体は、S から見ると
+    $$\tilde u=\frac{u+v}{1+uv/c^2}\qquad(13.17)$$
+    (アインシュタインの速度の合成則)。$u=c$ なら $\tilde u=c$ で、光速度不変と合います。$u,v\ll c$ なら $u+v$(ガリレイ)に戻ります。</p>
+    <div class="box intuit"><div class="label">直感で理解する:光の速さは「足し算できない上限」</div>
+      <p>光速に近いものどうしをいくら足しても、光速を超えません(問題 AK)。ふだんの速さでは分母の $uv/c^2$ がとても小さく、足し算と区別できないので、私たちは相対論の効果に気づかないのです。</p>
+    </div>
+
+    <h2 id="s5">5. 具体例で練習(講義ノートにない補足) <span class="page-tag">補足</span></h2>
+    <p>この節は、講義ノートの例とは別に、私が作った練習問題と解答です。</p>
+    <div class="box ex"><div class="label">問題 AK:速度の合成</div>
+      <p>地上から見て $0.8c$ で飛ぶ宇宙船から、前向きに(宇宙船から見て)$0.8c$ でボールを打ち出した。地上から見たボールの速さを求めよ。</p>
+    </div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>$\tilde u=\frac{0.8c+0.8c}{1+0.64}=\frac{1.6}{1.64}c\approx0.976c$。ガリレイの足し算なら $1.6c$ ですが、光速を超えません。</p>
+    </div>
+    <div class="box ex"><div class="label">問題 AL:時間の遅れ</div>
+      <p>$0.6c$ で飛ぶ宇宙船の中で 1 時間たつ間に、地上では何分たつか。また、宇宙船の中の長さ 100 m の廊下(進む向き)は、地上から見て何 m か。</p>
+    </div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>$\gamma=1/\sqrt{1-0.36}=1/0.8=1.25$。地上では $1.25$ 時間 = 75 分。廊下は $100/1.25=80$ m に縮んで見える。</p>
+    </div>
+    <div class="box ex"><div class="label">問題 AM:ゲージ変換でローレンツゲージにする</div>
+      <p>ポテンシャル $(\phi,\bm{A})$ がローレンツゲージ条件を満たしていないとき、ゲージ変換の $\lambda$ がどんな式を満たせば、変換後のポテンシャルがローレンツゲージ条件を満たすか。</p>
+    </div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>$\nabla\cdot\bm{A}'+\frac{1}{c^2}\partial_t\phi'=\nabla\cdot\bm{A}+\Delta\lambda+\frac{1}{c^2}\partial_t\phi-\frac{1}{c^2}\partial_t^2\lambda$。これを 0 にするには
+      $$\Box^2\lambda=\Delta\lambda-\frac{1}{c^2}\frac{\partial^2\lambda}{\partial t^2}=-\Bigl(\nabla\cdot\bm{A}+\frac{1}{c^2}\frac{\partial\phi}{\partial t}\Bigr).$$
+      源のある波動方程式なので、解 $\lambda$ は必ず見つかります(ジェフィメンコ方程式と同じく、遅延時間を使って解ける)。</p>
+    </div>
+
+    <h2 id="s6">6. まとめ(この回で覚えること)</h2>
+    <ul>
+      <li><b>ポテンシャル</b>:一般に $\bm{B}=\nabla\times\bm{A}$、$\bm{E}=-\nabla\phi-\partial_t\bm{A}$。ゲージ変換 $\bm{A}\to\bm{A}+\nabla\lambda$、$\phi\to\phi-\partial_t\lambda$ で電磁場は不変。</li>
+      <li><b>ローレンツゲージ</b> $\nabla\cdot\bm{A}+\frac{1}{c^2}\partial_t\phi=0$ で、$\Box^2\phi=-\rho/\varepsilon_0$、$\Box^2\bm{A}=-\mu_0\bm{J}$。4元で $\Box^2A^\mu=-\mu_0J^\mu$、$A^\mu=(\phi/c,\bm{A})$、$J^\mu=(c\rho,\bm{J})$。</li>
+      <li><b>特殊相対論</b>:光速度不変 → 同時のずれ、時間の遅れ $\tau=\gamma\tilde\tau$、ローレンツ収縮 $l=\tilde l/\gamma$($\gamma=1/\sqrt{1-v^2/c^2}$)。ローレンツ変換 $\tilde x=\gamma(x-vt)$、$\tilde t=\gamma(t-vx/c^2)$。速度の合成 $\frac{u+v}{1+uv/c^2}$。$-(ct)^2+x^2$ は不変。</li>
+    </ul>
+
+    <h2 id="s7">7. この回のノートについてのメモ</h2>
+    <p>板書の写真ではなく、<b>文章で書かれた講義ノート(フル版)</b>の p.87〜p.94(§12、§13.1)をもとにまとめました。図は描き直しました。</p>
+    <p>講義ノートの記述で、誤り(または誤記)と判断して直した箇所、読み替えた箇所は次のとおりです。</p>
+    <ol>
+      <li><b>ミュー粒子の時間の遅れ(p.91)</b>:$1/\sqrt{1-0.994^2}$ は約 9.1 です(講義ノートは「≃ 10 倍」)。大まかな見積もりとしては同じ結論です。</li>
+      <li><b>(12.5) の書き方(p.87)</b>:講義ノートは2つの書き方を等号でつないでいますが、整理した形 $-\Delta\bm{A}+\frac{1}{c^2}\partial_t^2\bm{A}+\nabla(\nabla\cdot\bm{A}+\frac{1}{c^2}\partial_t\phi)=\mu_0\bm{J}$ だけを書きました。</li>
+      <li><b>ローレンツ変換の導出(p.92〜94)</b>:講義ノートは時空図の上の点を追って導いていますが、このノートでは結果を示し、$-(ct)^2+x^2$ が変わらないことで確かめました(導出の別の方法は第14回の補論)。</li>
+      <li><b>回の分け方</b>:講義ノートの分量と内容から分けた予定です。日程が分かったら合わせます。</li>
+    </ol>
+
+    <nav class="pager" data-fixed>
+      <a href="week-12.html">← 第12回</a>
+      <a href="../index.html">一覧へ</a>
+      <span class="disabled">次の回 →</span>
+    </nav>
+
+  </main>
+
+  <footer>© Aセメまとめノート</footer>
+</body>
+</html>
