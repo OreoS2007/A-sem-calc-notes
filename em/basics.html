@@ -30,7 +30,7 @@
       <p>・飛んだ先には、画面の左下に<b>「元の位置にもどる」</b>ボタンが出ます。押すと、元のノートの読んでいた場所にそのまま戻れます(ブラウザの「戻る」でも同じ位置に戻ります)。</p>
       <p>・各トピックの最後に「この回で使う場所」があり、本文の対応箇所に飛べます。</p>
       <p>・説明は、<b>定義・主張 → 意味(直感) → 例 → 証明</b>の順です。証明は折りたたんであります。</p>
-      <p>・偏微分・連鎖律・内積・線形写像を、図と例でもっと詳しく知りたいときは、このページの最後の「もっと詳しく(数学の基礎)」(<a href="#x-partial">s</a>〜<a href="#x-linmap">w</a>)を見てください。</p>
+      <p>・偏微分・連鎖律・内積・線形写像を、図と例でもっと詳しく知りたいときは、このページの最後の「もっと詳しく(数学の基礎)」(<a href="#x-partial">補1</a>〜<a href="#x-linmap">補5</a>)を見てください。</p>
       <p>・このページは、各回のノートを作るたびに、その回で必要になるトピックを足していきます。</p>
     </div>
 
@@ -70,14 +70,20 @@
             <li><a href="#capacitor">コンデンサー</a></li>
             <li><a href="#matrix">行列と逆行列(連立方程式)</a></li>
           </ol></li>
-        <li><b>もっと詳しく(数学の基礎)</b>
+        <li><b>静磁場のための道具</b><!--b5-->
           <ol type="a" start="19">
-            <li><a href="#x-partial">偏微分(もっと詳しく)</a></li>
-            <li><a href="#x-chain">連鎖律(もっと詳しく)</a></li>
-            <li><a href="#x-grad">内積・勾配ベクトル・方向微分(もっと詳しく)</a></li>
-            <li><a href="#x-rnip">平面・空間のベクトルと内積(もっと詳しく)</a></li>
-            <li><a href="#x-linmap">線形写像(もっと詳しく)</a></li>
+            <li><a href="#magnet">磁場と電流(高校)</a></li>
+            <li><a href="#cyl">円筒座標</a></li>
+            <li><a href="#angmom">角運動量とトルク(力学)</a></li>
           </ol></li>
+        <li><b>もっと詳しく(数学の基礎)</b>
+          <ul>
+            <li><a href="#x-partial">補1. 偏微分(もっと詳しく)</a></li>
+            <li><a href="#x-chain">補2. 連鎖律(もっと詳しく)</a></li>
+            <li><a href="#x-grad">補3. 内積・勾配ベクトル・方向微分(もっと詳しく)</a></li>
+            <li><a href="#x-rnip">補4. 平面・空間のベクトルと内積(もっと詳しく)</a></li>
+            <li><a href="#x-linmap">補5. 線形写像(もっと詳しく)</a></li>
+          </ul></li>
       </ol>
     </nav>
 
@@ -169,7 +175,7 @@
       <svg viewBox="0 0 520 224" width="520" role="img" aria-label="内積による法線成分の取り出し"><line x1="30" y1="180" x2="300" y2="180" style="stroke:var(--muted);stroke-width:5;stroke-linecap:round;opacity:.5"/><text class="tm" x="40" y="202">面(の一部)</text><line x1="150" y1="180" x2="150" y2="70" style="stroke:var(--muted);stroke-width:1.1;stroke-dasharray:5 4;fill:none"/><line x1="150" y1="180" x2="150" y2="90.4" style="stroke:var(--ex);stroke-width:2.8;fill:none"/><polygon points="150,82 154.4,91 145.6,91" style="fill:var(--ex)"/><text class="tm" x="140" y="80" style="text-anchor:end">n(面に垂直な単位ベクトル)</text><line x1="150" y1="180" x2="218.7" y2="92.1" style="stroke:var(--accent);stroke-width:2.8;fill:none"/><polygon points="223.9,85.4 221.8,95.2 214.9,89.8" style="fill:var(--accent)"/><text class="t" x="231.9" y="89.4" style="font-size:18px;fill:var(--accent)">A</text><line x1="223.9" y1="85.4" x2="150" y2="85.4" style="stroke:var(--muted);stroke-width:1.1;stroke-dasharray:5 4;fill:none"/><line x1="144" y1="180" x2="144" y2="85.4" style="stroke:var(--thm);stroke-width:5;stroke-linecap:round;opacity:.85"/><text class="tt" x="136" y="136.7" style="text-anchor:end">A·n</text><path d="M150 138 A42 42 0 0 1 175.9 146.9" style="fill:none;stroke:var(--muted);stroke-width:1.4"/><text class="t" x="164" y="134">θ</text><text class="tj" x="330" y="70">A·n = |A| cosθ</text><text class="tm" x="330" y="96">「A のうち、面に垂直な方向の</text><text class="tm" x="330" y="114">  成分(符号つきの長さ)」</text></svg>
       <figcaption>$\bm{A}\cdot\bm{n}$ は、ベクトル $\bm{A}$ の「面に垂直な方向の成分」。</figcaption>
     </figure>
-    <p>(内積・直交・なす角のさらに詳しい説明は、<a href="#x-rnip">v. 平面・空間のベクトルと内積</a>と、<a href="#x-inner">u. 内積・勾配ベクトル・方向微分</a>にあります。)</p>
+    <p>(内積・直交・なす角のさらに詳しい説明は、<a href="#x-rnip">補4. 平面・空間のベクトルと内積</a>と、<a href="#x-inner">補3. 内積・勾配ベクトル・方向微分</a>にあります。)</p>
 
     <h3>外積(ベクトル積)</h3>
     <div class="box def">
@@ -224,7 +230,7 @@
 
     <!-- ===================== e: 偏微分・勾配・連鎖律 ===================== -->
     <h2 id="partial">e. 偏微分・勾配・連鎖律</h2>
-    <p>(ここでは要点だけを整理します。例や図をもっと見たいときは、このページの最後の<a href="#x-partial">s. 偏微分</a>と<a href="#x-chain">t. 連鎖律</a>を見てください。)</p>
+    <p>(ここでは要点だけを整理します。例や図をもっと見たいときは、このページの最後の<a href="#x-partial">補1. 偏微分</a>と<a href="#x-chain">補2. 連鎖律</a>を見てください。)</p>
 
     <h3>偏微分</h3>
     <div class="box def">
@@ -623,13 +629,90 @@
 
     <h3>対称行列</h3>
     <p>$c_{ij}=c_{ji}$ をみたす行列(対角線について折り返すと同じ)を<b>対称行列</b>といいます。上の例の $c$ も $p$ も対称。<b>対称行列の逆行列は対称</b>(2×2 なら、逆行列の公式を見れば、非対角成分が $-b$ と $-c$ で、$b=c$ なら対称。一般の大きさでも、$cp=I$ の両辺の転置をとると $p^{\top}c^{\top}=I$、$c^{\top}=c$ なので $p^{\top}c=I$。つまり $p^{\top}$ も $c$ の逆行列で、逆行列はただ1つなので $p^{\top}=p$)。</p>
-    <p>(行列と線形写像の詳しい説明は、このページの最後の<a href="#x-linmap">w. 線形写像</a>を参照。)</p>
+    <p>(行列と線形写像の詳しい説明は、このページの最後の<a href="#x-linmap">補5. 線形写像</a>を参照。)</p>
     <p class="used-in">この回で使う場所:<a href="weeks/week-05.html#w-matrix" data-xref>第5回 1.2 行列と逆行列</a><a href="weeks/week-05.html#s3-1" data-xref>第5回 3.1 容量係数と電位係数</a></p>
+
+    <!-- b5:start -->
+    <!-- ===================== s: 磁場と電流(高校) ===================== -->
+    <h2 id="magnet">s. 磁場と電流(高校)</h2>
+    <p>電荷のまわりには電場があり、電場は電荷に力を及ぼしました。同じように、<b>電流(動く電荷)のまわりには磁場</b>があり、<b>磁場は電流(動く電荷)に力</b>を及ぼします。磁場の強さは磁束密度 $\bm{B}$(単位 T:テスラ)で表します。</p>
+    <h3>電流が作る磁場</h3>
+    <ul>
+      <li><b>直線電流</b>:電流を軸とする同心円状。向きは<b>右ねじの法則</b>(右手の親指を電流の向きに立てると、握った指の向き)。大きさ $B=\dfrac{\mu_0I}{2\pi r}$($r$:電流からの距離)。</li>
+      <li><b>円形電流の中心</b>:$B=\dfrac{\mu_0I}{2a}$($a$:半径)。向きは、右手の指を電流に沿って巻いたときの親指の向き。</li>
+      <li><b>ソレノイドの中</b>:軸に沿った一様な磁場 $B=\mu_0nI$($n$:単位長さあたりの巻き数)。外はほぼ 0。</li>
+    </ul>
+    <p>$\mu_0\approx4\pi\times10^{-7}\ \mathrm{N/A^2}$(真空の透磁率)。</p>
+    <h3>磁場が電流・電荷に及ぼす力</h3>
+    <ul>
+      <li><b>電流が受ける力</b>:磁場 $B$ に垂直な長さ $L$ の電流 $I$ は、大きさ $F=IBL$ の力を受ける。向きは電流と磁場の両方に垂直(フレミングの左手の法則。ベクトルでは $\bm{F}=I\bm{L}\times\bm{B}$)。</li>
+      <li><b>動く電荷が受ける力(ローレンツ力)</b>:$\bm{F}=q\bm{v}\times\bm{B}$、大きさは $qvB\sin\theta$($\theta$:速度と磁場のなす角)。</li>
+      <li>電流 $I$ は電荷が流れたものなので、2つは同じ法則です(長さ $L$ の導線の中の電荷 $q$ の合計が速さ $v$ で動くと、$qv=IL$)。</li>
+    </ul>
+    <figure class="fig">
+      <svg viewBox="0 0 620 230" width="620" role="img" aria-label="右ねじの法則と、フレミングの左手の法則のイメージ"><line x1="120" y1="215" x2="120" y2="34" style="stroke:var(--thm);stroke-width:3.2"/><polygon points="120,25 124.1,34 116,34" style="fill:var(--thm)"/><text class="tt" x="130" y="35">電流 I</text><ellipse cx="120" cy="120" rx="80" ry="26" style="fill:none;stroke:var(--accent);stroke-width:2.2"/><line x1="80" y1="143" x2="91.1" y2="144.7" style="stroke:var(--accent);stroke-width:2.4"/><polygon points="100,146 90.5,148.7 91.7,140.7" style="fill:var(--accent)"/><text class="ta" x="30" y="182">B(右ねじの向きに回る)</text><line x1="380" y1="200" x2="380" y2="40" style="stroke:var(--thm);stroke-width:3"/><line x1="380" y1="60" x2="380" y2="49" style="stroke:var(--thm);stroke-width:3"/><polygon points="380,40 384.1,49 376,49" style="fill:var(--thm)"/><text class="t" x="390" y="50">I</text><circle cx="450" cy="70" r="8" style="fill:none;stroke:var(--accent);stroke-width:1.8"/><line x1="445.04" y1="65.04" x2="454.96" y2="74.96" style="stroke:var(--accent);stroke-width:1.8"/><line x1="445.04" y1="74.96" x2="454.96" y2="65.04" style="stroke:var(--accent);stroke-width:1.8"/><circle cx="450" cy="120" r="8" style="fill:none;stroke:var(--accent);stroke-width:1.8"/><line x1="445.04" y1="115.04" x2="454.96" y2="124.96" style="stroke:var(--accent);stroke-width:1.8"/><line x1="445.04" y1="124.96" x2="454.96" y2="115.04" style="stroke:var(--accent);stroke-width:1.8"/><circle cx="450" cy="170" r="8" style="fill:none;stroke:var(--accent);stroke-width:1.8"/><line x1="445.04" y1="165.04" x2="454.96" y2="174.96" style="stroke:var(--accent);stroke-width:1.8"/><line x1="445.04" y1="174.96" x2="454.96" y2="165.04" style="stroke:var(--accent);stroke-width:1.8"/><text class="ta" x="470" y="75">B(奥向き)</text><line x1="380" y1="120" x2="329" y2="120" style="stroke:var(--ex);stroke-width:3"/><polygon points="320,120 329,116 329,124.1" style="fill:var(--ex)"/><text class="t" x="300" y="110">F</text><text class="tm" x="330" y="215">F = IL × B(L:電流の向きの長さ)</text></svg>
+      <figcaption>左:電流のまわりの磁場は右ねじの向き。右:磁場の中の電流は、電流と磁場の両方に垂直な力を受ける(この図では左向き)。</figcaption>
+    </figure>
+    <div class="box ex"><div class="label">例</div>
+      <p>$I=10$ A の直線電流から $r=1$ cm の点:$B=\dfrac{4\pi\times10^{-7}\times10}{2\pi\times0.01}=2\times10^{-4}$ T。地球の磁場(約 $5\times10^{-5}$ T)の4倍ほどです。</p>
+    </div>
+    <div class="box intuit"><div class="label">直感で理解する</div>
+      <p>電場は電荷から「噴き出す」、磁場は電流のまわりを「回る」。そして磁場から受ける力は、いつも動く向きの真横なので、磁場は動く電荷の<b>向きだけ</b>を変え、速さは変えません。</p>
+    </div>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-05.html#w-magnet" data-xref>第5回 1.4 磁場と電流(高校の復習)</a><a href="weeks/week-05.html#s4-7" data-xref>第5回 4.7 ローレンツ力</a></p>
+
+    <!-- ===================== t: 円筒座標 ===================== -->
+    <h2 id="cyl">t. 円筒座標</h2>
+    <p>平面の<b>極座標</b>は、点を「原点からの距離 $r$」と「$x$ 軸からの角度 $\theta$」で表す方法でした:
+    $$x=r\cos\theta,\qquad y=r\sin\theta\qquad(r\gt0).$$
+    (極座標への変換のヤコビ行列は $\begin{pmatrix}\cos\theta&-r\sin\theta\\\sin\theta&r\cos\theta\end{pmatrix}$ でした。)これに高さ $z$ をそのまま付けたのが<b>円筒座標</b> $(r,\theta,z)$ です。</p>
+    <figure class="fig">
+      <svg viewBox="0 0 620 250" width="620" role="img" aria-label="円筒座標の r, θ, z と、3つの向きの単位ベクトル"><line x1="150" y1="220" x2="150" y2="20" style="stroke:var(--muted);stroke-width:1.4"/><text class="t" x="156" y="28">z</text><ellipse cx="150" cy="170" rx="110" ry="32" style="fill:none;stroke:var(--muted);stroke-width:1.2;stroke-dasharray:5 4"/><line x1="150" y1="170" x2="245" y2="186" style="stroke:var(--muted);stroke-width:1.4"/><text class="t" x="190" y="196">r</text><circle cx="245" cy="186" r="5" style="fill:var(--thm)"/><line x1="245" y1="186" x2="245" y2="90" style="stroke:var(--muted);stroke-width:1.1;stroke-dasharray:4 3"/><circle cx="245" cy="90" r="5" style="fill:var(--thm)"/><text class="tj" x="253" y="132">点 (r, θ, z)</text><line x1="245" y1="90" x2="291.1" y2="97.5" style="stroke:var(--thm);stroke-width:2.4"/><polygon points="300,99 290.5,101.5 291.8,93.5" style="fill:var(--thm)"/><text class="tt" x="304" y="104">e_r(外向き)</text><line x1="245" y1="90" x2="230.2" y2="69.3" style="stroke:var(--accent);stroke-width:2.4"/><polygon points="225,62 233.5,67 226.9,71.7" style="fill:var(--accent)"/><text class="ta" x="160" y="58">e_θ(回る向き)</text><line x1="245" y1="90" x2="245" y2="49" style="stroke:var(--ex);stroke-width:2.4"/><polygon points="245,40 249.1,49 241,49" style="fill:var(--ex)"/><text class="t" x="252" y="44">e_z</text><text class="tj" x="380" y="150">x = r cos θ</text><text class="tj" x="380" y="175">y = r sin θ</text><text class="tj" x="380" y="200">z = z</text></svg>
+      <figcaption>円筒座標。点を「軸からの距離 $r$」「角度 $\theta$」「高さ $z$」で表し、ベクトルは各点で「外向き $\bm{e}_r$」「回る向き $\bm{e}_\theta$」「$z$ 方向 $\bm{e}_z$」に分けます。</figcaption>
+    </figure>
+    <h3>いつ使うか</h3>
+    <p>軸(ここでは $z$ 軸)のまわりに回しても形が変わらない問題(<b>軸対称</b>)で使います。直線電流、ソレノイド、円形電流、円柱など。軸対称なら、量は $\theta$ によらず、$r$ と $z$ だけの関数になります。</p>
+    <h3>ベクトルの成分</h3>
+    <p>各点で、3つの向きの単位ベクトルをとります:外向き $\bm{e}_r=(\cos\theta,\sin\theta,0)$、回る向き $\bm{e}_\theta=(-\sin\theta,\cos\theta,0)$、上向き $\bm{e}_z=(0,0,1)$。どれも互いに垂直で長さ1です。ただし $\bm{e}_r$ と $\bm{e}_\theta$ は<b>場所(角度 $\theta$)によって向きが変わる</b>点が、$x,y,z$ の単位ベクトルとの違いです。角度が $\Delta\theta$ だけ変わると、$\bm{e}_r$ は $\Delta\theta\,\bm{e}_\theta$ だけ向きを変えます(講義ノート脚注83の「$[\partial_\theta\bm{B}]_\theta=B_r$」は、これのこと)。</p>
+    <h3>軸対称なベクトル場の発散</h3>
+    <p>$B_\theta=0$ で、$B_r$、$B_z$ が $\theta$ によらないとき、
+    $$\nabla\cdot\bm{B}=\frac1r\frac{\partial}{\partial r}(rB_r)+\frac{\partial B_z}{\partial z}.$$
+    確かめ:$B_r=f(r)$ として、$x$ 成分 $f(r)\frac{x}{r}$、$y$ 成分 $f(r)\frac{y}{r}$ を偏微分して足すと $f'(r)+\frac{f(r)}{r}=\frac1r\frac{d}{dr}(rf)$ になります。</p>
+    <figure class="fig">
+      <svg viewBox="0 0 620 200" width="620" role="img" aria-label="円筒座標の小さな箱:外側の面のほうが広い"><path d="M 120 160 A 150 150 0 0 1 220 50" style="fill:none;stroke:var(--muted);stroke-width:1.6"/><path d="M 170 165 A 210 210 0 0 1 300 30" style="fill:none;stroke:var(--muted);stroke-width:1.6"/><line x1="120" y1="160" x2="170" y2="165" style="stroke:var(--muted);stroke-width:1.6"/><line x1="220" y1="50" x2="300" y2="30" style="stroke:var(--muted);stroke-width:1.6"/><line x1="150" y1="110" x2="176.3" y2="102.5" style="stroke:var(--thm);stroke-width:2.4"/><polygon points="185,100 177.5,106.4 175.2,98.6" style="fill:var(--thm)"/><line x1="230" y1="105" x2="261.3" y2="97.2" style="stroke:var(--thm);stroke-width:2.4"/><polygon points="270,95 262.3,101.1 260.3,93.3" style="fill:var(--thm)"/><text class="tm" x="80" y="105">内側の面(狭い)</text><text class="tm" x="170" y="190">外側の面(広い)</text><text class="tj" x="360" y="70">同じ B_r でも、外側の面を出る量は</text><text class="tj" x="360" y="95">「面積 ∝ r」の分だけ多い</text><text class="ta" x="360" y="130">→ 発散は (1/r) ∂(r B_r)/∂r</text></svg>
+      <figcaption>円筒座標の発散に $\frac1r\frac{\partial}{\partial r}(rB_r)$ が出てくる理由。軸から離れるほど、同じ角度の幅の面は広くなります。</figcaption>
+    </figure>
+    <div class="box ex"><div class="label">例</div>
+      <p>無限に長い線電荷の電場 $E_r=\dfrac{\lambda}{2\pi\varepsilon_0r}$(第3回 例 3.2)では、$rE_r$ が一定なので $\frac1r\frac{\partial}{\partial r}(rE_r)=0$(線の外には電荷がない)。確かに合っています。</p>
+    </div>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-05.html#w-cyl" data-xref>第5回 1.5 円筒座標</a><a href="weeks/week-05.html#s4-10" data-xref>第5回 4.10 ブッシュの定理</a></p>
+
+    <!-- ===================== u: 角運動量とトルク ===================== -->
+    <h2 id="angmom">u. 角運動量とトルク(力学)</h2>
+    <p>回転の運動を表す量が<b>角運動量</b>です。位置 $\bm{r}$、運動量 $\bm{p}=m\bm{v}$ の粒子について
+    $$\bm{L}=\bm{r}\times\bm{p}.$$
+    時間で微分すると、$\frac{d\bm{r}}{dt}\times\bm{p}=\bm{v}\times m\bm{v}=\bm{0}$ なので
+    $$\frac{d\bm{L}}{dt}=\bm{r}\times\frac{d\bm{p}}{dt}=\bm{r}\times\bm{F}\quad(\text{力のモーメント = トルク}).$$</p>
+    <figure class="fig">
+      <svg viewBox="0 0 620 210" width="620" role="img" aria-label="角運動量 L = r × p と、回転いすの例"><circle cx="120" cy="120" r="4" style="fill:var(--muted)"/><text class="tm" x="100" y="140">軸</text><line x1="120" y1="120" x2="220" y2="70" style="stroke:var(--muted);stroke-width:1.4"/><text class="t" x="160" y="85">r</text><circle cx="220" cy="70" r="6" style="fill:var(--thm)"/><line x1="220" y1="70" x2="255.5" y2="132.2" style="stroke:var(--thm);stroke-width:2.6"/><polygon points="260,140 252,134.2 259.1,130.2" style="fill:var(--thm)"/><text class="t" x="266" y="145">p = mv</text><text class="tj" x="60" y="190">L_z = m r² dθ/dt(回る勢い)</text><circle cx="460" cy="110" r="60" style="fill:none;stroke:var(--muted);stroke-width:1.2;stroke-dasharray:5 4"/><circle cx="460" cy="110" r="25" style="fill:none;stroke:var(--accent);stroke-width:2"/><circle cx="485" cy="110" r="5" style="fill:var(--accent)"/><line x1="485" y1="110" x2="485" y2="84" style="stroke:var(--accent);stroke-width:2.4"/><polygon points="485,75 489.1,84 481,84" style="fill:var(--accent)"/><text class="tj" x="390" y="190">腕を縮める(r 小)→ 速く回る</text></svg>
+      <figcaption>角運動量 $L_z=mr^2\dot\theta$。トルクがなければ一定なので、$r$ を小さくすると回る速さ $\dot\theta$ が大きくなります。</figcaption>
+    </figure>
+    <h3>$z$ 軸のまわりの成分</h3>
+    <p>$L_z=xp_y-yp_x$。円筒座標では $L_z=mr^2\dot\theta$($\dot\theta=d\theta/dt$:回る角速度)。トルクの $z$ 成分は $rF_\theta$(軸からの距離 × 回る向きの力)。</p>
+    <ul>
+      <li>力がいつも軸を向く(または軸に平行)なら $F_\theta=0$ で、$L_z$ は一定(<b>角運動量保存</b>)。</li>
+      <li>例:回転いすで腕を縮める、フィギュアスケートのスピン、惑星の運動(ケプラーの第2法則)。</li>
+    </ul>
+    <div class="box intuit"><div class="label">直感で理解する</div>
+      <p>角運動量は「軸のまわりを回る勢い」。回そうとする力(トルク)がなければ変わらない。だから回る半径を小さくすると、そのぶん速く回る。</p>
+    </div>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-05.html#w-angmom" data-xref>第5回 1.6 角運動量とトルク</a><a href="weeks/week-05.html#s4-10" data-xref>第5回 4.10 ブッシュの定理</a></p>
+    <!-- b5:end -->
 
     <!-- import:start -->
     <!-- ここから下は、ほかの教科の基礎ページから取り込んだ「もっと詳しく」(reference/em/import-basics.js で作る。直接直さない) -->
-    <!-- ===================== s: 偏微分(もっと詳しく) ===================== -->
-    <h2 id="x-partial">s. 偏微分(もっと詳しく)</h2>
+    <!-- ===================== 補1: 偏微分(もっと詳しく) ===================== -->
+    <h2 id="x-partial">補1. 偏微分(もっと詳しく)</h2>
 
     <div class="box def">
       <div class="label">定義(偏微分係数)</div>
@@ -677,8 +760,8 @@
     <p>$f(x,y,z)$ でも同じです。たとえば $f_x(a,b,c)=\displaystyle\lim_{h\to0}\frac{f(a+h,b,c)-f(a,b,c)}{h}$(他の2つは固定)。$f_y,f_z$ も同様です。</p>
     <p class="used-in">この回で使う場所:<a href="weeks/week-01.html#w-partial" data-xref>第1回 1.6 偏微分、勾配、連鎖律</a><a href="#partial">e. 偏微分・勾配・連鎖律</a></p>
 
-    <!-- ===================== t: 連鎖律(もっと詳しく) ===================== -->
-    <h2 id="x-chain">t. 連鎖律(もっと詳しく)</h2>
+    <!-- ===================== 補2: 連鎖律(もっと詳しく) ===================== -->
+    <h2 id="x-chain">補2. 連鎖律(もっと詳しく)</h2>
 
     <h3>1変数の復習</h3>
     <p>$y=g(u)$、$u=u(t)$ のとき、$\dfrac{dy}{dt}=g'(u)\,u'(t)$。「$t$ を動かす → $u$ が動く → $y$ が動く」と変化が<b>連鎖</b>するので、変化率の積になります。</p>
@@ -745,8 +828,8 @@
     $$\frac{d}{dt}f(x(t),y(t),z(t))=\frac{\partial f}{\partial x}\frac{dx}{dt}+\frac{\partial f}{\partial y}\frac{dy}{dt}+\frac{\partial f}{\partial z}\frac{dz}{dt}.$$</p>
     <p class="used-in">この回で使う場所:<a href="weeks/week-01.html#w-partial" data-xref>第1回 1.6 偏微分、勾配、連鎖律</a><a href="#partial">e. 偏微分・勾配・連鎖律</a></p>
 
-    <!-- ===================== u: 内積・勾配ベクトル・方向微分(もっと詳しく) ===================== -->
-    <h2 id="x-grad">u. 内積・勾配ベクトル・方向微分(もっと詳しく)</h2>
+    <!-- ===================== 補3: 内積・勾配ベクトル・方向微分(もっと詳しく) ===================== -->
+    <h2 id="x-grad">補3. 内積・勾配ベクトル・方向微分(もっと詳しく)</h2>
 
     <h3 id="x-inner">内積と直交</h3>
     <div class="box def">
@@ -793,8 +876,8 @@
     </figure>
     <p class="used-in">この回で使う場所:<a href="weeks/week-01.html#w-vec3" data-xref>第1回 1.4 内積と外積</a><a href="#vec3">c. 3次元ベクトルの内積と外積</a></p>
 
-    <!-- ===================== v: 平面・空間のベクトルと内積(もっと詳しく) ===================== -->
-    <h2 id="x-rnip">v. 平面・空間のベクトルと内積(もっと詳しく)</h2>
+    <!-- ===================== 補4: 平面・空間のベクトルと内積(もっと詳しく) ===================== -->
+    <h2 id="x-rnip">補4. 平面・空間のベクトルと内積(もっと詳しく)</h2>
 
     <div class="box def">
       <div class="label">定義(平面・空間のベクトルの内積と長さ)</div>
@@ -856,8 +939,8 @@
     </div>
     <p class="used-in">この回で使う場所:<a href="weeks/week-01.html#w-vec3" data-xref>第1回 1.4 内積と外積</a><a href="#vec3">c. 3次元ベクトルの内積と外積</a></p>
 
-    <!-- ===================== w: 線形写像(もっと詳しく) ===================== -->
-    <h2 id="x-linmap">w. 線形写像(もっと詳しく)</h2>
+    <!-- ===================== 補5: 線形写像(もっと詳しく) ===================== -->
+    <h2 id="x-linmap">補5. 線形写像(もっと詳しく)</h2>
 
     <div class="box def">
       <div class="label">定義(線形写像)</div>

@@ -37,10 +37,10 @@
       <ol start="0">
         <li><a href="#s0">この回の全体像</a> <span class="need need-y">範囲内・過去問なし</span></li>
         <li><a href="#s1">準備:基礎の確認</a> <span class="need need-y">範囲内・過去問なし</span>
-          <div class="sub">コンデンサー／行列と逆行列(連立方程式)／第4回の結果(導体の性質、鏡像法、エネルギー)</div></li>
+          <div class="sub">コンデンサー／行列と逆行列(連立方程式)／第4回の結果(導体の性質、鏡像法、エネルギー)／磁場と電流(高校の復習)／円筒座標／角運動量とトルク</div></li>
         <li><a href="#s2">導体に対する仕事(導体にはたらく力)</a> <span class="need need-y">範囲内・過去問なし</span></li>
         <li><a href="#s3">補論:容量係数とグリーンの相反定理</a> <span class="need need-x">不要</span></li>
-        <li><a href="#s4">静磁場:ビオ・サバールの法則とアンペールの法則(§5.1〜§5.2)</a> <span class="need need-x">不要(範囲外)</span></li>
+        <li><a href="#s4">静磁場:ビオ・サバールの法則、アンペールの法則、ローレンツ力(§5.1〜§5.2)</a> <span class="need need-x">不要(範囲外)</span></li>
         <li><a href="#s5">具体例で練習(講義ノートにない補足)</a> <span class="need need-y">範囲内・過去問なし</span></li>
         <li><a href="#s6">まとめ(この回で覚えること)</a> <span class="need need-y">範囲内・過去問なし</span></li>
         <li><a href="#s7">この回のノートについてのメモ</a> <span class="need need-x">不要</span></li>
@@ -86,6 +86,36 @@
     </div>
 
     <!-- ===================== 2 ===================== -->
+
+    <!--s5:prep-->
+    <h3 id="w-magnet" data-need="Z">1.4 磁場と電流(高校の復習) <span class="need need-x">不要(範囲外)</span></h3>
+    <div data-need="Z" class="box basic">
+      <div class="label">基礎:電流が作る磁場、電流と電荷が磁場から受ける力 <span class="need need-x">不要(範囲外)</span> <a class="xref-link" href="../basics.html#magnet" data-xref>→ 詳しい解説</a></div>
+      <p><b>電流は磁場を作る</b>:まっすぐな電流のまわりには、電流を軸とする同心円状の磁場ができる。向きは<b>右ねじの法則</b>(右手の親指を電流の向きに立てると、残りの指の巻く向きが磁場の向き)。大きさは電流 $I$ に比例し、距離 $r$ に反比例する($B=\dfrac{\mu_0I}{2\pi r}$)。ソレノイド(導線を筒状に密に巻いたもの)の中には、軸に沿った一様な磁場 $B=\mu_0nI$($n$:単位長さあたりの巻き数)ができる。</p>
+      <p><b>磁場は電流と動く電荷に力を及ぼす</b>:磁場 $B$ の中の長さ $L$ の電流 $I$ は、大きさ $F=IBL$(電流と磁場が垂直のとき)の力を受ける(フレミングの左手の法則)。速さ $v$ で動く電荷 $q$ は、大きさ $qvB$ の力(<b>ローレンツ力</b>)を受ける。向きは速度と磁場の両方に垂直で、ベクトルでは $\bm{F}=q\bm{v}\times\bm{B}$。</p>
+      <p><b>単位</b>:磁束密度 $B$ の単位は T(テスラ)。$\mu_0$ は真空の透磁率で、およそ $4\pi\times10^{-7}\ \mathrm{N/A^2}$。</p>
+      <p><b>直感:</b> 電流のまわりの磁場は「電流を軸にした渦」。動く電荷が受ける力は、いつも進む向きに対して真横なので、向きだけを変えて、速さは変えない。</p>
+    </div>
+
+    <h3 id="w-cyl" data-need="Z">1.5 円筒座標(極座標の3次元版) <span class="need need-x">不要(範囲外)</span></h3>
+    <div data-need="Z" class="box basic">
+      <div class="label">基礎:円筒座標 $(r,\theta,z)$ <span class="need need-x">不要(範囲外)</span> <a class="xref-link" href="../basics.html#cyl" data-xref>→ 詳しい解説</a></div>
+      <p>平面の<b>極座標</b>は、点を「原点からの距離 $r$」と「$x$ 軸から測った角度 $\theta$」で表す方法で、$x=r\cos\theta$、$y=r\sin\theta$($r\gt0$)。これに高さ $z$ をそのまま付け加えたのが<b>円筒座標</b> $(r,\theta,z)$ です。軸(ここでは $z$ 軸)のまわりの回転で形が変わらない(軸対称な)問題では、変数が $r$ と $z$ の2つに減るので便利です。</p>
+      <p>ベクトルも、各点で「外向き($r$ 方向)」「ぐるっと回る向き($\theta$ 方向)」「$z$ 方向」の3つの単位ベクトルに分けて、$\bm{B}=B_r\bm{e}_r+B_\theta\bm{e}_\theta+B_z\bm{e}_z$ と書きます。直線電流のまわりの磁場は $\theta$ 方向だけ、ソレノイドの中の磁場は $z$ 方向だけ、という具合です。</p>
+      <p>軸対称なベクトル場($B_\theta=0$、成分が $\theta$ によらない)の発散は
+      $$\nabla\cdot\bm{B}=\frac{1}{r}\frac{\partial}{\partial r}(rB_r)+\frac{\partial B_z}{\partial z}.$$
+      $r$ 方向の項に $\frac1r$ と $r$ が付くのは、外へ行くほど円周が長くなる(同じ $B_r$ でも、広がって薄まる)ためです。</p>
+      <p><b>直感:</b> 円筒座標は「缶詰の中心軸からの距離・角度・高さ」で場所を言う方法。</p>
+    </div>
+
+    <h3 id="w-angmom" data-need="Z">1.6 角運動量とトルク(力学の復習) <span class="need need-x">不要(範囲外)</span></h3>
+    <div data-need="Z" class="box basic">
+      <div class="label">基礎:角運動量 $\bm{L}=\bm{r}\times\bm{p}$ と、その時間変化 <span class="need need-x">不要(範囲外)</span> <a class="xref-link" href="../basics.html#angmom" data-xref>→ 詳しい解説</a></div>
+      <p>位置 $\bm{r}$、運動量 $\bm{p}=m\bm{v}$ の粒子の<b>角運動量</b>は $\bm{L}=\bm{r}\times\bm{p}$。その時間変化は、力 $\bm{F}$ の<b>モーメント(トルク)</b>に等しい:$\dfrac{d\bm{L}}{dt}=\bm{r}\times\bm{F}$。$z$ 軸のまわりの成分は $L_z=m(xv_y-yv_x)=mr^2\dot\theta$(円筒座標)。</p>
+      <p>トルクの $z$ 成分が 0(力が軸のまわりに回そうとしない)なら $L_z$ は一定(角運動量保存)。回転いすの上で腕を縮めると速く回るのは、$L_z=mr^2\dot\theta$ が一定のまま $r$ が小さくなるからです。</p>
+      <p><b>直感:</b> 角運動量は「軸のまわりの回る勢い」。回す力(トルク)が働かなければ、変わらない。</p>
+    </div>
+    <!--/s5:prep-->
 
     <h2 id="s2" data-need="Y">2. 導体に対する仕事(導体にはたらく力) <span class="need need-y">範囲内・過去問なし</span> <span class="page-tag">講義ノート p.29–30(§4.3)</span></h2>
 
@@ -217,9 +247,183 @@
 
     <!-- ===================== 4 ===================== -->
 
-    <h2 id="s4" data-need="Z">4. 静磁場:ビオ・サバールの法則とアンペールの法則(§5.1〜§5.2) <span class="need need-x">不要(範囲外)</span> <span class="page-tag">授業ノート</span></h2>
-    <div data-need="Z" class="box note-box"><div class="label">準備中 <span class="need need-x">不要(範囲外)</span></div>
-      <p>この回の後半(§5.1〜§5.2:ビオ・サバールの法則、$\nabla\cdot\bm{B}=0$ とアンペールの法則 $\nabla\times\bm{B}=\mu_0\bm{J}$、磁束、例 5.1 ソレノイド。磁場圧は除く)は、講義ノートのPDF(§4.4 まで)にないため、まだ書いていません。第1回中間試験の範囲外です。</p>
+    <h2 id="s4" data-need="Z">4. 静磁場:ビオ・サバールの法則、アンペールの法則、ローレンツ力(§5.1〜§5.2) <span class="need need-x">不要(範囲外)</span> <span class="page-tag">講義ノート p.31–36</span></h2>
+    <p data-need="Z">ここから講義ノートの §5「静磁場」です。§3・§4 では、<b>電荷</b>が作る電場(静電場)を学びました。この節では、<b>電流</b>が作る磁場(静磁場)を学びます。「静」は、電流が時間変化しない(定常電流)という意味です。電場のときと同じ流れ(① 基本法則 → ② 発散と回転 → ③ 積分型の法則で計算 → ④ 力)で進むので、電場の結果と見比べながら読むと分かりやすくなります。</p>
+    <div data-need="Z" class="box note-box"><div class="label">この回で扱った範囲 <span class="need need-x">不要(範囲外)</span></div>
+      <p>11/6 の授業は、§5.1〜§5.2 のうち「磁気圧」(講義ノート p.36〜37)を除く部分でした。磁気圧は次の回(第6回)に回しています。第1回中間試験(11/13)の範囲外です。</p>
+    </div>
+
+    <h3 id="s4-1" data-need="Z">4.1 ビオ・サバールの法則(電流が作る磁場) <span class="need need-x">不要(範囲外)</span></h3>
+    <p data-need="Z">電荷 $\rho$ が作る電場を与えるのがクーロンの法則でした。これと同様に、位置 $\bm{r}'$ に電流密度 $\bm{J}(\bm{r}')$ の電流があるとき、それが位置 $\bm{r}$ に作る磁場は、次の式で与えられます。</p>
+    <div data-need="Z" class="box def">
+      <div class="label">ビオ・サバールの法則 (5.1) <span class="need need-x">不要(範囲外)</span></div>
+      <p>$$\bm{B}(\bm{r})=\frac{\mu_0}{4\pi}\int\frac{\bm{J}(\bm{r}')\times(\bm{r}-\bm{r}')}{|\bm{r}-\bm{r}'|^3}\,d\bm{r}'$$
+      $\mu_0$ は「真空の透磁率」と呼ばれる定数です(名前は歴史的なもので、深く考えなくてよい、と講義ノートの脚注69)。</p>
+    </div>
+    <figure data-need="Z" class="fig">
+      <svg viewBox="0 0 640 270" width="640" role="img" aria-label="ビオ・サバールの法則:微小電流と、観測点への向きの両方に垂直な向きに磁場ができる"><path d="M 150 255 C 120 200, 190 150, 165 95 S 150 30, 185 10" style="fill:none;stroke:var(--muted);stroke-width:1.6"/><line x1="160" y1="150" x2="167.7" y2="120.7" style="stroke:var(--thm);stroke-width:3"/><polygon points="170,112 171.6,121.7 163.8,119.7" style="fill:var(--thm)"/><text class="tt" x="178" y="140">J(r′)ΔV</text><circle cx="163" cy="135" r="4" style="fill:var(--thm)"/><text class="t" x="120" y="160">r′</text><line x1="163" y1="135" x2="420" y2="90" style="stroke:var(--muted);stroke-width:1.4;stroke-dasharray:6 4"/><text class="t" x="270" y="100">r − r′</text><circle cx="420" cy="90" r="5" style="fill:var(--accent)"/><text class="tj" x="432" y="86">観測点 r</text><line x1="420" y1="90" x2="448.3" y2="153.8" style="stroke:var(--accent);stroke-width:3"/><polygon points="452,162 444.6,155.4 452,152.1" style="fill:var(--accent)"/><text class="ta" x="460" y="168">ΔB(紙面の奥へ傾く)</text><text class="tm" x="330" y="225">ΔB は J と r − r′ の両方に垂直(外積の向き)</text><text class="tm" x="330" y="245">大きさは 1/|r − r′|² で弱まる(クーロンの法則と同じ)</text></svg>
+      <figcaption>図1 ビオ・サバールの法則 (5.1) のイメージ(講義ノートの図21を描き直しました)。小さな電流 $\bm{J}(\bm{r}')\,\Delta V$ が点 $\bm{r}$ に作る磁場は、電流の向きとも、電流から観測点へ向かう向き $\bm{r}-\bm{r}'$ とも垂直です。</figcaption>
+    </figure>
+    <p data-need="Z">クーロンの法則と並べると、形がそっくりです。</p>
+    <div class="need-wrap" data-need="Z"><table class="cmp">
+      <tr><th></th><th>電場(クーロンの法則 (3.3))</th><th>磁場(ビオ・サバールの法則 (5.1))</th></tr>
+      <tr><td>源</td><td>電荷密度 $\rho(\bm{r}')$(スカラー)</td><td>電流密度 $\bm{J}(\bm{r}')$(ベクトル)</td></tr>
+      <tr><td>式</td><td>$\displaystyle\frac{1}{4\pi\varepsilon_0}\int\frac{\rho(\bm{r}')(\bm{r}-\bm{r}')}{|\bm{r}-\bm{r}'|^3}d\bm{r}'$</td><td>$\displaystyle\frac{\mu_0}{4\pi}\int\frac{\bm{J}(\bm{r}')\times(\bm{r}-\bm{r}')}{|\bm{r}-\bm{r}'|^3}d\bm{r}'$</td></tr>
+      <tr><td>向き</td><td>源から観測点へ($\bm{r}-\bm{r}'$ の向き)</td><td>$\bm{J}$ と $\bm{r}-\bm{r}'$ の<b>両方に垂直</b>(外積)</td></tr>
+      <tr><td>強さ</td><td colspan="2">どちらも、距離の2乗に反比例して弱まる</td></tr>
+    </table></div><!--need-wrap-->
+    <p data-need="Z">違いは「掛け算」が<b>外積</b>になっていることだけです。そのため磁場は、電流の向きとも、電流から観測点への向きとも垂直を向きます。特に、まっすぐな無限に長い電流のまわりでは、磁場は電流を中心とする右ねじの向きの渦巻き状になります(図2)。</p>
+    <figure data-need="Z" class="fig">
+      <svg viewBox="0 0 640 250" width="640" role="img" aria-label="直線電流のまわりの同心円状の磁場と、右手の親指と指の向き"><ellipse cx="200" cy="140" rx="120" ry="40" style="fill:none;stroke:var(--accent);stroke-width:2"/><ellipse cx="200" cy="140" rx="70" ry="23" style="fill:none;stroke:var(--accent);stroke-width:2"/><line x1="200" y1="245" x2="200" y2="29" style="stroke:var(--thm);stroke-width:3.2"/><polygon points="200,20 204.1,29 196,29" style="fill:var(--thm)"/><text class="tt" x="210" y="30">電流 I</text><line x1="130" y1="175" x2="166.1" y2="179.8" style="stroke:var(--accent);stroke-width:2.4"/><polygon points="175,181 165.5,183.8 166.6,175.8" style="fill:var(--accent)"/><line x1="270" y1="103" x2="239" y2="100.7" style="stroke:var(--accent);stroke-width:2.4"/><polygon points="230,100 239.3,96.6 238.7,104.7" style="fill:var(--accent)"/><text class="t" x="330" y="150">B</text><text class="tj" x="400" y="70">右手の親指 = 電流の向き</text><text class="tj" x="400" y="95">握った指の向き = 磁場の向き</text><text class="ta" x="400" y="130">大きさ B = μ₀I / 2πr</text><text class="tm" x="400" y="155">(例 5.2、距離 r に反比例)</text></svg>
+      <figcaption>図2 まっすぐな電流のまわりの磁場は、電流を中心とする同心円(右ねじの向き)。外側の円ほど磁場は弱くなります(例 5.2 で $B=\mu_0I/2\pi r$ と求めます)。</figcaption>
+    </figure>
+    <div data-need="Z" class="box intuit"><div class="label">直感で理解する:電流のまわりの「渦」 <span class="need need-x">不要(範囲外)</span></div>
+      <p>電場は電荷から放射状に「噴き出す」のに対して、磁場は電流のまわりを「ぐるぐる回る」。外積 $\bm{J}\times(\bm{r}-\bm{r}')$ は、電流の向きを軸にして、観測点の方向を90°回した向きを表しています。右手の親指を電流に向けて握ったときの指の向きが、まさにこの「回した向き」です。</p>
+    </div>
+    <div data-need="Z" class="box ex"><div class="label">問 [5-1] <span class="need need-x">不要(範囲外)</span></div>
+      <p>$y=z=0$ の $x$ 軸上の $-l\le x\le l$ の領域に、$x$ 軸正方向に向けて大きさ $I$ の電流が流れている(端に電荷がたまる点は無視する)。この電流が点 $(0,0,z)$ に作る磁場を求めよ。</p>
+    </div>
+    <div data-need="Z" class="box supp"><div class="label">講義ノートにない補足:[5-1] の解答 <span class="need need-x">不要(範囲外)</span></div>
+      <p>線電流では $\bm{J}\,d\bm{r}'$ を $I\,d\bm{l}'$(電流 × 導線の小さな長さのベクトル)に置き換えます。位置 $(x',0,0)$ の小さな部分 $d\bm{l}'=(dx',0,0)$ から観測点 $(0,0,z)$ へのベクトルは $\bm{r}-\bm{r}'=(-x',0,z)$ で、外積は
+      $$d\bm{l}'\times(\bm{r}-\bm{r}')=(dx',0,0)\times(-x',0,z)=(0,\ -z\,dx',\ 0).$$
+      よって磁場は $y$ 成分だけで、
+      $$B_y=-\frac{\mu_0I}{4\pi}\int_{-l}^{l}\frac{z\,dx'}{(x'^2+z^2)^{3/2}}=-\frac{\mu_0Iz}{4\pi}\cdot\frac{2l}{z^2\sqrt{l^2+z^2}}=-\frac{\mu_0Il}{2\pi z\sqrt{l^2+z^2}}.$$
+      (積分は第3回の過去問 2023年度 [4] と同じ $\int\frac{dx}{(x^2+z^2)^{3/2}}=\frac{x}{z^2\sqrt{x^2+z^2}}$。)したがって
+      $$\bm{B}=\Bigl(0,\ -\frac{\mu_0Il}{2\pi z\sqrt{l^2+z^2}},\ 0\Bigr)\qquad(z\gt0).$$
+      <b>確かめ</b>:向きは、$x$ 方向の電流の上($z\gt0$)で $-y$ 向き(右ねじの向きと一致)。$l\to\infty$ で $B=\frac{\mu_0I}{2\pi z}$ となり、無限に長い直線電流(例 5.2)に一致します。数値積分でも確かめました。</p>
+    </div>
+
+    <h3 id="s4-2" data-need="Z">4.2 磁場の発散はゼロ <span class="need need-x">不要(範囲外)</span></h3>
+    <p data-need="Z">ビオ・サバールの法則から、磁場の発散 $\nabla\cdot\bm{B}$ を計算します。ベクトルの公式 $\nabla\cdot(\bm{X}\times\bm{Y})=\bm{Y}\cdot(\nabla\times\bm{X})-\bm{X}\cdot(\nabla\times\bm{Y})$(<a href="week-01.html#s5-5">第1回 5.5</a> の $\varepsilon\varepsilon$ の公式で示せる)を使うと
+    $$\nabla\cdot\bm{B}=\frac{\mu_0}{4\pi}\Bigl[\int\frac{\bm{r}-\bm{r}'}{|\bm{r}-\bm{r}'|^3}\cdot\bigl(\nabla\times\bm{J}(\bm{r}')\bigr)d\bm{r}'-\int\bm{J}(\bm{r}')\cdot\Bigl(\nabla\times\frac{\bm{r}-\bm{r}'}{|\bm{r}-\bm{r}'|^3}\Bigr)d\bm{r}'\Bigr]=0\qquad(5.2)$$</p>
+    <ul data-need="Z">
+      <li><b>1項目が 0 の理由</b>:$\nabla$ は観測点 $\bm{r}$ についての微分です。$\bm{J}(\bm{r}')$ は $\bm{r}$ を含まないので、$\nabla\times\bm{J}(\bm{r}')=\bm{0}$。</li>
+      <li><b>2項目が 0 の理由</b>:$\dfrac{\bm{r}-\bm{r}'}{|\bm{r}-\bm{r}'|^3}$ は点電荷の電場の形で、その回転は 0 でした(<a href="week-03.html#s4-6">第3回 4.6</a>、$\nabla\times\bm{E}=\bm{0}$)。</li>
+    </ul>
+    <div data-need="Z" class="box thm"><div class="label">結果 <span class="need need-x">不要(範囲外)</span></div><p>$$\nabla\cdot\bm{B}=0\qquad(5.5)$$ 磁場には「湧き出し」がない。電場の $\nabla\cdot\bm{E}=\rho/\varepsilon_0$ に対応する「磁荷」は存在しない。</p></div>
+
+    <h3 id="s4-3" data-need="Z">4.3 磁場の回転:アンペールの法則 <span class="need need-x">不要(範囲外)</span></h3>
+    <p data-need="Z">次に回転 $\nabla\times\bm{B}$ です。今度は $\varepsilon\varepsilon$ の公式 (2.14) で $\nabla\times(\bm{X}\times\bm{Y})$ を展開すると、4つの項が出てきます((5.3))。</p>
+    $$\nabla\times\bm{B}=\frac{\mu_0}{4\pi}\Bigl[\int\bm{J}(\bm{r}')\Bigl(\nabla\cdot\frac{\bm{r}-\bm{r}'}{|\bm{r}-\bm{r}'|^3}\Bigr)d\bm{r}'-\int\frac{\bm{r}-\bm{r}'}{|\bm{r}-\bm{r}'|^3}(\nabla\cdot\bm{J}(\bm{r}'))d\bm{r}'+\int\Bigl(\frac{\bm{r}-\bm{r}'}{|\bm{r}-\bm{r}'|^3}\cdot\nabla\Bigr)\bm{J}(\bm{r}')d\bm{r}'-\int(\bm{J}(\bm{r}')\cdot\nabla)\frac{\bm{r}-\bm{r}'}{|\bm{r}-\bm{r}'|^3}d\bm{r}'\Bigr]$$
+    <ul data-need="Z">
+      <li><b>2・3項目</b>:$\nabla$ が $\bm{J}(\bm{r}')$ に作用しているので、4.2 と同じ理由で 0。</li>
+      <li><b>4項目</b>:電流が閉じたループを作るとき(定常電流)、「電流に沿って、ある関数の微分を足す」積分は、出発点と終点が同じなので 0 になります(微分を積分すると両端の差、の一周版)。講義ノートの脚注74は、部分積分とガウスの定理を使った別の確かめ方です。</li>
+      <li><b>1項目</b>:$\nabla\cdot\dfrac{\bm{r}-\bm{r}'}{|\bm{r}-\bm{r}'|^3}=4\pi\delta(\bm{r}-\bm{r}')$((3.10)、<a href="week-03.html#s4-3">第3回 4.3</a> のデルタ関数)を代入すると、積分が $4\pi\bm{J}(\bm{r})$ になる。</li>
+    </ul>
+    <div data-need="Z" class="box thm"><div class="label">アンペールの法則 (5.6) と、静磁場の基本法則 <span class="need need-x">不要(範囲外)</span></div>
+      <p>$$\nabla\cdot\bm{B}=0\quad(5.5),\qquad\nabla\times\bm{B}=\mu_0\bm{J}\quad(5.6)$$</p>
+    </div>
+    <p data-need="Z">静電場の基本法則と並べると、発散と回転の役割がちょうど入れ替わっています。</p>
+    <div class="need-wrap" data-need="Z"><table class="cmp">
+      <tr><th></th><th>発散</th><th>回転</th><th>力線</th></tr>
+      <tr><td>静電場</td><td>$\nabla\cdot\bm{E}=\rho/\varepsilon_0$(電荷から湧き出す)</td><td>$\nabla\times\bm{E}=\bm{0}$(渦なし)</td><td>電荷で始まり、電荷で終わる</td></tr>
+      <tr><td>静磁場</td><td>$\nabla\cdot\bm{B}=0$(湧き出しなし)</td><td>$\nabla\times\bm{B}=\mu_0\bm{J}$(電流のまわりに渦)</td><td>必ず閉じている</td></tr>
+    </table></div><!--need-wrap-->
+    <p data-need="Z">電気力線と同じように「磁力線」を考えることができ(向きが磁場の向き、密度が大きさ)、(5.5) から<b>磁力線は必ず閉じている</b>ことが分かります(図3)。また、面 $S$ を貫く磁力線の本数を<b>磁束</b>といい、
+    $$\Phi=\int_S\bm{B}\cdot d\bm{S}\qquad(5.7)$$
+    で定義します(第2回の面積分そのもの)。</p>
+    <figure data-need="Z" class="fig">
+      <svg viewBox="0 0 640 240" width="640" role="img" aria-label="電気力線は電荷から湧き出すが、磁力線は必ず閉じている"><circle cx="140" cy="120" r="9" style="fill:var(--thm)"/><text class="tj" x="134" y="125">+</text><line x1="156" y1="120" x2="206" y2="120" style="stroke:var(--thm);stroke-width:2"/><polygon points="215,120 206,124.1 206,116" style="fill:var(--thm)"/><line x1="151.3" y1="131.3" x2="186.7" y2="166.7" style="stroke:var(--thm);stroke-width:2"/><polygon points="193,173 183.8,169.5 189.5,163.8" style="fill:var(--thm)"/><line x1="140" y1="136" x2="140" y2="186" style="stroke:var(--thm);stroke-width:2"/><polygon points="140,195 136,186 144.1,186" style="fill:var(--thm)"/><line x1="128.7" y1="131.3" x2="93.3" y2="166.7" style="stroke:var(--thm);stroke-width:2"/><polygon points="87,173 90.5,163.8 96.2,169.5" style="fill:var(--thm)"/><line x1="124" y1="120" x2="74" y2="120" style="stroke:var(--thm);stroke-width:2"/><polygon points="65,120 74,116 74,124.1" style="fill:var(--thm)"/><line x1="128.7" y1="108.7" x2="93.3" y2="73.3" style="stroke:var(--thm);stroke-width:2"/><polygon points="87,67 96.2,70.5 90.5,76.2" style="fill:var(--thm)"/><line x1="140" y1="104" x2="140" y2="54" style="stroke:var(--thm);stroke-width:2"/><polygon points="140,45 144.1,54 136,54" style="fill:var(--thm)"/><line x1="151.3" y1="108.7" x2="186.7" y2="73.3" style="stroke:var(--thm);stroke-width:2"/><polygon points="193,67 189.5,76.2 183.8,70.5" style="fill:var(--thm)"/><text class="tm" x="140" y="225" style="text-anchor:middle">電気力線:電荷から湧き出す(∇·E ≠ 0)</text><circle cx="430" cy="120" r="9" style="fill:none;stroke:var(--thm);stroke-width:1.8"/><circle cx="430" cy="120" r="2.6" style="fill:var(--thm)"/><circle cx="530" cy="120" r="9" style="fill:none;stroke:var(--thm);stroke-width:1.8"/><line x1="524.42" y1="114.42" x2="535.58" y2="125.58" style="stroke:var(--thm);stroke-width:1.8"/><line x1="524.42" y1="125.58" x2="535.58" y2="114.42" style="stroke:var(--thm);stroke-width:1.8"/><ellipse cx="480" cy="120" rx="22" ry="40" style="fill:none;stroke:var(--accent);stroke-width:2"/><ellipse cx="480" cy="120" rx="80" ry="70" style="fill:none;stroke:var(--accent);stroke-width:2"/><ellipse cx="480" cy="120" rx="120" ry="95" style="fill:none;stroke:var(--accent);stroke-width:1.6;stroke-dasharray:5 4"/><line x1="478" y1="82" x2="472" y2="82" style="stroke:var(--accent);stroke-width:2.4"/><polygon points="482,82 472,86.5 472,77.5" style="fill:var(--accent)"/><line x1="482" y1="51" x2="488" y2="51" style="stroke:var(--accent);stroke-width:2.4"/><polygon points="478,51 488,46.5 488,55.5" style="fill:var(--accent)"/><text class="tm" x="480" y="225" style="text-anchor:middle">磁力線:必ず閉じている(∇·B = 0)</text></svg>
+      <figcaption>図3 左:電気力線は電荷から湧き出す。右:円形の電流(断面。⊙ は手前向き、⊗ は奥向きの電流)のまわりの磁力線は、始まりも終わりもない閉じた曲線になります(講義ノートの図22のコイルの磁力線と同じ性質)。</figcaption>
+    </figure>
+    <div data-need="Z" class="box warn"><div class="label">静磁場でだけ成り立つもの、いつも成り立つもの(講義ノート p.32〜33) <span class="need need-x">不要(範囲外)</span></div>
+      <ul>
+        <li>静磁場では、「ビオ・サバールの法則 (5.1)」と「(5.5)+(5.6)」は同じ結果を与える(<a href="week-03.html#s3">第3回 3.</a> のヘルムホルツの定理(1)の一意性による)。</li>
+        <li>電磁場が時間変化するときは、$\nabla\cdot\bm{B}=0$ はそのまま成り立つが、(5.6) には補正の項が加わる(講義の後半、§8 のマクスウェルの変位電流)。ビオ・サバールの法則は、一般には正しくない。</li>
+        <li>電場のときのクーロンの法則とガウスの法則の関係と、まったく同じ構図です。</li>
+      </ul>
+    </div>
+
+    <h3 id="s4-4" data-need="Z">4.4 積分型のアンペールの法則 <span class="need need-x">不要(範囲外)</span></h3>
+    <p data-need="Z">(5.6) の両辺を面 $S$ で面積分し、左辺に<b>ストークスの定理</b>を使うと、
+    $$\oint_{\partial S}\bm{B}\cdot d\bm{x}=\mu_0\int_S\bm{J}\cdot d\bm{S}\qquad(5.8)$$
+    が得られます。左辺は「閉じた経路に沿った磁場の線積分」、右辺は「その経路を縁とする面を貫く電流の合計」の $\mu_0$ 倍です。電場で積分型のガウスの法則が役立ったのと同じく、<b>対称性が高いとき</b>に磁場を楽に計算できます。</p>
+    <div data-need="Z" class="box intuit"><div class="label">直感で理解する:「囲んだ電流」だけで決まる <span class="need need-x">不要(範囲外)</span></div>
+      <p>電場のガウスの法則は「閉じた面から出ていく電気力線の本数 = 中の電荷」でした。アンペールの法則は「閉じた経路に沿って磁場を足したもの = 経路が囲む電流」です。経路の外を流れる電流は、経路を一周する間に「行って戻る」寄与になり、打ち消し合います。</p>
+    </div>
+
+    <h3 id="s4-5" data-need="Z">4.5 例 5.1:ソレノイド(円筒形のコイル)の磁場 <span class="need need-x">不要(範囲外)</span></h3>
+    <div data-need="Z" class="box ex"><div class="label">例 5.1 <span class="need need-x">不要(範囲外)</span></div>
+      <p>$z$ 軸を中心軸とする、半径 $r$ の無限に長い円筒形コイルがある。単位長さあたりの巻き数は $N$、流れる電流は大きさ $I$。このコイルが作る磁場を求めよ。</p>
+    </div>
+    <p data-need="Z">磁場を $B_r$(動径)、$B_\theta$(回転)、$B_z$(軸方向)に分けて、1つずつ調べます。</p>
+    <ol data-need="Z">
+      <li><b>$B_r=0$</b>:コイルを上下逆さまにすると、電流の向きが反転した状態になります。電流を反転すると磁場も反転するはずなので $B_r\to-B_r$。一方、上下を逆さまにしても動径方向(軸から外向き)は変わらないので $B_r\to B_r$。両方が成り立つには $B_r=0$。</li>
+      <li><b>$B_\theta=0$</b>:$xy$ 面に平行な半径 $d$ の円を経路にとって (5.8) を使うと、$2\pi d\,B_\theta=0$(この円の内側を、面に垂直に貫く電流はない)。</li>
+      <li><b>$B_z$</b>:図4の長方形の経路(軸に平行な辺の長さ $h$、内側の辺は軸からの距離 $l_0\lt r$、外側の辺は $l_1\gt r$)に (5.8) を使います。水平な辺では磁場が $z$ 方向なので線積分は 0。経路を貫く電流は $hN$ 本 × $I$ なので
+      $$h\bigl(B_z(l_0)-B_z(l_1)\bigr)=\mu_0hIN\qquad(5.9).$$
+      外側の辺を無限に遠くにとると $B_z(l_1)\to0$ なので</li>
+    </ol>
+    <div data-need="Z" class="box thm"><div class="label">結果 (5.10) <span class="need need-x">不要(範囲外)</span></div><p>$$B_z(l)=\begin{cases}\mu_0IN&(l\lt r:\ \text{コイルの中})\\0&(l\gt r:\ \text{コイルの外})\end{cases}$$ 中の磁場は<b>一様</b>で、位置($l_0$)によらない。</p></div>
+    <figure data-need="Z" class="fig">
+      <svg viewBox="0 0 640 270" width="640" role="img" aria-label="ソレノイドの断面と、アンペールの法則を使う長方形の経路"><circle cx="150" cy="70" r="8" style="fill:none;stroke:var(--thm);stroke-width:1.8"/><circle cx="150" cy="70" r="2.6" style="fill:var(--thm)"/><circle cx="150" cy="190" r="8" style="fill:none;stroke:var(--thm);stroke-width:1.8"/><line x1="145.04" y1="185.04" x2="154.96" y2="194.96" style="stroke:var(--thm);stroke-width:1.8"/><line x1="145.04" y1="194.96" x2="154.96" y2="185.04" style="stroke:var(--thm);stroke-width:1.8"/><circle cx="200" cy="70" r="8" style="fill:none;stroke:var(--thm);stroke-width:1.8"/><circle cx="200" cy="70" r="2.6" style="fill:var(--thm)"/><circle cx="200" cy="190" r="8" style="fill:none;stroke:var(--thm);stroke-width:1.8"/><line x1="195.04" y1="185.04" x2="204.96" y2="194.96" style="stroke:var(--thm);stroke-width:1.8"/><line x1="195.04" y1="194.96" x2="204.96" y2="185.04" style="stroke:var(--thm);stroke-width:1.8"/><circle cx="250" cy="70" r="8" style="fill:none;stroke:var(--thm);stroke-width:1.8"/><circle cx="250" cy="70" r="2.6" style="fill:var(--thm)"/><circle cx="250" cy="190" r="8" style="fill:none;stroke:var(--thm);stroke-width:1.8"/><line x1="245.04" y1="185.04" x2="254.96" y2="194.96" style="stroke:var(--thm);stroke-width:1.8"/><line x1="245.04" y1="194.96" x2="254.96" y2="185.04" style="stroke:var(--thm);stroke-width:1.8"/><circle cx="300" cy="70" r="8" style="fill:none;stroke:var(--thm);stroke-width:1.8"/><circle cx="300" cy="70" r="2.6" style="fill:var(--thm)"/><circle cx="300" cy="190" r="8" style="fill:none;stroke:var(--thm);stroke-width:1.8"/><line x1="295.04" y1="185.04" x2="304.96" y2="194.96" style="stroke:var(--thm);stroke-width:1.8"/><line x1="295.04" y1="194.96" x2="304.96" y2="185.04" style="stroke:var(--thm);stroke-width:1.8"/><circle cx="350" cy="70" r="8" style="fill:none;stroke:var(--thm);stroke-width:1.8"/><circle cx="350" cy="70" r="2.6" style="fill:var(--thm)"/><circle cx="350" cy="190" r="8" style="fill:none;stroke:var(--thm);stroke-width:1.8"/><line x1="345.04" y1="185.04" x2="354.96" y2="194.96" style="stroke:var(--thm);stroke-width:1.8"/><line x1="345.04" y1="194.96" x2="354.96" y2="185.04" style="stroke:var(--thm);stroke-width:1.8"/><circle cx="400" cy="70" r="8" style="fill:none;stroke:var(--thm);stroke-width:1.8"/><circle cx="400" cy="70" r="2.6" style="fill:var(--thm)"/><circle cx="400" cy="190" r="8" style="fill:none;stroke:var(--thm);stroke-width:1.8"/><line x1="395.04" y1="185.04" x2="404.96" y2="194.96" style="stroke:var(--thm);stroke-width:1.8"/><line x1="395.04" y1="194.96" x2="404.96" y2="185.04" style="stroke:var(--thm);stroke-width:1.8"/><circle cx="450" cy="70" r="8" style="fill:none;stroke:var(--thm);stroke-width:1.8"/><circle cx="450" cy="70" r="2.6" style="fill:var(--thm)"/><circle cx="450" cy="190" r="8" style="fill:none;stroke:var(--thm);stroke-width:1.8"/><line x1="445.04" y1="185.04" x2="454.96" y2="194.96" style="stroke:var(--thm);stroke-width:1.8"/><line x1="445.04" y1="194.96" x2="454.96" y2="185.04" style="stroke:var(--thm);stroke-width:1.8"/><line x1="130" y1="130" x2="471" y2="130" style="stroke:var(--accent);stroke-width:2.6"/><polygon points="480,130 471,134.1 471,126" style="fill:var(--accent)"/><text class="ta" x="488" y="135">B(中は一様)</text><text class="tm" x="150" y="40">ソレノイドの断面(上の列 ⊙、下の列 ⊗)</text><path d="M 330 110 L 400 110 L 400 240 L 330 240 Z" style="fill:none;stroke:var(--ex);stroke-width:2"/><text class="t" x="408" y="175">h</text><text class="tm" x="336" y="104">中(l₀ < r)</text><text class="tm" x="336" y="258">外(l₁ > r)</text><text class="tj" x="510" y="200">経路の中を通る電流:</text><text class="tj" x="510" y="220">hN 本 × I</text></svg>
+      <figcaption>図4 ソレノイド(例 5.1)の断面。緑の長方形(高さ $h$)の経路に積分型アンペールの法則を使うと、経路の中を貫く電流は $hN\times I$。外側の磁場は 0 なので、中の磁場は $B_z=\mu_0NI$(講義ノートの図23(b))。</figcaption>
+    </figure>
+    <div data-need="Z" class="box supp"><div class="label">講義ノートにない補足:磁場の向き(符号) <span class="need need-x">不要(範囲外)</span></div>
+      <p>講義ノートは「時計回りの電流」で $B_z=+\mu_0IN$ としていますが、時計回りかどうかは、どちらから見るかで変わります。右ねじの法則で決めるのが確実です:<b>右手の4本の指をコイルの電流の向きに巻くと、親指の向きがコイルの中の磁場の向き</b>。大きさ $\mu_0IN$ は向きによりません。</p>
+    </div>
+
+    <h3 id="s4-6" data-need="Z">4.6 例 5.2:無限に長い直線電流 <span class="need need-x">不要(範囲外)</span></h3>
+    <p data-need="Z">$z$ 軸上を正の向きに電流 $I$ が流れているとき、対称性から磁場は $z$ 軸のまわりを回る向き($\theta$ 方向)で、大きさは軸からの距離 $r$ だけで決まります。半径 $r$ の円に (5.8) を使うと $2\pi r\,B=\mu_0I$、つまり
+    $$B=\frac{\mu_0I}{2\pi r}.$$
+    高校で習った式そのものです。ビオ・サバールの法則で積分すると([5-1] で $l\to\infty$)同じ答えになります。</p>
+
+    <h3 id="s4-7" data-need="Z">4.7 ローレンツ力 <span class="need need-x">不要(範囲外)</span></h3>
+    <p data-need="Z">磁場 $\bm{B}$ の中を、電荷 $q$ が速度 $\bm{v}$ で動いているとき、電荷には
+    $$\bm{F}=q(\bm{v}\times\bm{B})\qquad(5.11)$$
+    の力がはたらきます(<b>ローレンツ力</b>)。電流密度 $\bm{J}$ にも同様に
+    $$\bm{F}=\bm{J}\times\bm{B}\qquad(5.12)$$
+    の力(単位体積あたり)がはたらきます。これは、電荷密度 $\rho$ の電荷が速度 $\bm{v}$ で動いて電流 $\bm{J}=\rho\bm{v}$ を作っている、と考えると (5.11) から自然に出てきます。</p>
+    <div data-need="Z" class="box intuit"><div class="label">直感で理解する:磁場は「舵を切る」だけ <span class="need need-x">不要(範囲外)</span></div>
+      <p>ローレンツ力は、いつも速度と垂直です。力が進む向きと垂直なら、仕事 $\bm{F}\cdot\bm{v}\,dt$ は 0 で、速さ(運動エネルギー)は変わりません。磁場は粒子の<b>向きだけを曲げる</b>「舵」の役目をします。この事実が、次の回の「磁場は仕事をしない」(§5.3)につながります。</p>
+    </div>
+
+    <h3 id="s4-8" data-need="Z">4.8 例 5.3:サイクロトロン運動 <span class="need need-x">不要(範囲外)</span></h3>
+    <div data-need="Z" class="box ex"><div class="label">例 5.3 <span class="need need-x">不要(範囲外)</span></div>
+      <p>$z$ 軸正方向に一様な磁場 $B$ がかかっている。質量 $m$、電荷 $q$ の荷電粒子が、初速度 $\bm{v}=(v,0,0)$ で運動を始めた。この粒子はどのように運動するか。</p>
+    </div>
+    <p data-need="Z">ローレンツ力は速度と垂直なので、速さ $v$ は一定。力の大きさはいつも $qvB$ で、向きは速度に対して真横です。大きさが一定で、いつも速度に垂直な力は、<b>等速円運動</b>の向心力です。向心力の式 $m\dfrac{v^2}{R}=qvB$ から
+    $$R=\frac{mv}{qB},\qquad T=\frac{2\pi R}{v}=\frac{2\pi m}{qB},\qquad\omega=\frac{qB}{m}.$$
+    この運動を<b>サイクロトロン運動</b>、$\omega=qB/m$ を<b>サイクロトロン周波数</b>といいます。周期が<b>速さによらない</b>のが特徴です(速い粒子は大きな円を回るので、一周の時間は同じ)。初速度に $z$ 成分があれば、$z$ 方向には等速で進むので、らせん運動になります。</p>
+    <figure data-need="Z" class="fig">
+      <svg viewBox="0 0 640 250" width="640" role="img" aria-label="一様な磁場の中の荷電粒子の円運動"><circle cx="90" cy="30" r="6" style="fill:none;stroke:var(--accent);stroke-width:1.8"/><circle cx="90" cy="30" r="2.6" style="fill:var(--accent)"/><circle cx="90" cy="80" r="6" style="fill:none;stroke:var(--accent);stroke-width:1.8"/><circle cx="90" cy="80" r="2.6" style="fill:var(--accent)"/><circle cx="90" cy="130" r="6" style="fill:none;stroke:var(--accent);stroke-width:1.8"/><circle cx="90" cy="130" r="2.6" style="fill:var(--accent)"/><circle cx="90" cy="180" r="6" style="fill:none;stroke:var(--accent);stroke-width:1.8"/><circle cx="90" cy="180" r="2.6" style="fill:var(--accent)"/><circle cx="90" cy="230" r="6" style="fill:none;stroke:var(--accent);stroke-width:1.8"/><circle cx="90" cy="230" r="2.6" style="fill:var(--accent)"/><circle cx="210" cy="30" r="6" style="fill:none;stroke:var(--accent);stroke-width:1.8"/><circle cx="210" cy="30" r="2.6" style="fill:var(--accent)"/><circle cx="210" cy="80" r="6" style="fill:none;stroke:var(--accent);stroke-width:1.8"/><circle cx="210" cy="80" r="2.6" style="fill:var(--accent)"/><circle cx="210" cy="130" r="6" style="fill:none;stroke:var(--accent);stroke-width:1.8"/><circle cx="210" cy="130" r="2.6" style="fill:var(--accent)"/><circle cx="210" cy="180" r="6" style="fill:none;stroke:var(--accent);stroke-width:1.8"/><circle cx="210" cy="180" r="2.6" style="fill:var(--accent)"/><circle cx="210" cy="230" r="6" style="fill:none;stroke:var(--accent);stroke-width:1.8"/><circle cx="210" cy="230" r="2.6" style="fill:var(--accent)"/><circle cx="330" cy="30" r="6" style="fill:none;stroke:var(--accent);stroke-width:1.8"/><circle cx="330" cy="30" r="2.6" style="fill:var(--accent)"/><circle cx="330" cy="80" r="6" style="fill:none;stroke:var(--accent);stroke-width:1.8"/><circle cx="330" cy="80" r="2.6" style="fill:var(--accent)"/><circle cx="330" cy="130" r="6" style="fill:none;stroke:var(--accent);stroke-width:1.8"/><circle cx="330" cy="130" r="2.6" style="fill:var(--accent)"/><circle cx="330" cy="180" r="6" style="fill:none;stroke:var(--accent);stroke-width:1.8"/><circle cx="330" cy="180" r="2.6" style="fill:var(--accent)"/><circle cx="330" cy="230" r="6" style="fill:none;stroke:var(--accent);stroke-width:1.8"/><circle cx="330" cy="230" r="2.6" style="fill:var(--accent)"/><circle cx="450" cy="30" r="6" style="fill:none;stroke:var(--accent);stroke-width:1.8"/><circle cx="450" cy="30" r="2.6" style="fill:var(--accent)"/><circle cx="450" cy="80" r="6" style="fill:none;stroke:var(--accent);stroke-width:1.8"/><circle cx="450" cy="80" r="2.6" style="fill:var(--accent)"/><circle cx="450" cy="130" r="6" style="fill:none;stroke:var(--accent);stroke-width:1.8"/><circle cx="450" cy="130" r="2.6" style="fill:var(--accent)"/><circle cx="450" cy="180" r="6" style="fill:none;stroke:var(--accent);stroke-width:1.8"/><circle cx="450" cy="180" r="2.6" style="fill:var(--accent)"/><circle cx="450" cy="230" r="6" style="fill:none;stroke:var(--accent);stroke-width:1.8"/><circle cx="450" cy="230" r="2.6" style="fill:var(--accent)"/><circle cx="270" cy="130" r="80" style="fill:none;stroke:var(--thm);stroke-width:2.4"/><circle cx="350" cy="130" r="6" style="fill:var(--thm)"/><line x1="350" y1="130" x2="350" y2="79" style="stroke:var(--thm);stroke-width:2.6"/><polygon points="350,70 354.1,79 346,79" style="fill:var(--thm)"/><text class="t" x="358" y="78">v</text><line x1="350" y1="130" x2="309" y2="130" style="stroke:var(--ex);stroke-width:2.6"/><polygon points="300,130 309,126 309,134.1" style="fill:var(--ex)"/><text class="t" x="302" y="122">F</text><text class="ta" x="470" y="120">B:手前向き(⊙)</text><text class="tj" x="470" y="145">半径 r = mv/qB</text><text class="tj" x="470" y="170">周期 T = 2πm/qB</text></svg>
+      <figcaption>図5 一様な磁場の中の荷電粒子(例 5.3)。ローレンツ力 $\bm{F}=q\bm{v}\times\bm{B}$ はいつも速度と垂直で中心を向くので、速さを変えずに向きだけを曲げ、円運動になります(図は $q\gt0$ の場合)。</figcaption>
+    </figure>
+
+    <h3 id="s4-9" data-need="Z">4.9 例 5.4:平行電流の間にはたらく力 <span class="need need-x">不要(範囲外)</span></h3>
+    <div data-need="Z" class="box ex"><div class="label">例 5.4 <span class="need need-x">不要(範囲外)</span></div>
+      <p>2本の導線が距離 $l$ だけ離れて平行に並び、どちらにも同じ向きに電流 $I$ が流れている。導線の単位長さあたりにはたらく力はどれだけか。</p>
+    </div>
+    <p data-need="Z">電流1が距離 $l$ の位置に作る磁場は、例 5.2 より $\dfrac{\mu_0I}{2\pi l}$。電流2の長さ1の部分が受ける力は $IB$ なので、
+    $$F=\frac{\mu_0I^2}{2\pi l}\quad(\text{単位長さあたり、引力}).$$
+    同じ向きの電流は引き合い、逆向きなら反発します(図6)。2019年まで、電流の単位アンペアは、この力を使って「1 m 離れた2本の電流の間に、1 m あたり $2\times10^{-7}$ N の力がはたらく電流」と定義されていました($\mu_0=4\pi\times10^{-7}$ を入れると、確かに $I=1$ A で $2\times10^{-7}$ N)。</p>
+    <figure data-need="Z" class="fig">
+      <svg viewBox="0 0 640 210" width="640" role="img" aria-label="同じ向きの平行電流は引き合う"><line x1="200" y1="190" x2="200" y2="34" style="stroke:var(--thm);stroke-width:3"/><polygon points="200,25 204.1,34 196,34" style="fill:var(--thm)"/><line x1="380" y1="190" x2="380" y2="34" style="stroke:var(--thm);stroke-width:3"/><polygon points="380,25 384.1,34 376,34" style="fill:var(--thm)"/><text class="t" x="170" y="22">I</text><text class="t" x="390" y="22">I</text><line x1="200" y1="110" x2="380" y2="110" style="stroke:var(--muted);stroke-width:1.2;stroke-dasharray:5 4"/><text class="t" x="282" y="103">l</text><circle cx="380" cy="150" r="8" style="fill:none;stroke:var(--accent);stroke-width:1.8"/><line x1="375.04" y1="145.04" x2="384.96" y2="154.96" style="stroke:var(--accent);stroke-width:1.8"/><line x1="375.04" y1="154.96" x2="384.96" y2="145.04" style="stroke:var(--accent);stroke-width:1.8"/><text class="ta" x="392" y="155">1 が作る B</text><line x1="372" y1="80" x2="329" y2="80" style="stroke:var(--ex);stroke-width:2.6"/><polygon points="320,80 329,76 329,84.1" style="fill:var(--ex)"/><line x1="208" y1="80" x2="251" y2="80" style="stroke:var(--ex);stroke-width:2.6"/><polygon points="260,80 251,84.1 251,76" style="fill:var(--ex)"/><text class="tj" x="430" y="75">力:単位長さあたり μ₀I²/2πl</text><text class="tj" x="430" y="100">同じ向き → 引き合う</text></svg>
+      <figcaption>図6 平行な2本の電流(例 5.4)。電流1が電流2の位置に作る磁場は紙面の奥向き(⊗)で、電流2が受ける力 $\bm{J}\times\bm{B}$ は電流1のほうを向きます(引力)。</figcaption>
+    </figure>
+
+    <h3 id="s4-10" data-need="Z">4.10 電子顕微鏡とブッシュの定理 <span class="need need-x">不要(範囲外)</span></h3>
+    <p data-need="Z">ローレンツ力は、電子顕微鏡で電子のビームを細く絞る「磁気レンズ」に使われています。講義ノートは、軸対称な磁場の中の電荷の運動から、この原理を説明しています。</p>
+    <p data-need="Z"><b>① 軸対称な磁場の性質</b>:磁場が $z$ 軸のまわりで軸対称で、回転成分 $B_\theta$ がないとき、磁場は $B_z$ と $B_r$ だけで決まります。$\nabla\cdot\bm{B}=0$ を円筒座標で書くと(1.5 の枠)
+    $$\frac1r\frac{\partial}{\partial r}(rB_r)+\frac{\partial B_z}{\partial z}=0\qquad(5.13).$$
+    高さ $z$ の、軸を中心とする半径 $r$ の円板を貫く磁束を $\Phi(r,z)=\int_0^r2\pi r'B_z(r',z)\,dr'$ とすると、
+    $$B_z=\frac{1}{2\pi r}\frac{\partial\Phi}{\partial r}\quad(5.14),\qquad B_r=-\frac{1}{2\pi r}\frac{\partial\Phi}{\partial z}\quad(5.15).$$
+    (5.14) は微分積分学の基本定理、(5.15) は (5.13) で $r$ の微分を $z$ の微分に書き換えたものです。</p>
+    <p data-need="Z"><b>② 角運動量の変化</b>:電荷 $q$(質量 $m$)の $z$ 軸まわりの角運動量 $L_z$(1.6 の枠)の時間変化はトルクの $z$ 成分で、ローレンツ力を入れて計算すると
+    $$\frac{dL_z}{dt}=qr\Bigl(\frac{dz}{dt}B_r-\frac{dr}{dt}B_z\Bigr)=-\frac{q}{2\pi}\Bigl(\frac{\partial\Phi}{\partial z}\frac{dz}{dt}+\frac{\partial\Phi}{\partial r}\frac{dr}{dt}\Bigr)=-\frac{q}{2\pi}\frac{d\Phi}{dt}\qquad(5.16)$$
+    (最後は連鎖律。$r,z$ は電荷の位置)。つまり保存するのは $L_z$ そのものではなく、</p>
+    <div data-need="Z" class="box thm"><div class="label">ブッシュの定理 (5.17) <span class="need need-x">不要(範囲外)</span></div><p>$$L_z+\frac{q}{2\pi}\Phi=\text{一定}$$ ($\Phi$ は、電荷の位置を通る、軸を中心とする円を貫く磁束)</p></div>
+    <p data-need="Z"><b>③ なぜ電子が軸に近づけるのか</b>:ふつうの角運動量保存 $L_z=mr^2\dot\theta=$ 一定 のままだと、速さ(エネルギー)が一定の電子は、軸からの距離 $r$ を自由に変えられません。ところがブッシュの定理では、電子が磁場の強い領域に入って $\Phi$ が変わると、その分 $L_z$ が変わり、電子は軸に引き寄せられます(図7)。これが電子顕微鏡の磁気レンズの仕組みです。</p>
+    <figure data-need="Z" class="fig">
+      <svg viewBox="0 0 640 250" width="640" role="img" aria-label="軸のまわりで細くなる磁力線と、軸に近づく電子"><line x1="40" y1="125" x2="600" y2="125" style="stroke:var(--muted);stroke-width:1;stroke-dasharray:6 4"/><text class="t" x="605" y="129">z</text><path d="M 40 85 C 220 85, 260 111, 320 111 S 420 85, 600 85" style="fill:none;stroke:var(--accent);stroke-width:1.8"/><path d="M 40 165 C 220 165, 260 139, 320 139 S 420 165, 600 165" style="fill:none;stroke:var(--accent);stroke-width:1.8"/><path d="M 40 55 C 220 55, 260 100.5, 320 100.5 S 420 55, 600 55" style="fill:none;stroke:var(--accent);stroke-width:1.8"/><path d="M 40 195 C 220 195, 260 149.5, 320 149.5 S 420 195, 600 195" style="fill:none;stroke:var(--accent);stroke-width:1.8"/><path d="M 40 25 C 220 25, 260 90, 320 90 S 420 25, 600 25" style="fill:none;stroke:var(--accent);stroke-width:1.8"/><path d="M 40 225 C 220 225, 260 160, 320 160 S 420 225, 600 225" style="fill:none;stroke:var(--accent);stroke-width:1.8"/><path d="M 40 30 C 200 40, 300 110, 420 122 S 560 125, 600 125" style="fill:none;stroke:var(--thm);stroke-width:2.6;stroke-dasharray:7 4"/><circle cx="40" cy="30" r="5" style="fill:var(--thm)"/><text class="ta" x="330" y="20" style="text-anchor:middle">コイルの中央で磁場が強い(磁力線が密)</text><text class="tm" x="60" y="245">電子の通り道(橙):磁束の変化で軸に引き寄せられる</text></svg>
+      <figcaption>図7 磁気レンズ(電子顕微鏡)のイメージ(講義ノートの図24を簡単にしたもの)。軸のまわりで回転対称な磁場の中を進む電子は、ブッシュの定理 (5.17) により、軸に近づくように曲げられます。</figcaption>
+    </figure>
+    <div data-need="Z" class="box supp"><div class="label">講義ノートにない補足:(5.16) の1つ目の等号 <span class="need need-x">不要(範囲外)</span></div>
+      <p>$\bm{r}=(r,0,z)$(円筒座標で、電荷のいる角度を $\theta=0$ とした)とすると、$z$ 軸まわりのトルクは $rF_\theta$($\theta$ 方向の力 × 軸からの距離)。ローレンツ力の $\theta$ 成分は $[q\bm{v}\times\bm{B}]_\theta=q(v_zB_r-v_rB_z)$($\bm{e}_z\times\bm{e}_r=\bm{e}_\theta$、$\bm{e}_r\times\bm{e}_z=-\bm{e}_\theta$)。$v_r=\frac{dr}{dt}$、$v_z=\frac{dz}{dt}$ を入れると (5.16) の真ん中の式になります。</p>
+    </div>
+    <p data-need="Z"><b>④ オーロラとプラズマの閉じ込め</b>(講義ノート p.35〜36):太陽から来た電子も、地球の磁場について同じ定理に従うので、磁極から少し離れた輪の形の領域に集まり、そこでオーロラが多く見られます(実際の現象はずっと複雑、と講義ノートも注意しています)。逆に「軸の近くの磁場が弱い場所にいる電子は、磁場の強い外側へ出ていけない」ことを使うのが、核融合などで使われるプラズマの磁気閉じ込めです。</p>
+    <div data-need="Z" class="box intuit"><div class="label">直感で理解する:回転いすと磁場 <span class="need need-x">不要(範囲外)</span></div>
+      <p>ふつうの角運動量保存は「回転いすで腕を縮めると速く回る」でした。磁場の中では、磁束 $\Phi$ を横切るたびに、磁場が角運動量を「貸し借り」します。その帳尻を合わせたもの $L_z+\frac{q}{2\pi}\Phi$ が保存する、というのがブッシュの定理です。</p>
     </div>
 
     <h2 id="s5" data-need="Y">5. 具体例で練習(講義ノートにない補足) <span class="need need-y">範囲内・過去問なし</span> <span class="page-tag">補足</span></h2>
@@ -241,18 +445,46 @@
 
     <!-- ===================== 5 ===================== -->
 
+    <!--s5:ex-->
+    <div data-need="Z" class="box ex">
+      <div class="label">問題 R:円電流の中心軸上の磁場(ビオ・サバールの法則) <span class="need need-x">不要(範囲外)</span></div>
+      <p>$xy$ 面上の、原点を中心とする半径 $a$ の円に、$z$ 軸正方向から見て反時計回りに電流 $I$ が流れている。点 $(0,0,z)$ の磁場を求めよ。また $z=0$(円の中心)での値を求めよ。</p>
+    </div>
+    <figure data-need="Z" class="fig">
+      <svg viewBox="0 0 640 220" width="640" role="img" aria-label="円電流の中心軸上の点の磁場"><ellipse cx="220" cy="170" rx="110" ry="32" style="fill:none;stroke:var(--thm);stroke-width:2.4"/><line x1="240" y1="202" x2="253" y2="201.4" style="stroke:var(--thm);stroke-width:2.4"/><polygon points="262,201 253.2,205.5 252.8,197.4" style="fill:var(--thm)"/><text class="t" x="340" y="200">I</text><line x1="220" y1="170" x2="220" y2="20" style="stroke:var(--muted);stroke-width:1.2;stroke-dasharray:5 4"/><circle cx="220" cy="60" r="5" style="fill:var(--accent)"/><text class="tj" x="230" y="58">(0, 0, z)</text><line x1="220" y1="60" x2="220" y2="31" style="stroke:var(--accent);stroke-width:2.6"/><polygon points="220,22 224.1,31 216,31" style="fill:var(--accent)"/><text class="t" x="230" y="32">B_z</text><line x1="220" y1="170" x2="330" y2="170" style="stroke:var(--muted);stroke-width:1.2"/><text class="t" x="268" y="165">a</text><text class="tm" x="380" y="90">横向きの成分は、円の反対側と打ち消し合う</text></svg>
+      <figcaption>図8 円電流(半径 $a$)の中心軸上の磁場(問題 R)。円の各部分が作る磁場の横向きの成分は、反対側の部分と打ち消し合い、軸方向の成分だけが残ります。</figcaption>
+    </figure>
+    <div data-need="Z" class="box proof"><div class="label">解答 <span class="need need-x">不要(範囲外)</span></div>
+      <p>角度 $\varphi$ の位置 $\bm{r}'=(a\cos\varphi,a\sin\varphi,0)$ の小さな部分は $d\bm{l}'=(-a\sin\varphi,a\cos\varphi,0)\,d\varphi$。観測点へのベクトルは $\bm{r}-\bm{r}'=(-a\cos\varphi,-a\sin\varphi,z)$、距離は $\sqrt{a^2+z^2}$(どの部分からも同じ)。外積の $z$ 成分は $(-a\sin\varphi)(-a\sin\varphi)-(a\cos\varphi)(-a\cos\varphi)=a^2$($x,y$ 成分は $\varphi$ で一周積分すると 0)。よって
+      $$B_z=\frac{\mu_0I}{4\pi}\int_0^{2\pi}\frac{a^2\,d\varphi}{(a^2+z^2)^{3/2}}=\frac{\mu_0Ia^2}{2(a^2+z^2)^{3/2}}.$$
+      中心($z=0$)では $B=\dfrac{\mu_0I}{2a}$(高校の円形電流の式)。遠く($z\gg a$)では $\dfrac{\mu_0Ia^2}{2z^3}$ と、距離の3乗で弱まります(電気双極子と同じ減り方。小さな円電流は「磁気双極子」)。</p>
+    </div>
+    <div data-need="Z" class="box ex">
+      <div class="label">問題 S:サイクロトロン運動の大きさ <span class="need need-x">不要(範囲外)</span></div>
+      <p>電子(質量 $m=9.1\times10^{-31}$ kg、電荷の大きさ $e=1.6\times10^{-19}$ C)が、磁束密度 $B=0.10$ T の一様な磁場に垂直に、速さ $v=1.0\times10^{7}$ m/s で入った。円運動の半径と周期を求めよ。</p>
+    </div>
+    <div data-need="Z" class="box proof"><div class="label">解答 <span class="need need-x">不要(範囲外)</span></div>
+      <p>$R=\dfrac{mv}{eB}=\dfrac{9.1\times10^{-31}\times1.0\times10^{7}}{1.6\times10^{-19}\times0.10}\approx5.7\times10^{-4}$ m(約 0.6 mm)。$T=\dfrac{2\pi m}{eB}=\dfrac{2\pi\times9.1\times10^{-31}}{1.6\times10^{-19}\times0.10}\approx3.6\times10^{-10}$ s。周期は速さによらないので、もっと遅い電子でも同じ周期で回ります(サイクロトロン加速器はこの性質を使う)。</p>
+    </div>
+    <!--/s5:ex-->
+
     <h2 id="s6" data-need="Y">6. まとめ(この回で覚えること) <span class="need need-y">範囲内・過去問なし</span></h2>
     <ul data-need="Y">
       <li><b>導体表面の電荷にはたらく力</b>は、外側の電場 $E$ の<b>半分</b> $E/2$(単位面積あたり $\tfrac12\varepsilon_0E^2$、導体を外に引く向き)。電荷が自分自身の作る電場からは力を受けないため。</li>
       <li><b>平行板コンデンサー</b>:$U=\dfrac{Q^2l}{2\varepsilon_0S}$。板を $\Delta l$ 引き離すときのエネルギーの増加から、板にはたらく力 $QE^*$ の $E^*=E/2$ が確かめられる。</li>
       <li><b>電荷一定</b>(孤立)と<b>電位差一定</b>(電池につなぐ)では、板を引き離したときの電場のエネルギーの変化の符号が逆。外からする仕事は同じで、差は電池が受け取る。</li>
       <li><b>容量係数</b> $c_{ij}$($Q_i=\sum_jc_{ij}\phi_j$)と<b>電位係数</b> $p_{ij}$(逆行列、$\phi_i=\sum_jp_{ij}Q_j$)。<b>グリーンの相反定理</b> $c_{ij}=c_{ji}$($p_{ij}=p_{ji}$)は、任意の形の導体に成り立つ非自明な対称性:「1 に $Q$ を与えたときの 2 の電位」=「2 に $Q$ を与えたときの 1 の電位」。</li>
+      <!--s5:li-->
+      <li><b>ビオ・サバールの法則</b>(5.1):$\bm{B}=\frac{\mu_0}{4\pi}\int\frac{\bm{J}\times(\bm{r}-\bm{r}')}{|\bm{r}-\bm{r}'|^3}d\bm{r}'$。クーロンの法則の「掛け算」を外積にした形。磁場は電流のまわりを右ねじの向きに回る。</li>
+      <li><b>静磁場の基本法則</b>:$\nabla\cdot\bm{B}=0$(磁力線は閉じている)、$\nabla\times\bm{B}=\mu_0\bm{J}$(アンペールの法則)。積分型 $\oint\bm{B}\cdot d\bm{x}=\mu_0\int\bm{J}\cdot d\bm{S}$ で、対称性が高いときは楽に計算できる:直線電流 $B=\frac{\mu_0I}{2\pi r}$、ソレノイドの中 $B=\mu_0NI$(外は0)。</li>
+      <li><b>ローレンツ力</b>:$\bm{F}=q\bm{v}\times\bm{B}$、$\bm{F}=\bm{J}\times\bm{B}$。速度に垂直なので仕事をしない → 一様な磁場の中では円運動($R=\frac{mv}{qB}$、$T=\frac{2\pi m}{qB}$)。平行電流は同じ向きなら引き合う($\frac{\mu_0I^2}{2\pi l}$)。ブッシュの定理 $L_z+\frac{q}{2\pi}\Phi=$ 一定(磁気レンズ)。</li>
+      <!--/s5:li-->
     </ul>
 
     <!-- ===================== 6 ===================== -->
 
     <h2 id="s7" data-need="X">7. この回のノートについてのメモ <span class="need need-x">不要</span></h2>
-    <p data-need="X">板書の写真ではなく、<b>文章で書かれた講義ノート(PDF)</b>の p.29〜p.30(§4.3〜§4.4)をもとにまとめました。§5(静磁場)は講義ノートのPDFにないため、まだ書いていません。<b>回の分け方</b>:実際の授業の日程(10/2 §1・§2.1、10/9 §2.2〜§2.4、10/16 §2.5〜§2.6・§3.1〜§3.2、10/23 休講、10/30 §3.3〜§3.4・§4.1〜§4.2、11/6 §4.3・§5.1〜§5.2)に合わせて分けています(2026-11-13 に、それまでの7回の分け方から組み直しました)。</p>
+    <p data-need="X">板書の写真ではなく、<b>文章で書かれた講義ノート(PDF)</b>の p.29〜p.30(§4.3〜§4.4)をもとにまとめました。§5.1〜§5.2(静磁場)は、講義ノートのフル版の p.31〜p.36 をもとにまとめました(磁気圧の部分は第6回)。<b>回の分け方</b>:実際の授業の日程(10/2 §1・§2.1、10/9 §2.2〜§2.4、10/16 §2.5〜§2.6・§3.1〜§3.2、10/23 休講、10/30 §3.3〜§3.4・§4.1〜§4.2、11/6 §4.3・§5.1〜§5.2)に合わせて分けています(2026-11-13 に、それまでの7回の分け方から組み直しました)。</p>
 
     <p data-need="X">講義ノートの記述で、誤り(または誤記)と判断して直した箇所、読み替えた箇所は次のとおりです。</p>
 
@@ -262,6 +494,11 @@
       <li><b>§4.3 の「接地」(p.29–30)</b>:コンデンサーの両板を「接地した」とありますが、板の電位差を一定に保つのは電池なので、「電位差を保つ電池につなぐ」ことと読み、本文もそのように書き直しました(講義ノートにも「電池などにつながれている」とあります)。</li>
       <li><b>§4.3 の「$\Delta U'$」の電池の仕事(p.30)</b>:「電池が両者の和の仕事 $\varepsilon_0E^2S\Delta l$ を受け取った」の意味を、補足の枠でエネルギー収支として確認しました。</li>
       <li><b>講義ノートで証明が省略されていた部分</b>:$E/2$ の式変形、(4.12)、[4-4]、(4.17) の各等号は、講義ノートの記述が短いので、補足の枠で補いました(各計算に検算を付けてあります)。</li>
+      <!--s5:li-->
+      <li><b>(5.8) の「任意の閉曲面 $S$」(p.33)</b>:ストークスの定理を使うので、正しくは「境界 $\partial S$ が閉じた曲線になっている任意の曲面 $S$」です(閉曲面には境界がない)。そのように読み替えました。</li>
+      <li><b>例 5.1 の電流の向き(p.33)</b>:「時計回り」は見る向きで変わるので、磁場の向きは右ねじの法則で決める、と補足しました(大きさ $\mu_0IN$ は変わらない)。</li>
+      <li><b>§5 の資料</b>:§5 以降は、講義ノートのフル版(全100ページ)をもとにしています。フル版では、p.22 の (3.31) の「$\nabla\cdot\phi_2$」が「$\nabla\phi_2$」に、p.29 の (4.7) の積分の $dx$ の抜けが、それぞれ直っています。</li>
+      <!--/s5:li-->
     </ol>
 
     <nav class="pager" data-fixed>
