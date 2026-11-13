@@ -4,13 +4,320 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex">
-  <title>移動しました | Aセメまとめノート</title>
-  <meta http-equiv="refresh" content="0; url=week-05.html">
+  <title>第7回 <補論> 誘電体と磁性体(物質中の電磁気学) | Aセメまとめノート</title>
   <link rel="stylesheet" href="../../assets/style.css">
+  <script defer src="../../assets/nav.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],macros:{'\\R':'\\mathbb{R}','\\bm':'\\boldsymbol{#1}','\\rot':'\\operatorname{rot}','\\grad':'\\operatorname{grad}','\\dvg':'\\operatorname{div}','\\pd':'\\frac{\\partial #1}{\\partial #2}'}});window.__navReady&&window.__navReady()"></script>
 </head>
 <body>
+  <header class="site-header">
+    <div class="inner">
+      <a class="site-title" href="../../index.html">Aセメまとめノート</a>
+      <span class="links"><a href="../index.html">電磁気学</a><a href="../basics.html">基礎のまとめ</a><a href="../../calc/index.html">微積</a><a href="../../linalg/index.html">線形代数</a><a href="../../structchem/index.html">構造化学</a><a href="../../mech/index.html">力学A</a><a href="../../thermo/index.html">熱力学</a></span>
+    </div>
+  </header>
+
   <main class="note">
-    <p>授業の日程に合わせて回を分け直したため、この内容は<a href="week-05.html">第5回</a>に移りました。</p>
+    <h1>第7回:<補論> 誘電体と磁性体(物質中の電磁気学)</h1>
+    <div class="meta">電磁気学(東京大学 教養学部 秋学期)／授業日は未定(講義ノートの分量から分けた予定)／講義ノート §6(p.43〜p.55)</div>
+
+    <nav class="toc">
+      <div class="toc-title">目次</div>
+      <ol start="0">
+        <li><a href="#s0">この回の全体像</a></li>
+        <li><a href="#s1">準備:基礎の確認</a>
+          <div class="sub">電気双極子(第4回 補論)／誘電体とコンデンサー(高校)／面電荷の電場とガウスの法則／熱力学の言葉(平衡状態・自由エネルギー)／ベクトルポテンシャル(第6回)</div></li>
+        <li><a href="#s2">マクロな電磁気学とメソスケールの記述(§6.1)</a></li>
+        <li><a href="#s3">分極と電気変位(§6.2)</a></li>
+        <li><a href="#s4">誘電体(§6.3)</a></li>
+        <li><a href="#s5">磁気モーメントと磁化(§6.4)</a></li>
+        <li><a href="#s6">磁性体(§6.5)</a></li>
+        <li><a href="#s7">誘電体と磁性体のエネルギー(§6.6)</a></li>
+        <li><a href="#s8">補論:平均化と磁気双極子モーメントの導出(§6.7〜§6.8)</a></li>
+        <li><a href="#s9">具体例で練習(講義ノートにない補足)</a></li>
+        <li><a href="#s10">まとめ(この回で覚えること)</a></li>
+        <li><a href="#s11">この回のノートについてのメモ</a></li>
+      </ol>
+    </nav>
+
+    <h2 id="s0">0. この回の全体像 <span class="page-tag">講義ノート p.43</span></h2>
+    <p>ここまでは、真空中に電荷や電流がある場合を考えてきました。この回は、電場や磁場の中に<b>物質</b>(誘電体・磁性体)がある場合です。講義ノートは、この章を「補論」とし、具体的な計算よりも、<b>概念と取り扱い方を正しく理解する</b>ことを目標にしています。</p>
+    <div class="box thm"><div class="label">この回のゴール</div>
+      <p>① 物質中の電磁気学は、真空中の電磁気学と<b>記述のレベル</b>が違う(メソスケールの平衡系を「1点」と見る、マクロな記述)。<br>
+      ② 分極 $\bm{P}$ と拘束電荷($\sigma_b=\bm{P}\cdot\bm{n}$、$\rho_b=-\nabla\cdot\bm{P}$)、電気変位 $\bm{D}=\varepsilon_0\bm{E}+\bm{P}$($\nabla\cdot\bm{D}=\rho_f$)。ただし $\bm{D}$ は $\bm{E}$ の「見せかけの類似」にすぎない。<br>
+      ③ 誘電体(線形・等方、誘電率 $\varepsilon$)と、その3つの注意点。<br>
+      ④ 磁化 $\bm{M}$ と拘束電流、補助場 $\bm{H}=\bm{B}/\mu_0-\bm{M}$($\nabla\times\bm{H}=\bm{J}_f$)。常磁性・反磁性・強磁性。<br>
+      ⑤ 誘電体・磁性体の「エネルギー」は、正確には<b>ヘルムホルツの自由エネルギー</b>。</p>
+    </div>
+    <table class="cmp">
+      <tr><th></th><th>誘電体(電場)</th><th>磁性体(磁場)</th></tr>
+      <tr><td>ミクロな源</td><td>電気双極子</td><td>小さな電流ループ(磁気モーメント)</td></tr>
+      <tr><td>単位体積あたり</td><td>分極 $\bm{P}$</td><td>磁化 $\bm{M}$</td></tr>
+      <tr><td>拘束された源</td><td>$\sigma_b=\bm{P}\cdot\bm{n}$、$\rho_b=-\nabla\cdot\bm{P}$</td><td>$\bm{I}_b=\bm{M}\times\bm{n}$、$\bm{J}_b=\nabla\times\bm{M}$</td></tr>
+      <tr><td>補助的な場</td><td>$\bm{D}=\varepsilon_0\bm{E}+\bm{P}$、$\nabla\cdot\bm{D}=\rho_f$</td><td>$\bm{H}=\bm{B}/\mu_0-\bm{M}$、$\nabla\times\bm{H}=\bm{J}_f$</td></tr>
+      <tr><td>線形・等方</td><td>$\bm{D}=\varepsilon\bm{E}$、$\varepsilon=\varepsilon_0(1+\chi)$</td><td>$\bm{B}=\mu\bm{H}$、$\mu=\mu_0(1+\chi_m)$</td></tr>
+    </table>
+    <div class="box note-box"><div class="label">この回の日程について</div>
+      <p>この回は講義ノートの分量と内容から分けた予定です。§6 は「補論」なので、実際の授業では短く扱われるかもしれません。日程が分かったら合わせます。</p>
+    </div>
+    <p>以下では、先に必要な基礎を復習してから、講義ノートの順に進みます。紫色の枠は「基礎の復習」、黄色の枠は「講義ノートにないが、理解を助けるために私が補った部分」、緑の枠は「直感で理解するための説明」です。</p>
+
+    <h2 id="s1">1. 準備:基礎の確認</h2>
+    <p>この回で使う道具と、前の回までの結果を並べます。</p>
+
+    <h3 id="w-dipole">1.1 電気双極子(第4回 補論)</h3>
+    <div class="box basic">
+      <div class="label">基礎:電気双極子モーメントと、それが作る電位 <a class="xref-link" href="week-04.html#s4" data-xref>→ 第4回 4.</a></div>
+      <p>電荷 $+q$ と $-q$ が、$-q$ から $+q$ に向かうベクトル $\bm{d}$ だけ離れて置かれたものが<b>電気双極子</b>で、$\bm{p}=q\bm{d}$ を<b>電気双極子モーメント</b>という。電荷分布 $\rho$ なら $\bm{p}=\int\bm{r}'\rho(\bm{r}')d\bm{r}'$。遠く($|\bm{r}|\gg|\bm{d}|$)での電位は
+      $$\phi(\bm{r})\approx\frac{1}{4\pi\varepsilon_0}\frac{\bm{p}\cdot\bm{r}}{|\bm{r}|^3}\qquad(3.38)$$
+      で、距離の2乗で弱まる(点電荷の1乗より速い。全体では中性なので打ち消し合う)。</p>
+      <p><b>直感:</b> 遠くから見ると、+ と − がほとんど重なって見えるので、残るのは「ずれ」の効果だけ。</p>
+    </div>
+
+    <h3 id="w-hsdiel">1.2 誘電体とコンデンサー(高校)</h3>
+    <div class="box basic">
+      <div class="label">基礎:誘電分極、比誘電率、コンデンサーの容量 <a class="xref-link" href="../basics.html#dielectric" data-xref>→ 詳しい解説</a></div>
+      <p>絶縁体(誘電体)に電場をかけると、中の正負の電荷がわずかにずれて(<b>誘電分極</b>)、表面に逆符号の電荷が現れ、中の電場を弱める。中の電場が真空の $1/\varepsilon_r$ になるとき、$\varepsilon_r$ を<b>比誘電率</b>、$\varepsilon=\varepsilon_r\varepsilon_0$ を<b>誘電率</b>という。極板の間を誘電体で満たした平行板コンデンサーの容量は $C=\varepsilon S/d$(真空の $\varepsilon_r$ 倍)。</p>
+      <p><b>直感:</b> 誘電体の中の原子が電場の向きに少し「伸び」、表面に余った電荷が、もとの電場を打ち消す向きの電場を作る。</p>
+    </div>
+
+    <h3 id="w-gauss">1.3 面電荷の電場とガウスの法則</h3>
+    <div class="box basic">
+      <div class="label">基礎:無限に広い面電荷 $\sigma$ の電場は、両側に $\sigma/2\varepsilon_0$ <a class="xref-link" href="../basics.html#bcond" data-xref>→ 詳しい解説</a></div>
+      <p>面密度 $\sigma$ の平らな面電荷は、面の両側に、面から遠ざかる向きの大きさ $\frac{\sigma}{2\varepsilon_0}$ の電場を作る(第3回 問 [3-2])。面を横切ると、電場の垂直成分は $\sigma/\varepsilon_0$ だけジャンプする。積分型ガウスの法則 $\int_{\partial V}\bm{E}\cdot d\bm{S}=Q_V/\varepsilon_0$ の $Q_V$ には、自由な電荷も拘束電荷も、すべての電荷が入る。</p>
+      <p><b>直感:</b> 面電荷から出る電気力線は、両側に半分ずつ分かれる。</p>
+    </div>
+
+    <h3 id="w-thermo">1.4 熱力学の言葉(平衡状態・自由エネルギー)</h3>
+    <div class="box basic">
+      <div class="label">基礎:熱平衡状態、示量変数と示強変数、ヘルムホルツの自由エネルギー <a class="xref-link" href="../basics.html#thermo" data-xref>→ 詳しい解説</a></div>
+      <p><b>熱平衡状態</b>は、放っておくと落ち着く時間変化しない状態で、少数の変数(温度、体積、圧力、…)で指定できる。系の大きさに比例する量が<b>示量変数</b>(体積、分極の合計、磁化の合計)、比例しない量が<b>示強変数</b>(温度、圧力、電場、磁場)。温度一定でゆっくり変化させる(等温準静的過程)とき、外から系にした仕事は<b>ヘルムホルツの自由エネルギー</b> $F=U-TS$ の増加に等しい。</p>
+      <p><b>直感:</b> 自由エネルギーは「温度を保ったまま出し入れできる仕事」。エネルギーの一部は熱として出入りするので、エネルギーとは少し違う。</p>
+    </div>
+
+    <h3 id="w-vecpot">1.5 ベクトルポテンシャル(第6回)</h3>
+    <div class="box basic">
+      <div class="label">基礎:$\bm{B}=\nabla\times\bm{A}$、$\bm{A}=\frac{\mu_0}{4\pi}\int\frac{\bm{J}}{|\bm{r}-\bm{r}'|}$ <a class="xref-link" href="week-06.html#s4" data-xref>→ 第6回 4.</a></div>
+      <p>$\nabla\cdot\bm{B}=0$ なので $\bm{B}=\nabla\times\bm{A}$ と書ける。$\nabla\cdot\bm{A}=0$ に選ぶと、$\bm{A}$ は電流から、電位と同じ形の式 $\bm{A}=\frac{\mu_0}{4\pi}\int\frac{\bm{J}(\bm{r}')}{|\bm{r}-\bm{r}'|}d\bm{r}'$ で求まる。だから、電荷の多重極展開(第4回 補論)と同じことが、電流でもできる。</p>
+      <p><b>直感:</b> 電位にとっての電荷が、ベクトルポテンシャルにとっての電流。</p>
+    </div>
+
+    <h2 id="s2">2. マクロな電磁気学とメソスケールの記述(§6.1) <span class="page-tag">講義ノート p.43–45</span></h2>
+    <p>物質中の電磁気学は、これまでの真空中の電磁気学と<b>記述のレベルが違います</b>。これを見落とすと混乱しやすいので、講義ノートはまずこの点を説明します。</p>
+    <h3 id="s2-1">2.1 流体力学のたとえ</h3>
+    <p>流体力学では「ある場所の温度」「ある場所の密度」を考えます。しかし、本当にミクロな1点を考えると、そこに酸素分子は「いるか、いないか」のどちらかで、密度はデルタ関数が並んだガタガタの関数になり、温度(そもそも平衡状態に対して定義される量)は定義できません。</p>
+    <p>流体力学がうまくいくのは、<b>ミクロ/メソ/マクロ</b>の3層構造があるからです(図1)。</p>
+    <ul>
+      <li><b>ミクロ</b>:分子はスカスカで、全体が右に流れていても、一部の分子は左や上に動いている。</li>
+      <li><b>メソ</b>:ある程度大きな領域をとると、中には多数の分子があり、熱力学を満たす平衡状態とみなせる。</li>
+      <li><b>マクロ</b>:さらに遠くから見ると、そのメソの平衡系が「1点」に見える。流体力学の「1点の温度」は、この「1点に対応する平衡系の温度」。</li>
+    </ul>
+    <figure class="fig">
+      <svg viewBox="0 0 640 230" width="640" role="img" aria-label="ミクロ、メソ、マクロの3つの階層"><rect x="20" y="40" width="180" height="150" rx="8" style="fill:none;stroke:var(--muted);stroke-width:1.6"/><rect x="230" y="40" width="180" height="150" rx="8" style="fill:none;stroke:var(--muted);stroke-width:1.6"/><rect x="440" y="40" width="180" height="150" rx="8" style="fill:none;stroke:var(--muted);stroke-width:1.6"/><text class="tt" x="110" y="30" style="text-anchor:middle">ミクロ</text><text class="tt" x="320" y="30" style="text-anchor:middle">メソ</text><text class="tt" x="530" y="30" style="text-anchor:middle">マクロ</text><circle cx="50" cy="70" r="4" style="fill:var(--accent)"/><line x1="38" y1="70" x2="56" y2="70" style="stroke:var(--accent);stroke-width:1.6"/><polygon points="62,70 56,72.7 56,67.3" style="fill:var(--accent)"/><circle cx="90" cy="120" r="4" style="fill:var(--accent)"/><line x1="84" y1="109.6" x2="93" y2="125.2" style="stroke:var(--accent);stroke-width:1.6"/><polygon points="96,130.4 90.7,126.5 95.3,123.8" style="fill:var(--accent)"/><circle cx="150" cy="80" r="4" style="fill:var(--accent)"/><line x1="160.4" y1="74" x2="144.8" y2="83" style="stroke:var(--accent);stroke-width:1.6"/><polygon points="139.6,86 143.5,80.7 146.2,85.3" style="fill:var(--accent)"/><circle cx="70" cy="160" r="4" style="fill:var(--accent)"/><line x1="74.1" y1="171.3" x2="67.9" y2="154.4" style="stroke:var(--accent);stroke-width:1.6"/><polygon points="65.9,148.7 70.5,153.4 65.4,155.3" style="fill:var(--accent)"/><circle cx="160" cy="150" r="4" style="fill:var(--accent)"/><line x1="154" y1="160.4" x2="163" y2="144.8" style="stroke:var(--accent);stroke-width:1.6"/><polygon points="166,139.6 165.3,146.2 160.7,143.5" style="fill:var(--accent)"/><circle cx="120" cy="60" r="4" style="fill:var(--accent)"/><line x1="131.3" y1="64.1" x2="114.4" y2="57.9" style="stroke:var(--accent);stroke-width:1.6"/><polygon points="108.7,55.9 115.3,55.4 113.4,60.5" style="fill:var(--accent)"/><circle cx="250" cy="70" r="2.5" style="fill:var(--accent)"/><circle cx="295" cy="70" r="2.5" style="fill:var(--accent)"/><circle cx="340" cy="70" r="2.5" style="fill:var(--accent)"/><circle cx="385" cy="70" r="2.5" style="fill:var(--accent)"/><circle cx="250" cy="115" r="2.5" style="fill:var(--accent)"/><circle cx="295" cy="115" r="2.5" style="fill:var(--accent)"/><circle cx="340" cy="115" r="2.5" style="fill:var(--accent)"/><circle cx="385" cy="115" r="2.5" style="fill:var(--accent)"/><circle cx="250" cy="160" r="2.5" style="fill:var(--accent)"/><circle cx="295" cy="160" r="2.5" style="fill:var(--accent)"/><circle cx="340" cy="160" r="2.5" style="fill:var(--accent)"/><circle cx="385" cy="160" r="2.5" style="fill:var(--accent)"/><circle cx="320" cy="115" r="55" style="fill:none;stroke:var(--ex);stroke-width:1.6;stroke-dasharray:5 4"/><text class="tm" x="320" y="185" style="text-anchor:middle">平衡状態(分極の平均)</text><path d="M 460 170 C 500 120, 540 100, 600 60" style="fill:none;stroke:var(--ex);stroke-width:2.2"/><circle cx="530" cy="108" r="6" style="fill:var(--ex)"/><text class="tm" x="530" y="185" style="text-anchor:middle">場がゆっくり変わる</text><text class="tm" x="110" y="215" style="text-anchor:middle">分子がばらばらに動く</text><text class="tm" x="320" y="215" style="text-anchor:middle">多数の分子 = 1つの平衡系</text><text class="tm" x="530" y="215" style="text-anchor:middle">メソの平衡系を「1点」と見る</text></svg>
+      <figcaption>図1 物質中の電磁気学の記述の階層(講義ノートの図32を描き直したもの)。ミクロな分子はばらばらだが、多数集めた<b>メソスケール</b>では平衡状態とみなせる。その平衡系を「1点」と見なすのが、物質中の電磁気学(マクロな記述)です。</figcaption>
+    </figure>
+    <h3 id="s2-2">2.2 物質中の電磁気学も同じ構造</h3>
+    <p>誘電体の中では、分極した分子(図2)がたくさん集まり、それぞれ違う向き・違う大きさをもっています。しかしメソスケールで見ると平衡状態に落ち着いていて、温度などに加えて「全体として見た分極の向きと大きさ」で特徴づけられます。物質中の電磁気学で「ある1点の分極」と言うときは、ミクロな1点のことではなく、<b>その点に対応するメソスケールの平衡系の、平均の分極</b>のことです。</p>
+    <figure class="fig">
+      <svg viewBox="0 0 640 180" width="640" role="img" aria-label="電場をかけると、原子核と電子雲が逆向きにずれて分極する"><circle cx="140" cy="90" r="50" style="fill:var(--accent);stroke:var(--accent);stroke-width:1.6"/><circle cx="140" cy="90" r="7" style="fill:var(--thm)"/><text class="tm" x="118" y="160">電場なし</text><circle cx="140" cy="90" r="50" style="fill:var(--accent);opacity:.15"/><circle cx="380" cy="90" r="50" style="fill:var(--accent);opacity:.15;stroke:var(--accent);stroke-width:1.6"/><circle cx="400" cy="90" r="7" style="fill:var(--thm)"/><text class="tm" x="365" y="160">電場あり</text><line x1="470" y1="90" x2="551" y2="90" style="stroke:var(--muted);stroke-width:2.4"/><polygon points="560,90 551,94.1 551,86" style="fill:var(--muted)"/><text class="t" x="500" y="80">E</text><line x1="385" y1="125" x2="401" y2="125" style="stroke:var(--ex);stroke-width:2.2"/><polygon points="410,125 401,129.1 401,121" style="fill:var(--ex)"/><text class="tj" x="420" y="130">p(双極子)</text></svg>
+      <figcaption>図2 分極のひとつのイメージ(講義ノートの図33)。もとは中性の原子(正の原子核と負の電子雲)が、電場で逆向きに少しずれ、小さな電気双極子になる。あくまでイメージで、現実はもっと複雑です。</figcaption>
+    </figure>
+    <p>この記述が成り立つには、電磁場の空間変化がメソスケールより十分ゆるやかで、時間変化も、メソの平衡系が平衡に戻る速さより十分ゆっくりである必要があります。</p>
+    <div class="box warn"><div class="label">この講義の方針(講義ノート p.44〜45)</div>
+      <p>「ミクロな分子の性質からマクロな性質を導く」のは統計力学(と量子力学、物性理論)の仕事で、1年生ではまだ習っていません。ミクロな古典力学で分極や磁性を「それっぽく」説明する教科書は多いが、それは本当の物理の説明としては正しくない(例:古典力学からは磁性が出てこないことが証明されている。ボーア=ファン・リューエンの定理)。そこでこの講義では、「ミクロ→メソ」はブラックボックスにして、「このような性質の物質がある」と現象論的に認めて進めます。</p>
+    </div>
+    <div class="box intuit"><div class="label">直感で理解する:新聞の写真の網点</div>
+      <p>新聞の写真を虫眼鏡で見ると、黒い点の集まり(ミクロ)。少し離れると、点の密度で灰色の濃さ(メソの平均)が決まる。もっと離れると、なめらかな写真(マクロ)。物質中の「電場」や「分極」は、この「なめらかな写真」のほうの量です。</p>
+    </div>
+
+    <h2 id="s3">3. 分極と電気変位(§6.2) <span class="page-tag">講義ノート p.45–46</span></h2>
+    <p>物質の中に、小さな電気双極子がたくさん広がっているとします(もともと正負に分かれた分子でも、電場で電子雲がずれたものでもよい)。単位体積あたりの電気双極子モーメントを<b>分極</b> $\bm{P}$ といいます。1.1 の双極子の電位を足し合わせると、分極した物体が作る電位は
+    $$\phi(\bm{r})=\frac{1}{4\pi\varepsilon_0}\int\frac{\bm{P}(\bm{r}')\cdot(\bm{r}-\bm{r}')}{|\bm{r}-\bm{r}'|^3}d\bm{r}'\qquad(6.1).$$
+    (3.38) は遠くでの近似ですが、$\phi$ や $\bm{P}$ を「メソスケールで平均した量」と解釈すれば、物体の中でもこの式が正しいことが示せます(8.1 の補論)。</p>
+    <h3 id="s3-1">3.1 拘束電荷</h3>
+    <p>$\frac{\bm{r}-\bm{r}'}{|\bm{r}-\bm{r}'|^3}=\nabla'\frac{1}{|\bm{r}-\bm{r}'|}$($\nabla'$ は $\bm{r}'$ についての微分)と、積の微分 $\nabla'\cdot(f\bm{P})=f\nabla'\cdot\bm{P}+\bm{P}\cdot\nabla'f$、ガウスの定理を使うと
+    $$\phi(\bm{r})=\frac{1}{4\pi\varepsilon_0}\Bigl[\int_{\partial V}\frac{\bm{P}(\bm{r}')\cdot d\bm{S}'}{|\bm{r}-\bm{r}'|}-\int_V\frac{\nabla'\cdot\bm{P}(\bm{r}')}{|\bm{r}-\bm{r}'|}d\bm{r}'\Bigr]\qquad(6.2).$$
+    これは、表面に<b>表面拘束電荷</b> $\sigma_b=\bm{P}\cdot\bm{n}$ (6.3)、内部に<b>内部拘束電荷</b> $\rho_b=-\nabla\cdot\bm{P}$ (6.4) があるときの、ふつうの電位の式 (6.5) と同じ形です。</p>
+    <figure class="fig">
+      <svg viewBox="0 0 640 210" width="640" role="img" aria-label="一様な分極では表面にだけ、不均一な分極では内部にも拘束電荷が残る"><text class="ta" x="60" y="70">−</text><text class="tt" x="95" y="70">+</text><line x1="70" y1="66" x2="92" y2="66" style="stroke:var(--muted);stroke-width:1.2"/><text class="ta" x="115" y="70">−</text><text class="tt" x="150" y="70">+</text><line x1="125" y1="66" x2="147" y2="66" style="stroke:var(--muted);stroke-width:1.2"/><text class="ta" x="170" y="70">−</text><text class="tt" x="205" y="70">+</text><line x1="180" y1="66" x2="202" y2="66" style="stroke:var(--muted);stroke-width:1.2"/><text class="ta" x="225" y="70">−</text><text class="tt" x="260" y="70">+</text><line x1="235" y1="66" x2="257" y2="66" style="stroke:var(--muted);stroke-width:1.2"/><text class="ta" x="60" y="110">−</text><text class="tt" x="95" y="110">+</text><line x1="70" y1="106" x2="92" y2="106" style="stroke:var(--muted);stroke-width:1.2"/><text class="ta" x="115" y="110">−</text><text class="tt" x="150" y="110">+</text><line x1="125" y1="106" x2="147" y2="106" style="stroke:var(--muted);stroke-width:1.2"/><text class="ta" x="170" y="110">−</text><text class="tt" x="205" y="110">+</text><line x1="180" y1="106" x2="202" y2="106" style="stroke:var(--muted);stroke-width:1.2"/><text class="ta" x="225" y="110">−</text><text class="tt" x="260" y="110">+</text><line x1="235" y1="106" x2="257" y2="106" style="stroke:var(--muted);stroke-width:1.2"/><rect x="48" y="45" width="225" height="85" rx="8" style="fill:none;stroke:var(--ex);stroke-width:1.6;stroke-dasharray:5 4"/><text class="tm" x="160" y="160" style="text-anchor:middle">(a) 一様:中は打ち消し、両端だけ残る</text><text class="ta" x="345" y="50">−</text><text class="tt" x="380" y="50">+</text><text class="ta" x="407" y="50">−</text><text class="tt" x="442" y="50">+</text><text class="ta" x="407" y="72">−</text><text class="tt" x="442" y="72">+</text><text class="ta" x="469" y="50">−</text><text class="tt" x="504" y="50">+</text><text class="ta" x="469" y="72">−</text><text class="tt" x="504" y="72">+</text><text class="ta" x="469" y="94">−</text><text class="tt" x="504" y="94">+</text><text class="ta" x="531" y="50">−</text><text class="tt" x="566" y="50">+</text><text class="ta" x="531" y="72">−</text><text class="tt" x="566" y="72">+</text><text class="ta" x="531" y="94">−</text><text class="tt" x="566" y="94">+</text><text class="ta" x="531" y="116">−</text><text class="tt" x="566" y="116">+</text><text class="tm" x="470" y="160" style="text-anchor:middle">(b) 不均一:中にも打ち消し残りが出る</text></svg>
+      <figcaption>図3 拘束電荷の正体(講義ノートの図34)。(a) 双極子が一様に並ぶと、となりの + と − が打ち消し合い、両端(表面)にだけ電荷が残る(表面拘束電荷 $\sigma_b=\bm{P}\cdot\bm{n}$)。(b) 分極の大きさが場所で変わると、内部にも打ち消し残り(内部拘束電荷 $\rho_b=-\nabla\cdot\bm{P}$)が出ます。</figcaption>
+    </figure>
+    <div class="box intuit"><div class="label">直感で理解する:並んだ双極子の「打ち消し残り」</div>
+      <p>双極子が一様に並ぶと、となりの + と − が打ち消し合い、両端にだけ電荷が残ります(図3(a))。分極が場所によって変わると、打ち消しきれない分が内部にも残る(図3(b))。$-\nabla\cdot\bm{P}$ は「分極が湧き出していく分だけ、そこには負の電荷が残される」という意味です。</p>
+    </div>
+    <h3 id="s3-2">3.2 電気変位 $\bm{D}$</h3>
+    <p>ガウスの法則には、自由な電荷 $\rho_f$ も拘束電荷 $\rho_b$ も入ります:$\varepsilon_0\nabla\cdot\bm{E}=\rho_f+\rho_b=\rho_f-\nabla\cdot\bm{P}$ (6.6)。拘束電荷は実験者が自由にいじれないので、表に出ない形が便利です。<b>電気変位</b>
+    $$\bm{D}=\varepsilon_0\bm{E}+\bm{P}\qquad(6.8)$$
+    を定義すると、$\nabla\cdot\bm{D}=\rho_f$ (6.9)、積分型では $\int_{\partial V}\bm{D}\cdot d\bm{S}=Q_{f,V}$ (6.7) と、自由な電荷だけで書けます。</p>
+    <div class="box warn"><div class="label">$\bm{D}$ は $\bm{E}$ の「見せかけの類似」</div>
+      <p>「物質中では $\bm{E}$ を $\bm{D}/\varepsilon_0$ に置き換えればよい」と考えるのは<b>誤り</b>です。例えば、クーロンの法則の素朴な拡張 $\bm{D}(\bm{r})=\int\frac{\rho_f(\bm{r}')}{4\pi}\frac{\bm{r}-\bm{r}'}{|\bm{r}-\bm{r}'|^3}d\bm{r}'$ は一般に<b>成り立ちません</b> (6.10)。クーロンの法則を導くには、ガウスの法則に加えて回転ゼロ($\nabla\times\bm{E}=\bm{0}$)が必要でしたが、分極は一般に回転をもち、$\nabla\times\bm{D}\ne\bm{0}$ (6.11) だからです(第3回のヘルムホルツの定理:発散だけでは場は決まらない)。</p>
+    </div>
+
+    <h2 id="s4">4. 誘電体(§6.3) <span class="page-tag">講義ノート p.46–49</span></h2>
+    <p>電場をかけると分極が生じる物体を<b>誘電体</b>といいます(分極は、一般に外部電場を弱めるように生じる)。分極 $\bm{P}$ は電場 $\bm{E}$ の関数 $\bm{P}(\bm{E})$ です。</p>
+    <ul>
+      <li><b>線形</b>:$\bm{P}(a_1\bm{E}_1+a_2\bm{E}_2)=a_1\bm{P}(\bm{E}_1)+a_2\bm{P}(\bm{E}_2)$ (6.12)。電場が弱ければ、テイラー展開の1次でほとんどの物体は線形とみなせる(例外は、電場 0 でも分極が残る強誘電体)。</li>
+      <li>線形でも、分極の向きは電場の向きと一致するとは限らない(図4)。一般には $\bm{P}=\varepsilon_0X\bm{E}$ (6.13)、$X$ は $3\times3$ の行列(<b>電気感受率</b>、感受率テンソル)。</li>
+      <li><b>等方</b>なら $X$ は数 $\chi$ とみなせ、$\bm{D}=\varepsilon_0(1+\chi)\bm{E}=:\varepsilon\bm{E}$ (6.14)。$\varepsilon$ を<b>誘電率</b>という($\chi\ge0$ が示せるので $\varepsilon\ge\varepsilon_0$)。$\varepsilon_0$ を「真空の誘電率」と呼ぶのはこのため。</li>
+    </ul>
+    <figure class="fig">
+      <svg viewBox="0 0 640 200" width="640" role="img" aria-label="動きやすい向きがあると、分極は電場と違う向きになる"><line x1="100" y1="40" x2="160" y2="170" style="stroke:var(--muted);stroke-width:1.2"/><line x1="130" y1="40" x2="190" y2="170" style="stroke:var(--muted);stroke-width:1.2"/><line x1="160" y1="40" x2="220" y2="170" style="stroke:var(--muted);stroke-width:1.2"/><line x1="190" y1="40" x2="250" y2="170" style="stroke:var(--muted);stroke-width:1.2"/><line x1="220" y1="40" x2="280" y2="170" style="stroke:var(--muted);stroke-width:1.2"/><text class="tm" x="70" y="30">電荷が動きやすい向き(斜めの溝)</text><line x1="330" y1="120" x2="461" y2="120" style="stroke:var(--accent);stroke-width:2.6"/><polygon points="470,120 461,124.1 461,116" style="fill:var(--accent)"/><text class="ta" x="480" y="125">電場 E</text><line x1="330" y1="120" x2="431.8" y2="73.7" style="stroke:var(--thm);stroke-width:2.6"/><polygon points="440,70 433.5,77.4 430.1,70" style="fill:var(--thm)"/><text class="tt" x="450" y="70">分極 P</text></svg>
+      <figcaption>図4 結晶のように、電荷が動きやすい向きと動きにくい向きがあると、分極 $\bm{P}$ の向きは電場 $\bm{E}$ の向きと一致しない(講義ノートの図35)。このため一般には $\bm{P}=\varepsilon_0X\bm{E}$ と、行列 $X$ が必要です。</figcaption>
+    </figure>
+    <h3 id="s4-1">4.1 3つの注意</h3>
+    <ol>
+      <li><b>線形等方でも $\nabla\times\bm{D}\ne\bm{0}$</b>:誘電体と真空の<b>境界</b>では、$\bm{P}$ が誘電体の中だけで 0 でないので、境界をまたぐ経路で $\oint\bm{P}\cdot d\bm{x}\ne0$ にでき、$\nabla\times\bm{P}\ne\bm{0}$ の場所がある。真空中の静電場の議論がそのまま使えるのは、全空間を誘電体が埋め尽くす(ふつうは興味のない)場合だけ。</li>
+      <li><b>分極は熱力学の平衡状態の変化</b>:分極が示量変数、電場が共役な示強変数(1.4 の枠)。だから感受率は一般に<b>温度に依存</b>する。</li>
+      <li><b>(6.13) の $\bm{E}$ は「最終的にその場所にある電場」</b>:外から加えた電場だけを入れると誤り。「電場 → 分極 → 分極による電場 → さらに分極 → …」をすべて含んだ電場です。(6.13) は「$\bm{E}$ を入れると $\bm{P}$ が出る式」ではなく、未知の $\bm{E}$ と $\bm{P}$ の間の<b>連立方程式(自己無撞着方程式)</b>の一部です。</li>
+    </ol>
+    <div class="box intuit"><div class="label">直感で理解する:鶏と卵</div>
+      <p>電場が分極を作り、分極が電場を作る。どちらが先かと考え出すと終わらないので、「最終的に落ち着いた状態で、両方の関係が同時に成り立つ」と考えます。例外的に簡単なのは、電位差を固定したコンデンサーに誘電体を挟む場合:電場は $E=\Delta\phi/h$ に固定されるので、すぐに $P=\varepsilon_0\chi\Delta\phi/h$、$D=\varepsilon\Delta\phi/h$ と分かります。</p>
+    </div>
+    <h3 id="s4-2">4.2 例 6.1:誘電体の平面と点電荷</h3>
+    <div class="box ex"><div class="label">例 6.1</div>
+      <p>点 $(a,0,0)$($a\gt0$)に点電荷 $q$ があり、$x\lt0$ の領域を誘電率 $\varepsilon$ の線形等方誘電体が占めている。誘起された拘束電荷を求めよ。</p>
+    </div>
+    <figure class="fig">
+      <svg viewBox="0 0 640 230" width="640" role="img" aria-label="誘電体の平面と、その外の点電荷"><rect x="40" y="20" width="250" height="190" style="fill:var(--ex);opacity:.12"/><line x1="290" y1="20" x2="290" y2="210" style="stroke:var(--ex);stroke-width:2"/><text class="tj" x="70" y="45">誘電体(x < 0、誘電率 ε)</text><text class="tj" x="310" y="45">真空</text><circle cx="460" cy="115" r="7" style="fill:var(--thm)"/><text class="tt" x="472" y="110">q(点 (a, 0, 0))</text><line x1="290" y1="115" x2="460" y2="115" style="stroke:var(--muted);stroke-width:1;stroke-dasharray:5 4"/><text class="t" x="370" y="108">a</text><text class="ta" x="276" y="60">−</text><text class="ta" x="276" y="90">−</text><text class="ta" x="276" y="120">−</text><text class="ta" x="276" y="150">−</text><text class="ta" x="276" y="180">−</text><text class="ta" x="60" y="205">表面に拘束電荷 σ_b(r)</text></svg>
+      <figcaption>図5 例 6.1 の設定。$x\lt0$ を誘電体が占め、点 $(a,0,0)$ に点電荷 $q$ がある。誘電体の表面($x=0$)に、$q$ と逆符号の表面拘束電荷が現れます($q\gt0$ の場合)。</figcaption>
+    </figure>
+    <ol>
+      <li><b>拘束電荷は表面だけ</b>:誘電体の中には自由電荷がないので $\nabla\cdot\bm{D}=0$、表面以外では $\nabla\times\bm{D}=\bm{0}$。均一な線形等方誘電体では、内部拘束電荷は 0。</li>
+      <li><b>表面拘束電荷</b>:対称性から、$yz$ 面上の表面拘束電荷は原点からの距離 $r$ だけで決まる。表面の外向き法線は $+x$ なので $\sigma_b(r)=P_x=(\varepsilon-\varepsilon_0)E_x(r)$(表面の少し内側の電場)。</li>
+      <li><b>$E_x$ の2つの寄与</b>:点電荷からは $E^{\text{point}}_x=-\dfrac{q}{4\pi\varepsilon_0}\dfrac{a}{(r^2+a^2)^{3/2}}$ (6.16)。表面拘束電荷からは、表面のすぐ内側で見ると、その場所の $\sigma_b(r)$ が十分広い面とみなせて $E^{\text{surface}}_x=-\dfrac{\sigma_b(r)}{2\varepsilon_0}$ (6.17)(1.3 の枠)。ほかの場所の面電荷は $yz$ 面内にあるので、$x$ 成分を作らない。</li>
+      <li><b>解く</b>:$\sigma_b=(\varepsilon-\varepsilon_0)\Bigl(-\dfrac{q}{4\pi\varepsilon_0}\dfrac{a}{(r^2+a^2)^{3/2}}-\dfrac{\sigma_b}{2\varepsilon_0}\Bigr)$ を $\sigma_b$ について解いて</li>
+    </ol>
+    <div class="box thm"><div class="label">結果</div><p>$$\sigma_b(r)=-\frac{1}{2\pi}\,\frac{\varepsilon-\varepsilon_0}{\varepsilon+\varepsilon_0}\,\frac{qa}{(r^2+a^2)^{3/2}}$$</p></div>
+    <div class="box supp"><div class="label">講義ノートにない補足:講義ノートの (6.15)〜(6.19) との違い</div>
+      <p>講義ノートは (6.15) で $\sigma_b=\varepsilon E_x$ とし、(6.19) を $-\frac{1}{2\pi}\frac{\varepsilon}{\varepsilon+2\varepsilon_0}\frac{a}{(r^2+a^2)^{3/2}}$ としています。しかし $\bm{P}=\bm{D}-\varepsilon_0\bm{E}=(\varepsilon-\varepsilon_0)\bm{E}$ なので、係数は $\varepsilon-\varepsilon_0$ が正しく、また電荷 $q$ が抜けています。講義ノートの $\varepsilon$ を $\varepsilon-\varepsilon_0$ に置き換えると、$\frac{\varepsilon-\varepsilon_0}{(\varepsilon-\varepsilon_0)+2\varepsilon_0}=\frac{\varepsilon-\varepsilon_0}{\varepsilon+\varepsilon_0}$ となり、上の結果と一致します(講義ノートの $\varepsilon$ は、$\varepsilon_0\chi$ のつもりかもしれません)。</p>
+      <p><b>確かめ</b>:① $\varepsilon\to\varepsilon_0$(誘電体なし)で 0。② 全表面の拘束電荷を足すと $\int_0^\infty\sigma_b\,2\pi r\,dr=-\frac{\varepsilon-\varepsilon_0}{\varepsilon+\varepsilon_0}q$。③ $\varepsilon\to\infty$ では $-\frac{qa}{2\pi(r^2+a^2)^{3/2}}$ となり、接地された導体平面の誘導電荷(第4回 練習 4-3)に一致します(導体は「誘電率が無限大」の極限)。</p>
+    </div>
+
+    <h2 id="s5">5. 磁気モーメントと磁化(§6.4) <span class="page-tag">講義ノート p.49–50</span></h2>
+    <p>磁場に応答する物質(磁性体)の話も、大枠は誘電体と同じです。大きな違いは、磁場には電荷にあたる<b>磁荷(磁気単極子)</b>がないこと(磁力線は閉じていて、N極やS極は単独では存在しない)。そのため、物質の中で磁場を生み出す源は、<b>小さな電流ループ</b>のようなものです(古典的には永続しないが、量子力学ではスピンとして存在する)。</p>
+    <h3 id="s5-1">5.1 磁気モーメント</h3>
+    <p>電流ループから遠くでのベクトルポテンシャルも、電荷の多重極展開と同じように求まります(8.2 の補論)。<b>磁気(双極子)モーメント</b>
+    $$\bm{m}:=\frac12\int\bm{r}'\times\bm{J}(\bm{r}')\,d\bm{r}'\qquad(6.20)$$
+    を使うと、原点の磁気モーメントが作るベクトルポテンシャルの主要項は
+    $$\bm{A}=\frac{\mu_0}{4\pi}\frac{\bm{m}\times\bm{r}}{r^3}\qquad(6.21).$$</p>
+    <div class="box supp"><div class="label">講義ノートにない補足:円形電流の磁気モーメント</div>
+      <p>半径 $a$ の円形電流 $I$ では、$\bm{r}'\times d\bm{l}'$ はいつも軸方向で大きさ $a\cdot a\,d\varphi$。$\bm{m}=\frac{I}{2}\oint\bm{r}'\times d\bm{l}'=\frac{I}{2}\cdot2\pi a^2=I\pi a^2$(<b>電流 × 面積</b>)で、向きは右ねじの向き。第5回の問題 R で、軸上の遠方の磁場が $\frac{\mu_0Ia^2}{2z^3}=\frac{\mu_0}{4\pi}\frac{2m}{z^3}$ だったのと合っています(電気双極子の軸上の電場 $\frac{1}{4\pi\varepsilon_0}\frac{2p}{z^3}$ と同じ形)。</p>
+    </div>
+    <h3 id="s5-2">5.2 磁化と拘束電流</h3>
+    <p>単位体積あたりの磁気モーメントを<b>磁化</b> $\bm{M}$ といいます(「磁荷」とは全く別物)。分極のときと同じ変形で、磁化した物体のベクトルポテンシャルは、表面の<b>表面拘束電流</b> $\bm{I}_b=\bm{M}\times\bm{n}$ (6.24) と、内部の<b>体積拘束電流</b> $\bm{J}_b=\nabla\times\bm{M}$(講義ノート (6.25) は符号に注意。下の補足)が作るものと同じ形 (6.26) になります。</p>
+    <figure class="fig">
+      <svg viewBox="0 0 640 210" width="640" role="img" aria-label="小さな電流ループが並ぶと、中は打ち消し、表面に電流が残る"><rect x="80" y="50" width="40" height="40" rx="4" style="fill:none;stroke:var(--thm);stroke-width:1.6"/><line x1="95" y1="90" x2="102" y2="90" style="stroke:var(--thm);stroke-width:1.6"/><polygon points="108,90 102,92.7 102,87.3" style="fill:var(--thm)"/><rect x="130" y="50" width="40" height="40" rx="4" style="fill:none;stroke:var(--thm);stroke-width:1.6"/><line x1="145" y1="90" x2="152" y2="90" style="stroke:var(--thm);stroke-width:1.6"/><polygon points="158,90 152,92.7 152,87.3" style="fill:var(--thm)"/><rect x="180" y="50" width="40" height="40" rx="4" style="fill:none;stroke:var(--thm);stroke-width:1.6"/><line x1="195" y1="90" x2="202" y2="90" style="stroke:var(--thm);stroke-width:1.6"/><polygon points="208,90 202,92.7 202,87.3" style="fill:var(--thm)"/><rect x="230" y="50" width="40" height="40" rx="4" style="fill:none;stroke:var(--thm);stroke-width:1.6"/><line x1="245" y1="90" x2="252" y2="90" style="stroke:var(--thm);stroke-width:1.6"/><polygon points="258,90 252,92.7 252,87.3" style="fill:var(--thm)"/><rect x="80" y="100" width="40" height="40" rx="4" style="fill:none;stroke:var(--thm);stroke-width:1.6"/><line x1="95" y1="140" x2="102" y2="140" style="stroke:var(--thm);stroke-width:1.6"/><polygon points="108,140 102,142.7 102,137.3" style="fill:var(--thm)"/><rect x="130" y="100" width="40" height="40" rx="4" style="fill:none;stroke:var(--thm);stroke-width:1.6"/><line x1="145" y1="140" x2="152" y2="140" style="stroke:var(--thm);stroke-width:1.6"/><polygon points="158,140 152,142.7 152,137.3" style="fill:var(--thm)"/><rect x="180" y="100" width="40" height="40" rx="4" style="fill:none;stroke:var(--thm);stroke-width:1.6"/><line x1="195" y1="140" x2="202" y2="140" style="stroke:var(--thm);stroke-width:1.6"/><polygon points="208,140 202,142.7 202,137.3" style="fill:var(--thm)"/><rect x="230" y="100" width="40" height="40" rx="4" style="fill:none;stroke:var(--thm);stroke-width:1.6"/><line x1="245" y1="140" x2="252" y2="140" style="stroke:var(--thm);stroke-width:1.6"/><polygon points="258,140 252,142.7 252,137.3" style="fill:var(--thm)"/><rect x="80" y="150" width="40" height="40" rx="4" style="fill:none;stroke:var(--thm);stroke-width:1.6"/><line x1="95" y1="190" x2="102" y2="190" style="stroke:var(--thm);stroke-width:1.6"/><polygon points="108,190 102,192.7 102,187.3" style="fill:var(--thm)"/><rect x="130" y="150" width="40" height="40" rx="4" style="fill:none;stroke:var(--thm);stroke-width:1.6"/><line x1="145" y1="190" x2="152" y2="190" style="stroke:var(--thm);stroke-width:1.6"/><polygon points="158,190 152,192.7 152,187.3" style="fill:var(--thm)"/><rect x="180" y="150" width="40" height="40" rx="4" style="fill:none;stroke:var(--thm);stroke-width:1.6"/><line x1="195" y1="190" x2="202" y2="190" style="stroke:var(--thm);stroke-width:1.6"/><polygon points="208,190 202,192.7 202,187.3" style="fill:var(--thm)"/><rect x="230" y="150" width="40" height="40" rx="4" style="fill:none;stroke:var(--thm);stroke-width:1.6"/><line x1="245" y1="190" x2="252" y2="190" style="stroke:var(--thm);stroke-width:1.6"/><polygon points="258,190 252,192.7 252,187.3" style="fill:var(--thm)"/><rect x="72" y="42" width="206" height="156" rx="6" style="fill:none;stroke:var(--accent);stroke-width:2.4"/><line x1="160" y1="198" x2="191" y2="198" style="stroke:var(--accent);stroke-width:2.4"/><polygon points="200,198 191,202.1 191,194" style="fill:var(--accent)"/><text class="tj" x="320" y="80">中:となりのループの電流が逆向きで打ち消す</text><text class="ta" x="320" y="110">表面:打ち消されずに残る(表面拘束電流)</text><text class="t" x="320" y="150">I_b = M × n</text></svg>
+      <figcaption>図6 磁化の正体(分極の図3の磁気版)。小さな電流ループ(磁気モーメント)が一様に並ぶと、中ではとなりどうしの電流が打ち消し合い、表面にだけ電流が残ります(表面拘束電流 $\bm{I}_b=\bm{M}\times\bm{n}$)。</figcaption>
+    </figure>
+    <h3 id="s5-3">5.3 補助場 $\bm{H}$</h3>
+    <p>アンペールの法則には、自由な電流 $\bm{J}_f$ も拘束電流も入ります:$\frac{1}{\mu_0}\nabla\times\bm{B}=\bm{J}_f+\bm{J}_b=\bm{J}_f+\nabla\times\bm{M}$ (6.27)。<b>補助場</b>
+    $$\bm{H}=\frac{1}{\mu_0}\bm{B}-\bm{M}\qquad(6.28)$$
+    を定義すると、$\nabla\times\bm{H}=\bm{J}_f$ (6.29) と、自由な電流だけで書けます。$\bm{H}$ は電気変位 $\bm{D}$ と同じ位置づけの量で、同じ注意が必要です:一般に $\nabla\cdot\bm{H}\ne0$ なので、$\bm{B}$ で成り立つよい性質の多くは $\bm{H}$ では成り立ちません(具体例 Y)。</p>
+    <div class="box supp"><div class="label">講義ノートにない補足:(6.25) の符号</div>
+      <p>講義ノートは $\bm{J}_b:=-\nabla'\times\bm{M}$ (6.25) と書いていますが、(6.27) では $\bm{J}_b=\nabla\times\bm{M}$ として使っています。(6.22) から (6.23) を導く変形を追うと、体積の項は $+\frac{\mu_0}{4\pi}\int\frac{\nabla'\times\bm{M}}{|\bm{r}-\bm{r}'|}$ になるので、$\bm{J}_b=+\nabla\times\bm{M}$ が正しい符号です(図6:中の電流の打ち消し残り)。</p>
+    </div>
+    <div class="box note-box"><div class="label">講義ノートの脚注121・122:$\bm{H}$ を「磁場」と呼ぶ流儀</div>
+      <p>本によっては $\bm{H}$ を「磁場」、$\bm{B}$ を「磁束密度」と呼びます。実験室では、電流計で測れる(自由な電流で決まる)$\bm{H}$ の方がよく使われるためです。</p>
+    </div>
+
+    <h2 id="s6">6. 磁性体(§6.5) <span class="page-tag">講義ノート p.50–51</span></h2>
+    <ul>
+      <li><b>常磁性</b>:外部磁場と<b>同じ向き</b>に磁化が生じる。小さな磁石が磁場の向きにそろうとエネルギーが下がる、という説明が一つ(ほかの機構もある)。鉄やニッケルなど、磁石にくっつく金属。</li>
+      <li><b>反磁性</b>:外部磁場と<b>逆向き</b>に磁化が生じる。量子力学に由来するランダウ反磁性は、<b>すべての物質</b>がもつ(水も弱い反磁性。強い磁場で生きたカエルを浮かせた実験は、2000年のイグノーベル賞)。常磁性体は、この反磁性に打ち勝つ強い常磁性をもつ特別なもの。</li>
+      <li><b>強磁性</b>:外部磁場が 0 でも磁化が残る(<b>永久磁石</b>)。キュリー温度より低温で現れ、高温では常磁性になる。小さな磁石がそろっていると、他の磁石もその向きにそろう方がエネルギーが下がるから。温度が高いと、いろいろな向きを向きたがるエントロピーの効果が勝つ。</li>
+    </ul>
+    <p>線形等方な磁性体では、慣習的に $\bm{M}$ を $\bm{H}$ と結びつけて $\bm{M}=\chi_m\bm{H}$ (6.30)、$\bm{B}=\mu_0(1+\chi_m)\bm{H}=\mu\bm{H}$ (6.31)。$\chi_m$ は<b>磁化率</b>(常磁性で正、反磁性で負)、$\mu$ は<b>透磁率</b>。ほとんどの物質で $|\chi_m|$ はとても小さい(大きくて $10^{-4}$ 程度)ので、$\mu\approx\mu_0$ です。</p>
+    <figure class="fig">
+      <svg viewBox="0 0 640 220" width="640" role="img" aria-label="常磁性と強磁性の、外部磁場に対する磁化"><line x1="40" y1="110" x2="280" y2="110" style="stroke:var(--muted);stroke-width:1.2"/><line x1="160" y1="20" x2="160" y2="200" style="stroke:var(--muted);stroke-width:1.2"/><path d="M 60 170 L 260 50" style="fill:none;stroke:var(--accent);stroke-width:2.4"/><text class="tm" x="160" y="215" style="text-anchor:middle">常磁性:比例(線形)</text><line x1="360" y1="110" x2="600" y2="110" style="stroke:var(--muted);stroke-width:1.2"/><line x1="480" y1="20" x2="480" y2="200" style="stroke:var(--muted);stroke-width:1.2"/><path d="M 370 170 C 420 168, 460 165, 480 160 L 480 60 C 500 55, 540 52, 590 50" style="fill:none;stroke:var(--thm);stroke-width:2.4"/><path d="M 590 50 C 540 52, 500 55, 455 60 L 455 160 C 430 165, 400 168, 370 170" style="fill:none;stroke:var(--thm);stroke-width:1.6;stroke-dasharray:5 4"/><text class="tm" x="480" y="215" style="text-anchor:middle">強磁性:0 で跳ぶ(点線はヒステリシス)</text><text class="tm" x="285" y="105">外部磁場</text><text class="tm" x="165" y="25">磁化</text></svg>
+      <figcaption>図7 外部磁場に対する磁化(講義ノートの図37)。常磁性体では磁化が磁場に比例する。強磁性体では、外部磁場が 0 でも磁化が残る(永久磁石)。実際には履歴(ヒステリシス、点線)があり、逆向きの磁場をかけても、しばらくは磁化が残ります。</figcaption>
+    </figure>
+    <div class="box intuit"><div class="label">直感で理解する:そろいたい力と、ばらばらになりたい力</div>
+      <p>強磁性は「みんなと同じ向きを向きたい(エネルギー)」と「いろいろな向きを試したい(エントロピー、温度)」の綱引き。低温ではそろう力が勝って永久磁石に、キュリー温度を超えるとばらばらになる力が勝って、ただの常磁性体になります。</p>
+    </div>
+
+    <h2 id="s7">7. 誘電体と磁性体のエネルギー(§6.6) <span class="page-tag">講義ノート p.51–53</span></h2>
+    <p>誘電体のまわりに導体を置いて帯電させ、電場をかけます。導体1の電荷を $Q$ から $Q+\Delta Q$ に少し増やすのに必要な仕事は $\Delta W=\phi_{\partial V_1}\Delta Q$ (6.32)(導体表面の電位は一定)。$Q=\int_{\partial V_1}\bm{D}\cdot d\bm{S}$ (6.33) とガウスの定理、導体の外では自由電荷が変わらない($\nabla\cdot\Delta\bm{D}=0$)ことを使って変形すると</p>
+    <div class="box thm"><div class="label">誘電体に対する仕事 (6.38)</div>
+      <p>$$\Delta W=\int\bm{E}(\bm{r})\cdot\Delta\bm{D}(\bm{r})\,d\bm{r}$$ (全空間で積分)。真空なら $\bm{D}=\varepsilon_0\bm{E}$ で $\Delta W=\frac{\varepsilon_0}{2}\int\Delta|\bm{E}|^2$ となり、電場のエネルギー (3.33) に戻る。</p>
+    </div>
+    <p>線形等方なら $\bm{D}=\varepsilon\bm{E}$ なので $\bm{E}\cdot\Delta\bm{D}=\frac12\Delta(\bm{E}\cdot\bm{D})$ (6.40) となり、電場のない状態から作るのに必要な仕事は
+    $$W=\frac12\int\bm{E}\cdot\bm{D}\,d\bm{r}\qquad(6.41).$$
+    磁性体でも同様に $\Delta W=\int\bm{H}\cdot\Delta\bm{B}$ (6.42)、線形等方なら $W=\frac12\int\bm{H}\cdot\bm{B}=\frac12\int\mu|\bm{H}|^2$ (6.43)。平衡状態が安定であることから $\mu\gt0$ (6.44)。</p>
+    <div class="box warn"><div class="label">これは「エネルギー」ではなく「自由エネルギー」</div>
+      <p>この操作は、温度一定の環境でゆっくり行う<b>等温準静的過程</b>です。熱力学の最大仕事の原理から、その仕事はヘルムホルツの自由エネルギーの変化 $\Delta F$ に等しい(1.4 の枠)。$W$ はしばしば「エネルギー」と呼ばれますが、正確には(エントロピーの寄与を含む)<b>自由エネルギー</b>と理解する方がよい、と講義ノートは強調しています。</p>
+    </div>
+    <div class="box supp"><div class="label">講義ノートの脚注131:なぜ $\frac{\varepsilon_0}{2}\int|\bm{E}|^2$ ではないのか</div>
+      <p>$\frac{\varepsilon_0}{2}\int|\bm{E}|^2$ (3.33) は、ミクロに導いた式なので、誘電体があっても正しい。ただしそれは「誘電体そのものも含めて、何もないところから全部組み立てる」エネルギー。私たちが「誘電体のエネルギー」と言うときに知りたいのは、「誘電体はもうあって、それをある状態(分極した状態)にするのに必要なエネルギー」で、それが (6.41) です。</p>
+    </div>
+
+    <h2 id="s8">8. 補論:平均化と磁気双極子モーメントの導出(§6.7〜§6.8) <span class="page-tag">講義ノート p.53–55</span></h2>
+    <h3 id="s8-1">8.1 誘電体の中での平均化(§6.7)</h3>
+    <p>3. の (6.1) が誘電体の<b>中</b>でも正しい理由です。講義ノートは次を示します:半径 $R$ の球 $V$ の中に電荷があるとき、その電荷が作る電場の、球の中での平均は
+    $$\bar{\bm{E}}=-\frac{1}{4\pi\varepsilon_0}\frac{\bm{p}}{R^3}\qquad(6.45)$$
+    ($\bm{p}=\int_V\rho(\bm{r})\bm{r}\,d\bm{r}$ は球の中の全双極子モーメント)。これは、球が一様に分極しているときに中心に作られる電場と同じ値です。鍵は、「点 $\bm{r}$ の電荷が球の中に作る電場の合計」と「一様に帯電した球が点 $\bm{r}$ に作る電場」が、大きさが同じで向きが逆になる、という補題です(作用・反作用と同じで、2点の間の電場は向きを逆にすると入れ替わる)。後者はガウスの法則で $\frac{\rho r}{3\varepsilon_0}$ と簡単に計算できます。</p>
+    <h3 id="s8-2">8.2 磁気双極子モーメントの導出(§6.8)</h3>
+    <p>ベクトルポテンシャルは電位と同じ形の式なので、電荷の多重極展開(第4回 補論)をそのまままねできます:
+    $$A_i(\bm{r})=\frac{\mu_0}{4\pi r}\int J_i\,d\bm{r}'+\frac{\mu_0}{4\pi r^2}\int J_i(\bm{r}'\cdot\bm{e}_r)\,d\bm{r}'+\cdots\qquad(6.49).$$
+    電荷のときとの決定的な違いは、<b>第1項が必ず 0</b> になることです(電流はループになっている。磁荷はない)。だから、いつも第2項(磁気双極子)が主要項になります。第2項を、定常電流の $\nabla\cdot\bm{J}=0$ と部分積分で整理し、ベクトル三重積の公式を使うと、(6.20) の $\bm{m}=\frac12\int\bm{r}'\times\bm{J}$ と (6.21) が得られます。</p>
+    <div class="box intuit"><div class="label">直感で理解する:「磁荷」がないので、いきなり双極子から始まる</div>
+      <p>電荷の集まりを遠くから見ると、まず全電荷(単極子)が見え、それが 0 なら双極子が見えます。電流ループには「全磁荷」にあたるものが最初からないので、遠くから見ると、いきなり磁気双極子(小さな磁石)に見えるのです。</p>
+    </div>
+
+    <h2 id="s9">9. 具体例で練習(講義ノートにない補足) <span class="page-tag">補足</span></h2>
+    <p>この節は、講義ノートの例とは別に、私が作った練習問題と解答です。</p>
+    <div class="box ex"><div class="label">問題 W:平行板コンデンサーに誘電体を挟む</div>
+      <p>面積 $S$、間隔 $h$ の平行板コンデンサーの間を、誘電率 $\varepsilon$ の線形等方誘電体で満たし、電位差 $V$ を保つ(電池につなぐ)。(1) 誘電体の中の $E$、$P$、$D$ を求めよ。(2) 極板の自由電荷と、誘電体表面の拘束電荷を求めよ。(3) 電気容量を求めよ。</p>
+    </div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>(1) 電位差が固定なので $E=V/h$(4.1 の「例外的に簡単な場合」)。$P=(\varepsilon-\varepsilon_0)V/h$、$D=\varepsilon V/h$。</p>
+      <p>(2) 極板(導体)の表面で $\int\bm{D}\cdot d\bm{S}=Q_f$ より、自由電荷の面密度は $\sigma_f=D=\varepsilon V/h$。誘電体の表面拘束電荷は $\sigma_b=\bm{P}\cdot\bm{n}=\mp P=\mp(\varepsilon-\varepsilon_0)V/h$(+極板側の表面に負、−極板側に正)。合計 $\sigma_f-P=\varepsilon_0V/h=\varepsilon_0E$ で、これが電場を作っている(真空のガウスの法則と一致)。</p>
+      <p>(3) $C=\dfrac{Q_f}{V}=\dfrac{\varepsilon S}{h}$。真空の $\varepsilon/\varepsilon_0$ 倍(高校の比誘電率の式)。</p>
+    </div>
+    <div class="box ex"><div class="label">問題 X:一様に磁化した細長い円柱(棒磁石)</div>
+      <p>軸方向に一様な磁化 $\bm{M}$ をもつ、とても長い円柱がある。中の $\bm{B}$ と $\bm{H}$ を求めよ。</p>
+    </div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>中は一様なので体積拘束電流 $\nabla\times\bm{M}=\bm{0}$。側面には表面拘束電流 $\bm{I}_b=\bm{M}\times\bm{n}$ が、円周方向に単位長さあたり $M$ だけ流れる。これは「単位長さあたり $nI=M$ のソレノイド」と同じなので、中の磁場は $B=\mu_0M$、外は 0(第5回 例 5.1)。補助場は $H=\frac{B}{\mu_0}-M=0$。</p>
+      <p><b>意味</b>:自由な電流がないので $\nabla\times\bm{H}=\bm{0}$ で、この場合 $\bm{H}=\bm{0}$。磁場 $\bm{B}$ はちゃんとあるのに $\bm{H}$ は 0。$\bm{H}$ を「磁場」と思い込むと混乱する例です。</p>
+    </div>
+    <div class="box ex"><div class="label">問題 Y:誘電体のエネルギー</div>
+      <p>問題 W のコンデンサーで、誘電体の「エネルギー」(6.41) を求め、真空のときと比べよ。</p>
+    </div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>$W=\frac12\int\bm{E}\cdot\bm{D}=\frac12\cdot\frac Vh\cdot\frac{\varepsilon V}{h}\cdot Sh=\frac12\frac{\varepsilon S}{h}V^2=\frac12CV^2$。真空のときの $\varepsilon/\varepsilon_0$ 倍。高校の $\frac12CV^2$ と同じ形ですが、7. で見たように、これは正確には(温度一定での)自由エネルギーです。</p>
+    </div>
+
+    <h2 id="s10">10. まとめ(この回で覚えること)</h2>
+    <ul>
+      <li><b>記述のレベル</b>:物質中の電磁気学は、メソスケールの平衡系を「1点」と見るマクロな記述。「1点の分極」は、その点に対応する平衡系の平均。</li>
+      <li><b>分極</b>:拘束電荷 $\sigma_b=\bm{P}\cdot\bm{n}$、$\rho_b=-\nabla\cdot\bm{P}$。電気変位 $\bm{D}=\varepsilon_0\bm{E}+\bm{P}$ で $\nabla\cdot\bm{D}=\rho_f$。しかし $\nabla\times\bm{D}\ne\bm{0}$ なので、$\bm{D}$ を $\varepsilon_0\bm{E}$ のように扱ってはいけない。</li>
+      <li><b>誘電体</b>:線形なら $\bm{P}=\varepsilon_0X\bm{E}$、等方なら $\bm{D}=\varepsilon\bm{E}$、$\varepsilon=\varepsilon_0(1+\chi)\ge\varepsilon_0$。$\bm{E}$ は分極の効果も含んだ最終的な電場(自己無撞着)。例 6.1:$\sigma_b=-\frac{1}{2\pi}\frac{\varepsilon-\varepsilon_0}{\varepsilon+\varepsilon_0}\frac{qa}{(r^2+a^2)^{3/2}}$。</li>
+      <li><b>磁性体</b>:磁気モーメント $\bm{m}=\frac12\int\bm{r}\times\bm{J}$(円電流なら電流 × 面積)、磁化 $\bm{M}$、拘束電流 $\bm{I}_b=\bm{M}\times\bm{n}$、$\bm{J}_b=\nabla\times\bm{M}$、補助場 $\bm{H}=\bm{B}/\mu_0-\bm{M}$ で $\nabla\times\bm{H}=\bm{J}_f$。常磁性・反磁性・強磁性。$\bm{B}=\mu\bm{H}$。</li>
+      <li><b>エネルギー</b>:$\Delta W=\int\bm{E}\cdot\Delta\bm{D}$、$\int\bm{H}\cdot\Delta\bm{B}$。線形なら $W=\frac12\int\bm{E}\cdot\bm{D}$、$\frac12\int\bm{H}\cdot\bm{B}$。正確にはヘルムホルツの自由エネルギー。</li>
+    </ul>
+
+    <h2 id="s11">11. この回のノートについてのメモ</h2>
+    <p>板書の写真ではなく、<b>文章で書かれた講義ノート(フル版)</b>の p.43〜p.55(§6)をもとにまとめました。講義ノートの図は、必要なものを描き直しました。</p>
+    <p>講義ノートの記述で、誤り(または誤記)と判断して直した箇所、読み替えた箇所は次のとおりです。</p>
+    <ol>
+      <li><b>例 6.1 の (6.15)〜(6.19)(p.48〜49)</b>:$\sigma_b=\varepsilon E_x$ としていますが、$\bm{P}=(\varepsilon-\varepsilon_0)\bm{E}$ なので係数は $\varepsilon-\varepsilon_0$。また (6.19) では電荷 $q$ が抜けています。正しくは $\sigma_b=-\frac{1}{2\pi}\frac{\varepsilon-\varepsilon_0}{\varepsilon+\varepsilon_0}\frac{qa}{(r^2+a^2)^{3/2}}$(4.2 の黄色の枠に確かめ)。講義ノートは拘束電荷の面密度を $\rho_b(r)$ と書いていますが、(6.3) に合わせて $\sigma_b$ と書きました。</li>
+      <li><b>(6.25) の符号(p.49)</b>:$\bm{J}_b:=-\nabla'\times\bm{M}$ とありますが、(6.27) で使っている $\bm{J}_b=\nabla\times\bm{M}$ が正しい符号です(5.3 の黄色の枠)。</li>
+      <li><b>「真空中の静磁場の議論を単純に拡張した結果」(p.47)</b>:誘電体の文脈なので「真空中の静電場」の誤記と読みました。</li>
+      <li><b>(6.42)(p.53)</b>:$W=\bm{H}\cdot\Delta\bm{B}$ と積分記号が抜けて見えるので、$\Delta W=\int\bm{H}\cdot\Delta\bm{B}\,d\bm{r}$ と書きました。</li>
+      <li><b>回の分け方</b>:§6 は「補論」です。授業の日程が分かったら合わせます。</li>
+    </ol>
+
+    <nav class="pager" data-fixed>
+      <a href="week-06.html">← 第6回</a>
+      <a href="../index.html">一覧へ</a>
+      <span class="disabled">次の回 →</span>
+    </nav>
+
   </main>
+
+  <footer>© Aセメまとめノート</footer>
 </body>
 </html>

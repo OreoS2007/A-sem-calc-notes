@@ -76,6 +76,11 @@
             <li><a href="#cyl">円筒座標</a></li>
             <li><a href="#angmom">角運動量とトルク(力学)</a></li>
           </ol></li>
+        <li><b>物質中の電磁気学のための道具</b><!--b5-->
+          <ol type="a" start="22">
+            <li><a href="#dielectric">誘電体とコンデンサー(高校)</a></li>
+            <li><a href="#thermo">熱力学の基礎(平衡状態と自由エネルギー)</a></li>
+          </ol></li>
         <li><b>もっと詳しく(数学の基礎)</b>
           <ul>
             <li><a href="#x-partial">補1. 偏微分(もっと詳しく)</a></li>
@@ -714,6 +719,37 @@
       <p>角運動量は「軸のまわりを回る勢い」。回そうとする力(トルク)がなければ変わらない。だから回る半径を小さくすると、そのぶん速く回る。</p>
     </div>
     <p class="used-in">この回で使う場所:<a href="weeks/week-05.html#w-angmom" data-xref>第5回 1.6 角運動量とトルク</a><a href="weeks/week-05.html#s4-10" data-xref>第5回 4.10 ブッシュの定理</a></p>
+
+    <!-- ===================== v: 誘電体(高校) ===================== -->
+    <h2 id="dielectric">v. 誘電体とコンデンサー(高校)</h2>
+    <p>電気を通さない物質(紙、ガラス、プラスチック、水など)を<b>誘電体</b>(絶縁体)といいます。誘電体に電場をかけると、中の正の電荷と負の電荷がわずかにずれて(<b>分極</b>)、表面に電荷が現れます(<b>誘電分極</b>)。</p>
+    <figure class="fig">
+      <svg viewBox="0 0 620 220" width="620" role="img" aria-label="コンデンサーに誘電体を入れると、表面に逆符号の電荷が現れて中の電場が弱まる"><line x1="120" y1="30" x2="120" y2="190" style="stroke:var(--thm);stroke-width:4"/><line x1="420" y1="30" x2="420" y2="190" style="stroke:var(--accent);stroke-width:4"/><text class="tt" x="100" y="25">+Q</text><text class="ta" x="410" y="25">−Q</text><rect x="190" y="45" width="160" height="130" style="fill:var(--ex);opacity:.12;stroke:var(--ex);stroke-width:1.6"/><text class="ta" x="193" y="62">−</text><text class="tt" x="338" y="62">+</text><text class="ta" x="193" y="88">−</text><text class="tt" x="338" y="88">+</text><text class="ta" x="193" y="114">−</text><text class="tt" x="338" y="114">+</text><text class="ta" x="193" y="140">−</text><text class="tt" x="338" y="140">+</text><text class="ta" x="193" y="166">−</text><text class="tt" x="338" y="166">+</text><line x1="130" y1="70" x2="176" y2="70" style="stroke:var(--muted);stroke-width:2.2"/><polygon points="185,70 176,74.1 176,66" style="fill:var(--muted)"/><line x1="355" y1="70" x2="401" y2="70" style="stroke:var(--muted);stroke-width:2.2"/><polygon points="410,70 401,74.1 401,66" style="fill:var(--muted)"/><line x1="230" y1="70" x2="303" y2="70" style="stroke:var(--ex);stroke-width:1.6"/><polygon points="310,70 303,73.2 303,66.9" style="fill:var(--ex)"/><line x1="130" y1="115" x2="176" y2="115" style="stroke:var(--muted);stroke-width:2.2"/><polygon points="185,115 176,119.1 176,111" style="fill:var(--muted)"/><line x1="355" y1="115" x2="401" y2="115" style="stroke:var(--muted);stroke-width:2.2"/><polygon points="410,115 401,119.1 401,111" style="fill:var(--muted)"/><line x1="230" y1="115" x2="303" y2="115" style="stroke:var(--ex);stroke-width:1.6"/><polygon points="310,115 303,118.2 303,111.9" style="fill:var(--ex)"/><line x1="130" y1="160" x2="176" y2="160" style="stroke:var(--muted);stroke-width:2.2"/><polygon points="185,160 176,164.1 176,156" style="fill:var(--muted)"/><line x1="355" y1="160" x2="401" y2="160" style="stroke:var(--muted);stroke-width:2.2"/><polygon points="410,160 401,164.1 401,156" style="fill:var(--muted)"/><line x1="230" y1="160" x2="303" y2="160" style="stroke:var(--ex);stroke-width:1.6"/><polygon points="310,160 303,163.2 303,156.9" style="fill:var(--ex)"/><text class="tm" x="270" y="205" style="text-anchor:middle">誘電体の中の電場は弱い(E/εr)</text><text class="tj" x="470" y="110">誘電体の表面に</text><text class="tj" x="470" y="130">逆符号の電荷</text></svg>
+      <figcaption>コンデンサーの極板の間に誘電体を入れると、誘電体の表面に、極板と逆符号の電荷(分極電荷)が現れ、誘電体の中の電場は弱くなります(緑の細い矢印)。</figcaption>
+    </figure>
+    <ul>
+      <li><b>比誘電率</b> $\varepsilon_r$:誘電体を入れると、中の電場は真空のときの $1/\varepsilon_r$ になる($\varepsilon_r\ge1$。空気はほぼ1、水は約80)。</li>
+      <li><b>誘電率</b> $\varepsilon=\varepsilon_r\varepsilon_0$。誘電体の中の点電荷の電場は $\dfrac{q}{4\pi\varepsilon r^2}$(真空の $\varepsilon_0$ を $\varepsilon$ に置き換える)。</li>
+      <li><b>平行板コンデンサー</b>:極板の間を誘電体で満たすと、電気容量は $C=\dfrac{\varepsilon S}{d}=\varepsilon_r\dfrac{\varepsilon_0S}{d}$($\varepsilon_r$ 倍に増える)。同じ電圧でたくさんの電荷をためられる。</li>
+    </ul>
+    <div class="box intuit"><div class="label">直感で理解する</div>
+      <p>誘電体の中の原子や分子が、電場の向きに少しずつ「伸びる」(正の電荷が電場の向きに、負の電荷が逆向きにずれる)。中ではとなりどうしの正負が打ち消し合い、表面にだけ余りが残る。この表面の電荷が、もとの電場を弱める向きの電場を作ります。</p>
+    </div>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-07.html#w-hsdiel" data-xref>第7回 1.2 誘電体とコンデンサー(高校)</a><a href="weeks/week-07.html#s4" data-xref>第7回 4. 誘電体</a></p>
+
+    <!-- ===================== w: 熱力学の基礎 ===================== -->
+    <h2 id="thermo">w. 熱力学の基礎(平衡状態と自由エネルギー)</h2>
+    <p>物質中の電磁気学では、物質の各点を「小さな熱平衡状態」とみなします。そのために必要な熱力学の言葉を、最小限まとめます。</p>
+    <ul>
+      <li><b>熱平衡状態</b>:外から放っておくと落ち着く、時間変化しない状態。温度・圧力・体積など、少数の変数で指定できる。</li>
+      <li><b>示量変数と示強変数</b>:系を2倍にすると2倍になる量(体積、エネルギー、分極の合計)が示量変数、変わらない量(温度、圧力、電場)が示強変数。圧力 $p$ と体積 $V$ のように、対になって仕事 $-p\,dV$ を作る組を「共役」という。電場と分極、磁場と磁化も、このような組になっている。</li>
+      <li><b>等温準静的過程と自由エネルギー</b>:温度を一定に保ちながら、ゆっくり(各瞬間に平衡を保って)変化させるとき、外から系にする仕事は、<b>ヘルムホルツの自由エネルギー</b> $F=U-TS$ の変化に等しい(最大仕事の原理)。$U$ はエネルギー、$S$ はエントロピー。</li>
+      <li><b>相転移</b>:温度を変えると、ある温度を境に性質が急に変わることがある(水が氷になる、鉄が磁石になる(キュリー温度)など)。</li>
+    </ul>
+    <div class="box intuit"><div class="label">直感で理解する</div>
+      <p>自由エネルギーは「温度を一定に保ったまま、系から取り出せる(または系に入れる必要がある)仕事」。エネルギーの一部は熱としてまわりとやり取りされるので、エネルギーそのものとは少し違います。</p>
+    </div>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-07.html#w-thermo" data-xref>第7回 1.4 熱力学の言葉</a><a href="weeks/week-07.html#s2" data-xref>第7回 2. マクロな電磁気学</a><a href="weeks/week-07.html#s7" data-xref>第7回 7. 誘電体と磁性体のエネルギー</a></p>
     <!-- b5:end -->
 
     <!-- import:start -->
