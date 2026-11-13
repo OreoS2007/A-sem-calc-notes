@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>第9回 変動電磁場(電磁誘導、変位電流、マクスウェル方程式) | Aセメまとめノート</title>
+  <link rel="stylesheet" href="../../assets/style.css">
+  <script defer src="../../assets/nav.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],macros:{'\\R':'\\mathbb{R}','\\bm':'\\boldsymbol{#1}','\\rot':'\\operatorname{rot}','\\grad':'\\operatorname{grad}','\\dvg':'\\operatorname{div}','\\pd':'\\frac{\\partial #1}{\\partial #2}'}});window.__navReady&&window.__navReady()"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="inner">
+      <a class="site-title" href="../../index.html">Aセメまとめノート</a>
+      <span class="links"><a href="../index.html">電磁気学</a><a href="../basics.html">基礎のまとめ</a><a href="../../calc/index.html">微積</a><a href="../../linalg/index.html">線形代数</a><a href="../../structchem/index.html">構造化学</a><a href="../../mech/index.html">力学A</a><a href="../../thermo/index.html">熱力学</a></span>
+    </div>
+  </header>
+
+  <main class="note">
+    <h1>第9回:変動電磁場(電磁誘導、変位電流、マクスウェル方程式)</h1>
+    <div class="meta">電磁気学(東京大学 教養学部 秋学期)／授業日は未定(講義ノートの分量から分けた予定)／講義ノート §8(p.63〜p.69)</div>
+
+    <nav class="toc">
+      <div class="toc-title">目次</div>
+      <ol start="0">
+        <li><a href="#s0">この回の全体像</a></li>
+        <li><a href="#s1">準備:基礎の確認</a>
+          <div class="sub">電磁誘導(高校)／ストークスの定理(第2回)／静磁場の結果(第5回・第6回)／コンデンサーの電場(第5回)／テイラー展開(1次の近似)</div></li>
+        <li><a href="#s2">電場と磁場は「同じものの2つの表れ」(§8.1)</a></li>
+        <li><a href="#s3">電磁誘導(§8.2)</a></li>
+        <li><a href="#s4">マクスウェルの変位電流(§8.3)</a></li>
+        <li><a href="#s5">マクスウェル方程式(§8.4)</a></li>
+        <li><a href="#s6">補論:準定常近似とジェフィメンコ方程式(§8.5)</a></li>
+        <li><a href="#s7">具体例で練習(講義ノートにない補足)</a></li>
+        <li><a href="#s8">まとめ(この回で覚えること)</a></li>
+        <li><a href="#s9">この回のノートについてのメモ</a></li>
+      </ol>
+    </nav>
+
+    <h2 id="s0">0. この回の全体像 <span class="page-tag">講義ノート p.63</span></h2>
+    <p>ここまでは、時間変化しない静電場と静磁場を、別々に解いてきました。この回から、<b>時間変化する電磁場</b>を扱います。電場と磁場は別々ではなく、連立した偏微分方程式の解としてセットで決まります。そして、電磁気学の基礎方程式である<b>マクスウェル方程式</b>が、ついに出そろいます。</p>
+    <div class="box thm"><div class="label">この回のゴール</div>
+      <p>① 電場と磁場は「同じものの2つの表れ」で、磁場の変化が電場の原因、という因果関係ではない。<br>
+      ② ファラデーの法則 $\nabla\times\bm{E}=-\frac{\partial\bm{B}}{\partial t}$ と、レンツの法則。誘導起電力では電位が定義できない。<br>
+      ③ マクスウェルの変位電流:$\nabla\times\bm{B}-\mu_0\varepsilon_0\frac{\partial\bm{E}}{\partial t}=\mu_0\bm{J}$。それでも、磁場はビオ・サバールの法則(電流だけ)で正しく求まる。<br>
+      ④ マクスウェル方程式(4つ)。<br>
+      ⑤ (補論)ゆっくり変化するなら、クーロンの法則とビオ・サバールの法則は、思ったより高い精度で成り立つ。</p>
+    </div>
+    <table class="cmp">
+      <tr><th></th><th>静的(第3〜6回)</th><th>時間変化あり(この回)</th></tr>
+      <tr><td>電場の回転</td><td>$\nabla\times\bm{E}=\bm{0}$</td><td>$\nabla\times\bm{E}=-\frac{\partial\bm{B}}{\partial t}$(ファラデー)</td></tr>
+      <tr><td>磁場の回転</td><td>$\nabla\times\bm{B}=\mu_0\bm{J}$</td><td>$\nabla\times\bm{B}=\mu_0\bm{J}+\mu_0\varepsilon_0\frac{\partial\bm{E}}{\partial t}$(変位電流)</td></tr>
+      <tr><td>発散</td><td colspan="2">$\nabla\cdot\bm{E}=\rho/\varepsilon_0$、$\nabla\cdot\bm{B}=0$ はそのまま</td></tr>
+    </table>
+    <div class="box note-box"><div class="label">この回の日程について</div>
+      <p>講義ノートの分量と内容から分けた予定です。日程が分かったら合わせます。</p>
+    </div>
+    <p>以下では、先に必要な基礎を復習してから、講義ノートの順に進みます。紫色の枠は「基礎の復習」、黄色の枠は「講義ノートにないが、理解を助けるために私が補った部分」、緑の枠は「直感で理解するための説明」です。</p>
+
+    <h2 id="s1">1. 準備:基礎の確認</h2>
+    <p>この回で使う道具と、前の回までの結果を並べます。</p>
+
+    <h3 id="w-induct">1.1 電磁誘導(高校)</h3>
+    <div class="box basic">
+      <div class="label">基礎:ファラデーの法則、レンツの法則、自己誘導 <a class="xref-link" href="../basics.html#induction" data-xref>→ 詳しい解説</a></div>
+      <p>コイルを貫く磁束 $\Phi$ が変化すると、起電力 $V=-N\frac{d\Phi}{dt}$ が生じる(ファラデー)。誘導電流は、磁束の変化を<b>妨げる</b>向きに流れる(レンツ)。磁場の中を動く導体棒には $vBl$。コイル自身の電流の変化でも起電力 $-L\frac{dI}{dt}$ が生じる(自己誘導)。</p>
+      <p><b>直感:</b> 自然は変化をいやがる。慣性のようなもの。</p>
+    </div>
+
+    <h3 id="w-stokes">1.2 ストークスの定理(第2回)</h3>
+    <div class="box basic">
+      <div class="label">基礎:$\int_S(\nabla\times\bm{A})\cdot d\bm{S}=\oint_{\partial S}\bm{A}\cdot d\bm{x}$ <a class="xref-link" href="week-02.html#s3" data-xref>→ 第2回 3.</a></div>
+      <p>面 $S$ の上の回転の面積分は、縁 $\partial S$ に沿った線積分に等しい(縁を回る向きは、面の向きに対して右ねじ)。積分型の法則(積分型ファラデー、積分型アンペール)と、微分型の法則を行き来するのに使う。</p>
+      <p><b>直感:</b> 面の中の小さな渦を全部足すと、となりどうしは打ち消し合い、縁を一周する流れだけが残る。</p>
+    </div>
+
+    <h3 id="w-static">1.3 静磁場の結果(第5回・第6回)</h3>
+    <div class="box basic">
+      <div class="label">基礎:ビオ・サバールの法則、アンペールの法則、連続の式 <a class="xref-link" href="week-05.html#s4-3" data-xref>→ 第5回 4.3</a></div>
+      <p>$\bm{B}=\frac{\mu_0}{4\pi}\int\frac{\bm{J}\times(\bm{r}-\bm{r}')}{|\bm{r}-\bm{r}'|^3}d\bm{r}'$、$\nabla\times\bm{B}=\mu_0\bm{J}$、積分型 $\oint\bm{B}\cdot d\bm{x}=\mu_0\int\bm{J}\cdot d\bm{S}$。直線電流 $B=\frac{\mu_0I}{2\pi r}$、円電流の中心 $B=\frac{\mu_0I}{2a}$。連続の式 $\frac{\partial\rho}{\partial t}+\nabla\cdot\bm{J}=0$(第6回 1.3)。</p>
+      <p><b>直感:</b> 電流のまわりに磁場の渦。電荷は消えない。</p>
+    </div>
+
+    <h3 id="w-capa">1.4 コンデンサーの電場(第5回)</h3>
+    <div class="box basic">
+      <div class="label">基礎:極板の電荷 $Q$、面積 $S$ なら、極板の間の電場は $E=\frac{Q}{\varepsilon_0S}$ <a class="xref-link" href="../basics.html#capacitor" data-xref>→ 詳しい解説</a></div>
+      <p>平行板コンデンサーの極板の間の電場は一様で $E=\frac{\sigma}{\varepsilon_0}=\frac{Q}{\varepsilon_0S}$。電流 $I$ で充電していると、極板の電荷は毎秒 $I$ ずつ増えるので、$\frac{\partial E}{\partial t}=\frac{I}{\varepsilon_0S}$、極板の間を貫く電場の面積分の増え方は $\frac{I}{\varepsilon_0}$。</p>
+      <p><b>直感:</b> 電流がたまる場所では、電場が増えていく。</p>
+    </div>
+
+    <h3 id="w-taylor">1.5 テイラー展開(1次の近似)</h3>
+    <div class="box basic">
+      <div class="label">基礎:$f(t)=f(0)+f'(0)t+\cdots$ <a class="xref-link" href="../basics.html#taylor" data-xref>→ 詳しい解説</a></div>
+      <p>なめらかな関数は、小さな $t$ では $f(0)+f'(0)t$(1次の近似)でよく表せる。「…は時間の1次の範囲で厳密に成り立つ」とは、$f$ がちょうど1次式のときは正しく、2次以上の項があるときに補正が要る、という意味(8.5 の補論で使う)。</p>
+      <p><b>直感:</b> 短い時間なら、変化はほぼ一定の速さ。</p>
+    </div>
+
+    <h2 id="s2">2. 電場と磁場は「同じものの2つの表れ」(§8.1) <span class="page-tag">講義ノート p.63</span></h2>
+    <p>高校で電磁誘導を「磁場の変化が電場を作る」と習ったかもしれません。講義ノートは、磁場が電場の<b>原因</b>であるかのような説明は正確ではない、と注意します。電場と磁場は「同じものの異なる表れ」です。</p>
+    <figure class="fig">
+      <svg viewBox="0 0 640 210" width="640" role="img" aria-label="白い板と黒い板を貼った立方体を、両側から見る"><rect x="250" y="60" width="120" height="100" style="fill:var(--surface);stroke:var(--muted);stroke-width:1.6"/><rect x="236" y="70" width="14" height="80" style="fill:#fff;stroke:var(--muted);stroke-width:1.4"/><rect x="370" y="70" width="14" height="80" style="fill:#333;stroke:var(--muted);stroke-width:1.4"/><text class="tj" x="90" y="115">A さん(白い板の側)</text><text class="tj" x="420" y="115">B さん(黒い板の側)</text><line x1="250" y1="185" x2="229" y2="185" style="stroke:var(--thm);stroke-width:2.4"/><polygon points="220,185 229,181 229,189.1" style="fill:var(--thm)"/><line x1="370" y1="185" x2="391" y2="185" style="stroke:var(--thm);stroke-width:2.4"/><polygon points="400,185 391,189.1 391,181" style="fill:var(--thm)"/><text class="tm" x="150" y="205">A から見て:白い板が右へ</text><text class="tm" x="380" y="205">B から見て:黒い板が左へ</text><line x1="270" y1="40" x2="341" y2="40" style="stroke:var(--accent);stroke-width:2.4"/><polygon points="350,40 341,44.1 341,36" style="fill:var(--accent)"/><text class="ta" x="300" y="30">立方体が動く</text></svg>
+      <figcaption>図1 講義ノートの図46のたとえ。立方体が動くとき、A さんには「白い板が右へ動く」、B さんには「黒い板が左へ動く」と見える。これは原因と結果ではなく、同じ一つの現象を2通りに見ているだけです。電場と磁場の関係も、これに近い。</figcaption>
+    </figure>
+    <p>立方体の一方の面に白い板、反対の面に黒い板を貼ります。A さんから見て「白い板が右に動く」ことと、B さんから見て「黒い板が左に動く」ことは、完全に同じ現象です。「白い板が右に動いたから、黒い板が左に動いた」と言うのは不自然です。</p>
+    <p>電場と磁場も、半ば剛体のようにつながり合っていて、<b>磁場の時間変化が生じることと、電場の回転が生じることは、同じ現象</b>です(剛体の両端は一緒に動くしかなく、どちらが原因ということはない)。</p>
+    <div class="box intuit"><div class="label">直感で理解する:日常の言い方としてはよいが…</div>
+      <p>白い板を手で引っ張って動かしたなら「白い板を引いたから黒い板が動いた」と言っても不自然ではありません。同じように、電磁石のスイッチを入れたときに「磁場の変化が電場を生んだ」と言うのは、日常の言い方としてはかまいません。ただし本当に起きているのは「電磁石に電流が流れたことで、『磁場−電場』の複合体が変化した」です。後で学ぶ四元ポテンシャル(§12)を使うと、電場と磁場が、ある一つのものの2つの観測量にすぎないことが分かります。</p>
+    </div>
+
+    <h2 id="s3">3. 電磁誘導(§8.2) <span class="page-tag">講義ノート p.63–65</span></h2>
+    <p>面 $S$ を貫く磁束 $\Phi=\int_S\bm{B}\cdot d\bm{S}$ が時間変化すると、その面の縁に沿った電場の線積分が生じます:</p>
+    <div class="box thm"><div class="label">ファラデーの法則</div>
+      <p>積分型 (8.1):$$-\frac{d\Phi}{dt}=\oint_{\partial S}\bm{E}\cdot d\bm{x}$$
+      ストークスの定理で右辺を $\int_S(\nabla\times\bm{E})\cdot d\bm{S}$ にして比べると、微分型 (8.2):$$\nabla\times\bm{E}=-\frac{\partial\bm{B}}{\partial t}$$</p>
+    </div>
+    <ul>
+      <li>コイルがあれば電流が流れる。この起電力を<b>誘導起電力</b>という。$\nabla\times\bm{E}\ne\bm{0}$ なので、電位は定義できず、「起電力 = 電位差」(第8回の (7.6))は成り立たない。</li>
+      <li>コイルを止めて磁場を変えても(ファラデーの法則)、磁場を止めてコイルを動かしても(ローレンツ力、第8回 例 7.1)、同じ起電力が出る。これは偶然ではなく、アインシュタインの<b>特殊相対性理論</b>の着想の一つ(どの慣性系から見ても同じ現象)。</li>
+    </ul>
+    <h3 id="s3-1">3.1 レンツの法則:向きの決め方</h3>
+    <p>誘導電流の向きは、回転の定義から計算もできますが、実用的には<b>レンツの法則</b>「誘導電流は、それを生じさせる変化を妨げる(弱める)向きに流れる」が間違えにくい。例:N極を上にした磁石を、平らなコイルに下から近づけると、上向きの磁束が増えるので、それを弱める下向きの磁場を作る向き、つまり上から見て時計回りに電流が流れます。</p>
+    <div class="box supp"><div class="label">講義ノートにない補足:マイナス符号とレンツの法則</div>
+      <p>(8.1) の $-$ がレンツの法則です。面の向き(法線 $\bm{n}$)を決めると、縁を回る正の向きは右ねじで決まる。$\Phi$ が増えると $\oint\bm{E}\cdot d\bm{x}\lt0$、つまり電場は正の向きと<b>逆</b>に回り、その電流が作る磁場は、$\bm{n}$ と逆向き(増加を打ち消す向き)になります。</p>
+    </div>
+    <h3 id="s3-2">3.2 例 8.1:増える磁場の中の円形の導線</h3>
+    <div class="box ex"><div class="label">例 8.1</div>
+      <p>半径 $l$ の円形の導線(単位長さあたりの抵抗 $R$)が $xy$ 面内にあり、円に垂直に($z$ 方向正)大きさ $B(t)=kt$ の一様な磁場がかかっている。この導線の電流が、円の中心に作る磁場の大きさを求めよ。</p>
+    </div>
+    <figure class="fig">
+      <svg viewBox="0 0 640 220" width="640" role="img" aria-label="一様に増える磁場と、その中の円形の導線"><circle cx="140" cy="60" r="6" style="fill:none;stroke:var(--accent);stroke-width:1.8"/><circle cx="140" cy="60" r="2.6" style="fill:var(--accent)"/><circle cx="140" cy="110" r="6" style="fill:none;stroke:var(--accent);stroke-width:1.8"/><circle cx="140" cy="110" r="2.6" style="fill:var(--accent)"/><circle cx="140" cy="160" r="6" style="fill:none;stroke:var(--accent);stroke-width:1.8"/><circle cx="140" cy="160" r="2.6" style="fill:var(--accent)"/><circle cx="185" cy="60" r="6" style="fill:none;stroke:var(--accent);stroke-width:1.8"/><circle cx="185" cy="60" r="2.6" style="fill:var(--accent)"/><circle cx="185" cy="110" r="6" style="fill:none;stroke:var(--accent);stroke-width:1.8"/><circle cx="185" cy="110" r="2.6" style="fill:var(--accent)"/><circle cx="185" cy="160" r="6" style="fill:none;stroke:var(--accent);stroke-width:1.8"/><circle cx="185" cy="160" r="2.6" style="fill:var(--accent)"/><circle cx="230" cy="60" r="6" style="fill:none;stroke:var(--accent);stroke-width:1.8"/><circle cx="230" cy="60" r="2.6" style="fill:var(--accent)"/><circle cx="230" cy="110" r="6" style="fill:none;stroke:var(--accent);stroke-width:1.8"/><circle cx="230" cy="110" r="2.6" style="fill:var(--accent)"/><circle cx="230" cy="160" r="6" style="fill:none;stroke:var(--accent);stroke-width:1.8"/><circle cx="230" cy="160" r="2.6" style="fill:var(--accent)"/><circle cx="275" cy="60" r="6" style="fill:none;stroke:var(--accent);stroke-width:1.8"/><circle cx="275" cy="60" r="2.6" style="fill:var(--accent)"/><circle cx="275" cy="110" r="6" style="fill:none;stroke:var(--accent);stroke-width:1.8"/><circle cx="275" cy="110" r="2.6" style="fill:var(--accent)"/><circle cx="275" cy="160" r="6" style="fill:none;stroke:var(--accent);stroke-width:1.8"/><circle cx="275" cy="160" r="2.6" style="fill:var(--accent)"/><circle cx="320" cy="60" r="6" style="fill:none;stroke:var(--accent);stroke-width:1.8"/><circle cx="320" cy="60" r="2.6" style="fill:var(--accent)"/><circle cx="320" cy="110" r="6" style="fill:none;stroke:var(--accent);stroke-width:1.8"/><circle cx="320" cy="110" r="2.6" style="fill:var(--accent)"/><circle cx="320" cy="160" r="6" style="fill:none;stroke:var(--accent);stroke-width:1.8"/><circle cx="320" cy="160" r="2.6" style="fill:var(--accent)"/><circle cx="230" cy="110" r="85" style="fill:none;stroke:var(--thm);stroke-width:2.6"/><line x1="230" y1="25" x2="241" y2="26.1" style="stroke:var(--thm);stroke-width:2.6"/><polygon points="250,27 240.6,30.1 241.4,22.1" style="fill:var(--thm)"/><text class="tt" x="330" y="40">電場(誘導電流)</text><text class="ta" x="380" y="100">B(t) = kt(手前向き、増える)</text><text class="tj" x="380" y="125">円の半径 l</text><text class="tj" x="380" y="150">起電力 πkl²(大きさ)</text><text class="tj" x="380" y="175">電流 I = kl/2R</text></svg>
+      <figcaption>図2 例 8.1。手前向き(⊙)の磁場が増えると、レンツの法則により、誘導電流は手前から見て時計回り(奥向きの磁場を作る向き)に流れます。</figcaption>
+    </figure>
+    <ol>
+      <li>円を貫く磁束 $\Phi=kt\cdot\pi l^2$。積分型ファラデーの法則で $\oint\bm{E}\cdot d\bm{x}=-\pi kl^2$ (8.3)。</li>
+      <li>導線の一周は $2\pi l$ なので、電場の大きさは $\bar E=\frac{\pi kl^2}{2\pi l}=\frac{kl}{2}$。向きは $z$ 方向の上から見て時計回り(レンツの法則とも合う)。</li>
+      <li>オームの法則:単位長さあたりの抵抗が $R$ なので、電流 $I=\frac{\bar E}{R}=\frac{kl}{2R}$(起電力 $\pi kl^2$ を全抵抗 $2\pi lR$ で割っても同じ)。</li>
+      <li>ビオ・サバールの法則(円電流の中心):$B=\frac{\mu_0I}{2l}=\frac{\mu_0k}{4R}$ (8.4)。</li>
+    </ol>
+    <div class="box warn"><div class="label">細かい点:電流自身が作る磁場</div>
+      <p>電流が流れ始めた直後は、電流が変化し、それが作る磁場も変化するので、その分も磁束の変化に入れる必要があります(自己誘導)。しかし誘導電流は、ごく短い時間で一定の値に落ち着き、その後は電流の磁場は変化しないので、外部磁場の変化だけを考えればよい。ただしこれは、$B$ が時間の1次で変わる場合です。2次以上の変化があれば、電流も時間変化し続けるので、外部磁場と電流の磁場を連立させて解く必要があります。</p>
+    </div>
+    <div class="box ex"><div class="label">問 [8-1]</div>
+      <p>$z$ 軸上を正方向に電流 $I$ が流れている。$y=0$ の $xz$ 面内の $l\le x\le l+a$、$0\le z\le a$ の正方形の縁に、単位長さあたりの抵抗が $r$ の金属線がある。電流を $I(t)=I+ct$ と変化させるとき、準定常近似の範囲で、正方形の金属線に流れる電流を求めよ。</p>
+    </div>
+    <div class="box supp"><div class="label">講義ノートにない補足:[8-1] の解答</div>
+      <p>直線電流の磁場は $B=\frac{\mu_0I(t)}{2\pi x}$ で、正方形の面($xz$ 面)に垂直。磁束は、幅 $dx$・高さ $a$ の細長い帯に分けて
+      $$\Phi=\int_l^{l+a}\frac{\mu_0I(t)}{2\pi x}\,a\,dx=\frac{\mu_0aI(t)}{2\pi}\log\frac{l+a}{l}.$$
+      起電力の大きさは $\frac{d\Phi}{dt}=\frac{\mu_0ac}{2\pi}\log\frac{l+a}{l}$、金属線の全抵抗は $4ar$ なので
+      $$I_{\text{coil}}=\frac{\mu_0c}{8\pi r}\log\Bigl(1+\frac al\Bigr).$$
+      向きは、レンツの法則で、増える磁束を打ち消す向き。$c$ が一定なので、例 8.1 と同じく電流はすぐ一定になります。数値積分でも確かめました。</p>
+    </div>
+    <h3 id="s3-3">3.3 身近な電磁誘導</h3>
+    <ul>
+      <li><b>銅管の中を落ちる磁石</b>:ネオジム磁石を銅管に落とすと、とてもゆっくり落ちる。磁石の通過で管に誘導電流が流れ、その電流の磁場が磁石を上向きに押し、重力とつり合うと等速で落ちる。</li>
+      <li><b>Suica などの非接触 IC カード</b>:カードに電池はない。改札機から交流の磁場が出ていて、カードの中のコイルに電磁誘導で電流が流れ、その電力でデータを読み書きする。非接触の充電器や IH 調理器も同じ考え方。</li>
+    </ul>
+
+    <h2 id="s4">4. マクスウェルの変位電流(§8.3) <span class="page-tag">講義ノート p.65–67</span></h2>
+    <p>静磁場のアンペールの法則 $\nabla\times\bm{B}=\mu_0\bm{J}$ は、時間変化があるとそのままでは成り立ちません。電流の途中にコンデンサーを入れた状況を考えます(図3)。電流を取り除いたのはごくわずかな区間なので、まわりの磁場はほとんど変わらないはず。ところが、極板の間を通る面 $S_2$ をとると、それを貫く電流は 0 になってしまいます。</p>
+    <figure class="fig">
+      <svg viewBox="0 0 640 220" width="640" role="img" aria-label="コンデンサーをはさんだ電流と、2通りの面"><line x1="40" y1="110" x2="260" y2="110" style="stroke:var(--thm);stroke-width:3"/><line x1="340" y1="110" x2="600" y2="110" style="stroke:var(--thm);stroke-width:3"/><line x1="150" y1="110" x2="191" y2="110" style="stroke:var(--thm);stroke-width:3"/><polygon points="200,110 191,114.1 191,106" style="fill:var(--thm)"/><line x1="260" y1="50" x2="260" y2="170" style="stroke:var(--muted);stroke-width:4"/><line x1="340" y1="50" x2="340" y2="170" style="stroke:var(--muted);stroke-width:4"/><line x1="270" y1="75" x2="323" y2="75" style="stroke:var(--ex);stroke-width:1.6"/><polygon points="330,75 323,78.2 323,71.9" style="fill:var(--ex)"/><line x1="270" y1="110" x2="323" y2="110" style="stroke:var(--ex);stroke-width:1.6"/><polygon points="330,110 323,113.2 323,106.9" style="fill:var(--ex)"/><line x1="270" y1="145" x2="323" y2="145" style="stroke:var(--ex);stroke-width:1.6"/><polygon points="330,145 323,148.2 323,141.9" style="fill:var(--ex)"/><ellipse cx="180" cy="110" rx="14" ry="50" style="fill:none;stroke:var(--accent);stroke-width:2"/><text class="ta" x="130" y="190">面 S₁:電流が貫く</text><path d="M 180 60 C 230 30, 310 30, 300 110 C 310 190, 230 190, 180 160" style="fill:none;stroke:var(--accent);stroke-width:1.6;stroke-dasharray:5 4"/><text class="ta" x="320" y="205">面 S₂:極板の間を通る(電流は貫かない)</text><text class="tj" x="420" y="60">極板の間:電場が増えている</text></svg>
+      <figcaption>図3 講義ノートの図47。同じ縁(青い楕円)をもつ2つの面のうち、$S_1$ は電流が貫くが、極板の間を通る $S_2$ は電流が貫かない。アンペールの法則が両方で成り立つには、極板の間で増えている電場(緑)も数える必要があります。</figcaption>
+    </figure>
+    <p>極板の間では、電流はない代わりに、たまる電荷が増え、<b>電場が増えています</b>。電流 $I$ で極板の電荷は毎秒 $I$ 増え(連続の式)、極板の間を貫く電場の面積分は毎秒 $I/\varepsilon_0$ 増える(1.4 の枠)。これも数えることにすると、$S_1$ と $S_2$ で同じ答えになります:</p>
+    <div class="box thm"><div class="label">変位電流を加えたアンペールの法則</div>
+      <p>積分型 (8.5):$$\oint_{\partial S}\bm{B}\cdot d\bm{x}=\mu_0\int_S\bm{J}\cdot d\bm{S}+\mu_0\varepsilon_0\frac{\partial}{\partial t}\int_S\bm{E}\cdot d\bm{S}$$
+      微分型 (8.6):$$\nabla\times\bm{B}=\mu_0\bm{J}+\mu_0\varepsilon_0\frac{\partial\bm{E}}{\partial t}$$</p>
+    </div>
+    <p>右辺の第2項がマクスウェルの導入した<b>変位電流</b>です。マクスウェル自身は「電流の拡張」と考えていたようですが、現代の見方では、ファラデーの法則と同じく「電場の変化と磁場の回転は、同じ現象の2つの表れ」と理解すべきもので、移項して
+    $$\nabla\times\bm{B}-\mu_0\varepsilon_0\frac{\partial\bm{E}}{\partial t}=\mu_0\bm{J}\qquad(8.7)$$
+    と書く方が、意味(左辺:互いに拘束し合う電磁場、右辺:電磁場の原因である電流)をよく表します。</p>
+    <div class="box supp"><div class="label">講義ノートにない補足:変位電流がないと矛盾する</div>
+      <p>$\nabla\times\bm{B}=\mu_0\bm{J}$ の発散をとると、左辺は $\nabla\cdot(\nabla\times\bm{B})=0$ なので $\nabla\cdot\bm{J}=0$。これは定常電流でしか成り立たず、電荷がたまっていく(連続の式で $\nabla\cdot\bm{J}=-\frac{\partial\rho}{\partial t}\ne0$)ときに矛盾します。変位電流を足すと、$\nabla\cdot\bigl(\bm{J}+\varepsilon_0\frac{\partial\bm{E}}{\partial t}\bigr)=\nabla\cdot\bm{J}+\frac{\partial\rho}{\partial t}=0$(ガウスの法則を使った)となり、矛盾が消えます。</p>
+    </div>
+    <h3 id="s4-1">4.1 例 8.2:変位電流は磁場を作るのか</h3>
+    <p>ビオ・サバールの法則は電流だけを数えます。変位電流を数え忘れていないか、具体例で確かめます。</p>
+    <div class="box ex"><div class="label">例 8.2</div>
+      <p>$z$ 軸の負の部分を、上向きに電流 $J$ が流れている。原点で導線は切れていて、流れてきた電流はすべて原点にたまる。$z$ 軸からの距離を $r$ として、位置 $(z_0,r)$ の磁場を求めよ($\tan\theta_0=r/z_0$)。</p>
+    </div>
+    <figure class="fig">
+      <svg viewBox="0 0 640 230" width="640" role="img" aria-label="原点で途切れた電流と、点 (z0, r)"><line x1="120" y1="210" x2="120" y2="120" style="stroke:var(--thm);stroke-width:3"/><line x1="120" y1="200" x2="120" y2="169" style="stroke:var(--thm);stroke-width:3"/><polygon points="120,160 124.1,169 116,169" style="fill:var(--thm)"/><text class="tt" x="130" y="190">電流 J</text><circle cx="120" cy="120" r="7" style="fill:var(--thm)"/><text class="tm" x="80" y="115">電荷がたまる</text><line x1="120" y1="120" x2="120" y2="20" style="stroke:var(--muted);stroke-width:1.1;stroke-dasharray:5 4"/><text class="t" x="126" y="28">z</text><circle cx="300" cy="70" r="5" style="fill:var(--accent)"/><text class="tj" x="310" y="66">(z₀, r)</text><line x1="120" y1="120" x2="300" y2="70" style="stroke:var(--muted);stroke-width:1.2;stroke-dasharray:5 4"/><path d="M 120 95 A 25 25 0 0 1 142 107" style="fill:none;stroke:var(--muted);stroke-width:1.2"/><text class="t" x="140" y="92">θ₀</text><line x1="120" y1="100" x2="120" y2="66" style="stroke:var(--ex);stroke-width:1.4"/><polygon points="120,60 122.7,66 117.3,66" style="fill:var(--ex)"/><line x1="130" y1="102.7" x2="147" y2="73.2" style="stroke:var(--ex);stroke-width:1.4"/><polygon points="150,68 149.3,74.6 144.7,71.9" style="fill:var(--ex)"/><line x1="137.3" y1="110" x2="166.8" y2="93" style="stroke:var(--ex);stroke-width:1.4"/><polygon points="172,90 168.1,95.3 165.4,90.7" style="fill:var(--ex)"/><line x1="140" y1="120" x2="174" y2="120" style="stroke:var(--ex);stroke-width:1.4"/><polygon points="180,120 174,122.7 174,117.3" style="fill:var(--ex)"/><line x1="137.3" y1="130" x2="166.8" y2="147" style="stroke:var(--ex);stroke-width:1.4"/><polygon points="172,150 165.4,149.3 168.1,144.7" style="fill:var(--ex)"/><line x1="130" y1="137.3" x2="147" y2="166.8" style="stroke:var(--ex);stroke-width:1.4"/><polygon points="150,172 144.7,168.1 149.3,165.4" style="fill:var(--ex)"/><text class="tj" x="380" y="130">電場は原点の電荷から放射状</text><text class="tj" x="380" y="155">(電荷が増えるので、電場も増える)</text><text class="ta" x="380" y="190">B = μ₀J(1 − cos θ₀)/4πr</text></svg>
+      <figcaption>図4 例 8.2。$z\lt0$ を上向きに流れてきた電流が原点で途切れ、電荷が原点にたまっていく。どこで磁場を測っても、ビオ・サバールの法則(電流だけ)と、変位電流を入れたアンペールの法則が、同じ答えを与えます。</figcaption>
+    </figure>
+    <ul>
+      <li><b>ビオ・サバールの法則</b>:$z\le0$ の電流だけを積分して $B=\frac{\mu_0J}{4\pi r}(1-\cos\theta_0)$ (8.8)。</li>
+      <li><b>変位電流つきのアンペールの法則</b>($z_0\ge0$):高さ $z_0$ の半径 $r$ の円を縁とする円板 $S$ を、電流は貫かない。原点の電荷は毎秒 $J$ ずつ増え、それを囲む球面全体を貫く電場は毎秒 $J/\varepsilon_0$ 増える。そのうち $S$ を貫く割合は、角度 $\theta_0$ 以内の球面の面積の割合 $\frac{2\pi(1-\cos\theta_0)}{4\pi}$。よって $2\pi rB=\mu_0J\frac{1-\cos\theta_0}{2}$、つまり $B=\frac{\mu_0J}{4\pi r}(1-\cos\theta_0)$ (8.10)。</li>
+      <li>($z_0\lt0$):電流の寄与 $\frac{\mu_0J}{2\pi r}$ と、下向きに抜ける電場の寄与 $\frac{\mu_0J}{4\pi r}(-1-\cos\theta_0)$ を足して、やはり同じ (8.12)。</li>
+    </ul>
+    <div class="box thm"><div class="label">結論</div>
+      <p>どちらで計算しても同じ。<b>準定常なら</b>、変位電流を入れなくても、ビオ・サバールの法則で(空間全体の電流を数えれば)磁場は正しく求まる。「電流が磁場を作る」と同じ意味で、「変位電流は磁場を作らない」と言ってよい。</p>
+    </div>
+    <div class="box ex"><div class="label">問 [8-2]</div>
+      <p>原点を中心とする半径 $a$ の球殻に電荷 $Q$、半径 $b(\gt a)$ の球殻に電荷 $-Q$ がある。2つの球殻の間は電気伝導度 $\sigma$ の物体で満たされていて、電場に従った電流 $\bm{J}=\sigma\bm{E}$ が流れている。この球対称な電流が作る磁場を求めよ。また、なぜそうなるのか議論せよ。</p>
+    </div>
+    <div class="box supp"><div class="label">講義ノートにない補足:[8-2] の解答</div>
+      <p><b>答え:磁場は 0。</b></p>
+      <ul>
+        <li><b>対称性</b>:電流は球対称に外向き。磁場が球対称なら、向きは動径方向しかありえない(回転方向を選ぶと、どちら回りか決められない)。動径方向の球対称な磁場は、$\nabla\cdot\bm{B}=0$(球面を貫く磁束が 0)から 0 しかない。</li>
+        <li><b>変位電流で確かめる</b>:球殻の間の電場は $E=\frac{Q(t)}{4\pi\varepsilon_0r^2}$。電流で内側の電荷が減るので $\frac{dQ}{dt}=-\int\bm{J}\cdot d\bm{S}=-4\pi r^2\sigma E$。すると $\varepsilon_0\frac{\partial E}{\partial t}=\frac{1}{4\pi r^2}\frac{dQ}{dt}=-\sigma E=-J$。つまり<b>電流と変位電流がちょうど打ち消し合い</b>、$\nabla\times\bm{B}=\mu_0\bigl(\bm{J}+\varepsilon_0\frac{\partial\bm{E}}{\partial t}\bigr)=\bm{0}$。</li>
+        <li><b>ビオ・サバールで見る</b>:球対称に外向きの電流の寄与は、どの点で見ても、向かい合う部分どうしが打ち消し合う。</li>
+      </ul>
+    </div>
+
+    <h2 id="s5">5. マクスウェル方程式(§8.4) <span class="page-tag">講義ノート p.67–68</span></h2>
+    <p>これで電磁気学の基礎方程式がそろいました。</p>
+    <div class="box thm"><div class="label">マクスウェル方程式 (8.13)〜(8.16)</div>
+      <p>$$\nabla\cdot\bm{E}=\frac{\rho}{\varepsilon_0},\qquad\frac{\partial\bm{B}}{\partial t}+\nabla\times\bm{E}=\bm{0},\qquad\nabla\cdot\bm{B}=0,\qquad-\mu_0\varepsilon_0\frac{\partial\bm{E}}{\partial t}+\nabla\times\bm{B}=\mu_0\bm{J}$$</p>
+    </div>
+    <table class="cmp">
+      <tr><th>式</th><th>名前</th><th>意味</th></tr>
+      <tr><td>$\nabla\cdot\bm{E}=\rho/\varepsilon_0$</td><td>ガウスの法則</td><td>電荷から電気力線が湧き出す</td></tr>
+      <tr><td>$\frac{\partial\bm{B}}{\partial t}+\nabla\times\bm{E}=\bm{0}$</td><td>ファラデーの法則</td><td>磁場の変化と電場の回転は、同じ現象の2つの表れ</td></tr>
+      <tr><td>$\nabla\cdot\bm{B}=0$</td><td>(磁気単極子はない)</td><td>磁力線は閉じている</td></tr>
+      <tr><td>$-\mu_0\varepsilon_0\frac{\partial\bm{E}}{\partial t}+\nabla\times\bm{B}=\mu_0\bm{J}$</td><td>アンペール・マクスウェルの法則</td><td>電流のまわりに磁場の渦。電場の変化と磁場の回転は結びついている</td></tr>
+    </table>
+    <p>右辺の電荷と電流が、電磁場を生み出す原因です。左辺は、電場と磁場がどのように絡み合いながら存在できるかを決める偏微分方程式です。電磁気学の結果は、すべてこの4つの式から導けます(ローレンツ力も、電磁場のローレンツ変換から与えられるので含まれる、という立場)。時空の境界条件が決まれば、例えば「ある時刻の電磁場」と「すべての時刻の電荷と電流」が分かれば、すべての場所と時刻の電磁場が決まります。</p>
+    <div class="box intuit"><div class="label">直感で理解する:4つの式の役割分担</div>
+      <p>発散の2式は「源から湧き出すか」(電場は電荷から湧き、磁場は湧かない)。回転の2式は「どう渦を巻くか」(電場の渦は磁場の変化と、磁場の渦は電流と電場の変化と結びつく)。ヘルムホルツの定理(第6回)のとおり、発散と回転が分かれば場は決まります。そして回転の2式が、電場と磁場を互いに結びつけ、次の章の<b>電磁波</b>を生みます。</p>
+    </div>
+
+    <h2 id="s6">6. 補論:準定常近似とジェフィメンコ方程式(§8.5) <span class="page-tag">講義ノート p.68–69</span></h2>
+    <p>クーロンの法則とビオ・サバールの法則は、静的でない一般の場合には近似的にしか成り立ちません。それでも、多くの状況でよく成り立ちます。実は、電荷と電流が時間の<b>1次</b>の範囲で変化していれば、そのままの形で<b>厳密に</b>成り立つことが示せます(例 8.2 で電荷が増えているのにクーロンの法則で電場を計算したのも、厳密に正しい)。</p>
+    <p>一般の場合の正しい式は、光の速さ $c$ で影響が伝わる時間差 $t_r(\bm{r}')=t-\frac{|\bm{r}-\bm{r}'|}{c}$ (8.17)(<b>遅延時間</b>)を使った<b>ジェフィメンコ方程式</b>です:</p>
+    $$\bm{E}(\bm{r},t)=\frac{1}{4\pi\varepsilon_0}\int d\bm{r}'\Bigl[\rho(\bm{r}',t_r)\frac{\bm{r}-\bm{r}'}{|\bm{r}-\bm{r}'|^3}+\dot\rho(\bm{r}',t_r)\frac{\bm{r}-\bm{r}'}{c|\bm{r}-\bm{r}'|^2}-\frac{\dot{\bm{J}}(\bm{r}',t_r)}{c^2|\bm{r}-\bm{r}'|}\Bigr]\qquad(8.18)$$
+    $$\bm{B}(\bm{r},t)=\frac{\mu_0}{4\pi}\int d\bm{r}'\Bigl[\bm{J}(\bm{r}',t_r)\times\frac{\bm{r}-\bm{r}'}{|\bm{r}-\bm{r}'|^3}+\dot{\bm{J}}(\bm{r}',t_r)\times\frac{\bm{r}-\bm{r}'}{c|\bm{r}-\bm{r}'|^2}\Bigr]\qquad(8.19)$$
+    <p>(導出はマクスウェル方程式を解く。$\dot\rho$ は時間微分。)遠くの電荷・電流は、光が届くのにかかる時間だけ<b>過去の</b>値が効く。さらに、値だけでなく時間微分も効きます。</p>
+    <div class="box supp"><div class="label">講義ノートにない補足:(8.18) の第3項の $c^2$</div>
+      <p>講義ノートの (8.18) の第3項は $\frac{\dot{\bm{J}}}{c|\bm{r}-\bm{r}'|}$ ですが、単位をそろえると $\frac{\dot{\bm{J}}}{c^2|\bm{r}-\bm{r}'|}$ が正しい形です(第1項 $\frac{\rho}{|\bm{r}-\bm{r}'|^2}$ と比べると、$\bm{J}$ は $\rho\times$ 速さ、$\dot{\bm{J}}$ はさらに $\div$ 時間なので、$c^2$ で割って初めて同じ単位になる)。このノートでは $c^2$ で書きました。</p>
+    </div>
+    <p>電荷と電流がゆっくり変わるなら、時刻 $t$ のまわりでテイラー展開します:$\rho(\bm{r}',t)=\rho(\bm{r}',0)+a(\bm{r}')t+\cdots$、$\bm{J}(\bm{r}',t)=\bm{J}(\bm{r}',0)+\bm{b}(\bm{r}')t+\cdots$ (8.20)(8.21)。ジェフィメンコ方程式に代入すると、次のことが確かめられます。</p>
+    <ul>
+      <li>電流が一定で、電荷が時間の1次で変化するなら、遅延時間ではなく現在の時刻 $t$ を使った<b>ふつうのクーロンの法則</b> (8.22) が厳密に正しい。</li>
+      <li>電流が時間の1次で変化するなら、<b>ふつうのビオ・サバールの法則</b> (8.23) が厳密に正しい。</li>
+    </ul>
+    <div class="box intuit"><div class="label">直感で理解する:遅れの効果と微分の効果が打ち消し合う</div>
+      <p>遠くの電荷は「過去の値」しか届かないので、電荷が増えているなら、届く値は少し小さい。ところが (8.18) の第2項(電荷の時間微分の項)が、ちょうどその不足分を補います。変化が一定の速さ(1次)なら、補いが過不足なく効いて、「今の値で計算したクーロンの法則」と同じになるのです。補正が要るのは、電場なら電荷の2次、磁場なら電流の2次から。素朴な予想より1つ上の次数まで、2つの法則はそのまま使えます。</p>
+    </div>
+
+    <h2 id="s7">7. 具体例で練習(講義ノートにない補足) <span class="page-tag">補足</span></h2>
+    <p>この節は、講義ノートの例とは別に、私が作った練習問題と解答です。</p>
+    <div class="box ex"><div class="label">問題 AA:交流発電機</div>
+      <p>一様な磁場 $B$ の中で、面積 $S$、巻き数 $N$ のコイルを、磁場に垂直な軸のまわりに角速度 $\omega$ で回す。コイルに生じる起電力を求めよ。</p>
+    </div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>コイルの面の法線と磁場のなす角は $\omega t$ なので、1巻きあたりの磁束は $\Phi=BS\cos\omega t$。ファラデーの法則で $V=-N\frac{d\Phi}{dt}=NBS\omega\sin\omega t$。振幅 $NBS\omega$ の交流です。コイルを止めて磁石を回しても、同じ起電力になります(相対性)。</p>
+    </div>
+    <div class="box ex"><div class="label">問題 AB:充電中のコンデンサーの中の磁場</div>
+      <p>半径 $R$ の円形の極板をもつ平行板コンデンサーを、電流 $I$ で充電している。極板の間の、中心軸からの距離 $r(\lt R)$ の点の磁場を求めよ(極板の間の電場は一様とする)。</p>
+    </div>
+    <div class="box proof"><div class="label">解答</div>
+      <p>極板の間の電場は $E=\frac{Q}{\varepsilon_0\pi R^2}$ で、$\frac{\partial E}{\partial t}=\frac{I}{\varepsilon_0\pi R^2}$。半径 $r$ の円に変位電流つきのアンペールの法則を使うと(電流は貫かない)
+      $$2\pi rB=\mu_0\varepsilon_0\frac{\partial E}{\partial t}\pi r^2=\frac{\mu_0Ir^2}{R^2},\qquad B=\frac{\mu_0Ir}{2\pi R^2}.$$
+      $r=R$ では $\frac{\mu_0I}{2\pi R}$ で、導線のまわりの磁場と同じ。例 8.2 の結論どおり、これは導線の電流と、極板にたまる電荷の変化から(ビオ・サバール的に)決まる磁場と一致します。</p>
+    </div>
+
+    <h2 id="s8">8. まとめ(この回で覚えること)</h2>
+    <ul>
+      <li><b>電場と磁場は同じものの2つの表れ</b>。「磁場の変化が電場の原因」は日常の言い方としてはよいが、正確には同じ現象を2つの量で見ている。</li>
+      <li><b>ファラデーの法則</b>:$\oint\bm{E}\cdot d\bm{x}=-\frac{d\Phi}{dt}$、$\nabla\times\bm{E}=-\frac{\partial\bm{B}}{\partial t}$。誘導起電力では電位が定義できない。向きはレンツの法則(変化を妨げる向き)。</li>
+      <li><b>変位電流</b>:$\nabla\times\bm{B}-\mu_0\varepsilon_0\frac{\partial\bm{E}}{\partial t}=\mu_0\bm{J}$。連続の式と矛盾しないために必要。準定常なら、磁場はビオ・サバールの法則(電流だけ)で正しく求まる。</li>
+      <li><b>マクスウェル方程式</b>:$\nabla\cdot\bm{E}=\rho/\varepsilon_0$、$\nabla\times\bm{E}=-\partial_t\bm{B}$、$\nabla\cdot\bm{B}=0$、$\nabla\times\bm{B}=\mu_0\bm{J}+\mu_0\varepsilon_0\partial_t\bm{E}$。電磁気学のすべての基礎。</li>
+      <li><b>(補論)</b>ジェフィメンコ方程式:遅延時間 $t-|\bm{r}-\bm{r}'|/c$ の値と微分が効く。電荷・電流が時間の1次で変わるなら、ふつうのクーロンの法則・ビオ・サバールの法則が厳密に正しい。</li>
+    </ul>
+
+    <h2 id="s9">9. この回のノートについてのメモ</h2>
+    <p>板書の写真ではなく、<b>文章で書かれた講義ノート(フル版)</b>の p.63〜p.69(§8)をもとにまとめました。図は描き直しました。</p>
+    <p>講義ノートの記述で、誤り(または誤記)と判断して直した箇所、読み替えた箇所は次のとおりです。</p>
+    <ol>
+      <li><b>(8.18) の第3項(p.68)</b>:$\frac{\dot{\bm{j}}}{c|\bm{r}-\bm{r}'|}$ とありますが、単位から $\frac{\dot{\bm{J}}}{c^2|\bm{r}-\bm{r}'|}$ が正しいので、そう書きました(6. の黄色の枠)。</li>
+      <li><b>例 8.2 の $B_J=J/2\pi r$(p.67)</b>:$\mu_0$ が抜けているので $B_J=\frac{\mu_0J}{2\pi r}$ と書きました。</li>
+      <li><b>「変異電流」(p.68)</b>:「変位電流」の誤記と読みました。</li>
+      <li><b>問 [8-1] の電流の記号</b>:定数の $I$ と、変化する $I(t)=I+ct$ が同じ文字なので、答えでは金属線の電流を $I_{\text{coil}}$ と書きました。</li>
+      <li><b>回の分け方</b>:講義ノートの分量と内容から分けた予定です。日程が分かったら合わせます。</li>
+    </ol>
+
+    <nav class="pager" data-fixed>
+      <a href="week-08.html">← 第8回</a>
+      <a href="../index.html">一覧へ</a>
+      <span class="disabled">次の回 →</span>
+    </nav>
+
+  </main>
+
+  <footer>© Aセメまとめノート</footer>
+</body>
+</html>

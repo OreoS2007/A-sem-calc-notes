@@ -85,6 +85,10 @@
           <ol type="a" start="24">
             <li><a href="#circuit">直流回路(高校)</a></li>
           </ol></li>
+        <li><b>変動電磁場のための道具</b><!--b5-->
+          <ol type="a" start="25">
+            <li><a href="#induction">電磁誘導(高校)</a></li>
+          </ol></li>
         <li><b>もっと詳しく(数学の基礎)</b>
           <ul>
             <li><a href="#x-partial">補1. 偏微分(もっと詳しく)</a></li>
@@ -775,6 +779,25 @@
       <p>電池は「電荷を高いところへ持ち上げるポンプ」、抵抗は「坂を下りながら摩擦で熱を出す道」。電圧は高さの差、電流は流れの量。一周すると高さは元に戻る(キルヒホッフの第2法則)。</p>
     </div>
     <p class="used-in">この回で使う場所:<a href="weeks/week-08.html#w-circuit" data-xref>第8回 1.1 直流回路(高校)</a><a href="weeks/week-08.html#s2" data-xref>第8回 2. 電気伝導と電気抵抗</a><a href="weeks/week-08.html#s5" data-xref>第8回 5. 回路と電流</a></p>
+
+    <!-- ===================== y: 電磁誘導(高校) ===================== -->
+    <h2 id="induction">y. 電磁誘導(高校)</h2>
+    <ul>
+      <li><b>磁束</b>:面を貫く磁場の量 $\Phi=BS$(磁場が面に垂直、一様なとき。単位 Wb)。</li>
+      <li><b>ファラデーの電磁誘導の法則</b>:コイルを貫く磁束が変化すると、コイルに起電力 $V=-N\dfrac{\Delta\Phi}{\Delta t}$($N$:巻き数)が生じる。</li>
+      <li><b>レンツの法則</b>:誘導電流は、磁束の変化を<b>妨げる</b>向きに流れる(マイナス符号の意味)。</li>
+      <li><b>動く導体棒</b>:磁場 $B$ に垂直に速さ $v$ で動く長さ $l$ の棒には、起電力 $vBl$。</li>
+      <li><b>発電機</b>:面積 $S$ のコイルを、一様な磁場の中で角速度 $\omega$ で回すと、$\Phi=BS\cos\omega t$ で、起電力 $BS\omega\sin\omega t$(交流)。</li>
+      <li><b>自己誘導</b>:コイル自身の電流 $I$ の変化で、$V=-L\dfrac{dI}{dt}$ の起電力($L$:自己インダクタンス。ソレノイドなら $L=\mu_0n^2Sl$)。蓄えられるエネルギーは $\frac12LI^2$。</li>
+    </ul>
+    <figure class="fig">
+      <svg viewBox="0 0 620 230" width="620" role="img" aria-label="磁石を近づけると、コイルには磁束の増加を妨げる向きの電流が流れる"><rect x="140" y="150" width="60" height="70" style="fill:var(--thm);opacity:.25;stroke:var(--thm);stroke-width:1.6"/><text class="tt" x="160" y="170">N</text><text class="tj" x="162" y="212">S</text><line x1="170" y1="140" x2="170" y2="109" style="stroke:var(--muted);stroke-width:2.2"/><polygon points="170,100 174.1,109 166,109" style="fill:var(--muted)"/><text class="tm" x="210" y="130">近づける</text><ellipse cx="170" cy="70" rx="90" ry="22" style="fill:none;stroke:var(--thm);stroke-width:2.6"/><line x1="120" y1="88" x2="108.6" y2="84.6" style="stroke:var(--thm);stroke-width:2.4"/><polygon points="100,82 109.8,80.7 107.5,88.5" style="fill:var(--thm)"/><text class="tt" x="270" y="75">誘導電流(上から見て時計回り)</text><line x1="130" y1="145" x2="130" y2="37" style="stroke:var(--accent);stroke-width:1.4"/><polygon points="130,30 133.2,37 126.9,37" style="fill:var(--accent)"/><line x1="170" y1="145" x2="170" y2="37" style="stroke:var(--accent);stroke-width:1.4"/><polygon points="170,30 173.2,37 166.9,37" style="fill:var(--accent)"/><line x1="210" y1="145" x2="210" y2="37" style="stroke:var(--accent);stroke-width:1.4"/><polygon points="210,30 213.2,37 206.9,37" style="fill:var(--accent)"/><text class="ta" x="300" y="35">磁石の磁場(上向きに増える)</text><line x1="400" y1="60" x2="400" y2="101" style="stroke:var(--ex);stroke-width:2.4"/><polygon points="400,110 396,101 404.1,101" style="fill:var(--ex)"/><text class="tj" x="410" y="100">誘導電流の磁場は下向き</text></svg>
+      <figcaption>レンツの法則。N極を上にした磁石を下から近づけると、コイルを上向きに貫く磁束が増える。誘導電流は、それを打ち消す下向きの磁場を作る向き(上から見て時計回り)に流れます。</figcaption>
+    </figure>
+    <div class="box intuit"><div class="label">直感で理解する</div>
+      <p>自然は「変化をいやがる」。磁束を増やそうとすると減らす向きに、減らそうとすると増やす向きに電流が流れる。慣性(速度を変えにくい)とよく似ています。</p>
+    </div>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-09.html#w-induct" data-xref>第9回 1.1 電磁誘導(高校)</a><a href="weeks/week-09.html#s3" data-xref>第9回 3. 電磁誘導</a></p>
     <!-- b5:end -->
 
     <!-- import:start -->
