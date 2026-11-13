@@ -260,9 +260,34 @@
       <p class="kk-tools">例年は第2回中間に出た問題ですが、内容は今年の第1回中間の範囲(§4.3 の (4.12) まで)に入ります。</p>
       <p><b>問題(要旨)</b> 曲線 $C$:$y=x^3-x$($-1\le x\le0$)に沿って、$x=0$ から $x=-1$ の向きに、ベクトル $(yx,\ x^2)$ を線積分せよ。</p>
       <details class="kk-ans"><summary>解答を見る</summary>
-      <p>$x$ をパラメータにすると、$y=x^3-x$、$dy=(3x^2-1)\,dx$。$\int_C\bm{A}\cdot d\bm{x}=\int(A_x\,dx+A_y\,dy)$ に入れて
-      $$\int_C\bm{A}\cdot d\bm{x}=\int_0^{-1}\Bigl(x(x^3-x)+x^2(3x^2-1)\Bigr)dx=\int_0^{-1}(4x^4-2x^2)\,dx=-\Bigl(\frac45-\frac23\Bigr)=\boldsymbol{-\frac{2}{15}}.$$</p>
-      <p>積分の向き($0\to-1$)を、そのまま下端・上端にすれば、符号は自動的に合います。</p>
+      <p><b>1. 何を求めているか。</b>線積分 $\int_C\bm{A}\cdot d\bm{x}$ は、「曲線 $C$ を少しずつ進むとき、$\bm{A}$ のうち進む向きの成分 × 進んだ距離」の足し合わせです(力学の仕事と同じ)。少し進んだときの変位を $d\bm{x}=(dx,\ dy)$ とすると
+      $$\bm{A}\cdot d\bm{x}=A_x\,dx+A_y\,dy.$$
+      この問題では $\bm{A}=(yx,\ x^2)$ なので、$A_x=yx$、$A_y=x^2$ です。</p>
+      <p><b>2. 曲線を1つの変数で表す。</b>曲線は $y=x^3-x$ と書かれているので、<b>$x$ をそのままパラメータ</b>にします。曲線上の点は $(x,\ x^3-x)$ です。$x$ が $dx$ だけ動くと、$y$ は
+      $$dy=\frac{dy}{dx}\,dx=(3x^2-1)\,dx$$
+      だけ動きます。(定義 (2.25) の形で言えば、$\bm{x}(s)=(s,\ s^3-s)$、$\frac{d\bm{x}}{ds}=(1,\ 3s^2-1)$ とするのと同じです。)</p>
+      <p><b>3. すべてを $x$ だけで書く(いちばん大事)。</b></p>
+      <ul>
+        <li>$A_x\,dx=yx\,dx$ の $y$ に、<b>曲線の式 $y=x^3-x$ を代入</b>する:$x(x^3-x)\,dx=(x^4-x^2)\,dx$。</li>
+        <li>$A_y\,dy=x^2\cdot(3x^2-1)\,dx=(3x^4-x^2)\,dx$。</li>
+      </ul>
+      <p>足して $\bm{A}\cdot d\bm{x}=(4x^4-2x^2)\,dx$。$y$ を代入し忘れると、変数が2つ残って積分できません。「曲線の上だけを足す」ので、$y$ は自由な変数ではなく、$x$ で決まる値です。</p>
+      <p><b>4. 積分の範囲は「出発 → 到着」。</b>出発は $x=0$、到着は $x=-1$ なので $\int_0^{-1}$ です。$\int_{-1}^{0}$ に直すと、逆向きに進む線積分になり、<b>符号が逆</b>になります(左に進むので $dx$ は負。向きの情報は、下端・上端の順番に入っています)。</p>
+      <p><b>5. 計算。</b>
+      $$\int_0^{-1}(4x^4-2x^2)\,dx=\Bigl[\frac{4x^5}{5}-\frac{2x^3}{3}\Bigr]_0^{-1}=-\frac45+\frac23=-\frac{12}{15}+\frac{10}{15}=\boldsymbol{-\frac{2}{15}}.$$
+      ($(-1)^5=-1$、$(-1)^3=-1$。$x=0$ を入れた値は 0。)</p>
+      <figure class="fig">
+        <svg viewBox="0 0 680 360" width="680" role="img" aria-label="曲線 y=x^3-x を x=0 から x=-1 まで進む。前半は上り、後半は下り。ベクトル A の上向き成分は x=-1 に近いほど大きい"><line x1="80" y1="300" x2="574" y2="300" style="stroke:var(--muted);stroke-width:1"/><polygon points="580,300 573,296.5 573,303.5" style="fill:var(--muted)"/><line x1="520" y1="330" x2="520" y2="66" style="stroke:var(--muted);stroke-width:1"/><polygon points="520,60 516.5,67 523.5,67" style="fill:var(--muted)"/><text class="tm" x="586" y="304">x</text><text class="tm" x="528" y="68">y</text><text class="tm" x="508" y="320">0</text><text class="tm" x="108" y="320">−1</text><line x1="289" y1="300" x2="289" y2="107" style="stroke:var(--muted);stroke-width:.8;stroke-dasharray:3 3"/><text class="tm" x="262" y="320">−1/√3</text><polyline points="520,300 480,250.5 440,204 400,163.5 360,132 320,112.5 289,107.5" style="fill:none;stroke:var(--ex);stroke-width:3"/><polyline points="289,107.5 280,108 240,121.5 200,156 160,214.5 120,300" style="fill:none;stroke:#c0392b;stroke-width:3"/><line x1="440" y1="204" x2="428.7" y2="191.6" style="stroke:var(--ex);stroke-width:2"/><polygon points="424,186.4 431.3,189.3 426.1,193.9" style="fill:var(--ex)"/><line x1="160" y1="214.5" x2="147.4" y2="237" style="stroke:#c0392b;stroke-width:2"/><polygon points="144,243.1 144.4,235.3 150.4,238.7" style="fill:#c0392b"/><g style="stroke:var(--thm);stroke-width:1.8"><line x1="400" y1="163.5" x2="394.7" y2="157.7"/><line x1="320" y1="112.5" x2="302.1" y2="88.2"/><line x1="200" y1="156" x2="174.4" y2="85.6"/><line x1="140" y1="254" x2="129.7" y2="152.9"/></g><g style="fill:var(--thm)"><polygon points="390,152.5 397.3,155.4 392.1,160"/><polygon points="298,82.5 304.9,86.1 299.3,90.3"/><polygon points="172,79 177.7,84.4 171.1,86.8"/><polygon points="129,146 133.2,152.6 126.2,153.3"/></g><text class="tj" x="528" y="292">出発 x=0</text><text class="tj" x="96" y="345">到着 x=−1</text><text class="tj" x="400" y="217" style="fill:var(--ex)">上り(dy&gt;0)</text><text class="tj" x="410" y="233">A_y は小さい</text><text class="tj" x="40" y="110" style="fill:#c0392b">下り(dy&lt;0)</text><text class="tj" x="40" y="127">A_y = x² が大きい</text><text class="tj" x="330" y="70" style="fill:var(--thm)">橙の矢印:A = (yx, x²)</text></svg>
+        <figcaption>曲線 $y=x^3-x$ を、$x=0$ から $x=-1$ へ進む。前半(緑)は上り、後半(赤)は下り。$\bm{A}$ の上向き成分 $A_y=x^2$ は、$x=-1$ に近い下りの区間のほうが大きい。</figcaption>
+      </figure>
+      <p><b>確かめ:なぜ負になるか。</b>2つの項を別々に計算すると、理由が分かります。</p>
+      <ul>
+        <li>$\int A_x\,dx=\int_0^{-1}(x^4-x^2)\,dx=+\frac{2}{15}$。曲線上($-1\lt x\lt0$)では $y\gt0$ なので $A_x=yx\lt0$(左向き)。左に進むので、進む向きと同じ向きで<b>正</b>。</li>
+        <li>$\int A_y\,dy=\int_0^{-1}(3x^4-x^2)\,dx=-\frac{4}{15}$。前半は上り、後半は下りで、$y$ は 0 に戻る(上った高さと下った高さは同じ)。ただし上向きの $A_y=x^2$ は、下りの区間($x$ が $-1$ に近い)のほうが強い。強い上向きの場に逆らって下るので、<b>負が勝つ</b>。</li>
+      </ul>
+      <p>合計 $\frac{2}{15}-\frac{4}{15}=-\frac{2}{15}$ で一致します。</p>
+      <p><b>近道はない。</b>$\frac{\partial A_y}{\partial x}=2x$ と $\frac{\partial A_x}{\partial y}=x$ は等しくない(回転が 0 でない)ので、$\bm{A}$ はポテンシャルの勾配ではありません。「始点と終点だけで決まる」という近道は使えず、定義どおり曲線に沿って計算します。</p>
+      <p><b>試験での書き方(2点)。</b>① $x$ をパラメータにして $y=x^3-x$、$dy=(3x^2-1)\,dx$ と書く。② 代入した被積分関数 $(4x^4-2x^2)\,dx$ を書く。③ $\int_0^{-1}$ で計算して、答え $-\frac{2}{15}$。</p>
       </details>
     </div><!--kakomon-->
 
