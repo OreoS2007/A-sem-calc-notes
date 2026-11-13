@@ -26,7 +26,7 @@
 
     <div class="box note-box need-legend">
       <div class="label">ラベルの見方:第1回中間の過去問を解くのに、どれくらい必要か</div>
-      <p>今年の第1回中間(11/13、範囲は §4.3 の (4.12) まで)の対策として、2023・2025年度の中間試験のうち範囲内の問題を解くのに、<b>説明の塊(段落・枠・図)ごと</b>に、どれくらい要るかを付けました(<a href="../exam/index.html">過去問対策特化ページ</a>の分析にもとづく)。見出しのラベルは、その節の中でいちばん高いものです。</p>
+      <p>今年の第1回中間(11/13、範囲は §4.3 の (4.12) まで)の対策として、2023・2025年度の中間試験のうち範囲内の問題を解くのに、<b>説明の塊(段落・枠・図)ごと</b>に、どれくらい要るかを付けました(過去問の分析にもとづく)。見出しのラベルは、その節の中でいちばん高いものです。</p>
       <p><span class="need need-a">必須</span> 過去問にそのまま出た型、答案に書く式 <span class="need need-b">必要</span> 過去問を解くときに使う道具 <span class="need need-c">参考</span> 理解の助け(答案には直接使わない) <span class="need need-x">不要</span> 中間を乗り切るだけなら読まなくてよい <span class="need need-y">範囲内・過去問なし</span> 今年は範囲内だが、過去問には出ていない</p>
       <p>過去問で出た証明は「エネルギー最小化(第3回 3.4)」だけです。ガウス・ストークスの定理やデルタ関数の導出のように、<b>公式を導くための説明や証明は「不要」</b>(公式を覚えて使えばよい)にしました。§2.4〜2.6 のほかの証明は、同じ型で出る可能性があるので「参考」です。</p>
       <div class="need-filter"><button type="button" data-f="all">すべて表示</button><button type="button" data-f="nox">「不要」を隠す</button><button type="button" data-f="ab">「必須」「必要」だけ</button></div>
@@ -240,7 +240,7 @@
       $$\int_Vr^2\,d\bm{x}=\int_0^1r^2\cdot4\pi r^2\,dr=4\pi\Bigl[\frac{r^5}{5}\Bigr]_0^1=\frac{4\pi}{5}.$$
       <b>検算</b>:球面上では $\bm{n}=(x,y,z)$ なので、$\bm{A}\cdot\bm{n}=x^2y^2+y^2z^2+z^2x^2$。対称性から $\int_Sx^2y^2\,dS=\int_Sy^2z^2\,dS=\int_Sz^2x^2\,dS$ で、この値は $\dfrac{4\pi}{15}$ です。したがって $3\times\dfrac{4\pi}{15}=\dfrac{4\pi}{5}$ となり、一致します。</p>
     </div>
-    <div data-need="A" class="box kakomon"><div class="label">過去問:2023年度 第1回中間 [2](5点) <span class="need need-a">必須</span> <a class="xref-link" href="../exam/q2.html#y2023">→ 過去問対策の解説</a></div>
+    <div data-need="A" class="box kakomon"><div class="label">過去問:2023年度 第1回中間 [2](5点) <span class="need need-a">必須</span></div>
       <p>すぐ下の<b>問 [2-6] は、2023年度 第1回中間 [2](5点)に、一字一句同じ形で出ました</b>。下の解答が、そのまま過去問の解答です(答え $-\frac{4}{15}$)。答案を見ずに解けるようにしておきます。</p>
     </div><!--kakomon-->
 
@@ -270,7 +270,7 @@
 
 
     <!-- ===================== 3 ===================== -->
-    <div data-need="A" class="box kakomon"><div class="label">過去問:2025年度 第1回中間 [2](6点) <span class="need need-a">必須</span> <a class="xref-link" href="../exam/q2.html#prob">→ 過去問対策の解説</a></div>
+    <div data-need="A" class="box kakomon"><div class="label">過去問:2025年度 第1回中間 [2](6点) <span class="need need-a">必須</span></div>
       <p class="kk-tools"><b>道具がそろったので、過去問を解いてみます。</b>使うもの:ストークスの定理と、線積分の定義。上の [2-6] とまったく同じ手順(曲面と $\bm{A}$ を変えただけの、同じ型の問題です)。</p>
       <p><b>問題(要旨)</b> 曲面 $S$ を $z=(x-y)^2(y-x^2)$($x^2\le y\le x$)とする。次の面積分を求めよ。ただし面積分の符号は $z$ 軸正の向きを正にとる。
       $$\int_S\begin{pmatrix}-x^2e^{x^2-y}-2ze^y\\ xye^z-2x(1+x^2)e^{x^2-y}\\ (x^2-y+2x)e^{x-y}-xe^z\end{pmatrix}\cdot d\bm{S}$$
@@ -391,7 +391,7 @@
       $$=2\int_{\partial V}e\,\nabla\psi\cdot d\bm{S}+\int_V|\nabla e|^2\,d\bm{x}=\int_V|\nabla e|^2\,d\bm{x}\ge0\tag{2.45}$$
       となり、求めたかった不等式が得られる。</p>
       <p>各等号の理由:2つ目の等号は $\nabla\cdot(e\nabla\psi)=\nabla e\cdot\nabla\psi+e\Delta\psi=\nabla e\cdot\nabla\psi$(積の微分と、$\Delta\psi=0$ に注意)を使っている。3つ目の等号では<b>ガウスの定理</b>を、4つ目の等号では $e$ が境界上で常にゼロであること(面積分が消える)を使っている。</p></div>
-    <div data-need="A" class="box kakomon"><div class="label">過去問:2025年度 第1回中間 [1](5点) <span class="need need-a">必須</span> <a class="xref-link" href="../exam/q1.html#prob">→ 過去問対策の解説</a></div>
+    <div data-need="A" class="box kakomon"><div class="label">過去問:2025年度 第1回中間 [1](5点) <span class="need need-a">必須</span></div>
       <p class="kk-tools"><b>道具がそろったので、過去問を解いてみます。</b>使うもの:すぐ上の証明そのものです(使うのは、積の微分、$\Delta\phi=0$、ガウスの定理、境界で $e=0$)。</p>
       <p><b>問題(要旨)</b> 3次元空間の単連結な領域 $V$ をとる。$V$ の表面 $\partial V$ では与えられた関数 $F(\bm{x})$ と同じ値をとる、という拘束条件を満たすスカラー場 $f(\bm{x})$ のうち、$\int_V|\nabla f|^2\,d\bm{x}$ を最小にするもの $f^*$ を求めたい。同じ拘束条件を満たす $V$ 上の調和関数 $\phi$($\Delta\phi=0$)が存在するならば、$f^*=\phi$ であることを証明せよ。<b>(注:式変形では、どの定理や議論を用いたのか分かるように書くこと)</b></p>
       <details class="kk-ans"><summary>解答を見る</summary>

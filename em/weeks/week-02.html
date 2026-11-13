@@ -26,7 +26,7 @@
 
     <div class="box note-box need-legend">
       <div class="label">ラベルの見方:第1回中間の過去問を解くのに、どれくらい必要か</div>
-      <p>今年の第1回中間(11/13、範囲は §4.3 の (4.12) まで)の対策として、2023・2025年度の中間試験のうち範囲内の問題を解くのに、<b>説明の塊(段落・枠・図)ごと</b>に、どれくらい要るかを付けました(<a href="../exam/index.html">過去問対策特化ページ</a>の分析にもとづく)。見出しのラベルは、その節の中でいちばん高いものです。</p>
+      <p>今年の第1回中間(11/13、範囲は §4.3 の (4.12) まで)の対策として、2023・2025年度の中間試験のうち範囲内の問題を解くのに、<b>説明の塊(段落・枠・図)ごと</b>に、どれくらい要るかを付けました(過去問の分析にもとづく)。見出しのラベルは、その節の中でいちばん高いものです。</p>
       <p><span class="need need-a">必須</span> 過去問にそのまま出た型、答案に書く式 <span class="need need-b">必要</span> 過去問を解くときに使う道具 <span class="need need-c">参考</span> 理解の助け(答案には直接使わない) <span class="need need-x">不要</span> 中間を乗り切るだけなら読まなくてよい <span class="need need-y">範囲内・過去問なし</span> 今年は範囲内だが、過去問には出ていない</p>
       <p>過去問で出た証明は「エネルギー最小化(第3回 3.4)」だけです。ガウス・ストークスの定理やデルタ関数の導出のように、<b>公式を導くための説明や証明は「不要」</b>(公式を覚えて使えばよい)にしました。§2.4〜2.6 のほかの証明は、同じ型で出る可能性があるので「参考」です。</p>
       <div class="need-filter"><button type="button" data-f="all">すべて表示</button><button type="button" data-f="nox">「不要」を隠す</button><button type="button" data-f="ab">「必須」「必要」だけ</button></div>
@@ -278,7 +278,7 @@
       $$=\sum_jA_j\,\partial_iA_j-\sum_jA_j\,\partial_jA_i.$$
       第1項は、積の微分から $\sum_jA_j\partial_iA_j=\partial_i\Bigl(\frac12\sum_jA_j^2\Bigr)=\Bigl[\nabla\Bigl(\frac12\bm{A}\cdot\bm{A}\Bigr)\Bigr]_i$。第2項は $\sum_jA_j\partial_jA_i=[(\bm{A}\cdot\nabla)\bm{A}]_i$。よって (2.17) が成り立つ。<b>(この式は、流体力学の運動方程式などで現れる、有名な恒等式です。)</b></p>
     </div>
-    <div data-need="A" class="box kakomon"><div class="label">過去問:2023年度 第1回中間 [1](2点) <span class="need need-a">必須</span> <a class="xref-link" href="../exam/q1.html#ident">→ 過去問対策の解説</a></div>
+    <div data-need="A" class="box kakomon"><div class="label">過去問:2023年度 第1回中間 [1](2点) <span class="need need-a">必須</span></div>
       <p class="kk-tools"><b>道具がそろったので、過去問を解いてみます。</b>使うもの:公式 (2.14)($\varepsilon\varepsilon$ の公式)と、上の [2-2] と同じ「成分で書く → (2.14) → 積の微分で展開」の流れ。</p>
       <p><b>問題(要旨)</b> $\nabla\times(\bm{A}\times\bm{B})$ を、$P:=\nabla(\bm{A}\cdot\bm{B})$、$Q:=\bm{A}(\nabla\cdot\bm{B})$、$R:=\bm{B}(\nabla\cdot\bm{A})$、$S:=(\bm{A}\cdot\nabla)\bm{B}$、$T:=(\bm{B}\cdot\nabla)\bm{A}$ を用いた式で書け(例:$1+S+T$、$2P+R-3S$ のような形で)。ここで $(\bm{A}\cdot\nabla)\bm{B}$ は、第 $i$ 成分が $\sum_jA_j\partial_jB_i$ のベクトルです。</p>
       <details class="kk-ans"><summary>解答を見る</summary>
@@ -391,7 +391,7 @@
       したがって
       $$\int_0^{\pi}\Bigl(-\cos s\sin s+\frac{\sin s}{2\pi}\Bigr)ds=\Bigl[-\frac{\sin^2s}{2}\Bigr]_0^{\pi}+\frac{1}{2\pi}\Bigl[-\cos s\Bigr]_0^{\pi}=0+\frac{1}{2\pi}\cdot2=\frac1\pi.$$</p>
     </div>
-    <div data-need="A" class="box kakomon"><div class="label">過去問:2023年度 第2回中間 [1](2点) <span class="need need-a">必須</span> <a class="xref-link" href="../exam/q2.html#line">→ 過去問対策の解説</a></div>
+    <div data-need="A" class="box kakomon"><div class="label">過去問:2023年度 第2回中間 [1](2点) <span class="need need-a">必須</span></div>
       <p class="kk-tools"><b>道具がそろったので、過去問を解いてみます。</b>使うもの:線積分の定義 (2.25)。例 2.2 と同じく、曲線を $x$ で表して1変数の積分にします。</p>
       <p class="kk-tools">例年は第2回中間に出た問題ですが、内容は今年の第1回中間の範囲(§4.3 の (4.12) まで)に入ります。</p>
       <p><b>問題(要旨)</b> 曲線 $C$:$y=x^3-x$($-1\le x\le0$)に沿って、$x=0$ から $x=-1$ の向きに、ベクトル $(yx,\ x^2)$ を線積分せよ。</p>
