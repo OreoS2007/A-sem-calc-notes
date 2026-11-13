@@ -290,6 +290,25 @@
       <p>覚え方:「$\varepsilon\varepsilon$ の公式で2項 → それぞれ積の微分で2項 → 合計4項」。</p>
       </details>
     </div><!--kakomon-->
+    <div data-need="A" class="box kakomon renshu"><div class="label">練習 2-1(2023年度 第1回中間 [1] と同じ型(ε で恒等式)) <span class="need need-a">必須</span></div>
+      <p><b>問題</b> $\nabla\cdot(\bm{A}\times\bm{B})=\bm{B}\cdot(\nabla\times\bm{A})-\bm{A}\cdot(\nabla\times\bm{B})$ を、$\varepsilon_{ijk}$ を使って示せ。</p>
+      <details class="kk-ans"><summary>解答を見る</summary>
+      <p>成分で書くと $\nabla\cdot(\bm{A}\times\bm{B})=\sum_i\partial_i\sum_{j,k}\varepsilon_{ijk}A_jB_k$。積の微分で2つに分ける:
+      $$=\sum_{i,j,k}\varepsilon_{ijk}(\partial_iA_j)B_k+\sum_{i,j,k}\varepsilon_{ijk}A_j(\partial_iB_k).$$</p>
+      <p><b>1項目</b>:添字を巡回させても $\varepsilon$ は変わらない($\varepsilon_{ijk}=\varepsilon_{kij}$)ので、$\sum_kB_k\sum_{i,j}\varepsilon_{kij}\partial_iA_j=\sum_kB_k(\nabla\times\bm{A})_k=\bm{B}\cdot(\nabla\times\bm{A})$。</p>
+      <p><b>2項目</b>:2つの添字を入れ替えると符号が変わる($\varepsilon_{ijk}=-\varepsilon_{jik}$)ので、$-\sum_jA_j\sum_{i,k}\varepsilon_{jik}\partial_iB_k=-\bm{A}\cdot(\nabla\times\bm{B})$。$\blacksquare$</p>
+      <p>ポイント:$(\nabla\times\bm{A})_k=\sum_{i,j}\varepsilon_{kij}\partial_iA_j$ の形(<b>回転の成分の添字が先頭</b>)に並べ替えるだけです。</p>
+      </details>
+    </div><!--kakomon-->
+    <div data-need="A" class="box kakomon renshu"><div class="label">練習 2-2(2023年度 第1回中間 [1] と同じ型(ε で恒等式)) <span class="need need-a">必須</span></div>
+      <p><b>問題</b> スカラー場 $\phi$ とベクトル場 $\bm{A}$ について、$\nabla\times(\phi\bm{A})$ を $\phi$、$\nabla\phi$、$\bm{A}$、$\nabla\times\bm{A}$ で表せ。</p>
+      <details class="kk-ans"><summary>解答を見る</summary>
+      <p>$[\nabla\times(\phi\bm{A})]_i=\sum_{j,k}\varepsilon_{ijk}\partial_j(\phi A_k)=\phi\sum_{j,k}\varepsilon_{ijk}\partial_jA_k+\sum_{j,k}\varepsilon_{ijk}(\partial_j\phi)A_k$。</p>
+      <p>1項目は $\phi(\nabla\times\bm{A})_i$、2項目は外積の定義そのもので $(\nabla\phi\times\bm{A})_i$。よって
+      $$\boldsymbol{\nabla\times(\phi\bm{A})=\phi\,\nabla\times\bm{A}+\nabla\phi\times\bm{A}}.$$</p>
+      <p>確かめ:$\bm{A}$ が定ベクトルなら $\nabla\times\bm{A}=\bm{0}$ で、答えは $\nabla\phi\times\bm{A}$ だけ。順番を $\bm{A}\times\nabla\phi$ にすると符号が逆なので注意。</p>
+      </details>
+    </div><!--kakomon-->
 
     <h3 id="s2-6" data-need="C">2.6 ラプラシアン <span class="need need-c">参考</span> <span class="page-tag">p.7</span></h3>
     <p data-need="X">最後に、一般次元の場に対する<b>ラプラシアン</b>(Laplacian)を導入します(数学者ピエール・シモン・ラプラスにちなむ)。</p>
@@ -407,8 +426,32 @@
       <p><b>試験での書き方(2点)。</b>① $x$ をパラメータにして $y=x^3-x$、$dy=(3x^2-1)\,dx$ と書く。② 代入した被積分関数 $(4x^4-2x^2)\,dx$ を書く。③ $\int_0^{-1}$ で計算して、答え $-\frac{2}{15}$。</p>
       </details>
     </div><!--kakomon-->
+    <div data-need="A" class="box kakomon renshu"><div class="label">練習 2-3(2023年度 第2回中間 [1] と同じ型(線積分を定義どおりに)) <span class="need need-a">必須</span></div>
+      <p><b>問題</b> 曲線 $C$:$y=x^2$ に沿って、点 $(0,0)$ から点 $(1,1)$ まで、ベクトル $\bm{A}=(y,\ x^2)$ を線積分せよ。</p>
+      <details class="kk-ans"><summary>解答を見る</summary>
+      <p>$x$ をパラメータにする:$y=x^2$、$dy=2x\,dx$、$x:0\to1$。$y$ を代入して
+      $$\int_C(A_x\,dx+A_y\,dy)=\int_0^1\bigl(x^2+x^2\cdot2x\bigr)dx=\int_0^1(x^2+2x^3)\,dx=\frac13+\frac12=\boldsymbol{\frac56}.$$</p>
+      </details>
+    </div><!--kakomon-->
+    <div data-need="A" class="box kakomon renshu"><div class="label">練習 2-4(2023年度 第2回中間 [1] と同じ型(向きに注意)) <span class="need need-a">必須</span></div>
+      <p><b>問題</b> $\bm{A}=(-y,\ x)$ を、単位円の上を (1) $(1,0)$ から $(0,1)$ まで反時計回りに、(2) 同じ円弧を $(0,1)$ から $(1,0)$ まで、それぞれ線積分せよ。</p>
+      <details class="kk-ans"><summary>解答を見る</summary>
+      <p>(1) $\bm{x}(s)=(\cos s,\ \sin s)$($s:0\to\frac\pi2$)とすると $\frac{d\bm{x}}{ds}=(-\sin s,\ \cos s)$、$\bm{A}=(-\sin s,\ \cos s)$。
+      $$\int_0^{\pi/2}\bm{A}\cdot\frac{d\bm{x}}{ds}\,ds=\int_0^{\pi/2}(\sin^2s+\cos^2s)\,ds=\boldsymbol{\frac\pi2}.$$</p>
+      <p>(2) 同じパラメータで $s:\frac\pi2\to0$ と進むので $\int_{\pi/2}^{0}1\,ds=\boldsymbol{-\frac\pi2}$。<b>向きを逆にすると、符号だけが変わる</b>。</p>
+      <p>意味:$\bm{A}=(-y,x)$ は原点のまわりを反時計回りに回る場で、円の接線方向にいつも大きさ1。だから「進んだ長さ」がそのまま答えになります。</p>
+      </details>
+    </div><!--kakomon-->
+    <div data-need="A" class="box kakomon renshu"><div class="label">練習 2-5(問 [2-3] と同じ型(3次元の曲線)) <span class="need need-a">必須</span></div>
+      <p><b>問題</b> らせん $\bm{x}(s)=(\cos s,\ \sin s,\ s)$($0\le s\le2\pi$)に沿って、$\bm{A}=(z,\ x,\ y)$ を線積分せよ。</p>
+      <details class="kk-ans"><summary>解答を見る</summary>
+      <p>$\frac{d\bm{x}}{ds}=(-\sin s,\ \cos s,\ 1)$、曲線上で $\bm{A}=(s,\ \cos s,\ \sin s)$。
+      $$\bm{A}\cdot\frac{d\bm{x}}{ds}=-s\sin s+\cos^2s+\sin s.$$
+      各項:$\int_0^{2\pi}(-s\sin s)\,ds=\bigl[s\cos s-\sin s\bigr]_0^{2\pi}=2\pi$(部分積分)、$\int_0^{2\pi}\cos^2s\,ds=\pi$($\cos^2$ の平均は $\frac12$)、$\int_0^{2\pi}\sin s\,ds=0$。合計 $\boldsymbol{3\pi}$。</p>
+      </details>
+    </div><!--kakomon-->
 
-    <h3 id="s3-2" data-need="B">3.2 面積分(surface integral) <span class="need need-b">必要</span></h3>
+    <h3 id="s3-2" data-need="A">3.2 面積分(surface integral) <span class="need need-a">必須</span></h3>
     <p data-need="C">次に、別のベクトル場の積分として<b>面積分</b>を導入します。これは(特にここで述べたような形では)<b>3次元空間において</b>定義される積分です。考え方は、与えられた曲面 $S$ について「<b>その曲面 $S$ を貫くベクトルはどれだけあるか</b>」を積分するというものです。</p>
     <p data-need="C">たとえば、水が流れている状況で、ある面をどれだけ水が横切ったかを考えます。横切った水の量は水の流れの速度ベクトルによって決まりますが、これは速さだけでなく、<b>面に対する流れの向き</b>も重要です。図の (a) のように面に垂直に水が流れてきている場合に、一定時間内に面を通過した水の量が $V$ だとすると、(b) のように、同じ速さの流れでも斜めから水が入り込んでくる場合には、通過した水の量は $V\cos\theta$ になり、面が傾いているほど小さくなります。</p>
     <figure data-need="C" class="fig">
@@ -450,6 +493,23 @@
     </div>
 
     <!-- ===================== 4 ===================== -->
+    <div data-need="A" class="box kakomon renshu"><div class="label">練習 2-6(問 [2-4] と同じ型(面積分を球面座標で)) <span class="need need-a">必須</span></div>
+      <p><b>問題</b> $\bm{A}=(x,\ y,\ 0)$ の、半径1の球面の $z\ge0$ の部分(上半球、法線は外向き)での面積分を求めよ。</p>
+      <details class="kk-ans"><summary>解答を見る</summary>
+      <p>外向き法線 $\bm{n}=(x,y,z)$ なので $\bm{A}\cdot\bm{n}=x^2+y^2=\sin^2\theta$(z 軸からの距離の2乗)。面素 $dS=\sin\theta\,d\theta\,d\varphi$、$0\le\theta\le\frac\pi2$。
+      $$\int_0^{2\pi}d\varphi\int_0^{\pi/2}\sin^2\theta\cdot\sin\theta\,d\theta=2\pi\int_0^1(1-u^2)\,du=2\pi\cdot\frac23=\boldsymbol{\frac{4\pi}{3}}.$$
+      ($u=\cos\theta$、$du=-\sin\theta\,d\theta$ で置換。)</p>
+      <p>検算:底の円板($z=0$)では $\bm{A}$ は面に平行で、面積分は 0。$\nabla\cdot\bm{A}=2$ なので、ガウスの定理から $2\times$(半球の体積 $\frac{2\pi}{3}$)$=\frac{4\pi}{3}$。一致。</p>
+      </details>
+    </div><!--kakomon-->
+    <div data-need="A" class="box kakomon renshu"><div class="label">練習 2-7(問 [2-4] と同じ型(面積分を球面座標で)) <span class="need need-a">必須</span></div>
+      <p><b>問題</b> $\bm{A}=(0,\ 0,\ z^2)$ の、(1) 上半球(半径1、$z\ge0$、外向き)、(2) 球面全体(外向き)での面積分を求めよ。</p>
+      <details class="kk-ans"><summary>解答を見る</summary>
+      <p>(1) $\bm{A}\cdot\bm{n}=z^2\cdot z=\cos^3\theta$。
+      $$2\pi\int_0^{\pi/2}\cos^3\theta\sin\theta\,d\theta=2\pi\int_0^1u^3\,du=2\pi\cdot\frac14=\boldsymbol{\frac\pi2}.$$</p>
+      <p>(2) $\theta$ を $\pi$ まで:$2\pi\int_{-1}^{1}u^3\,du=\boldsymbol{0}$(奇関数)。下半球では $\bm{A}$ は上向き、法線は下向きなので、上半球と打ち消し合う。ガウスの定理でも、$\nabla\cdot\bm{A}=2z$ を球で積分すると、上下の対称性で 0。</p>
+      </details>
+    </div><!--kakomon-->
     <h2 id="s4" data-need="B">4. 具体例で練習(講義ノートにない補足) <span class="need need-b">必要</span> <span class="page-tag">補足</span></h2>
     <p data-need="X">この節は、講義ノートの問題 [2-1]〜[2-4] とは別に、私が作った練習問題と解答です。計算が合っているかを確認するための検算も付けました。</p>
 

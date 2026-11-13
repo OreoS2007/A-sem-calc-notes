@@ -284,6 +284,24 @@
       <p><b>(iv) 確かめ</b>:$l\to\infty$ で $\frac{\rho}{2\pi\varepsilon_0a}$(無限に長い線電荷、下の例 3.2)。</p>
       </details>
     </div><!--kakomon-->
+    <div data-need="A" class="box kakomon renshu"><div class="label">練習 4-1(2023・2025年度 第1回中間 [4][3] と同じ型(クーロンの積分)) <span class="need need-a">必須</span></div>
+      <p><b>問題</b> $xy$ 面内の、原点を中心とする半径 $l$ の半円($y\ge0$ の部分)に、一様線密度 $\lambda$ で電荷が分布している。原点の電場を求めよ。</p>
+      <details class="kk-ans"><summary>解答を見る</summary>
+      <p>角度 $\varphi$($0\le\varphi\le\pi$)の位置 $(l\cos\varphi,\ l\sin\varphi,\ 0)$ の小さな電荷は $\lambda l\,d\varphi$。原点での電場は、電荷から原点へ向かう向き $-(\cos\varphi,\ \sin\varphi,\ 0)$ で、大きさ $\frac{\lambda l\,d\varphi}{4\pi\varepsilon_0l^2}$。</p>
+      <p><b>対称性</b>:$y$ 軸について左右対称なので $E_x=0$。$y$ 成分を足すと
+      $$E_y=-\frac{\lambda}{4\pi\varepsilon_0l}\int_0^\pi\sin\varphi\,d\varphi=-\frac{2\lambda}{4\pi\varepsilon_0l},\qquad\boldsymbol{\bm{E}=\Bigl(0,\ -\frac{\lambda}{2\pi\varepsilon_0l},\ 0\Bigr)}.$$</p>
+      <p>確かめ:円全体なら、反対側の半円と打ち消し合って 0(円環の中心の電場は 0)。</p>
+      </details>
+    </div><!--kakomon-->
+    <div data-need="A" class="box kakomon renshu"><div class="label">練習 4-2(2023年度 第1回中間 [4] と同じ型(対称性がない場合)) <span class="need need-a">必須</span></div>
+      <p><b>問題</b> $z$ 軸の $0\le z\le L$ の上に、一様線密度 $\rho$ の電荷がある。点 $(a,0,0)$($a\gt0$)の電場を求めよ。</p>
+      <details class="kk-ans"><summary>解答を見る</summary>
+      <p>過去問と違い、点が線の真ん中の横にないので、<b>$z\to-z$ の対称性がなく、$E_z\ne0$</b>。位置 $z$ の電荷 $\rho\,dz$ から点へのベクトルは $(a,\ 0,\ -z)$、距離 $\sqrt{a^2+z^2}$。</p>
+      $$E_x=\frac{\rho a}{4\pi\varepsilon_0}\int_0^L\frac{dz}{(a^2+z^2)^{3/2}}=\boldsymbol{\frac{\rho L}{4\pi\varepsilon_0a\sqrt{a^2+L^2}}},$$
+      $$E_z=-\frac{\rho}{4\pi\varepsilon_0}\int_0^L\frac{z\,dz}{(a^2+z^2)^{3/2}}=-\frac{\rho}{4\pi\varepsilon_0}\Bigl[-\frac{1}{\sqrt{a^2+z^2}}\Bigr]_0^L=\boldsymbol{-\frac{\rho}{4\pi\varepsilon_0}\Bigl(\frac1a-\frac{1}{\sqrt{a^2+L^2}}\Bigr)}.$$
+      <p>($E_z$ の積分は $u=a^2+z^2$ で置換。$E_x$ の積分は過去問と同じ $z=a\tan\theta$。)$E_z\lt0$:電荷はすべて $z\ge0$ にあるので、下向きに押される。確かめ:$L\to\infty$ で $E_x\to\frac{\rho}{4\pi\varepsilon_0a}$(無限に長い線の電場のちょうど半分)。</p>
+      </details>
+    </div><!--kakomon-->
 
     <h3 id="s3-2" data-need="A">3.2 対称性が高いときは、積分型ガウスの法則 <span class="need need-a">必須</span></h3>
     <p data-need="A">対称性が高い場合には、<b>積分型ガウスの法則 (3.12)</b> が非常に便利です。使い方は、(i)対称性から、電場の向きと「何に依存するか」を決める、(ii)その電場の大きさが一定とみなせる面で囲まれた領域 $V$ をとる、(iii)(3.12) の左辺を「$E$ × 面積」と書く、という手順です。</p>
@@ -312,6 +330,23 @@
       $$4\pi a^2E=\frac{Qa^3}{\varepsilon_0r^3},\qquad E=\frac{Qa}{4\pi\varepsilon_0r^3}.$$
       点 $(a,0,0)$ での動径方向は $+x$ なので $\boldsymbol{\bm{E}=\Bigl(\dfrac{Qa}{4\pi\varepsilon_0r^3},\ 0,\ 0\Bigr)}$。</p>
       <p>注意:問題文の $r$ は<b>球の半径</b>(定数)で、観測点までの距離は $a$。文字がいつもと入れ替わっています。$a\to r$(表面)で $\frac{Q}{4\pi\varepsilon_0r^2}$ になるかで確かめる。</p>
+      </details>
+    </div><!--kakomon-->
+    <div data-need="A" class="box kakomon renshu"><div class="label">練習 4-3(2023年度 第1回中間 [3] と同じ型(対称性 + ガウス)) <span class="need need-a">必須</span></div>
+      <p><b>問題</b> 半径 $R$ の球の内部に、中心からの距離 $r$ に比例する電荷密度 $\rho(r)=kr$($k$ は定数)で電荷がある。電場を、球の内外で求めよ。</p>
+      <details class="kk-ans"><summary>解答を見る</summary>
+      <p>球対称なので、電場は動径方向で大きさは $r$ だけで決まる。半径 $r$ の球面に<b>積分型ガウスの法則</b>:$4\pi r^2E(r)=Q_{\text{内}}/\varepsilon_0$。</p>
+      <p>密度が一様でないので、中の電荷は<b>球殻に分けて積分</b>する:$r\lt R$ で $Q_{\text{内}}=\int_0^rkr'\cdot4\pi r'^2\,dr'=\pi kr^4$。$r\gt R$ では全電荷 $\pi kR^4$。
+      $$E(r)=\begin{cases}\dfrac{kr^2}{4\varepsilon_0}&(r\lt R)\\[8pt]\dfrac{kR^4}{4\varepsilon_0r^2}&(r\gt R)\end{cases}$$</p>
+      <p>確かめ:$r=R$ で両方 $\frac{kR^2}{4\varepsilon_0}$ になり、つながる。一様な球($E\propto r$)と違い、中では $r^2$ に比例。</p>
+      </details>
+    </div><!--kakomon-->
+    <div data-need="A" class="box kakomon renshu"><div class="label">練習 4-4(2023年度 第1回中間 [3] と同じ型(対称性 + ガウス)) <span class="need need-a">必須</span></div>
+      <p><b>問題</b> 原点に点電荷 $q$ があり、原点を中心とする半径 $a$ の球殻に、総電荷 $-q$ が一様に分布している。電場を求めよ。</p>
+      <details class="kk-ans"><summary>解答を見る</summary>
+      <p>球対称なので、半径 $r$ の球面にガウスの法則。中の電荷は、$r\lt a$ で $q$、$r\gt a$ で $q-q=0$。
+      $$\boldsymbol{E(r)=\frac{q}{4\pi\varepsilon_0r^2}\ (r\lt a),\qquad E(r)=0\ (r\gt a)}$$
+      (向きは動径方向)。外から見ると、全体の電荷が 0 なので電場がない(球殻が点電荷の電場を「閉じ込める」)。</p>
       </details>
     </div><!--kakomon-->
 

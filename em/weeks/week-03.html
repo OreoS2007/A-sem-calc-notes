@@ -285,6 +285,32 @@
       <p>採点で見られるのは、① ストークスの定理を使うと書く、② 縁で $z=0$ の確認、③ 回る<b>向き</b>、④ 2本に分けた計算。向きを逆にすると符号が逆になります。</p>
       </details>
     </div><!--kakomon-->
+    <div data-need="A" class="box kakomon renshu"><div class="label">練習 3-1(2023・2025年度 第1回中間 [2] と同じ型(ストークスで面積分)) <span class="need need-a">必須</span></div>
+      <p><b>問題</b> 曲面 $S$:$z=xy(1-x)(1-y)$($0\le x\le1$、$0\le y\le1$)、面積分の符号は $z$ 軸正の向きを正とする。次の面積分を求めよ。
+      $$\int_S\begin{pmatrix}-2z\\ \sin y-ze^{xz}\\ 3x^2+3y^2-z\cos y\end{pmatrix}\cdot d\bm{S}$$
+      被積分関数が $\nabla\times\bm{A}$、$\bm{A}=\bigl(-y^3+z\sin y,\ x^3+z^2,\ e^{xz}\bigr)$ と書けることは、証明なしに用いてよい。</p>
+      <details class="kk-ans"><summary>解答を見る</summary>
+      <p><b>(i) ストークスの定理</b>で $\oint_{\partial S}\bm{A}\cdot d\bm{x}$ にする。</p>
+      <p><b>(ii) 縁</b>:正方形の4辺 $x=0$、$x=1$、$y=0$、$y=1$ の上では $z=0$、$dz=0$。上から見て反時計回り($(0,0)\to(1,0)\to(1,1)\to(0,1)\to(0,0)$)。</p>
+      <p><b>(iii)</b> $z=0$ を入れると $\bm{A}\cdot d\bm{x}=-y^3\,dx+x^3\,dy$($e^{xz}$ の項は $dz=0$ で消える)。</p>
+      <p><b>(iv) 4辺</b>:</p>
+      <ul>
+        <li>下 $y=0$($x:0\to1$、$dy=0$):$-0\,dx$ なので 0。</li>
+        <li>右 $x=1$($y:0\to1$、$dx=0$):$\int_0^1 1\,dy=1$。</li>
+        <li>上 $y=1$($x:1\to0$、$dy=0$):$\int_1^0(-1)\,dx=1$。</li>
+        <li>左 $x=0$($y:1\to0$、$dx=0$):$0$。</li>
+      </ul>
+      <p><b>(v) 合計</b> $\boldsymbol{2}$。(検算:縁を変えない平らな面 $z=0$ に取り替えると、$z$ 成分 $3x^2+3y^2$ を正方形で積分して $1+1=2$。数値積分でも一致。)</p>
+      </details>
+    </div><!--kakomon-->
+    <div data-need="A" class="box kakomon renshu"><div class="label">練習 3-2(問 [2-5] と同じ型(ガウスで面積分)) <span class="need need-a">必須</span></div>
+      <p><b>問題</b> 半径1の球面全体(外向き)で、$\bm{A}=(x^3,\ y^3,\ z^3)$ の面積分を求めよ。</p>
+      <details class="kk-ans"><summary>解答を見る</summary>
+      <p>閉じた曲面なので<b>ガウスの定理</b>。$\nabla\cdot\bm{A}=3x^2+3y^2+3z^2=3r^2$。球殻に分けて
+      $$\int_V3r^2\,d\bm{x}=\int_0^13r^2\cdot4\pi r^2\,dr=12\pi\cdot\frac15=\boldsymbol{\frac{12\pi}{5}}.$$</p>
+      <p>直接計算なら $\bm{A}\cdot\bm{n}=x^4+y^4+z^4$。対称性で $3\int_Sz^4\,dS=3\cdot2\pi\int_{-1}^1u^4\,du=3\cdot\frac{4\pi}{5}$ で一致。</p>
+      </details>
+    </div><!--kakomon-->
     <h2 id="s3" data-need="A">3. ラプラス方程式と調和関数 <span class="need need-a">必須</span> <span class="page-tag">講義ノート p.12–14(§2.4)</span></h2>
 
     <h3 id="s3-1" data-need="B">3.1 ラプラス方程式と調和関数 <span class="need need-b">必要</span></h3>
@@ -377,6 +403,15 @@
       $$\int_V|\nabla f|^2d\bm{x}-\int_V|\nabla\phi|^2d\bm{x}=\int_V|\nabla e|^2d\bm{x}\ \ge\ 0.$$
       よって $\phi$ が最小を与え、$f^*=\phi$。(等号は $\nabla e=\bm{0}$ のとき。境界で $e=0$ なので $e\equiv0$、つまり最小にするのは $\phi$ だけ。)$\blacksquare$</p>
       <p>問題文の「注」が採点基準です。<b>境界で $e=0$、$\Delta\phi=0$、ガウスの定理</b>を、使った場所ごとに書きます。</p>
+      </details>
+    </div><!--kakomon-->
+    <div data-need="A" class="box kakomon renshu"><div class="label">練習 3-3(2025年度 第1回中間 [1] と同じ型(ガウスの定理を使う証明)) <span class="need need-a">必須</span></div>
+      <p><b>問題</b> 閉領域 $V$ で $\Delta\psi=0$、境界 $\partial V$ で $\psi=0$ ならば、$V$ 全体で $\psi=0$ であることを、$\int_V|\nabla\psi|^2d\bm{x}$ を使って示せ。(どの定理を使ったか書くこと)</p>
+      <details class="kk-ans"><summary>解答を見る</summary>
+      <p>積の微分と <b>$\Delta\psi=0$</b> より $\nabla\cdot(\psi\nabla\psi)=|\nabla\psi|^2+\psi\,\Delta\psi=|\nabla\psi|^2$。<b>ガウスの定理</b>から
+      $$\int_V|\nabla\psi|^2d\bm{x}=\int_V\nabla\cdot(\psi\nabla\psi)\,d\bm{x}=\int_{\partial V}\psi\,\nabla\psi\cdot d\bm{S}=0\qquad(\partial V\text{ 上で }\psi=0).$$
+      $|\nabla\psi|^2\ge0$ の積分が 0 なので、$V$ 全体で $\nabla\psi=\bm{0}$、つまり $\psi$ は定数。境界で 0 なので $\psi\equiv0$。$\blacksquare$</p>
+      <p>使い道:ディリクレ問題の2つの解 $\psi,\eta$ の差 $\kappa=\psi-\eta$ にこれを使うと、<b>解の一意性</b>の別証明になります(3.3 節の最大値原理を使う証明とは別の方法)。過去問 [1] と同じく、$\nabla\cdot(e\nabla\phi)$ の形を作るのが鍵です。</p>
       </details>
     </div><!--kakomon-->
     <div data-need="C" class="box intuit">

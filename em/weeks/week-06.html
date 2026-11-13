@@ -217,6 +217,17 @@
       <p>つまずきポイント:P を「鏡像の位置」と勘違いしない。鏡像は面 $y=0$ についての対称点 $(a,-b,0)$ で、P は真空中の別の点です。</p>
       </details>
     </div><!--kakomon-->
+    <div data-need="A" class="box kakomon renshu"><div class="label">練習 6-1(2025年度 第2回中間 [1] と同じ型(平面の鏡像)) <span class="need need-a">必須</span></div>
+      <p><b>問題</b> $z\le0$ の領域に接地された導体がある。点 $(0,0,d)$ に点電荷 $q$ を置く。(1) 点 $(0,0,2d)$ の電場を求めよ。(2) 導体表面の点 $(x,y,0)$ の誘導電荷密度 $\sigma$ を求め、その総和が $-q$ であることを確かめよ。</p>
+      <details class="kk-ans"><summary>解答を見る</summary>
+      <p>鏡像電荷 $-q$ を $(0,0,-d)$ に置く(面 $z=0$ 上で電位 0。一意性より、$z\gt0$ ではこれが答え)。</p>
+      <p>(1) $q$ からの距離 $d$、$-q$ からの距離 $3d$。どちらも $z$ 方向で
+      $$E_z=\frac{q}{4\pi\varepsilon_0d^2}-\frac{q}{4\pi\varepsilon_0(3d)^2}=\frac{q}{4\pi\varepsilon_0d^2}\cdot\frac89=\boldsymbol{\frac{2q}{9\pi\varepsilon_0d^2}}.$$</p>
+      <p>(2) 表面の点で、2つの電荷の電場の横向き成分は打ち消し、$z$ 成分は同じ向き(下向き)に足し合う:$E_z=-2\cdot\frac{q}{4\pi\varepsilon_0}\frac{d}{(x^2+y^2+d^2)^{3/2}}$。導体から外向きの法線は $+z$ なので $\sigma=\varepsilon_0E_z$:
+      $$\boldsymbol{\sigma=-\frac{qd}{2\pi(x^2+y^2+d^2)^{3/2}}}.$$
+      総和:$\rho=\sqrt{x^2+y^2}$ として円環に分けると $\int_0^\infty\sigma\cdot2\pi\rho\,d\rho=-qd\Bigl[-\frac{1}{\sqrt{\rho^2+d^2}}\Bigr]_0^\infty=-q$。</p>
+      </details>
+    </div><!--kakomon-->
 
     <h3 id="s3-3" data-need="A">3.3 問 [4-1]:2枚の平行な導体板 <span class="need need-a">必須</span></h3>
     <div data-need="B" class="box ex">
@@ -243,6 +254,20 @@
       <p>$(-a,b,0)$ に $-q$、$(a,-b,0)$ に $-q$、$(-a,-b,0)$ に $+q$ の<b>3つ</b>。4つの電荷が長方形の頂点に並び、<b>対角の位置どうしは同じ符号</b>。</p>
       <p>確かめ:面 $x=0$ について、$q$ と $(-a,b,0)$ の $-q$、$(a,-b,0)$ の $-q$ と $(-a,-b,0)$ の $+q$ が、それぞれ符号反対の対になるので、$x=0$ 上の電位は 0。面 $y=0$ についても同様。</p>
       <p>直感:2枚の鏡を直角に置くと、像は3つ見える(合わせ鏡)。1回反射した像は $-q$、2回反射した像は $+q$。</p>
+      </details>
+    </div><!--kakomon-->
+    <div data-need="A" class="box kakomon renshu"><div class="label">練習 6-2(2023年度 第2回中間 [2] と同じ型(直角の角)) <span class="need need-a">必須</span></div>
+      <p><b>問題</b> 過去問と同じ直角の角($x\le0$ または $y\le0$ が接地された導体)で、点電荷 $q$ を $(a,a,0)$ に置いた。電荷 $q$ にはたらく力を求めよ。</p>
+      <details class="kk-ans"><summary>解答を見る</summary>
+      <p>鏡像:$(-a,a,0)$ に $-q$、$(a,-a,0)$ に $-q$、$(-a,-a,0)$ に $+q$。$q$ が受ける力は、この3つの電荷からのクーロン力の和(導体からの力と同じ)。</p>
+      <ul>
+        <li>$(-a,a,0)$ の $-q$(距離 $2a$、$-x$ 向きに引かれる):$-\frac{q^2}{4\pi\varepsilon_0(2a)^2}(1,0,0)$。</li>
+        <li>$(a,-a,0)$ の $-q$:$-\frac{q^2}{4\pi\varepsilon_0(2a)^2}(0,1,0)$。</li>
+        <li>$(-a,-a,0)$ の $+q$(距離 $2\sqrt2a$、斜めに押される):$\frac{q^2}{4\pi\varepsilon_0(2\sqrt2a)^2}\cdot\frac{(1,1,0)}{\sqrt2}$。</li>
+      </ul>
+      <p>合計:
+      $$\boldsymbol{\bm{F}=\frac{q^2}{16\pi\varepsilon_0a^2}\Bigl(-1+\frac{1}{2\sqrt2}\Bigr)(1,\ 1,\ 0)}.$$
+      括弧は負なので、電荷は<b>角に向かって引かれる</b>(数値で確認済み)。</p>
       </details>
     </div><!--kakomon-->
 
@@ -343,6 +368,23 @@
       <p>点 $(0,l,0)$ は、どちらの電荷から見ても $\theta=\frac\pi2$($\cos\theta=0$)。2つの電荷の分を足して
       $$\sigma=2\Bigl(-\frac{q}{4\pi l}\frac{a^2-l^2}{(a^2+l^2)^{3/2}}+\frac{q}{4\pi al}\Bigr)=\boldsymbol{\frac{q}{2\pi}\Bigl(\frac{1}{al}-\frac{a^2-l^2}{l\,(a^2+l^2)^{3/2}}\Bigr)}.$$</p>
       <p>部分点は、鏡像電荷の配置(中心の電荷も)、それが条件を満たす理由(一意性)、$\sigma=\varepsilon_0E_n$、計算、にあるはずです。</p>
+      </details>
+    </div><!--kakomon-->
+    <div data-need="A" class="box kakomon renshu"><div class="label">練習 6-3(2023・2025年度 第2回中間 [3][2] と同じ型(球の誘導電荷)) <span class="need need-a">必須</span></div>
+      <p><b>問題</b> 原点中心・半径 $l$ の<b>接地された</b>導体球と、点 $(a,0,0)$($a\gt l$)の点電荷 $q$。球面上の点 $(0,l,0)$ の誘導電荷密度を求めよ。</p>
+      <details class="kk-ans"><summary>解答を見る</summary>
+      <p>接地されているので、鏡像は $\bigl(\frac{l^2}{a},0,0\bigr)$ の $-\frac laq$ だけ(中心の電荷は置かない)。点 $(0,l,0)$ は電荷の方向から見て $\theta=\frac\pi2$($\cos\theta=0$)なので、過去問の式 $\sigma_{\text{接地}}(\theta)$ に入れて
+      $$\boldsymbol{\sigma=-\frac{q}{4\pi l}\,\frac{a^2-l^2}{(a^2+l^2)^{3/2}}}.$$</p>
+      <p>過去問(接地されていない球)との違いは、$+\frac{q}{4\pi al}$ の項がないことだけ。問題文の「接地」の有無を必ず確かめる。</p>
+      </details>
+    </div><!--kakomon-->
+    <div data-need="A" class="box kakomon renshu"><div class="label">練習 6-4(2023年度 第2回中間 [3] の発展(帯電した球)) <span class="need need-a">必須</span></div>
+      <p><b>問題</b> 原点中心・半径 $l$ の、接地されていない導体球が、<b>総電荷 $Q$</b> をもっている。点 $(a,0,0)$($a\gt l$)に点電荷 $q$ を置いた。球面上の点 $(l,0,0)$ の誘導電荷密度を求めよ。</p>
+      <details class="kk-ans"><summary>解答を見る</summary>
+      <p>鏡像:$\bigl(\frac{l^2}{a},0,0\bigr)$ に $-\frac laq$(球面を等電位にする)。総電荷を $Q$ にするため、中心に $Q+\frac laq$(中心の電荷は球面を等電位のまま保つ)。一意性より、これで条件がすべて満たされる。</p>
+      <p>点 $(l,0,0)$ は電荷にいちばん近い点($\theta=0$、距離 $a-l$)。接地の分は $\sigma_{\text{接地}}(0)=-\frac{q}{4\pi l}\frac{a^2-l^2}{(a-l)^3}=-\frac{q(a+l)}{4\pi l(a-l)^2}$。中心の電荷の分は一様に $\frac{Q+lq/a}{4\pi l^2}$。
+      $$\boldsymbol{\sigma=-\frac{q(a+l)}{4\pi l(a-l)^2}+\frac{Q+\frac laq}{4\pi l^2}}.$$</p>
+      <p>確かめ:$Q=0$ なら過去問の型(後ろの項が $\frac{q}{4\pi al}$)。$q=0$ なら $\frac{Q}{4\pi l^2}$(一様に分布)。数値でも、球面が等電位で、総電荷が $Q$ になることを確認済み。</p>
       </details>
     </div><!--kakomon-->
 

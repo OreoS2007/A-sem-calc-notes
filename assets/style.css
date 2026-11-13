@@ -207,6 +207,9 @@ main h2[id], main h3[id], main section[id], main div[id] { scroll-margin-top: 68
 .box.kakomon details.kk-ans { margin-top: 8px; border-top: 1px dashed var(--border); padding-top: 6px; }
 .box.kakomon details.kk-ans > summary { cursor: pointer; font-weight: 700; color: #c62828; }
 @media (prefers-color-scheme: dark) { .box.kakomon > .label, .box.kakomon details.kk-ans > summary { color: #ff8a80; } }
+/* 過去問と同じ型の練習問題(オリジナル):橙の枠 */
+.box.kakomon.renshu { border-color: var(--thm); background: color-mix(in srgb, var(--surface) 94%, var(--thm) 6%); }
+.box.kakomon.renshu > .label, .box.kakomon.renshu details.kk-ans > summary { color: var(--thm); }
 
 /* ---- 過去問に対する必要度のラベル(em の各回のノート) ---- */
 .need { display: inline-block; font-size: .7rem; font-weight: 700; padding: 1px 8px; border-radius: 99px; margin-left: 8px; vertical-align: middle; border: 1px solid currentColor; white-space: nowrap; letter-spacing: 0; }

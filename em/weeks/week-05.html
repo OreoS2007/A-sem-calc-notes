@@ -236,6 +236,25 @@
       <p><b>確かめ</b>:$a\to0$(一様な球)で $\frac{3Q^2}{20\pi\varepsilon_0b}$。整理に時間を使いすぎない(積分の結果を代入した形まで書けば、大部分の点は取れるはず)。</p>
       </details>
     </div><!--kakomon-->
+    <div data-need="A" class="box kakomon renshu"><div class="label">練習 5-1(2023・2025年度 第1回中間 [5][4] と同じ型(系のエネルギー)) <span class="need need-a">必須</span></div>
+      <p><b>問題</b> 原点を中心とする半径 $a$ の球殻に $+Q$、半径 $b$($b\gt a$)の球殻に $-Q$ が一様に分布している。この系のエネルギーを求めよ。</p>
+      <details class="kk-ans"><summary>解答を見る</summary>
+      <p>ガウスの法則で電場:$r\lt a$ で 0、$a\lt r\lt b$ で $\frac{Q}{4\pi\varepsilon_0r^2}$、$r\gt b$ で 0(中の電荷が 0)。電場があるのは2つの球殻の間だけ。
+      $$U=\frac{\varepsilon_0}{2}\int_a^b\Bigl(\frac{Q}{4\pi\varepsilon_0r^2}\Bigr)^2 4\pi r^2\,dr=\frac{Q^2}{8\pi\varepsilon_0}\int_a^b\frac{dr}{r^2}=\boldsymbol{\frac{Q^2}{8\pi\varepsilon_0}\Bigl(\frac1a-\frac1b\Bigr)}.$$</p>
+      <p>別の方法($U=\frac12\int\rho\phi$):外の球殻の電位は 0(外側に電場がないので、無限遠と同じ)。内の球殻の電位は $\frac{Q}{4\pi\varepsilon_0}\bigl(\frac1a-\frac1b\bigr)$。$U=\frac12Q\phi_a+\frac12(-Q)\cdot0$ で同じ答え。(これは §4.3 の球形のコンデンサーです。)</p>
+      </details>
+    </div><!--kakomon-->
+    <div data-need="A" class="box kakomon renshu"><div class="label">練習 5-2(2025年度 第1回中間 [4] と同じ型(ガウス → エネルギー)) <span class="need need-a">必須</span></div>
+      <p><b>問題</b> 第4回の練習 4-3 の球(半径 $R$、電荷密度 $\rho=kr$)の、系のエネルギーを求めよ。</p>
+      <details class="kk-ans"><summary>解答を見る</summary>
+      <p>電場は $E=\frac{kr^2}{4\varepsilon_0}$($r\lt R$)、$\frac{kR^4}{4\varepsilon_0r^2}$($r\gt R$)。$U=\frac{\varepsilon_0}{2}\int E^2\,4\pi r^2dr$ を内と外に分ける:</p>
+      <ul>
+        <li>内:$\frac{\varepsilon_0}{2}\cdot\frac{k^2}{16\varepsilon_0^2}\cdot4\pi\int_0^Rr^6\,dr=\frac{\pi k^2}{8\varepsilon_0}\cdot\frac{R^7}{7}$。</li>
+        <li>外:$\frac{\varepsilon_0}{2}\cdot\frac{k^2R^8}{16\varepsilon_0^2}\cdot4\pi\int_R^\infty\frac{dr}{r^2}=\frac{\pi k^2}{8\varepsilon_0}\cdot R^7$。</li>
+      </ul>
+      <p>合計 $\frac{\pi k^2R^7}{8\varepsilon_0}\bigl(\frac17+1\bigr)=\boldsymbol{\frac{\pi k^2R^7}{7\varepsilon_0}}$。(数値積分で確認済み。)外側の寄与のほうが大きいことに注意:外を忘れると大きく減点されます。</p>
+      </details>
+    </div><!--kakomon-->
 
     <h3 id="s3-5" data-need="C">3.5 「相互作用エネルギー」と「場が持つエネルギー」 <span class="need need-c">参考</span></h3>
     <p data-need="C">さて、式 (3.33) を見ると、いかにも「空間中の各点の電場がエネルギー $\varepsilon_0|\bm{E}|^2/2$ を持っている」ように見えます。一方、元々のエネルギーの特徴づけ (3.27) は「電荷分布が電荷分布自身に対して作っている(ポテンシャル)エネルギー」でした。この二つは大きく異なる見方のようにも見えますが、実はそこまで異なるわけでもありません。例として、一方が壁に固定され、もう一方の先には質点がついているバネを考えましょう(図13)。質点を引っ張るには仕事が必要であり、引っ張った際にはエネルギーが蓄えられます。このエネルギーについて、以下の二通りの見方が可能です。</p>

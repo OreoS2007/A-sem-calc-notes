@@ -62,7 +62,7 @@
       <p>面積分の定義(何を足しているか、法線の向き)→ ストークスの定理の主張 → 講義ノートの問 [2-6] の解き方、の順に読みます。 過去問の解答:<a href="q2.html">過去問対策2 積分定理の計算</a></p>
     </div>
 
-    <h3 id="w2-s3-2">第2回 3.2 面積分(surface integral) <span class="need need-b">必要</span> </h3>
+    <h3 id="w2-s3-2">第2回 3.2 面積分(surface integral) <span class="need need-a">必須</span> </h3>
     <p style="font-size:.9em;color:var(--muted);margin-top:-4px">切り抜き元:<a href="../weeks/week-02.html#s3-2">第2回のノート 3.2 面積分(surface integral)</a></p>
     <p data-need="C">次に、別のベクトル場の積分として<b>面積分</b>を導入します。これは(特にここで述べたような形では)<b>3次元空間において</b>定義される積分です。考え方は、与えられた曲面 $S$ について「<b>その曲面 $S$ を貫くベクトルはどれだけあるか</b>」を積分するというものです。</p>
     <p data-need="C">たとえば、水が流れている状況で、ある面をどれだけ水が横切ったかを考えます。横切った水の量は水の流れの速度ベクトルによって決まりますが、これは速さだけでなく、<b>面に対する流れの向き</b>も重要です。図の (a) のように面に垂直に水が流れてきている場合に、一定時間内に面を通過した水の量が $V$ だとすると、(b) のように、同じ速さの流れでも斜めから水が入り込んでくる場合には、通過した水の量は $V\cos\theta$ になり、面が傾いているほど小さくなります。</p>
@@ -105,6 +105,23 @@
     </div>
 
     <!-- ===================== 4 ===================== -->
+    <div data-need="A" class="box kakomon renshu"><div class="label">練習 2-6(問 [2-4] と同じ型(面積分を球面座標で)) <span class="need need-a">必須</span></div>
+      <p><b>問題</b> $\bm{A}=(x,\ y,\ 0)$ の、半径1の球面の $z\ge0$ の部分(上半球、法線は外向き)での面積分を求めよ。</p>
+      <details class="kk-ans"><summary>解答を見る</summary>
+      <p>外向き法線 $\bm{n}=(x,y,z)$ なので $\bm{A}\cdot\bm{n}=x^2+y^2=\sin^2\theta$(z 軸からの距離の2乗)。面素 $dS=\sin\theta\,d\theta\,d\varphi$、$0\le\theta\le\frac\pi2$。
+      $$\int_0^{2\pi}d\varphi\int_0^{\pi/2}\sin^2\theta\cdot\sin\theta\,d\theta=2\pi\int_0^1(1-u^2)\,du=2\pi\cdot\frac23=\boldsymbol{\frac{4\pi}{3}}.$$
+      ($u=\cos\theta$、$du=-\sin\theta\,d\theta$ で置換。)</p>
+      <p>検算:底の円板($z=0$)では $\bm{A}$ は面に平行で、面積分は 0。$\nabla\cdot\bm{A}=2$ なので、ガウスの定理から $2\times$(半球の体積 $\frac{2\pi}{3}$)$=\frac{4\pi}{3}$。一致。</p>
+      </details>
+    </div><!--kakomon-->
+    <div data-need="A" class="box kakomon renshu"><div class="label">練習 2-7(問 [2-4] と同じ型(面積分を球面座標で)) <span class="need need-a">必須</span></div>
+      <p><b>問題</b> $\bm{A}=(0,\ 0,\ z^2)$ の、(1) 上半球(半径1、$z\ge0$、外向き)、(2) 球面全体(外向き)での面積分を求めよ。</p>
+      <details class="kk-ans"><summary>解答を見る</summary>
+      <p>(1) $\bm{A}\cdot\bm{n}=z^2\cdot z=\cos^3\theta$。
+      $$2\pi\int_0^{\pi/2}\cos^3\theta\sin\theta\,d\theta=2\pi\int_0^1u^3\,du=2\pi\cdot\frac14=\boldsymbol{\frac\pi2}.$$</p>
+      <p>(2) $\theta$ を $\pi$ まで:$2\pi\int_{-1}^{1}u^3\,du=\boldsymbol{0}$(奇関数)。下半球では $\bm{A}$ は上向き、法線は下向きなので、上半球と打ち消し合う。ガウスの定理でも、$\nabla\cdot\bm{A}=2z$ を球で積分すると、上下の対称性で 0。</p>
+      </details>
+    </div><!--kakomon-->
 
     <h3 id="w3-s2-1">第3回 2.1 結果:2つの定理 <span class="need need-a">必須</span> </h3>
     <p style="font-size:.9em;color:var(--muted);margin-top:-4px">切り抜き元:<a href="../weeks/week-03.html#s2-1">第3回のノート 2.1 結果:2つの定理</a></p>
@@ -205,6 +222,32 @@
       <p>採点で見られるのは、① ストークスの定理を使うと書く、② 縁で $z=0$ の確認、③ 回る<b>向き</b>、④ 2本に分けた計算。向きを逆にすると符号が逆になります。</p>
       </details>
     </div><!--kakomon-->
+    <div data-need="A" class="box kakomon renshu"><div class="label">練習 3-1(2023・2025年度 第1回中間 [2] と同じ型(ストークスで面積分)) <span class="need need-a">必須</span></div>
+      <p><b>問題</b> 曲面 $S$:$z=xy(1-x)(1-y)$($0\le x\le1$、$0\le y\le1$)、面積分の符号は $z$ 軸正の向きを正とする。次の面積分を求めよ。
+      $$\int_S\begin{pmatrix}-2z\\ \sin y-ze^{xz}\\ 3x^2+3y^2-z\cos y\end{pmatrix}\cdot d\bm{S}$$
+      被積分関数が $\nabla\times\bm{A}$、$\bm{A}=\bigl(-y^3+z\sin y,\ x^3+z^2,\ e^{xz}\bigr)$ と書けることは、証明なしに用いてよい。</p>
+      <details class="kk-ans"><summary>解答を見る</summary>
+      <p><b>(i) ストークスの定理</b>で $\oint_{\partial S}\bm{A}\cdot d\bm{x}$ にする。</p>
+      <p><b>(ii) 縁</b>:正方形の4辺 $x=0$、$x=1$、$y=0$、$y=1$ の上では $z=0$、$dz=0$。上から見て反時計回り($(0,0)\to(1,0)\to(1,1)\to(0,1)\to(0,0)$)。</p>
+      <p><b>(iii)</b> $z=0$ を入れると $\bm{A}\cdot d\bm{x}=-y^3\,dx+x^3\,dy$($e^{xz}$ の項は $dz=0$ で消える)。</p>
+      <p><b>(iv) 4辺</b>:</p>
+      <ul>
+        <li>下 $y=0$($x:0\to1$、$dy=0$):$-0\,dx$ なので 0。</li>
+        <li>右 $x=1$($y:0\to1$、$dx=0$):$\int_0^1 1\,dy=1$。</li>
+        <li>上 $y=1$($x:1\to0$、$dy=0$):$\int_1^0(-1)\,dx=1$。</li>
+        <li>左 $x=0$($y:1\to0$、$dx=0$):$0$。</li>
+      </ul>
+      <p><b>(v) 合計</b> $\boldsymbol{2}$。(検算:縁を変えない平らな面 $z=0$ に取り替えると、$z$ 成分 $3x^2+3y^2$ を正方形で積分して $1+1=2$。数値積分でも一致。)</p>
+      </details>
+    </div><!--kakomon-->
+    <div data-need="A" class="box kakomon renshu"><div class="label">練習 3-2(問 [2-5] と同じ型(ガウスで面積分)) <span class="need need-a">必須</span></div>
+      <p><b>問題</b> 半径1の球面全体(外向き)で、$\bm{A}=(x^3,\ y^3,\ z^3)$ の面積分を求めよ。</p>
+      <details class="kk-ans"><summary>解答を見る</summary>
+      <p>閉じた曲面なので<b>ガウスの定理</b>。$\nabla\cdot\bm{A}=3x^2+3y^2+3z^2=3r^2$。球殻に分けて
+      $$\int_V3r^2\,d\bm{x}=\int_0^13r^2\cdot4\pi r^2\,dr=12\pi\cdot\frac15=\boldsymbol{\frac{12\pi}{5}}.$$</p>
+      <p>直接計算なら $\bm{A}\cdot\bm{n}=x^4+y^4+z^4$。対称性で $3\int_Sz^4\,dS=3\cdot2\pi\int_{-1}^1u^4\,du=3\cdot\frac{4\pi}{5}$ で一致。</p>
+      </details>
+    </div><!--kakomon-->
 
     <h2 id="line">2. 線積分(定義どおりの計算)</h2>
     <div class="box note-box"><div class="label">出題された過去問</div>
@@ -290,6 +333,30 @@
       <p><b>試験での書き方(2点)。</b>① $x$ をパラメータにして $y=x^3-x$、$dy=(3x^2-1)\,dx$ と書く。② 代入した被積分関数 $(4x^4-2x^2)\,dx$ を書く。③ $\int_0^{-1}$ で計算して、答え $-\frac{2}{15}$。</p>
       </details>
     </div><!--kakomon-->
+    <div data-need="A" class="box kakomon renshu"><div class="label">練習 2-3(2023年度 第2回中間 [1] と同じ型(線積分を定義どおりに)) <span class="need need-a">必須</span></div>
+      <p><b>問題</b> 曲線 $C$:$y=x^2$ に沿って、点 $(0,0)$ から点 $(1,1)$ まで、ベクトル $\bm{A}=(y,\ x^2)$ を線積分せよ。</p>
+      <details class="kk-ans"><summary>解答を見る</summary>
+      <p>$x$ をパラメータにする:$y=x^2$、$dy=2x\,dx$、$x:0\to1$。$y$ を代入して
+      $$\int_C(A_x\,dx+A_y\,dy)=\int_0^1\bigl(x^2+x^2\cdot2x\bigr)dx=\int_0^1(x^2+2x^3)\,dx=\frac13+\frac12=\boldsymbol{\frac56}.$$</p>
+      </details>
+    </div><!--kakomon-->
+    <div data-need="A" class="box kakomon renshu"><div class="label">練習 2-4(2023年度 第2回中間 [1] と同じ型(向きに注意)) <span class="need need-a">必須</span></div>
+      <p><b>問題</b> $\bm{A}=(-y,\ x)$ を、単位円の上を (1) $(1,0)$ から $(0,1)$ まで反時計回りに、(2) 同じ円弧を $(0,1)$ から $(1,0)$ まで、それぞれ線積分せよ。</p>
+      <details class="kk-ans"><summary>解答を見る</summary>
+      <p>(1) $\bm{x}(s)=(\cos s,\ \sin s)$($s:0\to\frac\pi2$)とすると $\frac{d\bm{x}}{ds}=(-\sin s,\ \cos s)$、$\bm{A}=(-\sin s,\ \cos s)$。
+      $$\int_0^{\pi/2}\bm{A}\cdot\frac{d\bm{x}}{ds}\,ds=\int_0^{\pi/2}(\sin^2s+\cos^2s)\,ds=\boldsymbol{\frac\pi2}.$$</p>
+      <p>(2) 同じパラメータで $s:\frac\pi2\to0$ と進むので $\int_{\pi/2}^{0}1\,ds=\boldsymbol{-\frac\pi2}$。<b>向きを逆にすると、符号だけが変わる</b>。</p>
+      <p>意味:$\bm{A}=(-y,x)$ は原点のまわりを反時計回りに回る場で、円の接線方向にいつも大きさ1。だから「進んだ長さ」がそのまま答えになります。</p>
+      </details>
+    </div><!--kakomon-->
+    <div data-need="A" class="box kakomon renshu"><div class="label">練習 2-5(問 [2-3] と同じ型(3次元の曲線)) <span class="need need-a">必須</span></div>
+      <p><b>問題</b> らせん $\bm{x}(s)=(\cos s,\ \sin s,\ s)$($0\le s\le2\pi$)に沿って、$\bm{A}=(z,\ x,\ y)$ を線積分せよ。</p>
+      <details class="kk-ans"><summary>解答を見る</summary>
+      <p>$\frac{d\bm{x}}{ds}=(-\sin s,\ \cos s,\ 1)$、曲線上で $\bm{A}=(s,\ \cos s,\ \sin s)$。
+      $$\bm{A}\cdot\frac{d\bm{x}}{ds}=-s\sin s+\cos^2s+\sin s.$$
+      各項:$\int_0^{2\pi}(-s\sin s)\,ds=\bigl[s\cos s-\sin s\bigr]_0^{2\pi}=2\pi$(部分積分)、$\int_0^{2\pi}\cos^2s\,ds=\pi$($\cos^2$ の平均は $\frac12$)、$\int_0^{2\pi}\sin s\,ds=0$。合計 $\boldsymbol{3\pi}$。</p>
+      </details>
+    </div><!--kakomon-->
 
     <h2 id="gauss">3. 対称性 + ガウスの法則で電場</h2>
     <div class="box note-box"><div class="label">出題された過去問</div>
@@ -352,6 +419,23 @@
       $$4\pi a^2E=\frac{Qa^3}{\varepsilon_0r^3},\qquad E=\frac{Qa}{4\pi\varepsilon_0r^3}.$$
       点 $(a,0,0)$ での動径方向は $+x$ なので $\boldsymbol{\bm{E}=\Bigl(\dfrac{Qa}{4\pi\varepsilon_0r^3},\ 0,\ 0\Bigr)}$。</p>
       <p>注意:問題文の $r$ は<b>球の半径</b>(定数)で、観測点までの距離は $a$。文字がいつもと入れ替わっています。$a\to r$(表面)で $\frac{Q}{4\pi\varepsilon_0r^2}$ になるかで確かめる。</p>
+      </details>
+    </div><!--kakomon-->
+    <div data-need="A" class="box kakomon renshu"><div class="label">練習 4-3(2023年度 第1回中間 [3] と同じ型(対称性 + ガウス)) <span class="need need-a">必須</span></div>
+      <p><b>問題</b> 半径 $R$ の球の内部に、中心からの距離 $r$ に比例する電荷密度 $\rho(r)=kr$($k$ は定数)で電荷がある。電場を、球の内外で求めよ。</p>
+      <details class="kk-ans"><summary>解答を見る</summary>
+      <p>球対称なので、電場は動径方向で大きさは $r$ だけで決まる。半径 $r$ の球面に<b>積分型ガウスの法則</b>:$4\pi r^2E(r)=Q_{\text{内}}/\varepsilon_0$。</p>
+      <p>密度が一様でないので、中の電荷は<b>球殻に分けて積分</b>する:$r\lt R$ で $Q_{\text{内}}=\int_0^rkr'\cdot4\pi r'^2\,dr'=\pi kr^4$。$r\gt R$ では全電荷 $\pi kR^4$。
+      $$E(r)=\begin{cases}\dfrac{kr^2}{4\varepsilon_0}&(r\lt R)\\[8pt]\dfrac{kR^4}{4\varepsilon_0r^2}&(r\gt R)\end{cases}$$</p>
+      <p>確かめ:$r=R$ で両方 $\frac{kR^2}{4\varepsilon_0}$ になり、つながる。一様な球($E\propto r$)と違い、中では $r^2$ に比例。</p>
+      </details>
+    </div><!--kakomon-->
+    <div data-need="A" class="box kakomon renshu"><div class="label">練習 4-4(2023年度 第1回中間 [3] と同じ型(対称性 + ガウス)) <span class="need need-a">必須</span></div>
+      <p><b>問題</b> 原点に点電荷 $q$ があり、原点を中心とする半径 $a$ の球殻に、総電荷 $-q$ が一様に分布している。電場を求めよ。</p>
+      <details class="kk-ans"><summary>解答を見る</summary>
+      <p>球対称なので、半径 $r$ の球面にガウスの法則。中の電荷は、$r\lt a$ で $q$、$r\gt a$ で $q-q=0$。
+      $$\boldsymbol{E(r)=\frac{q}{4\pi\varepsilon_0r^2}\ (r\lt a),\qquad E(r)=0\ (r\gt a)}$$
+      (向きは動径方向)。外から見ると、全体の電荷が 0 なので電場がない(球殻が点電荷の電場を「閉じ込める」)。</p>
       </details>
     </div><!--kakomon-->
 
@@ -446,6 +530,25 @@
       <p><b>確かめ</b>:$a\to0$(一様な球)で $\frac{3Q^2}{20\pi\varepsilon_0b}$。整理に時間を使いすぎない(積分の結果を代入した形まで書けば、大部分の点は取れるはず)。</p>
       </details>
     </div><!--kakomon-->
+    <div data-need="A" class="box kakomon renshu"><div class="label">練習 5-1(2023・2025年度 第1回中間 [5][4] と同じ型(系のエネルギー)) <span class="need need-a">必須</span></div>
+      <p><b>問題</b> 原点を中心とする半径 $a$ の球殻に $+Q$、半径 $b$($b\gt a$)の球殻に $-Q$ が一様に分布している。この系のエネルギーを求めよ。</p>
+      <details class="kk-ans"><summary>解答を見る</summary>
+      <p>ガウスの法則で電場:$r\lt a$ で 0、$a\lt r\lt b$ で $\frac{Q}{4\pi\varepsilon_0r^2}$、$r\gt b$ で 0(中の電荷が 0)。電場があるのは2つの球殻の間だけ。
+      $$U=\frac{\varepsilon_0}{2}\int_a^b\Bigl(\frac{Q}{4\pi\varepsilon_0r^2}\Bigr)^2 4\pi r^2\,dr=\frac{Q^2}{8\pi\varepsilon_0}\int_a^b\frac{dr}{r^2}=\boldsymbol{\frac{Q^2}{8\pi\varepsilon_0}\Bigl(\frac1a-\frac1b\Bigr)}.$$</p>
+      <p>別の方法($U=\frac12\int\rho\phi$):外の球殻の電位は 0(外側に電場がないので、無限遠と同じ)。内の球殻の電位は $\frac{Q}{4\pi\varepsilon_0}\bigl(\frac1a-\frac1b\bigr)$。$U=\frac12Q\phi_a+\frac12(-Q)\cdot0$ で同じ答え。(これは §4.3 の球形のコンデンサーです。)</p>
+      </details>
+    </div><!--kakomon-->
+    <div data-need="A" class="box kakomon renshu"><div class="label">練習 5-2(2025年度 第1回中間 [4] と同じ型(ガウス → エネルギー)) <span class="need need-a">必須</span></div>
+      <p><b>問題</b> 第4回の練習 4-3 の球(半径 $R$、電荷密度 $\rho=kr$)の、系のエネルギーを求めよ。</p>
+      <details class="kk-ans"><summary>解答を見る</summary>
+      <p>電場は $E=\frac{kr^2}{4\varepsilon_0}$($r\lt R$)、$\frac{kR^4}{4\varepsilon_0r^2}$($r\gt R$)。$U=\frac{\varepsilon_0}{2}\int E^2\,4\pi r^2dr$ を内と外に分ける:</p>
+      <ul>
+        <li>内:$\frac{\varepsilon_0}{2}\cdot\frac{k^2}{16\varepsilon_0^2}\cdot4\pi\int_0^Rr^6\,dr=\frac{\pi k^2}{8\varepsilon_0}\cdot\frac{R^7}{7}$。</li>
+        <li>外:$\frac{\varepsilon_0}{2}\cdot\frac{k^2R^8}{16\varepsilon_0^2}\cdot4\pi\int_R^\infty\frac{dr}{r^2}=\frac{\pi k^2}{8\varepsilon_0}\cdot R^7$。</li>
+      </ul>
+      <p>合計 $\frac{\pi k^2R^7}{8\varepsilon_0}\bigl(\frac17+1\bigr)=\boldsymbol{\frac{\pi k^2R^7}{7\varepsilon_0}}$。(数値積分で確認済み。)外側の寄与のほうが大きいことに注意:外を忘れると大きく減点されます。</p>
+      </details>
+    </div><!--kakomon-->
 
     <h2 id="coulomb">5. クーロンの法則の積分</h2>
     <div class="box note-box"><div class="label">出題された過去問</div>
@@ -516,6 +619,24 @@
       $$E_x=\frac{\rho a}{4\pi\varepsilon_0}\int_{-l}^{l}\frac{dz}{(a^2+z^2)^{3/2}}=\frac{\rho a}{4\pi\varepsilon_0}\Bigl[\frac{z}{a^2\sqrt{a^2+z^2}}\Bigr]_{-l}^{l}=\boldsymbol{\frac{\rho\,l}{2\pi\varepsilon_0\,a\sqrt{a^2+l^2}}}.$$
       ($\int\frac{dz}{(a^2+z^2)^{3/2}}$ は $z=a\tan\theta$ で求まる。答えを微分して確かめるのが確実。)</p>
       <p><b>(iv) 確かめ</b>:$l\to\infty$ で $\frac{\rho}{2\pi\varepsilon_0a}$(無限に長い線電荷、下の例 3.2)。</p>
+      </details>
+    </div><!--kakomon-->
+    <div data-need="A" class="box kakomon renshu"><div class="label">練習 4-1(2023・2025年度 第1回中間 [4][3] と同じ型(クーロンの積分)) <span class="need need-a">必須</span></div>
+      <p><b>問題</b> $xy$ 面内の、原点を中心とする半径 $l$ の半円($y\ge0$ の部分)に、一様線密度 $\lambda$ で電荷が分布している。原点の電場を求めよ。</p>
+      <details class="kk-ans"><summary>解答を見る</summary>
+      <p>角度 $\varphi$($0\le\varphi\le\pi$)の位置 $(l\cos\varphi,\ l\sin\varphi,\ 0)$ の小さな電荷は $\lambda l\,d\varphi$。原点での電場は、電荷から原点へ向かう向き $-(\cos\varphi,\ \sin\varphi,\ 0)$ で、大きさ $\frac{\lambda l\,d\varphi}{4\pi\varepsilon_0l^2}$。</p>
+      <p><b>対称性</b>:$y$ 軸について左右対称なので $E_x=0$。$y$ 成分を足すと
+      $$E_y=-\frac{\lambda}{4\pi\varepsilon_0l}\int_0^\pi\sin\varphi\,d\varphi=-\frac{2\lambda}{4\pi\varepsilon_0l},\qquad\boldsymbol{\bm{E}=\Bigl(0,\ -\frac{\lambda}{2\pi\varepsilon_0l},\ 0\Bigr)}.$$</p>
+      <p>確かめ:円全体なら、反対側の半円と打ち消し合って 0(円環の中心の電場は 0)。</p>
+      </details>
+    </div><!--kakomon-->
+    <div data-need="A" class="box kakomon renshu"><div class="label">練習 4-2(2023年度 第1回中間 [4] と同じ型(対称性がない場合)) <span class="need need-a">必須</span></div>
+      <p><b>問題</b> $z$ 軸の $0\le z\le L$ の上に、一様線密度 $\rho$ の電荷がある。点 $(a,0,0)$($a\gt0$)の電場を求めよ。</p>
+      <details class="kk-ans"><summary>解答を見る</summary>
+      <p>過去問と違い、点が線の真ん中の横にないので、<b>$z\to-z$ の対称性がなく、$E_z\ne0$</b>。位置 $z$ の電荷 $\rho\,dz$ から点へのベクトルは $(a,\ 0,\ -z)$、距離 $\sqrt{a^2+z^2}$。</p>
+      $$E_x=\frac{\rho a}{4\pi\varepsilon_0}\int_0^L\frac{dz}{(a^2+z^2)^{3/2}}=\boldsymbol{\frac{\rho L}{4\pi\varepsilon_0a\sqrt{a^2+L^2}}},$$
+      $$E_z=-\frac{\rho}{4\pi\varepsilon_0}\int_0^L\frac{z\,dz}{(a^2+z^2)^{3/2}}=-\frac{\rho}{4\pi\varepsilon_0}\Bigl[-\frac{1}{\sqrt{a^2+z^2}}\Bigr]_0^L=\boldsymbol{-\frac{\rho}{4\pi\varepsilon_0}\Bigl(\frac1a-\frac{1}{\sqrt{a^2+L^2}}\Bigr)}.$$
+      <p>($E_z$ の積分は $u=a^2+z^2$ で置換。$E_x$ の積分は過去問と同じ $z=a\tan\theta$。)$E_z\lt0$:電荷はすべて $z\ge0$ にあるので、下向きに押される。確かめ:$L\to\infty$ で $E_x\to\frac{\rho}{4\pi\varepsilon_0a}$(無限に長い線の電場のちょうど半分)。</p>
       </details>
     </div><!--kakomon-->
 
@@ -600,6 +721,17 @@
       <p>つまずきポイント:P を「鏡像の位置」と勘違いしない。鏡像は面 $y=0$ についての対称点 $(a,-b,0)$ で、P は真空中の別の点です。</p>
       </details>
     </div><!--kakomon-->
+    <div data-need="A" class="box kakomon renshu"><div class="label">練習 6-1(2025年度 第2回中間 [1] と同じ型(平面の鏡像)) <span class="need need-a">必須</span></div>
+      <p><b>問題</b> $z\le0$ の領域に接地された導体がある。点 $(0,0,d)$ に点電荷 $q$ を置く。(1) 点 $(0,0,2d)$ の電場を求めよ。(2) 導体表面の点 $(x,y,0)$ の誘導電荷密度 $\sigma$ を求め、その総和が $-q$ であることを確かめよ。</p>
+      <details class="kk-ans"><summary>解答を見る</summary>
+      <p>鏡像電荷 $-q$ を $(0,0,-d)$ に置く(面 $z=0$ 上で電位 0。一意性より、$z\gt0$ ではこれが答え)。</p>
+      <p>(1) $q$ からの距離 $d$、$-q$ からの距離 $3d$。どちらも $z$ 方向で
+      $$E_z=\frac{q}{4\pi\varepsilon_0d^2}-\frac{q}{4\pi\varepsilon_0(3d)^2}=\frac{q}{4\pi\varepsilon_0d^2}\cdot\frac89=\boldsymbol{\frac{2q}{9\pi\varepsilon_0d^2}}.$$</p>
+      <p>(2) 表面の点で、2つの電荷の電場の横向き成分は打ち消し、$z$ 成分は同じ向き(下向き)に足し合う:$E_z=-2\cdot\frac{q}{4\pi\varepsilon_0}\frac{d}{(x^2+y^2+d^2)^{3/2}}$。導体から外向きの法線は $+z$ なので $\sigma=\varepsilon_0E_z$:
+      $$\boldsymbol{\sigma=-\frac{qd}{2\pi(x^2+y^2+d^2)^{3/2}}}.$$
+      総和:$\rho=\sqrt{x^2+y^2}$ として円環に分けると $\int_0^\infty\sigma\cdot2\pi\rho\,d\rho=-qd\Bigl[-\frac{1}{\sqrt{\rho^2+d^2}}\Bigr]_0^\infty=-q$。</p>
+      </details>
+    </div><!--kakomon-->
 
     <h3 id="w6-s3-3">第6回 3.3 問 [4-1]:2枚の平行な導体板 <span class="need need-a">必須</span> </h3>
     <p style="font-size:.9em;color:var(--muted);margin-top:-4px">切り抜き元:<a href="../weeks/week-06.html#s3-3">第6回のノート 3.3 問 [4-1]:2枚の平行な導体板</a></p>
@@ -627,6 +759,20 @@
       <p>$(-a,b,0)$ に $-q$、$(a,-b,0)$ に $-q$、$(-a,-b,0)$ に $+q$ の<b>3つ</b>。4つの電荷が長方形の頂点に並び、<b>対角の位置どうしは同じ符号</b>。</p>
       <p>確かめ:面 $x=0$ について、$q$ と $(-a,b,0)$ の $-q$、$(a,-b,0)$ の $-q$ と $(-a,-b,0)$ の $+q$ が、それぞれ符号反対の対になるので、$x=0$ 上の電位は 0。面 $y=0$ についても同様。</p>
       <p>直感:2枚の鏡を直角に置くと、像は3つ見える(合わせ鏡)。1回反射した像は $-q$、2回反射した像は $+q$。</p>
+      </details>
+    </div><!--kakomon-->
+    <div data-need="A" class="box kakomon renshu"><div class="label">練習 6-2(2023年度 第2回中間 [2] と同じ型(直角の角)) <span class="need need-a">必須</span></div>
+      <p><b>問題</b> 過去問と同じ直角の角($x\le0$ または $y\le0$ が接地された導体)で、点電荷 $q$ を $(a,a,0)$ に置いた。電荷 $q$ にはたらく力を求めよ。</p>
+      <details class="kk-ans"><summary>解答を見る</summary>
+      <p>鏡像:$(-a,a,0)$ に $-q$、$(a,-a,0)$ に $-q$、$(-a,-a,0)$ に $+q$。$q$ が受ける力は、この3つの電荷からのクーロン力の和(導体からの力と同じ)。</p>
+      <ul>
+        <li>$(-a,a,0)$ の $-q$(距離 $2a$、$-x$ 向きに引かれる):$-\frac{q^2}{4\pi\varepsilon_0(2a)^2}(1,0,0)$。</li>
+        <li>$(a,-a,0)$ の $-q$:$-\frac{q^2}{4\pi\varepsilon_0(2a)^2}(0,1,0)$。</li>
+        <li>$(-a,-a,0)$ の $+q$(距離 $2\sqrt2a$、斜めに押される):$\frac{q^2}{4\pi\varepsilon_0(2\sqrt2a)^2}\cdot\frac{(1,1,0)}{\sqrt2}$。</li>
+      </ul>
+      <p>合計:
+      $$\boldsymbol{\bm{F}=\frac{q^2}{16\pi\varepsilon_0a^2}\Bigl(-1+\frac{1}{2\sqrt2}\Bigr)(1,\ 1,\ 0)}.$$
+      括弧は負なので、電荷は<b>角に向かって引かれる</b>(数値で確認済み)。</p>
       </details>
     </div><!--kakomon-->
 
@@ -738,6 +884,23 @@
       <p>部分点は、鏡像電荷の配置(中心の電荷も)、それが条件を満たす理由(一意性)、$\sigma=\varepsilon_0E_n$、計算、にあるはずです。</p>
       </details>
     </div><!--kakomon-->
+    <div data-need="A" class="box kakomon renshu"><div class="label">練習 6-3(2023・2025年度 第2回中間 [3][2] と同じ型(球の誘導電荷)) <span class="need need-a">必須</span></div>
+      <p><b>問題</b> 原点中心・半径 $l$ の<b>接地された</b>導体球と、点 $(a,0,0)$($a\gt l$)の点電荷 $q$。球面上の点 $(0,l,0)$ の誘導電荷密度を求めよ。</p>
+      <details class="kk-ans"><summary>解答を見る</summary>
+      <p>接地されているので、鏡像は $\bigl(\frac{l^2}{a},0,0\bigr)$ の $-\frac laq$ だけ(中心の電荷は置かない)。点 $(0,l,0)$ は電荷の方向から見て $\theta=\frac\pi2$($\cos\theta=0$)なので、過去問の式 $\sigma_{\text{接地}}(\theta)$ に入れて
+      $$\boldsymbol{\sigma=-\frac{q}{4\pi l}\,\frac{a^2-l^2}{(a^2+l^2)^{3/2}}}.$$</p>
+      <p>過去問(接地されていない球)との違いは、$+\frac{q}{4\pi al}$ の項がないことだけ。問題文の「接地」の有無を必ず確かめる。</p>
+      </details>
+    </div><!--kakomon-->
+    <div data-need="A" class="box kakomon renshu"><div class="label">練習 6-4(2023年度 第2回中間 [3] の発展(帯電した球)) <span class="need need-a">必須</span></div>
+      <p><b>問題</b> 原点中心・半径 $l$ の、接地されていない導体球が、<b>総電荷 $Q$</b> をもっている。点 $(a,0,0)$($a\gt l$)に点電荷 $q$ を置いた。球面上の点 $(l,0,0)$ の誘導電荷密度を求めよ。</p>
+      <details class="kk-ans"><summary>解答を見る</summary>
+      <p>鏡像:$\bigl(\frac{l^2}{a},0,0\bigr)$ に $-\frac laq$(球面を等電位にする)。総電荷を $Q$ にするため、中心に $Q+\frac laq$(中心の電荷は球面を等電位のまま保つ)。一意性より、これで条件がすべて満たされる。</p>
+      <p>点 $(l,0,0)$ は電荷にいちばん近い点($\theta=0$、距離 $a-l$)。接地の分は $\sigma_{\text{接地}}(0)=-\frac{q}{4\pi l}\frac{a^2-l^2}{(a-l)^3}=-\frac{q(a+l)}{4\pi l(a-l)^2}$。中心の電荷の分は一様に $\frac{Q+lq/a}{4\pi l^2}$。
+      $$\boldsymbol{\sigma=-\frac{q(a+l)}{4\pi l(a-l)^2}+\frac{Q+\frac laq}{4\pi l^2}}.$$</p>
+      <p>確かめ:$Q=0$ なら過去問の型(後ろの項が $\frac{q}{4\pi al}$)。$q=0$ なら $\frac{Q}{4\pi l^2}$(一様に分布)。数値でも、球面が等電位で、総電荷が $Q$ になることを確認済み。</p>
+      </details>
+    </div><!--kakomon-->
 
     <h2 id="proof">8. 証明:調和関数とエネルギー最小化</h2>
     <div class="box note-box"><div class="label">出題された過去問</div>
@@ -792,6 +955,15 @@
       $$\int_V|\nabla f|^2d\bm{x}-\int_V|\nabla\phi|^2d\bm{x}=\int_V|\nabla e|^2d\bm{x}\ \ge\ 0.$$
       よって $\phi$ が最小を与え、$f^*=\phi$。(等号は $\nabla e=\bm{0}$ のとき。境界で $e=0$ なので $e\equiv0$、つまり最小にするのは $\phi$ だけ。)$\blacksquare$</p>
       <p>問題文の「注」が採点基準です。<b>境界で $e=0$、$\Delta\phi=0$、ガウスの定理</b>を、使った場所ごとに書きます。</p>
+      </details>
+    </div><!--kakomon-->
+    <div data-need="A" class="box kakomon renshu"><div class="label">練習 3-3(2025年度 第1回中間 [1] と同じ型(ガウスの定理を使う証明)) <span class="need need-a">必須</span></div>
+      <p><b>問題</b> 閉領域 $V$ で $\Delta\psi=0$、境界 $\partial V$ で $\psi=0$ ならば、$V$ 全体で $\psi=0$ であることを、$\int_V|\nabla\psi|^2d\bm{x}$ を使って示せ。(どの定理を使ったか書くこと)</p>
+      <details class="kk-ans"><summary>解答を見る</summary>
+      <p>積の微分と <b>$\Delta\psi=0$</b> より $\nabla\cdot(\psi\nabla\psi)=|\nabla\psi|^2+\psi\,\Delta\psi=|\nabla\psi|^2$。<b>ガウスの定理</b>から
+      $$\int_V|\nabla\psi|^2d\bm{x}=\int_V\nabla\cdot(\psi\nabla\psi)\,d\bm{x}=\int_{\partial V}\psi\,\nabla\psi\cdot d\bm{S}=0\qquad(\partial V\text{ 上で }\psi=0).$$
+      $|\nabla\psi|^2\ge0$ の積分が 0 なので、$V$ 全体で $\nabla\psi=\bm{0}$、つまり $\psi$ は定数。境界で 0 なので $\psi\equiv0$。$\blacksquare$</p>
+      <p>使い道:ディリクレ問題の2つの解 $\psi,\eta$ の差 $\kappa=\psi-\eta$ にこれを使うと、<b>解の一意性</b>の別証明になります(3.3 節の最大値原理を使う証明とは別の方法)。過去問 [1] と同じく、$\nabla\cdot(e\nabla\phi)$ の形を作るのが鍵です。</p>
       </details>
     </div><!--kakomon-->
     <div data-need="C" class="box intuit">
@@ -890,6 +1062,25 @@
       $$=\underbrace{\sum_jB_j\partial_jA_i}_{T}+\underbrace{A_i\sum_j\partial_jB_j}_{Q}-\underbrace{\sum_jA_j\partial_jB_i}_{S}-\underbrace{B_i\sum_j\partial_jA_j}_{R}.$$
       よって $\boldsymbol{\nabla\times(\bm{A}\times\bm{B})=Q-R-S+T}$($P$ は出てこない)。</p>
       <p>覚え方:「$\varepsilon\varepsilon$ の公式で2項 → それぞれ積の微分で2項 → 合計4項」。</p>
+      </details>
+    </div><!--kakomon-->
+    <div data-need="A" class="box kakomon renshu"><div class="label">練習 2-1(2023年度 第1回中間 [1] と同じ型(ε で恒等式)) <span class="need need-a">必須</span></div>
+      <p><b>問題</b> $\nabla\cdot(\bm{A}\times\bm{B})=\bm{B}\cdot(\nabla\times\bm{A})-\bm{A}\cdot(\nabla\times\bm{B})$ を、$\varepsilon_{ijk}$ を使って示せ。</p>
+      <details class="kk-ans"><summary>解答を見る</summary>
+      <p>成分で書くと $\nabla\cdot(\bm{A}\times\bm{B})=\sum_i\partial_i\sum_{j,k}\varepsilon_{ijk}A_jB_k$。積の微分で2つに分ける:
+      $$=\sum_{i,j,k}\varepsilon_{ijk}(\partial_iA_j)B_k+\sum_{i,j,k}\varepsilon_{ijk}A_j(\partial_iB_k).$$</p>
+      <p><b>1項目</b>:添字を巡回させても $\varepsilon$ は変わらない($\varepsilon_{ijk}=\varepsilon_{kij}$)ので、$\sum_kB_k\sum_{i,j}\varepsilon_{kij}\partial_iA_j=\sum_kB_k(\nabla\times\bm{A})_k=\bm{B}\cdot(\nabla\times\bm{A})$。</p>
+      <p><b>2項目</b>:2つの添字を入れ替えると符号が変わる($\varepsilon_{ijk}=-\varepsilon_{jik}$)ので、$-\sum_jA_j\sum_{i,k}\varepsilon_{jik}\partial_iB_k=-\bm{A}\cdot(\nabla\times\bm{B})$。$\blacksquare$</p>
+      <p>ポイント:$(\nabla\times\bm{A})_k=\sum_{i,j}\varepsilon_{kij}\partial_iA_j$ の形(<b>回転の成分の添字が先頭</b>)に並べ替えるだけです。</p>
+      </details>
+    </div><!--kakomon-->
+    <div data-need="A" class="box kakomon renshu"><div class="label">練習 2-2(2023年度 第1回中間 [1] と同じ型(ε で恒等式)) <span class="need need-a">必須</span></div>
+      <p><b>問題</b> スカラー場 $\phi$ とベクトル場 $\bm{A}$ について、$\nabla\times(\phi\bm{A})$ を $\phi$、$\nabla\phi$、$\bm{A}$、$\nabla\times\bm{A}$ で表せ。</p>
+      <details class="kk-ans"><summary>解答を見る</summary>
+      <p>$[\nabla\times(\phi\bm{A})]_i=\sum_{j,k}\varepsilon_{ijk}\partial_j(\phi A_k)=\phi\sum_{j,k}\varepsilon_{ijk}\partial_jA_k+\sum_{j,k}\varepsilon_{ijk}(\partial_j\phi)A_k$。</p>
+      <p>1項目は $\phi(\nabla\times\bm{A})_i$、2項目は外積の定義そのもので $(\nabla\phi\times\bm{A})_i$。よって
+      $$\boldsymbol{\nabla\times(\phi\bm{A})=\phi\,\nabla\times\bm{A}+\nabla\phi\times\bm{A}}.$$</p>
+      <p>確かめ:$\bm{A}$ が定ベクトルなら $\nabla\times\bm{A}=\bm{0}$ で、答えは $\nabla\phi\times\bm{A}$ だけ。順番を $\bm{A}\times\nabla\phi$ にすると符号が逆なので注意。</p>
       </details>
     </div><!--kakomon-->
 
