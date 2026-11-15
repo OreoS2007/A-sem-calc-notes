@@ -61,3 +61,5 @@ h2 { font-size: 1.3rem; margin: 32px 0 8px; }
   .para .row > .en, .para .row > .ja { margin: 0; }
   body.hide-ja .para .row { grid-template-columns: 1fr; }
 }
+
+.pbi { color: var(--muted); font-family: system-ui, sans-serif; font-size: .72rem; white-space: nowrap; }
