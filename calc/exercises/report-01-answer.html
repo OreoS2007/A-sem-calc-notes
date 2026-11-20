@@ -90,10 +90,7 @@
     (2) の点では $\varphi_x=\varphi_y=0$ であるから，これらの式で $\varphi_x,\varphi_y$ を含む項は消えて
     $$\varphi_{xx}=-\frac{f_{xx}}{f_z}=-\frac{2}{f_z},\qquad \varphi_{xy}=-\frac{f_{xy}}{f_z}=-\frac{2y-z}{f_z},\qquad \varphi_{yy}=-\frac{f_{yy}}{f_z}=-\frac{2x}{f_z}$$
     を得る．</p>
-    <p><b>判定法.</b> $C^2$ 級の関数 $g(x,y)$ が $(a,b)$ で $g_x=g_y=0$ を満たすとし，$A=g_{xx}(a,b)$，$B=g_{xy}(a,b)$，$C=g_{yy}(a,b)$，$D=AC-B^2$ とおく．このとき，$D\gt0,\ A\gt0$ ならば $g$ は $(a,b)$ で極小，$D\gt0,\ A\lt0$ ならば極大，$D\lt0$ ならば極値をとらない．</p>
-    <p>(証明) テイラーの定理より，ある $0\lt\theta\lt1$ について
-    $$g(a+h,b+k)-g(a,b)=\tfrac12\bigl(g_{xx}h^2+2g_{xy}hk+g_{yy}k^2\bigr)\big|_{(a+\theta h,\,b+\theta k)}.$$
-    $Q(h,k)=Ah^2+2Bhk+Ck^2$ とおき，$\begin{pmatrix}A&B\\B&C\end{pmatrix}$ の固有値を $\lambda_1\le\lambda_2$ とすると，$\lambda_1(h^2+k^2)\le Q(h,k)\le\lambda_2(h^2+k^2)$，$\lambda_1\lambda_2=D$ である．$D\gt0$，$A=Q(1,0)\gt0$ ならば $\lambda_1\gt0$ であり，2階偏導関数の連続性から，$(h,k)\ne(0,0)$ が十分小さいとき右辺は $\tfrac{\lambda_1}{4}(h^2+k^2)$ 以上となって正である．よって極小である．$A\lt0$ の場合は $-g$ を考えればよい．$D\lt0$ ならば $\lambda_1\lt0\lt\lambda_2$ であり，それぞれの固有ベクトルの方向に動くと右辺の符号が異なるので，極値ではない．(証明終)</p>
+    <p><b>判定法</b>(テイラーの定理による2次近似から従う，2変数関数の極値の判定法)．$C^2$ 級の関数 $g(x,y)$ が $(a,b)$ で $g_x=g_y=0$ を満たすとし，$A=g_{xx}(a,b)$，$B=g_{xy}(a,b)$，$C=g_{yy}(a,b)$，$D=AC-B^2$ とおく．このとき，$D\gt0,\ A\gt0$ ならば $g$ は $(a,b)$ で極小，$D\gt0,\ A\lt0$ ならば極大，$D\lt0$ ならば極値をとらない．</p>
     <p>これを $g=\varphi$ に適用する．$D=\varphi_{xx}\varphi_{yy}-\varphi_{xy}^{\,2}$ として，各点での値は次のとおりである．</p>
     <div class="tscroll" style="position:relative"><table class="cmp">
       <tr><th>$(x,y,z)$</th><th>$f_z$</th><th>$\varphi_{xx}$</th><th>$\varphi_{xy}$</th><th>$\varphi_{yy}$</th><th>$D$</th></tr>
