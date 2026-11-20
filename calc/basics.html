@@ -85,6 +85,7 @@
             <li><a href="#stats">平均・分散・共分散</a></li>
             <li><a href="#heron">三角形の面積:ヘロンの公式</a></li>
             <li><a href="#xlogx">$\log$ の微分と、$x\log x$ の極限</a></li>
+            <li><a href="#hessian">2変数の極値の判定(2階偏微分)</a></li>
           </ol></li>
       </ol>
     </nav>
@@ -560,7 +561,7 @@
     <h3 id="chain3">3変数の場合</h3>
     <p>$f(x,y,z)$ で $x=x(t),y=y(t),z=z(t)$ のとき、道が3本になるだけで:
     $$\frac{d}{dt}f(x(t),y(t),z(t))=\frac{\partial f}{\partial x}\frac{dx}{dt}+\frac{\partial f}{\partial y}\frac{dy}{dt}+\frac{\partial f}{\partial z}\frac{dz}{dt}.$$</p>
-    <p class="used-in">この回で使う場所:<a href="weeks/week-01.html#w-chain" data-xref>1.7 連鎖律</a><a href="weeks/week-01.html#s7" data-xref>7. 連鎖律で公式を出す</a><a href="weeks/week-01.html#s10" data-xref>10. 3変数の連鎖律</a><a href="weeks/week-02.html#w-chain" data-xref>第2回 1.5 連鎖律</a></p>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-01.html#w-chain" data-xref>1.7 連鎖律</a><a href="weeks/week-01.html#s7" data-xref>7. 連鎖律で公式を出す</a><a href="weeks/week-01.html#s10" data-xref>10. 3変数の連鎖律</a><a href="weeks/week-02.html#w-chain" data-xref>第2回 1.5 連鎖律</a><a href="exercises/report-01.html#p2" data-xref>レポート課題1 問2</a></p>
 
     <!-- ===================== j: 2変数の平均値の定理 ===================== -->
     <h2 id="mvt2">j. 2変数の平均値の定理</h2>
@@ -711,7 +712,7 @@
       </svg>
       <figcaption>曲面(青)と、点 $(a,b,c)$ で接する平面(赤)。法線ベクトルは接平面と直角に立ちます。</figcaption>
     </figure>
-    <p class="used-in">この回で使う場所:<a href="weeks/week-01.html#s9" data-xref>9. 曲線の接線</a><a href="weeks/week-01.html#w-tplane" data-xref>10.4 接平面の方程式</a></p>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-01.html#s9" data-xref>9. 曲線の接線</a><a href="weeks/week-01.html#w-tplane" data-xref>10.4 接平面の方程式</a><a href="exercises/report-01.html#p1" data-xref>レポート課題1 問1</a></p>
 
     <!-- ===================== m: 極値と臨界点 ===================== -->
     <h2 id="extremum">m. 極値と臨界点</h2>
@@ -919,7 +920,7 @@
       <li>最大値・最小値をとる点は、極値の点でもあるので、ラグランジュの条件をみたす点(候補)のどれかである。($\nabla g=\vec0$ となる点があれば、それも候補に加える。)</li>
       <li>候補での $f$ の値を全部比べる。いちばん大きいものが最大値、いちばん小さいものが最小値。</li>
     </ol>
-    <p class="used-in">この回で使う場所:<a href="weeks/week-02.html#w-closed" data-xref>第2回 1.8 閉集合と最大・最小</a><a href="weeks/week-02.html#s9" data-xref>第2回 9. 例題</a><a href="weeks/week-02.html#s10" data-xref>第2回 10. 最大・最小の存在</a><a href="weeks/week-03.html#s3" data-xref>第3回 3. 存在定理と開集合・閉集合</a><a href="weeks/week-03.html#s4" data-xref>第3回 4. 2次形式の最大・最小</a><a href="weeks/week-04.html#w-lagr3" data-xref>第4回 1.1 存在定理の復習</a><a href="weeks/week-04.html#s2" data-xref>第4回 2. 球面上の最大・最小</a></p>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-02.html#w-closed" data-xref>第2回 1.8 閉集合と最大・最小</a><a href="weeks/week-02.html#s9" data-xref>第2回 9. 例題</a><a href="weeks/week-02.html#s10" data-xref>第2回 10. 最大・最小の存在</a><a href="weeks/week-03.html#s3" data-xref>第3回 3. 存在定理と開集合・閉集合</a><a href="weeks/week-03.html#s4" data-xref>第3回 4. 2次形式の最大・最小</a><a href="weeks/week-04.html#w-lagr3" data-xref>第4回 1.1 存在定理の復習</a><a href="weeks/week-04.html#s2" data-xref>第4回 2. 球面上の最大・最小</a><a href="exercises/report-01.html#p3" data-xref>レポート課題1 問3</a></p>
 
     <!-- ===================== q: 連立1次方程式・1次従属・行列式 ===================== -->
     <h2 id="det">q. 連立1次方程式・1次従属・行列式</h2>
@@ -1212,7 +1213,7 @@
     $f(x_1,\dots,x_n)=\sum_{i,j}a_{ij}x_ix_j=x^{\mathsf T}Ax.$
     $n=2$ なら $f=ax^2+2bxy+cy^2$($A=\begin{pmatrix}a&b\\b&c\end{pmatrix}$)。勾配は $\nabla f=2Ax$。$\|x\|=1$ のもとでの $f$ の極値(ラグランジュ)は、$Ax=\lambda x$ をみたす点(固有ベクトル)で、値は $f=x^{\mathsf T}(\lambda x)=\lambda\|x\|^2=\lambda$(固有値)。</p>
     <p><b>2×2 の実対称行列の固有値は実数:</b>判別式 $(a+c)^2-4(ac-b^2)=(a-c)^2+4b^2\ge0$。(一般の $n$ でも、実対称行列の固有値は実数ですが、それは線形代数で示されます。)</p>
-    <p class="used-in">この回で使う場所:<a href="weeks/week-03.html#w-eigen" data-xref>第3回 1.5 固有値と固有ベクトル</a><a href="weeks/week-03.html#s4" data-xref>第3回 4. 応用例:2次形式の最大・最小</a><a href="weeks/week-04.html#w-eigen3" data-xref>第4回 1.2 固有値と固有ベクトル、2次形式</a><a href="weeks/week-04.html#s3" data-xref>第4回 3. 一般の2次形式と固有値</a></p>
+    <p class="used-in">この回で使う場所:<a href="weeks/week-03.html#w-eigen" data-xref>第3回 1.5 固有値と固有ベクトル</a><a href="weeks/week-03.html#s4" data-xref>第3回 4. 応用例:2次形式の最大・最小</a><a href="weeks/week-04.html#w-eigen3" data-xref>第4回 1.2 固有値と固有ベクトル、2次形式</a><a href="weeks/week-04.html#s3" data-xref>第4回 3. 一般の2次形式と固有値</a><a href="exercises/report-01.html#p2" data-xref>レポート課題1 問2(3)</a></p>
 
     <!-- ===================== x: 平均・分散 ===================== -->
     <h2 id="stats">x. 平均・分散・共分散</h2>
@@ -1275,6 +1276,43 @@
     </div>
     <p>この極限があるので、$x=0$ で $x\log x:=0$ と<b>定義すれば</b>、$x\log x$ は $x\ge0$ 全体で連続な関数になります。確率 $p_k=0$ の事象を含むエントロピー $-\sum p_k\log p_k$ を、境界まで連続に拡張できる理由です。</p>
     <p class="used-in">この回で使う場所:<a href="weeks/week-04.html#w-xlogx" data-xref>第4回 1.4 対数と $x\log x$ の極限</a><a href="weeks/week-04.html#s6" data-xref>第4回 6. エントロピー</a></p>
+
+    <!-- ===================== aa: 2変数の極値の判定 ===================== -->
+    <h2 id="hessian">aa. 2変数の極値の判定(2階偏微分)</h2>
+    <p>臨界点($f_x=f_y=0$)は、極大・極小・鞍点のどれでもありえました(<a href="#extremum">極値と臨界点</a>)。どれなのかを、2階偏微分で見分ける方法です。春学期の最後に、テイラーの定理の応用として、入口(2次式で近似して調べる)まで扱われました。ここでは、その続きを第3回の「2次形式と固有値」を使って完成させます。</p>
+
+    <div class="box thm">
+      <div class="label">定理(2階偏微分による判定)</div>
+      <p>$f(x,y)$ は $(a,b)$ を含む開集合で $C^2$ 級、$f_x(a,b)=f_y(a,b)=0$ とする。$A=f_{xx}(a,b), B=f_{xy}(a,b), C=f_{yy}(a,b)$、$D=AC-B^2$ とおくと:</p>
+      <p>(1) $Dgt0$ かつ $Agt0$ ⟹ $(a,b)$ で極小。 (2) $Dgt0$ かつ $Alt0$ ⟹ 極大。 (3) $Dlt0$ ⟹ 極値ではない(鞍点)。 (4) $D=0$ ⟹ これだけでは判定できない。</p>
+      <p>(春学期のノートでは、$A,B,C$ を $p,q,r$ と書いていました。)</p>
+    </div>
+
+    <div class="box intuit">
+      <div class="label">直感で理解する:接平面が水平なら、形は「2次の部分」で決まる</div>
+      <p>臨界点では接平面が水平です(1次の項が $0$)。顕微鏡で拡大していくと、1次の「傾き」がないので、次に効くのは2次の「曲がり具合」です。2次式 $Ah^2+2Bhk+Ck^2$ のグラフは、<b>お椀</b>(どの向きにも上がる:極小)、<b>伏せたお椀</b>(どの向きにも下がる:極大)、<b>馬の鞍</b>(上がる向きと下がる向きがある:鞍点)のどれかです。$D=AC-B^2$ は、その「お椀か鞍か」を見分ける数です。</p>
+      <p>$D=0$ のときは2次の部分が「谷が一直線に続く溝」の形になり、溝の方向の上がり下がりは3次以上の項で決まるので、2階偏微分だけでは判定できません(例:$x^2+y^4$ は極小、$x^2-y^4$ は鞍点だが、どちらも原点で $A=2,B=C=0,D=0$)。</p>
+    </div>
+
+    <h3>理由(証明の流れ)</h3>
+    <div class="box proof">
+      <div class="label">証明</div>
+      <p><b>Step 1(テイラーの定理)。</b> 2変数のテイラーの定理($n=2$、<a href="#taylor">テイラーの定理</a>)で、1次の項は $f_x=f_y=0$ なので消えて、
+      $$f(a+h,b+k)-f(a,b)=	frac12,Q_	heta(h,k),quad Q_	heta(h,k)=f_{xx}h^2+2f_{xy}hk+f_{yy}k^2Big|_{(a+	heta h,,b+	heta k)} (0lt	hetalt1).$$
+      </p>
+      <p><b>Step 2(2次形式の大きさ)。</b> $Q(h,k)=Ah^2+2Bhk+Ck^2$ とおく。第3回(<a href="#eigen">固有値と2次形式</a>)より、単位円 $h^2+k^2=1$ の上の $Q$ の最小値・最大値は、$egin{pmatrix}A&B\B&Cend{pmatrix}$ の固有値 $lambda_1lelambda_2$ で、$lambda_1lambda_2=AC-B^2=D$。$(h,k)$ を長さで割って考えると、すべての $(h,k)$ で
+      $$lambda_1(h^2+k^2)le Q(h,k)lelambda_2(h^2+k^2).$$
+      </p>
+      <p><b>Step 3(極小の場合)。</b> $Dgt0$ なら $lambda_1,lambda_2$ は同符号。$A=Q(1,0)$ は $lambda_1$ と $lambda_2$ の間にあるので、$Agt0$ なら両方とも正。2階偏微分は連続なので、$(h,k)$ が十分小さければ $Q_	heta$ の係数と $A,B,C$ の差はいくらでも小さく、$|Q_	heta(h,k)-Q(h,k)|le	frac{lambda_1}2(h^2+k^2)$ にできる。すると $Q_	heta(h,k)ge	frac{lambda_1}2(h^2+k^2)gt0$($(h,k)
+e(0,0)$)なので、$f(a+h,b+k)gt f(a,b)$:極小。(2) は $-f$ に (1) を使う。</p>
+      <p><b>Step 4(鞍点の場合)。</b> $Dlt0$ なら $lambda_1lt0ltlambda_2$。固有ベクトル $ec u_2$ の向きに少し動くと $Qgt0$ で $f$ は増え、$ec u_1$ の向きに動くと $Qlt0$ で $f$ は減る(Step 3 と同じく、連続性で $Q_	heta$ の符号は $Q$ と同じ)。よって極値ではない。</p>
+    </div>
+
+    <div class="box ex">
+      <div class="label">例</div>
+      <p>・$f=x^2+y^2$:原点で $A=2,B=0,C=2$、$D=4gt0$、$Agt0$ ⟹ 極小。・$f=x^2-y^2$:$A=2,B=0,C=-2$、$D=-4lt0$ ⟹ 鞍点。・$f=x^2+xy+y^2$:$A=2,B=1,C=2$、$D=3gt0$ ⟹ 極小。・$f=xy$:$A=0,B=1,C=0$、$D=-1$ ⟹ 鞍点。</p>
+    </div>
+    <p class="used-in">この回で使う場所:<a href="exercises/report-01.html#p2" data-xref>レポート課題1 問2(3)</a></p>
 
     <p style="margin-top:48px;color:var(--muted);font-size:.9rem">このページは、新しい回で春学期の内容が必要になるたびに、トピックを追加していきます。</p>
     <!--END-->
