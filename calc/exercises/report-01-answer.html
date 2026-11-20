@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>中間レポート課題1 回答 | Aセメまとめノート</title>
+  <link rel="stylesheet" href="../../assets/style.css">
+  <script defer src="../../assets/nav.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],macros:{'\\R':'\\mathbb{R}'}});window.__navReady&&window.__navReady()"></script>
+  <style>
+    /* 提出用:装飾を控えめにし、印刷時はサイトの部品を隠す */
+    .answer h2 { border-bottom: none; font-size: 1.15rem; margin: 34px 0 8px; }
+    .answer h3 { font-size: 1rem; margin: 20px 0 6px; }
+    .answer p { margin: 6px 0; }
+    .answer .head { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; border-bottom: 1px solid var(--border); padding-bottom: 10px; margin-bottom: 8px; }
+    .answer .fill { display: inline-block; min-width: 9em; border-bottom: 1px solid var(--muted); }
+    .answer table.cmp td, .answer table.cmp th { text-align: center; }
+    .site-note { font-size: .85rem; color: var(--muted); margin-bottom: 18px; }
+    @media print {
+      .site-header, footer, .site-note, nav.pager, .nav-return { display: none !important; }
+      body { background: #fff; color: #000; }
+      main { padding-top: 0; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="inner">
+      <a class="site-title" href="../../index.html">Aセメまとめノート</a>
+      <span class="links"><a href="../index.html">微積</a><a href="../basics.html">春学期のまとめ</a><a href="../../linalg/index.html">線形代数</a><a href="../../structchem/index.html">構造化学</a><a href="../../mech/index.html">力学A</a><a href="../../thermo/index.html">熱力学</a><a href="../../em/index.html">電磁気学</a></span>
+    </div>
+  </header>
+
+  <main class="note answer">
+    <p class="site-note">提出用の回答です(印刷すると、このサイトのヘッダーなどは消えます)。考え方の詳しい説明は <a href="report-01.html">解説ページ</a> にあります。</p>
+
+    <h1 style="font-size:1.4rem">微分積分学 Aセメスター 中間レポート課題1</h1>
+    <div class="head">
+      <span>学籍番号 <span class="fill">&nbsp;</span></span>
+      <span>氏名 <span class="fill">&nbsp;</span></span>
+    </div>
+
+    <!-- ===================== 1 ===================== -->
+    <h2>1.</h2>
+    <p>$F(x,y,z)=5z^2+4x^2y-6xz^2-3$ とおくと，曲面は $F(x,y,z)=0$ と表される．$F(1,1,1)=5+4-6-3=0$ より，$P$ はこの曲面上の点である．</p>
+    <p>$F$ は多項式なので $C^1$ 級であり，
+    $$F_x=8xy-6z^2,\qquad F_y=4x^2,\qquad F_z=10z-12xz$$
+    より，$\nabla F(1,1,1)=(2,\ 4,\ -2)\ne\vec 0$ である．したがって，$P$ における接平面は $\nabla F(1,1,1)$ を法線ベクトルとする平面
+    $$2(x-1)+4(y-1)-2(z-1)=0$$
+    であり，整理すると
+    $$x+2y-z=2.$$</p>
+
+    <!-- ===================== 2 ===================== -->
+    <h2>2.</h2>
+    <p>$f$ の偏導関数は
+    $$f_x=2x+y^2-yz,\qquad f_y=x(2y-z),\qquad f_z=-xy-2z,$$
+    $$f_{xx}=2,\qquad f_{xy}=2y-z,\qquad f_{yy}=2x$$
+    である．</p>
+
+    <h3>(1)</h3>
+    <p>$f$ は多項式なので $C^\infty$ 級である．陰関数の定理より，$f(x,y,z)=0$ を満たす点で $f_z(x,y,z)\ne0$ ならば，その点の近くで $f(x,y,z)=0$ の陰関数 $z=\varphi(x,y)$ が存在する．よって求める条件は
+    $$x^2+xy^2-xyz-z^2+9=0\quad\text{かつ}\quad xy+2z\ne0.$$</p>
+
+    <h3>(2)</h3>
+    <p>$f(x,y,\varphi(x,y))=0$ を $x,y$ でそれぞれ偏微分すると $f_x+f_z\varphi_x=0$，$f_y+f_z\varphi_y=0$ より
+    $$\varphi_x=-\frac{f_x}{f_z},\qquad \varphi_y=-\frac{f_y}{f_z}.$$
+    よって $\varphi_x=\varphi_y=0$ となるのは，$f_x=f_y=0$，$f=0$，$f_z\ne0$ を満たす点である．$f_y=x(2y-z)=0$ より $x=0$ または $z=2y$ である．</p>
+    <p>(i) $x=0$ のとき．$f=9-z^2=0$ より $z=\pm3$．$f_x=y(y-z)=0$ より $y=0$ または $y=z$．このとき $f_z=-2z\ne0$ である．よって $(x,y,z)$ は $(0,0,3)$，$(0,0,-3)$，$(0,3,3)$，$(0,-3,-3)$．</p>
+    <p>(ii) $z=2y$ のとき．$f_x=2x-y^2=0$ より $x=\dfrac{y^2}{2}$．これらを $f=0$ に代入すると
+    $$\frac{y^4}{4}+\frac{y^4}{2}-y^4-4y^2+9=0\iff (y^2-2)(y^2+18)=0$$
+    より $y^2=2$．よって $y=\pm\sqrt2$，$x=1$，$z=\pm2\sqrt2$(複号同順)であり，このとき $f_z=-5y\ne0$ である．よって $(x,y,z)$ は $(1,\sqrt2,2\sqrt2)$，$(1,-\sqrt2,-2\sqrt2)$．</p>
+    <p>以上より，求める点は
+    $$(0,0,3),\quad(0,0,-3),\quad(0,3,3),\quad(0,-3,-3),\quad(1,\sqrt2,2\sqrt2),\quad(1,-\sqrt2,-2\sqrt2).$$</p>
+
+    <h3>(3)</h3>
+    <p>$f$ は $C^\infty$ 級なので $\varphi$ も $C^\infty$ 級である．$f_x+f_z\varphi_x=0$ をさらに $x$ で偏微分すると
+    $$f_{xx}+2f_{xz}\varphi_x+f_{zz}\varphi_x^{\,2}+f_z\varphi_{xx}=0$$
+    となる．(2) の点では $\varphi_x=\varphi_y=0$ であるから，同様に計算して
+    $$\varphi_{xx}=-\frac{f_{xx}}{f_z}=-\frac{2}{f_z},\qquad \varphi_{xy}=-\frac{f_{xy}}{f_z}=-\frac{2y-z}{f_z},\qquad \varphi_{yy}=-\frac{f_{yy}}{f_z}=-\frac{2x}{f_z}$$
+    を得る．</p>
+    <p><b>判定法.</b> $C^2$ 級の関数 $g(x,y)$ が $(a,b)$ で $g_x=g_y=0$ を満たすとし，$A=g_{xx}(a,b)$，$B=g_{xy}(a,b)$，$C=g_{yy}(a,b)$，$D=AC-B^2$ とおく．このとき，$D\gt0,\ A\gt0$ ならば $g$ は $(a,b)$ で極小，$D\gt0,\ A\lt0$ ならば極大，$D\lt0$ ならば極値をとらない．</p>
+    <p>(証明) テイラーの定理より，ある $0\lt\theta\lt1$ について
+    $$g(a+h,b+k)-g(a,b)=\tfrac12\bigl(g_{xx}h^2+2g_{xy}hk+g_{yy}k^2\bigr)\big|_{(a+\theta h,\,b+\theta k)}.$$
+    $Q(h,k)=Ah^2+2Bhk+Ck^2$ とおき，$\begin{pmatrix}A&B\\B&C\end{pmatrix}$ の固有値を $\lambda_1\le\lambda_2$ とすると，$\lambda_1(h^2+k^2)\le Q(h,k)\le\lambda_2(h^2+k^2)$，$\lambda_1\lambda_2=D$ である．$D\gt0$，$A=Q(1,0)\gt0$ ならば $\lambda_1\gt0$ であり，2階偏導関数の連続性から，$(h,k)\ne(0,0)$ が十分小さいとき右辺は $\tfrac{\lambda_1}{4}(h^2+k^2)$ 以上となって正である．よって極小である．$A\lt0$ の場合は $-g$ を考えればよい．$D\lt0$ ならば $\lambda_1\lt0\lt\lambda_2$ であり，それぞれの固有ベクトルの方向に動くと右辺の符号が異なるので，極値ではない．(証明終)</p>
+    <p>これを $g=\varphi$ に適用する．$D=\varphi_{xx}\varphi_{yy}-\varphi_{xy}^{\,2}$ として，各点での値は次のとおりである．</p>
+    <div class="tscroll" style="position:relative"><table class="cmp">
+      <tr><th>$(x,y,z)$</th><th>$f_z$</th><th>$\varphi_{xx}$</th><th>$\varphi_{xy}$</th><th>$\varphi_{yy}$</th><th>$D$</th></tr>
+      <tr><td>$(0,0,3)$</td><td>$-6$</td><td>$\tfrac13$</td><td>$-\tfrac12$</td><td>$0$</td><td>$-\tfrac14$</td></tr>
+      <tr><td>$(0,0,-3)$</td><td>$6$</td><td>$-\tfrac13$</td><td>$-\tfrac12$</td><td>$0$</td><td>$-\tfrac14$</td></tr>
+      <tr><td>$(0,3,3)$</td><td>$-6$</td><td>$\tfrac13$</td><td>$\tfrac12$</td><td>$0$</td><td>$-\tfrac14$</td></tr>
+      <tr><td>$(0,-3,-3)$</td><td>$6$</td><td>$-\tfrac13$</td><td>$\tfrac12$</td><td>$0$</td><td>$-\tfrac14$</td></tr>
+      <tr><td>$(1,\sqrt2,2\sqrt2)$</td><td>$-5\sqrt2$</td><td>$\tfrac{\sqrt2}{5}$</td><td>$0$</td><td>$\tfrac{\sqrt2}{5}$</td><td>$\tfrac{2}{25}$</td></tr>
+      <tr><td>$(1,-\sqrt2,-2\sqrt2)$</td><td>$5\sqrt2$</td><td>$-\tfrac{\sqrt2}{5}$</td><td>$0$</td><td>$-\tfrac{\sqrt2}{5}$</td><td>$\tfrac{2}{25}$</td></tr>
+    </table></div>
+    <p>$x=0$ の4点では $D\lt0$ なので，$\varphi$ は極値をとらない．</p>
+    <p>$(1,\sqrt2,2\sqrt2)$ では $D\gt0$，$\varphi_{xx}\gt0$ なので，$\varphi(1,\sqrt2)=2\sqrt2$ を満たす陰関数 $\varphi$ は $(x,y)=(1,\sqrt2)$ で<b>極小値 $2\sqrt2$</b> をとる．</p>
+    <p>$(1,-\sqrt2,-2\sqrt2)$ では $D\gt0$，$\varphi_{xx}\lt0$ なので，$\varphi(1,-\sqrt2)=-2\sqrt2$ を満たす陰関数 $\varphi$ は $(x,y)=(1,-\sqrt2)$ で<b>極大値 $-2\sqrt2$</b> をとる．</p>
+
+    <!-- ===================== 3 ===================== -->
+    <h2>3.</h2>
+    <p>$D=\{(x,y,z)\mid x+y+z=1,\ x\ge0,\ y\ge0,\ z\ge0\}$，$h(x,y,z)=x^py^qz^r$ とおく．</p>
+    <p>$D$ は有界な閉集合であり，$p,q,r\gt0$ より $h$ は $D$ 上で連続である．よって $h$ は $D$ 上で最大値をとる．$D$ の境界(すなわち $x,y,z$ のいずれかが $0$ の点)では $h=0$ であり，一方 $h\bigl(\tfrac13,\tfrac13,\tfrac13\bigr)\gt0$ であるから，$h$ は境界上で最大値をとらない．したがって最大値は $x,y,z\gt0$ を満たす点でとられる．</p>
+    <p>$x,y,z\gt0$ において $h$ は $C^1$ 級で，
+    $$\nabla h=\Bigl(\frac{p}{x}h,\ \frac{q}{y}h,\ \frac{r}{z}h\Bigr)$$
+    である．$g(x,y,z)=x+y+z-1$ とおくと $\nabla g=(1,1,1)\ne\vec0$ であるから，ラグランジュの未定乗数法より，最大値をとる点ではある定数 $\lambda$ について $\nabla h=\lambda\nabla g$，すなわち
+    $$\frac{p}{x}h=\frac{q}{y}h=\frac{r}{z}h=\lambda$$
+    が成り立つ．$h\gt0$ より $\dfrac px=\dfrac qy=\dfrac rz$ であり，これを $\mu$ とおくと $x=\dfrac p\mu,\ y=\dfrac q\mu,\ z=\dfrac r\mu$．$x+y+z=1$ より $\mu=p+q+r$ となるので
+    $$(x,y,z)=\Bigl(\frac{p}{p+q+r},\ \frac{q}{p+q+r},\ \frac{r}{p+q+r}\Bigr).$$
+    条件を満たす点はこの1点のみであるから，ここで $h$ は最大となる．よって求める最大値は
+    $$\Bigl(\frac{p}{p+q+r}\Bigr)^p\Bigl(\frac{q}{p+q+r}\Bigr)^q\Bigl(\frac{r}{p+q+r}\Bigr)^r=\frac{p^p\,q^q\,r^r}{(p+q+r)^{p+q+r}}.$$</p>
+
+    <nav class="pager">
+      <a href="report-01.html">← 解説ページ</a>
+      <a href="../index.html">微積の一覧へ</a>
+    </nav>
+  </main>
+
+  <footer>© Aセメまとめノート</footer>
+</body>
+</html>
