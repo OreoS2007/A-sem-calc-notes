@@ -66,7 +66,9 @@
     $$x^2+xy^2-xyz-z^2+9=0\quad\text{かつ}\quad xy+2z\ne0.$$</p>
 
     <h3>(2)</h3>
-    <p>$f(x,y,\varphi(x,y))=0$ を $x,y$ でそれぞれ偏微分すると $f_x+f_z\varphi_x=0$，$f_y+f_z\varphi_y=0$ より
+    <p>陰関数の定理より $\varphi$ は $C^1$ 級であり，$(x,y)$ の近くで恒等的に $f(x,y,\varphi(x,y))=0$ が成り立つ．この両辺を $x$ で偏微分すると，連鎖律より($\dfrac{\partial x}{\partial x}=1$，$\dfrac{\partial y}{\partial x}=0$，$\dfrac{\partial z}{\partial x}=\varphi_x$ であるから)
+    $$f_x\cdot1+f_y\cdot0+f_z\cdot\varphi_x=0,\quad\text{すなわち}\quad f_x+f_z\varphi_x=0$$
+    となる．ここで $f_x,f_z$ は点 $(x,y,\varphi(x,y))$ での値である．同様に $y$ で偏微分すると $f_y+f_z\varphi_y=0$ を得る．$f_z\ne0$ であるから
     $$\varphi_x=-\frac{f_x}{f_z},\qquad \varphi_y=-\frac{f_y}{f_z}.$$
     よって $\varphi_x=\varphi_y=0$ となるのは，$f_x=f_y=0$，$f=0$，$f_z\ne0$ を満たす点である．$f_y=x(2y-z)=0$ より $x=0$ または $z=2y$ である．</p>
     <p>(i) $x=0$ のとき．$f=9-z^2=0$ より $z=\pm3$．$f_x=y(y-z)=0$ より $y=0$ または $y=z$．このとき $f_z=-2z\ne0$ である．よって $(x,y,z)$ は $(0,0,3)$，$(0,0,-3)$，$(0,3,3)$，$(0,-3,-3)$．</p>
@@ -77,9 +79,15 @@
     $$(0,0,3),\quad(0,0,-3),\quad(0,3,3),\quad(0,-3,-3),\quad(1,\sqrt2,2\sqrt2),\quad(1,-\sqrt2,-2\sqrt2).$$</p>
 
     <h3>(3)</h3>
-    <p>$f$ は $C^\infty$ 級なので $\varphi$ も $C^\infty$ 級である．$f_x+f_z\varphi_x=0$ をさらに $x$ で偏微分すると
-    $$f_{xx}+2f_{xz}\varphi_x+f_{zz}\varphi_x^{\,2}+f_z\varphi_{xx}=0$$
-    となる．(2) の点では $\varphi_x=\varphi_y=0$ であるから，同様に計算して
+    <p>まず $\varphi$ が $C^2$ 級であることを確かめる．$\varphi_x=-\dfrac{f_x(x,y,\varphi(x,y))}{f_z(x,y,\varphi(x,y))}$ の右辺は，$C^\infty$ 級の関数 $f_x,f_z$ に $C^1$ 級の関数 $(x,y,\varphi(x,y))$ を代入したものの商($f_z\ne0$)であるから $C^1$ 級である．$\varphi_y$ も同様なので，$\varphi$ は $C^2$ 級である．</p>
+    <p>恒等式 $f_x+f_z\varphi_x=0$ の両辺をさらに $x$ で偏微分する．$f_x,f_z$ は点 $(x,y,\varphi(x,y))$ での値なので，連鎖律より
+    $$\frac{\partial}{\partial x}\bigl(f_x\bigr)=f_{xx}+f_{xz}\varphi_x,\qquad \frac{\partial}{\partial x}\bigl(f_z\bigr)=f_{zx}+f_{zz}\varphi_x$$
+    であり，積の微分法とあわせて
+    $$f_{xx}+f_{xz}\varphi_x+\bigl(f_{zx}+f_{zz}\varphi_x\bigr)\varphi_x+f_z\varphi_{xx}=0$$
+    を得る．同様に，$f_x+f_z\varphi_x=0$ を $y$ で，$f_y+f_z\varphi_y=0$ を $y$ で偏微分すると
+    $$f_{xy}+f_{xz}\varphi_y+\bigl(f_{zy}+f_{zz}\varphi_y\bigr)\varphi_x+f_z\varphi_{xy}=0,$$
+    $$f_{yy}+f_{yz}\varphi_y+\bigl(f_{zy}+f_{zz}\varphi_y\bigr)\varphi_y+f_z\varphi_{yy}=0.$$
+    (2) の点では $\varphi_x=\varphi_y=0$ であるから，これらの式で $\varphi_x,\varphi_y$ を含む項は消えて
     $$\varphi_{xx}=-\frac{f_{xx}}{f_z}=-\frac{2}{f_z},\qquad \varphi_{xy}=-\frac{f_{xy}}{f_z}=-\frac{2y-z}{f_z},\qquad \varphi_{yy}=-\frac{f_{yy}}{f_z}=-\frac{2x}{f_z}$$
     を得る．</p>
     <p><b>判定法.</b> $C^2$ 級の関数 $g(x,y)$ が $(a,b)$ で $g_x=g_y=0$ を満たすとし，$A=g_{xx}(a,b)$，$B=g_{xy}(a,b)$，$C=g_{yy}(a,b)$，$D=AC-B^2$ とおく．このとき，$D\gt0,\ A\gt0$ ならば $g$ は $(a,b)$ で極小，$D\gt0,\ A\lt0$ ならば極大，$D\lt0$ ならば極値をとらない．</p>
@@ -103,7 +111,7 @@
     <!-- ===================== 3 ===================== -->
     <h2>3.</h2>
     <p>$D=\{(x,y,z)\mid x+y+z=1,\ x\ge0,\ y\ge0,\ z\ge0\}$，$h(x,y,z)=x^py^qz^r$ とおく．</p>
-    <p>$D$ は有界な閉集合であり，$p,q,r\gt0$ より $h$ は $D$ 上で連続である．よって $h$ は $D$ 上で最大値をとる．$D$ の境界(すなわち $x,y,z$ のいずれかが $0$ の点)では $h=0$ であり，一方 $h\bigl(\tfrac13,\tfrac13,\tfrac13\bigr)\gt0$ であるから，$h$ は境界上で最大値をとらない．したがって最大値は $x,y,z\gt0$ を満たす点でとられる．</p>
+    <p>$D$ の点は $0\le x,y,z\le1$ を満たすので $D$ は有界である．また，$D$ は連続関数 $x+y+z$，$x$，$y$，$z$ についての等式と「$\ge$」の不等式で定まる集合なので，閉集合である．$p,q,r\gt0$ より $h$ は $D$ 上で連続である．よって $h$ は $D$ 上で最大値をとる．$D$ の境界(すなわち $x,y,z$ のいずれかが $0$ の点)では $h=0$ であり，一方 $h\bigl(\tfrac13,\tfrac13,\tfrac13\bigr)\gt0$ であるから，$h$ は境界上で最大値をとらない．したがって最大値は $x,y,z\gt0$ を満たす点でとられる．</p>
     <p>$x,y,z\gt0$ において $h$ は $C^1$ 級で，
     $$\nabla h=\Bigl(\frac{p}{x}h,\ \frac{q}{y}h,\ \frac{r}{z}h\Bigr)$$
     である．$g(x,y,z)=x+y+z-1$ とおくと $\nabla g=(1,1,1)\ne\vec0$ であるから，ラグランジュの未定乗数法より，最大値をとる点ではある定数 $\lambda$ について $\nabla h=\lambda\nabla g$，すなわち
